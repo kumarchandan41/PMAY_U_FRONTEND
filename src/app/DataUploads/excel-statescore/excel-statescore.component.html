@@ -1,0 +1,248 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"><input type="file" #fileInput (cahnge)="UploadFile($event)" /></div>
+        <div class="col-sm-2"><button (click)="UploadFile($event)">Upload</button>
+          <h6>{{message}}</h6>
+        </div>
+        <div class="col-sm-7"><button (click)="DeleteTableStateScore()">Delete Table Data</button></div>
+      </div>
+
+ 
+   
+
+
+    <br>
+    <br>
+
+    <div>
+            <select class="form-control" placeholder="Choose Sheet" style="width: 200px;">
+              <option value="0">Select Sheet</option>
+              <option *ngFor='let st of lstExcelSheet'>
+                {{st.SheetName}}
+              </option>
+            </select>
+    </div>
+<div style="overflow: auto;width:1100px;height:500px">  
+    <table class="table table-striped" style="overflow-y:scroll; width:100px;border:1">
+        <thead class="thead-dark" >
+            <tr style="background-color: gray;color: white;">
+                <th>ScoreId</th>
+                <th style="width:200px">StateName</th>
+                <th>Sanction  vs Demand</th>
+                <th>Grounding Sanction</th>
+                <th>Completion vs Sanction</th>
+                <th>BLCHouses Geotagged</th>
+
+                <th>Relelase vs Sanction</th>
+                <th>MIS Annexure uploading</th>
+                <th>BeneficiaryAttachment</th>
+                <th>Reforms Achievement</th>
+                <th>JN Houses vacant</th>
+                 
+                <th >Population Census2011</th>
+                <th>TG12 Housing Shortage</th>
+                <th>Aadhar Coverage</th>
+                <th>Cities included</th>
+                <th>Total Demand (as per Road map)</th>
+                
+                <th>Demand met</th>
+                <th>% Demand met</th>
+                <th>Total PMAY Houses ISSR_AHP_BLC_CLSS</th>
+                <th>Valid Aadhar Benef</th>
+                <th>Bene %</th>
+                
+
+                <th>HFAPoA funds Rel</th>
+                <th>HFAPoA Recd</th>
+                <th>HFAPoA Status</th>
+                <th>ISSR NOP</th>
+                <th>AHP NOP</th>
+                
+                <th>BLC NOP</th>
+                <th>ISSR Sanct for Rel</th>
+                <th>AHP Sanct for Rel</th>
+                <th>BLC Sanct for Rel</th>
+                <th>ISSR CA Rel</th>
+
+                <th>AHP CA Rel</th>
+                <th>BLC CA Rel</th>
+                <th>ISSR Bal for Rel</th>
+                <th>AHP Bal for Rel</th>
+                <th>BLC Bal for Rel</th>
+
+                <th>ISSR Houses Sanctioned</th>
+                <th>AHP Houses Sanctioned</th>
+                <th>BLC Houses_Sanctioned</th>
+                <th>ISSR Grounded</th>
+                <th>AHP Grounded</th>
+
+                <th>BLC Grounded</th>
+                <th>ISSR Completed</th>
+                <th>AHP Completed</th>
+                <th>BLC Completed</th>
+                <th>PMAY Funds Rel</th>
+
+                <th>PMAY Ucs Recd</th>
+                <th>PMAY UC Pending</th>
+                <th>PMAY Houses Occupied</th>
+                <th>Reforms</th>
+                <th>Reforms Achieved</th>
+
+                <th>SLTC FundsReld  RsinCr</th>
+                <th>SLTC SpecialistsApproved</th>
+                <th>SLTC Specialists inPlace</th>
+                <th>CLTC Funds Released RsinCr</th>
+                <th>CLTC Specialists Approved</th>
+
+                <th>CLTC Specialists in Place</th>
+                <th>Projects Approved</th>
+                <th>Projects uploaded</th>
+                <th>Percent Projects uploaded</th>
+                <th>BLC Houses Approved</th>
+
+                <th>BLC Houses Grounded</th>
+                <th>BLC HousesGeoTagged</th>
+                <th>CLSS MIS Survey</th>
+                <th>CLSS Bene EWS LIG MIG</th>
+                <th>CLSS Subsidy EWS LIG IG</th>
+
+                <th>JN Houses Sanctioned</th>
+                <th>JN Houses Completed</th>
+                <th>JN Houses Occupied</th>
+                <th>JN Houses In Progress</th>
+                <th>JN Houses Unoccupied</th>
+
+                <th>JNHouses NonStarter</th>
+                <th>JN UC Pending</th>
+                <th>RAY Houses Sanctioned</th>
+                <th>RAY Houses Completed</th>
+                <th>RAY Houses Occupied</th>
+
+                <th>RAY Houses InProgress</th>
+                <th>RAY Houses Unoccupied</th>
+                <th>RAYHouses NonStarter</th>
+                <th>RAY UC Pending</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody style="overflow-y:scroll; width:100px;">
+            <tr *ngFor="let data of lstExcel | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{data.ScoreId}}</td>
+                <td>{{data.StateName}}</td>
+                <td>{{data.Sanction_vs_Demand}}</td>
+                <td>{{data.Grounding_Sanction}}</td>
+                <td>{{data.Completion_vs_Sanction}}</td>
+                <td>{{data.BLC_Houses_Geotagged}}</td>
+
+                <th>{{data.Relelase_vs_Sanction}}</th>
+                <th>{{data.MIS_Annexure_uploading}}</th>
+                <th>{{data.Beneficiary_Attachment}}</th>
+                <th>{{data.Reforms_Achievement}}</th>
+                <th>{{data.JN_Houses_vacant}}</th>
+
+                <th>{{data.Population_Census_2011}}</th>
+                <th>{{data.TG_12_Housing_Shortage}}</th>
+                <th>{{data.Aadhar_Coverage}}</th>
+                <th>{{data.Cities_included_in_Mission}}</th>
+                <th>{{data.Total_Demand_as_per_Road_map}}</th>
+                
+                <th>{{data.Demand_met}}</th>
+                <th>{{data.Per_Demand_met}}</th>
+                <th>{{data.Total_PMAY_U_Houses_ISSR_AHP_BLC_CLSS}}</th>
+                <th>{{data.Valid_Aadhar_Beneficiaries}}</th>
+                <th>{{data.Bene_Percentage}}</th>
+                
+
+                <th>{{data.HFAPoA_funds_Released}}</th>
+                <th>{{data.HFAPoA_Received}}</th>
+                <th>{{data.HFAPoA_Status}}</th>
+                <th>{{data.ISSR_NOP}}</th>
+                <th>{{data.AHP_NOP}}</th>
+                
+                <th>{{data.BLC_NOP}}</th>
+                <th>{{data.ISSR_Sanct_for_Release}}</th>
+                <th>{{data.AHP_Sanct_for_Release}}</th>
+                <th>{{data.BLC_Sanct_for_Release}}</th>
+                <th>{{data.ISSR_CA_Released}}</th>
+
+                <th>{{data.AHP_CA_Released}}</th>
+                <th>{{data.BLC_CA_Released}}</th>
+                <th>{{data.ISSR_Balance_for_Release}}</th>
+                <th>{{data.AHP_Balance_for_Release}}</th>
+                <th>{{data.BLC_Balance_for_Release}}</th>
+
+                <th>{{data.ISSR_Houses_Sanctioned}}</th>
+                <th>{{data.AHP_Houses_Sanctioned}}</th>
+                <th>{{data.BLC_Houses_Sanctioned}}</th>
+                <th>{{data.ISSR_Grounded}}</th>
+                <th>{{data.AHP_Grounded}}</th>
+
+                <th>{{data.BLC_Grounded}}/th>
+                <th>{{data.ISSR_Completed}}</th>
+                <th>{{data.AHP_Completed}}</th>
+                <th>{{data.BLC_Completed}}</th>
+                <th>{{data.PMAY_Funds_Released}}</th>
+
+                <th>{{data.PMAY_Ucs_Received}}</th>
+                <th>{{data.PMAY_UC_Pending}}</th>
+                <th>{{data.PMAY_Houses_Occupied}}</th>
+                <th>{{data.Reforms}}</th>
+                <th>{{data.Reforms_Achieved}}</th>
+
+                <th>{{data.SLTC_Funds_Released_RsinnCr}}</th>
+                <th>{{data.SLTC_Specialists_Approved}}</th>
+                <th>{{data.SLTC_Specialists_in_Place}}</th>
+                <th>{{data.CLTC_Funds_Released_RsinCr}}</th>
+                <th>{{data.CLTC_Specialists_Approved}}</th>
+
+                <th>{{data.CLTC_Specialists_in_Place}}</th>
+                <th>{{data.Projects_Approved}}</th>
+                <th>{{data.Projects_uploaded}}</th>
+                <th>{{data.Percent_Projects_uploaded}}</th>
+                <th>{{data.BLC_Houses_Approved}}</th>
+
+                <th>{{data.BLC_Houses_Grounded}}</th>
+                <th>{{data.BLC_Houses_Geo_Tagged}}</th>
+                <th>{{data.CLSS_MIS_Survey}}</th>
+                <th>{{data.CLSS_Beneficiaries_EWS_LIG_MIG}}</th>
+                <th>{{data.CLSS_Subsidy_EWS_LIG_MIG}}</th>
+
+                <th>{{data.JN_Houses_Sanctioned}}</th>
+                <th>{{data.JN_Houses_Completed}}</th>
+                <th>{{data.JN_Houses_Occupied}}</th>
+                <th>{{data.JN_Houses_In_Progress}}</th>
+                <th>{{data.JN_Houses_Unoccupied}}</th>
+
+                <th>{{data.JN_Houses_Non_Starter}}</th>
+                <th>{{data.JN_UC_Pending}}</th>
+                <th>{{data.RAY_Houses_Sanctioned}}</th>
+                <th>{{data.RAY_Houses_Completed}}</th>
+                <th>{{data.RAY_Houses_Occupied}}</th>
+
+                <th>{{data.RAY_Houses_In_Progress}}</th>
+                <th>{{data.RAY_Houses_Unoccupied}}</th>
+                <th>{{data.RAY_Houses_Non_Starter}}</th>
+                <th>{{data.RAY_UC_Pending}}</th>
+                <td><input type="button" class="btn btn-primary" (click)="Update(data)" value="Update">&nbsp;&nbsp;
+                    </td>
+            <td>
+                <input type="button" class="btn btn-danger" (click)="Delete(data)" value="Delete">
+            </td>
+                  </tr>
+            <tr><td colspan="4">
+            
+                    <ul class="pagination">  
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>  
+                            </ul>  
+            </td></tr>
+        </tbody>
+
+    
+    </table>
+  </div>
+
+    </div>
+    
+    
+    

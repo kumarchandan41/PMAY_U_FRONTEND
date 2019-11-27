@@ -1,1 +1,94 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: "Open Sans";
+  }
+  .modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+     /* width: 900px;  */
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    /* border: 1px solid rgba(0,0,0,.2);
+     */
+    border-radius: .3rem;
+    outline: 0;
+    font-size: 15px;
+    height: 500px;
+    left:-200px;
+}
+
+@media (min-width: 775px) {
+  .modal-dialog {
+    width: 600;
+    margin: 30px auto;
+  }
+  .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+  }
+  .modal-sm {
+    width: 300px;
+  }
+}
+  
+  .button-group-pills .btn {
+    border-radius: 20px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    border-color: #bbbbbb;
+    background-color: #FFF;
+    color: #14a4be;
+  }
+  .button-group-pills .btn.active {
+    border-color: #14a4be;
+    background-color: #14a4be;
+    color: #FFF;
+    box-shadow: none;
+  }
+  .button-group-pills .btn:hover {
+    border-color: #158b9f;
+    background-color: #158b9f;
+    color: #FFF;
+  }
+  
+/* You can add global styles to this file, and also import other style files */
+a.canvasjs-chart-credit { 
+  display: none !important;
+}
+
+
+.Downloadbtn {
+  background-color: RoyalBlue;
+  border: none;
+  color: white;
+  /* padding: 12px  30px; */
+  cursor: pointer;
+  font-size: 20px;
+  height: 35px;
+  width: 150px;
+}
+
+.previous {
+  background-color: RoyalBlue;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  height: 35px;
+  width: 150px;
+}
+
+.next {
+  background-color: RoyalBlue;
+  color: white;
+}
+
+
+
+

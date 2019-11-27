@@ -1,0 +1,271 @@
+  
+<div  class="row">
+  <div class="container"     >
+      <br>
+    <div class="row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-2">
+        <div class="row">
+          <!-- <div class="col-md-5"><b> State :</b></div> -->
+          <div class="col-md-7">
+            <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
+                style="width: 200px;font-display: #FF00FF;color: black;background-color: white">
+              <option value={{stValue}}>{{StateMessage}}</option>
+              <option *ngFor='let sntry of service.StateDetails3' [value]='sntry.Codes'>
+                {{sntry.States_UT}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-2" style="padding-left: 40px">
+        <div class="row">
+          <!-- <div class="col-md-4"><b> District :</b></div> -->
+          <div class="col-md-8">
+            <div><select class="form-control" placeholder="Choose Distt" (change)="getDistrictDetails($event.target.value)"
+              style="width: 200px;font-display: #FF00FF;color: black;background-color: white">
+                <option  value={{distValue}}>{{DistrictMessage}}</option>
+                <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+                  {{sntry.District}}
+                </option>
+              </select></div>
+          </div>
+        </div>
+      </div>      
+      <div class="col-md-2" style="padding-left: 60px">
+        <div class="row">
+          <!-- <div class="col-md-4"> <b>City :</b></div> -->
+          <div class="col-md-8">
+            <div> <select class="form-control" placeholder="Choose City" (change)="getCityDetails($event.target.value)"
+              style="width: 200px;font-display: #FF00FF;color: black;background-color: white">
+                <option value={{cityValue}}>{{CityMessage}}</option>
+                <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+                  {{sntry.City}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        </div>
+      <!-- <div class="col-md-1">
+        </div>
+      <div class="col-md-2"> -->
+          <!-- <input type="button" (click)="AdminPage()" value="Back" style="width: 200px;background-color:cornflowerblue"/> -->
+      <!-- </div> -->
+    </div>
+  </div>
+  
+
+
+
+  
+  <!-- </p> -->
+  
+  <div class="container" id="tblPdf" style="background-color: rgb(227, 233, 241)!important;height: 100%">
+    <div style="text-align:center;">
+        <b> <font size=5px  style="font-family:''Arial',Franklin Gothic Medium', Arial, sans-serif;align-self: auto;">  At a Glance  for  {{lblStateDisttCity}}</font></b> 
+
+
+    </div>
+    <div style="text-align:center;"><b><font size=5px>Physical and Financial Progress under  JnNURM & PMAY (U)</font> </b></div>
+    <div><br/></div>
+    <div style="text-align:center;"><b> </b></div>
+    
+  <!--    {{States_UT}} {{District}} {{City}}
+    <div class="modal-body" style="width:1140px;font-size:11px;overflow-y: scroll;">
+            -->
+      <!--  <table border="1" class="table table-bordered table-custom" style="font-size:22px;width:1200px;">
+           -->
+    <table class="bodyataglance"  border="1" style="font-size:15px;" id="printme" style="background-color:white">
+      <tr>   
+      </tr>
+      <tr>
+        <td   rowspan="2" style="text-align:center;"><b> SrNo</b></td>
+        <td  rowspan="2" style="text-align:center;"><b>Particulars</b></td>
+        <!-- <th>JNNURM</th>
+        <th>JNNURM New </th> -->
+        <th colspan="2" style="text-align:center;font-size: 20px!important">Progress of JnNURM</th>
+  
+        
+        <th colspan="6" style="text-align:center;font-size: 20px!important">PMAY(U)</th>
+      </tr>
+      <tr style="text-align:center;">
+          <!-- <td></td>
+          <td></td>  -->
+          <td style="width:100px"><b>Cumulative Progress</b></td>
+          <td  style="width:100px"><b>Physical Progress after 2014</b></td>
+          <td  style="width:100px" ><b>Rajiv Awas Yojna (RAY)</b></td>
+          <td  style="width:100px"><b>Credit linked Subsidy Scheme (CLSS)</b></td>
+          <td  style="width:100px"><b> In-situ Slum Redevelopment (ISSR)</b></td>
+          <td  style="width:100px"><b>Affordable Housing in Partnership (AHP)</b></td>
+          <td  style="width:100px"><b>Beneficiary Led Construction (BLC)</b></td>
+          <td style="width:100px" ><b>Achievement Under PMAY(U)</b></td>
+      </tr>  
+      <tr>
+          <td align="center">1</td>
+          <td >No of Project(s) Approved</td> 
+          <td  style="padding-right: 10px;text-align: right">{{NoPApprovedJN.toLocaleString('en-IN')}}</td>  
+          <td  style="padding-right: 10px;text-align: right">-</td>  
+          
+          
+          <td  style="padding-right: 10px;text-align: right">{{NoOfprojRay.toLocaleString('en-IN')}}</td>
+          
+          <td  style="padding-right: 10px;text-align: right">{{NoPApprovedCLSS.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{NoOfprojISSR.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{NoOfprojAHP.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{NoOfprojBLCS.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{proj_Total}}</td>        
+      </tr>
+      <tr>
+        <td align="center">2</td>
+          <td  >Project Cost Approved (Rs in Cr.)</td>
+          <td  style="padding-right: 10px;text-align: right">{{ProjCostApp_JN.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">-</td>
+          
+          <td  style="padding-right: 10px;text-align: right">{{ProjCostRay.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{CLSSLoanAmt.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{ProjCostISSR.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{ProjCostAHP.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{ProjCostBLCS.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{ProjApp_Total}}</td>
+      </tr>
+      <tr>
+          <td align="center"> 3</td>
+          <td>Central Assistance Sanctioned (Rs in Cr.)</td>
+          <td  style="padding-right: 10px;text-align: right">{{CShare_JN.toLocaleString('en-IN')}}</td>        
+          <td  style="padding-right: 10px;text-align: right">-</td>        
+          
+          <td  style="padding-right: 10px;text-align: right">{{CSRay.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{SubsidyAmtCr.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{CSISSR.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{CSAHP.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{CSBLCS.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{CAS_Total}}</td>
+      </tr>
+      <tr>
+          <td align="center">4</td>
+           <td>Central Assistance Released (Rs in Cr.)</td>
+           <td  style="padding-right: 10px;text-align: right">{{CARel_JN.toLocaleString('en-IN')}}</td>        
+           <td  style="padding-right: 10px;text-align: right">-</td>        
+           <td  style="padding-right: 10px;text-align: right">{{CARay.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{SubsidyAmtCr.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{CAISSR.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{CAAHP.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{CABLCS.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{CAR_Total}}</td>       
+      </tr>
+      <tr >
+          <td align="center">5</td>
+          <td>Houses Sanctioned (Nos)</td>
+          <td  style="padding-right: 10px;text-align: right">{{HS_JN.toLocaleString('en-IN')}}</td>         
+          <td  style="padding-right: 10px;text-align: right">-</td>         
+          <td  style="padding-right: 10px;text-align: right">{{HSRay.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{NoofBene.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HSISSR.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HSAHP.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HSBLCS.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HS_Total}}</td>      
+      </tr>
+      <tr>
+          <td align="center">6</td>             
+          <td>Houses Grounded for Construction (Nos)</td>
+          <td  style="padding-right: 10px;text-align: right">{{Grounded_JN.toLocaleString('en-IN')}}</td>   
+          <td  style="padding-right: 10px;text-align: right">{{HGrnd_JN.toLocaleString('en-IN')}}</td>     
+          <td  style="padding-right: 10px;text-align: right">{{HGRay.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{NoofBene.toLocaleString('en-IN')}}</td>
+          <td style="padding-right: 10px;text-align: right">{{HGISSR.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HGAHP.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HGBLCS.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HG_Total}}</td>         
+      </tr>
+      <tr>
+          <td align="center">7</td>     
+          <td>Constructions of Houses Completed (Nos)</td>
+          <td  style="padding-right: 10px;text-align: right">{{Completed_JN.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HComp_JN.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HCRay.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{NoofBene.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HCISSR.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HCAHP.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HCBLCS.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HC_Total}}</td>        
+      </tr>
+      <tr>
+          <td align="center">8</td>
+          <td>Houses Occupied (Nos)</td>
+          <td  style="padding-right: 10px;text-align: right">{{OccupiedJN.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HOcc_JN.toLocaleString('en-IN')}}</td>        
+          <td  style="padding-right: 10px;text-align: right">{{HORay.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{NoofBene.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HOISSR.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HOAHP.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HOBLCS.toLocaleString('en-IN')}}</td>
+          <td  style="padding-right: 10px;text-align: right">{{HO_Total}}</td>
+         </tr>
+         <tr >
+            <td colspan="10">
+                <i><p><label id="Note7" [hidden]=not7ShowHide> "* inclusive of incomplete houses of earlier scheme grounded and completed after 2014"</label>
+                 <br/> <label id="Note8" [hidden]=not8ShowHide>   "+ inclusive of unoccupied houses of earlier scheme occupied after 2014"</label>
+                  </p></i>
+             </td>
+         </tr>
+    </table></div>
+     
+             <div class="container">
+  <div class="row" >
+      <div class="col-md-1">
+              <!-- <input type="button" (click)="AdminPage()" value="Back" style="width: 200px;background-color:cornflowerblue"/> -->
+                
+        </div>
+        <div class="col-md-1">
+         
+          </div>
+          <div class="col-md-1">
+        
+            </div>
+            <div class="col-md-1">
+    
+              </div>
+              <div class="col-md-1">
+                  <input type="button" (click)="pdfReport()" value="download pdf" style="width: 200px;background-color:cornflowerblue"/>
+          
+                </div>
+                <div class="col-md-1">
+              
+                  </div>
+                  <div class="col-md-1">
+    
+                    </div>
+                    <div class="col-md-1">
+                        <!-- <button class="previous" (click)="AdminPage()"> &laquo; Previous</button> -->
+
+                      </div>
+                      <div class="col-md-1">
+                    
+                        </div>
+                        <div class="col-md-1">
+                
+                          </div>
+                          <div class="col-md-1">
+                        
+                            </div>
+            <!-- <div class="col-md-1">
+                 <input type="button" (click)="pdfReport()" value="Back" style="width: 200px;background-color: blue"/>
+            </div> -->
+      </div>
+  
+  
+  
+  
+  
+  
+  
+    </div>
+  </div>
+  
+   
+   

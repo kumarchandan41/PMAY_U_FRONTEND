@@ -1,0 +1,20 @@
+<p>
+  dynamic-comp works!
+</p>
+{{data|json}}
+<div class="form-group form-inline">
+  <input type="button" (click)="AddNewRow()" value="Add New Row">
+  <ng-container *ngFor="let item of data;let i = index">
+    <div class="row">
+      <div class="col-lg-2">
+        {{i+1}}
+      </div>
+      <div class="col-lg-4">
+        <input type="text" class="form-control" [(ngModel)]="data[i].Name" />
+      </div>
+      <div class="col-lg-4">
+        <input type="text" class="form-control" [(ngModel)]="data[i].Amount" />
+      </div>
+    </div>
+  </ng-container>
+</div>

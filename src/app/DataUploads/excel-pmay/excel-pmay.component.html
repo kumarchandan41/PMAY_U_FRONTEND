@@ -1,0 +1,140 @@
+<div class="container">
+    <input type="file" #fileInput (cahnge)="UploadFile($event)" />
+    <button (click)="UploadFile($event)">Upload</button>
+  
+    &nbsp;<button (click)="DeleteTablePMAY()">Delete Table Data</button>
+    <br>
+    <br>
+    <div>
+            <select class="form-control" placeholder="Choose Sheet">
+              <option value="0">Select Sheet</option>
+              <option *ngFor='let st of lstExcelSheet'>
+                {{st.SheetName}}
+              </option>
+            </select>
+    </div>
+  <div style="overflow: auto;width:1180px;height:520px">  
+    <table class="table table-striped" style="overflow-y:scroll; width:100px;border:1">
+        <thead class="thead-dark" >
+            <tr>
+                <th>SrNo</th>
+                <th style="width:200px">Project_Code</th>
+                <th>Annexure_ID</th>
+                <th>Component</th>
+                <th>State</th>
+                <th>District</th>
+                <th>City</th>
+                <th>StateCode</th>
+                <th>Dcode</th>
+                <th>sunDisttCode</th>
+                <th>CityCode</th>
+  
+                <th>Project_Name</th>
+                <th>CSMCDate</th>
+                <th>CSMCNo</th>
+                <th>FinYear</th>
+                <th>NoofProjects</th>
+  
+                <th>Project_Cost</th>
+                <th>Central_Assistance_involved</th>
+                <th>State_Grant</th>
+                <th>ULBShare</th>
+                <th>BeneficiaryShare</th>
+                
+  
+                <th>Released_throug_EBR</th>
+                <th>CASanctionedForRel</th>
+                <th>FirstInstallmentReleased</th>
+                <th>SecondInstallmentReleased</th>
+                <th>ThirdInstallmentReleased</th>
+                <th>CentralAssistanceReleased</th>
+                <th>UC_Received</th>
+                <th>UC_Pending</th>
+                <th>Housesinvolved</th>
+                <th>FundsDisbursed_in_Houses</th>
+  
+                <th>Houses_Grounded</th>
+                <th>HousesUnderProgress</th>
+                <th>Houses_Completed</th>
+                <th>HousesAllotted</th>
+                <th>HousesOccupied</th>
+  
+                <th>Houses_yetto_Grounded</th>
+                <th>Cid</th>
+                <th>Division</th>
+                 <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody style="overflow-y:scroll; width:100px;">
+            <tr *ngFor="let data of lstExcel | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{data.SrNo}}</td>
+                <td>{{data.Project_Code}}</td>
+                <td>{{data.Annexure_ID}}</td>
+                <td>{{data.Component}}</td>
+                <td>{{data.State}}</td>
+                <td>{{data.District}}</td>
+                <th>{{data.City}}</th>
+                <th>{{data.StateCode}}</th>
+                <th>{{data.Dcode}}</th>
+                <th>{{data.sunDisttCode}}</th>
+                <th>{{data.CityCode}}</th>
+           
+                <th>{{data.Project_Name}}</th>
+                <th>{{data.CSMCDate}}</th>
+                <th>{{data.CSMCNo}}</th>
+                <th>{{data.FinYear}}</th>
+                
+                <th>{{data.NoofProjects}}</th>
+                <th>{{data.Project_Cost}}</th>
+                <th>{{data.Central_Assistance_involved}}</th>
+                <th>{{data.State_Grant}}</th>
+                <th>{{data.ULBShare}}</th>
+                
+  
+                <th>{{data.BeneficiaryShare}}</th>
+  
+  
+                <th>{{data.Released_throug_EBR}}</th>
+                <th>{{data.CASanctionedForRel}}</th>
+                <th>{{data.FirstInstallmentReleased}}</th>
+                <th>{{data.SecondInstallmentReleased}}</th>
+                
+                <th>{{data.ThirdInstallmentReleased}}</th>
+                <th>{{data.CentralAssistanceReleased}}</th>
+                <th>{{data.UC_Received}}</th>
+                <th>{{data.UC_Pending}}</th>
+                <th>{{data.Housesinvolved}}</th>
+  
+                <th>{{data.FundsDisbursed_in_Houses}}</th>
+  
+                
+                <th>{{data.Houses_Grounded}}</th>
+                <th>{{data.HousesUnderProgress}}</th>
+                <th>{{data.Houses_Completed}}</th>
+                <th>{{data.HousesAllotted}}</th>
+  
+                <th>{{data.HousesOccupied}}</th>
+                <th>{{data.Houses_yetto_Grounded}}</th>
+                <th>{{data.Cid}}</th>
+                <th>{{data.Division}}</th>
+                <td><input type="button" class="btn btn-primary" (click)="Update(data)" value="Update">&nbsp;&nbsp;
+                    </td>
+            <td>
+                <input type="button" class="btn btn-danger" (click)="Delete(data)" value="Delete">
+            </td>
+                  </tr>
+            <tr>
+                <td colspan="4">
+                    <ul class="pagination">  
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>  
+                    </ul>  
+               </td>
+           </tr>
+        </tbody>
+    </table>
+  </div>
+    </div>
+    
+    
+    

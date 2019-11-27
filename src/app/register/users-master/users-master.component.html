@@ -1,0 +1,61 @@
+
+<div style="overflow: auto;width:1300px;height:500px;margin: 15px;">  
+    <table class="table table-striped" style="overflow-y:scroll; width:100px;border:1">
+        <thead class="thead-dark">
+            <tr style="background-color: gray;color: white;">
+                <th>SrNo</th>
+                <th style="width:200px">UserName</th>
+                <th>LastName</th>
+                <th>UserType</th>
+                <th>Address</th>
+                <th>Password</th>
+                <th>DesignationId</th>
+                <th>StateName</th>
+                <th>DisttName</th>
+                <th>City Name</th>
+                <th>Zip Code</th>
+                <th>LastLoginDate</th>
+                <th>PasswordChangeDate</th>
+                <th>Role</th>
+                <th>EmailId</th>
+                <th>phone</th>
+                <th>mobile no</th>
+                <th>User Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+       <tbody style="overflow-y:scroll; width:100px;">
+            <tr *ngFor="let data of lstUserDetails | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>1</td>
+                <td style="width:200px">{{data.UserName}}</td>
+                <td>{{data.LastName}}</td>
+                <td>{{data.UserType}}</td>
+                <td>{{data.Address}}</td>
+                <td>{{data.Password}}</td>
+                <td>{{data.DesignationId}}</td>
+                <td>{{data.States_UT}}</td>
+                <td>{{data.District}}</td>
+                <td>{{data.City}}</td>
+                <td>{{data.ZipCode}}</td>
+                <td>{{data.LastLoginDate}}</td>
+                <td>{{data.PasswordChangeDate}}</td>
+                <td>{{data.RoleName}}</td>
+                <td>{{data.EmailId}}</td>
+                <td>{{data.MobileNo}}</td>
+                <td>{{data.PhoneNo}}</td>
+                <td>
+                        <input type="button" class="btn btn-danger" (click)="Delete(data)" value="Block">
+
+                </td>
+                <td><input type="button" class="btn btn-primary" (click)="Update(data)" value="Update">&nbsp;&nbsp;
+                </td>
+
+            </tr>
+            <tr><td colspan="4">
+                      <ul class="pagination">  
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>  
+                      </ul>  
+            </td></tr>
+        </tbody>   
+    </table>
+</div>

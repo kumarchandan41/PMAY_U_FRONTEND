@@ -1,0 +1,99 @@
+
+    <div class="container"  style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+      <div id="print-section">
+<div class="w3-card-4">
+  <h3
+  style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
+    Report District-Wise</h3>
+</div>
+<br>
+
+<div class="form-container">
+        <h3 style="text-align: center;font-family: Arial, Geneva, Tahoma, sans-serif;"><b>District wise physical and financial progress report for the state of {{adminSandbox.reportState}} </b></h3>    
+        <br>
+        <h5  style="text-align:right;width: 1050px;font-family: Arial, Geneva, Tahoma, sans-serif;">Date.............</h5>  
+        <table  border="1px"  style="width: 78%;"  id="content" #content align="center"  #table>
+              <thead style="background-color: lightgray; font-weight: bold">
+                      <tr>
+                              <td rowspan="2" colspan="1" style="text-align: center;width: 5px;font-family: Arial, Geneva, Tahoma, sans-serif;" >
+                                      S.No
+                              </td>
+                              <td rowspan="2" colspan="1" style="text-align: center;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                                      District Name
+                              </td>
+                              <td rowspan="2" colspan="1" style="text-align: center;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                                        Number of Project(s)
+                                 </td>
+                              <td rowspan="1" colspan="5" style="text-align: center;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                                      Financial Progress(Rs in Crore)
+                              </td>
+                              <td rowspan="1" colspan="4" style="text-align: center;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                                      Physical Progress of Houses(Nos)
+                              </td>
+                          </tr>
+                          <tr>
+                                  <td style="width: 112px;font-family: Arial, Geneva, Tahoma, sans-serif;text-align: center">Project Cost</td>
+                                  <td style="width: 112px;font-family: Arial, Geneva, Tahoma, sans-serif;">Central Assistance Approved</td>
+                                  <td style="width: 112px;font-family: Arial, Geneva, Tahoma, sans-serif;">Central Assistance Released</td>
+                                  <td style="width: 112px;font-family: Arial, Geneva, Tahoma, sans-serif;">Central Assistance Utilized</td>
+                                  <td style="width: 112px;font-family: Arial, Geneva, Tahoma, sans-serif;">Houses Sanctioned</td>
+                                  <td style="width: 90px;font-family: Arial, Geneva, Tahoma, sans-serif;">Grounded</td>
+                                  <td style="width: 88px;font-family: Arial, Geneva, Tahoma, sans-serif;">Under Progress</td>
+                                  <td style="width: 16px;font-family: Arial, Geneva, Tahoma, sans-serif;">Construction Completed</td>
+                                  <td style="width: 92px;font-family: Arial, Geneva, Tahoma, sans-serif;">Occupied </td>
+                              </tr>
+                
+              </thead>
+              <tbody>
+                      <tr *ngFor="let reportStateDistrictWise of adminSandbox.reportStateDistrictWise;let i = index"
+                      style="text-align: center;background-color:white">
+                          <td style="text-align: left">{{i+1}}</td>
+                          <td style="text-align: left;width: 150px;font-family: Arial, Geneva, Tahoma, sans-serif;" (click)="adminSandbox.CityReportWise(reportStateDistrictWise.Dcode)" >{{reportStateDistrictWise.District}}</td>
+                          <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{reportStateDistrictWise.NumberofProject.toLocaleString('en-IN')}}</td>
+                          <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{reportStateDistrictWise.ProjectCost.toLocaleString('en-IN')}}</td>
+                          <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{reportStateDistrictWise.CentralAssistance.toLocaleString('en-IN')}}</td>
+                          <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;" >
+                                        <p style="font-size: 15px;text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;" *ngIf="reportStateDistrictWise.Release == null">{{0}}</p>
+                                        <p style="font-size: 15px;text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;" *ngIf=" reportStateDistrictWise.Release != null" > {{reportStateDistrictWise.Release.toLocaleString('en-IN')}}</p>
+                                      
+                         
+                        </td>
+                        <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;"></td>
+                          <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{reportStateDistrictWise.TotalSanction.toLocaleString('en-IN')}}</td>
+                          <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{reportStateDistrictWise.Grounding.toLocaleString('en-IN')}}</td>
+                          <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{reportStateDistrictWise.TotalProgressHouse.toLocaleString('en-IN')}}</td>
+                          <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{reportStateDistrictWise.ConstructionCompleted.toLocaleString('en-IN')}}</td>
+                          <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{reportStateDistrictWise.TotalHouseOccupiedBeneficiary.toLocaleString('en-IN')}}</td>
+                      
+                      </tr>
+                      <tr style="text-align: center;background-color:yellow">
+                                <td> </td>
+                                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;"> <b>Total</b></td>
+                                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{ getNumberOfProjectTotal(1).toLocaleString('en-IN') }} </td>
+                                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{ getProjectCostTotal(2).toLocaleString('en-IN') }} </td>
+                                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{ getCentralAssistanceTotal(3).toLocaleString('en-IN') }} </td>
+                                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{ getCentralAssistanceReleaseTotal(4).toLocaleString('en-IN') }} </td>
+                                <td> </td>
+                                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{ getTotalHouseSanction(6).toLocaleString('en-IN') }} </td>
+                                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{ getTotalGrounding(7).toLocaleString('en-IN') }} </td>
+                                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{ getTotalProgressHouse(8).toLocaleString('en-IN') }} </td>
+                                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{ getTotalConstructionCompleted(9).toLocaleString('en-IN') }} </td>
+                                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">{{ getTotalTotalHouseOccupiedBeneficiary(10).toLocaleString('en-IN') }} </td>
+                </tr>
+                  </tbody>
+          </table>
+       
+  </div>
+  <br>
+ 
+</div>
+<div style="text-align: center">
+<button class="w3-btn w3-green w3-round w3-ripple" style="font-family: Arial, Geneva, Tahoma, sans-serif" (click)="print()">print</button>
+<button class="w3-btn w3-orange w3-red w3-ripple" style="font-family: Arial, Geneva, Tahoma, sans-serif;" (click)="pdf()">Pdf</button>
+<button (click)="ExportToExcel()" style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-btn w3-orange w3-round w3-ripple">XL-Sheet</button>
+</div>
+</div> 
+
+
+
+

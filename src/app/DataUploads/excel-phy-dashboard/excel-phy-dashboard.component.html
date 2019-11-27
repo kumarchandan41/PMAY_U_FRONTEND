@@ -1,0 +1,218 @@
+<div class="container">
+    <input type="file" #fileInput (cahnge)="UploadFile($event)" />
+    <button (click)="UploadFile($event)">Upload</button>
+    <br>
+    <br>
+
+    <div>
+            <select class="form-control" placeholder="Choose Sheet">
+              <option value="0">Select Sheet</option>
+              <option *ngFor='let st of lstExcelSheet'>
+                {{st.SheetName}}
+              </option>
+            </select></div>
+<div style="overflow: auto;width:1180px;height:520px">  
+    <table class="table table-striped" style="overflow-y:scroll; width:100px;border:1">
+        <thead class="thead-dark" >
+            <tr>
+
+     
+                <th>SrNo</th>
+                <th>State1</th>
+                
+                <th style="width:200px">State Name</th>
+                <th>Demand</th>
+                <th>Houses Sanctioned</th>
+                <th>CentralShare</th>
+                <th>StateShare</th>
+
+                <th>ULBShare</th>
+                <th>BeneficiaryShare</th>
+                <th>TotalCost</th>
+                <th>Grounded</th>
+                <th>Completed</th>
+                				
+                <th>Occupied</th>
+                <th>CAApproved</th>
+                <th>CASanctionedforRelease</th>
+                <th>CAReleased</th>
+                <th>PendingforRelease</th>
+            
+                <th>IIIQ_15_16</th>
+                <th>IV_Q_15_16</th>
+                <th>IQ_16_17</th>
+                <th>IIQ_16_17</th>
+                <th>IIIQ_16_17</th>
+                
+           
+                <th>IV_Q_16_17</th>
+                <th>I_Q_17_18</th>
+                <th>II_Q_17_18</th>
+                <th>III_Q_17_18</th>
+                <th>IV_Q_17_18</th>
+                
+                <th>I_Q_18_19</th>
+                <th>II_Q_18_19</th>
+                <th>III_Q_18_19</th>
+                <th>IV_Q_18_19</th>
+                <th>I_Q_19_20</th>
+   				
+                <th>SRNo1</th>
+                <th>State2</th>
+                <th>CumSanctioned</th>
+                <th>CASanctioned_15_16</th>
+                <th>CASanctioned_16_17</th>
+
+                <th>CASanctioned_17_18</th>
+                <th>CASanctioned_18_19</th>
+                <th>CASanctioned_19_20</th>
+                <th>CumuCA_Released_15_16</th>
+                <th>CumuCA_Released_16_17</th>
+
+                <th>CumuCA_Released_17_18</th>
+                <th>CumuCA_Released_18_19</th>
+                <th>CumuCA_Released_19_20</th>
+                <th>HS_Cum_20_8_18</th>
+                <th>HS_15_16</th>
+         
+                <th>HS_16_17</th>
+                <th>HS_17_18</th>
+                <th>HS_18_19</th>
+                <th>HS_19_20</th>
+                <th>HC_20_08_18</th>
+           
+                <th>HC_14_15</th>
+                <th>HC_15_16</th>
+                <th>HC_16_17</th>
+                <th>HC_17_18</th>
+                <th>HC_18_19</th>
+                
+                <th>HC_19_20</th>
+                <th>HO_Cum</th>
+                <th>HO_14_15</th>
+                <th>HO_15_16</th>
+                <th>HO_16_17</th>
+                				
+         
+                <th>HO_17_18</th>
+                <th>HO_18_19</th>
+                <th>HO_19_20</th>
+                <th>Expenditure</th>
+                <th>Division</th>
+                 <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody style="overflow-y:scroll; width:100px;">
+            <tr *ngFor="let data of lstExcel | paginate: { itemsPerPage: 10, currentPage: p }">
+         
+               
+                <td>{{data.SrNo}}</td>
+                <td>{{data.State1}}</td>
+                <td>{{data.StateCode}}</td>
+                <td>{{data.Demand}}</td>
+                <td>{{data.Houses_Sanctioned}}</td>
+                <td>{{data.CentralShare}}</td>
+
+                <td>{{data.StateShare}}</td>
+                <td>{{data.ULBShare}}</td>
+                <td>{{data.BeneficiaryShare}}</td>
+                <td>{{data.TotalCost}}</td>
+                <td>{{data.Grounded}}</td>
+
+                <td>{{data.Completed}}</td>
+                <td>{{data.Occupied}}</td>
+                <td>{{data.CAApproved}}</td>
+                <td>{{data.CASanctionedforRelease}}</td>
+                <td>{{data.CAReleased}}</td>
+                
+                <td>{{data.PendingforRelease}}</td>
+                <td>{{data.IIIQ_15_16}}</td>
+                <td>{{data.IV_Q_15_16}}</td>
+                <td>{{data.IQ_16_17}}</td>
+                <td>{{data.IIQ_16_17}}</td>
+                
+           
+                <td>{{data.IIIQ_16_17}}</td>
+                <td>{{data.IV_Q_16_17}}</td>
+                <td>{{data.I_Q_17_18}}</td>
+                <td>{{data.II_Q_17_18}}</td>
+                <td>{{data.III_Q_17_18}}</td>
+        
+        
+                <td>{{data.IV_Q_17_18}}</td>
+                <td>{{data.I_Q_18_19}}</td>
+                <td>{{data.II_Q_18_19}}</td>
+                <td>{{data.III_Q_18_19}}</td>
+                <td>{{data.IV_Q_18_19}}</td>
+
+                <td>{{data.I_Q_19_20}}</td>
+                <td>{{data.SRNo1}}</td>
+                <td>{{data.State2}}</td>
+                <td>{{data.CumSanctioned}}</td>
+                <td>{{data.CASanctioned_15_16}}</td>
+
+            
+
+                <td>{{data.CASanctioned_16_17}}</td>
+                <td>{{data.CASanctioned_17_18}}</td>
+                <td>{{data.CASanctioned_18_19}}</td>
+                <td>{{data.CASanctioned_19_20}}</td>
+                <td>{{data.CumuCAReleased}}</td>
+                
+                <td>{{data.CumuCA_Released_15_16}}</td>
+                <td>{{data.CumuCA_Released_16_17}}</td>
+                <td>{{data.CumuCA_Released_17_18}}</td>
+                <td>{{data.CumuCA_Released_18_19}}</td>
+                <td>{{data.CumuCA_Released_19_20}}</td>
+            
+                <td>{{data.HS_Cum_20_8_18}}</td>
+                <td>{{data.HS_15_16}}</td>
+                <td>{{data.HS_16_17}}</td>
+                <td>{{data.HS_17_18}}</td>
+                <td>{{data.HS_18_19}}</td>
+          
+                <td>{{data.HS_19_20}}</td>
+                <td>{{data.HC_20_08_18}}</td>
+                <td>{{data.HC_14_15}}</td>
+                <td>{{data.HC_15_16}}</td>
+                <td>{{data.HC_16_17}}</td>
+             
+                <td>{{data.HC_17_18}}</td>
+                <td>{{data.HC_18_19}}</td>
+                <td>{{data.HC_19_20}}</td>
+                <td>{{data.HO_Cum}}</td>
+                <td>{{data.HO_14_15}}</td>
+                						
+
+                <td>{{data.HO_15_16}}</td>
+                <td>{{data.HO_16_17}}</td>
+                <td>{{data.HO_17_18}}</td>
+                <td>{{data.HO_18_19}}</td>
+                <td>{{data.HO_19_20}}</td>
+
+                <td>{{data.Expenditure}}</td>
+                <td>{{data.Division}}</td>
+                <td><input type="button" class="btn btn-primary" (click)="Update(data)" value="Update">&nbsp;&nbsp;
+                    </td>
+            <td>
+                <input type="button" class="btn btn-danger" (click)="Delete(data)" value="Delete">
+            </td>
+                  </tr>
+            <tr>
+                <td colspan="4">
+                    <ul class="pagination">  
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>  
+                    </ul>  
+               </td>
+           </tr>
+        </tbody>
+
+    
+    </table>
+  </div>
+
+    </div>
+    
+    
+    

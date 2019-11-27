@@ -1,0 +1,130 @@
+ <!-- <div><u>PMAY UPDATION FORM </u></div> -->
+ <div class="container">
+     
+      <div class="row"><h2>State List</h2></div>
+      <div class="row">
+      <div class="col-md-4">
+          <b>Type any keyword to search</b><br>
+          <input type="text" [(ngModel)]="searchText" autocomplete="off" class="form-control col-md-4">
+      </div>
+   
+        <div class="row" align="right" style="padding:10px;padding-right: 40px">        
+               <input type="button" (click)="openModalDialog('save')" value="Add State" class="btn btn-default">
+        </div>
+    </div>
+    <div class="row">
+      
+        </div>
+        <hr>
+        <div class="row">
+            <table class="table table-striped" align="center">
+            <tr class="btn-primary" style="height: 50px;width:600px;">
+                <th>State Code</th>
+                <th>State Name</th>
+                <th>Division</th>
+                <th>Status</th>
+                <th style="width: 100px">Action</th>
+            </tr>
+            <tr *ngFor="let state of stateMaster | paginate: { itemsPerPage: 5, currentPage:p  } | filter:searchText" >
+                <td style="padding-left: 40px">{{state.Codes}}</td>
+                <td>{{state.States_UT}}</td>
+                 <td>{{state.Division}}</td>
+                <td>{{state.Status}}</td> 
+                <td  style="padding: 5px"><button type="button" (click)="openModalDialog(state)" class="btn btn-link">Edit</button>&nbsp;&nbsp;
+            </tr>
+            <tr><td colspan="4">
+                <ul class="pagination">  
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>  
+                        </ul>  
+        </td></tr>
+        </table>
+
+    </div>
+
+   
+ </div>
+
+
+ <!-- modal -->
+<div class="modal" tabindex="-1" role="dialog" style="height: 400px" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:#2C7BBA;color:white;height: 50px;">
+         
+         <div style="width:570px">
+            <div style="width: 550px;float:left;"><h4 class="modal-title" style="text-align: center;">{{headerTitle}}</h4></div>
+            <div style="width: 20px;float:left">
+                <button type="button" class="close" style="color: white" aria-label="Close" (click)="closeModalDialog()"><span aria-hidden="true">&times;</span></button>
+            </div>
+      
+        </div>   
+         
+         
+        </div>
+  
+        <!-- modal-body -->
+        <div class="modal-body">
+
+            <div class="row" style="padding:15px">
+                <div class="row" style="padding: 4px">
+                    <div class="col-md-4">
+                        <label>State</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" name="StateName"  [(ngModel)]="StateName" value="{{States_UT}}"  class="form-control">
+                    </div>
+                </div>
+                <div class="row"  style="padding: 4px">
+                        <div class="col-md-4">
+                            <label>State Code</label>
+                        </div>
+                        <div class="col-md-8">
+                          
+                            <input type="text" name="Codes"  [(ngModel)]="Codes" value="{{Codes}}"  class="form-control">
+                        </div>
+                </div>
+                <div class="row" style="align-items: center;padding: 4px">
+                    <div class="col-md-4">
+                        <label>Division</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control" [(ngModel)]="Division"
+                          style="font-display: #FF00FF;color:black;">
+                                <option [selected]="true" [ngValue]="Division">{{Division}}</option>
+                                <option value="HFA-1">HFA-1</option>
+                                <option value="HFA-3">HFA-3</option>
+                                <option value="HFA-4">HFA-4</option>
+                                <option value="HFA-5">HFA-5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row"  style="padding: 4px">
+                        <div class="col-md-3">
+                          
+                        </div>
+                        <!-- <div class="col-md-8">
+                                <input type ="button" (click)="SaveData()" value="{{action}}" class="btn btn-success" />&nbsp;&nbsp;&nbsp;
+                                <input type ="button"  (click)="ResetState()" value="Reset" class="btn btn-warning" />      
+                        </div> -->
+        
+                       
+                </div>
+            </div>
+
+      
+      </div>
+        <!-- modal-footer -->
+        <div class="modal-footer">
+                <input type ="button" (click)="SaveData()" value="{{action}}" class="btn btn-success" />&nbsp;&nbsp;&nbsp;
+                <input type ="button" (click)="ResetState()" value="Reset" class="btn btn-warning" />      
+        </div>
+        <!-- <div class="col-md-8">
+            <button type="button" class="btn btn-default" (click)="Save()" >Save</button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-default" (click)="closeModalDialog()" >Close</button>
+        </div>  
+         -->
+
+      </div>
+    </div>
+  </div>
+ 

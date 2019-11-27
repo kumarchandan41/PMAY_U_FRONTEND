@@ -1,0 +1,50 @@
+.modal-content{
+    width: 920px;
+    /* left: 20px; */
+    padding:10px;
+}
+th{
+    width: 98px;
+}
+
+
+
+bodyataglance1 {
+    background-color: #FFF;
+    color: #777;
+    font-family: "Open Sans", Arial, sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    /* margin: 0px;   */
+
+    /* margin: 0; */
+  }
+  
+  body  
+{ 
+    /* this affects the margin on the content before sending to printer */ 
+    margin: 0px;  
+} 
+
+
+  table, th, td {
+     height: 4px;
+     font-family: "Open Sans", Arial, sans-serif;
+    font-size: 10px;
+  }
+   
+  
+  @media print {
+    body *, #drpdown, #buttonGroup{display : none};
+    body #toPrint * {display:none} 
+    table {border-collapse: collapse;}
+    
+    table, td, th {border: 1px solid black}
+    #toPrint { padding-left :-10px; padding-top :2px;padding-right :-10px;}  
+   }
+  
+   
+  
+  
+  
+ 

@@ -1,0 +1,132 @@
+<div class="container">
+    <input type="file" #fileInput (cahnge)="UploadFile($event)" />
+    <button (click)="UploadFile($event)">Upload</button>
+  
+    &nbsp;<button (click)="DeleteTablePMAY()">Delete Table Data</button>
+    <br>
+    <br>
+    <div>
+            <select class="form-control" placeholder="Choose Sheet">
+              <option value="0">Select Sheet</option>
+              <option *ngFor='let st of lstExcelSheet'>
+                {{st.SheetName}}
+              </option>
+            </select>
+    </div>
+  <div style="overflow: auto;width:1180px;height:520px">  
+    <table class="table table-striped" style="overflow-y:scroll; width:100px;border:1">
+        <thead class="thead-dark" >
+            <tr>
+                <th>SrNo</th>
+                <th style="width:200px">State Name</th>
+                <th>StateCode</th>
+                <th>Loan_EWS_LIG</th>
+                <th>Subsidy_EWS_LIG</th>
+                <th>No_Beneficiary_EWS_LIG</th>
+                <th>Loan_MIG</th>
+                <th>Subsidy_MIG</th>
+                <th>No_Beneficiary_MIG</th>
+                <th>Loan_TOTAL_14_15</th>
+                <th>Loan_TOTAL_15_16</th>
+  
+                <th>Loan_TOTAL_16_17</th>
+                <th>Loan_TOTAL_17_18</th>
+                <th>Loan_TOTAL_18_19</th>
+                <th>Loan_TOTAL_18_19</th>
+                <th>Loan_TOTAL_20_21</th>
+  
+                <th>Loan_TOTAL_21_22</th>
+                <th>Loan_TOTAL</th>
+
+
+                <th>Subsidy_Total</th>
+                <th>NoBeneficiary_Total</th>
+                <th>Bene2014_15</th>
+                
+  
+                <th>Bene2015_16</th>
+                <th>Bene2016_17</th>
+                <th>Bene2017_18</th>
+                <th>Bene2018_19</th>
+                <th>Bene2019_20</th>
+                <th>Bene2020_21</th>
+                <th>Bene2021_22</th>
+                <th>Subsidy2014_15</th>
+                <th>Subsidy2015_16</th>
+                <th>Subsidy2016_17</th>
+  
+                <th>Subsidy2017_18</th>
+                <th>Subsidy2018_19</th>
+                <th>Subsidy2019_20</th>
+                <th>Subsidy20_21</th>
+                <th>Subsidy21_22</th>
+  
+                <th>Division</th>
+                 <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody style="overflow-y:scroll; width:100px;">
+            <tr *ngFor="let data of lstExcelSheet | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{data.SrNo}}</td>
+                <td>{{data.State}}</td>
+                <td>{{data.StateCode}}</td>
+                <td>{{data.Loan_EWS_LIG}}</td>
+                <td>{{data.Subsidy_EWS_LIG}}</td>
+                <td>{{data.No_Beneficiary_EWS_LIG}}</td>
+                <th>{{data.Loan_MIG}}</th>
+                <th>{{data.Subsidy_MIG}}</th>
+                <th>{{data.No_Beneficiary_MIG}}</th>
+                <th>{{data.Loan_TOTAL_14_15}}</th>
+                <th>{{data.Loan_TOTAL_15_16}}</th>
+           
+                <th>{{data.Loan_TOTAL_16_17}}</th>
+                <th>{{data.Loan_TOTAL_17_18}}</th>
+                <th>{{data.Loan_TOTAL_18_19}}</th>
+                <th>{{data.Loan_TOTAL_18_19}}</th>
+                <th>{{data.Loan_TOTAL_20_21}}</th>
+
+                <th>{{data.Loan_TOTAL_21_22}}</th>
+                <th>{{data.Loan_TOTAL}}</th>
+                <th>{{data.Subsidy_Total}}</th>
+                <th>{{data.NoBeneficiary_Total}}</th>
+                <th>{{data.Bene2014_15}}</th>
+   
+                <th>{{data.Bene2015_16}}</th>
+                <th>{{data.Bene2016_17}}</th>
+                <th>{{data.Bene2017_18}}</th>
+                <th>{{data.Bene2018_19}}</th>
+                <th>{{data.Bene2019_20}}</th>
+                <th>{{data.Bene2020_21}}</th>
+                <th>{{data.Bene2021_22}}</th>
+                <th>{{data.Subsidy2014_15}}</th>
+                <th>{{data.Subsidy2015_16}}</th>
+                <th>{{data.Subsidy2016_17}}</th>
+                <th>{{data.Subsidy2017_18}}</th>
+                <th>{{data.Subsidy2018_19}}</th>
+                <th>{{data.Subsidy2019_20}}</th>
+                <th>{{data.Subsidy20_21}}</th>
+                <th>{{data.Subsidy21_22}}</th>
+  
+                <th>{{data.Division}}</th>
+                 
+                <td><input type="button" class="btn btn-primary" (click)="Update(data)" value="Update">&nbsp;&nbsp;
+                    </td>
+            <td>
+                <input type="button" class="btn btn-danger" (click)="Delete(data)" value="Delete">
+            </td>
+                  </tr>
+            <tr>
+                <td colspan="4">
+                    <ul class="pagination">  
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>  
+                    </ul>  
+               </td>
+           </tr>
+        </tbody>
+    </table>
+  </div>
+    </div>
+    
+    
+    

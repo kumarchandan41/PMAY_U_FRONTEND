@@ -1,0 +1,800 @@
+
+    <div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+      <div class="w3-card-4">
+          <h3
+          style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
+              Project-Detail</h3>
+      </div>
+      <br>
+      <div >
+        <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;width: 19%;">Bulk Upload Project Detail</label>
+        <input type="file" (ngModel)="ucOrder.UCPDF" 
+        (change)="selectFile($event)" 
+        name="txtSelectFile" style="font-family: Arial, Geneva, Tahoma, sans-serif;"/>
+        <br>
+        <button style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-btn w3-orange w3-round w3-ripple"
+                                    (click)="onClickProjectBulkData()">submit</button>
+    </div>
+    <br>
+      <div class="form-container">
+          <form [formGroup]="projectDetail" (ngSubmit)="onClickProjectDetail($event, projectDetail)">
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          State Name:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select [formControl]="ddlStateCode" [(ngModel)]="State" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (change)="adminSandbox.getStateDistrictData($event.target.value);adminSandbox.getProjectDetailData(ddlStateCode.value,null,null,null,null);this.District='';this.City='';this.Agency='';
+                          this.Scheme='';this.Components='';"
+                          class="w3-input w3-border">
+                          <option value="" disabled>Please select state--</option>
+                          <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                              {{state.States_UT}}</option>
+                      </select>
+                      <label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select
+                          state name. </label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          District Name:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select [formControl]="ddlDistrictCode" [(ngModel)]="District" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (change)="adminSandbox.getDistrictCityData($event.target.value); this.Scheme='';this.Components='';this.City='';this.Agency='';adminSandbox.getProjectDetailData(ddlStateCode.value,ddlDistrictCode.value,null,null,null)"
+                          class="w3-input w3-border">
+                          <option value="" disabled>Please select district--</option>
+                          <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster"
+                              [value]="ditrict.Dcode">
+                              {{ditrict.District}}</option>
+                      </select>
+                      <label *ngIf="submitted && ddlDistrictCode.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select
+                          district name. </label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          City Name:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select [formControl]="ddlCity" [(ngModel)]="City" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (change)="adminSandbox.getAgencyData($event.target.value);adminSandbox.getProjectDetailData(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,null,null);this.Agency=''"
+                          class="w3-input w3-border">
+                          <option value="" disabled>Please select city--</option>
+                          <option *ngFor="let city of adminSandbox.districtCityMaster" [value]="city.CityCode">
+                              {{city.City}}</option>
+                      </select>
+                      <label *ngIf="submitted && ddlCity.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select
+                          city name. </label>
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          CSMC Date:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input type="text" class="w3-input w3-border" [minDate]="maxStartDate" 
+                          [formControl]="txtCMCDate" bsDatepicker [bsConfig]="dpConfig" autocomplete="off"
+                          onkeydown="return false" placeholder="dd/mm/yyyy">
+                      <label *ngIf="submitted && txtCMCDate.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select date. </label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          CSMC Number:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input type="text" AllowOnlyNumber="true" class="w3-input w3-border"
+                          [formControl]="txtCSMCNumber" placeholder="CSMC Number" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      <label *ngIf="submitted && txtCSMCNumber.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter csmc number.</label>
+                  </div>
+                  
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Scheme:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select [formControl]="ddlScheme" class="w3-input w3-border" [(ngModel)]="Scheme" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (change)="adminSandbox.getProjectSchemeComponentData($event.target.value);Components='';
+                          adminSandbox.getProjectDetailData(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,null);
+                         ">
+                          <option value="" disabled>Please select Scheme--</option>
+                          <option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme.SchemeShortName">
+                              {{scheme.SchemeShortName}}</option>
+                      </select>
+                      <label *ngIf="submitted && ddlScheme.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select scheme. </label>
+                  </div>
+              </div> 
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Components:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select [formControl]="ddlComponent" [(ngModel)]="Components" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                      (change)="adminSandbox.getProjectDetailData(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,ddlComponent.value);">
+                          <option value="" disabled>Please select Components--</option>
+                          <option *ngFor="let schemeComp of adminSandbox.schComponentMaster"
+                              [value]="schemeComp.Cname">
+                              {{schemeComp.Cname}}</option>
+                      </select>
+                      <label *ngIf="submitted && ddlComponent.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select components. </label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Project Status:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;" [(ngModel)]="Status" [formControl]="ddlStatus">
+                          <option value="" selected="selected">Please select status--</option>
+                          <option value="Approved">Approved</option>
+                          <option value="Revised">Revised</option>
+                          <option value="InPrinciple">In-principle</option>
+                      </select>
+                      <label *ngIf="submitted && ddlStatus.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select project status. </label>
+                  </div>
+
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Project Title:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 45%;">
+                      <textarea style="font-family: Arial, Geneva, Tahoma, sans-serif;" rows="4" cols="50" type="text" class="w3-input w3-border"
+                          [formControl]="txtProjectTitle" placeholder="Project Title"></textarea>
+                      <label *ngIf="submitted && txtProjectTitle.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter project title.</label>
+                  </div>
+
+
+
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Project Cost:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
+                          [formControl]="txtProjectCost" placeholder="Project Cost" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (blur)="adminSandbox.OtherCost(txtProjectCost.value,txtCentralAssist.value,txtStateGrant.value,txtULB.value,txtBeneficiaryShare.value)">
+                      <label *ngIf="submitted && txtProjectCost.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter project cost. </label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Cental Asssistance:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input AllowOnlyDecimal="true" type="text"
+                          (blur)="adminSandbox.AddFirstInstallment(txtCentralAssist.value);adminSandbox.OtherCost(txtProjectCost.value,txtCentralAssist.value,txtStateGrant.value,txtULB.value,txtBeneficiaryShare.value)"
+                          class="w3-input w3-border" [formControl]="txtCentralAssist" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          placeholder="Cental Asssistance">
+                      <label *ngIf="submitted && txtCentralAssist.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter central asssistance.</label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          State Grant:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
+                          [formControl]="txtStateGrant" placeholder="State Grant" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (blur)="adminSandbox.OtherCost(txtProjectCost.value,txtCentralAssist.value,txtStateGrant.value,txtULB.value,txtBeneficiaryShare.value)">
+                      <label *ngIf="submitted && txtStateGrant.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter state grant. </label>
+
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          ULB/Implementing Agencies Share:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtULB"
+                          placeholder="ULB/Implementing Agencies Share" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (blur)="adminSandbox.OtherCost(txtProjectCost.value,txtCentralAssist.value,txtStateGrant.value,txtULB.value,txtBeneficiaryShare.value)">
+                      <label *ngIf="submitted && txtULB.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter ULB/Implementing agencies share.</label>
+
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Beneficiary Share:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
+                          [formControl]="txtBeneficiaryShare" placeholder="Beneficiary Share" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (blur)="adminSandbox.OtherCost(txtProjectCost.value,txtCentralAssist.value,txtStateGrant.value,txtULB.value,txtBeneficiaryShare.value)">
+                      <label *ngIf="submitted && txtBeneficiaryShare.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter beneficiary share. </label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Others:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input disabled AllowOnlyDecimal="true" type="text"  class="w3-input w3-border" [formControl]="txtOther" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (blur)="adminSandbox.OtherCost(txtProjectCost.value,txtCentralAssist.value,txtStateGrant.value,txtULB.value,txtBeneficiaryShare.value)"
+                          placeholder="Others Cost" [(ngModel)]="adminSandbox.ProjectOtherCost">
+                      <label *ngIf="submitted && txtOther.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter other amount. </label>
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          Amount Of First Installment Sanction For Release:
+                      </label>
+                  </div>
+                  <div AllowOnlyNumber="true" class="w3-quarter w3-left" style="width: 22%;">
+                      <input AllowOnlyNumber="true" type="text" class="w3-input w3-border"
+                          [(ngModel)]="adminSandbox.installment" [formControl]="txtAmountInstallment"
+                          placeholder="Amount Of First Installment Sanction For Release" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      <label *ngIf="submitted && txtAmountInstallment.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter first installment amount. </label>
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class=" w3-quarter w3-left">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          Houses Sanctions
+                      </label>
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          New Sanction:
+                      </label>
+                  </div>
+                  <div AllowOnlyNumber="true" class="w3-quarter w3-left" style="width: 22%;">
+                      <input type="text" class="w3-input w3-border"
+                          (blur)="adminSandbox.AddSanction(txtNewSanction.value,txtUpgrade.value)"
+                          [formControl]="txtNewSanction" placeholder=" New Sanction" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      <label *ngIf="submitted && txtNewSanction.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter new sanctions.</label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Upgrade Sanction:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input AllowOnlyNumber="true" type="text" class="w3-input w3-border"
+                          (blur)="adminSandbox.AddSanction(txtNewSanction.value,txtUpgrade.value)"
+                          [formControl]="txtUpgrade" placeholder="Upgrade Sanction" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      <label *ngIf="submitted && txtUpgrade.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter new sanctions. </label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Total Sanction:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input disabled AllowOnlyNumber="true" type="text" class="w3-input w3-border"
+                          [(ngModel)]="adminSandbox.totalSanction" [formControl]="txtTotalSanction"
+                          placeholder="Total Sanction" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 12%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Agency :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select [formControl]="ddlAgency" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;" [(ngModel)]="Agency">
+                          <option value="">Select Agency--</option>
+                          <option *ngFor="let agency of adminSandbox.agencyMaster" [value]="agency.ULBAgencyShare">
+                              {{agency.ULBAgencyShare}}</option>
+                              
+                      </select>
+                      <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (click)="adminSandbox.addAgency('block',this.ddlStateCode.value,this.ddlDistrictCode.value,this.ddlCity.value)"
+                          class="w3-btn w3-orange w3-round w3-ripple">Add Agency</button>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                  </div>
+                  <!-- <div class="w3-quarter w3-left" style="width: 22%;">
+                          <input type="text" class="w3-input w3-border" 
+                           (click)="adminSandbox.AddProjectAgency(ddlAgency.value)" [(ngModel)]="adminSandbox.ProjectAgency"
+                           [formControl]="txtProjectAgency">    
+                           <button type="submit"
+                           (click)="adminSandbox.editAgencyMaster('block',this.ddlCity.value,this.txtProjectAgency.value)"
+                           class="w3-btn w3-orange w3-round w3-ripple">Edit Agency</button>         
+                      </div> -->
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 23%;">
+                      <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Project Duration :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;" [(ngModel)]="Duration" [formControl]="ddlDuration">
+                          <option value="" disabled>Please select duration--</option>
+                          <option value="12">12</option>
+                          <option value="18">18</option>
+                          <option value="24">24</option>
+                          <option value="36">36</option>
+                          <option value="42">42</option>
+                      </select>
+                      <label *ngIf="submitted && ddlDuration.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select project duration. </label>
+                  </div>
+              </div>
+              <br>
+              <div style="text-align: center">
+                  <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+              </div>
+              <br>
+          </form>
+          <table class="table" border="1px" style="width: 89%;" align="center" *ngIf="adminSandbox.projectDetailMaster.length>0">
+              <thead style="background-color: lightgray; font-weight: bold">
+                  <tr>
+                      <td style="text-align: right; width: 10px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State Name</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">District Name</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">City Name</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Project Code</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">CSMC Date</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">CSMC Number</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Scheme</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Project Status</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Project Title</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Project Cost</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Agency </td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Total Sanction</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Action</td>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let projectDetail of adminSandbox.projectDetailMaster;let i = index"
+                      style="text-align: center;background-color:white">
+                      <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.States_UT}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.District}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.City}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.ProjectCode}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.CSMCDate|date: 'yyyy-MM-dd'}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.CSMCNumber}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.Scheme}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.ProjectStatus}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.ProjectTitle}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.ProjectCost}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.ProjectAgencies}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.TotalSanction}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                          <button (click)="adminSandbox.editProjectDetailMaster('block',projectDetail)" type="submit"
+                              class="w3-btn w3-green w3-round w3-ripple">Edit</button>
+                          &nbsp;
+                          <button (click)="adminSandbox.deleteProjectDetailData(projectDetail.ProjectId)"
+                              type="submit" class="w3-btn w3-red w3-round w3-ripple">Delete</button>
+                      </td>
+                  </tr>
+              </tbody>
+              <tfoot *ngIf="adminSandbox.projectDetailMaster.length==0">
+                  <tr>
+                      <td colspan="14">
+                          <a style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">No Records Found</a>
+                      </td>
+                  </tr>
+              </tfoot>
+          </table>
+      </div>
+  </div>
+
+<div [style.display]="adminSandbox.showProperty" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-teal">
+          <span (click)="adminSandbox.editProjectDetailMaster('none','')"
+              class="w3-button w3-large w3-display-topright">&times;</span>
+          <h2 style="padding-left: 17px;font-family: Arial, Geneva, Tahoma, sans-serif;">Update Project-Details</h2>
+      </header>
+      <br>
+      <div class="w3-container">
+          <form>
+              <div>
+                  <input type="hidden" name="hiddendTxtSchemeID"
+                      [(ngModel)]="adminSandbox.EditProjectDetailMaster.hiddendTxtProjectID" />
+              </div>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          State Name:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <select name="ddlStateCode" [(ngModel)]="adminSandbox.EditProjectDetailMaster.ddlStateCode"
+                          (change)="adminSandbox.getStateDistrictData($event.target.value)"
+                          class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          <option value="" disabled>Please select state--</option>
+                          <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                              {{state.States}}</option>
+                      </select>
+                  </div>
+                  <div class="w3-quarter w3-center">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          District Name:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <select name="ddlDistrictCode"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.ddlDistrictCode" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (change)="adminSandbox.getDistrictCityData($event.target.value)" class="w3-input w3-border">
+                          <option value="" disabled>Please select district--</option>
+                          <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster"
+                              [value]="ditrict.Dcode">
+                              {{ditrict.District}}</option>
+                      </select>
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          City Name:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <select name="ddlCity" [(ngModel)]="adminSandbox.EditProjectDetailMaster.ddlCity"
+                          (change)="adminSandbox.getAgencyData($event.target.value)" class="w3-input w3-border"
+                          style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          <option value="" disabled>Please select city--</option>
+                          <option *ngFor="let city of adminSandbox.districtCityMaster" [value]="city.CityCode">
+                              {{city.City}}</option>
+                      </select>
+
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          CSMC Date :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <input type="text" class="w3-input w3-border" [minDate]="maxStartDate" name="txtCMCDate"
+                          bsDatepicker [bsConfig]="dpConfig" autocomplete="off" onkeydown="return false"
+                          placeholder="dd/mm/yyyy" [(ngModel)]="adminSandbox.EditProjectDetailMaster.txtCMCDate">
+                  </div>
+                  <div class="w3-quarter w3-center">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          CSMC Number :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <input type="text" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.txtCSMCNumber" name="txtCSMCNumber"
+                          AllowOnlyNumber="true" placeholder="CSMC Number">
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Scheme :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+
+                      <select name="ddlScheme" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (change)="adminSandbox.getProjectSchemeComponentData($event.target.value)"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.ddlScheme" class="w3-input w3-border">
+                          <option value="" disabled>Select Scheme--</option>
+                          <option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme.SchemeShortName">
+                              {{scheme.SchemeShortName}}</option>
+                      </select>
+                  </div>
+                  <div class="w3-quarter w3-center">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Components:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <select name="ddlComponent" [(ngModel)]="adminSandbox.EditProjectDetailMaster.ddlComponent"
+                          class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          <option value="" disabled>Select Scheme--</option>
+                          <option *ngFor="let schemeComp of adminSandbox.schComponentMaster"
+                              [value]="schemeComp.Cname">
+                              {{schemeComp.Cname }}</option>
+                      </select>
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Project Title :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <textarea rows="4" cols="50" type="text" class="w3-input w3-border" name="txtProjectTitle"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.txtProjectTitle"
+                          placeholder="Project Title" style="font-family: Arial, Geneva, Tahoma, sans-serif;"></textarea>
+                  </div>
+                  <div class="w3-quarter w3-center">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Project Status :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <select class="w3-input w3-border" [(ngModel)]="adminSandbox.EditProjectDetailMaster.ddlStatus"
+                          name="ddlStatus" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          <option value="" selected="selected">Please select status--</option>
+                          <option value="Approved">Approved</option>
+                          <option value="Revised">Revised</option>
+                          <option value="InPrinciple">In-principle</option>
+                      </select>
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Project Cost :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <input type="text" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (blur)="adminSandbox.OtherCost(adminSandbox.EditProjectDetailMaster.txtProjectCost,adminSandbox.EditProjectDetailMaster.txtCentralAssist,adminSandbox.EditProjectDetailMaster.txtStateGrant,adminSandbox.EditProjectDetailMaster.txtULB,adminSandbox.EditProjectDetailMaster.txtBeneficiaryShare)"
+                          name="txtProjectCost" AllowOnlyDecimal="true"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.txtProjectCost"
+                          placeholder="Project Cost">
+                  </div>
+                  <div class="w3-quarter w3-center">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Cental Asssistance :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <input type="text" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (blur)="adminSandbox.AddFirstInstallment(adminSandbox.EditProjectDetailMaster.txtCentralAssist);
+                          adminSandbox.OtherCost(adminSandbox.EditProjectDetailMaster.txtProjectCost,adminSandbox.EditProjectDetailMaster.txtCentralAssist,adminSandbox.EditProjectDetailMaster.txtStateGrant,adminSandbox.EditProjectDetailMaster.txtULB,adminSandbox.EditProjectDetailMaster.txtBeneficiaryShare)"
+                          class="w3-input w3-border" AllowOnlyDecimal="true"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.txtCentralAssist" name="txtCentralAssist"
+                          placeholder="Cental Asssistance">
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          State Grant :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <input type="text" class="w3-input w3-border" AllowOnlyDecimal="true" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (blur)="adminSandbox.OtherCost(adminSandbox.EditProjectDetailMaster.txtProjectCost,adminSandbox.EditProjectDetailMaster.txtCentralAssist,adminSandbox.EditProjectDetailMaster.txtStateGrant,adminSandbox.EditProjectDetailMaster.txtULB,adminSandbox.EditProjectDetailMaster.txtBeneficiaryShare)"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.txtStateGrant" name="txtStateGrant"
+                          placeholder="State Grant">
+                  </div>
+                  <div class="w3-quarter w3-center ">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          ULB/Implementing Agencies Share :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <input type="text" class="w3-input w3-border" AllowOnlyDecimal="true" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (blur)="adminSandbox.OtherCost(adminSandbox.EditProjectDetailMaster.txtProjectCost,adminSandbox.EditProjectDetailMaster.txtCentralAssist,adminSandbox.EditProjectDetailMaster.txtStateGrant,adminSandbox.EditProjectDetailMaster.txtULB,adminSandbox.EditProjectDetailMaster.txtBeneficiaryShare)"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.txtULB" name="txtULB"
+                          placeholder="ULB/Implementing Agencies Share">
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Beneficiary Share :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <input type="text" class="w3-input w3-border" AllowOnlyDecimal="true" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.txtBeneficiaryShare"
+                          (blur)="adminSandbox.OtherCost(adminSandbox.EditProjectDetailMaster.txtProjectCost,adminSandbox.EditProjectDetailMaster.txtCentralAssist,adminSandbox.EditProjectDetailMaster.txtStateGrant,adminSandbox.EditProjectDetailMaster.txtULB,adminSandbox.EditProjectDetailMaster.txtBeneficiaryShare)"
+                          name="txtBeneficiaryShare" placeholder="Beneficiary Share">
+                  </div>
+                  <div class="w3-quarter w3-center">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Others:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <input AllowOnlyNumber="true" type="text" class="w3-input w3-border" name="txtOther"
+                          [value]="adminSandbox.EditProjectDetailMaster.txtOther" placeholder="Others Cost"
+                          [(ngModel)]="adminSandbox.ProjectOtherCost" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class=" w3-quarter w3-left">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          Amount Of First Installment Sanction For Release :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <input type="text" class="w3-input w3-border" AllowOnlyNumber="true"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.txtAmountInstallment"
+                          [value]="adminSandbox.installment" name="txtAmountInstallment"
+                          placeholder="Amount Of First Installment Sanction For Release"
+                          style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                  </div>
+                  <div class="w3-quarter w3-center">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Project Duration :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left">
+                      <select class="w3-input w3-border"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.ddlDuration" style="font-family: Arial, Geneva, Tahoma, sans-serif;" name="ddlDuration">
+                          <option value="" disabled>Please select duration--</option>
+                          <option value="12">12</option>
+                          <option value="18">18</option>
+                          <option value="24">24</option>
+                          <option value="36">36</option>
+                          <option value="42">42</option>
+                      </select>
+
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class=" w3-quarter w3-left">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Houses Sanctions
+                      </label>
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          New Sanction:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input type="text" AllowOnlyNumber="true" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (blur)="adminSandbox.AddSanction(adminSandbox.EditProjectDetailMaster.txtNewSanction,adminSandbox.EditProjectDetailMaster.txtUpgrade)"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.txtNewSanction" class="w3-input w3-border"
+                          name="txtNewSanction" placeholder="New">
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Upgrade Sanction:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input type="text" AllowOnlyNumber="true" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (blur)="adminSandbox.AddSanction(adminSandbox.EditProjectDetailMaster.txtNewSanction,adminSandbox.EditProjectDetailMaster.txtUpgrade)"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.txtUpgrade" class="w3-input w3-border"
+                          name="txtUpgrade" placeholder="Upgrade">
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Total Sanction:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input type="text" class="w3-input w3-border" AllowOnlyNumber="true" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.txtTotalSanction"
+                          [value]="adminSandbox.totalSanction" name="txtTotalSanction" placeholder="Total Sanction">
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 12%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Agency :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select name="ddlAgency" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          [(ngModel)]="adminSandbox.EditProjectDetailMaster.ddlAgency">
+                          <option value="">Select Agency--</option>
+                          <option *ngFor="let agency of adminSandbox.agencyMaster" [value]="agency.ULBAgencyShare">
+                              {{agency.ULBAgencyShare}}</option>
+                              
+                      </select>
+                  </div>
+              </div>
+              <br>
+              <div style="text-align: center">
+                  <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;" (click)="adminSandbox.updateProjectDetail()"
+                      class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+              </div>
+              <br>
+          </form>
+      </div>
+      <footer class="w3-container w3-teal">
+      </footer>
+  </div>
+</div>
+<div [style.display]="adminSandbox.showAgency" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-teal">
+          <span (click)="adminSandbox.addAgency('none','','','')"
+              class="w3-button w3-large w3-display-topright">&times;</span>
+          <h2 style="padding-left: 17px;font-family: Arial, Geneva, Tahoma, sans-serif;">Add Agency</h2>
+      </header>
+      <br>
+      <div class="w3-container">
+          <form [formGroup]="agencyMaster" (ngSubmit)="onClickAgencyMaster($event, agencyMaster)">
+              <div class="w3-row">
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Agency :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input type="text" [formControl]="txtAgency" style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;"/>
+                      <label *ngIf="submitted && txtAgency.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter agency. </label>
+                  </div>
+              </div>
+              <br>
+              <div style="text-align: center">
+                  <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;" class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+              </div>
+              <br>
+          </form>
+      </div>
+      <footer class="w3-container w3-teal">
+      </footer>
+  </div>
+</div>
+
+
+  

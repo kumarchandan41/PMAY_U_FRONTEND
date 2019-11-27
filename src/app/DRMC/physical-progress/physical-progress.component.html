@@ -1,0 +1,202 @@
+
+<div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+  <div class="w3-card-4">
+      <h3
+      style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
+          Physical-Progress</h3>
+  </div>
+  <br>
+  <div class="form-container">
+      <form [formGroup]="physicalProgress">
+
+          <div class="w3-row">
+              <div class="w3-quarter w3-left" style="width: 10%;">
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      State Name:
+                  </label>
+              </div>
+              <div class="w3-quarter w3-left" style="width: 18%;">
+                  <select [formControl]="ddlStateCode" [(ngModel)]="state" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                      (change)="adminSandbox.getStateDistrictData($event.target.value);adminSandbox.getProjectDetailData(ddlStateCode.value,null,null,null,null);
+                      this.city='';this.scheme='';this.district='';"
+                      class="w3-input w3-border">
+                      <option value="" disabled>Please select state--</option>
+                      <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                          {{state.States_UT}}</option>
+                  </select>
+
+              </div>
+              <div class="w3-quarter w3-center" style="width: 16%;">
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      District Name:
+                  </label>
+              </div>
+              <div class="w3-quarter w3-left" style="width: 18%;">
+                  <select [formControl]="ddlDistrictCode" [(ngModel)]="district" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                      (change)="adminSandbox.getDistrictCityData($event.target.value);adminSandbox.getProjectDetailData(ddlStateCode.value,ddlDistrictCode.value,null,null,null);
+                      this.city='';this.scheme='';"
+                      class="w3-input w3-border">
+                      <option value="" disabled>Please select district--</option>
+                      <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster" [value]="ditrict.Dcode">
+                          {{ditrict.District}}</option>
+                  </select>
+
+              </div>
+              <div class="w3-quarter w3-center" style="width: 12%;">
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      City Name:
+                  </label>
+              </div>
+              <div class="w3-quarter w3-left" style="width: 18%;">
+                  <select [formControl]="ddlCity" [(ngModel)]="city" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                      (change)="adminSandbox.getAgencyData($event.target.value);adminSandbox.getProjectDetailData(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,null,null);"
+                      class="w3-input w3-border">
+                      <option value="" disabled>Please select city--</option>
+                      <option *ngFor="let city of adminSandbox.districtCityMaster" [value]="city.CityCode">
+                          {{city.City}}</option>
+                  </select>
+
+              </div>
+          </div>
+          <br>
+
+          <div class="w3-quarter w3-left" style="width: 10%;">
+              <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                  Scheme:
+              </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 18%;">
+              <select [formControl]="ddlScheme" class="w3-input w3-border"  [(ngModel)]="scheme"
+                  (change)="adminSandbox.getProjectSchemeComponentData($event.target.value); 
+                    adminSandbox.getProjectDetailData(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,null);
+                    this.Components='';" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                  <option value="" disabled>Please select Scheme--</option>
+                  <option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme.SchemeShortName">
+                      {{scheme.SchemeShortName}}</option>
+              </select>
+
+          </div>
+          <div class="w3-quarter w3-center" style="width: 16%;">
+              <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                  Components:
+              </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 18%;">
+              <select [formControl]="ddlComponent" [(ngModel)]="Components" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              (change)="adminSandbox.getProjectDetailData(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,ddlComponent.value);">
+                  <option value="" disabled>Please select Components--</option>
+                  <option *ngFor="let schemeComp of adminSandbox.schComponentMaster"
+                      [value]="schemeComp.Cname">
+                      {{schemeComp.Cname}}</option>
+              </select>
+             
+          </div>
+          <br>
+          <br>
+      </form>
+
+       <br>
+
+      <form>
+        <div class="pic-container">
+          <table class="table" border="1px" style="width: 80%;"  *ngIf="adminSandbox.projectDetailMaster.length>0">
+              <thead style="background-color: lightgray; font-weight: bold">
+                  <tr>
+                      <td style="text-align: right; width: 10px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State Name</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">District Name</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">City Name</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Scheme</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Project Code</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Houses</td>
+
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Ground Level</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Pinth</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Lintel Level</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Roof Level</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Super-Structure Completed</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Finishing stage</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Total House in Progress</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Houses for which construction completed</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Non-starter houses</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Dweeling units with power supply connection</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Dweeling units with water supply</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Dweeling units with drainage</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Total Number Of Houses Occupied By Beneficiaries</td>
+                  </tr>
+              </thead>
+
+              <tbody>
+                  <tr *ngFor="let projectDetail of adminSandbox.projectDetailMaster;let i = index;"
+                      style="text-align: center;background-color:white">
+                      <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.States_UT}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.District}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.City}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.Scheme}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.ProjectCode}}</td>
+                      <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{projectDetail.TotalSanction}}</td>
+                      
+                      <td style="text-align: left;border-top: 1px solid black;"><input [(ngModel)]="projectDetail.GroundLevel"
+                              [ngModelOptions]="{standalone: true}" name="txtGroundLevel" AllowOnlyNumber="true"
+                              style="width: 75px;background-color: yellow" type="text" (blur)="adminSandbox.TotalHouseProgress(i,projectDetail.GroundLevel,projectDetail.Pinth,projectDetail.LinterLevel,
+                  projectDetail.RoofLevel,projectDetail.SuperStructure,projectDetail.FinishingStage)"></td>
+                      <td style="text-align: left;border-top: 1px solid black;"><input [(ngModel)]="projectDetail.Pinth"
+                              [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true" style="width: 75px;background-color: yellow"
+                              name="txtPinth" type="text" (blur)="adminSandbox.TotalHouseProgress(i,projectDetail.GroundLevel,projectDetail.Pinth,projectDetail.LinterLevel,
+                  projectDetail.RoofLevel,projectDetail.SuperStructure,projectDetail.FinishingStage)"></td>
+                      <td style="text-align: left;border-top: 1px solid black;"><input [(ngModel)]="projectDetail.LinterLevel"
+                              [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true" style="width: 75px;background-color: yellow"
+                              name="txtLinterLevel" type="text" (blur)="adminSandbox.TotalHouseProgress(i,projectDetail.GroundLevel,projectDetail.Pinth,projectDetail.LinterLevel,
+                  projectDetail.RoofLevel,projectDetail.SuperStructure,projectDetail.FinishingStage)"></td>
+                      <td style="text-align: left;border-top: 1px solid black;"><input [(ngModel)]="projectDetail.RoofLevel"
+                              [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true" style="width: 75px;background-color: yellow"
+                              name="txtRoofLevel" type="text" (blur)="adminSandbox.TotalHouseProgress(i,projectDetail.GroundLevel,projectDetail.Pinth,projectDetail.LinterLevel,
+                  projectDetail.RoofLevel,projectDetail.SuperStructure,projectDetail.FinishingStage)"></td>
+                      <td style="text-align: left;border-top: 1px solid black;"><input [(ngModel)]="projectDetail.SuperStructure"
+                              [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true" style="width: 75px;background-color: yellow"
+                              name="txtSuperStructure" type="text" (blur)="adminSandbox.TotalHouseProgress(i,projectDetail.GroundLevel,projectDetail.Pinth,projectDetail.LinterLevel,
+                  projectDetail.RoofLevel,projectDetail.SuperStructure,projectDetail.FinishingStage)"></td>
+                      <td style="text-align: left;border-top: 1px solid black;"><input [(ngModel)]="projectDetail.FinishingStage"
+                              [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true" style="width: 75px;background-color: yellow"
+                              name="txtFinishingStage" type="text" (blur)="adminSandbox.TotalHouseProgress(i,projectDetail.GroundLevel,projectDetail.Pinth,projectDetail.LinterLevel,
+                  projectDetail.RoofLevel,projectDetail.SuperStructure,projectDetail.FinishingStage)"></td>
+                      <td style="text-align: left;border-top: 1px solid black;"><input disabled [(ngModel)]="projectDetail.TotalProgressHouse" (blur)="adminSandbox.TotalHouseProgress(i,projectDetail.GroundLevel,projectDetail.Pinth,projectDetail.LinterLevel,
+                  projectDetail.RoofLevel,projectDetail.SuperStructure,projectDetail.FinishingStage)"
+                              name="txttotalHouse" [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true"
+                              style="width: 75px;background-color: yellow" type="text"></td>
+                      <td style="text-align: left;border-top: 1px solid black;"><input  [(ngModel)]="projectDetail.ConstructionCompleted"
+                              [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true"
+                              (blur)="adminSandbox.NonStarter(i,projectDetail.TotalSanction,projectDetail.TotalProgressHouse,projectDetail.ConstructionCompleted);"
+                              style="width: 75px;background-color: yellow" name="txtConstructionCompleted" type="text"></td>
+                      <td style="text-align: left;border-top: 1px solid black;"><input disabled [(ngModel)]="projectDetail.NonStarterHouse"
+                              [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true" style="width: 75px;background-color: yellow"
+                              name="txtNonStarter" type="text"></td>
+                      <td style="text-align: left;border-top: 1px solid black;"><input [(ngModel)]="projectDetail.PowerSupply"
+                              [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true" style="width: 75px;background-color: yellow"
+                              name="txtPowerSupply" type="text"></td>
+                      <td style="text-align: left;border-top: 1px solid black;"><input [(ngModel)]="projectDetail.WaterSupply"
+                              [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true" style="width: 75px;background-color: yellow"
+                              name="txtWaterSupply" type="text"></td>
+                      <td style="text-align: left;border-top: 1px solid black;"><input [(ngModel)]="projectDetail.DrainageSupply"
+                              [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true" style="width: 75px;background-color: yellow"
+                              name="txtDrainage" type="text"></td>
+                      <td style="text-align: left;border-top: 1px solid black;"><input
+                              [(ngModel)]="projectDetail.TotalHouseOccupiedBeneficiary"
+                              [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true" style="width: 75px;background-color: yellow"
+                              name="txtTotalHouseOccupied" type="text"></td>
+                      <input disabled [(ngModel)]="projectDetail.PhysicalProgressId"
+                          [ngModelOptions]="{standalone: true}" AllowOnlyNumber="true" [hidden]="true"
+                          style="width: 75px;" name="txtPhysicalId" type="hiden">
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+          <br>
+          <div style="text-align: center" *ngIf="adminSandbox.projectDetailMaster.length>0">
+              <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-btn w3-orange w3-round w3-ripple"
+                  (click)="onClickPhysicalProgess($event)">Submit</button>
+          </div>
+      </form>
+  </div>
+</div>

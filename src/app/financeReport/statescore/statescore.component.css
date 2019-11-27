@@ -1,0 +1,225 @@
+ /* .table-progress>thead>tr>th{background-color: #000;color: #fff;}
+.table-custom>thead>tr>th{background-color: #d9d9d9;font-weight: normal}
+table.table-custom,.table-custom th,.table-custom td { border: 4px solid #808080!important;}
+table.table-progress,.table-progress th,.table-progress td { border: 4px solid #808080!important;}
+h1{padding: 0;font-size: 50px;}
+h2{font-weight: bold;font-size: 18px;}
+hr{margin-top: 5px;margin-bottom: 5px;border: 2px solid #000;}
+.table-score{border-style: double;border-left: none;border-right: none}
+.table-score th{border: none!important;font-weight: normal}
+.table-score td{border: none!important;font-weight: bold;font-size:18px;} */
+
+
+.table-progress>thead>tr>th{background-color: #000;color: #fff;}
+/* .table-custom>thead>tr>th{background-color: #d9d9d9;font-weight: normal} */
+.table-custom>thead>tr>th{background-color: #d9d9d9;} 
+
+table.table-custom,.table-custom th,.table-custom td { border: 2px solid #808080!important;font-size: 8px;font-weight: normal}
+table.table-progress,.table-progress th,.table-progress td { border: 1px solid #808080!important;}  
+
+
+.table1 td, .table th {
+      /* padding: .85rem;   */
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    font-family: "Segoe UI",Arial,sans-serif;
+    font-size: 14px;
+    width: 1500px;
+    border: 1px solid black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Segoe UI",Arial,sans-serif;
+    font-weight: 400;
+    margin: 4px 0;
+}
+
+.header_Table
+{
+    font-size: 15px;
+    font-family:Arial, Helvetica, sans-serif;  
+    /* font-display: bold;  */
+    align-content: center; 
+    border: 1px;
+}
+
+.DataFont_Table
+{
+    font-size: 50px;
+    font-family:Arial, Helvetica, sans-serif;  
+}
+
+.tdalign {
+    margin: 12px 5 1 5;
+}
+
+  
+h1{padding: 0;font-size: 20px;}
+h2{font-weight: normal;font-size: 14px;}
+hr{margin-top: 5px;margin-bottom: 5px;border: 2px solid #000;}
+.table-score{border-style: double;border-left: none;border-right: none}
+.table-score th{border: none!important;font-weight: normal;font-size:25px;}
+.table-score td{border: none!important;font-weight: normal;font-size:14px;} 
+
+.borderCA{
+    border-bottom:  4px solid #808080;
+}
+.borderLine{
+    border-right:  4px solid #808080;
+} 
+
+body {
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 1rem;
+    /* font-weight: 400; */
+    /* line-height: 1.5; */
+    color: #212529;
+    text-align: center;
+    background-color: #fff;
+}
+
+body1 {
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.0;
+    color: #212529;
+    /* text-align: left; */
+    background-color: #fff;
+}
+body{
+    font-size: 9px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+body[_ngcontent-gvo-c1] {
+    /* margin: 0; */
+    /* font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"; */
+    /* font-size: 1rem; */
+    color: #212529;
+    text-align: right;
+    background-color: #fff;
+}
+
+a{
+    cursor: pointer;
+}
+
+#tblPdf{
+    font-size: 8px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* b {
+   font-size: 14px; 
+}    */
+
+  
+   
+  /* @media print {
+    body *, #drpdown, #buttonGroup{display : none};
+    body #printme * {display:none} 
+    table {border-collapse: collapse;}
+    
+    table, td, th {border: 1px solid black;}
+    #printme { padding-left :20px; padding-top :20px}
+   } */
+
+
+
+   .StateScore_CSMC {
+    background-color: #FFF;
+    color: #777;
+    font-family: "Arial,Open Sans", sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    
+    
+    /* margin: 0; */
+}
+
+.fifteen{
+    font-family: "Arial,Open Sans", sans-serif;
+    /* font-size: 12px; */
+    font-size: 12px;
+    border: 1px solid #d4c9c9;
+    max-width: 100%;
+    margin-left: 0px;
+}
+    
+table, th, td {
+   font-family: "Open Sans", Arial, sans-serif;
+   font-size: 12px;
+   border: 1px solid #d4c9c9;
+   max-width: 100%;
+   padding-left :0px;
+     /* border: 1px solid black;  */
+ }
+
+ .headerStateName{
+    font-family:"Arial","Franklin Gothic Medium", Arial, sans-serif;
+    align-self: auto;
+    font-size: 25px;
+}
+
+ .header{
+     font-family:"Arial","Franklin Gothic Medium", Arial, sans-serif;
+     align-self: auto;
+     font-size: 20px;
+ }
+ .headerC{
+    font-family:"Arial","Franklin Gothic Medium", Arial, sans-serif;
+    align-self: auto;
+    font-size: 16px;
+}
+ 
+ /* @media print {
+     #drpdown{display : none};
+    table {border-collapse: collapse;}
+    
+    table, td, th {border: 1px solid black;}
+    table tr td{padding: 1px}
+    #printme { padding-left :20px; padding-top :10px}
+    .page_break {page-break-before: always;}
+     
+   }  */
+
+
+   @media print {
+    #drpdown{display : none};
+    
+    /* body *{display : none}; 
+    body #statescore * {display:none} */
+    /* table {border-collapse: collapse;} */
+    
+    table, td, th {border: 1px solid black;}
+    #statescore { padding-left :0px; padding-top :5px}
+
+    .noprint { display: none; }
+      /* .page-break { display: block; page-break-before: '#fifteen'; } */
+   }
+
+   element.style {
+    background-color: rgb(221, 59, 19);
+}
+
+
+     
+   
+
+/* .table-progress>thead>tr>th{background-color: #000;color: #fff;}
+.table-clss tr th{background-color: #d9d9d9!important;font-weight: normal}
+.table-custom>thead>tr>th{background-color: #d9d9d9;font-weight: normal}
+table.table-custom,.table-custom th,.table-custom td { border: 4px solid #808080!important;padding:1px}
+table.table-progress,.table-progress,.table-progress .border { border: 4px solid #808080!important;padding:2px;}  */
+/* table.table-progress,.table-progress th,.table-progress td { border: 4px solid #808080!important;} */
+
+/* h1{padding: 0;font-size: 50px;}
+h2{font-weight: bold;font-size: 18px;}
+hr{margin-top: 5px;margin-bottom: 5px;border: 2px solid #000;}
+.table-score{border-style: double;border-left: none;border-right: none}
+.table-score th{border: none!important;font-weight: normal}
+.table-score td{border: none!important;font-weight: bold;font-size:18px;} */
+
+ 

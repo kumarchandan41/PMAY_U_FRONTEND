@@ -1,0 +1,82 @@
+
+
+bodyataglance1 {
+  background-color: #FFF;
+  color: #777;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  
+  /* margin: 0; */
+}
+
+table, th, td {
+   height: 35px;
+   font-family: "Open Sans", Arial, sans-serif;
+  font-size: 12px;
+}
+ 
+
+@media print {
+  body *, #drpdown, #buttonGroup{display : none};
+  body #ataglancePDF * {display:none} 
+  table {border-collapse: collapse;}
+  
+  table, td, th {border: 1px solid black}
+  #ataglancePDF { padding-left :10px; padding-top :20px;padding-right :10px;}  
+ }
+
+ 
+
+
+
+/* 
+
+bodyataglance1 {
+    background-color: #FFF;
+    color: #777;
+    font-family: "Open Sans", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    
+ 
+}
+
+table, th, td {
+     height: 35px;
+     font-family: "Open Sans", Arial, sans-serif;
+    font-size: 14px;
+  }
+
+
+  @media print {
+    body *, #drpdown, #buttonGroup{display : none};
+    body #ataglancePDF * {display:none;
+      width: 710px;
+      widows: 750px;
+    
+    }  
+    
+    table {border-collapse: collapse;}
+
+    
+    table, td, th {border: 1px solid black;}
+    #ataglancePDF {
+      padding-left :0px; 
+      padding-top :20px;
+      width: 710px;
+    }
+    #printme{
+      width: 710px;
+     
+    }
+   }
+
+   .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+} */

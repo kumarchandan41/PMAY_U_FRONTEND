@@ -1,0 +1,42 @@
+.modal-content{
+    width: 920px;
+    /* left: 20px; */
+    padding:10px;
+}
+th{
+    width: 90px;
+}
+
+
+
+bodyataglance1 {
+    background-color: #FFF;
+    color: #777;
+    font-family: "Open Sans", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    
+    /* margin: 0; */
+  }
+  
+  table, th, td {
+     height: 8px;
+     font-family: "Open Sans", Arial, sans-serif;
+    font-size: 10px;
+  }
+   
+  
+  @media print {
+    body *, #drpdown, #buttonGroup{display : none};
+    body #toPrint * {display:none} 
+    table {border-collapse: collapse;}
+    
+    table, td, th {border: 1px solid black}
+    #toPrint { padding-left :1px; padding-top :20px;padding-right :1px;}  
+   }
+  
+   
+  
+  
+  
+ 

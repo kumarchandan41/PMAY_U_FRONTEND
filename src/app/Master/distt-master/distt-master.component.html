@@ -1,0 +1,168 @@
+ <div class="container">
+  <div class="row"><h2>District Master</h2></div>
+<div class="row">
+        <div class="col-md-4">
+            <!-- <b>Type any keyword to search</b>  -->
+            <!-- <input type="text" [(ngModel)]="searchText" autocomplete="off" class="form-control col-md-4"> -->
+                <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
+                            style="width: 300px;font-display: #FF00FF;color: black">
+                            <option [selected]="true"  >{{StateMessage}}</option>
+                            <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+                            {{sntry.States_UT}}     
+                            </option>
+                </select> 
+        </div>
+
+        <div class="col-md-4">
+            <!-- <input type="text" name="DistrictName"  (change)="getDistDetails($event.target.value)"  class="form-control"> -->
+            <input type="text" [(ngModel)]="searchText" autocomplete="off" class="form-control col-md-4">
+        </div>
+        <div class="row" align="right" style="padding:10px;padding-right: 40px">
+            <input type="button" (click)="openModalDialog('Save')" value="Add Distt" class="btn btn-default">
+        </div>
+</div>
+<div class="row">
+    </div>
+    <hr>
+    <div class="row">
+        <table class="table table-striped" align="center">
+            <tr class="btn-primary" style="height: 50px;width:600px;">
+                <th>Distt Code</th>
+                <th>State Name</th>
+                <th style="display: none;">State Code</th>
+                <th>District Name</th>
+                <th>Distt</th>                
+                <th style="display:none;">Dcode</th>
+                <!-- <th>sunDisttCode</th> -->
+                <th>BackwardDistrict</th>
+                <th>Minority</th>
+                <th>ActiveFlag</th>
+                <th>Status</th>
+                <th style="width: 100px">Action</th>
+            </tr>
+            <tr *ngFor="let dist of DisttMaster | paginate: { itemsPerPage: 5, currentPage: p } | filter:searchText" >
+                <td style="padding-left: 40px">{{dist.DisttId}}</td>
+                <td>{{dist.StatesName}}</td>
+                <td  style="display: none;">{{dist.StateCode}}</td>
+                 <td>{{dist.District}}</td>
+                <td>{{dist.Distt}}</td>
+                <td style="display:none;">{{dist.Dcode}}</td>
+                <!-- <td>{{dist.sunDisttCode}}</td> -->
+                <td>{{dist.BackwardDistrict}}</td>
+                <td>{{dist.Minority}}</td>
+                <td>{{dist.ActiveFlag}}</td>
+                <td>{{dist.Status}}</td>
+                <td  style="padding: 5px"><button type="button" (click)="openModalDialog(dist,'Edit')"  class="btn btn-link">Edit</button>&nbsp;&nbsp;
+            </tr>
+            <tr>
+                <td colspan="4">
+                        <ul class="pagination">  
+                                    <pagination-controls (pageChange)="p = $event"></pagination-controls>  
+                        </ul>  
+               </td>
+            </tr>
+        </table>
+</div>
+</div>
+
+
+<!-- modal -->
+<div class="modal" tabindex="-1" role="dialog" style="height: 510px" [ngStyle]="{'display':display}">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header" style="background-color:#2C7BBA;color:white;height: 50px;">
+            <div style="width:570px">
+                <div style="width: 550px;float:left"><h4 class="modal-title">{{SaveUpdate}}</h4></div>
+                <div style="width: 20px;float:left">
+                    <button type="button" class="close" style="color: white" aria-label="Close" (click)="closeModalDialog()"><span aria-hidden="true">&times;</span></button>
+                </div>
+            </div>   
+    </div>
+    <!-- modal-body -->
+    <div class="modal-body">
+        <div class="row" style="padding:15px">
+                    <div class="row" style="padding: 4px">
+                                <div class="row" style="padding: 4px">
+                                        <div class="col-md-4">
+                                            <input type="hidden" [(ngModel)]="DisttId">
+                                            <label>State</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                                <select class="form-control" placeholder="Choose State" [(ngModel)]="StateCode" (change)="getStateDetails($event.target.value)"
+                                                            style="width: 300px;font-display: #FF00FF;color: black">
+                                                            <option [selected]="true"  >{{StateMessage}}</option>
+                                                            <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+                                                            {{sntry.States_UT}}     
+                                                            </option>
+                                                </select> 
+                                        </div>
+                                </div>
+                                <div class="row"  style="padding: 4px">
+                                        <div class="col-md-4">
+                                            <label>District Name </label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" name="DistrictName"  [(ngModel)]="DistrictName"  class="form-control">
+                                        </div>
+                                </div>
+                                <div class="row"  style="padding: 4px">
+                                        <div class="col-md-4">
+                                            <label>Distt(Short Name)</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" name="Distt"  (change)="RistrictQuot()" [(ngModel)]="Distt"  class="form-control">
+                                        </div>
+                                </div>
+                                <div class="row"  style="padding: 4px">
+                                        <div class="col-md-4">
+                                            <label>Dcode</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" name="Dcode" numeric maxlength="5"   [(ngModel)]="Dcode"  class="form-control">
+                                        </div>
+                                </div>
+                                <div class="row" style="align-items: center;padding: 4px">
+                                    <div class="col-md-4">
+                                        <label>Status</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select class="form-control" [(ngModel)]="Active"
+                                        style="font-display: #FF00FF;color:black;">
+                                                <option  [selected]="true" [ngValue]="Active" >Active</option>
+                                                <option [ngValue]="Inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row" style="align-items: center;padding: 4px">
+                                        <div class="col-md-4">
+                                            <label>Backward</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                                <fieldset id="horizontal" class="horizontal">
+                                                        <input type="radio"  [(ngModel)]="BackwardDistrict"  name="backward" value="Yes">    Yes 
+                                                        <input type="radio"  [(ngModel)]="BackwardDistrict"  name="backward" value="No"> No 
+                                                    </fieldset>
+                                        </div>
+                                </div>
+                                <div class="row" style="align-items: center;padding: 4px">
+                                            <div class="col-md-4">
+                                                <label>Minority</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                    <fieldset id="horizontal" class="horizontal">
+                                                            <input type="radio"  [(ngModel)]="Minority"    name="Minority" value="Yes">    Yes 
+                                                            <input type="radio"  [(ngModel)]="Minority"    name="Minority" value="No"> No 
+                                                        </fieldset>
+                                            </div>
+                                </div>
+                    </div>
+        </div>
+            <!-- modal-footer -->
+            <div class="modal-footer">
+                    <input type ="button" (click)="SaveDataDistt()" value="{{action}}" class="btn btn-success" />&nbsp;&nbsp;&nbsp;
+                    <input type ="button"  (click)="ResetState()" value="Reset" class="btn btn-warning" />      
+            </div>
+    </div>
+</div>
+</div>
+</div>

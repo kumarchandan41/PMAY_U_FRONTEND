@@ -1,0 +1,284 @@
+<div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+  <div class="w3-card-4" style="padding-top:30px;padding-left: 10px;">
+    <h3
+      style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
+              Sanctioned/Utilization</h3>
+      </div>
+      <br>
+      <div class="form-container">
+          <div class="w3-row" style="text-align: center;padding-left: 300px;">
+              <div class="w3-half w3-left">
+                  <input type="radio" name="radioSanction" (click)="radioSanction();" value="1" />
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 51px;">Sanction</label>&nbsp;
+                  <input type="radio" name="radioSanction" (click)="radioUtilization();" value="2" />
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">Utilization</label>&nbsp;
+              </div>
+          </div>
+          <br><br>
+          <form [formGroup]="releaseOrder" (ngSubmit)="onClickReleaseOrder($event, releaseOrder)" *ngIf="Sanction">
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          State Name:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select [formControl]="ddlStateCode" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          (change)="adminSandbox.getReleaseOrder($event.target.value);" [(ngModel)]="State"
+                          class="w3-input w3-border">
+                          <option value="" disabled>Please select state--</option>
+                          <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                              {{state.States_UT}}</option>
+                      </select>
+                      <label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select
+                          state name. </label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Scheme:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select [formControl]="ddlScheme" class="w3-input w3-border" [(ngModel)]="Scheme"
+                          (change)="adminSandbox.getProjectSchemeComponentData($event.target.value);"
+                          style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          <option value="" disabled>Please select Scheme--</option>
+                          <option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme.SchemeShortName">
+                              {{scheme.SchemeShortName}}</option>
+                      </select>
+                      <label *ngIf="submitted && ddlScheme.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select scheme. </label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Components:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select [formControl]="ddlComponent" [(ngModel)]="Components" style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
+                          <option value="" disabled>Please select Components--</option>
+                          <option *ngFor="let schemeComp of adminSandbox.schComponentMaster"
+                              [value]="schemeComp.Cname">
+                              {{schemeComp.Cname}}</option>
+                      </select>
+                      <label *ngIf="submitted && ddlComponent.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select components. </label>
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Sanction No.:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input type="text" class="w3-input w3-border"
+                          [formControl]="txtSanctionNumber" placeholder="Sanction Number" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      <label *ngIf="submitted && txtSanctionNumber.hasError('required')" class="error-label"
+                          style="color: red">Please enter sanction number.</label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Date:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input type="text" class="w3-input w3-border" [minDate]="maxStartDate" [formControl]="txtDate"
+                          bsDatepicker [bsConfig]="dpConfig" autocomplete="off" onkeydown="return false"
+                          placeholder="dd/mm/yyyy"  style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      <label *ngIf="submitted && txtDate.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select date. </label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Amount Released :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input type="text" AllowOnlyDecimal="true" class="w3-input w3-border"
+                          [formControl]="txtAmountReleased" placeholder="Amount Released" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      <label *ngIf="submitted && txtAmountReleased.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter amount.</label>
+                  </div>
+              </div>
+              <br>
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 13%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Release Order PDF :
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <input type="file" [formControl]="txtSelectFile" accept="application/pdf"
+                          (change)="selectFile($event)" name="txtSelectFile" style="font-family: Arial, Geneva, Tahoma, sans-serif;" />
+                      <label *ngIf="submitted && txtSelectFile.hasError('required')" class="error-label"
+                          style="color: red">Please upload pdf.</label>
+                  </div>
+              </div>
+              <div style="text-align: center">
+                  <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+              </div>
+              <br>
+              <table class="table" border="1px" style="width: 89%;" align="center">
+                  <thead style="background-color: lightgray; font-weight: bold">
+                      <tr *ngIf="adminSandbox.releaseOrderValue.length>0">
+                          <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Sanction No.</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Date</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Scheme</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Component</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Amount Released</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Release Order in PDF</td>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let releaseOrder of adminSandbox.releaseOrderValue;let i = index"
+                          style="text-align: center;background-color:white">
+                          <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{releaseOrder.States_UT}}</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{releaseOrder.SanctionNo}}</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{releaseOrder.Date|date}}</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{releaseOrder.Scheme}}</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{releaseOrder.Component}}</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{releaseOrder.AmountReleased.toLocaleString('en-IN') }}</td>
+                          <td style="text-align:center;color:blue;border-top: 1px solid black;"
+                              (click)="adminSandbox.downloadRelease(releaseOrder.ReleasePDF)">Download</td>
+
+                      </tr>
+                      <tr style="text-align: center;background-color:yellow"
+                          *ngIf="adminSandbox.releaseOrderValue.length>0">
+                          <td style="border-top: 1px solid black;"> </td>
+                          <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;"> <b>Total</b></td>
+                          <td style="text-align: right;border-top: 1px solid black;">  </td>
+                          <td style="text-align: right;border-top: 1px solid black;"> </td>
+                          <td style="text-align: right;border-top: 1px solid black;"> </td>
+                          <td style="text-align: left;border-top: 1px solid black;"> </td>
+                          <td style="text-align: left;border-top: 1px solid black;font-family: Arial, Geneva, Tahoma, sans-serif;"> {{ getAmountSum(5).toLocaleString('en-IN') }} </td>
+                          <td style="border-top: 1px solid black;"> </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </form>
+          <form [formGroup]="releaseOrder" *ngIf="utilization">
+              <div class="w3-row">
+                  <div class="w3-quarter w3-left" style="width: 10%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          State Name:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select [formControl]="ddlStateCode" (change)="adminSandbox.getUCOrder($event.target.value);"
+                          [(ngModel)]="State" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          <option value="" disabled>Please select state--</option>
+                          <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                              {{state.States_UT}}</option>
+                      </select>
+                      <label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select
+                          state name. </label>
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Scheme:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select [formControl]="ddlScheme" class="w3-input w3-border" [(ngModel)]="Scheme"
+                          (change)="adminSandbox.getProjectSchemeComponentData($event.target.value);
+                          "
+                          style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          <option value="" disabled>Please select Scheme--</option>
+                          <option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme.SchemeShortName">
+                              {{scheme.SchemeShortName}}</option>
+                      </select>
+                      <label *ngIf="submitted && ddlScheme.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select scheme. </label>
+
+                  </div>
+                  <div class="w3-quarter w3-center" style="width: 12%;">
+                      <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                          Components:
+                      </label>
+                  </div>
+                  <div class="w3-quarter w3-left" style="width: 22%;">
+                      <select [formControl]="ddlComponent" [(ngModel)]="Components" class="w3-input w3-border"
+                      style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          <option value="" disabled>Please select Components--</option>
+                          <option *ngFor="let schemeComp of adminSandbox.schComponentMaster"
+                              [value]="schemeComp.Cname">
+                              {{schemeComp.Cname}}</option>
+                      </select>
+                      <label *ngIf="submitted && ddlComponent.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          select components. </label>
+                  </div>
+              </div>
+            
+              <br>
+              <table class="table" border="1px" style="width: 89%;" align="center">
+                  <thead style="background-color: lightgray; font-weight: bold">
+                      <tr>
+                          <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Sanction No.</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Date</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Amount Released</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Utilization No.</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">UC Date</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">UC Amount</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">UC PDF</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Submit</td>
+                      </tr>
+                  </thead>
+               
+                  <tbody>
+                      <tr *ngFor="let ucOrder of adminSandbox.ucOrderValue;let ucOrder1 of ucOrder;let i = index"
+                          style="text-align: center;background-color:white">
+                          <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{i+1}}</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{ucOrder.States_UT[0]}}</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{ucOrder.SanctionNo}}</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{ucOrder.Date|date}}</td>
+                          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{ucOrder.AmountReleased.toLocaleString('en-IN')}}</td>
+                          <td style="text-align: right;border-top: 1px solid black;">
+                              <input name="UtilizationNumber" [(ngModel)]="ucOrder.UtilizationNo"
+                                  style="width: 143px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;" type="text"
+                                  [ngModelOptions]="{standalone: true}"></td>
+                          <td style="text-align: right;border-top: 1px solid black;">
+                              <input type="text" class="w3-input w3-border" [minDate]="maxStartDate"
+                                  [(ngModel)]="ucOrder.UCDate" name="UCDAte"
+                                  style="width: 143px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;" bsDatepicker
+                                  [bsConfig]="dpConfig" autocomplete="off" onkeydown="return false"
+                                  placeholder="dd/mm/yyyy" [ngModelOptions]="{standalone: true}">
+                          </td>
+                          <td style="text-align: right;border-top: 1px solid black;">
+                              <input name="UCAmount" [(ngModel)]="ucOrder.UCAmount"
+                                  style="width: 143px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;" type="text"
+                                  [ngModelOptions]="{standalone: true}"></td>
+                          <td style="border-top: 1px solid black;">
+                              <input type="file" (ngModel)="ucOrder.UCPDF" accept="application/pdf"
+                                  (change)="selectFile($event)" [ngModelOptions]="{standalone: true}"
+                                  name="txtSelectFile" style="font-family: Arial, Geneva, Tahoma, sans-serif;"/>
+                               <ul *ngFor="let ucOrder1 of ucOrder.UCPDF;let i = index"
+                                  (click)="adminSandbox.downloadUCOrder(ucOrder1,i)">
+                                  <li style="text-indent: 43px;color: blue;font-family: Arial, Geneva, Tahoma, sans-serif;">{{ucOrder1}}</li>
+
+                              </ul> 
+                          </td>
+                          <td style="text-align: right;border-top: 1px solid black;"><button style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-btn w3-orange w3-round w3-ripple"
+                                  (click)="onSubmitReleaseFundFlow(adminSandbox.ucOrderValue,i)">submit</button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </form>
+      </div>
+  </div>

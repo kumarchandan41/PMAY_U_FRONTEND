@@ -1,0 +1,30 @@
+
+<div class="color-picker">
+    <div class="summary-info" (click)="toggleColors()">
+      <div class="info">
+          <p class="style" font-bold="true" style="align-items: right;color: white;font-weight:50px;font-size: 17px;font-family: Arial, Helvetica, sans-serif" align="right" >Choose Colour :</p>
+        <!-- <p class="style">{{ heading }}11</p> -->
+        <!-- <p class="style-value">{{ color }}</p> -->
+      </div>
+  
+      <div class="circle" [ngStyle]="{'background': color}" style="background-color: #fd7e15"></div>
+    </div>
+  
+    <div *ngIf="show" class="opened">
+      <div class="colors" >
+        <div (click)="changeColor(paint)" *ngFor="let paint of defaultColors" class="circle"
+             [ngStyle]="{'background': paint}"></div>
+    </div>
+  
+      <!-- <div class="hex-code">
+        <p>Hex Code</p>
+        <div class="g-input">
+          <input type="text" maxlength="7" [value]="color"
+                 (keyup)="changeColorManual(paintInput.value)"
+                 (keydown.enter)="toggleColors()"
+                 #paintInput/>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  

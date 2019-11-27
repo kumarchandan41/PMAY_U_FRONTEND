@@ -1,0 +1,501 @@
+
+<!--  <br>    -->
+
+
+<div class="container" style="width: 100%;height: 100%;" [ngStyle]="{background: backgroundColor}">
+    <div class="Test Div">
+  <div  class="row fix-row border dynamicColor">
+  <div class="col-md-3" align="right" style="padding-right: 10px" >
+        <div class="row" style="padding: 14px">
+          <br><br>
+          <img src="assets\img\home.png" height="70px" width="70px" />
+        </div>
+        <div class="row" style="padding: 11px">
+          <br> <br><br> <br><br>
+          <img src="assets\img\rs.png" height="80px" width="80px" />
+        </div>
+        <div class="row" style="padding: 18px">
+          <br> <br><br> <br><br><br>
+          <img src="assets\img\employment.png" height="80px" width="80px" />
+        </div>
+  </div>
+  <div class="col-md-7">
+    <div class="row" [ngStyle]="{background: backgroundColor}">
+      <h5 style="padding-left: 170px;font-size:23px">Construction of Houses ( Nos in lakh)</h5>
+      <table class="table" >
+        <tr style="background-color: orange;color:white; font-size: 22px">
+          <th style="font-size:21px">Sanctioned</th>
+          <th style="font-size:21px">Grounded</th>
+          <th style="font-size:21px">Completed</th>
+          <th style="font-size:21px">Occupied</th>
+        </tr>
+        <tr style="background-color: orange;color:white;">
+          <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+
+
+
+                <div counto [step]="25" [countTo]="counter" [countFrom]="0" [duration]="4" (countoChange)="counto_a = $event" (countoEnd)="onCountoEnd()">{{counto_a | number:'1.2-2'}}</div>
+                
+                
+
+                <!-- <div data-ng-repeat="i in [70,75,76,77,78,79,80,83.69]">
+                    {{i + 30}}  
+                </div> -->
+
+                  
+                  
+          
+         <!-- <ng-template ngFor let-person="$implicit" let-variable [ngForOf]="people" let-i="0">
+            <p *ngIf="i == 0">{{53.69 + 30}}</p>
+            <p *ngIf="i > 0">{{53.69 + (30*i)}}</p>
+          <ng-template/> -->
+         
+
+          </span></td>
+          <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+            <!-- 49.54 -->
+            <div counto [step]="25" [countTo]="counter1" [countFrom]="0" [duration]="4" (countoChange)="counto_b = $event" (countoEnd)="onCountoEnd()">{{counto_b | number:'1.2-2'}}</div>
+                
+                
+              <!-- <div counto [step]="5" [countTo]="counter1" [countFrom]="0" [duration]="4" (countoChange)="counto = $event" (countoEnd)="onCountoEnd()">{{counto }}</div>
+ -->
+
+          </span></td>
+          <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+            <!-- 26.14 -->
+            <div counto [step]="25" [countTo]="counter2" [countFrom]="0" [duration]="4" (countoChange)="counto_c1 = $event" (countoEnd)="onCountoEnd()">{{counto_c1 | number:'1.2-2'}}</div>
+          </span></td>
+          <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+            <!-- 23.97 -->
+            <div counto [step]="25" [countTo]="counter3" [countFrom]="0" [duration]="4" (countoChange)="counto_d = $event" (countoEnd)="onCountoEnd()">{{counto_d | number:'1.2-2'}}</div>
+          </span></td>
+        </tr>
+      </table>
+    </div>
+    <div class="row">
+        <h5 style="padding-left: 160px;font-size:23px">Expenditure of Central assistance (Rs. in Cr)</h5>
+        <table class="table">
+          <tr style="background-color: black;color: white;font-size: 22px">
+            <th style="font-size:21px">Committed</th>
+            <th style="font-size:21px">Approved</th>
+            <th style="font-size:21px">Released</th>
+            <th style="font-size:21px">Utilized</th>
+          </tr>
+          <tr style="background-color: black;color: white">
+            <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+              <!-- 1,30,293
+             -->
+              <div counto [step]="25" [countTo]="counter5" [countFrom]="130200" [duration]="4" (countoChange)="counto_c = $event" (countoEnd)="onCountoEnd()">{{counto_c | number:'0.0-0'}}</div>
+         
+            </span></td>
+            
+            
+            <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+              
+            <div counto [step]="25" [countTo]="counter4" [countFrom]="72100" [duration]="4" (countoChange)="counto_e= $event" (countoEnd)="onCountoEnd()">{{counto_e | number:'0.0-0'}}</div>
+              
+            </span></td>    
+            <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+              <!-- 51,550 font-family:DS-DIGIB-->
+              <div counto [step]="25" [countTo]="counter6" [countFrom]="51500" [duration]="4" (countoChange)="counto_f= $event" (countoEnd)="onCountoEnd()">{{counto_f | number:'0.0-0'}}</div>
+            
+            </span></td>
+            <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+              <!-- 41,291 -->
+              <div counto [step]="25" [countTo]="counter7" [countFrom]="41200" [duration]="4" (countoChange)="counto_g= $event" (countoEnd)="onCountoEnd()">{{counto_g | number:'0.0-0'}}</div>
+            
+            </span></td>
+          </tr>
+        </table>
+      </div>
+      <div class="row">
+          <h5 style="padding-left: 210px;font-size:23px">Investment ( in lakh cr.)</h5>
+          <table class="table">
+            <tr style="background-color: green;color: white;font-size: 22px">
+              <th style="font-size:21px"> Overall</th>
+              <th style="font-size:21px">Public</th>
+              <th style="font-size:21px">Private</th>
+              <!-- <th> </th> -->
+            </tr>
+            <tr style="background-color: green;color: white;">
+              <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+                <!-- 4.97 -->
+                <div counto [step]="2" [countTo]="counter8" [countFrom]="2" [duration]="4" (countoChange)="counto_h= $event" (countoEnd)="onCountoEnd()">{{counto_h | number:'2.2-2'}}</div>
+              </span></td>
+              <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+                <!-- 2.60 -->
+                <div counto [step]="0.4" [countTo]="counter9" [countFrom]="2" [duration]="4" (countoChange)="counto_i= $event" (countoEnd)="onCountoEnd()">{{counto_i | number:'2.2-2'}}</div>
+
+              </span></td>
+              <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+                <!-- 2.37 -->
+                <div counto [step]="0.4" [countTo]="counter10" [countFrom]="2" [duration]="4" (countoChange)="counto_j= $event" (countoEnd)="onCountoEnd()">{{counto_j | number:'2.2-2'}}</div>
+
+              </span></td>
+              <!-- <td></td> -->
+            </tr>
+          </table>
+        </div>
+        <div class="row" >
+            <h5 style="padding-left: 210px;font-size:23px">Generation of Employment</h5>
+            <table class="table">
+              <tr style="background-color: blue;color: white;font-size: 22px">
+                <th style="font-size:21px">Details</th>
+                <th style="font-size:21px">Direct</th>
+                <th style="font-size:21px">Indirect</th>
+                <th style="font-size:21px">Total</th>
+              </tr>
+              <tr style="background-color: blue;color: white;">
+                <td style="font-size:20px">Person days (Nos in Cr.)</td>
+                <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;"> 
+                  <!-- 96.97 -->
+                  <div counto [step]="0.25" [countTo]="counter11" [countFrom]="96" [duration]="4" (countoChange)="counto_k= $event" (countoEnd)="onCountoEnd()">{{counto_k | number:'2.2-2'}}</div>
+
+                </span></td>
+                <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+                  <!-- counter12 215.48 -->
+                  <div counto [step]="0.25" [countTo]="counter12" [countFrom]="215" [duration]="4" (countoChange)="counto_l= $event" (countoEnd)="onCountoEnd()">{{counto_l | number:'2.2-2'}}</div>
+
+                </span></td>
+                <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+                  <!-- 312.45 -->
+                  <div counto [step]="0.25" [countTo]="counter14" [countFrom]="312" [duration]="4" (countoChange)="counto_m= $event" (countoEnd)="onCountoEnd()">{{counto_m | number:'2.2-2'}}</div>
+                </span></td>
+              </tr>
+              <tr style="background-color: blue;color: white;">
+                  <td style="font-size:20px">Jobs  (in lakh)</td>
+                  <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;"> 
+                    <!-- counter15 34.63 -->
+                    <div counto [step]="0.25" [countTo]="counter15" [countFrom]="34" [duration]="4" (countoChange)="counto_n= $event" (countoEnd)="onCountoEnd()">{{counto_n | number:'2.2-2'}}</div>
+                  </span></td>
+                  <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;"> 
+                    <!-- counter16 76.96 -->
+                    <div counto [step]="0.25" [countTo]="counter16" [countFrom]="76" [duration]="4" (countoChange)="counto_o= $event" (countoEnd)="onCountoEnd()">{{counto_o | number:'2.2-2'}}</div>
+                  </span></td>
+                  <td style="font-size:22px"><span style="font-family: Arial, Helvetica, sans-serif;font-size: 27px;">
+                    <!--counter17 111.59 -->
+                    <div counto [step]="0.25" [countTo]="counter17" [countFrom]="111" [duration]="4" (countoChange)="counto_p= $event" (countoEnd)="onCountoEnd()">{{counto_p | number:'2.2-2'}}</div>
+                  </span></td>
+                </tr>
+            </table>
+          </div>
+    </div>
+  </div>
+  </div>
+
+
+
+
+
+
+<!-- <div class="container" [ngStyle]="{background: backgroundColor}">
+    <div class="Test Div" [ngStyle]="">
+  <div  class="row fix-row border dynamicColor">
+  <div class="col-md-2" align="right" style="padding-right: 10px" >
+        <div class="row" style="padding: 14px">
+          <br>
+        <img src="assets\img\home.png" height="70px" width="70px" />
+        </div>
+        <div class="row" style="padding: 11px">
+          <br> <br><br> <br><br>
+          <img src="assets\img\rs.png" height="80px" width="80px" />
+        </div>
+        <div class="row" style="padding: 18px">
+          <br> <br><br> <br><br><br><br>
+          <img src="assets\img\employment.png" height="80px" width="80px" />
+        </div>
+  </div>
+  <div class="col-md-10">
+    <div class="row" [ngStyle]="{background: backgroundColor}">
+      <h5 style="padding-left: 300px;font-size:23px">Construction of Houses ( Nos in lakh)</h5>
+      <table class="table" >
+        <tr style="background-color: orange;color:white; font-size: 22px">
+          <th style="font-size:21px">Sanctioned</th>
+          <th style="font-size:21px">Grounded</th>
+          <th style="font-size:21px">Completed</th>
+          <th style="font-size:21px">Occupied</th>
+        </tr>
+        <tr>
+          <td>
+              <div class="main_container" id="id_main_container">
+                  <div class="container_inner" id="d1"></div>
+                  <span class="num_tiles" *ngFor="let item of getListValue(83.69);">{{item}}</span>
+                  <span style="font-family:DS-DIGIB;font-size: 25px;">45.56</span>
+
+              </div>
+          </td>
+          <td>
+
+              <div class="main_container" id="id_main_container">
+                  <div class="container_inner" id="d1"></div>
+                  <span class="num_tiles">4</span>
+                  <span class="num_tiles">9</span>
+                  <span class="num_tiles">.</span>
+                  <span class="num_tiles">5</span>
+                  <span class="num_tiles">4</span>
+              </div>
+          </td>
+          <td>
+               <td style="font-size:20px">26.14</td>  ==
+              <div class="main_container" id="id_main_container">
+                  <div class="container_inner" id="d1"></div>
+                  <span class="num_tiles">2</span>
+                  <span class="num_tiles">6</span>
+                  <span class="num_tiles">.</span>
+                  <span class="num_tiles">1</span>
+                  <span class="num_tiles">4</span>
+              </div>
+          </td>
+          <td>
+                 <div class="main_container" id="id_main_container">
+                    <div class="container_inner" id="d1"></div>
+                    <span class="num_tiles">2</span>
+                    <span class="num_tiles">3</span>
+                    <span class="num_tiles">.</span>
+                    <span class="num_tiles">9</span>
+                    <span class="num_tiles">7</span>
+                </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <br/><br/>
+    <div class="row">
+        <h5 style="padding-left:300px;font-size:23px">Expenditure of Central assistance (Rs. in Cr)</h5>
+        <table class="table">
+          <tr style="background-color: black;color: white;font-size: 22px">
+            <th style="font-size:21px">Committed</th>
+            <th style="font-size:21px">Approved</th>
+            <th style="font-size:21px">Released</th>
+            <th style="font-size:21px">Utilized</th>
+          </tr>
+          <tr>
+          <td>
+                   <div class="main_container1" id="id_main_container1">
+                      <div class="container_inner" id="d1"></div>
+                      <span class="num_tiles">1,</span>
+                      <span class="num_tiles">3</span>
+                      <span class="num_tiles">0, </span>
+                      <span class="num_tiles">2</span>
+                      <span class="num_tiles">9</span>
+                      <span class="num_tiles">3</span>
+                    </div>
+            </td>
+
+            <td>
+                   <div class="main_container1" id="id_main_container2">
+                      <div class="container_inner" id="d1"></div>
+                       <span class="num_tiles">7</span>
+                      <span class="num_tiles">2,</span>
+                      <span class="num_tiles">1 </span>
+                      <span class="num_tiles">2</span>
+                      <span class="num_tiles">1</span>
+                    </div>
+            </td>
+            <td>
+                   <div class="main_container1" id="id_main_container2">
+                      <div class="container_inner" id="d1"></div>
+                      <span class="num_tiles">5</span>
+                      <span class="num_tiles">1,</span>
+                      <span class="num_tiles">5 </span>
+                      <span class="num_tiles">5</span>
+                      <span class="num_tiles">0</span>
+                    </div>
+            </td>
+             <td>
+                   <div class="main_container1" id="id_main_container2">
+                      <div class="container_inner" id="d1"></div>
+                      <span class="num_tiles">4</span>
+                      <span class="num_tiles">1,</span>
+                      <span class="num_tiles">2 </span>
+                      <span class="num_tiles">9</span>
+                      <span class="num_tiles">1</span>
+                    </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <br/><br/>
+      <div class="row">
+          <h5 style="padding-left: 350px;font-size:23px">Investment ( in lakh cr.)</h5>
+          <table class="table">
+            <tr style="background-color: green;color: white;font-size: 22px">
+              <th style="font-size:21px"> Overall</th>
+              <th style="font-size:21px">Public</th>
+              <th style="font-size:21px">Private</th>
+             </tr>
+            <tr>
+
+              <td>
+                  <div class="main_container" id="id_main_container3">
+                      <div class="container_inner" id="d1"></div>
+                      <span class="num_tiles">4</span>
+                      <span class="num_tiles">.</span>
+                      <span class="num_tiles">9</span>
+                      <span class="num_tiles">7</span>
+                    </div>
+              </td>
+               <td>
+                  <div class="main_container" id="id_main_container3">
+                      <div class="container_inner" id="d1"></div>
+                      <span class="num_tiles">2</span>
+                      <span class="num_tiles">.</span>
+                      <span class="num_tiles">6</span>
+                      <span class="num_tiles">0</span>
+                    </div>
+              </td>
+                <td>
+                  <div class="main_container" id="id_main_container3">
+                      <div class="container_inner" id="d1"></div>
+                      <span class="num_tiles">2</span>
+                      <span class="num_tiles">.</span>
+                      <span class="num_tiles">3</span>
+                      <span class="num_tiles">7</span>
+                    </div>
+              </td>
+              <td>
+
+              </td>
+             </tr>
+          </table>
+        </div>
+        <br/><br/>
+        <div class="row" >
+            <h5 style="padding-left: 350px;font-size:23px">Generation of Employment</h5>
+            <table class="table" width="80%">
+              <tr style="background-color: blue;color: white;font-size: 22px">
+                <th style="font-size:21px">Details</th>
+                <th style="font-size:21px">Direct</th>
+                <th style="font-size:21px">Indirect</th>
+                <th style="font-size:21px">Total</th>
+              </tr>
+              <tr>
+                  <td style="width: 265px;">
+                      <div  style="font-size: 20px;width: 140px" id="id_main_container">
+                          Person days(Cr.)
+                      </div>
+                        </td>
+
+
+
+                <td>
+                    <div class="main_container" id="id_main_container">
+                        <div class="container_inner" id="d1"></div>
+                        <span class="num_tiles">9</span>
+                        <span class="num_tiles">6</span>
+                        <span class="num_tiles">.</span>
+                        <span class="num_tiles">9</span>
+                        <span class="num_tiles">7</span>
+                      </div>
+                </td>
+                <td>
+                    <div class="main_container" id="id_main_container3">
+                        <div class="container_inner" id="d1"></div>
+                        <span class="num_tiles">2</span>
+                        <span class="num_tiles">1</span>
+                        <span class="num_tiles">5</span>
+
+                        <span class="num_tiles">.</span>
+                        <span class="num_tiles">4</span>
+                        <span class="num_tiles">8</span>
+                      </div>
+                </td>
+
+                 <td>
+                    <div class="main_container" id="id_main_container3">
+                        <div class="container_inner" id="d1"></div>
+                        <span class="num_tiles">3</span>
+                        <span class="num_tiles">1</span>
+                        <span class="num_tiles">2</span>
+
+                        <span class="num_tiles">.</span>
+                        <span class="num_tiles">4</span>
+                        <span class="num_tiles">5</span>
+                      </div>
+                </td>
+              </tr>
+              <br/>
+              <tr>
+                   <td>
+                      <div   style="font-size: 20px;width: 140px" id="id_main_container">
+                          Jobs  (in lakh)
+                      </div>
+                        </td>
+
+                   <td>
+                      <div class="main_container" id="id_main_container3">
+                          <div class="container_inner" id="d1"></div>
+                          <span class="num_tiles">3</span>
+                          <span class="num_tiles">4</span>
+                          <span class="num_tiles">.</span>
+                          <span class="num_tiles">6</span>
+                          <span class="num_tiles">3</span>
+                        </div>
+                  </td>
+
+                  <td>
+                      <div class="main_container" id="id_main_container3">
+                          <div class="container_inner" id="d1"></div>
+                          <span class="num_tiles">7</span>
+                          <span class="num_tiles">6</span>
+                          <span class="num_tiles">.</span>
+                          <span class="num_tiles">9</span>
+                          <span class="num_tiles">6</span>
+                        </div>
+                  </td>
+
+                   <td>
+                      <div class="main_container" id="id_main_container3">
+                          <div class="container_inner" id="d1"></div>
+                          <span class="num_tiles">1</span>
+                          <span class="num_tiles">1</span>
+                          <span class="num_tiles">1</span>
+
+                          <span class="num_tiles">.</span>
+                          <span class="num_tiles">5</span>
+                          <span class="num_tiles">9</span>
+                        </div>
+                  </td>
+
+                </tr>
+            </table>
+          </div>
+    </div>
+</div>
+</div>   -->
+
+
+<!--
+--------------------------------------
+<script>
+  var counter_list = [10,10000,10000];
+  var str_counter_0 = counter_list[0];
+  var str_counter_1 = counter_list[1];
+  var str_counter_2 = counter_list[2];
+  var display_str = "83.69";
+  var display_div = document.getElementById("display_div_id");
+
+  function incrementCount(current_count){
+    setInterval(function(){
+      // clear count
+      while (display_div.hasChildNodes()) {
+          display_div.removeChild(display_div.lastChild);
+      }
+      str_counter_0++;
+      if (str_counter_0 > 99) {
+        str_counter_0 = 10; // reset count
+        str_counter_1++;    // increase next count
+      }
+      if(str_counter_1>99999){
+        str_counter_2++;
+      }
+      display_str = str_counter_2.toString() + str_counter_1.toString() + str_counter_0.toString();
+      for (var i = 0; i < display_str.length; i++) {
+        var new_span = document.createElement('span');
+        new_span.className = 'num_tiles';
+        new_span.innerText = display_str[i];
+        display_div.appendChild(new_span);
+      }
+    },1000);
+  }
+</script> -->

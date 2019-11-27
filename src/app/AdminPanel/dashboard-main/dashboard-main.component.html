@@ -1,0 +1,270 @@
+<!-- <div style="float: right; width: 600px;">
+  <div style="float: left; width: 400px;height: 20px;" >
+      <app-color-picker [color]="backgroundColor"  style="width: 300px;background-color: white" [heading]="'Background'"
+      (event)="setColor('background', $event)"></app-color-picker>
+  </div>
+</div> -->
+  <!-- Content Wrapper. Contains page content -->
+  <!-- <div [ngStyle]="{background: backgroundColor}">  class="Test Div"-->
+      <div class="Test Div"  [ngStyle]=""> 
+
+    <!-- Main content -->
+    <section >
+      <!-- Info boxes -->
+      <div class="row">
+         <div class="col-md-4 col-sm-6 col-xs-12">
+        
+      
+           <div  style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px">State :</div>
+          <div >
+              <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
+                style="width: 200px;font-size: 18px;font-display: black;color: black;;border-color: black;font-family: Arial, Geneva, Tahoma, sans-serif">
+                <option value={{stValue}}>{{StateMessage}}</option>
+                <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+                  {{sntry.States_UT}}
+                </option>
+              </select></div>
+              
+        </div>
+        <!-- /.col -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <!-- <div class="info-box" style="min-height: 40px;"> -->
+                <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px"> District :</div> 
+            <!-- <select class="form-control" placeholder="Choose Distt"
+            (change)="getCitytDetails($event.target.value)"
+            style="width: 200px;font-display: black;color:black;font-family: Arial, Helvetica, sans-serif">
+            <option value={{distValue}}>{{DistrictMessage}}</option>
+            <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+              {{sntry.District}}
+            </option>
+          </select>  -->
+
+          <div style="border: black"><select class="form-control" placeholder="Choose Distt"
+            (change)="getDistrictDetails($event.target.value)"
+            style="width: 200px;font-size: 18px;font-display: black;color:black;border-color: black;font-family: Arial, Helvetica, sans-serif">
+            <option value={{distValue}}>{{DistrictMessage}}</option>
+            <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+              {{sntry.District}}
+            </option>
+          </select></div>
+
+          <!-- </div> -->
+          <!-- /.info-box -->
+        </div>
+
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <!-- <div class="info-box" style="min-height: 40px;"> -->
+              <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px">City :</div> 
+
+              <!-- <div style="color:arial-narrow;border: black"> <select class="form-control" placeholder="Choose City"
+                (change)="getCityDetails($event.target.value)"
+                style="width: 200px;font-display: black;color:black;font-family: Arial, Helvetica, sans-serif">
+                <option value={{cityValue}}>{{CityMessage}}</option>
+                <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+                  {{sntry.City}}
+                </option>
+              </select>  </div> -->
+              <div style="color:arial-narrow;border: black"> <select class="form-control" placeholder="Choose City"
+                (change)="getCityDetails($event.target.value)"
+                style="width: 200px;font-size: 18px;font-display: black;color:black;border-color: black;font-family: Arial, Helvetica, sans-serif">
+                <option value={{cityValue}}>{{CityMessage}}</option>
+                <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+                  {{sntry.City}}
+                </option>
+              </select>  </div>
+
+          <!-- </div> style="font-size: 15px"-->
+        
+        </div>
+       
+      </div>
+      <div class="row dynamicColors" >
+ 
+          <br/> 
+          
+          <div>
+          
+          <div class="col-lg-4 info-box-inline" >
+ 
+              <span class="info-box-header" style="padding:-10px;font-size: 16px;font-family: Arial, Helvetica, sans-serif"><b>Division</b></span>
+              <ng-container *ngFor="let chkValue of lstHFACodes;let i=index">
+                <div class="form-check form-check-inline;padding:2px;" style="font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+                  <input class="form-check-input" type="checkbox" [disabled]="DisabledCheckBox" value="{{chkValue.HFAid}}"
+                  (change)="sendHFA_Codes(chkValue.Name,$event.target.checked)"/>
+                  <label class="form-check-label" for="inlineCheckbox1">{{chkValue.Name}}</label>
+                </div>
+              </ng-container>
+          </div>
+
+          <div class="info-box-inline" style="padding-left: 220px">
+          <span class="info-box-header" style="font-size: 18px;font-family: Arial, Helvetica, sans-serif"><b>Component</b></span>
+          <ng-container *ngFor="let chkValue of lstComp;let i=index">
+              <div class="form-check form-check-inline;padding:10px" style="font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+                  <input class="form-check-input" type="checkbox" value="{{chkValue.Cid}}"
+                  (change)="sendComp(chkValue.Cid,$event.target.checked)"/>
+                  <label class="form-check-label" for="inlineCheckbox1">{{chkValue.Cname}}</label>
+                </div>
+          </ng-container>
+          <!-- <div style="float: right; width: 400px;height: 20px;padding-left: 150px" >
+            <app-color-picker [color]="backgroundColor"  style="width: 300px;background-color: white;color: white" [heading]="'Background'"
+            (event)="setColor('background', $event)"></app-color-picker>
+        </div> -->
+        </div>
+        <!-- <div class="info-box-inline">
+          <span class="info-box-header">Reset</span> </div> -->
+        </div> 
+
+<!-- <br><br> -->
+      
+          
+          <div class="info-box-inline col-md-10 background dynamicColor" [ngStyle]="">
+            <!-- <span class="info-box-header">Component</span> {background: backgroundColor}
+            <ng-container *ngFor="let chkValue of lstComp;let i=index">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" value="{{chkValue.Cid}}"
+                    (change)="sendComp(chkValue.Cid,$event.target.checked)"/>
+                    <label class="form-check-label" for="inlineCheckbox1">{{chkValue.Cname}}</label>
+                  </div>
+            </ng-container> -->
+              <!-- <label class="form-control col-md-8" *ngFor="let chkValue of lstComp;let i=index"
+                style="color:green;background-color:black;width: 102px;transform-style: preserve-3d;display:inline-block;border: black;font-family: Arial, Helvetica, sans-serif">
+                <input type="checkbox" value="{{chkValue.Cid}}"
+                  (change)="sendComp(chkValue.Cid,$event.target.checked)" width=5px><b>{{chkValue.Cname}}</b>
+              </label></font> -->
+          </div>
+          
+     
+            
+ 
+          
+     
+
+        </div>
+        
+      
+      <div >
+          
+
+      <div class="row">
+          <div class="col-md-6 row fix-row border dynamicColor" style="margin-left:0px">
+             
+        <!-- Left col -->
+        <div class="col-md-6" style="padding: 10px">
+            <!-- <div class="box box-default"> -->
+                <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+                    <p style="text-align: center"> Investments <br/>₹ {{Total_CostNw}} cr</p></font>
+                   <div id="chartContainer1" style="height: 170px; width: 330px;"></div>
+              <!-- </div> -->
+
+              
+              
+        </div>  
+        <div class="col-md-6" style="padding-left: 50px">
+                  <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+                      <p style="text-align: center"><br/>{{ZeroDemand}}<br/> {{ZeroDemand1}}</p></font>
+                  <div id="DemandContainer" style="height: 145px; width: 150px;padding-left:15px"></div>
+          </div>
+        </div>
+        <div class="col-md-6 row fix-row border dynamicColor" >
+            <div class="row">
+                <marquee direction="right" behavior="alternate" scrolldelay="300"> <b>
+                    <font style="color: #f01c31;border-left: 180px;font-size:17px">F I N A N C I A L - P R O G R
+                      E
+                      S S</font>
+                  </b></marquee>
+              </div>
+                <div class="col-md-4" style="padding-left: 0px" >
+                  <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+                      <p style="text-align: left">Sanction/Commitment <br/>  ₹ {{CA_ApprovdNew}} cr </p></font>
+                  <div id="sancforRel" style="height: 150px; width: 150px;"></div>
+                </div>
+                <div class="col-md-4" style="padding-left: 10px"  style="padding-left: 0px">
+                    <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+                        <p style="text-align: center">Disbursed/Sanctions <br/> ₹ {{this.CASanct_forReleaseNChange}} cr</p></font>
+                  <div id="caReleased" style="height: 150px; width: 160px;"></div>
+                </div>
+                <div class="col-md-4" style="padding-left: 0px">
+                  <!-- <div>.</div>    -->
+                  <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+                      <p style="text-align: center">Utilized/Disbursed <br/>₹ {{CA_ReleasedNw}} cr </p></font>
+                  <div id="CAApprovedContainer" style="height: 160px; width: 150px;align-content: right"></div>
+                </div>
+              </div>  
+        <!-- </div> -->
+        <!-- /.col -->
+      
+      </div>
+    </div>
+
+      <div class="row"  style="padding: 1px">
+          <div class="col-md-6 row fix-row border dynamicColor" style="margin-left:0px">
+             <div class="row">
+                 <marquee direction="right" behavior="alternate" scrolldelay="300"> <b>
+                     <font style="color: #f01c31;border-left: 1S0px;font-size:17px">CREDIT LINKED SUBSIDY SCHEME.</font>
+                   </b></marquee>
+               </div>
+           <div class="col-md-3" style="padding:1px;margin-left:0px" id="clss1">
+               <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+                   <p style="text-align: center;margin-left:25px">
+                 Subsidy</p></font>
+               <div id="clssSubsi" style="height: 180px; width: 300px;"></div>
+          </div>
+             
+           <div class="col-md-3" style="padding:1px;margin-left:170px">
+               <!-- <div class="col-md-7"> -->
+                   <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+                       <p style="text-align: center;margin-left:35px">
+                     Beneficiaries</p></font>
+                   <div id="clssBene" style="height: 180px; width: 200px;"></div>
+                 <!-- </div> -->
+           </div>
+             <div></div>
+         </div>
+         
+         <div class="col-md-6 row fix-row border dynamicColor" style="padding: 1px">
+            
+           <!-- <div class="col-md-6" > -->
+              
+             <div class="row">
+               <marquee direction="right" behavior="alternate" scrolldelay="300"> <b>
+                   <font style="color: #f01c31;border-left: 150px;font-size:17px">P H Y S I C A L - P R O G R E S S
+                   </font>
+                 </b></marquee>
+             </div>
+               <div class="row" style="padding-left: 0px">
+               <div class="col-md-4" style="padding-left:14px">
+                   <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+                       <p style="text-align: center">
+                     Grounded/Sanctioned<br/>  {{Sanction_Total_New4}}</p></font>
+                   <div id="groundedContainer"
+                   style="height: 150px; width: 150px;"></div>
+              </div>
+
+               <div class="col-md-4" style="padding-left: 10px">
+                   <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+                       <p style="text-align: center">
+                     Completed/Grounded <br/>{{Ground_TotalNew}}</p> </font>
+                   <div id="CompletedContainer" style="height: 150px; width: 160px;"></div>
+               </div>
+
+               <div class="col-md-4" style="margin-right:-20px;">
+                     <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+                         <p style="text-align: center">
+                       Occupied/Completed <br/>{{GTCompleted_}}</p> </font>
+                     <div id="OccupiedContainer" style="height: 160px; width: 150px;align-content: right"></div>
+               </div>
+               
+             </div>
+              
+               
+             <!-- </div> -->
+           </div>
+
+           <br/>    
+          </div>
+      <!-- .row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

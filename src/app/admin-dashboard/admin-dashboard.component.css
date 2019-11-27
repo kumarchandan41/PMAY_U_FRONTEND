@@ -1,0 +1,119 @@
+
+
+.dashboard_font{
+   font-family: Arial, Helvetica, sans-serif;
+   font-size: 18px;
+}
+
+  /* .col-md-12 {
+    width: 25%;
+}  
+th, td{
+border: 2px solid gray;
+text-align: center;
+width: 100px;
+} */
+
+.col-md-12 {
+  width: 80%;
+}  
+
+.col-lg-12[_ngcontent-yan-c1] {
+  width: 200%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.td-number{
+  font-family: Open Sans,sans-serif;
+  line-height: 1.15;
+}
+
+
+
+/* 
+///////////////////////// */
+
+.main_container {
+  /* height: 46px; */
+  height: 5px;
+  width:0px; 
+  /*
+  width:auto;
+  padding: 3px;
+  margin: 2px;*/
+  max-width: 200px;
+  background-color: #555555;
+  align-content: center;
+}
+.main_container1 {
+  /* height: 46px; */
+  height: 0px;
+  width:155px; 
+  /*
+  width:auto;
+  padding: 3px;
+  margin: 2px;*/
+  max-width: 200px;
+  background-color: #555555;
+  align-content: center;
+}
+.main_container2 {
+  /* height: 46px; */
+  height: 0px;
+  width:100px; 
+  /*
+  width:auto;
+  padding: 3px;
+  margin: 2px;*/
+  max-width: 200px;
+  background-color: #555555;
+  align-content: center;
+}
+.container_inner {
+  /* height: auto;
+   */
+   height: 5px;
+   border: none;
+  background-color: #555555;
+  max-width: 290px;
+  vertical-align: center;
+  /* padding-top: 12px; */
+  padding-left: 10px;
+  align-content: center;
+}
+.container_inner1 {
+  /* height: auto;
+   */
+   height: 0px;
+   border: none;
+  background-color: #555555;
+  max-width: 270px;
+  vertical-align: center;
+  /* padding-top: 12px; */
+  padding-left: 10px;
+  align-content: center;
+}
+ .num_tiles {
+  /* width:10px; */
+  height: 30px;
+  background-color: #888888;
+  color: #ffffff;
+  font-size: 18px;
+  text-align: center;
+  line-height: 20px;
+  padding: 3px;
+  margin: 1.5px;
+  font-family: verdana;
+  vertical-align: center;
+}
+
+
+.content[_ngcontent-hsy-c1] {
+  padding: 0px !important;
+
+}
+
+@font-face {
+  font-family: DS-DIGIB;
+  src: url("/assets/fonts/CursedTimerUlil-Aznm.ttf") format("truetype");
+  }

@@ -1,0 +1,748 @@
+<div>
+  <div id="drpdown" >
+  <div class="container">
+    <div class="info-box-inline" style="padding-left:470px;font-family: Arial, Helvetica, sans-serif;font-size: 18px">
+          <input type="radio" name="progress" value="Phy" (change)="checkRadio($event)" checked="true"> Physical
+          <input type="radio" name="progress" value="Fin" (change)="checkRadio($event)"> Financial<br>  
+    </div>
+    <div class="info-box-inline" style="padding-left:250px;font-family: Arial, Helvetica, sans-serif;font-size: 18px">
+          <span class="info-box-header" style="padding:40px"><b>Component</b></span>
+          <input type="checkbox"  (change)="sendComp($event)" name="ISSR" value="ISSR">ISSR/RAY &nbsp;
+          <input type="checkbox" (change)="sendComp($event)" name="AHP" value="AHP">AHP&nbsp;
+          <input type="checkbox" (change)="sendComp($event)" name="BLCS" value="BLCS"> BLC&nbsp;
+          <input type="checkbox" (change)="sendComp($event)" name="CLSS" value="CLSS"> CLSS&nbsp;
+         <span [ngStyle]="{'display':JvrmDisplay}"><input type="checkbox"  (change)="sendComp($event)" name="JnNURM" value="JnNURM"> JnNURM&nbsp;</span> 
+          <input type="checkbox" id="chkAll" (change)="sendComp($event)" name="ALL" value="ALL" checked> ALL <br><br> 
+    </div>
+
+      <div id="drpdown1" >
+          <div class="row" style="padding-left:200px">
+              <div class="col-md-2" style="padding-right: 100px">
+              <div class="row">
+                <div class="col-md-7">
+                  <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
+                      style="width: 200px;font-display: #FF00FF;color: black">
+                    <option value={{stValue}}>{{StateMessage}}</option>
+                    <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+                      {{sntry.States_UT}}     
+                    </option>
+                  </select> 
+                </div>
+              </div>   
+              <div class="col-md-3">
+                </div>
+            </div>
+            
+            <div class="col-md-2" style="padding-left: 100px">
+              <div class="row">
+                <!-- <div class="col-md-4"><b> District :</b></div> -->
+                <div class="col-md-8">
+                  <div><select class="form-control" placeholder="Choose Distt" (change)="getDistrictDetails($event.target.value)"
+                    style="width: 200px;font-display: #FF00FF;color: black">
+                      <option  value={{distValue}}>{{DistrictMessage}}</option>
+                      <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+                        {{sntry.District}}
+                      </option>
+                    </select></div>
+                </div> &nbsp;&nbsp;
+              </div>
+              &nbsp;&nbsp;
+             </div>
+
+
+            <div class="col-md-2"  style="padding-left: 180px">
+              <div class="row">
+                <!-- <div class="col-md-4"> <b>City :</b></div> getCityDetails-->
+                <div class="col-md-8">
+                  <div> <select class="form-control" placeholder="Choose City" (change)="getCityDetails($event.target.value)"
+                    style="width: 200px;font-display: rgb(134, 133, 134);color: black">
+                      <option value={{cityValue}}>{{CityMessage}}</option>
+                      <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+                        {{sntry.City}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>     
+        </div> 
+      </div>
+  </div>
+
+      <div class="container" id="ataglancePDF" style="background-color: rgb(227, 233, 241)!important;height: 100%;width:70%">
+          <div style="text-align:center;">
+                 <!-- <b> <font size=5px  style="font-family:''Arial',Franklin Gothic Medium', Arial, sans-serif;align-self: auto;"> Status of Houses Sanctioned under PMAY(U)
+                </font></b>  -->
+          
+          </div>
+          <div style="text-align:center;padding-top: 10px"><b>
+            <font size=5px style="font-family:''Arial',Franklin Gothic Medium', Arial, sans-serif;align-self: auto;">{{Header}}</font> 
+          </b></div>
+
+          <div><br/></div>
+          <!-- Physical Main Table 1 -->
+          
+    <div [ngStyle]="{'display':display1}">
+          <table class="bodyataglance"  border="1px" style="font-size:12px;width:99%;background-color:white;align-content: center" id="printme" >
+          <tr style="text-align:center;">
+                <td  rowspan="1" style="width:40px;text-align:center;font-size: 15px; font-family: Arial, Helvetica, sans-serif"><b> SrNo</b></td>
+                <td  style="width:20px;text-align:center;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>Financial Year</b></td>
+                <td  style="width:20px;text-align:center;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>Houses subjected to Construction</b></td>
+                <td  style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>Houses for which Funds Released</b></td>
+                <td  style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif" ><b>Houses Grounded*</b></td>
+                <td  style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>Houses Completed*</b></td>
+                <td  style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>Houses Occupied*</b></td>
+            </tr>  
+               <tr>
+             </tr>
+            <tr>
+                <td  align="center"> 11</td>
+                <td style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif" align="center">2014-15</td> 
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{HouseInvolved1.toLocaleString('en-IN')}}</td>        
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{FundsDisbursed_in_Houses1.toLocaleString('en-IN')}}</td>        
+                
+                <!-- <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif" ><span [(ngModel)]="Houses_Grounded1new"></span>
+                  <input placeholder="User Name" class="form-control"  [(ngModel)]="Houses_Grounded1new" name="Houses_Grounded1new" required></td> -->
+                  <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Houses_Grounded1.toLocaleString('en-IN')}}</td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Houses_Completed1.toLocaleString('en-IN')}}</td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{HousesOccupied1.toLocaleString('en-IN')}}</td>
+            </tr>
+            <tr>
+                <td align="center">2</td>
+                 <td style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"  align="center">2015-16</td>
+                 <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{HouseInvolved2.toLocaleString('en-IN')}}</td>        
+                 <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{FundsDisbursed_in_Houses2.toLocaleString('en-IN')}}</td>        
+                 <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Houses_Grounded2.toLocaleString('en-IN')}}</td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"> {{Houses_Completed2.toLocaleString('en-IN')}}</td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{HousesOccupied2.toLocaleString('en-IN')}}</td>
+            </tr>
+            <tr>
+                <td align="center">3</td>
+                <td style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"  align="center">2016-17</td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{HouseInvolved3.toLocaleString('en-IN')}}</td>         
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{FundsDisbursed_in_Houses3.toLocaleString('en-IN')}}</td>         
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Houses_Grounded3.toLocaleString('en-IN')}}</td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Houses_Completed3.toLocaleString('en-IN')}} </td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{HousesOccupied3.toLocaleString('en-IN')}} </td>
+            </tr>
+             <tr>
+                <td align="center">4</td>             
+                <td style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"  align="center">2017-18</td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{HouseInvolved4.toLocaleString('en-IN')}} </td>   
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{FundsDisbursed_in_Houses4.toLocaleString('en-IN')}} </td>     
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Houses_Grounded4.toLocaleString('en-IN')}} </td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Houses_Completed4.toLocaleString('en-IN')}} </td>
+                <td style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{HousesOccupied4.toLocaleString('en-IN')}} </td>
+            </tr>
+            <tr>
+                <td align="center">5</td>     
+                <td style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"  align="center">2018-19</td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"> {{HouseInvolved5.toLocaleString('en-IN')}}</td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{FundsDisbursed_in_Houses5.toLocaleString('en-IN')}} </td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Houses_Grounded5.toLocaleString('en-IN')}} </td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"> {{Houses_Completed5.toLocaleString('en-IN')}}</td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{HousesOccupied5.toLocaleString('en-IN')}} </td>
+            </tr>
+            <tr>
+                <td align="center">6</td>
+                <td style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"  align="center">2019-20</td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{HouseInvolved6.toLocaleString('en-IN')}} </td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"> {{FundsDisbursed_in_Houses6.toLocaleString('en-IN')}}</td>        
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Houses_Grounded6.toLocaleString('en-IN')}} </td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Houses_Completed6.toLocaleString('en-IN')}} </td>
+                <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{HousesOccupied6.toLocaleString('en-IN')}} </td>
+               </tr>  
+
+
+              
+                   <tr>
+                    <td align="center" style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"></td>
+                    <!-- <td style="width:100px;font-size: 18px;font-family: Arial, Helvetica, sans-serif"  align="center"><a [routerLink]="['/Admin/VerticalHousesDetails']">Total</a></td> -->
+                    <!-- <td></td> -->
+                    <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><a style="cursor: pointer;color:blue" (click)="SendData()">Total Physical</a></td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{THouseInvolvedNew.toLocaleString('en-IN')}} </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{TFundsDisbursed_in_Houses.toLocaleString('en-IN')}} </td>        
+                    <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{THouses_Grounded.toLocaleString('en-IN')}} </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{THouses_Completed.toLocaleString('en-IN')}} </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"> {{THousesOccupied.toLocaleString('en-IN')}}</td>
+                 </tr>  
+                 <tr >
+                 <td colspan="10" style="align-items: flex-start;">
+                    <i><p style="text-align: left;"><label id="Note7"  > "* includes incomplete work of earlier JNNuRM"</label>
+                      </p></i>
+                 </td>
+               </tr>
+          </table>
+        </div>
+        
+
+        <!---  Financial Tab -->
+          <div [ngStyle]="{'display':display2}">
+              <table class="bodyataglance"  border="1px" style="font-size:12px;width:98%;background-color:white;align-content: center" id="printme" >
+                   
+                <tr style="text-align:center;">
+                        <td  rowspan="2" style="width:40px;text-align:center;font-size: 15px; font-family: Arial, Helvetica, sans-serif"><b>Sr No</b></td>
+                        <td  rowspan="2" style="width:40px;text-align:center;font-size: 15px; font-family: Arial, Helvetica, sans-serif"><b>Fin Year</b></td>
+                        <td  rowspan="2" style="width:20px;text-align:center;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>Project Cost</b></td>
+                        <td   rowspan="2" style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>CA Sanctioned</b></td>
+                        <td colspan="4" align="center"  style="width:20px;text-align:center;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>Central Assistance Released</b></td>
+                        <td  rowspan="2" align="center"  style="width:20px;text-align:center;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>CA Utilized</b></td>
+                     </tr>
+                     <tr>
+                          <td style="width:20px;text-align:center;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>1st</b></td>
+                          <td style="width:20px;text-align:center;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>2nd</b></td>
+                          <td style="width:20px;text-align:center;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>3rd</b></td>
+                          <td style="width:20px;text-align:center;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>Total</b></td>
+                    </tr>
+                    <tr> 
+                        <td  align="center"> 1</td>
+                        <td style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif" align="center">2014-15</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{PC14.toLocaleString('en-IN')}}</td>        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{CAI14.toLocaleString('en-IN')}}</td>        
+                        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{First14.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Second14.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Third14.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Total14.toLocaleString('en-IN')}}</td>
+                        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{UC_Received14.toLocaleString('en-IN')}}</td>
+                    </tr>
+                    <tr>
+                        <td align="center">2</td>
+                         <td style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"  align="center">2015-16</td>
+                         
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{PC15.toLocaleString('en-IN')}}</td>        
+                        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{CAI15.toLocaleString('en-IN')}}</td>        
+                        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{First15.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Second15.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Third15.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Total15.toLocaleString('en-IN')}}</td>
+                       
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{UC_Received15.toLocaleString('en-IN')}}</td>
+                    </tr>
+                    <tr>
+                        <td align="center">3</td>
+                        <td style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"  align="center">2016-17</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{PC16.toLocaleString('en-IN')}}</td>        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{CAI16.toLocaleString('en-IN')}}</td>        
+                        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{First16.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Second16.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Third16.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Total16.toLocaleString('en-IN')}}</td>
+                      
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{UC_Received16.toLocaleString('en-IN')}}</td>
+                    </tr>
+                     <tr>
+                        <td align="center">4</td>             
+                        <td style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"  align="center">2017-18</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{PC17.toLocaleString('en-IN')}}</td>        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{CAI17.toLocaleString('en-IN')}}</td>        
+                        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{First17.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Second17.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Third17.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Total17.toLocaleString('en-IN')}}</td>
+                      
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{UC_Received17.toLocaleString('en-IN')}}</td>
+                        
+                      </tr>
+                    <tr>
+                        <td align="center">5</td>     
+                        <td style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"  align="center">2018-19</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{PC18.toLocaleString('en-IN')}}</td>        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{CAI18.toLocaleString('en-IN')}}</td>        
+                        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{First18.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Second18.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Third18.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Total18.toLocaleString('en-IN')}}</td>
+                      
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{UC_Received18.toLocaleString('en-IN')}}</td>
+                      </tr>
+                    <tr>
+                        <td align="center">6</td>
+                        <td style="width:100px;font-size: 15px;font-family: Arial, Helvetica, sans-serif"  align="center">2019-20</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{PC19.toLocaleString('en-IN')}}</td>        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{CAI19.toLocaleString('en-IN')}}</td>        
+                        
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{First19.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Second19.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Third19.toLocaleString('en-IN')}}</td>
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{Total19.toLocaleString('en-IN')}}</td>
+                      
+                        <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{UC_Received19.toLocaleString('en-IN')}}</td>
+                      </tr>  
+                      <tr>
+                          <td align="center">6</td>
+                          <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><a style="cursor: pointer;color:blue" (click)="SendDataFin()">Total Financial</a></td>
+                          <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>{{sTotalPC.toLocaleString('en-IN')}}</b></td>        
+                          <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>{{sTotalCAI.toLocaleString('en-IN')}}</b></td>        
+                          <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>{{sTotalInst1.toLocaleString('en-IN')}}</b></td>
+                          <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>{{sTotalInst2.toLocaleString('en-IN')}}</b></td>
+                          <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>{{sTotalInst3.toLocaleString('en-IN')}}</b></td>
+                          <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>{{sTotal.toLocaleString('en-IN')}}</b></td>
+                          <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>{{sTotalUC.toLocaleString('en-IN')}}</b></td>
+                        </tr>  
+                  </table>
+          </div>
+      </div>
+           
+       <div class="container" id="buttonGroup">
+        <div class="row" >
+            <div class="col-md-1">
+                    <!-- <input type="button" (click)="AdminPage()" value="Back" style="width: 200px;background-color:cornflowerblue"/> -->
+                      
+              </div>
+              <div class="col-md-1">
+               
+                </div>
+                <div class="col-md-1">
+              
+                  </div>
+                  <div class="col-md-1">
+          
+                    </div>
+                    <div class="col-md-1">
+                        <!-- <input type="button" (click)="pdfReport()" value="Click to Print"  style="width: 200px;background-color:rgb(3, 5, 8)"/> -->
+                        <button class="Downloadbtn" (click)="pdfReport()"><i class="fa fa-download"></i> Click to Print</button>
+        
+                      </div>
+                      <div class="col-md-1">
+                    
+                        </div>
+                        <div class="col-md-1">
+          
+                          </div>
+                          <div class="col-md-1">
+            
+                            </div>
+                            <!-- <div class="col-md-1">
+                          
+                              </div>
+                              <div class="col-md-1">
+                      
+                                </div> -->
+                                <div class="col-md-2">
+                                    <!-- <input type="button" (click)="AdminPage()" value="Back" style="width: 200px;background-color:cornflowerblue"/>  -->
+                                    
+                                    <!-- <button class="previous" (click)="AdminPage()"> &laquo; Previous</button> -->
+        
+                                
+                                  </div>
+                                <div class="col-md-1">
+                              
+                                  </div>
+            </div>
+       </div>
+</div>
+
+
+
+<!-- modal popup start 1-->
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display5}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width: 900px">
+      <div class="modal-header" style="background-color:grey;color:white;align-items: center">
+          <h4 class="modal-title" align="center">Vertical Wise Status of Houses Sanctioned under PMAY(U) {{StateName}} {{Year}} {{Cid}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()"><span aria-hidden="true" style="color: white;">&times;</span></button>
+      </div>
+
+
+
+      <!-- modal-body   1--  {{StateName}} {{year}} {{cid}}-->
+      <div class="modal-body">
+        <div class="row">
+        <div style="height: 325px;width:900px;border:1px solid gray;overflow: auto;">
+              <!-- <table border="1" class="table" style="font-size: 16px;border:1px solid gray;"> -->
+                 
+                <table class="bodyataglance"  border="1px" style="font-size:12px;width:96%;background-color:white;align-content: center" id="printme"  align="center">
+                  <tr style="text-align:center;background-color:#E3E2C5">
+                        <td rowspan="1"  ><b> SrNo</b></td>
+                        <td  ><b>Component</b></td>
+                        <td  ><b>Financial Year</b></td>
+                        <td  ><b>Houses subjected  <br/> to Construction</b></td>
+                        <td   ><b>Houses for which Funds Released</b></td>
+                        <td    ><b>Houses Grounded*</b></td>
+                        <td   ><b>Houses Completed*</b></td>
+                        <td   ><b>Houses Occupied*</b></td>
+                  </tr>  
+                       <tr>
+                     </tr>
+                  <tr>
+                        <td  align="center"> 1</td>
+                        <td  >BLC </td> 
+                        <td >2014-15</td>
+                     
+                        <td >{{HouseInvolved1B14}}   </td>        
+                        
+                        <td  >{{FundsDisbursed_in_Houses1B14.toLocaleString('en-IN')}}   </td>
+                        <td  > {{Houses_Grounded1B141.toLocaleString('en-IN')}} </td>
+                        <td  > {{Houses_Completed1B14.toLocaleString('en-IN')}} </td>
+                        <td  > {{HousesOccupied1B14.toLocaleString('en-IN')}} </td>
+                  </tr>
+                  <tr>
+                      <td align="center"></td>
+                      <td></td>
+                       <td    align="center">2015-16</td>
+
+                       <td  >{{HouseInvolved2BLCS.toLocaleString('en-IN')}}</td>        
+                       <td  >{{FundsDisbursed_in_Houses2BLCS.toLocaleString('en-IN')}}</td>        
+                       <td  >{{Houses_Grounded2BLCS.toLocaleString('en-IN')}}</td>
+                      <td  > {{Houses_Completed2BLCS.toLocaleString('en-IN')}}</td>
+                      <td  >{{HousesOccupied2BLCS.toLocaleString('en-IN')}}</td>
+                  </tr>
+                  <tr>
+                      <td  align="center"> </td>
+                      <td   >  </td>
+                      <td   align="center">2016-17</td>
+                      <td   > {{HouseInvolved3_16BLCS.toLocaleString('en-IN')}}  </td>        
+                      <td   >{{FundsDisbursed_in_Houses3_16BLCS.toLocaleString('en-IN')}}   </td>
+                      <td   > {{Houses_Grounded3_16BLCS.toLocaleString('en-IN')}} </td>
+                      <td   >{{Houses_Completed3_16BLCS.toLocaleString('en-IN')}} </td>
+                      <td   > {{HousesOccupied3_16BLCS.toLocaleString('en-IN')}} </td>
+                </tr>
+                <tr >
+                      <td  align="center"> </td>
+                      <td   >  </td>
+                      <td  >2017-18
+                    </td>
+                    
+                      <td   > {{HouseInvolved4_17BLC.toLocaleString('en-IN')}} </td>        
+                      
+                      <td   > {{FundsDisbursed_in_Houses4_17BLC}}  </td>
+                      <td   > {{Houses_Grounded4_17BLC.toLocaleString('en-IN')}} </td>
+                      <td   > {{Houses_Completed4_17BLC.toLocaleString('en-IN')}} </td>
+                      <td   >{{HousesOccupied4_17BLC.toLocaleString('en-IN')}}  </td>
+                  </tr>
+                  <tr >
+                      <td  align="center"> </td>
+                      <td   >  </td>
+                      <td   align="center">2018-19
+                    </td>
+                    
+                      <td   > {{HouseInvolved5_18BLCS.toLocaleString('en-IN')}} </td>        
+                      
+                      <td   > {{FundsDisbursed_in_Houses5_18BLCS.toLocaleString('en-IN')}}  </td>
+                      <td   > {{Houses_Grounded5_18BLCS.toLocaleString('en-IN')}} </td>
+                      <td   > {{Houses_Completed5_18BLCS.toLocaleString('en-IN')}} </td>
+                      <td   > {{HousesOccupied5_18BLCS.toLocaleString('en-IN')}} </td>
+                  </tr>
+                  <tr >
+                      <td  align="center"> </td>
+                      <td   >  </td>
+                      <td  >2019-20
+                    </td>
+                    
+                      <td   > {{HouseInvolved6_19BLC.toLocaleString('en-IN')}} </td>        
+                      
+                      <td   > {{FundsDisbursed_in_Houses6_19BLC.toLocaleString('en-IN')}}  </td>
+                      <td   > {{Houses_Grounded6_19BLC.toLocaleString('en-IN')}} </td>
+                      <td  >{{Houses_Completed6_19BLC.toLocaleString('en-IN')}}  </td>
+                      <td   >{{HousesOccupied6_19BLC.toLocaleString('en-IN')}} </td>
+                  </tr>
+                  <tr style="background-color:#E3E2C5">
+                      <td  align="center"> </td>
+                      <td   >  </td>
+                      <td   align="center">Total11</td>
+                    
+                      <td   > {{THouseInvolved11.toLocaleString('en-IN')}}</td>        
+                      
+                      <td   >  {{TFundsDisbursed_in_Houses11.toLocaleString('en-IN')}} </td>
+                      <td   > {{THouses_Grounded11.toLocaleString('en-IN')}} </td>
+                      <td   > {{THouses_Completed11.toLocaleString('en-IN')}}  </td>
+                      <td   > {{THousesOccupied11.toLocaleString('en-IN')}}</td>
+                  </tr>
+
+                  <tr>
+                      <td  align="center"> 2</td>
+                      <td  >AHP</td> 
+                      <td   align="center">2014-15
+                    </td>
+                      <td   > {{HouseInvolved114AHP.toLocaleString('en-IN')}}  </td>        
+                      <td   > {{FundsDisbursed_in_Houses114AHP.toLocaleString('en-IN')}}  </td>
+                      <td   > {{Houses_Grounded114AHP.toLocaleString('en-IN')}} </td>
+                      <td   > {{Houses_Completed114AHP.toLocaleString('en-IN')}} </td>
+                      <td   > {{HousesOccupied114AHP.toLocaleString('en-IN')}} </td>
+                  </tr>
+                  <tr >
+                      <td  align="center"> </td>
+                      <td  >  </td> 
+                      <td   align="center" >2015-16
+                    </td>
+                      <td   > {{HouseInvolved2_15AHP.toLocaleString('en-IN')}}  </td>        
+                      <td   > {{FundsDisbursed_in_Houses2_15AHP.toLocaleString('en-IN')}}  </td>
+                      <td   > {{Houses_Grounded2_15AHP.toLocaleString('en-IN')}} </td>
+                      <td   > {{Houses_Completed2_15AHP.toLocaleString('en-IN')}} </td>
+                      <td   > {{HousesOccupied2_15AHP.toLocaleString('en-IN')}} </td>
+                  </tr>
+                  <tr >
+                      <td  align="center"> </td>
+                      <td  >  </td>
+                      <td   align="center">2016-17
+                    </td>
+                      <td   > {{HouseInvolved3_16AHP.toLocaleString('en-IN')}}  </td>        
+                      <td   > {{FundsDisbursed_in_Houses3_16AHP.toLocaleString('en-IN')}}  </td>
+                      <td   > {{Houses_Grounded3_16AHP.toLocaleString('en-IN')}} </td>
+                      <td   > {{Houses_Completed3_16AHP.toLocaleString('en-IN')}} </td>
+                      <td   > {{HousesOccupied3_16AHP.toLocaleString('en-IN')}} </td>
+                  </tr>
+                  <tr >
+                      <td  align="center"> </td>
+                      <td   >  </td>
+                      <td   align="center">2017-18
+                      </td>
+                      <td   > {{HouseInvolved4_17AHP.toLocaleString('en-IN')}}  </td>        
+                      <td   > {{FundsDisbursed_in_Houses4_17AHP.toLocaleString('en-IN')}}  </td>
+                      <td   > {{Houses_Grounded4_17AHP.toLocaleString('en-IN')}} </td>
+                      <td   >  {{Houses_Completed4_17AHP.toLocaleString('en-IN')}} </td>
+                      <td   > {{HousesOccupied4_17AHP.toLocaleString('en-IN')}} </td>
+                  </tr>
+                  <tr >
+                      <td  align="center"> </td>
+                      <td  >  </td>
+                      <td   align="center">2018-19
+                    </td>
+                      <td   >{{HouseInvolved5_18AHP.toLocaleString('en-IN')}}   </td>        
+                      <td > {{FundsDisbursed_in_Houses5_18AHP.toLocaleString('en-IN')}}  </td>
+                      <td  > {{Houses_Grounded5_18AHP.toHouseInvolved5_18AHPLocaleString('en-IN') }} </td>
+                      <td   >  {{Houses_Completed5_18AHP.toLocaleString('en-IN') }} </td>
+                      <td   >{{HousesOccupied5_18AHP.toLocaleString('en-IN')}}  </td>
+                  </tr>
+                  <tr >
+                      <td  align="center"> </td>
+                      <td   >  </td>
+                      <td   align="center">2019-20
+                    </td>
+                     <td   > {{HouseInvolved6_19AHP.toLocaleString('en-IN')}}  </td>        
+                      <td   >{{FundsDisbursed_in_Houses6_19AHP.toLocaleString('en-IN')}}   </td>
+                      <td    >{{Houses_Grounded6_19AHP.toLocaleString('en-IN') }}  </td>
+                      <td  > {{Houses_Completed6_19AHP.toLocaleString('en-IN')}} </td>
+                      <td  > {{HousesOccupied6_19AHP.toLocaleString('en-IN')}}</td>
+                  </tr>
+                  <tr style="background-color:#E3E2C5">
+                      <td  align="center"> </td>
+                      <td   >  </td>
+                      <td  align="center">Total</td>
+                       
+                      <td  > {{THouseInvolved_AHP1.toLocaleString('en-IN')}} </td>        
+                      
+                      <td   > {{TotalFundsDisbursedAHP1.toLocaleString('en-IN')}}   </td>
+                      <td   > {{THouses_Grounded_AHP1.toLocaleString('en-IN')}} </td>
+                      <td  > {{THouses_Completed_AHP1.toLocaleString('en-IN')}} </td>
+                      <td   > {{THousesOccupied_AHP1.toLocaleString('en-IN')}}</td>
+                </tr>
+                <tr>
+                    <td  align="center"> </td>
+                    <td  >ISSR</td>
+                    <td   align="center">2014-15</td>
+                    <td  > {{HouseInvolved1ISSR.toLocaleString('en-IN')}}</td>        
+                    <td > {{FundsDisbursed_ISSR_Houses1.toLocaleString('en-IN')}}  </td>
+                    <td >   {{Houses_ISSRGrounded1.toLocaleString('en-IN')}}</td>
+                    <td > {{Houses_ISSRCompleted1.toLocaleString('en-IN')}} </td>
+                    <td > {{Houses_ISSROccupied1.toLocaleString('en-IN')}} </td> 
+                </tr>
+                <tr>
+                    <td  align="center"> </td>
+                    <td ></td>
+                    <td  align="center">2015-16 </td>
+                    <td  > {{HouseInvolved21_ISSR_15.toLocaleString('en-IN')}}</td>        
+                    <td  > {{FundsDisbursed_in_Houses21_ISSR_15.toLocaleString('en-IN')}}  </td>
+                    <td  >   {{Houses_Grounded21_ISSR_15.toLocaleString('en-IN')}}</td>
+                    <td > {{Houses_Completed21_ISSR_15.toLocaleString('en-IN')}} </td>
+                    <td > {{HousesOccupied21_ISSR_15.toLocaleString('en-IN')}} </td> 
+                </tr>
+
+                <tr>
+                    <td  align="center"> </td>
+                    <td ></td>
+                    <td   align="center">2016-17
+                  </td>
+                    <td  > {{HouseInvolved31_16ISSR.toLocaleString('en-IN')}}</td>        
+                    <td  > {{FundsDisbursed_in_Houses31_16ISSR.toLocaleString('en-IN')}}  </td>
+                    <td  >   {{Houses_Grounded31_16ISSR.toLocaleString('en-IN')}}</td>
+                    <td  > {{Houses_Completed31_16ISSR.toLocaleString('en-IN')}} </td>
+                    <td > {{HousesOccupied31_16ISSR.toLocaleString('en-IN')}} </td> 
+                </tr>
+
+                <tr>
+                    <td  align="center"> </td>
+                    <td  ></td>
+                    <td   align="center">2017-18</td>
+                    <td   > {{HouseInvolved41_17ISSR.toLocaleString('en-IN')}}</td>        
+                    <td  > {{FundsDisbursed_in_Houses41_17ISSR.toLocaleString('en-IN')}}  </td>
+                    <td  >   {{Houses_Grounded41_17ISSR.toLocaleString('en-IN')}}</td>
+                    <td  > {{Houses_Completed41_17ISSR.toLocaleString('en-IN')}} </td>
+                    <td  > {{HousesOccupied41_17ISSR.toLocaleString('en-IN')}} </td> 
+                </tr>
+                <tr>
+                    <td  align="center"> </td>
+                    <td   ></td>
+                    <td   align="center">2018-19
+                  </td>
+                    <td   > {{HouseInvolved51_18ISSR.toLocaleString('en-IN')}}</td>        
+                    <td  > {{FundsDisbursed_in_Houses51_18ISSR.toLocaleString('en-IN')}}  </td>
+                    <td  >   {{Houses_Grounded51_18ISSR.toLocaleString('en-IN')}}</td>
+                    <td  > {{Houses_Completed51_18ISSR.toLocaleString('en-IN')}} </td>
+                    <td  > {{HousesOccupied51_18ISSR.toLocaleString('en-IN')}} </td> 
+                </tr>
+
+                <tr>
+                    <td  align="center"> </td>
+                    <td  ></td>
+                    <td   align="center">2019-20</td>
+                    <td  > {{HouseInvolved61_19ISSR.toLocaleString('en-IN')}}</td>        
+                    <td  > {{FundsDisbursed_in_Houses61_19ISSR}}  </td>
+                    <td  >   {{Houses_Grounded61_19ISSR}}</td>
+                    <td  > {{Houses_Completed61_19ISSR}} </td>
+                    <td  > {{HousesOccupied61_19ISSR}} </td> 
+                </tr>
+
+                <tr style="background-color:#E3E2C5">
+                    <td  align="center"> </td>
+                    <td   >  </td>
+                    <td   align="center">Total</td>
+                    <td   > {{THouseInvolved1_ISSR}}</td>        
+                    <td   > {{TFundsDisbursed_in_Houses1_ISSR}}  </td>
+                    <td  >   {{THouses_Grounded1_ISSR}}</td>
+                    <td > {{THouses_Completed1_ISSR}} </td>
+                    <td > {{THousesOccupied1_ISSR}} </td> 
+                </tr>
+
+                <tr>
+                    <td  align="center"> 4</td>
+                    <td  >CLSS </td> 
+                    <td   align="center">2014-15 </td>
+                    <td  >{{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>        
+                    <td   >{{Bene2014_15_CLSS.toLocaleString('en-IN')}}   </td>
+                    <td  >{{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
+                    <td  > {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
+                    <td  > {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
+                </tr>
+                <tr>
+                    <td  align="center"> </td>
+                    <td  ></td>
+                    <td   align="center">2015-16
+                  </td>
+                    <td   >{{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>        
+                    <td  >{{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
+                    <td  >{{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
+                    <td  >{{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
+                    <td  >{{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
+                </tr>
+                <tr>
+                    <td  align="center"> </td>
+                    <td  >  </td>
+                    <td  align="center">2016-17
+                  </td>
+                  
+                    <td  > {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>        
+                    
+                    <td   > {{Bene2016_17_CLSS.toLocaleString('en-IN')}}  </td>
+                    <td   > {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
+                    <td  > {{Bene2016_17_CLSS.toLocaleString('en-IN')}}</td>
+                    <td  > {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
+                </tr>
+                <tr >
+                    <td  align="center"> </td>
+                    <td   >  </td>
+                    <td   align="center">2017-18
+                  </td>
+                  
+                    <td   > {{Bene2017_18_CLSS}} </td>        
+                    
+                    <td  >{{Bene2017_18_CLSS}}   </td>
+                    <td  > {{Bene2017_18_CLSS}} </td>
+                    <td  > {{Bene2017_18_CLSS}} </td>
+                    <td  > {{Bene2017_18_CLSS}} </td>
+                </tr>
+                <tr >
+                    <td  align="center"> </td>
+                    <td  >  </td>
+                    <td  align="center">2018-19
+                  </td>
+                  
+                    <td   > {{Bene2018_19_CLSS}} </td>        
+                    
+                    <td  > {{Bene2018_19_CLSS}}  </td>
+                    <td  > {{Bene2018_19_CLSS}} </td>
+                    <td  >{{Bene2018_19_CLSS}}  </td>
+                    <td  > {{Bene2018_19_CLSS}} </td>
+                    <!-- <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif"> {{Bene2018_19_CLSS}} </td> -->
+                </tr>
+                <tr >
+                    <td  align="center"> </td>
+                    <td  >  </td>
+                    <td   align="center">2019-20
+                  </td>
+                  
+                    <td   > {{Bene2019_20_CLSS}} </td>        
+                    
+                    <td  >{{Bene2019_20_CLSS}}   </td>
+                    <td  > {{Bene2019_20_CLSS}} </td>
+                    <td  > {{Bene2019_20_CLSS}} </td>
+                    <td  > {{Bene2019_20_CLSS}}</td>
+                </tr>
+                <tr  style="background-color:#E3E2C5">
+                    <td  align="center"> </td>
+                    <td   >  </td>
+                    <td   align="center">Total</td>
+                  
+                    <td   > {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>        
+                    
+                    <td  > {{BeneCLSS_Total.toLocaleString('en-IN')}}  </td>
+                    <td   > {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
+                    <td  > {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
+                    <td   >{{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
+                    <!-- <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif">
+                      {{BeneCLSS_Total}} </td> -->
+                </tr>
+                <tr>
+                    <td  align="center"> 5</td>
+                    <td   >JNNURM </td> 
+                    <td style="width:100px;font-size: 18px;font-family: Arial, Helvetica, sans-serif" align="center">2014-15
+                    </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif">-- </td>        
+                    <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif"> --  </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif">{{test}}{{thHouses_GroundedJNG2}} </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif">{{Houses_CompletedJNC.toLocaleString('en-IN')}}  </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif">{{HousesOccupiedJNO.toLocaleString('en-IN')}} </td>
+                </tr>
+                <tr style="background-color:#E3E2C5">
+                    <td  align="center"> </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif">  </td>
+                    <td style="width:100px;font-size: 18px;font-family: Arial, Helvetica, sans-serif" align="center">Total</td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif">-- </td>        
+                    <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif"> --  </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif">{{Houses_GroundedJNG.toLocaleString('en-IN')}} </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif">{{Houses_CompletedJNC.toLocaleString('en-IN')}}  </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 18px;font-family: Arial, Helvetica, sans-serif">{{HousesOccupiedJNO.toLocaleString('en-IN')}} </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"><b>Grand Total</b></td>        
+                    <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{THouseInvolvedNew.toLocaleString('en-IN')}} </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{TFundsDisbursed_in_Houses.toLocaleString('en-IN')}} </td>        
+                    <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{THouses_Grounded.toLocaleString('en-IN')}} </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif">{{THouses_Completed.toLocaleString('en-IN')}} </td>
+                    <td  style="padding-right: 10px;text-align: right;font-size: 15px;font-family: Arial, Helvetica, sans-serif"> {{THousesOccupied.toLocaleString('en-IN')}}</td>                       
+                </tr>   
+            </table>
+        </div>
+      </div>
+    </div> 
+   <!-- modal-footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="closeModalDialog()" >Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ 

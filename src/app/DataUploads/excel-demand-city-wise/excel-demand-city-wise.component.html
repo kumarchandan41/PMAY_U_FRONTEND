@@ -1,0 +1,77 @@
+<div class="container">
+    <input type="file" #fileInput (cahnge)="UploadFile($event)" />
+    <button (click)="UploadFile($event)">Upload</button>
+
+    
+
+  &nbsp;<button (click)="DeleteTableDCU()">Delete Table Data</button>
+  <br>
+  <br>
+
+    <div>
+            <select class="form-control" placeholder="Choose Sheet">
+              <option value="0">Select Sheet</option>
+              <option *ngFor='let st of lstExcelSheet'>
+                {{st.SheetName}}
+              </option>
+            </select></div>
+<div style="overflow: auto;width:1100px;height:500px">  
+    <table class="table table-striped" style="overflow-y:scroll; width:250px;border:1">
+        <thead class="thead-dark" >
+            <tr>
+                <th>SrNo</th>
+                <th style="width:500px">State Name</th>
+                <th style="display:none;">State_Code</th>
+                <th>District Name</th>
+                <th style="display:none;">District_Code</th>
+                <th>City Name</th>
+                <th style="display:none;">City_Code</th>
+                <th>ISSR</th>
+                <th>AHP</th>
+                <th>BLC</th>
+                <th>CLSS</th>
+                <th>Demand</th>
+                <th>Cid</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody style="overflow-y:scroll; width:100px;">
+            <tr *ngFor="let data of lstExcel | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{data.SrNo}}</td>
+                <td>{{data.State_Name}}</td>
+                <td style="display:none;">{{data.State_Code}}</td>
+                <td>{{data.District_Name}}</td>
+                <td style="display:none;">{{data.District_Code}}</td>
+                <td>{{data.CITY_Name}}</td>
+
+                <th style="display:none;">{{data.City_Code}}</th>
+                <th>{{data.ISSR}}</th>
+                <th>{{data.AHP}}</th>
+                <th>{{data.BLC}}</th>
+                <th>{{data.CLSS}}</th>
+
+                <th>{{data.demand}}</th>
+                <th>{{data.Cid}}</th>
+                <td><input type="button" class="btn btn-primary" (click)="Update(data)" value="Update">&nbsp;&nbsp;
+                    </td>
+            <td>
+                <input type="button" class="btn btn-danger" (click)="Delete(data)" value="Delete">
+            </td>
+                  </tr>
+            <tr><td colspan="4">
+            
+                    <ul class="pagination">  
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>  
+                            </ul>  
+            </td></tr>
+        </tbody>
+
+    
+    </table>
+  </div>
+
+    </div>
+    
+    
+    

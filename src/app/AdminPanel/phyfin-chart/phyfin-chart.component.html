@@ -1,0 +1,263 @@
+<div [ngStyle]="{background: backgroundColor}"> 
+<div ng-show="colour_id">
+
+</div>
+
+    <!-- Main content -->
+    <section>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+           
+         
+              <div style="float:left;">State :</div>
+             <div >
+                 <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
+                   style="width: 200px;font-display: black;color: black;;border-color: black;font-family: Arial, Geneva, Tahoma, sans-serif">
+                   <option value={{stValue}}>{{StateMessage}}</option>
+                   <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+                     {{sntry.States_UT}}
+                   </option>
+                 </select></div>
+            
+             
+           </div>
+           <!-- /.col -->
+           <div class="col-md-4 col-sm-6 col-xs-12">
+               <!-- <div class="info-box" style="min-height: 40px;"> -->
+                   <div style="float:left;"> District :</div> 
+               <!-- <select class="form-control" placeholder="Choose Distt"
+               (change)="getCitytDetails($event.target.value)"
+               style="width: 200px;font-display: black;color:black;font-family: Arial, Helvetica, sans-serif">
+               <option value={{distValue}}>{{DistrictMessage}}</option>
+               <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+                 {{sntry.District}}
+               </option>
+             </select>  -->
+   
+             <div style="border: black"><select class="form-control" placeholder="Choose Distt"
+               (change)="getDistrictDetails($event.target.value)"
+               style="width: 200px;font-display: black;color:black;border-color: black;font-family: Arial, Helvetica, sans-serif">
+               <option value={{distValue}}>{{DistrictMessage}}</option>
+               <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+                 {{sntry.District}}
+               </option>
+             </select></div>
+   
+             <!-- </div> -->
+             <!-- /.info-box -->
+           </div>
+   
+   
+           <div class="col-md-4 col-sm-6 col-xs-12">
+             <!-- <div class="info-box" style="min-height: 40px;"> -->
+                 <div style="float:left;">City :</div> 
+   
+                 <!-- <div style="color:arial-narrow;border: black"> <select class="form-control" placeholder="Choose City"
+                   (change)="getCityDetails($event.target.value)"
+                   style="width: 200px;font-display: black;color:black;font-family: Arial, Helvetica, sans-serif">
+                   <option value={{cityValue}}>{{CityMessage}}</option>
+                   <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+                     {{sntry.City}}
+                   </option>
+                 </select>  </div> -->
+                 <div style="color:arial-narrow;border: black"> <select class="form-control" placeholder="Choose City"
+                   (change)="getCityDetails($event.target.value)"
+                   style="width: 200px;font-display: black;color:black;border-color: black;font-family: Arial, Helvetica, sans-serif">
+                   <option value={{cityValue}}>{{CityMessage}}</option>
+                   <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+                     {{sntry.City}}
+                   </option>
+                 </select>  </div>
+   
+             <!-- </div> -->
+           
+           </div>
+           <input type ="button" (click)="RefreshData()" value="Refresh" class="btn btn-success" />
+         </div>
+
+
+         <div class="row">
+          
+            <div class="col-lg-4 info-box-inline" style="visibility: hidden">
+                <span class="info-box-header"><b>Division</b></span>
+                <ng-container *ngFor="let chkValue of lstHFACodes;let i=index">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" [disabled]="DisabledCheckBox" value="{{chkValue.HFAid}}"
+                    (change)="sendHFA_Codes(chkValue.Name,$event.target.checked)"/>
+                    <label class="form-check-label" for="inlineCheckbox1">{{chkValue.Name}}</label>
+                  </div>
+                </ng-container>
+            </div>
+            <div class="info-box-inline" style="visibility: hidden" >
+            <span class="info-box-header"><b>Component</b></span>
+            <ng-container *ngFor="let chkValue of lstComp;let i=index">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" value="{{chkValue.Cid}}"
+                    (change)="sendComp(chkValue.Cid,$event.target.checked)"/>
+                    <label class="form-check-label" for="inlineCheckbox1">{{chkValue.Cname}}</label>
+                  </div>
+            </ng-container>
+            <!-- <div style="float: right; width: 400px;height: 20px;padding-left: 150px" >
+              <app-color-picker [color]="backgroundColor"  style="width: 300px;background-color: white;color: white" [heading]="'Background'"
+              (event)="setColor('background', $event)"></app-color-picker>
+          </div> -->
+          </div>
+          <!-- <div class="info-box-inline">
+            <span class="info-box-header">Reset</span> </div> -->
+          </div> 
+
+<div style="background-color:white;border: black" >
+  <!-- <div [ngStyle]="{'background': white}"> -->
+<div class="row"  >
+ 
+   
+<div class="col-md-12">
+  <table>
+    
+    <tr>
+        <td>
+            <div class="row">
+                <div class="col-md-6">
+                  </div>
+                  <div class="col-md-6">
+                    </div>   
+            </div>
+    <div class="row">
+       <div class="col-md-6">
+          <font style="color: black;font-family: Arial, Helvetica, sans-serif;font-size: 20px"><u>Physical Progress(Lakhs)</u></font>
+          <div id="YtWiseHouses" style="height: 400px; width: 525px;"></div>
+      </div>
+      <div class="col-md-6">
+          <font  style="color: black;font-family: Arial, Helvetica, sans-serif;font-size: 20px"><u>Financial Progress(Lakhs CA ,CAR)</u></font>
+          <div id="chartContainer2" style="height: 400px; width: 525px;"></div>
+      </div>
+    </div>
+    
+    <br/>
+    <!-- <div> 
+    <font style="color: black;font-family: Arial, Helvetica, sans-serif;font-size: 20px"><u> 
+      Consolidated Financial Year wise Report
+    </u></font></div> -->
+<div class="container">
+
+<div class="row">
+
+<div class="col-sm-6"> 
+    <!-- <font style="color: black;font-family: Arial, Helvetica, sans-serif;font-size: 20px"><u> 
+        Consolidated Physical Year wise Report
+      </u></font> -->
+        <div style="overflow: auto;width:500px;height:500px">  
+            <table class="table table-striped" style="border:1;background-color: white" border="1">
+                <thead class="thead-dark" >
+                  <tr  style="color: white;background-color: gray">
+                    <td font-bold="true"> Curr Fin Yr.</td>
+                    <!-- <td colspan="4"  align="center" >Houses</td> -->
+                    <td font-bold="true">Sanctioned</td>
+                    <td font-bold="true">Grounded</td>
+                    <td font-bold="true">Completed</td>
+                    <td font-bold="true">Occupied</td>
+                </tr>
+                </thead>
+                <tbody style="overflow-y:scroll; width:100px;">
+                    <tr *ngFor="let data of LstPayData1 | paginate: { itemsPerPage: 10, currentPage: p }">
+                        <td  align="right">{{data.Current_Financial_Year}}</td>
+                        <td  align="right">{{data.Houses_Sanctioned}}</td>
+                        <td  align="right">{{data.Grounded}}</td>
+                        <td  align="right">{{data.Completed}}</td>
+                        <td  align="right">{{data.Occupied}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</div>
+
+<div class="col-sm-6">
+  <div style="overflow: auto;width:500px;height:500px">  
+    <table class="table table-striped" style="border:1;background-color: white"  border="1">
+        <thead class="thead-dark">
+          <tr style="color: white;background-color: gray">
+            <td font-bold="true">FinYear</td>
+            <td font-bold="true">CA Approved</td>
+            <td align="center" font-bold="true">CA Released</td>
+            <td align="center" font-bold="true">UC Utilized</td>
+          </tr>
+        </thead>
+        <tbody style="overflow-y:scroll; width:100px;"> 
+            <tr *ngFor="let data of Lst_FinYrPayData1 | paginate: { itemsPerPage: 10, currentPage: p }">
+                <!-- <td>{{1}}</td> -->
+                <td align="right">{{data.FinYear}}</td>
+                <td  align="right">{{data.CAI}}</td>
+                <td  align="right">{{data.CAR}}</td>
+                <td  align="right">{{data.UC_Received}}</td>
+            </tr>
+            <!--UC_Received <tr><td colspan="4">
+                    <ul class="pagination">  
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>  
+                            </ul>  
+            </td></tr> -->
+        </tbody>
+    </table>
+  </div>
+</div>
+</div>
+</div>
+
+    <div class="row">
+        <div class="col-md-6">
+          </div>
+          <div class="col-md-6">
+            </div>   
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+          </div>
+          <div class="col-md-6">
+          </div>   
+    </div>
+  </td>
+  </tr>
+  </table>
+
+       
+  <div id=topHeader1>
+      <!-- <font style="color: black;border-left: 180px;font-size:22px ; ">सबका सपना, घर हो अपना</font> -->
+  </div>
+</div>
+</div></div>
+
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}" >
+    <!-- modal-dialog -->
+    <div class="modal-dialog" role="document">
+      <!-- modal-content -->
+      <div class="modal-content" style="width: 1200px;height: 600px;">
+        <!-- modal-header -->
+        <div class="modal-header">
+          <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()">
+            <span aria-hidden="true">&times;</span></button>
+          <!-- <h4 class="modal-title">Login</h4> -->
+        </div>
+        
+        <!-- modal-body -->
+        <div class="modal-body">
+            <div style="height:500px;overflow: auto">      
+                    <app-ata-glance></app-ata-glance>
+            </div>
+        </div>
+        <br> <br>  <br> <br>  <br> <br>  <br> <br> <br> <br>  <br> <br> 
+        <!-- modal-footer -->
+        <div class="modal-footer"> 
+
+          <button type="button" class="btn btn-default" (click)="closeModalDialog()" >Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- </div> -->
+</section>
+</div>
+  
+ 
+

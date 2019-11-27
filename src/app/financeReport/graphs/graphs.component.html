@@ -1,0 +1,286 @@
+
+<div>
+  <div id=topHeader1 style="background-color: #fd7e15" height="50ox">   
+      <!-- <marquee behavior="scroll" direction="right">  -->
+       <div style="float: left">
+          <img src="assets\img\pmay-logo.jpg" height="50px" width="150px"/>
+       </div>
+       <div style="float: right">
+          <img src="assets\img\swatchbharta.png" height="50px" width="150px"/>
+      </div>
+       <div style="height:50px;text-align: center" padding="25px">
+          <b> <u> <font   style="color: #4742BF;font-size:25px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">P M A Y (U)   A c h i e v e m e n t s</font></u>
+          </b>
+       </div>
+        
+    <!-- </marquee> -->
+      <!-- <img src ="F:\AngularAll\WeeklyHFAReports\hfaProject\src\assets\img\pmayLogo.png"/> -->
+  </div>
+</div>
+
+
+<div style="background-color:#B3E5FC;border: black" >
+<!-- <div [ngStyle]="{'background': white}"> -->
+<div class="row"  >
+<div class="col-md-2" style="background-color:black;border: black">
+      <div style="background-color:black;border: black">
+          <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
+             style="width: 200px;font-display: #FF00FF;color: yellow;background-color: black;border-color: black;font-family: Arial, Geneva, Tahoma, sans-serif" >
+            <option value={{stValue}}>{{StateMessage}}</option>
+            <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+              {{sntry.States_UT}}
+            </option>
+          </select></div>
+
+          <div style="border: black"><select class="form-control" placeholder="Choose Distt" (change)="getDistrictDetails($event.target.value)"
+            style="width: 200px;font-display: #FF00FF;color:orange;background-color: black; border: black;font-family: Arial, Helvetica, sans-serif">
+           <option value={{distValue}}>{{DistrictMessage}}</option>
+           <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+             {{sntry.District}}
+           </option>
+         </select></div>
+         <div style="color:arial-narrow;border: black"> <select class="form-control" placeholder="Choose City" (change)="getCityDetails($event.target.value)"
+          style="width: 200px;font-display: #FF00FF;color:lightgreen;background-color: black;border: black;font-family: Arial, Helvetica, sans-serif">
+           <option value={{cityValue}}>{{CityMessage}}</option>
+           <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+             {{sntry.City}}
+           </option>
+         </select>
+
+         <font style="color: white">HFA Codes</font>
+         <div style="width: 300px;border: black" background-color="black" ><font color="blue">
+            <label class="form-control col-md-8"   *ngFor="let chkValue of lstHFACodes;let i=index" style="color:#FFFF00;background-color:black;width: 102px;transform-style: preserve-3d;display:inline-block;border: black;font-family: Arial, Helvetica, sans-serif">
+              <input type="checkbox" [disabled]="DisabledCheckBox" value="{{chkValue.HFAid}}" (change)="sendHFA_Codes(chkValue.Name,$event.target.checked)" width=5px ><b>{{chkValue.Name}}</b>
+            </label></font>
+         </div>
+
+         <br/> <br/><br/><br/> <p></p>
+<!-- <br> --> <font style="color: white;font-family: Arial, Helvetica, sans-serif">Component</font>
+          <div style="width: 300px;border: black" background-color="black;border-color:black" ><font color="blue">
+            <label class="form-control col-md-8"   *ngFor="let chkValue of lstComp;let i=index" style="color:green;background-color:black;width: 102px;transform-style: preserve-3d;display:inline-block;border: black;font-family: Arial, Helvetica, sans-serif">
+              <input type="checkbox" value="{{chkValue.Cid}}" (change)="sendComp(chkValue.Cid,$event.target.checked)" width=5px ><b>{{chkValue.Cname}}</b>
+            </label></font>
+          </div>
+          
+       </div>
+       <!-- <br> <br>  <br> <br>  <br> <br>  <br> <br>  -->
+       <div>
+          <input type="button" (click)="AdminPage()" value="Back" style="color:white;background-color:blue;width:100px;font-family: Arial, Helvetica, sans-serif" />
+      </div>
+      <div>
+          <a style="cursor: pointer;"  > <font style="font: bold;color:white">At a Glance</font>
+          </a>
+          <br/>
+          <a style="cursor: pointer;"  > <font style="font: bold;color:white">State Score</font>
+          </a>    
+      </div>
+      <br> <br> 
+  </div>
+  
+<div class="col-md-10">
+<table>
+  <tr>
+    <td>
+  <div class="row" >
+   
+      <!-- style="border-style: solid; border-width:thin; border-color: rgb(136, 8, 8);" -->
+      <!-- <div class="col-md-1" >
+
+        </div>  -->
+    <div class="col-md-3" style="padding:15px;border-left:0px">
+        <!-- <br> -->
+         <div>.</div>   
+         <font size=3px style="font-family:''Arial Narrow',Franklin Gothic Medium', Arial, sans-serif;align-self: auto;"> Investments  ₹ {{Total_CostNw|number:'3.2-2'}}  Cr</font>
+             <div id="chartContainer1" style="height: 170px; width: 330px;"></div>
+        </div>
+    <div class="col-md-2" style="padding:10px" >
+      <!-- <br> -->
+      <!-- <b>Houses Approved v/s Demand {{total_Demand1_}} </b> -->
+       
+       <font size=3px style="font-family:''Arial Narrow',Franklin Gothic Medium', Arial, sans-serif;align-self: auto;"><br>{{ZeroDemand}}</font><br>
+         <!--.toFixed(2-->
+        <div id="DemandContainer" style="height: 145px; width: 150px;"></div>
+    </div>
+   <div class="col-md-6"> 
+     <div class="row">
+        <marquee  direction="right"  behavior="alternate"  scrolldelay="300"> <b> <font style="color: #f01c31;border-left: 180px;font-size:17px">F I N A N C I A L  -  P R O G R E S S</font></b></marquee>
+    </div>
+     <div class="row" style="padding-left: 0px">
+    <div class="col-md-4" style="padding-left: 20px">
+        <!-- <div>.</div>  -->
+        <font size=3px style="font-family:''Arial Narrow',Franklin Gothic Medium', Arial, sans-serif;align-self: auto;">Sanction v/s Commitment 
+             ₹ {{CA_ApprovdNew}} Cr  </font>  
+         <div id="sancforRel" style="height: 150px; width: 150px;"></div>
+    </div>
+    <div class="col-md-4"  style="padding-left: 25px">
+      <font size=3px style="font-family:''Arial Narrow',Franklin Gothic Medium', Arial, sans-serif;align-self: auto;">Disbursed v/s Sanctions ₹ {{this.CASanct_forReleaseNChange|number:'3.0-2'}}Cr</font>
+         <div id="caReleased" style="height: 150px; width: 160px;"></div>
+    </div>
+    <div class="col-md-4" style="padding-left: 50px">
+           <!-- <div>.</div>    -->
+           <font size=3px style="font-family:''Arial',Franklin Gothic Medium', Arial, sans-serif;align-self: auto;">Utilized v/s Disbursed ₹ {{CA_ReleasedNw|number:'3.0-2'}} Cr </font> 
+        <div id="CAApprovedContainer" style="height: 160px; width: 150px;align-content: right"></div>
+    </div>
+  </div>
+</div>
+    <!-- <div> 
+        <marquee behavior="scroll" direction="right"> <b> <u> <font style="color: black;border-left: 180px;font-size:20px">P M A Y (U) ACHIEVEMENTS</font></u>
+      </b></marquee>
+    
+    </div> -->
+  </div>
+</td>
+</tr>
+<tr>
+    <td>
+    <div class="row">
+
+        <div class="col-md-7" > 
+            <div class="row" >
+               <marquee direction="right"  behavior="alternate"  scrolldelay="300">  <b> <font style="color: #f01c31;border-left: 180px;font-size:17px">P H Y S I C A L  -  P R O G R E S S</font>
+               </b> </marquee>
+            </div>
+            <div class="row">
+    <div class="col-md-4" style="padding-left:90px">
+         <!-- <div>.</div> -->
+         <font size=3px style="font-family:''Arial Narrow',Franklin Gothic Medium', Arial, sans-serif;align-self: auto;">Grounded v/s Sanctioned {{Sanction_Total_New}}</font>
+      <div id="groundedContainer" style="height: 180px; width: 150px;align-items: right!important;padding-left: 10px"></div>
+    </div>
+    <div class="col-md-4"  style="padding:1px;padding-left: 58px">
+      <font size=3px style="font-family:''Arial Narrow',Franklin Gothic Medium', Arial, sans-serif;align-self: auto;">Completed v/s Grounded {{Ground_TotalNew|number:'3.0-2'}} </font>
+      <div id="CompletedContainer" style="height: 180px; width: 150px;padding-left: 20px"></div>
+    </div>
+    <!-- <div class="col-md-1">
+      </div> -->
+    <div class="col-md-4" style="padding-top: 20px;padding-left: 1px;text-align: end;"> 
+      <font size=3px style="font-family:''Arial Narrow',Franklin Gothic Medium', Arial, sans-serif;align-self: auto;">Occupied Vs Completed {{GTCompleted|number:'3.0-2'}}  </font>
+           
+        <div id="OccupiedContainer" style="height: 180px; width: 150px;padding-left: 70px"></div>
+    </div>
+    </div></div>
+    <div class="col-md-5"> 
+        <div class="row">
+            <!-- behavior="alternate" -->
+           <marquee  direction="right"  behavior="alternate"  scrolldelay="300"> <b> <font style="color: #f01c31;border-left: 180px;font-size:17px">C R E D I T  -  L I N K E D  -  S C H E M E</font>
+           </b></marquee>
+        </div>
+        <div class="row">
+    <div class="col-md-5" style="padding: 0px;padding-left: 10px" id ="clss1" >
+         <div>.</div>
+        <font size=3px style="font-family:''Arial Narrow',Franklin Gothic Medium', Arial, sans-serif;margin-left:70px;">Subsidy</font>
+       <div id="clssSubsi" style="height: 180px; width: 260px;"></div>
+      <!-- <b>CA Approved</b>
+      <div id="CAApprovedContainer" style="height: 180px; width: 140px;"></div> -->
+
+    </div>
+    <div class="col-md-7">
+        <div>.</div>
+        <!-- <div>.</div><div>.</div> -->
+        <font size=3px style="font-family:''Arial Narrow',Franklin Gothic Medium', Arial, sans-serif;margin-left:70px;">Beneficiaries</font>
+        <div id="clssBene" style="height: 180px; width: 250px;"></div>
+     <!-- <b> CA Released</b>
+      <div id="caReleased" style="height: 180px; width: 140px;"></div> -->
+
+    </div>
+  </div>
+    
+</div>
+
+  </div>
+</td>
+</tr>
+  <tr>
+      <td>
+  <!-- <div class="row">
+     <div class="col-md-6">
+        <div id="YtWiseHouses" style="height: 200px; width: 500px;"></div>
+    </div>
+    <div class="col-md-6">
+        <div id="chartContainer2" style="height: 200px; width: 500px;"></div>
+    </div>
+  </div> -->
+  <div class="row">
+      <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+          </div>   
+  </div>
+
+  <div class="row">
+      <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+          </div>   
+  </div>
+  <div class="row">
+      <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+          </div>   
+  </div>
+</td>
+</tr>
+</table>
+
+<br> <br>  <br> <br>  
+    
+<div id=topHeader>
+    <font style="color: black;border-left: 180px;font-size:22px ; ">सबका सपना, घर हो अपना</font>
+</div>
+</div>
+</div></div>
+
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}" >
+  <!-- modal-dialog -->
+  <div class="modal-dialog" role="document">
+    <!-- modal-content -->
+    <div class="modal-content" style="width: 1200px;height: 600px;">
+      <!-- modal-header -->
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()">
+          <span aria-hidden="true">&times;</span></button>
+        <!-- <h4 class="modal-title">Login</h4> -->
+      </div>
+
+      
+      <!-- modal-body -->
+      <div class="modal-body">
+
+        <div style="height:500px;overflow: auto">
+      
+<!-- <app-ata-glance></app-ata-glance> -->
+</div>
+      </div>
+      <br> <br>  <br> <br>  <br> <br>  <br> <br> <br> <br>  <br> <br> 
+      <!-- modal-footer -->
+      <div class="modal-footer"> 
+
+        <button type="button" class="btn btn-default" (click)="closeModalDialog()" >Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- </div> -->
+
+
+<!-- <ng-template #editModal let-modal>
+
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Form</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+    <div class="modal-body"> -->
+      <!-- YOUR FORM DATA -->
+    <!-- </div>
+    
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Save</button>
+    </div>
+    
+    </ng-template> -->
+

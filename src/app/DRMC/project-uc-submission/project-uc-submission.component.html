@@ -1,0 +1,445 @@
+
+  <div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+    <div class="w3-card-4">
+      <h3
+      style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
+        UC-Submission</h3>
+    </div>
+    <br>
+    <div class="form-container">
+      <form [formGroup]="ucSubmission">
+        <div class="w3-row">
+          <div class="w3-quarter w3-left" style="width: 10%;">
+            <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              State Name:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlStateCode" [(ngModel)]="state" (change)="adminSandbox.getStateDistrictData($event.target.value);this.district='';
+            this.city=''; this.csmcnumber=''; this.projectName='';adminSandbox.ReleaseProjectCode=[];adminSandbox.totalReleaseInstallment1=[];
+            adminSandbox.totalReleaseInstallment2=[];adminSandbox.totalReleaseInstallment3=[];adminSandbox.totalUCInstallment1=[];adminSandbox.totalUCInstallment2=[];
+            adminSandbox.totalUCInstallment3=[];" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              <option value="" disabled>Please select state--</option>
+              <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                {{state.States_UT}}</option>
+            </select>
+          </div>
+          <div class="w3-quarter w3-center" style="width: 10%;">
+            <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              District Name:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlDistrictCode" [(ngModel)]="district" (change)="adminSandbox.getDistrictCityData($event.target.value);
+            this.city=''; this.csmcnumber=''; this.projectName='';adminSandbox.ReleaseProjectCode=[];adminSandbox.totalReleaseInstallment1=[];
+            adminSandbox.totalReleaseInstallment2=[];adminSandbox.totalReleaseInstallment3=[];adminSandbox.totalUCInstallment1=[];adminSandbox.totalUCInstallment2=[];
+            adminSandbox.totalUCInstallment3=[];" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              <option value="" disabled>Please select district--</option>
+              <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster" [value]="ditrict.Dcode">
+                {{ditrict.District}}</option>
+            </select>
+          </div>
+          <div class="w3-quarter w3-center" style="width: 10%;">
+            <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              City Name:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlCity" [(ngModel)]="city"
+              (change)="adminSandbox.getCSMCNumber($event.target.value);this.csmcnumber=''; this.projectName='';adminSandbox.totalReleaseInstallment1=[];
+              adminSandbox.totalReleaseInstallment2=[];adminSandbox.totalReleaseInstallment3=[];adminSandbox.totalUCInstallment1=[];adminSandbox.totalUCInstallment2=[];
+              adminSandbox.totalUCInstallment3=[];"
+              class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              <option value="" disabled>Please select city--</option>
+              <option *ngFor="let city of adminSandbox.districtCityMaster" [value]="city.CityCode">
+                {{city.City}}</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="w3-quarter w3-left" style="width: 10%;">
+          <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            CSMC Number:
+          </label>
+        </div>
+        <div class="w3-quarter w3-left" style="width: 22%;">
+          <select [formControl]="ddlCSMCNumber" [(ngModel)]="csmcnumber" class="w3-input w3-border"
+            (change)="adminSandbox.getProjectName(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlCSMCNumber.value);adminSandbox.ReleaseProjectCode=[];this.projectName='';
+            adminSandbox.totalReleaseInstallment1=[];
+            adminSandbox.totalReleaseInstallment2=[];adminSandbox.totalReleaseInstallment3=[];adminSandbox.totalUCInstallment1=[];adminSandbox.totalUCInstallment2=[];
+            adminSandbox.totalUCInstallment3=[];" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+            <option value="" disabled>Please select csmc number--</option>
+            <option *ngFor="let csmcNumber of adminSandbox.csmcNumberMaster" [value]="csmcNumber.CSMCNumber">
+              {{csmcNumber.CSMCNumber}}</option>
+          </select>
+        </div>
+        <div>
+          <div class="w3-quarter w3-center"  style="width: 10%;">
+            <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              Project:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlProjectName" [(ngModel)]="projectName" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              (change)="adminSandbox.getProjectCode(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlCSMCNumber.value,ddlProjectName.value);">
+              <option value="" disabled>Please select project name--</option>
+              <option *ngFor="let projectHouses of adminSandbox.projectTitle" [value]="projectHouses.TotalSanction">
+                {{projectHouses.Houses}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="w3-quarter w3-center"  style="width: 10%;">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+            Project Code:
+          </label>
+        </div>
+        <div class="w3-quarter w3-left" style="width: 22%;">
+            <input type="radio" name="radioInstallment" [formControl]="radioInstallment" 
+            (click)="RadioButtonInstallment(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,adminSandbox.ReleaseProjectCode);
+           adminSandbox.getReleaseTotalInsat1(adminSandbox.ReleaseProjectCode,1);adminSandbox.getUCTotalInsat1(adminSandbox.ReleaseProjectCode,1);
+           adminSandbox.getReleaseTotalInsat2(adminSandbox.ReleaseProjectCode,2);adminSandbox.getUCTotalInsat2(adminSandbox.ReleaseProjectCode,2);
+           adminSandbox.getReleaseTotalInsat3(adminSandbox.ReleaseProjectCode,3);adminSandbox.getUCTotalInsat3(adminSandbox.ReleaseProjectCode,3);"
+            value="1" [formControl]="radioInstallment" />
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;"><b>{{adminSandbox.ReleaseProjectCode}}</b></label>
+        </div>
+        <br>
+        <br>
+        <br>
+      
+      </form>
+      <form [formGroup]="releaseFundFlow">
+        <table style="width: 41%;" align="center" >
+          <thead style="background-color: lightgray; font-weight: bold">       
+          <tr>
+          
+              <table border="1px">
+                <th style="width: 764px;text-align: center;font-family: Arial, Geneva, Tahoma, sans-serif;" >Release
+                </th>
+                <td style="width:564px;text-align: center;font-family: Arial, Geneva, Tahoma, sans-serif;">UC
+                </td>
+              </table>      
+                
+          </tr>
+            <tr>
+              <div>
+                <table border="1px">
+                  <th style="width: 134px;font-family: Arial, Geneva, Tahoma, sans-serif;">Installment
+                      <table>
+                        <tr>
+                        </tr>
+                        <tr>
+                        </tr>
+                      </table>
+                    </th>
+                <th style="width: 134px;font-family: Arial, Geneva, Tahoma, sans-serif;">Release
+                  <table>
+                    <tr>
+                    </tr>
+                    <tr>
+                    </tr>
+                  </table>
+                </th>
+                <th style="width: 125px;font-family: Arial, Geneva, Tahoma, sans-serif;">Source
+                  <table>
+                    <tr>
+                    
+                    </tr>
+                  </table>
+                </th>
+                <th style="width: 125px;font-family: Arial, Geneva, Tahoma, sans-serif;">Sanction No
+                  <table>
+                    <tr>
+                   
+                    </tr>
+                  </table>
+                </th>
+                <th style="width: 134px;font-family: Arial, Geneva, Tahoma, sans-serif;">Date
+                  <table>
+                    <tr>           
+                    </tr>
+                  </table>
+                </th>
+                <th style="width: 131px;font-family: Arial, Geneva, Tahoma, sans-serif;">Total Release
+                  <table>
+                    <tr>
+                    </tr>
+                  </table>
+                </th>   
+                <th style="width: 124px;font-family: Arial, Geneva, Tahoma, sans-serif;">Letter No.
+                  <table>
+                    <tr>
+                    </tr>
+                  </table>
+                </th>
+                <th style="width: 124px;font-family: Arial, Geneva, Tahoma, sans-serif;">UC Amount.
+                  <table>
+                    <tr>
+                    </tr>
+                  </table>
+                </th>
+                <th style="width: 124px;font-family: Arial, Geneva, Tahoma, sans-serif;">UC Date
+                  <table>
+                    <tr>
+                    </tr>
+                  </table>
+                </th>
+                <th style="width: 107px;font-family: Arial, Geneva, Tahoma, sans-serif;">Add UC
+                  <table>
+                    <tr>
+                    </tr>
+                  </table>
+                </th>
+                <th style="width: 99px;font-family: Arial, Geneva, Tahoma, sans-serif;">Submit
+                  <table>
+                    <tr>
+                
+                    </tr>
+                  </table>
+                </th>
+              </table>
+              </div>
+            </tr>
+          </thead>
+          <tr style="text-align: center;background-color:white">
+            <thead style="background-color: lightgray; font-weight: bold">
+              <table formArrayName="itemRows">
+                <tr *ngFor="let itemrow of releaseFundFlow.controls.itemRows['controls']; let i=index;"
+                  [formGroupName]="i">  
+                  <div>
+                    <table border="1px">
+                      <th>
+                          <table>
+                            <tr>
+                              <td style="text-align: left">
+                                <input disabled formControlName="Installment" style="width: 124px;font-family: Arial, Geneva, Tahoma, sans-serif;
+                             height: 32px;background-color: yellow" type="text">
+                               
+                              </td>
+                            </tr>
+                           
+                          </table>
+                        </th>
+                    <th>
+                      <table>
+                        <tr>
+                          <td style="text-align: left">
+                            <input disabled formControlName="Release" style="width: 122px;font-family: Arial, Geneva, Tahoma, sans-serif;
+                         height: 32px;background-color: yellow" type="text">
+                        
+                          </td>
+                        </tr>
+                       
+                      </table>
+                    </th>
+                    <th>
+                      <table>
+                        <tr>
+                          <td style="text-align: left">
+                            <select disabled formControlName="Source"
+                              style="width: 114px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
+                              <option value="" disabled>Please select Source--</option>
+                              <option value="EBR">EBR</option>
+                              <option value="Budget">Budget</option>
+                            </select>
+                          </td>
+                        </tr>
+                       
+                      </table>
+                    </th>
+                    
+                    <th>
+                      <table>
+                        <tr>
+                          <td style="text-align: left">
+                            <input disabled formControlName="SanctionNumber"
+                              style="width: 115px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;" type="text">
+                            <input formControlName="Codes" [(ngModel)]="ddlStateCode.value" hidden="true"
+                              style="width: 110px;background-color: yellow" type="text">
+                            <input formControlName="Dcode" [(ngModel)]="ddlDistrictCode.value" hidden="true"
+                              style="width: 110px;background-color: yellow" type="text">
+                            <input formControlName="CityCode" [(ngModel)]="ddlCity.value" hidden="true"
+                              style="width: 110px;background-color: yellow" type="text">
+
+                            <input formControlName="ProjectCode" hidden="true"
+                              [(ngModel)]="adminSandbox.ReleaseProjectCode"
+                              style="width: 110px;background-color: yellow" type="text">  
+                            <input formControlName="UCID" hidden="true" style="width: 110px;background-color: yellow"
+                              type="text">
+                          </td>
+                        </tr>
+                        <tr>
+                        </tr>
+                      </table>
+                    </th>
+                    <th>
+                      <table>
+                        <tr>
+                          <td style="text-align: left">
+                            <input disabled [minDate]="maxStartDate" bsDatepicker [bsConfig]="dpConfig"
+                              autocomplete="off" formControlName="TxtSCSPDate" onkeydown="return false"
+                              placeholder="dd/mm/yyyy" style="width: 121px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          </td>
+                        </tr>
+                      </table>
+                    </th>
+                    <th>
+                      <table>
+                        <tr>
+                          <td style="text-align: left">
+                            <input disabled formControlName="TotalRelease"
+                              style="width: 121px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;" type="text">
+                          </td>
+                        </tr>
+                      </table>
+                    </th>
+                    <th>
+                      <table>
+                        <tr>
+                          <td style="text-align: left">
+                            <input formControlName="LetterNo" type="text"
+                              style="width: 113px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          </td>
+                        </tr>
+                      </table>
+                    </th>
+                    <th>
+                      <table>
+                        <tr>
+                          <td style="text-align: left">
+                            <input formControlName="UCAmount" type="text" AllowOnlyNumber="true" 
+                              style="width: 115px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          </td>
+                        </tr>
+                      </table>
+                    </th>
+                    <th>
+                      <table>
+                        <tr>
+                          <td style="text-align: left">
+                            <input [minDate]="maxStartDate" bsDatepicker [bsConfig]="dpConfig" autocomplete="off"
+                              formControlName="UCDate" onkeydown="return false" placeholder="dd/mm/yyyy"
+                              style="width: 114px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          </td>
+                        </tr>
+                      </table>
+                    </th>
+                    <th>
+                      <table>
+                      
+                        <tr>
+                          <td>
+                            <button type="button" style="width: 106px;font-family: Arial, Geneva, Tahoma, sans-serif;height: 32px;" (click)="addNewReleaseRow(releaseFundFlow.value,i)"
+                              class="w3-btn w3-green w3-round w3-ripple"> Add UC</button>
+                          </td>
+                        </tr>
+                      </table>
+                    </th>
+                    <th>
+                      <table>
+                        <tr>
+                          <th>
+                            <table>
+                              <tr>
+                                <button type="submit" class="w3-btn w3-orange w3-round w3-ripple" style="font-family: Arial, Geneva, Tahoma, sans-serif;height: 32px;"
+                                  (click)="onSubmitReleaseFundFlow(releaseFundFlow.value,i)">Submit</button>
+                              </tr>
+                            </table>
+                          </th>
+                        </tr>
+                      </table>
+                    </th>
+                  </table>
+                  </div>
+                </tr>
+              </table>
+            </thead>
+          </tr>
+        </table>
+        <br>
+      </form>
+      <div class="w3-container">
+        <form style="padding-left: 163px;">
+          <h4 style="text-align: center;padding-right: 170px;font-family: Arial, Geneva, Tahoma, sans-serif;"><b>Status</b></h4>
+            <div class="w3-row">
+                <div class="w3-quarter w3-center">
+                    <label>
+                    </label>
+                  </div>   
+                      <div class="w3-quarter w3-left" >
+                          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                             Total Release 
+                              </label>     
+                  </div>
+              <div class="w3-quarter w3-left">
+               
+              </div>
+              <div class="w3-quarter w3-left">
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      Total UC 
+                      </label>
+              </div>       
+            </div>
+            <br>
+          <div class="w3-row">
+              <div class="w3-quarter w3-center">
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                  Installment 1 :
+                  </label>
+                </div>   
+                    <div class="w3-quarter w3-left" >
+                      <input type="text" disabled [(ngModel)]="adminSandbox.totalReleaseInstallment1" class="w3-input w3-border"
+                      name="TotalReleaseInstallment1" style="font-family: Arial, Geneva, Tahoma, sans-serif;width: 199px;">      
+                </div>
+            <div class="w3-quarter w3-left">
+            </div>
+            <div class="w3-quarter w3-left">
+              <input type="text" disabled [(ngModel)]="adminSandbox.totalUCInstallment1" class="w3-input w3-border"
+              name="TotalUCInstallment1" style="font-family: Arial, Geneva, Tahoma, sans-serif;width: 199px;" >
+            </div>       
+          </div>
+         <br>
+          <div class="w3-row">
+            <div class="w3-quarter w3-center">
+                <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                Installment 2 :
+                </label>
+              </div>   
+                  <div class="w3-quarter w3-left" >
+                    <input type="text" disabled [(ngModel)]="adminSandbox.totalReleaseInstallment2" class="w3-input w3-border"
+                    name="TotalReleaseInstallment2" style="font-family: Arial, Geneva, Tahoma, sans-serif;width: 199px;">      
+              </div>
+          <div class="w3-quarter w3-left">
+          </div>
+          <div class="w3-quarter w3-left">
+            <input type="text" disabled [(ngModel)]="adminSandbox.totalUCInstallment2" class="w3-input w3-border"
+            name="TotalUCInstallment2" style="font-family: Arial, Geneva, Tahoma, sans-serif;width: 199px;" >
+          </div>       
+        </div>
+        <br>
+        <div class="w3-row">
+          <div class="w3-quarter w3-center">
+              <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              Installment 3 :
+              </label>
+            </div>   
+                <div class="w3-quarter w3-left" >
+                  <input type="text" disabled [(ngModel)]="adminSandbox.totalReleaseInstallment3" class="w3-input w3-border"
+                  name="TotalReleaseInstallment3" style="font-family: Arial, Geneva, Tahoma, sans-serif;width: 199px;">      
+            </div>
+        <div class="w3-quarter w3-left">
+        </div>
+        <div class="w3-quarter w3-left">
+          <input type="text" disabled [(ngModel)]="adminSandbox.totalUCInstallment3" class="w3-input w3-border"
+          name="TotalUCInstallment3" style="font-family: Arial, Geneva, Tahoma, sans-serif;width: 199px;">
+        </div>       
+      </div> 
+          <br>
+        </form>
+      </div>
+    </div>
+    <div style="text-align: center">
+        <button type="submit" class="w3-btn w3-green w3-round w3-ripple" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                onClick="window.print()">Print</button>
+        
+</div>
+  </div>

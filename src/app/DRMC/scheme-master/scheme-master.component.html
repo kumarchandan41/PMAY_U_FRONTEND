@@ -1,0 +1,151 @@
+
+ <div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+   
+  <h3
+    style="margin-left: -46px;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px;font-family: Arial, Geneva, Tahoma, sans-serif;">
+    Create Scheme-Master </h3>
+
+<br>
+<div class="form-container">
+  <form [formGroup]="schemeMaster" (ngSubmit)="onClickSchemeMaster($event, schemeMaster)">
+      <div class="w3-row">
+          <div class="w3-quarter w3-left" style="width: 10%;">
+              <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                  Major Scheme Short Name :
+                </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+              <input type="text" style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border" [formControl]="txtSchemeShortName"
+              placeholder="Major Scheme Short Name">
+            <label *ngIf="submitted && txtSchemeShortName.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter major scheme short name. </label>
+          </div>
+         
+          <div class="w3-quarter w3-center" style="width: 10%;">
+              <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                  Name Of Scheme :
+                </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+              <input type="text" style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border" [formControl]="txtSchemeName" placeholder="Name Of Scheme">
+              <label *ngIf="submitted && txtSchemeName.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                enter name of scheme.</label>
+          </div>
+          <div class="w3-quarter w3-center" style="width: 10%;">
+              <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                  Period Of Scheme :
+                </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+              <input type="text" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;" [formControl]="txtPeriodScheme"
+              placeholder="Period of Scheme">
+            <label *ngIf="submitted && txtSchemeName.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              enter name of scheme.</label>
+          </div>
+        </div>
+   
+    <br>
+    <div style="text-align: center">
+      <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+    </div>
+    <br>
+  </form>
+  <table class="table" border="1px" style="width: 89%;"  align="center">
+    <thead style="background-color: lightgray; font-weight: bold">
+      <tr>
+        <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+        <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Major Scheme Short Name</td>
+        <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Name Of Scheme</td>
+        <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Period Of Scheme</td>
+        <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let scheme of adminSandbox.schemeMaster;let i = index"
+        style="text-align: center;background-color:white">
+        <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+        <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{scheme.SchemeShortName}}</td>
+        <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{scheme.SchemeName}}</td>
+        <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{scheme.SchemePeriod}}</td>
+        <td style="width: 169px;text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+          <button (click)="adminSandbox.editSchemeMaster('block',scheme)" type="submit"
+            class="w3-btn w3-green w3-round w3-ripple">Edit</button>
+
+          &nbsp;
+          <button (click)="adminSandbox.deleteSchemeData(scheme.SchemeId)" type="submit"
+            class="w3-btn w3-red w3-round w3-ripple">Delete</button>
+
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="adminSandbox.schemeMaster.length==0">
+      <tr>
+        <td colspan="5">
+          <a style="font-family: Arial, Geneva, Tahoma, sans-serif;">No Records Found</a>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+</div>
+
+
+<div [style.display]="adminSandbox.showProperty" class="w3-modal w3-animate-opacity">
+<div class="w3-modal-content w3-card-4">
+<header class="w3-container w3-teal">
+  <span (click)="adminSandbox.editSchemeMaster('none','')"
+    class="w3-button w3-large w3-display-topright">&times;</span>
+  <h2 style="padding-left: 17px;font-family: Arial, Geneva, Tahoma, sans-serif;">Update Scheme-Master</h2>
+</header>
+<br>
+<div class="w3-container">
+  <form>
+    <div class="w3-row">
+      <div class="w3-quarter w3-left">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+          Major Scheme Short Name&nbsp;:
+        </label>
+      </div>
+      <div class="w3-quarter w3-left">
+        <input type="text" class="w3-input w3-border" name="txtSchemeShortName" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+          placeholder="Major Scheme Short Name" [(ngModel)]="adminSandbox.EditSchemeMaster.txtSchemeShortName">
+      </div>
+      <div class="w3-quarter w3-center">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+          Name Of Scheme :
+        </label>
+      </div>
+      <div class="w3-quarter w3-left">
+        <input type="text" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;" name="txtSchemeName" placeholder="Name Of Scheme"
+          [(ngModel)]="adminSandbox.EditSchemeMaster.txtSchemeName">
+      </div>
+    </div>
+    <div>
+      <input type="hidden" name="hiddendTxtSchemeID"
+        [(ngModel)]="adminSandbox.EditSchemeMaster.hiddendTxtSchemeID" />
+    </div>
+    <br>
+    <div class="w3-row">
+      <div class="w3-quarter w3-left">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+          Period of Scheme :
+        </label>
+      </div>
+      <div class="w3-threequarter w3-left">
+        <input type="text" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;" name="txtPeriodScheme" placeholder="Period of Scheme"
+          style="width: 33.5%;" [(ngModel)]="adminSandbox.EditSchemeMaster.txtPeriodScheme">
+      </div>
+    </div>
+    <br>
+    <div style="text-align: center">
+      <button type="submit" class="w3-btn w3-orange w3-round w3-ripple" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+        (click)="adminSandbox.updateSchemeMaster()">Submit</button>
+    </div>
+    <br>
+  </form>
+</div>
+<footer class="w3-container w3-teal">
+
+</footer>
+</div>
+</div>

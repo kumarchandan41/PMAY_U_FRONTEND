@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+   
+ 
+      <div  style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px">State :</div>
+     <div >
+         <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
+           style="width: 200px;font-size: 18px;font-display: black;color: black;;border-color: black;font-family: Arial, Geneva, Tahoma, sans-serif">
+           <option value={{stValue}}>{{StateMessage}}</option>
+           <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+             {{sntry.States_UT}}
+           </option>
+         </select></div>
+         
+   </div>
+   <!-- /.col -->
+   <div class="col-md-4 col-sm-6 col-xs-12">
+       <!-- <div class="info-box" style="min-height: 40px;"> -->
+           <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px"> District :</div> 
+       <!-- <select class="form-control" placeholder="Choose Distt"
+       (change)="getCitytDetails($event.target.value)"
+       style="width: 200px;font-display: black;color:black;font-family: Arial, Helvetica, sans-serif">
+       <option value={{distValue}}>{{DistrictMessage}}</option>
+       <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+         {{sntry.District}}
+       </option>
+     </select>  -->
+
+     <div style="border: black"><select class="form-control" placeholder="Choose Distt"
+       (change)="getDistrictDetails($event.target.value)"
+       style="width: 200px;font-size: 18px;font-display: black;color:black;border-color: black;font-family: Arial, Helvetica, sans-serif">
+       <option value={{distValue}}>{{DistrictMessage}}</option>
+       <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+         {{sntry.District}}
+       </option>
+     </select></div>
+
+     <!-- </div> -->
+     <!-- /.info-box -->
+   </div>
+
+
+   <div class="col-md-4 col-sm-6 col-xs-12">
+     <!-- <div class="info-box" style="min-height: 40px;"> -->
+         <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px">City :</div> 
+
+         <!-- <div style="color:arial-narrow;border: black"> <select class="form-control" placeholder="Choose City"
+           (change)="getCityDetails($event.target.value)"
+           style="width: 200px;font-display: black;color:black;font-family: Arial, Helvetica, sans-serif">
+           <option value={{cityValue}}>{{CityMessage}}</option>
+           <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+             {{sntry.City}}
+           </option>
+         </select>  </div> -->
+         <div style="color:arial-narrow;border: black"> <select class="form-control" placeholder="Choose City"
+           (change)="getCityDetails($event.target.value)"
+           style="width: 200px;font-size: 18px;font-display: black;color:black;border-color: black;font-family: Arial, Helvetica, sans-serif">
+           <option value={{cityValue}}>{{CityMessage}}</option>
+           <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+             {{sntry.City}}
+           </option>
+         </select>  </div>
+
+        </div>
+
+     <div >
+        
+      <section style="align-items: center;">
+
+        <div class="row">
+          <div class="col-sm-12" style="background-color:lavender;"> 
+            <div id="chartAHP" style="height: 500px; width: 1400px;margin-left: 50px; "></div>
+          </div>
+          <!-- <div class="col-sm-4" style="background-color:lavenderblush;">
+            
+          </div>
+          <div class="col-sm-4" style="background-color:lavender;">
+ 
+          </div> -->
+        </div>
+
+
+        <div class="row">
+          <!-- <div class="col-sm-4" style="background-color:lavender;"> 
+          </div> -->
+          <div class="col-sm-12" style="background-color:lavenderblush;">
+            <div id="chartBLCS" style="height: 500px; width: 1400px;;margin-left: 50px;"></div>
+          </div>
+          <!-- <div class="col-sm-4" style="background-color:lavender;">
+          </div> -->
+        </div>
+
+        <div class="row">
+          <!-- <div class="col-sm-4" style="background-color:lavender;"> 
+          </div> -->
+          <div class="col-sm-12" style="background-color:lavenderblush;">
+            <div id="chartISSR" style="height: 500px; width: 1400px;;margin-left: 50px;"></div>
+          </div>
+          <!-- <div class="col-sm-4" style="background-color:lavender;">
+          </div> -->
+        </div>
+
+        
+
+        <div class="row">
+          <!-- <div class="col-sm-4" style="background-color:lavender;"> 
+          </div>
+          <div class="col-sm-4" style="background-color:lavenderblush;">
+          </div> -->
+          <div class="col-sm-12" style="background-color:lavender;">
+            <div id="chartPMAYU" style="height: 500px; width: 1400px;;margin-left: 50px;"></div>
+          </div>
+        </div>
+      </section>
+
+      
+    </div>
+
+
+ 

@@ -1,0 +1,102 @@
+<div class="container">
+    <input type="file" #fileInput (cahnge)="UploadFile($event)" />
+    <button (click)="UploadFile($event)">Upload</button>
+    <br>
+    <br>
+    <div>
+            <select class="form-control" placeholder="Choose Sheet">
+              <option value="0">Select Sheet</option>
+              <option *ngFor='let st of lstExcelSheet'>
+                {{st.SheetName}}
+              </option>
+            </select></div>
+<div style="overflow: auto;width:1100px;height:500px">  
+    <table class="table table-striped" style="overflow-y:scroll; width:250px;border:1">
+        <thead class="thead-dark" >
+            <tr>
+                <th>Id</th>
+                <th>SrNo</th>
+                <th style="width:500px">State Name</th>
+                <th style="display:none;">State_Code</th>
+                <th>District Name</th>
+                <th style="display:none;">District_Code</th>
+                <th>City Name</th>
+                <th style="display:none;">City_Code</th>
+
+                <th>EWS_Bene</th>
+                <th>EWS Loan Amt</th>
+                <th>EWS Subsidy</th>
+                <th>LIG Bene</th>
+                <th>LIG Loan Amt</th>
+                <th>LIG Subsidy</th>
+                <th>MIG1 Bene</th>
+
+                <th>MIG1 Loan Amt</th>
+                <th>MIG1 SubsidyAmt</th>
+                <th>MIG2 Bene</th>
+                <th>MIG2 Loan Amt</th>
+
+
+                <th>MIG2 SubsidyAmt</th>
+                <th>Total LoanAmt</th>
+
+                <th>Total SubsidyAmt</th>
+                <th>Total Beneficiaries</th>
+                <th>Cid</th>
+
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody style="overflow-y:scroll; width:100px;">
+            <tr *ngFor="let data of lstExcel | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{data.Id}}</td>
+                <td>{{data.SrNo}}</td>
+                <td>{{data.state_Name}}</td>
+                <td style="display:none;">{{data.StateCode}}</td>
+                <td>{{data.District_Name}}</td>
+                <td style="display:none;">{{data.Dcode}}</td>
+                <td>{{data.City_Name}}</td>
+                <th style="display:none;">{{data.CityCode}}</th>
+
+                <th>{{data.EWS_Bene}}</th>
+                <th>{{data.EWS_Loan_Amt}}</th>
+                <th>{{data.EWS_Subsidy}}</th>
+                <th>{{data.LIG_Bene}}</th>
+
+                <th>{{data.LIG_Loan_Amt}}</th>
+                <th>{{data.LIG_Subsidy}}</th>
+                <th>{{data.MIG1_Bene}}</th>
+                <th>{{data.MIG1_Loan_Amt}}</th>
+                <th>{{data.MIG1_SubsidyAmt}}</th>
+                <th>{{data.MIG2_Bene}}</th>
+                
+                <th>{{data.MIG2_Loan_Am}}</th>
+                <th>{{data.MIG2_SubsidyAmt}}</th>
+                <th>{{data.Total_LoanAmt}}</th>
+                <th>{{data.Total_SubsidyAmt}}</th>
+                
+                <th>{{data.Total_Beneficiaries}}</th>
+                <th>{{data.Cid}}</th>
+                <td><input type="button" class="btn btn-primary" (click)="Update(data)" value="Update">&nbsp;&nbsp;
+                    </td>
+            <td>
+                <input type="button" class="btn btn-danger" (click)="Delete(data)" value="Delete">
+            </td>
+                  </tr>
+            <tr><td colspan="4">
+            
+                    <ul class="pagination">  
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>  
+                            </ul>  
+            </td></tr>
+        </tbody>
+
+    
+    </table>
+  </div>
+
+    </div>
+    
+    
+    
