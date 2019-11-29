@@ -1,130 +1,154 @@
- <!-- <div><u>PMAY UPDATION FORM </u></div> -->
- <div class="container">
+
+<div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+    <div class="w3-card-4">
+      <h3
+        style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
+        Create State-Master </h3>
+    </div>
+    <br>
+    <div class="form-container">
+      <form [formGroup]="stateMaster" (ngSubmit)="onClickStateMaster($event, stateMaster)">
+          <div class="w3-row">
+              <div class="w3-quarter w3-left" style="width: 10%;padding-top: 8px;">
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      State Name :
+                    </label>
+              </div>
+              <div class="w3-quarter w3-left" style="width: 22%;">
+                  <input type="text" class="w3-input w3-border" [formControl]="txtStateName" placeholder="State Name" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                  <label *ngIf="submitted && txtStateName.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                    enter
+                    state name. </label>
+              </div>
+             
+              <div class="w3-quarter w3-center" style="width: 10%;">
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                      State Code :
+                    </label>
+              </div>
+              <div class="w3-quarter w3-left" style="width: 22%;">
+                  <input type="text" class="w3-input w3-border" [formControl]="txtStateCode" 
+                  placeholder="State Code" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                <label *ngIf="submitted && txtStateCode.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                  enter state code.</label>
+                <label *ngIf="submitted && txtStateCode.hasError('maxLength')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">State
+                  code must be 2 characters long.</label>
+              </div>
+              <div class="w3-quarter w3-center" style="width: 10%;">
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                      Division :
+                  </label>
+              </div>
+              <div class="w3-quarter w3-left" style="width: 22%;">
+                  <input type="text" class="w3-input w3-border" [formControl]="txtGovernment" style="font-family: Arial, Geneva, Tahoma, sans-serif;" placeholder=" Division">
+                  <label *ngIf="submitted && txtGovernment.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                    enter division.</label>
+              </div>
+            </div>
      
-      <div class="row"><h2>State List</h2></div>
-      <div class="row">
-      <div class="col-md-4">
-          <b>Type any keyword to search</b><br>
-          <input type="text" [(ngModel)]="searchText" autocomplete="off" class="form-control col-md-4">
-      </div>
-   
-        <div class="row" align="right" style="padding:10px;padding-right: 40px">        
-               <input type="button" (click)="openModalDialog('save')" value="Add State" class="btn btn-default">
+        <br>
+        <div style="text-align: center">
+          <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
         </div>
-    </div>
-    <div class="row">
-      
-        </div>
-        <hr>
-        <div class="row">
-            <table class="table table-striped" align="center">
-            <tr class="btn-primary" style="height: 50px;width:600px;">
-                <th>State Code</th>
-                <th>State Name</th>
-                <th>Division</th>
-                <th>Status</th>
-                <th style="width: 100px">Action</th>
-            </tr>
-            <tr *ngFor="let state of stateMaster | paginate: { itemsPerPage: 5, currentPage:p  } | filter:searchText" >
-                <td style="padding-left: 40px">{{state.Codes}}</td>
-                <td>{{state.States_UT}}</td>
-                 <td>{{state.Division}}</td>
-                <td>{{state.Status}}</td> 
-                <td  style="padding: 5px"><button type="button" (click)="openModalDialog(state)" class="btn btn-link">Edit</button>&nbsp;&nbsp;
-            </tr>
-            <tr><td colspan="4">
-                <ul class="pagination">  
-                        <pagination-controls (pageChange)="p = $event"></pagination-controls>  
-                        </ul>  
-        </td></tr>
-        </table>
+        <br>
+      </form>
+     
+      <table class="table" border="1px" style="width: 89%;" align="center">
+        <thead style="background-color: lightgray; font-weight: bold">
+          <tr>
+            <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State Name</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State Code</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Division</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let state of adminSandbox.stateMaster;let i = index"
+            style="text-align: center;background-color:white">
+            <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{state.States_UT}}</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{state.Codes}}</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{state.Division}}</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+              <button (click)="adminSandbox.editStateMaster('block',state)" type="submit"
+                class="w3-btn w3-green w3-round w3-ripple">Edit</button>
 
-    </div>
-
-   
- </div>
-
-
- <!-- modal -->
-<div class="modal" tabindex="-1" role="dialog" style="height: 400px" [ngStyle]="{'display':display}">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header" style="background-color:#2C7BBA;color:white;height: 50px;">
-         
-         <div style="width:570px">
-            <div style="width: 550px;float:left;"><h4 class="modal-title" style="text-align: center;">{{headerTitle}}</h4></div>
-            <div style="width: 20px;float:left">
-                <button type="button" class="close" style="color: white" aria-label="Close" (click)="closeModalDialog()"><span aria-hidden="true">&times;</span></button>
-            </div>
-      
-        </div>   
-         
-         
-        </div>
-  
-        <!-- modal-body -->
-        <div class="modal-body">
-
-            <div class="row" style="padding:15px">
-                <div class="row" style="padding: 4px">
-                    <div class="col-md-4">
-                        <label>State</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="text" name="StateName"  [(ngModel)]="StateName" value="{{States_UT}}"  class="form-control">
-                    </div>
-                </div>
-                <div class="row"  style="padding: 4px">
-                        <div class="col-md-4">
-                            <label>State Code</label>
-                        </div>
-                        <div class="col-md-8">
-                          
-                            <input type="text" name="Codes"  [(ngModel)]="Codes" value="{{Codes}}"  class="form-control">
-                        </div>
-                </div>
-                <div class="row" style="align-items: center;padding: 4px">
-                    <div class="col-md-4">
-                        <label>Division</label>
-                    </div>
-                    <div class="col-md-8">
-                        <select class="form-control" [(ngModel)]="Division"
-                          style="font-display: #FF00FF;color:black;">
-                                <option [selected]="true" [ngValue]="Division">{{Division}}</option>
-                                <option value="HFA-1">HFA-1</option>
-                                <option value="HFA-3">HFA-3</option>
-                                <option value="HFA-4">HFA-4</option>
-                                <option value="HFA-5">HFA-5</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row"  style="padding: 4px">
-                        <div class="col-md-3">
-                          
-                        </div>
-                        <!-- <div class="col-md-8">
-                                <input type ="button" (click)="SaveData()" value="{{action}}" class="btn btn-success" />&nbsp;&nbsp;&nbsp;
-                                <input type ="button"  (click)="ResetState()" value="Reset" class="btn btn-warning" />      
-                        </div> -->
-        
-                       
-                </div>
-            </div>
-
-      
-      </div>
-        <!-- modal-footer -->
-        <div class="modal-footer">
-                <input type ="button" (click)="SaveData()" value="{{action}}" class="btn btn-success" />&nbsp;&nbsp;&nbsp;
-                <input type ="button" (click)="ResetState()" value="Reset" class="btn btn-warning" />      
-        </div>
-        <!-- <div class="col-md-8">
-            <button type="button" class="btn btn-default" (click)="Save()" >Save</button>&nbsp;&nbsp;
-          <button type="button" class="btn btn-default" (click)="closeModalDialog()" >Close</button>
-        </div>  
-         -->
-
-      </div>
+              &nbsp;
+              <button (click)="adminSandbox.deleteStateData(state.StateId)" type="submit"
+                class="w3-btn w3-red w3-round w3-ripple">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot *ngIf="adminSandbox.stateMaster.length==0">
+          <tr>
+            <td colspan="5">
+              <a>No Records Found</a>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
   </div>
- 
+
+<div [style.display]="adminSandbox.showProperty" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-teal">
+      <span (click)="adminSandbox.editStateMaster('none','')"
+        class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2 style="padding-left: 17px;font-family: Arial, Geneva, Tahoma, sans-serif;">Update State-Master</h2>
+    </header>
+    <br>
+    <div class="w3-container">
+      <form>
+        <div class="w3-row">
+          <div class="w3-quarter w3-left">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              State Name :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left">
+            <input type="text" class="w3-input w3-border" [(ngModel)]="adminSandbox.EditStateMaster.txtStateName"
+              name="txtStateName" placeholder="State Name" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+
+          </div>
+          <div class="w3-quarter w3-center">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              State Code :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left">
+            <input type="text" class="w3-input w3-border" maxlength="2" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              [(ngModel)]="adminSandbox.EditStateMaster.txtStateCode" name="txtStateCode" placeholder="State Code">
+
+          </div>
+        </div>
+        <br>
+        <div>
+          <input type="hidden" name="hiddendTxtStateID" [(ngModel)]="adminSandbox.EditStateMaster.hiddendTxtStateID" />
+        </div>
+        <div class="w3-row">
+          <div class="w3-quarter w3-left">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              Government :
+            </label>
+          </div>
+          <div class="w3-threequarter w3-left">
+            <input type="text" class="w3-input w3-border" [(ngModel)]="adminSandbox.EditStateMaster.txtGovernment"
+              name="txtGovernment" placeholder="Government" style="width: 24.5%;font-family: Arial, Geneva, Tahoma, sans-serif;" >
+
+          </div>
+        </div>
+        <br>
+        <div style="text-align: center">
+          <button type="submit" (click)="adminSandbox.updateStateMaster()" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+        </div>
+        <br>
+      </form>
+    </div>
+    <footer class="w3-container w3-teal">
+
+    </footer>
+  </div>
+</div>

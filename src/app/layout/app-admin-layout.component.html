@@ -56,8 +56,8 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-      <div style="width: 1100px;">
-          <div style="width: 200px;float: left;">
+      <div style="width: 1100px; display: flex;">
+          <div style="width: 200px;">
           <img src="/assets/img/PMAY-U LOGO _Transparent.png" height="50px" width="150px" />
         </div>
         <div style="width: 220px;float: left; padding: 10px;"> <b style="font-size:14px;color: white">{{jstoday}}</b>
@@ -371,7 +371,7 @@
             <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/AtaGlance5'><i class="fa fa-circle-o"></i>At a Glance5</a></li> -->
             <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/phyfinChart'><i class="fa fa-circle-o"></i>Physical Fin Chart</a></li>
             <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/ConsphyfinChart1'><i class="fa fa-circle-o"></i>Cons. Phy-Fin Report</a></li>
-            <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/VerticalHousesDetails']"  ><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li>
+            <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/VerticalHousesDetails']"  ><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li> -->
             <li [ngStyle]="{'display':AdminDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/VerticalFinancialDetails'><i class="fa fa-circle-o"></i>Financial Houses Details</a></li> 
 
 
@@ -389,7 +389,7 @@
               
               <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/phyfinChart'><i class="fa fa-circle-o"></i>Physical Fin Chart</a></li>
               <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/ConsphyfinChart'><i class="fa fa-circle-o"></i>Cons. Phy-Fin Report</a></li>
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li>
+              <!-- <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li> -->
               
               <!-- <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/VerticalFinancialDetails'><i class="fa fa-circle-o"></i>Fincncial Houses Details</a></li> -->
 
@@ -412,10 +412,19 @@
             </span>
           </a>
           <ul class="treeview-menu" [style.display]="(reportmenu1.id == activeMenuId) ? 'block' : 'none'">
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/statemaster']"><i class="fa fa-circle-o"></i>State Master Form</a></li>
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DisttMaster']"><i class="fa fa-circle-o"></i>Distt Master Form</a></li>
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/CityMaster']"><i class="fa fa-circle-o"></i>City Master Form</a></li>
+            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/statemaster']"><i class="fa fa-circle-o"></i>State Master</a></li>
+            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DistrictMaster']"><i class="fa fa-circle-o"></i>Distt Master</a></li>
+            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/CityMaster']"><i class="fa fa-circle-o"></i>City Master</a></li>
             
+            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ConstituencyMaster']"><i class="fa fa-circle-o"></i>Constituency Master</a></li>
+            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ComponentMaster']"><i class="fa fa-circle-o"></i>Component Master</a></li>
+            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ClassificationMaster']"><i class="fa fa-circle-o"></i>Classification Master</a></li>
+            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/SchemeMaster']"><i class="fa fa-circle-o"></i>Scheme  Master </a></li>
+            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/MappingClassificationMaster']"><i class="fa fa-circle-o"></i>Mapping Classification Master</a></li>
+
+             
+             
+
 
           </ul>
       </li>

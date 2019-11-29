@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginModel } from '../Models/LoginModel';
 import { Alert } from 'selenium-webdriver';
+import { ConstantUrlService } from 'src/app/Shared/constant-url.service';
 
 
 @Injectable({
@@ -11,9 +12,24 @@ import { Alert } from 'selenium-webdriver';
 })
 export class LoginService {
   public token:string;
-  constructor(private _http:HttpClient,private _route:Router) { }
-  apiUrl ="http://localhost:58396/hfa_api/API/Authenticate/";
-   apiUrlReg ="http://localhost:58396/API/RegistrationApi/";
+  apiUrl:string;
+apiUrlReg:string;
+
+  constructor(private _http:HttpClient,private _route:Router,private constantUrlService: ConstantUrlService) { 
+
+    this.apiUrl=this.constantUrlService.apiUrl;
+    this.apiUrlReg=this.constantUrlService.apiUrlReg;
+
+  }
+//  apiUrl ="http://localhost:58396/hfa_api/API/Authenticate/";
+//  apiUrlReg ="http://localhost:58396/API/RegistrationApi/";
+
+
+
+  // apiUrl ="http://10.196.69.102/hfa_api/API/Authenticate/";
+  // apiUrlReg ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
+
+
 
   // baseUrl = "http://localhost:58396/Api";
 
@@ -48,7 +64,7 @@ export class LoginService {
   }
   onLogin(UserName, Password)
   {    
-    alert(1);
+     // alert(this.apiUrlReg);
       return this._http.get<string>(this.apiUrlReg + "Login_Master?Username=" + UserName+ "&password=" + Password);
   }
   CheckCrendential(UserName, Password)

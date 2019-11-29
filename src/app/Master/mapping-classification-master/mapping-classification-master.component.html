@@ -1,0 +1,482 @@
+<div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+  <div class="w3-card-4">
+    <h3
+      style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
+      Mapping-Classification-Master </h3>
+  </div>
+  <br>
+  <div class="form-container">
+    <div class="w3-row">
+      <div class="w3-quarter w3-left" style="width: 10%;">
+      </div>
+      <div class="w3-quarter w3-left" style="width: 58%;
+        padding-left: 354px;">
+        <input type="radio" name="radioApplicable" value="State"
+          (click)="radioState();adminSandbox.getStateClassification($event.target.value)" />&nbsp;
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 26px;">State</label>
+        <input type="radio" name="radioApplicable" value="District"
+          (click)="radioDistrict();adminSandbox.getStateClassification($event.target.value)" />&nbsp;
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 26px;">District</label>
+        <input type="radio" name="radioApplicable" value="City"
+          (click)="radioCity();adminSandbox.getStateClassification($event.target.value)" />&nbsp;
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 26px;">City</label>
+        <input type="radio" name="radioApplicable" value="Project"
+          (click)="radioProject();adminSandbox.getStateClassification($event.target.value)" />&nbsp;
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 26px;">Project</label>
+        <br>
+      </div>
+    </div>
+    <br>
+    <div *ngIf="StateClassification">
+
+      <form [formGroup]="classificationMappingMaster"
+        (ngSubmit)="onClickClassificationMappingMaster($event, classificationMappingMaster)">
+        <div class="w3-row">
+          <div class="w3-quarter w3-left" style="width: 10%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              State Name:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlState" [(ngModel)]="State" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              class="w3-input w3-border">
+              <option value="" disabled>Please select state--</option>
+              <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                {{state.States_UT}}</option>
+            </select>
+            <label *ngIf="submitted && ddlState.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select
+              state name. </label>
+          </div>
+          <div class="w3-quarter w3-center" style="width: 10%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">Mapping </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlMap" [(ngModel)]="Mapping" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              class="w3-input w3-border">
+              <option value="" disabled>Please select mapping--</option>
+              <option *ngFor="let statemapping of adminSandbox.stateClassificationMapping"
+                [value]="statemapping.DescriptionCode">
+                {{statemapping.Description}}</option>
+            </select>
+            <label *ngIf="submitted && ddlMap.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select
+              mapping. </label>
+          </div>
+          <br>
+          <br>
+          <br>
+        </div>
+        <div style="text-align: center">
+          <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+        </div>
+
+      </form>
+
+      <br>
+      <table class="table" border="1px" style="width: 89%;" align="center">
+        <thead style="background-color: lightgray; font-weight: bold">
+          <tr>
+            <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;"
+              *ngFor="let statemapping of adminSandbox.stateClassificationMapping">{{statemapping.Description}}</td>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let StateClassification of adminSandbox.stateMapingResult;let i = index"
+            style="text-align: center;background-color:white">
+            <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+              {{StateClassification.States_UT}}</td>
+
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;"
+              *ngFor="let statemapping of adminSandbox.stateClassificationMapping">
+              <div *ngFor="let list of StateClassification.Mapping;">
+                <ng-container>
+                  <div *ngIf="statemapping.Description==list.e.Description; else wrong">
+                    <input type="checkbox" (click)="adminSandbox.DeleteStateMapping(list.StateMappingId)"
+                      [checked]="list.selected"> {{statemapping.Description}}</div>
+
+                </ng-container>
+
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+    <div *ngIf="DistrictClassification">
+      <form [formGroup]="classificationDistrictMappingMaster"
+        (ngSubmit)="onClickDistrictClassificationMappingMaster($event, classificationDistrictMappingMaster)">
+        <div class="w3-row">
+          <div class="w3-quarter w3-left" style="width: 10%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              State Name:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlStateCode" [(ngModel)]="State" (change)="adminSandbox.getStateDistrictData($event.target.value);
+        adminSandbox.getDistrictClassificationMapping($event.target.value);this.District=''"
+              style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
+              <option value="" disabled>Please select state--</option>
+              <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                {{state.States_UT}}</option>
+            </select>
+            <label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select
+              state name. </label>
+          </div>
+          <div class="w3-quarter w3-center" style="width: 12%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              District Name:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlDistrictCode" [(ngModel)]="District"
+              style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
+              <option value="" disabled>Please select district--</option>
+              <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster" [value]="ditrict.Dcode">
+                {{ditrict.District}}</option>
+            </select>
+            <label *ngIf="submitted && ddlDistrictCode.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select
+              district name. </label>
+          </div>
+          <div class="w3-quarter w3-center" style="width: 10%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              Mapping:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlMapping" [(ngModel)]="Mapping"
+              style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
+              <option value="" disabled>Please select mapping--</option>
+              <option *ngFor="let statemapping of adminSandbox.stateClassificationMapping"
+                [value]="statemapping.DescriptionCode">
+                {{statemapping.Description}}</option>
+            </select>
+            <label *ngIf="submitted && ddlMapping.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select
+              mapping. </label>
+          </div>
+
+          <br>
+          <br>
+          <br>
+          <div style="text-align: center">
+            <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+          </div>
+        </div>
+        <br>
+        <table class="table" border="1px" style="width: 89%;" align="center">
+          <thead style="background-color: lightgray; font-weight: bold">
+            <tr>
+              <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">District</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;"
+                *ngFor="let statemapping of adminSandbox.stateClassificationMapping">{{statemapping.Description}}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let distClassification of adminSandbox.districtMapingResult;let i = index"
+              style="text-align: center;background-color:white">
+              <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                {{distClassification.States_UT[0]}}</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                {{distClassification.District}}</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;"
+                *ngFor="let statemapping of adminSandbox.stateClassificationMapping">
+                <div *ngFor="let list of distClassification.Mapping;">
+                  <ng-container>
+                    <div *ngIf="statemapping.Description==list.e.Description; else wrong">
+                      <input (click)="adminSandbox.DeleteDistrictMapping(list.DistrictClassId)" type="checkbox"
+                        [checked]="list.Selected"> {{statemapping.Description}} </div>
+
+                  </ng-container>
+
+                </div>
+              </td>
+
+
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <div *ngIf="CityClassification">
+      <form [formGroup]="classificationCityMappingMaster"
+        (ngSubmit)="onClickCityClassificationMappingMaster($event, classificationCityMappingMaster)">
+        <div class="w3-row">
+          <div class="w3-quarter w3-left" style="width: 10%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              State Name:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlStateCode1" [(ngModel)]="State"
+              (change)="adminSandbox.getStateDistrictData($event.target.value);this.District='';this.City='' "
+              style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
+              <option value="" disabled>Please select state--</option>
+              <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                {{state.States_UT}}</option>
+            </select>
+            <label *ngIf="submitted && ddlStateCode1.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select
+              state name. </label>
+          </div>
+          <div class="w3-quarter w3-center" style="width: 12%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              District Name:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlDistrictCode1" [(ngModel)]="District"
+              style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              (change)="adminSandbox.getDistrictCityData($event.target.value);this.City='';adminSandbox.getCityClassificationMapping(ddlStateCode1.value,$event.target.value);"
+              class="w3-input w3-border">
+              <option value="" disabled>Please select district--</option>
+              <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster" [value]="ditrict.Dcode">
+                {{ditrict.District}}</option>
+            </select>
+            <label *ngIf="submitted && ddlDistrictCode1.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select
+              district name. </label>
+          </div>
+          <div class="w3-quarter w3-center" style="width: 12%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              City Name:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlCity" [(ngModel)]="City" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              class="w3-input w3-border">
+              <option value="" disabled>Please select city--</option>
+              <option *ngFor="let city of adminSandbox.districtCityMaster" [value]="city.CityCode">
+                {{city.City}}</option>
+            </select>
+            <label *ngIf="submitted && ddlCity.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select
+              city name. </label>
+          </div>
+          <br><br> <br>
+          <div class="w3-row">
+            <div class="w3-quarter w3-left" style="width: 10%;">
+              <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                Mapping:
+              </label>
+            </div>
+            <div class="w3-quarter w3-left" style="width: 22%;">
+              <select [formControl]="ddlMapping1" [(ngModel)]="Mapping"
+                style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
+                <option value="" disabled>Please select mapping--</option>
+                <option *ngFor="let statemapping of adminSandbox.stateClassificationMapping"
+                  [value]="statemapping.DescriptionCode">
+                  {{statemapping.Description}}</option>
+              </select>
+              <label *ngIf="submitted && ddlMapping1.hasError('required')" class="error-label"
+                style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                select
+                mapping. </label>
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+          <div style="text-align: center">
+            <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+          </div>
+        </div>
+        <br>
+        <table class="table" border="1px" style="width: 89%;" align="center">
+          <thead style="background-color: lightgray; font-weight: bold">
+            <tr>
+              <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">City</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;"
+                *ngFor="let statemapping of adminSandbox.stateClassificationMapping">{{statemapping.Description}}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cityClassification of adminSandbox.cityMapingResult;let i = index"
+              style="text-align: center;background-color:white">
+              <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                {{cityClassification.City}}</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;"
+                *ngFor="let statemapping of adminSandbox.stateClassificationMapping">
+                <div *ngFor="let list of cityClassification.Mapping;">
+                  <ng-container>
+                    <div *ngIf="statemapping.Description==list.e.Description; else wrong">
+                      <input type="checkbox" (click)="adminSandbox.DeleteCityMapping(list.CityClassId)"
+                        [checked]="list.Selected"> {{statemapping.Description}} </div>
+
+                  </ng-container>
+
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <div *ngIf="ProjectClassification">
+      <form [formGroup]="classificationProjectMappingMaster"
+        (ngSubmit)="onClickProjectClassificationMappingMaster($event, classificationProjectMappingMaster)">
+        <div class="w3-row">
+          <div class="w3-quarter w3-left" style="width: 10%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              State Name:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlStateCodeP" [(ngModel)]="State"
+              (change)="adminSandbox.getStateDistrictData($event.target.value);this.District='';this.City='' "
+              style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
+              <option value="" disabled>Please select state--</option>
+              <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                {{state.States_UT}}</option>
+            </select>
+            <label *ngIf="submitted && ddlStateCodeP.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select
+              state name. </label>
+          </div>
+          <div class="w3-quarter w3-center" style="width: 12%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              District Name:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlDistrictCodeP" [(ngModel)]="District"
+              style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              (change)="adminSandbox.getDistrictCityData($event.target.value);this.City='';" class="w3-input w3-border">
+              <option value="" disabled>Please select district--</option>
+              <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster" [value]="ditrict.Dcode">
+                {{ditrict.District}}</option>
+            </select>
+            <label *ngIf="submitted && ddlDistrictCodeP.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select
+              district name. </label>
+          </div>
+          <div class="w3-quarter w3-center" style="width: 12%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              City Name:
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <select [formControl]="ddlCityP" [(ngModel)]="City" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              (change)="adminSandbox.getProjectClassificationName(ddlStateCodeP.value,ddlDistrictCodeP.value,$event.target.value);
+            adminSandbox.getProjectClassificationMapping(ddlStateCodeP.value,ddlDistrictCodeP.value,$event.target.value);"
+              class="w3-input w3-border">
+              <option value="" disabled>Please select city--</option>
+              <option *ngFor="let city of adminSandbox.districtCityMaster" [value]="city.CityCode">
+                {{city.City}}</option>
+            </select>
+            <label *ngIf="submitted && ddlCityP.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select
+              city name. </label>
+          </div>
+          <br><br> <br>
+          <div class="w3-row">
+            <div class="w3-quarter w3-left" style="width: 10%;">
+              <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                Project Name:
+              </label>
+            </div>
+            <div class="w3-quarter w3-left" style="width: 22%;">
+              <select [formControl]="ddlProjectName" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                [(ngModel)]="ProjectName" class="w3-input w3-border">
+                <option value="" disabled>Please select project name--</option>
+                <option *ngFor="let project of adminSandbox.projectClassificationName" [value]="project.ProjectCode">
+                  {{project.ProjectTitle}}</option>
+              </select>
+              <label *ngIf="submitted && ddlProjectName.hasError('required')" class="error-label"
+                style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                select
+                project name. </label>
+            </div>
+            <div class="w3-quarter w3-center" style="width: 12%;">
+              <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                Mapping:
+              </label>
+            </div>
+            <div class="w3-quarter w3-left" style="width: 22%;">
+              <select [formControl]="ddlMappingP" [(ngModel)]="Mapping"
+                style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
+                <option value="" disabled>Please select mapping--</option>
+                <option *ngFor="let statemapping of adminSandbox.stateClassificationMapping"
+                  [value]="statemapping.DescriptionCode">
+                  {{statemapping.Description}}</option>
+              </select>
+              <label *ngIf="submitted && ddlMappingP.hasError('required')" class="error-label"
+                style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                select
+                mapping. </label>
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+          <div style="text-align: center">
+            <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+          </div>
+        </div>
+        <br>
+
+        <table class="table" border="1px" style="width: 75%;" align="center">
+          <thead style="background-color: lightgray; font-weight: bold">
+            <tr>
+              <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Project Name</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;"
+                *ngFor="let statemapping of adminSandbox.stateClassificationMapping">{{statemapping.Description}}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let projectClassification of adminSandbox.projectMapingResult;let i = index"
+              style="text-align: center;background-color:white">
+              <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                {{projectClassification.ProjectTitle}}</td>
+
+              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;"
+                *ngFor="let statemapping of adminSandbox.stateClassificationMapping">
+                <div *ngFor="let list of projectClassification.Mapping;">
+                  <ng-container>
+                    <div *ngIf="statemapping.Description==list.e.Description; else wrong">
+                      <input type="checkbox" (click)="adminSandbox.DeleteProjectMapping(list.ProjectClassId)"
+                        [checked]="list.Selected"> {{statemapping.Description}} </div>
+                  </ng-container>
+
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </form> 
+    </div>
+  </div>
+</div>

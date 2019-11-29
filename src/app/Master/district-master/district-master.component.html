@@ -1,0 +1,218 @@
+<div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+  <div class="w3-card-4">
+    <h3
+      style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
+      Create District-Master </h3>
+  </div>
+  <br>
+  <div class="form-container">
+    <form [formGroup]="districtMaster" (ngSubmit)="onClickDistrictMaster($event, districtMaster)">
+        <div class="w3-row">
+            <div class="w3-quarter w3-left" style="width: 10%;">
+                <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                    State Name :
+                  </label>
+            </div>
+            <div class="w3-quarter w3-left" style="width: 22%;">
+                <select [formControl]="ddlStateCode" [(ngModel)]="StateCode" class="w3-input w3-border"
+                (change)="adminSandbox.getDistrictData(ddlStateCode.value);" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                  <option value="" disabled>Please select state--</option>
+                  <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                    {{state.States_UT}}</option>
+                </select>
+                <label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                  select
+                  state name. </label>
+            </div>
+           
+            <div class="w3-quarter w3-center" style="width: 10%;">
+                <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                    District Name :
+                  </label>
+            </div>
+            <div class="w3-quarter w3-left" style="width: 22%;">
+                <input type="text" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;"  [formControl]="txtDistrictName" placeholder="District Name">
+                <label *ngIf="submitted && txtDistrictName.hasError('required')" class="error-label"
+                  style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter district name.</label>
+            </div>
+            <div class="w3-quarter w3-center" style="width: 10%;">
+                <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                    District Code :
+                  </label>
+            </div>
+            <div class="w3-quarter w3-left" style="width: 22%;">
+                <input type="text" style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border" maxlength="3" [formControl]="txtDistrictCode"
+                placeholder="District Code">
+              <label *ngIf="submitted && txtDistrictCode.hasError('required')" class="error-label"
+                style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter district code.</label>
+            </div>
+          </div>
+      
+      <br>
+      <div class="w3-row">
+        <div class="w3-quarter w3-left">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            Backward District :
+          </label>
+        </div>
+        <div class="w3-quarter w3-left">
+          <input type="radio" name="radioBackwardDistrict" value="Yes" [formControl]="radioBackwardDistrict" />
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">Yes</label>&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="radioBackwardDistrict" value="No" [formControl]="radioBackwardDistrict" />
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">No</label>
+        </div>
+      </div>
+      <br>
+      <div class="w3-row">
+        <div class="w3-quarter w3-left">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+            Minority :
+          </label>
+        </div>
+        <div class="w3-quarter w3-left">
+          <input type="radio" name="radioMinority" value="Yes" [formControl]="radioMinority" />
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">Yes</label>&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="radioMinority" value="No" [formControl]="radioMinority" />
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">No</label>
+        </div>
+      </div>
+      <br>
+      <div style="text-align: center">
+        <button type="submit" class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+      </div>
+      <br>
+    </form>
+    <table class="table" border="1px" style="width: 89%;" align="center" *ngIf="adminSandbox.districtMaster.length>0">
+      <thead style="background-color: lightgray; font-weight: bold">
+        <tr>
+          <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">District Name</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">District Code</td>
+        
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let district of adminSandbox.districtMaster;let i = index"
+          style="text-align: center;background-color:white">
+          <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{district.District}}</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{district.Dcode}}</td>      
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+            <button (click)="adminSandbox.editDistrictMaster('block',district)" type="submit"
+              class="w3-btn w3-green w3-round w3-ripple">Edit</button>
+            &nbsp;
+            <button (click)="adminSandbox.deleteDistrictData(district.DisttId)" type="submit"
+              class="w3-btn w3-red w3-round w3-ripple">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="adminSandbox.districtMaster.length==0">
+        <tr>
+          <td colspan="6">
+            <a style="font-family: Arial, Geneva, Tahoma, sans-serif;">No Records Found</a>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<div [style.display]="adminSandbox.showProperty" class="w3-modal w3-animate-opacity">
+<div class="w3-modal-content w3-card-4">
+  <header class="w3-container w3-teal">
+    <span (click)="adminSandbox.editDistrictMaster('none','')"
+      class="w3-button w3-large w3-display-topright">&times;</span>
+    <h2 style="padding-left: 17px;font-family: Arial, Geneva, Tahoma, sans-serif;">Update District-Master</h2>
+  </header>
+  <br>
+  <div class="w3-container">
+    <form>
+      <div class="w3-row">
+        <div class="w3-quarter w3-left">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            State Name :
+          </label>
+        </div>
+        <div class="w3-quarter w3-left">
+          <select name="ddlStateCode" class="w3-input w3-border"
+            [(ngModel)]="adminSandbox.EditDistrictMaster.ddlStateCode" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+            <option value="" disabled>Please select state--</option>
+            <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+              {{state.States_UT}}</option>
+          </select>
+
+        </div>
+        <div class="w3-quarter w3-center">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            District Name :
+          </label>
+        </div>
+        <div class="w3-quarter w3-left">
+          <input type="text" [(ngModel)]="adminSandbox.EditDistrictMaster.txtDistrictName" class="w3-input w3-border"
+            name="txtDistrictName" placeholder="District Name" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+
+        </div>
+      </div>
+      <div>
+        <input type="hidden" name="hiddendTxtDistrictID"
+          [(ngModel)]="adminSandbox.EditDistrictMaster.hiddendTxtDistrictID" />
+      </div>
+      <br>
+      <div class="w3-row">
+        <div class="w3-quarter w3-left">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            District Code :
+          </label>
+        </div>
+        <div class="w3-threequarter w3-left">
+          <input type="text" maxlength="3" [(ngModel)]="adminSandbox.EditDistrictMaster.txtDistrictCode"
+            class="w3-input w3-border" name="txtDistrictCode" placeholder="District Code" style="width: 24.5%;">
+
+        </div>
+      </div>
+      <br>
+      <div class="w3-row">
+        <div class="w3-quarter w3-left">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            Backward District :
+          </label>
+        </div>
+        <div class="w3-quarter w3-left">
+          <input type="radio" [(ngModel)]="adminSandbox.EditDistrictMaster.radioBackwardDistrict"
+            name="radioBackwardDistrict" value="Yes" />
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">Yes</label>&nbsp;&nbsp;&nbsp;
+          <input type="radio" [(ngModel)]="adminSandbox.EditDistrictMaster.radioBackwardDistrict"
+            name="radioBackwardDistrict" value="No" />
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">No</label>
+        </div>
+      </div>
+      <br>
+      <div class="w3-row">
+        <div class="w3-quarter w3-left">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            Minority :
+          </label>
+        </div>
+        <div class="w3-quarter w3-left">
+          <input type="radio" [(ngModel)]="adminSandbox.EditDistrictMaster.radioMinority" name="radioMinority"
+            value="Yes" />
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">Yes</label>&nbsp;&nbsp;&nbsp;
+          <input type="radio" [(ngModel)]="adminSandbox.EditDistrictMaster.radioMinority" name="radioMinority"
+            value="No" />
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">No</label>
+        </div>
+      </div>
+      <br>
+      <div style="text-align: center">
+        <button type="submit" (click)="adminSandbox.updateDistrictMaster()" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+          class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+      </div>
+      <br>
+    </form>
+  </div>
+  <footer class="w3-container w3-teal">
+
+  </footer>
+</div>
+</div>

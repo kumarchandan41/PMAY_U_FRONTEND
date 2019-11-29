@@ -1,0 +1,160 @@
+<div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+  <div class="w3-card-4">
+    <h3
+      style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
+      Classification-Master </h3>
+  </div>
+  <br>
+  <div class="form-container">
+    <form [formGroup]="classificationMaster" (ngSubmit)="onClickClassificationMaster($event, classificationMaster)">
+      <div class="w3-row">
+        <div class="w3-quarter w3-left" style="width: 10%;">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            Description :
+          </label>
+        </div>
+        <div class="w3-quarter w3-left" style="width: 22%;">
+          <input type="text" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            [formControl]="txtDescription" placeholder="Description">
+          <label *ngIf="submitted && txtDescription.hasError('required')" class="error-label"
+            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+            enter description. </label>
+        </div>
+        <div class="w3-quarter w3-center" style="width: 16%;">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            Description Code:
+          </label>
+        </div>
+        <div class="w3-quarter w3-left" style="width: 22%;">
+          <input type="text" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            [formControl]="txtDCode" placeholder="Description Code">
+          <label *ngIf="submitted && txtDCode.hasError('required')" class="error-label"
+            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+            enter code. </label>
+        </div>
+      </div>
+      <br>
+      <div class="w3-row">
+        <div class="w3-quarter w3-left" style="width: 10%;">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+            Applicable :
+          </label>
+        </div>
+        <div class="w3-quarter w3-left" style="width: 35%;">
+          <input type="radio" name="radioApplicable" value="State" [formControl]="radioApplicable" />&nbsp;
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 26px;">State</label>
+          <input type="radio" name="radioApplicable" value="District" [formControl]="radioApplicable" />&nbsp;
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 26px;">District</label>
+          <input type="radio" name="radioApplicable" value="City" [formControl]="radioApplicable" />&nbsp;
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 26px;">City</label>
+          <input type="radio" name="radioApplicable" value="Project" [formControl]="radioApplicable" />&nbsp;
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 26px;">Project</label>
+          <br>
+          <label *ngIf="submitted && radioApplicable.hasError('required')" class="error-label"
+            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+            select applicable. </label>
+        </div>
+      </div>
+      <div style="text-align: center">
+        <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+          class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+      </div>
+      <br>
+    </form>
+    <table class="table" border="1px" style="width: 89%;" align="center">
+      <thead style="background-color: lightgray; font-weight: bold">
+        <tr>
+          <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Description</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Description Code</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Applicable</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let classification of adminSandbox.classificationMaster;let i = index"
+          style="text-align: center;background-color:white">
+          <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+            {{classification.Description}}</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+            {{classification.DescriptionCode}}</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+            {{classification.Applicable}}</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+            <button (click)="adminSandbox.editClassificationMaster('block',classification)" type="submit"
+              class="w3-btn w3-green w3-round w3-ripple">Edit</button>
+            &nbsp;
+            <button (click)="adminSandbox.deleteClassificationData(classification.ClassificationId)" type="submit"
+              class="w3-btn w3-red w3-round w3-ripple">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div [style.display]="adminSandbox.showProperty" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-teal">
+      <span (click)="adminSandbox.editCityMaster('none','')"
+        class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2 style="padding-left: 17px;font-family: Arial, Geneva, Tahoma, sans-serif;">Update Classification Master</h2>
+    </header>
+    <br>
+    <div class="w3-container">
+      <form>
+        <div>
+          <input type="hidden" name="hiddendTxtDescriptionID" [(ngModel)]="adminSandbox.EditClassificationComponentMaster.hiddendTxtDescriptionID " />
+        </div>
+        <br>
+        <div class="w3-row">
+          <div class="w3-quarter w3-center">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              Description :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left">
+            <input type="text" [(ngModel)]="adminSandbox.EditClassificationComponentMaster.txtDescription" class="w3-input w3-border"
+              name="txtDescription" placeholder=" City Name" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+          </div>
+          <div class="w3-quarter w3-center">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              Description Code :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left">
+            <input type="text" [(ngModel)]="adminSandbox.EditClassificationComponentMaster.txtDCode" class="w3-input w3-border"
+              name="txtDCode" placeholder=" City Code " style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+          </div>
+        </div>
+        <br>
+        <div class="w3-row">
+          <div class="w3-quarter w3-center" >
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              Applicable :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 356px;">
+            <input type="radio" name="radioApplicable" value="State" [(ngModel)]="adminSandbox.EditClassificationComponentMaster.radioApplicable"/>&nbsp;
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 26px;">State</label>
+            <input type="radio" name="radioApplicable" value="District"[(ngModel)]="adminSandbox.EditClassificationComponentMaster.radioApplicable" />&nbsp;
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 26px;">District</label>
+            <input type="radio" name="radioApplicable" value="City" [(ngModel)]="adminSandbox.EditClassificationComponentMaster.radioApplicable"/>&nbsp;
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 26px;">City</label>
+            <input type="radio" name="radioApplicable" value="Project" [(ngModel)]="adminSandbox.EditClassificationComponentMaster.radioApplicable"/>&nbsp;
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-right: 26px;">Project</label>
+            <br>  
+          </div>
+        </div>
+        <br>
+        <div style="text-align: center">
+          <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            (click)="adminSandbox.updateClassificationMaster()" class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+        </div>
+        <br>
+      </form>
+    </div>
+    <footer class="w3-container w3-teal">
+    </footer>
+  </div>
+</div>

@@ -44,7 +44,7 @@ import { VerticalHousesStatusComponent } from './financeReport/vertical-houses-s
 import { IndiaMapComponent } from './financeReport/india-map/india-map.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ChangePasswordComponent } from './login/change-password/change-password.component';
-import { DisttMasterComponent } from './Master/distt-master/distt-master.component';
+//import { DisttMasterComponent } from './Master/distt-master/distt-master.component';
 import { AlphaCharacterDirective } from './register/alphaChracter.directive';
 import { ExceljnnurmComponent } from './DataUploads/exceljnnurm/exceljnnurm.component';
 import { NumberDirective } from './register/number.directive';
@@ -98,6 +98,12 @@ import { ReportStateDistrictCityWiseComponent } from './DRMC/report-state-distri
 import { ReportStateWiseComponent } from './DRMC/report-state-wise/report-state-wise.component';
 import { ProjectBriefDetailComponent } from './DRMC/project-brief-detail/project-brief-detail.component';
 import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
+import { DistrictMasterComponent } from './Master/district-master/district-master.component';
+import { ConstituencyMasterComponent } from './Master/constituency-master/constituency-master.component';
+import { ClassificationMasterComponent } from './Master/classification-master/classification-master.component';
+import { ComponentMasterComponent } from './Master/component-master/component-master.component';
+import { MappingClassificationMasterComponent } from './Master/mapping-classification-master/mapping-classification-master.component';
+import { SchemeMasterComponent } from './Master/scheme-master/scheme-master.component';
 // import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
 // import { ProjectDetailsComponent } from './DRMC/project-details/project-details.component';
 // import { ProjectReleaseFundFlowComponent } from './DRMC/project-release-fund-flow/project-release-fund-flow.component';
@@ -111,9 +117,12 @@ import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/
 
 const routes: Routes = [
   
- {path:'Home',component:HomePageComponent},
- {path:'',redirectTo:'Home',pathMatch:'full'},
- {path:'Login',component:LoginComponent},
+//  {path:'Home',component:HomePageComponent},
+//  {path:'',redirectTo:'Home',pathMatch:'full'},
+
+{path:'Login',component:LoginComponent},
+{path:'',redirectTo:'Login',pathMatch:'full'},
+//  {path:'Login',component:LoginComponent},
 
   { path: 'Register', component: RegisterComponent },
   {path: 'ChangePassword', component: ChangePasswordComponent},
@@ -150,7 +159,7 @@ const routes: Routes = [
       // {path: 'AdminLoginDetails', component: AdminLoginPanelComponent} ,
       {path: 'VerticalHousesDetails', component: VerticalHousesStatusComponent},
       {path: 'IndiaMap', component: IndianmapComponent},
-      {path: 'DisttMaster', component: DisttMasterComponent},
+      {path: 'ConstituencyMaster', component: ConstituencyMasterComponent},
       {path: 'Exceljnnurm', component: ExceljnnurmComponent},
       {path: 'ExcelPMAY', component: ExcelPMAYComponent},
       {path: 'ExcelStatescore', component: ExcelStatescoreComponent},
@@ -167,15 +176,19 @@ const routes: Routes = [
       {path: 'CityMaster', component: CityMasterComponent},
 
       {path: 'PMAYuCompWise', component: PMAYuCompWiseComponent},
+      {path: 'DistrictMaster', component: DistrictMasterComponent},
+      {path: 'ComponentMaster', component: ComponentMasterComponent},
+      {path: 'SchemeMaster', component: SchemeMasterComponent},
+      {path: 'ClassificationMaster', component: ClassificationMasterComponent},
+      {path: 'MappingClassificationMaster', component: MappingClassificationMasterComponent},
 
       
-
     ] 
   },
   {
     path: 'DRMC', component: AppAdminLayoutComponent,
     children: [
-    //  {path: 'SchemeMaster', component: SchemeMasterComponent},
+      {path: 'ClassificationMaster', component: ClassificationMasterComponent},
      {path: 'ReportStateWise', component: ReportStateWiseComponent},
       {path: 'ReportStateDistrictCityWise', component: ReportStateDistrictCityWiseComponent},
       // {path: 'ReportDistrictWise/:statecode', component: ReportDistrictWiseComponent},
@@ -230,7 +243,7 @@ const routes: Routes = [
     VerticalHousesStatusComponent,
     IndiaMapComponent,
     ChangePasswordComponent,
-    DisttMasterComponent,
+    //DisttMasterComponent,
     AlphaCharacterDirective,
     ExceljnnurmComponent,
     NumberDirective,
@@ -259,7 +272,13 @@ const routes: Routes = [
     ReportStateDistrictCityWiseComponent,
     ReportStateWiseComponent,
     ProjectBriefDetailComponent,
-    ProjectCodeWiseReportComponent 
+    ProjectCodeWiseReportComponent,
+    DistrictMasterComponent,
+    ConstituencyMasterComponent,
+    ClassificationMasterComponent,
+    ComponentMasterComponent,
+    MappingClassificationMasterComponent,
+    SchemeMasterComponent 
   ],
   imports: [
     CountoModule,

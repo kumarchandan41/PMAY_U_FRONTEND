@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ConstantUrlService } from '../Shared/constant-url.service';
 
 
 
@@ -10,17 +11,21 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
   [x: string]: any;
-  baseUrl = "http://localhost:58396/Api";
+//  baseUrl = "http://localhost:58396/Api";
+baseUrl:string;
+ // baseUrl = "http://10.196.69.102/hfa_api/Api";
 
-  
 
   //apiUrl ="http://10.196.69.102/hfa_api/API/Authenticate/";
   //apiUrlReg ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
  
   constructor(
-    private http: HttpClient,
+    private http: HttpClient,private constantUrlService: ConstantUrlService
 
-  ) { }
+  ) {
+
+    this.baseUrl=this.constantUrlService.baseUrl;
+   }
 
   //get api for scheme master
   getSchemeData(): Observable<any> {

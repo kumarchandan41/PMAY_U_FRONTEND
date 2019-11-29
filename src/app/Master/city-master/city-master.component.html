@@ -1,179 +1,184 @@
-<div class="container">
-    <div class="row"><h2>City Master</h2></div>
-  <div class="row">
-          <div class="col-md-4">
-              <b>Type any keyword to search</b><br>
-              <input type="text" [(ngModel)]="searchText" autocomplete="off" class="form-control col-md-4">
-          </div>
-          <div class="row" align="right" style="padding:10px;padding-right: 40px">
-              <input type="button" (click)="openModalDialog()" value="Add City" class="btn btn-default">
-          </div>
-  </div>
-  <div class="row">
-      </div>
-      <hr>
-      <div class="row">
-          <table class="table table-striped" align="center">
-              <tr class="btn-primary" style="height: 50px;width:600px;">
-                  <th>State Name</th>                
-                  <th>State code</th>
-                  <th>Distt Name</th>                
-                  <th>Dcode</th>
-                  <th>City Name</th>
-                  <th>City Code</th>
-                  <th>Status</th>
-                  <th style="width: 100px">Action</th>
-              </tr>
-              <tr *ngFor="let City_ of CityMaster | paginate: { itemsPerPage: 5, currentPage: p } | filter:searchText" >
-                  <!-- <td style="padding-left: 40px">{{dist.DisttId}}</td> -->
-                  <td>{{City_.StatesName}}</td>
-                  <td>{{City_.Codes}}</td>
-                   <td>{{City_.District}}</td>
-                  <td>{{City_.Dcode}}</td>
-                  <td>{{City_.City}}</td>
-                  <td>{{City_.CityCode}}</td>
-                  <td>{{City_.Status}}</td>
-                  <td  style="padding: 5px"><button type="button" (click)="EditState(dist)" class="btn btn-link">Edit</button>&nbsp;&nbsp;
-              </tr>
-              <tr>
-                  <td colspan="4">
-                          <ul class="pagination">  
-                                      <pagination-controls (pageChange)="p = $event"></pagination-controls>  
-                          </ul>  
-                 </td>
-              </tr>
-          </table>
-  </div>
-  </div>
-  
-  
-  <!-- modal -->
-  <div class="modal" tabindex="-1" role="dialog" style="height: 510px" [ngStyle]="{'display':display}">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color:#2C7BBA;color:white;height: 50px;">
-              <div style="width:570px">
-                  <div style="width: 550px;float:left"><h4 class="modal-title">Save City</h4></div>
-                  <div style="width: 20px;float:left">
-                      <button type="button" class="close" style="color: white" aria-label="Close" (click)="closeModalDialog()"><span aria-hidden="true">&times;</span></button>
-                  </div>
-              </div>   
-      </div>
-      <!-- modal-body -->
 
-
-    
-
-
-      <div class="modal-body">
-        <div class="row" style="padding:15px">
-                    <div class="row" style="padding: 4px">
-                                <div class="row" style="padding: 4px">
-                                        <div class="col-md-4">
-                                            <input type="hidden" [(ngModel)]="DisttId">
-                                            <label>State</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                                <select class="form-control" placeholder="Choose State" [(ngModel)]="StateCode" (change)="getStateDetails($event.target.value)"
-                                                            style="width: 300px;font-display: #FF00FF;color: black">
-                                                            <option [selected]="true"  >{{StateMessage}}</option>
-                                                            <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
-                                                            {{sntry.States_UT}}     
-                                                            </option>
-                                                </select> 
-                                        </div>
-                                </div>
-                                <div class="row">
-                                        <div class="col-md-4">
-                                            <label>District Name </label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div style="border: white"><select class="form-control" placeholder="" (change)="getDistrictDetails($event.target.value)"
-                                                style="width: 200px;font-display: black;color: black;;border-color: black;font-family: Arial, Geneva, Tahoma, sans-serif">
-                                                <option value={{distValue}}>{{DistrictMessage}}</option>
-                                                <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
-                                                    {{sntry.District}}
-                                                </option>
-                                                </select>
-                                        </div>
-                                        </div>
-                                </div>
-                                <!-- <div class="row">
-                                        <div class="col-md-4">
-                                            <label>City</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="col-md-4">
-                                                  <div style="color:arial-narrow;border: black"> <select class="form-control" placeholder="Choose City"
-                                                  (change)="getCityDetails($event.target.value)"
-                                                  style="width: 200px;font-size: 18px;font-display: black;color:black;border-color: black;font-family: Arial, Helvetica, sans-serif">
-                                                  <option value={{cityValue}}>{{CityMessage}}</option>
-                                                  <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
-                                                    {{sntry.City}}
-                                                  </option>
-                                                </select>  </div>
-                                          </div>
-                                        </div>
-                                </div> -->
-                                <div class="row"  style="padding: 4px">
-                                        <div class="col-md-4">
-                                            <label>City Name</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input type="text" name="City" numeric maxlength="5"   [(ngModel)]="Dcode"  class="form-control">
-                                        </div>
-                                </div>
-                                <div class="row"  style="padding: 4px">
-                                    <div class="col-md-4">
-                                        <label>City Code</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" name="CityCode" numeric maxlength="5"   [(ngModel)]="Dcode"  class="form-control">
-                                    </div>
-                            </div>
-                                <div class="row" style="align-items: center;padding: 4px">
-                                    <div class="col-md-4">
-                                        <label>Status</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <select class="form-control" [(ngModel)]="Active"
-                                        style="font-display: #FF00FF;color:black;">
-                                                <option  [selected]="true" [ngValue]="Active" >Active</option>
-                                                <option [ngValue]="Inactive">Inactive</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <!-- <div class="row" style="align-items: center;padding: 4px">
-                                        <div class="col-md-4">
-                                            <label>Backward</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                                <fieldset id="horizontal" class="horizontal">
-                                                        <input type="radio"  [(ngModel)]="BackwardDistrict"  name="backward" value="Yes">    Yes 
-                                                        <input type="radio"  [(ngModel)]="BackwardDistrict"  name="backward" value="No"> No 
-                                                    </fieldset>
-                                        </div>
-                                </div>
-                                <div class="row" style="align-items: center;padding: 4px">
-                                            <div class="col-md-4">
-                                                <label>Minority</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                    <fieldset id="horizontal" class="horizontal">
-                                                            <input type="radio"  [(ngModel)]="Minority"    name="Minority" value="Yes">    Yes 
-                                                            <input type="radio"  [(ngModel)]="Minority"    name="Minority" value="No"> No 
-                                                        </fieldset>
-                                            </div>
-                                </div> -->
-                    </div>
-        </div>
-            <!-- modal-footer -->
-            <div class="modal-footer">
-                    <input type ="button" (click)="SaveDataDistt()" value="{{action}}" class="btn btn-success" />&nbsp;&nbsp;&nbsp;
-                    <input type ="button"  (click)="ResetState()" value="Reset" class="btn btn-warning" />      
+  <div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+    <div class="w3-card-4">
+      <h3
+      style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
+        Create City-Master </h3>
+    </div>
+    <br>
+    <div class="form-container">
+      <form [formGroup]="cityMaster" (ngSubmit)="onClickCityMaster($event, cityMaster)">
+          <div class="w3-row">
+              <div class="w3-quarter w3-left" style="width: 10%;">
+                  <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                      State Name :
+                    </label>
+              </div>
+              <div class="w3-quarter w3-left" style="width: 22%;">
+                  <select [formControl]="ddlStateCode"  [(ngModel)]="State"  style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                  (change)="adminSandbox.getStateDistrictData($event.target.value);adminSandbox.getCityData($event.target.value,null);this.District=''"
+                  class="w3-input w3-border">
+                  <option value="" disabled>Please select state--</option>
+                  <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                      {{state.States_UT}}</option>
+              </select>
+        <label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+          select
+          state name. </label>
+              </div>
+             
+              <div class="w3-quarter w3-center" style="width: 10%;">
+                  <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                      District Name :
+                    </label>
+              </div>
+              <div class="w3-quarter w3-left" style="width: 22%;">
+                  <select [formControl]="ddlDistrictCode" [(ngModel)]="District"    style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                  (change)="adminSandbox.getDistrictCityData($event.target.value);adminSandbox.getCityData(ddlStateCode.value,ddlDistrictCode.value);" class="w3-input w3-border">
+                  <option value="" disabled>Please select district--</option>
+                  <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster"
+                      [value]="ditrict.Dcode">
+                      {{ditrict.District}}</option>
+              </select>       
+                <label *ngIf="submitted && ddlDistrictCode.hasError('required')" class="error-label"
+                  style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                  select
+                  district name. </label>
+              </div>
+              <div class="w3-quarter w3-center" style="width: 10%;">
+                <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                  City Name:
+                </label>
+              </div>
+              <div class="w3-quarter w3-left" style="width: 22%;">
+                  <input type="text" class="w3-input w3-border"  style="font-family: Arial, Geneva, Tahoma, sans-serif;" [formControl]="txtCityName" placeholder="City Name">
+                  <label *ngIf="submitted && txtCityName.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                    enter city name. </label>
+              </div>
             </div>
+      <br>
+        <div class="w3-row">
+           
+          <div class="w3-quarter w3-left" style="width: 10%;">
+            <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              City Code :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <input type="text" class="w3-input w3-border"  style="font-family: Arial, Geneva, Tahoma, sans-serif;" [formControl]="txtCityCode" placeholder=" City Code ">
+            <label *ngIf="submitted && txtCityCode.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              enter city code.</label>
+          </div>
+        </div>
+        <br>
+        <div style="text-align: center">
+          <button type="submit"  style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+        </div>
+        <br>
+      </form>
+      <table class="table" border="1px"  style="width: 89%;" align="center" *ngIf="adminSandbox.cityMaster.length>0">
+        <thead style="background-color: lightgray; font-weight: bold">
+          <tr>
+            <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">City Name</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">City Code</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let city of adminSandbox.cityMaster;let i = index"
+            style="text-align: center;background-color:white">
+            <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{city.City}}</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{city.CityCode}}</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+              <button (click)="adminSandbox.editCityMaster('block',city)" type="submit"
+                class="w3-btn w3-green w3-round w3-ripple">Edit</button>
+              &nbsp;
+              <button (click)="adminSandbox.deleteCityData(city.CityId)" type="submit"
+                class="w3-btn w3-red w3-round w3-ripple">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+
+<div [style.display]="adminSandbox.showProperty" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-teal">
+      <span (click)="adminSandbox.editCityMaster('none','')"
+        class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2 style="padding-left: 17px;font-family: Arial, Geneva, Tahoma, sans-serif;">Update City-Master</h2>
+    </header>
+    <br>
+    <div class="w3-container">
+      <form>
+        <div class="w3-row">
+            <div class="w3-quarter w3-left">
+                <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                  State Name :
+                </label>
+              </div>   
+                  <div class="w3-quarter w3-left" >
+                      <select name="ddlStateCode"   [(ngModel)]="adminSandbox.EditCityMaster.ddlStateCode"
+                          (change)="adminSandbox.getStateDistrictData($event.target.value)"
+                          class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          <option value="" disabled>Please select state--</option>
+                          <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                              {{state.States}}</option>
+                      </select>        
+              </div>
+          <div class="w3-quarter w3-left">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              District Name :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left">
+              <select [formControl]="ddlDistrictCode" [(ngModel)]="adminSandbox.EditCityMaster.ddlDistrictCode"
+              (change)="adminSandbox.getDistrictCityData($event.target.value)" class="w3-input w3-border"
+              style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              <option value="" disabled>Please select district--</option>
+              <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster"
+                  [value]="ditrict.Dcode">
+                  {{ditrict.District}}</option>
+          </select>
+          </div>       
+        </div>
+        <div>
+          <input type="hidden" name="hiddendTxtCityID" [(ngModel)]="adminSandbox.EditCityMaster.hiddendTxtCityID" />
+        </div>
+        <br>
+        <div class="w3-row">
+            <div class="w3-quarter w3-center">
+                <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                  City Name :
+                </label>
+              </div>
+              <div class="w3-quarter w3-left">
+                <input type="text" [(ngModel)]="adminSandbox.EditCityMaster.txtCityName" class="w3-input w3-border"
+                  name="txtCityName" placeholder=" City Name" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+    
+              </div>
+          <div class="w3-quarter w3-left">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              City Code :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left">
+            <input type="text" [(ngModel)]="adminSandbox.EditCityMaster.txtCityCode" class="w3-input w3-border"
+              name="txtCityCode" placeholder=" City Code " style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+          </div>
+        </div>
+        <br>
+        <div style="text-align: center">
+          <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;" (click)="adminSandbox.updateCityMaster()"
+            class="w3-btn w3-orange w3-round w3-ripple">Submit</button>         
+        </div>
+        <br>
+      </form>
+    </div>
+    <footer class="w3-container w3-teal">
+    </footer>
   </div>
-  </div>
-  
+</div>

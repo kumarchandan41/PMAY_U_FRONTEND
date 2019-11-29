@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DisttMasterComponent } from './distt-master.component';
+import { ComponentMasterComponent } from './component-master.component';
 
-describe('DisttMasterComponent', () => {
-  let component: DisttMasterComponent;
-  let fixture: ComponentFixture<DisttMasterComponent>;
+describe('ComponentMasterComponent', () => {
+  let component: ComponentMasterComponent;
+  let fixture: ComponentFixture<ComponentMasterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DisttMasterComponent ]
+      declarations: [ ComponentMasterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DisttMasterComponent);
+    fixture = TestBed.createComponent(ComponentMasterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Excel_CLSSCityWisefile, Excelfile, Excel_PMAY_Data, ExcelSheet, Excel_CLSSCityMain, ExcelfilePhyDash, Excel_JNNURN_Data, Excel_CLSSStateWisefile, Excel_DemandCityWise } from '../model/excelfile';
+import { ConstantUrlService } from 'src/app/Shared/constant-url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,14 @@ export class GraphService {
   CLSS_ValuesList(stateCode: any) {
     throw new Error("Method not implemented.");
   }
-   url="http://localhost:58396/api/Buldings/";
-   url1 ="http://localhost:58396/API/RegistrationApi/";
+  // url="http://localhost:58396/api/Buldings/";
+  // url1 ="http://localhost:58396/API/RegistrationApi/";
+
+  url:string;
+  url1:string;
+   //url="http://10.196.69.102/hfa_api/api/Buldings/";
+   //url1 ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
+   
 
   StateDetails : States[];
   StateDetails1: States[];
@@ -34,7 +41,13 @@ export class GraphService {
   ChartDetail:Charts;
   ComponentData : Comp_Values[];
 
-  constructor(private http:HttpClient, private locationStrategy: LocationStrategy) { }
+  constructor(private http:HttpClient, private locationStrategy: LocationStrategy ,private constantUrlService: ConstantUrlService ) { 
+       
+     this.url=this.constantUrlService.url;
+     this.url1=this.constantUrlService.url1;
+
+  }
+
 
 PriventBackButton()
 {

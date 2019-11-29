@@ -2306,7 +2306,7 @@ getCityDetails(cityCode) {
         }
         catch{}
         finally{}
-alert(this.PC14AHP);
+//alert(this.PC14AHP);
         
         
         this.PC15AHP= 0;

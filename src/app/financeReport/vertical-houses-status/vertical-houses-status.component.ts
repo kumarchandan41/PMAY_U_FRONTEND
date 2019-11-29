@@ -1257,7 +1257,7 @@ GetFilterDatanew (stateCode,districtCodes ,cityCodes, Compid)
     //   }
     //   catch{}
     //   finally{}
-alert();
+//alert();
     this.service.GetStatusofHouses_CompWiseNew(stateCode,districtCodes ,cityCodes,"BLCS","2015-16").subscribe(result_BLCS15=>{
       try{
         this.HouseInvolved1=result_BLCS15[0].Housesinvolved; 

@@ -7,7 +7,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginServiceService {
-url = "http://localhost:58396/API/RegistrationApi";
+//url = "http://localhost:58396/API/RegistrationApi";
+url = "http://10.196.69.102/hfa_api/API/RegistrationApi";
+
+
+
   constructor(private http:HttpClient) { }
 
 CreateUser(user:User_registration):Observable<string>{

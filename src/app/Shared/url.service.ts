@@ -7,12 +7,16 @@ import { States, District, City, DistrictMaster } from './CommonModel';
   providedIn: 'root'
 })
 export class UrlService {
- url="http://localhost:58396/Api/RegistrationApi/";
- urlHFA="http://localhost:58396/API/HFAMaster/";
- urlHFA1="http://localhost:58396/Api/Buldings/";
+//  url="http://localhost:58396/Api/RegistrationApi/";
+//  urlHFA="http://localhost:58396/API/HFAMaster/";
+//  urlHFA1="http://localhost:58396/Api/Buldings/";
 
  
+ url="http://10.196.69.102/hfa_api/Api/RegistrationApi/";
+ urlHFA="http://10.196.69.102/hfa_api/API/HFAMaster/";
+ urlHFA1="http://10.196.69.102/hfa_api/Api/Buldings/";
 
+ 
   
   constructor(private http:HttpClient) { }
 

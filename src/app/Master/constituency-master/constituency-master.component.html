@@ -1,0 +1,182 @@
+
+    <div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+      <div class="w3-card-4">
+      <h3
+      style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
+        Create Constituency-Master </h3>
+    </div>
+    <br>
+    <div class="form-container">
+      <form [formGroup]="constituencyMaster" (ngSubmit)="onClickConstituencyMaster($event, constituencyMaster)">
+          <div class="w3-row">
+              <div class="w3-quarter w3-left" style="width: 10%;">
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                      City Name :
+                    </label>
+              </div>
+              <div class="w3-quarter w3-left" style="width: 22%;">
+                  <select [formControl]="ddlCity" [(ngModel)]="CityCode" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      <option value="" disabled>Please select city--</option>
+                      <option *ngFor="let city of adminSandbox.constituencyCityMaster" [value]="city.CityCode">
+                        {{city.City}}</option>
+                    </select>
+                    <label *ngIf="submitted && ddlCity.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                      select
+                      state name. </label>
+              </div>
+             
+              <div class="w3-quarter w3-center" style="width: 10%;">
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                      Constituency Name :
+                    </label>
+              </div>
+              <div class="w3-quarter w3-left" style="width: 22%;">
+                  <input type="text" class="w3-input w3-border" [formControl]="txtConstituencyName"
+                  placeholder="Constituency Name" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                <label *ngIf="submitted && txtConstituencyName.hasError('required')" class="error-label"
+                  style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter
+                  constituency name. </label>
+              </div>
+              <div class="w3-quarter w3-center" style="width: 10%;">
+                  <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                      Constituency Number :
+                    </label>
+              </div>
+              <div class="w3-quarter w3-left" style="width: 22%;">
+                  <input type="text" class="w3-input w3-border" [formControl]="txtConstituencyNumber"
+                  placeholder="Constituency Number" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                <label *ngIf="submitted && txtConstituencyNumber.hasError('required')" class="error-label"
+                  style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter name of constituency number.</label>
+              </div>
+            </div>
+       
+        <br>
+        <div class="w3-row">
+        
+          <div class="w3-quarter w3-left" style="width: 10%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              Name Of Shitting MP :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <input type="text" class="w3-input w3-border" [formControl]="txtShittingMP"
+              placeholder=" Name Of Shitting MP" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+            <label *ngIf="submitted && txtShittingMP.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              enter name of shitting MP.</label>
+          </div>
+        </div>
+        <br>
+        <div style="text-align: center">
+          <button type="submit" class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+        </div>
+        <br>
+      </form>
+      <table class="table" border="1px"  style="width: 89%;" align="center">
+        <thead style="background-color: lightgray; font-weight: bold">
+          <tr>
+            <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Constituency Name</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Constituency Number</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Name Of Shitting MP</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let constituency of adminSandbox.constituencyMaster;let i = index"
+            style="text-align: center;background-color:white">
+            <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{constituency.ConstituencyName}}</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{constituency.ConstituencyNumber}}</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{constituency.NameShittingMp}}</td>
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+              <button (click)="adminSandbox.editConstituencyMaster('block',constituency)" type="submit"
+                class="w3-btn w3-green w3-round w3-ripple">Edit</button>
+              &nbsp;
+              <button (click)="adminSandbox.deleteConstituencyData(constituency.ConstituencyId)" type="submit"
+                class="w3-btn w3-red w3-round w3-ripple">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot *ngIf="adminSandbox.constituencyMaster.length==0">
+          <tr>
+            <td colspan="5">
+              <a style="font-family: Arial, Geneva, Tahoma, sans-serif;">No Records Found</a>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+<div [style.display]="adminSandbox.showProperty" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-teal">
+      <span (click)="adminSandbox.editConstituencyMaster('none','')"
+        class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2 style="padding-left: 17px;font-family: Arial, Geneva, Tahoma, sans-serif;">Update Constituency-Master</h2>
+    </header>
+    <br>
+    <div class="w3-container">
+      <form>
+        <div class="w3-row">
+          <div class="w3-quarter w3-left">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              City Name :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left">
+            <select name="ddlCity" style="font-family: Arial, Geneva, Tahoma, sans-serif;" [(ngModel)]="adminSandbox.EditConstituencyMaster.ddlCity" class="w3-input w3-border">
+              <option selected="selected">Please select city--</option>
+              <option *ngFor="let city of adminSandbox.constituencyCityMaster" [value]="city.CityCode">
+                {{city.City}}</option>
+            </select>
+
+          </div>
+          <div class="w3-quarter w3-left">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              Constituency Name :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left">
+            <input type="text" style="font-family: Arial, Geneva, Tahoma, sans-serif;" [(ngModel)]="adminSandbox.EditConstituencyMaster.txtConstituencyName"
+              class="w3-input w3-border" name="txtConstituencyName" placeholder="Constituency Name">
+          </div>
+        </div>
+        <div>
+          <input type="hidden" name="hiddendTxtConstituencyID"
+            [(ngModel)]="adminSandbox.EditConstituencyMaster.hiddendTxtConstituencyID" />
+        </div>
+        <br>
+        <div class="w3-row">
+          <div class="w3-quarter w3-left">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              Constituency Number :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left">
+            <input type="text" style="font-family: Arial, Geneva, Tahoma, sans-serif;" [(ngModel)]="adminSandbox.EditConstituencyMaster.txtConstituencyNumber"
+              class="w3-input w3-border" name="txtConstituencyNumber" placeholder="Constituency Number">
+          </div>
+          <div class="w3-quarter w3-left">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              Name Of Shitting MP :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left">
+            <input type="text" style="font-family: Arial, Geneva, Tahoma, sans-serif;" [(ngModel)]="adminSandbox.EditConstituencyMaster.txtShittingMP"
+              class="w3-input w3-border" name="txtShittingMP" placeholder=" Name Of Shitting MP">
+          </div>
+        </div>
+        <br>
+        <div style="text-align: center">
+          <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;" (click)="adminSandbox.updateConstituencyMaster()"
+            class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+        </div>
+        <br>
+      </form>
+    </div>
+    <footer class="w3-container w3-teal">
+
+    </footer>
+  </div>
+</div>
