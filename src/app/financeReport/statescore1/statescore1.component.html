@@ -1,44 +1,32 @@
-<div class="row" id="drpdown">
-  <div class="col-md-2">
-  </div>
-  
-  <div class="col-md-1" style="padding-left: 70px;padding-top:5px;font-family: Arial, Helvetica, sans-serif">
-          <b> State:-</b>
-  </div>
-  <div class="col-md-2"  style="padding-left: 70px">
-    <div>
-      <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event)"
-        style="width: 200px;font-display: #FF00FF;color: yellow;background-color: black">
-        <option value={{stValue}}>{{StateMessage}}</option>
-        <option *ngFor='let sntry of stateDetails' [value]='sntry.Codes'>
-          {{sntry.States_UT}}
-        </option>
-      </select></div>  
-  </div> 
-  <div class="col-md-1">
+<div>
+  <div class="container-fuild">
+    <div id="drpdown">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div id='filter' class="row">
+          <div class="col-md-1">
+            <b> State:-</b>
+          </div>
+          <div class="col-md-7 col-sm-7">
+              <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event)"
+                style="width: 200px;font-display: #FF00FF;color: yellow;background-color: black">
+                <option value={{stValue}}>{{StateMessage}}</option>
+                <option *ngFor='let sntry of stateDetails' [value]='sntry.Codes'>
+                  {{sntry.States_UT}}
+                </option>
+              </select>
+          </div>
+
+          <div class="col-md-4 col-md-4" style="padding-left: 30px">
+            <button class="Downloadbtn" (click)="pdfReport()" width="4px"><i class="fa fa-download"></i>Print</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-md-1" style="padding-left: 30px">
-        <button class="Downloadbtn" (click)="pdfReport()" width="4px" ><i class="fa fa-download"></i>Print</button>
-    </div>
-    <!-- <div class="col-md-1">
-    </div>    -->
-      
-  <div class="col-md-1" style="padding-left: 100px">
-    <!-- <button class="previous" (click)="AdminPage()"  width="4px"> &laquo; Previous</button> -->
-  </div>
-  <div class="col-md-1">
-    </div>    
-  <div class="col-md-2">
-    </div>
-  <div class="col-md-2">
-    </div>
-    <div class="col-md-1">
-      </div> 
   </div>
 
 
 
-<!DOCTYPE html>
+  <!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Pradhan Mantri Awas Yojana</title>
@@ -47,514 +35,562 @@
  <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 </head>
-<body>
- <table id="statescore"  align="center" padding="20px" style="border-color: white;align-content: center">
-      <div class="container"> 
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-          
+<body> -->
+  <section id="statescore" class="container-fuild">
+      <div class="col-md-12 col-sm-12">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+
+              <div style="text-align: center; padding-top: 5px;">
+                <b class="headerStateName">({{StateText}}) </b><br />
+                <p class="headerC">Pradhan Mantri Awas Yojana (U)</p>
+                <!-- <img src ="F:\AngularAll\nbo\15_new1Hfa\hfaapp\src\assets\images\pmay.jpg" width="80px" height="80px"/> -->
+                <hr>
+                <b style="font-size: 16px;">S C O R E C A R D</b>
+              </div>
+              <table id="one" width="100%">
+                <tr>
+                  <td style="color:blue;font-size: 14px">Sanction vs Demand</td>
+                  <td style="color:blue;font-size: 14px">Grounding vs Sanction</td>
+                  <td style="color:blue;font-size: 14px">Completion vs Sanction</td>
+                  <td style="color:blue;font-size: 14px">BLC Houses Geotagged</td>
+                  <td style="color:blue;font-size: 14px">Release vs Sanction</td>
+                  <td style="color:blue;font-size: 14px">MIS Annexure uploading</td>
+                  <td style="color:blue;font-size: 14px">Beneficiary Attachment</td>
+                  <td style="color:blue;font-size: 14px">Reforms Achievement</td>
+                  <td style="color:blue;font-size: 14px">JN Houses vacant</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 15px"><b>{{Sanction_vs_Demand1}}%</b></td>
+                  <td style="font-size: 15px"><b>{{Grounding_Sanction}}%</b></td>
+                  <td style="font-size: 15px"><b>{{Completion_vs_Sanction}}%</b></td>
+                  <td style="font-size: 15px"><b>{{BLC_Houses_Geotagged}}%</b></td>
+                  <td style="font-size: 15px"><b>{{Relelase_vs_Sanction}}%</b></td>
+                  <td style="font-size: 15px"><b>{{MIS_Annexure_uploading}}%</b></td>
+                  <td style="font-size: 15px"><b>{{Beneficiary_Attachment }}%</b></td>
+                  <td style="font-size: 15px"><b>100%</b></td>
+                  <td style="font-size: 15px"><b>{{JN_Houses_vacant1}}</b></td>
+                </tr>
+
+              </table>
+            </div>
+
+          </div>
+
+
+
+          <div id="tblPdf">
+
+            <div class="container-fuild">
+                <div class="row" style="padding-top: 5px;">
+                  <div class="col-md-6 col-sm-6">
+                    <table id="two">
+                      <tr>
+                        <td colspan="4" style="border-color: white">
+                          <b class="header_Table">General</b>
+                        </td>
+                      </tr>
+                      <tr style="border-top: 2px solid black">
+                        <td style="background-color:#A7E074;align-items:center">Population (Census 2011)<br /> (Nos in
+                          Cr.)</td>
+                        <td style="background-color:#A7E074;align-items:center">TG-12 Housing Shortage <br />(Nos in
+                          lakh)</td>
+                        <td style="background-color:#A7E074;align-items:center">Aadhar Coverage</td>
+                        <td style="background-color:#A7E074;align-items:center">Cities in Mission</td>
+                      </tr>
+                      <tr>
+                        <td align="center">
+                          {{Population_Census_2011 ?Population_Census_2011.toFixed(2):Population_Census_2011}} </td>
+                        <td align="center"> {{TG_12_Housing_Shortage1}} </td>
+                        <td align="center">{{Aadhar_Coverage}} </td>
+                        <td align="center">{{Cities_included_in_Mission}} </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <table id="three">
+                      <tr>
+                        <td colspan="3" style="border-color: white">
+                          <b class="header_Table">Demand Survey</b>
+                        </td>
+                      </tr>
+                      <tr style="border-top: 2px solid black;">
+                        <td style="background-color:#A7E074;align-items:center">Total Demand (as per Road
+                          Map)<br /> (Nos in lakh)
+                        </td>
+                        <td style="background-color:#A7E074">Demand met <br /> (Nos in lakh)</td>
+                        <td style="background-color:#A7E074">% Demand met</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          {{Total_Demand_as_per_Road_map ? Total_Demand_as_per_Road_map.toFixed(2):Total_Demand_as_per_Road_map}}
+                        </td>
+                        <td>{{Demand_met ?Demand_met.toFixed(2):Demand_met}}</td>
+                        <td>{{Per_Demand_met}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+            </div>
+
+            <div class="container-fuild">
+                <div class="row" style="padding-top: 5px;">
+                  <div class="col-md-6 col-sm-6">
+                    <table id="four">
+                      <tr style="border:0px!important;font-size: 14px">
+                        <td colspan="3" style="border-color: white">
+                          <b class="header_Table" style="font-size: 14px">Beneficiaries with Aadhaar</b>
+                        </td>
+                      </tr>
+                      <tr style="border-top: 2px solid black;">
+                        <td style="background-color:rgb(173, 211, 211)"> Total PMAY(U)<br /> Houses (Nos) </td>
+                        <td style="background-color:rgb(173, 211, 211)"> Valid Aadhar <br />Beneficiaries</td>
+                        <td style="background-color:rgb(173, 211, 211)">Beneficiary <br />%age</td>
+                      </tr>
+                      <tr>
+                        <td> {{Total_PMAY_U_Houses_ISSR_AHP_BLC_CLSS1.toLocaleString('en-IN')}}</td>
+                        <td>{{Valid_Aadhar_Beneficiaries1}}</td>
+                        <td>{{Bene_Percent|number:'1.0-2'}}%</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <table id="five">
+                      <tr>
+                        <td colspan="3" style="border-color: white">
+                          <b class="header_Table">HFAPoA</b>
+                        </td>
+                      </tr>
+                      <tr style="border-top: 2px solid black;">
+                        <td style="background-color:rgb(173, 211, 211)">HFAPoA Funds<br /> Released (Rs in lakh)</td>
+                        <td style="background-color:rgb(173, 211, 211)">HFAPoA <br />Received</td>
+                        <td style="background-color:rgb(173, 211, 211);height:45px">HFAPoA <br />Status</td>
+                      </tr>
+                      <tr>
+                        <td align="center!important">{{HFAPoA_funds_Released}}</td>
+                        <td align="center!important">{{HFAPoA_Received}}</td>
+                        <td align="center!important">{{HFAPoA_Status}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+            </div>
+
+
+
+            <div class="container-fuild">
+              <div class="row" style="padding-top: 5px;">
+                <div class="col-md-12 col-sm-12">
+                  <table id="six" >
+                    <tr>
+                      <td colspan="7" style="border-color: white">
+                        <b class="header_Table1" style="font-size: 14px">PMAY (U) - Progress</b>
+                      </td>
+                    </tr>
+                    <tr style="border-top: 2px solid black;font-size: 14px">
+                      <td rowspan="2" colspan="1" style="background-color:rgb(240, 178, 137);font-size: 14px">Component
+                      </td>
+                      <td rowspan="1" colspan="4" style="background-color:rgb(240, 178, 137);font-size: 14px">Central
+                        Assistance ( Rs in Cr)</td>
+                      <td rowspan="1" colspan="3" style="background-color:rgb(240, 178, 137);font-size: 14px">Houses
+                        (Nos.)</td>
+                    </tr>
+                    <tr style="font-size: 14px">
+                      <td style="background-color:rgb(240, 178, 137);font-size: 14px">Committed</td>
+                      <td style="background-color:rgb(240, 178, 137);font-size: 14px">Sanctioned</td>
+                      <td style="background-color:rgb(240, 178, 137);font-size: 14px">Released </td>
+                      <td style="background-color:rgb(240, 178, 137);font-size: 14px">Balance </td>
+                      <td style="background-color:rgb(240, 178, 137);font-size: 14px">Sanctioned </td>
+                      <td style="background-color:rgb(240, 178, 137);font-size: 14px">Grounded </td>
+                      <td style="background-color:rgb(240, 178, 137);font-size: 14px">Completed</td>
+                    </tr>
+                    <tr style="font-size: 14px">
+                      <td style="text-align: left!important;font-size: 14px"><b>Total ISSR
+                          ({{ISSR_NOP.toLocaleString('en-IN')}})</b></td>
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{ISSR_CA_Committed.toLocaleString('en-IN')}}</td>
+
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{ISSR_Sanct_for_Release.toLocaleString('en-IN')}}</td>
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{ISSR_CA_Released.toLocaleString('en-IN')}}</td>
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{ISSR_Balance_for_Release.toLocaleString('en-IN')}}</td>
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{ISSR_Houses_Sanctioned.toLocaleString('en-IN')}}</td>
+                      <td style="text-align: right!important;font-size: 14px">{{ISSR_Grounded.toLocaleString('en-IN')}}
+                      </td>
+                      <td style="text-align: right!important;font-size: 14px">{{ISSR_Completed.toLocaleString('en-IN')}}
+                      </td>
+                    </tr>
+                    <tr style="font-size: 14px">
+                      <td style="text-align: left!important;font-size: 14px"><b>Total AHP ({{AHP_NOP}})</b></td>
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{AHP_CA_Committed.toLocaleString('en-IN')}}</td>
+
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{AHP_Sanct_for_Release.toLocaleString('en-IN')}}</td>
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{AHP_CA_Released.toLocaleString('en-IN')}}</td>
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{AHP_Balance_for_Release.toLocaleString('en-IN')}}</td>
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{AHP_Houses_Sanctioned1.toLocaleString('en-IN')}}</td>
+                      <td style="text-align: right!important;font-size: 14px">{{AHP_Grounded1.toLocaleString('en-IN')}}
+                      </td>
+                      <td style="text-align: right!important;font-size: 14px">{{AHP_Completed1.toLocaleString('en-IN')}}
+                      </td>
+                    </tr>
+                    <tr style="font-size: 14px">
+                      <td style="text-align: left!important;font-size: 14px"><b>Total BLC ({{BLC_NOP}})</b></td>
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{BLC_CA_Committed.toLocaleString('en-IN')}}</td>
+
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{BLC_Sanct_for_Release1.toLocaleString('en-IN')}}</td>
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{BLC_CA_Released1.toLocaleString('en-IN')}}</td>
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{BLC_Balance_for_Release1.toLocaleString('en-IN')}}</td>
+                      <td style="text-align: right!important;font-size: 14px">
+                        {{BLC_Houses_Sanctioned1.toLocaleString('en-IN')}}</td>
+                      <td style="text-align: right!important;font-size: 14px">{{BLC_Grounded1.toLocaleString('en-IN')}}
+                      </td>
+                      <td style="text-align: right!important;font-size: 14px">{{BLC_Completed1.toLocaleString('en-IN')}}
+                      </td>
+                    </tr>
+                    <tr style="font-size: 14px">
+                      <td style="background-color: #000;text-align:center!important">
+                        <font style="color:white;text-align:right!important;font-size:13px">Total ({{proj}} Projects)
+                        </font>
+                      </td>
+
+                      <td style="background-color: #000;text-align:right!important">
+                        <font style="color:white;text-align:right!important;font-size:13px">
+                          {{Total_CA_Committed ?Total_CA_Committed.toLocaleString('en-IN'):Total_CA_Committed.toLocaleString('en-IN')}}
+                        </font>
+
+
+                      <td style="background-color: #000;text-align:right!important">
+                        <font style="color:white;text-align:right!important;font-size:13px">
+                          {{Sanct_Release?Sanct_Release.toLocaleString('en-IN'):Sanct_Release.toLocaleString('en-IN')}}
+                        </font>
+
+                      </td>
+                      <td style="background-color: #000;text-align:right!important">
+                        <font style="color:white;text-align:right!important;font-size:13px">
+                          {{TOTAL_Release?TOTAL_Release.toLocaleString('en-IN'):TOTAL_Release.toLocaleString('en-IN')}}
+                        </font>
+                      </td>
+                      <td style="background-color: #000;text-align:right!important">
+                        <font style="color:white;text-align:right!important;font-size:13px">{{Balance3}}</font>
+                      </td>
+                      <td style="background-color: #000;text-align:right!important">
+                        <font style="color:white;text-align:right!important;font-size:13px">{{Sanct1}} </font>
+                      </td>
+                      <td style="background-color: #000;text-align:right!important">
+                        <font style="color:white;text-align:right!important;font-size:13px">{{Ground1}}</font>
+                      </td>
+                      <td style="background-color: #000;text-align:right!important">
+                        <font style="color:white;text-align:right!important;font-size:13px">{{complted1}}</font>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
         
-                <div class="row">   
-                    <div>
-                  
-                       <div class="text-center1">
-                           <b class="headerStateName">({{StateText}}) </b><br/>
-                           <p class="headerC">Pradhan Mantri Awas Yojana (U)</p>
-                           <!-- <img src ="F:\AngularAll\nbo\15_new1Hfa\hfaapp\src\assets\images\pmay.jpg" width="80px" height="80px"/> -->
-                           <hr style="width: 730px"> 
-                           <b>S C O R E     C A R D</b>
-                       </div>
-                           <table id="one" width="730px">
-                                     <tr>
-                                       <td style="color:blue;font-size: 14px">Sanction vs Demand</td>
-                                       <td style="color:blue;font-size: 14px">Grounding vs Sanction</td>
-                                       <td style="color:blue;font-size: 14px">Completion vs Sanction</td>
-                                       <td style="color:blue;font-size: 14px">BLC Houses Geotagged</td>
-                                       <td style="color:blue;font-size: 14px">Release vs Sanction</td>
-                                       <td style="color:blue;font-size: 14px">MIS Annexure uploading</td>
-                                       <td style="color:blue;font-size: 14px">Beneficiary Attachment</td>
-                                       <td style="color:blue;font-size: 14px">Reforms Achievement</td>
-                                       <td style="color:blue;font-size: 14px">JN Houses vacant</td>
-                                     </tr>
-                                    <tr>
-                                       <td style="font-size: 15px"><b>{{Sanction_vs_Demand1}}%</b></td>
-                                       <td style="font-size: 15px"><b>{{Grounding_Sanction}}%</b></td>
-                                       <td style="font-size: 15px"><b>{{Completion_vs_Sanction}}%</b></td>
-                                       <td style="font-size: 15px"><b>{{BLC_Houses_Geotagged}}%</b></td>
-                                       <td style="font-size: 15px"><b>{{Relelase_vs_Sanction}}%</b></td>
-                                       <td style="font-size: 15px"><b>{{MIS_Annexure_uploading}}%</b></td>
-                                       <td style="font-size: 15px"><b>{{Beneficiary_Attachment }}%</b></td>
-                                       <td style="font-size: 15px"><b>100%</b></td>
-                                       <td style="font-size: 15px"><b>{{JN_Houses_vacant1}}</b></td>
-                                     </tr>
-                                  
-                           </table>
-                   </div>
-           
-                 </div>
+            <!--1-->
+            <div class="container-fuild">
+
+              <div class="row" style="padding-top: 5px;">
+
+                <div class="col-md-5 col-sm-5 ">
+                  <table id="seven" >
+                    <tr>
+                      <td colspan="3" style="border-color: white">
+                        <b class="header_Table">PMAY - UCs (Rs in Cr)</b>
+                      </td>
+                    </tr>
+                    <tr style="border-top: 2px solid black;">
+                      <td style="background-color:rgb(140, 175, 240);">Funds Released</td>
+                      <td style="background-color:rgb(140, 175, 240);">UCs Receieved</td>
+                      <td style="background-color:rgb(140, 175, 240);">UCs Pending</td>
+                    </tr>
+                    <tr>
+                      <td>{{PMAY_Funds_Released1}}</td>
+                      <td>{{PMAY_Ucs_Received1}}</td>
+                      <td>{{PMAY_UC_Pending1}}</td>
+                    </tr>
+                  </table>
+                </div>
 
 
-      
-                 <div id="tblPdf">
+                <div  class="col-md-2 col-sm-2 ">
+                  <table id="eight">
+                    <tr>
+                      <td style="border-color: white;font-size: 14px"><b class="header_Table">Occupancy</b></td>
+                    </tr>
+                    <tr style="border-top: 2px solid black;">
+                      <td style="background-color:rgb(140, 175, 240)">PMAY(U) Houses(Nos)</td>
+                    </tr>
+                    <tr style="border-top: 2px solid black;">
+                      <td>{{PMAY_Houses_Occupied1}}</td>
+                    </tr>
+                  </table>
+                </div>
 
-                    <div class="row">
-                        <div>
-                            <div width="710px">
-                                <div style="width:360px;float: left;padding: 2px">
-                                        <table id="two"  style="width:350px;border:1px;align-content: left">
-                                                 <tr >
-                                                    <td colspan="4" style="border-color: white">
-                                                        <b class="header_Table">General</b>
-                                                    </td>
-                                                 </tr>
-                                                 <tr style="border-top: 2px solid black">
-                                                    <td  style="background-color:#A7E074;align-items:center">Population (Census 2011)<br/> (Nos in Cr.)</td>
-                                                    <td  style="background-color:#A7E074;align-items:center">TG-12 Housing Shortage <br/>(Nos in lakh)</td>
-                                                    <td  style="background-color:#A7E074;align-items:center">Aadhar Coverage</td>
-                                                    <td  style="background-color:#A7E074;align-items:center">Cities in Mission</td>
-                                                 </tr>
-                                                 <tr>
-                                                    <td align="center"> {{Population_Census_2011 ?Population_Census_2011.toFixed(2):Population_Census_2011}} </td>
-                                                    <td align="center"> {{TG_12_Housing_Shortage1}}  </td>
-                                                    <td align="center">{{Aadhar_Coverage}} </td>
-                                                    <td align="center">{{Cities_included_in_Mission}} </td>
-                                                 </tr>
-                                        </table>
-                                 </div>
-                                <div style="width:350px;float: right;padding: 2px">
-                                          <table id="three" style="width: 300px;border:1px">
-                                            <tr>
-                                              <td colspan="3" style="border-color: white">
-                                                <b class="header_Table">Demand Survey</b>
-                                              </td>
-                                            </tr>
-                                            <tr style="border-top: 2px solid black;">
-                                              <td style="background-color:#A7E074;align-items:center">Total Demand <br />(as per Road Map)<br /> (Nos in lakh)
-                                              </td>
-                                              <td style="background-color:#A7E074">Demand<br /> met <br /> (Nos in lakh)</td>
-                                              <td style="background-color:#A7E074">% Demand<br /> met</td>
-                                            </tr>
-                                            <tr>
-                                              <td>{{Total_Demand_as_per_Road_map ? Total_Demand_as_per_Road_map.toFixed(2):Total_Demand_as_per_Road_map}}</td>
-                                              <td>{{Demand_met ?Demand_met.toFixed(2):Demand_met}}</td>
-                                              <td>{{Per_Demand_met}}</td>
-                                            </tr>
-                                          </table>
-                                                </div>
-                        </div>
-                        </div>
-                      </div>
-                    
-                      <br><br>
-                      <div class="row">
-                          <div >
-                      <div width="710px">
-                          <div style="padding: 2px;width:360px;float: left;">
-                                           <table id ="four" style="width:350px;border:1px;align-content: left">
-                                              <tr style="border:0px!important;font-size: 14px">
-                                                  <td colspan="3" style="border-color: white">
-                                                      <b class="header_Table" style="font-size: 14px" >Beneficiaries with Aadhaar</b>
-                                                  </td>
-                                                </tr>
-                                                     <tr style="border-top: 2px solid black;">
-                                                        <td style="background-color:rgb(173, 211, 211)"> Total PMAY(U)<br/> Houses (Nos) </td>
-                                                        <td style="background-color:rgb(173, 211, 211)"> Valid Aadhar <br/>Beneficiaries</td>
-                                                        <td style="background-color:rgb(173, 211, 211)">Beneficiary <br/>%age</td>
-                                                     </tr>
-                                                     <tr>
-                                                        <td > {{Total_PMAY_U_Houses_ISSR_AHP_BLC_CLSS1.toLocaleString('en-IN')}}</td>
-                                                        <td >{{Valid_Aadhar_Beneficiaries1}}</td>
-                                                        <td >{{Bene_Percent|number:'1.0-2'}}%</td>
-                                                     </tr>
-                                           </table>
-                                   </div>
-                                   <div style="padding: 2px;width:350px;float: right;">
-                                           <table id ="five" style="width: 300px"  border="1" >
-                                              <tr>
-                                                  <td colspan="3" style="border-color: white">
-                                                      <b class="header_Table">HFAPoA</b>
-                                                  </td>
-                                                </tr>
-                                                     <tr style="border-top: 2px solid black;">
-                                                        <td style="background-color:rgb(173, 211, 211)">HFAPoA Funds<br/> Released (Rs in lakh)</td>
-                                                        <td style="background-color:rgb(173, 211, 211)">HFAPoA <br/>Received</td>
-                                                        <td style="background-color:rgb(173, 211, 211);height:45px">HFAPoA <br/>Status</td>
-                                                     </tr>
-                                                     <tr>
-                                                        <td align="center!important">{{HFAPoA_funds_Released}}</td>
-                                                        <td align="center!important">{{HFAPoA_Received}}</td>
-                                                        <td align="center!important">{{HFAPoA_Status}}</td>
-                                                     </tr>
-                                              </table>
-                                   </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    
-                    
-                     <div class="row">
-                        <div style="padding: 0px;align-content: center">
-                          <div   >
-                            <table id ="six"   width="730px" style="padding-left: -10px!important;padding: 2px">
-                                <tr>
-                                    <td colspan="7" style="border-color: white">
-                                        <b class="header_Table1" style="font-size: 14px">PMAY (U) - Progress</b>
-                                    </td>
-                                  </tr>
-                                <tr style="border-top: 2px solid black;font-size: 14px">
-                                  <td rowspan="2" colspan="1" style="background-color:rgb(240, 178, 137);font-size: 14px">Component</td>
-                                  <td rowspan="1" colspan="4" style="background-color:rgb(240, 178, 137);font-size: 14px">Central Assistance ( Rs in Cr)</td>
-                                  <td rowspan="1" colspan="3" style="background-color:rgb(240, 178, 137);font-size: 14px">Houses (Nos.)</td>
-                                </tr>
-                                <tr style="font-size: 14px">
-                                    <td style="background-color:rgb(240, 178, 137);font-size: 14px">Committed</td>
-                                  <td style="background-color:rgb(240, 178, 137);font-size: 14px">Sanctioned</td>
-                                  <td style="background-color:rgb(240, 178, 137);font-size: 14px">Released </td>
-                                  <td style="background-color:rgb(240, 178, 137);font-size: 14px">Balance </td>
-                                  <td style="background-color:rgb(240, 178, 137);font-size: 14px">Sanctioned </td>
-                                  <td style="background-color:rgb(240, 178, 137);font-size: 14px">Grounded </td>
-                                  <td style="background-color:rgb(240, 178, 137);font-size: 14px">Completed</td>
-                                </tr>
-                                <tr style="font-size: 14px">
-                                  <td style="text-align: left!important;font-size: 14px"><b>Total ISSR ({{ISSR_NOP.toLocaleString('en-IN')}})</b></td>
-                                  <td style="text-align: right!important;font-size: 14px">{{ISSR_CA_Committed.toLocaleString('en-IN')}}</td>
-                    
-                                  <td style="text-align: right!important;font-size: 14px">{{ISSR_Sanct_for_Release.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{ISSR_CA_Released.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{ISSR_Balance_for_Release.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{ISSR_Houses_Sanctioned.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{ISSR_Grounded.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{ISSR_Completed.toLocaleString('en-IN')}}</td>
-                                </tr>
-                                <tr style="font-size: 14px">
-                                  <td style="text-align: left!important;font-size: 14px"><b>Total AHP ({{AHP_NOP}})</b></td>
-                                  <td style="text-align: right!important;font-size: 14px">{{AHP_CA_Committed.toLocaleString('en-IN')}}</td>
-                    
-                                  <td style="text-align: right!important;font-size: 14px">{{AHP_Sanct_for_Release.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{AHP_CA_Released.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{AHP_Balance_for_Release.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{AHP_Houses_Sanctioned1.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{AHP_Grounded1.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{AHP_Completed1.toLocaleString('en-IN')}}</td>
-                                </tr>
-                                <tr style="font-size: 14px">
-                                  <td style="text-align: left!important;font-size: 14px"><b>Total BLC ({{BLC_NOP}})</b></td>
-                                  <td style="text-align: right!important;font-size: 14px">{{BLC_CA_Committed.toLocaleString('en-IN')}}</td>
-                    
-                                  <td style="text-align: right!important;font-size: 14px">{{BLC_Sanct_for_Release1.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{BLC_CA_Released1.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{BLC_Balance_for_Release1.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{BLC_Houses_Sanctioned1.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{BLC_Grounded1.toLocaleString('en-IN')}}</td>
-                                  <td style="text-align: right!important;font-size: 14px">{{BLC_Completed1.toLocaleString('en-IN')}}</td>
-                                </tr>
-                                <tr style="font-size: 14px">
-                                  <td style="background-color: #000;text-align:center!important">
-                                    <font style="color:white;text-align:right!important;font-size:13px">Total ({{proj}} Projects)</font></td>
-                                  
-                                    <td style="background-color: #000;text-align:right!important">  
-                                        <font style="color:white;text-align:right!important;font-size:13px">{{Total_CA_Committed ?Total_CA_Committed.toLocaleString('en-IN'):Total_CA_Committed.toLocaleString('en-IN')}}</font>
-                                  
-                                        
-                                    <td style="background-color: #000;text-align:right!important">  
-                                    <font style="color:white;text-align:right!important;font-size:13px">{{Sanct_Release?Sanct_Release.toLocaleString('en-IN'):Sanct_Release.toLocaleString('en-IN')}}</font>
-                    
-                                  </td>
-                                  <td style="background-color: #000;text-align:right!important">
-                                    <font style="color:white;text-align:right!important;font-size:13px">{{TOTAL_Release?TOTAL_Release.toLocaleString('en-IN'):TOTAL_Release.toLocaleString('en-IN')}}</font>
-                                  </td>
-                                  <td style="background-color: #000;text-align:right!important">
-                                    <font style="color:white;text-align:right!important;font-size:13px">{{Balance3}}</font>
-                                  </td>
-                                  <td style="background-color: #000;text-align:right!important">
-                                    <font style="color:white;text-align:right!important;font-size:13px">{{Sanct1}} </font>
-                                  </td>
-                                  <td style="background-color: #000;text-align:right!important">
-                                    <font style="color:white;text-align:right!important;font-size:13px">{{Ground1}}</font>
-                                  </td>
-                                  <td style="background-color: #000;text-align:right!important">
-                                    <font style="color:white;text-align:right!important;font-size:13px">{{complted1}}</font>
-                                  </td>
-                                </tr>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                      <br/><br/>
-                      <!--1-->
-                        <div class="row">
-                         
-                                <div width="720px">
-                                
-                                       <div  style="padding: 1px;float: left;width: 340px">
-                                        <table id="seven" style="width:290px;;padding: 2px">
-                                                <tr>
-                                                  <td colspan="3" style="border-color: white">
-                                                      <b class="header_Table">PMAY - UCs (Rs in Cr)</b>
-                                                  </td>
-                                                </tr>
-                                                   <tr  style="border-top: 2px solid black;">
-                                                        <td style="background-color:rgb(140, 175, 240);">Funds <br/>Released</td>
-                                                        <td style="background-color:rgb(140, 175, 240);">UCs <br/>Receieved</td>
-                                                        <td style="background-color:rgb(140, 175, 240);">UCs <br/>Pending</td>
-                                                    </tr>
-                                                    <tr>  
-                                                        <td>{{PMAY_Funds_Released1}}</td>
-                                                        <td>{{PMAY_Ucs_Received1}}</td>
-                                                        <td >{{PMAY_UC_Pending1}}</td>
-                                                    </tr>
-                                            </table>
-                                       </div>
-                                      
-                    
-                                     <div  style="float: left;width: 190px;" >
-                                      <table  style="width:150px;;padding: 2px" id="eight">
-                                        <tr>
-                                          <td style="border-color: white;font-size: 14px"><b class="header_Table">Occupancy</b></td>
-                                        </tr>
-                                                <tr  style="border-top: 2px solid black;">
-                                                    <td  style="background-color:rgb(140, 175, 240)">PMAY(U)<br> Houses(Nos)</td>
-                                                </tr>
-                                                <tr  style="border-top: 2px solid black;">
-                                                    <td>{{PMAY_Houses_Occupied1}}</td>
-                                                </tr>
-                                        </table>
-                                      </div>
-                                     
-                                      <div style="padding-left: 1px;float:left;width: 200px">
-                                        <table id="eightB" style="width:200px;;padding: 2px">
-                                          <tr>
-                                            <td colspan="3" style="border-color: white">
-                                              <b class="header_Table">CLSS</b>
-                                            </td>
-                                          </tr>
-                                          <tr  style="border-top: 2px solid black;">
-                                            <td style="background-color:rgb(140, 175, 240)">CLSS MIS Survey</td>
-                                            <td style="background-color:rgb(140, 175, 240)">Beneficiaries </td>
-                                            <td style="background-color:rgb(140, 175, 240)">Subsidy Released</td>
-                                          </tr>
-                                          <tr>
-                                            <td>{{CLSS_MIS_Survey1}}</td>
-                                            <td>{{CLSS_Beneficiaries_EWS_LIG_MIG1}}</td>
-                                            <td>{{CLSS_Subsidy_EWS_LIG_MIG1}}</td>
-                                          </tr>
-                                        </table>
-                                      </div>
-                      
-                    </div>  </div>
-                    
-                      <div class="row">
-                          <div >  <!--class="col-md-8"-->
-                          <div width="730px">
-                            <div  style="padding: 1px;float: left;width: 340px">
-                              <table id="eleven1" style="width:290px;font-size: 14px">
-                                  <tr >
-                                    <td colspan="3" style="border-color: white">
-                                        <b class="header_Table">SLTC</b>
-                                    </td>
-                                  </tr>
-                                            <tr  style="border-top: 2px solid black;">   
-                                                <td style="background-color:rgb(240, 232, 190)">Funds Released<br/> (Rs in lakh)</td>
-                                                <td style="background-color:rgb(240, 232, 190)">Specialists Approved</td>
-                                                <td style="background-color:rgb(240, 232, 190)">Specialists in Place</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{SLTC_Funds_Released_RsinnCr1}}</td>
-                                                  <td>{{SLTC_Specialists_Approved}}</td>
-                                                    <td>{{SLTC_Specialists_in_Place}}</td>
-                                            </tr>
-                              </table>
-                            </div>  
-                            <div  style="float: left;width: 280px;" >
-                              <table id="twelve1" style="width:240px;font-size: 14px" >
-                                    <tr>
-                                      <td colspan="3" style="border-color: white">
-                                        <b class="header_Table">CLTC</b>
-                                      </td>
-                                    </tr>
-                                    <tr  style="border-top: 2px solid black;">
-                                      <td style="background-color:rgb(240, 232, 190)">Funds Released<br/> (Rs in lakh)</td>
-                                      <td style="background-color:rgb(240, 232, 190)">Specialists Approved</td>
-                                      <td style="background-color:rgb(240, 232, 190)">Specialists in Place</td>
-                                    </tr>
-                                      <tr>
-                                        <td>{{CLTC_Funds_Released_RsinCr1}}  </td>
-                                        <td >{{CLTC_Specialists_Approved}}</td>
-                                        <td >{{CLTC_Specialists_in_Place}}</td>
-                                      </tr>
-                                </table>
-                            </div>
-                            <div style="padding-left: 1px;float:left;width: 110px">
-                              <table id="nine1" style="width:100px;">
-                                    <tr>
-                                      <td style="border-color: white;font-size: 14px"><b class="header_Table1">Reforms</b></td>
-                                    </tr>
-                                    <tr  style="border-top: 2px solid black;">
-                                      <td style="background-color:rgb(240, 232, 190);padding: 10px">Reforms Achieved </td>
-                                    </tr>
-                                    <tr  style="border-top: 2px solid black;">
-                                      <td>{{Reforms_Achieved1}} %</td>
-                                    </tr>
-                              </table>
-                            </div>                         
-                       </div>               
-                      </div> 
-                    </div>     
-                    
-                     
-                    
-                       <div class="row" >
-                         <div width="710px">
-                          <div style="width:300px;float: left;">
-                            <table id="mis"  style="width:300px;border:1px;align-content: left">
-                                          <tr>
-                                            <td colspan="3" style="border-color: white">
-                                              <b class="header_Table">MIS</b>
-                                            </td>
-                                          </tr>
-                                          <tr  style="border-top: 2px solid black;">
-                                            <td style="background-color:rgb(140, 175, 240)">MIS Projects Approved</td>
-                                            <td style="background-color:rgb(140, 175, 240)">Projects Uploaded</td>
-                                            <td style="background-color:rgb(140, 175, 240)">% Projects Uploaded</td>
-                                          </tr>
-                                          <tr  style="border-top: 2px solid black;">
-                                            <td>{{Projects_Approved}} </td>
-                                            <td>{{Projects_uploaded}}</td>
-                                            <td>{{Percent_Projects_uploaded.toFixed(2)}}%</td>
-                                          </tr>
-                            </table>
-                                      </div>
-                    
-                        <div style="width:240px;float: right;">
-                              <table id="geo" style="width:180px;border:1px">
-                                          <tr>
-                                            <td colspan="3" style="border-color: white">
-                                              <b class="header_Table">Geo-Tagging</b>
-                                            </td>
-                                          </tr>
-                                          <tr  style="border-top: 2px solid black;">
-                                            <td style="background-color:rgb(140, 175, 240)">BLC Houses Approved</td>
-                                            <td style="background-color:rgb(140, 175, 240)">BLC Houses Grounded</td>
-                                            <td style="background-color:rgb(140, 175, 240)">BLC Houses GeoTagged</td>
-                                          </tr>
-                                          <tr  style="border-top: 2px solid black;">
-                                            <td>{{BLC_Houses_Approved1}}</td>
-                                            <td>{{BLC_Houses_Grounded1}}</td>
-                                            <td>{{BLC_Houses_Geo_Tagged1}}</td>
-                                          </tr>
-                              </table>
-                        </div>
-                       </div>
-                    
-                      </div>
-                    
-                                <div class="col-sm-5">
-                                        <div class="row">
-                    
-                                                
-                                                        
-                                            </div>
-                                        
-                                          
-                                </div>
-                              
-                        
-                                    
-                            <div class="row" style="padding: 10px">
-                                    <div >
-                                            <table id="fourteen" width="710px">
-                                              <tr  style="border-top: 2px solid black;">
-                                                <td style="background-color:rgb(240, 178, 137)"></td>
-                                                <td style="background-color:rgb(240, 178, 137)">Sanctioned</td>
-                                                <td style="background-color:rgb(240, 178, 137)">Completed</td>
-                                                <td style="background-color:rgb(240, 178, 137)">Occupied</td>
-                                                <td style="background-color:rgb(240, 178, 137)">In Progress</td>
-                                                <td style="background-color:rgb(240, 178, 137)">Unoccupied</td>
-                                                <td style="background-color:rgb(240, 178, 137)">Non Starter</td>
-                                                <td style="background-color:rgb(240, 178, 137)">UCs <br/>Pending</td>
-                                              </tr>
-                                              <tr>
-                                                <td style="background-color:rgb(240, 178, 137)">JNNURM</td>
-                                                <td align="right!important">{{JN_Houses_Sanctioned1}}</td>
-                                                <td align="right!important">{{JN_Houses_Completed1}}</td>
-                                                <td align="right!important">{{JN_Houses_Occupied1}}</td>
-                                                <td align="right!important">{{JN_Houses_In_Progress1}}</td>
-                                                <td align="right!important">{{JN_Houses_Unoccupied1}}</td>
-                                                <td align="right!important">{{JN_Houses_Non_Starter1}}</td>
-                                                <td align="right!important">{{JN_UC_Pending}}</td>
-                                              </tr>
-                                              <tr>
-                                                <td style="background-color:rgb(240, 178, 137)">RAY</td>
-                                                <td align="right!important">{{RAY_Houses_Sanctioned1}}</td>
-                                                <td align="right!important">{{RAY_Houses_Completed1}}</td>
-                                                <td align="right!important">{{RAY_Houses_Occupied1}}</td>
-                                                <td align="right!important">{{RAY_Houses_In_Progress1}}</td>
-                                                <td align="right!important">{{RAY_Houses_Unoccupied1}}</td>
-                                                <td align="right!important">{{RAY_Houses_Non_Starter}}</td>
-                                                <td align="right!important">{{RAY_UC_Pending}}</td>
-                                              </tr>
-                                   </table>
-                                    </div>
-                            </div>
-       
-              
+                <div  class="col-md-5 col-sm-5 ">
+                  <table id="eightB" >
+                    <tr>
+                      <td colspan="3" style="border-color: white">
+                        <b class="header_Table">CLSS</b>
+                      </td>
+                    </tr>
+                    <tr style="border-top: 2px solid black;">
+                      <td style="background-color:rgb(140, 175, 240)">CLSS MIS Survey</td>
+                      <td style="background-color:rgb(140, 175, 240)">Beneficiaries </td>
+                      <td style="background-color:rgb(140, 175, 240)">Subsidy Released</td>
+                    </tr>
+                    <tr>
+                      <td>{{CLSS_MIS_Survey1}}</td>
+                      <td>{{CLSS_Beneficiaries_EWS_LIG_MIG1}}</td>
+                      <td>{{CLSS_Subsidy_EWS_LIG_MIG1}}</td>
+                    </tr>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="container-fuild">
+              <div class="row" style="padding-top: 5px;">
+                <!--class="col-md-8"-->
+                  <div class="col-md-5 col-sm-5 ">
+                    <table id="eleven1">
+                      <tr>
+                        <td colspan="3" style="border-color: white">
+                          <b class="header_Table">SLTC</b>
+                        </td>
+                      </tr>
+                      <tr style="border-top: 2px solid black;">
+                        <td style="background-color:rgb(240, 232, 190)">Funds Released<br /> (Rs in lakh)</td>
+                        <td style="background-color:rgb(240, 232, 190)">Specialists Approved</td>
+                        <td style="background-color:rgb(240, 232, 190)">Specialists in Place</td>
+                      </tr>
+                      <tr>
+                        <td>{{SLTC_Funds_Released_RsinnCr1}}</td>
+                        <td>{{SLTC_Specialists_Approved}}</td>
+                        <td>{{SLTC_Specialists_in_Place}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="col-md-5 col-sm-5 ">
+                    <table id="twelve1"  >
+                      <tr>
+                        <td colspan="3" style="border-color: white">
+                          <b class="header_Table">CLTC</b>
+                        </td>
+                      </tr>
+                      <tr style="border-top: 2px solid black;">
+                        <td style="background-color:rgb(240, 232, 190)">Funds Released<br /> (Rs in lakh)</td>
+                        <td style="background-color:rgb(240, 232, 190)">Specialists Approved</td>
+                        <td style="background-color:rgb(240, 232, 190)">Specialists in Place</td>
+                      </tr>
+                      <tr>
+                        <td>{{CLTC_Funds_Released_RsinCr1}} </td>
+                        <td>{{CLTC_Specialists_Approved}}</td>
+                        <td>{{CLTC_Specialists_in_Place}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="col-md-2 col-sm-2 ">
+                    <table id="nine1" >
+                      <tr>
+                        <td style="border-color: white;font-size: 14px"><b class="header_Table1">Reforms</b></td>
+                      </tr>
+                      <tr style="border-top: 2px solid black;">
+                        <td style="background-color:rgb(240, 232, 190);padding: 10px">Reforms Achieved </td>
+                      </tr>
+                      <tr style="border-top: 2px solid black;">
+                        <td>{{Reforms_Achieved1}} %</td>
+                      </tr>
+                    </table>
+                  </div>
+              </div>
+            </div>
 
 
-                            <br/><br/><br/><br/><br/><br/><br/><br/>       <br/><br/><br/><br/>           
 
-          
-              <div id="pdf1" >
-                  <div style="width: 750px">  
+            <div class="container-fuild">
+              <div class="row" style="padding-top: 5px;">
+                <div class="col-md-6 col-sm-6">
+                  <table id="mis">
+                    <tr>
+                      <td colspan="3" style="border-color: white">
+                        <b class="header_Table">MIS</b>
+                      </td>
+                    </tr>
+                    <tr style="border-top: 2px solid black;">
+                      <td style="background-color:rgb(140, 175, 240)">MIS Projects Approved</td>
+                      <td style="background-color:rgb(140, 175, 240)">Projects Uploaded</td>
+                      <td style="background-color:rgb(140, 175, 240)">% Projects Uploaded</td>
+                    </tr>
+                    <tr style="border-top: 2px solid black;">
+                      <td>{{Projects_Approved}} </td>
+                      <td>{{Projects_uploaded}}</td>
+                      <td>{{Percent_Projects_uploaded.toFixed(2)}}%</td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                  <table id="geo">
+                    <tr>
+                      <td colspan="3" style="border-color: white">
+                        <b class="header_Table">Geo-Tagging</b>
+                      </td>
+                    </tr>
+                    <tr style="border-top: 2px solid black;">
+                      <td style="background-color:rgb(140, 175, 240)">BLC Houses Approved</td>
+                      <td style="background-color:rgb(140, 175, 240)">BLC Houses Grounded</td>
+                      <td style="background-color:rgb(140, 175, 240)">BLC Houses GeoTagged</td>
+                    </tr>
+                    <tr style="border-top: 2px solid black;">
+                      <td>{{BLC_Houses_Approved1}}</td>
+                      <td>{{BLC_Houses_Grounded1}}</td>
+                      <td>{{BLC_Houses_Geo_Tagged1}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+
+
+
+            <div class="container-fuild" style="padding-top: 10px;">
+              <div>
+                <table id="fourteen">
+                  <tr style="border-top: 2px solid black;">
+                    <td style="background-color:rgb(240, 178, 137)"></td>
+                    <td style="background-color:rgb(240, 178, 137)">Sanctioned</td>
+                    <td style="background-color:rgb(240, 178, 137)">Completed</td>
+                    <td style="background-color:rgb(240, 178, 137)">Occupied</td>
+                    <td style="background-color:rgb(240, 178, 137)">In Progress</td>
+                    <td style="background-color:rgb(240, 178, 137)">Unoccupied</td>
+                    <td style="background-color:rgb(240, 178, 137)">Non Starter</td>
+                    <td style="background-color:rgb(240, 178, 137)">UCs <br />Pending</td>
+                  </tr>
+                  <tr>
+                    <td style="background-color:rgb(240, 178, 137)">JNNURM</td>
+                    <td align="right!important">{{JN_Houses_Sanctioned1}}</td>
+                    <td align="right!important">{{JN_Houses_Completed1}}</td>
+                    <td align="right!important">{{JN_Houses_Occupied1}}</td>
+                    <td align="right!important">{{JN_Houses_In_Progress1}}</td>
+                    <td align="right!important">{{JN_Houses_Unoccupied1}}</td>
+                    <td align="right!important">{{JN_Houses_Non_Starter1}}</td>
+                    <td align="right!important">{{JN_UC_Pending}}</td>
+                  </tr>
+                  <tr>
+                    <td style="background-color:rgb(240, 178, 137)">RAY</td>
+                    <td align="right!important">{{RAY_Houses_Sanctioned1}}</td>
+                    <td align="right!important">{{RAY_Houses_Completed1}}</td>
+                    <td align="right!important">{{RAY_Houses_Occupied1}}</td>
+                    <td align="right!important">{{RAY_Houses_In_Progress1}}</td>
+                    <td align="right!important">{{RAY_Houses_Unoccupied1}}</td>
+                    <td align="right!important">{{RAY_Houses_Non_Starter}}</td>
+                    <td align="right!important">{{RAY_UC_Pending}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <br />
+            <div id="pdf1">
+              <div>
                 <b class="header">CSMC wise Financial & Physical Progress</b>
-                <div class="container">
-                  <div class="row">
-                  
-                    <table id ="fifteen" style="width: 715px;padding-left:-5px;align-content: center" border="1">
-                        <tr style="font-size: 14px">
-                          <td rowspan="2" style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">Sr <br/>  No</font></td>
-                          <td rowspan="2" style="background-color:rgb(87, 81, 80);"><font style="color: white;font-size: 11px">CSMC <br/>NO</font></td>
-                          <td  rowspan="2" style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">CSMC<br/>Date</font></td>
-                          <td rowspan="2" style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">Component</font></td>
-                          <td colspan="4" rowspan="1" style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">Central Assistance(Rs in Cr)</font></td>
-                          <td colspan="4" rowspan="1" style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">Houses(in Nos)</font></td>
-                        </tr>
-                        <tr style="font-size: 10px">
-                          <td class='borderLine' style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">Committed </font></td>
-                          <td class='borderLine' style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">Sanctioned</font></td>
-                          <td style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">Released</font></td>
-                          <td style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">Balance</font></td>
-                          
-                          <td class='borderLine' style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">Sanctioned</font></td>
-                          <td class='borderLine' style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">Grounded</font></td>
-                          <td class='borderLine' style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">Completed</font></td>
-                          <td class='borderLine' style="background-color:rgb(221, 59, 19);"><font style="color: white;font-size: 11px">Occupied</font></td>
-                        </tr>
+                <div class="container-fuild">
+
+                    <table id="fifteen">
+                      <tr style="font-size: 14px">
+                        <td rowspan="2" style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">Sr <br /> No</font>
+                        </td>
+                        <td rowspan="2" style="background-color:rgb(87, 81, 80);">
+                          <font style="color: white;font-size: 11px">CSMC <br />NO</font>
+                        </td>
+                        <td rowspan="2" style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">CSMC<br />Date</font>
+                        </td>
+                        <td rowspan="2" style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">Component</font>
+                        </td>
+                        <td colspan="4" rowspan="1" style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">Central Assistance(Rs in Cr)</font>
+                        </td>
+                        <td colspan="4" rowspan="1" style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">Houses(in Nos)</font>
+                        </td>
+                      </tr>
+                      <tr style="font-size: 10px">
+                        <td class='borderLine' style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">Committed </font>
+                        </td>
+                        <td class='borderLine' style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">Sanctioned</font>
+                        </td>
+                        <td style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">Released</font>
+                        </td>
+                        <td style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">Balance</font>
+                        </td>
+
+                        <td class='borderLine' style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">Sanctioned</font>
+                        </td>
+                        <td class='borderLine' style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">Grounded</font>
+                        </td>
+                        <td class='borderLine' style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">Completed</font>
+                        </td>
+                        <td class='borderLine' style="background-color:rgb(221, 59, 19);">
+                          <font style="color: white;font-size: 11px">Occupied</font>
+                        </td>
+                      </tr>
                       <tr *ngFor='let state of stateScore; let i=index' style="font-size: 12px">
                         <td style="font-size: 11px">{{i+1}}</td>
                         <td style="text-align: center;font-size: 11px">{{state.CSMCNo}}</td>
-                        <td   style="text-align: center;font-size: 11px">{{state.CSMCDate}}</td>
-                        <td  style="text-align: center;font-size: 11px">
-                        <a style="cursor:pointer" (click)="openPopup(content,state)">
+                        <td style="text-align: center;font-size: 11px">{{state.CSMCDate}}</td>
+                        <td style="text-align: center;font-size: 11px">
+                          <a style="cursor:pointer" (click)="openPopup(content,state)">
                             <font color="blue">{{state.Component}}</font>
-                            </a> ({{state.recordBased_dtC}})</td>
-                        <td  style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">{{state.CASanctionedRel.toLocaleString('en-IN')  }}</td>
-                        
-                        <td  style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">{{state.CASanctionedForRel.toLocaleString('en-IN')  }}</td>
-                        
+                          </a> ({{state.recordBased_dtC}})</td>
+                        <td style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">
+                          {{state.CASanctionedRel.toLocaleString('en-IN')  }}</td>
 
-                        <td  style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">{{state.CentralAssistanceReleased.toLocaleString('en-IN') }}</td>
-                        <td  style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">{{state.Balance.toLocaleString('en-IN') }}</td>
-                        <td  style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">{{state.Housesinvolved.toLocaleString('en-IN') }}</td>
-                        <td  style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">{{state.Houses_Grounded.toLocaleString('en-IN')}}</td>
-                        <td  style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">{{state.Houses_Completed.toLocaleString('en-IN') }}</td>
-                        <td  style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">{{state.HousesOccupied.toLocaleString('en-IN')}}</td>
+                        <td style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">
+                          {{state.CASanctionedForRel.toLocaleString('en-IN')  }}</td>
+
+
+                        <td style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">
+                          {{state.CentralAssistanceReleased.toLocaleString('en-IN') }}</td>
+                        <td style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">
+                          {{state.Balance.toLocaleString('en-IN') }}</td>
+                        <td style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">
+                          {{state.Housesinvolved.toLocaleString('en-IN') }}</td>
+                        <td style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">
+                          {{state.Houses_Grounded.toLocaleString('en-IN')}}</td>
+                        <td style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">
+                          {{state.Houses_Completed.toLocaleString('en-IN') }}</td>
+                        <td style="text-align: right;font-size: 11px;padding-right: 10px;text-align: right">
+                          {{state.HousesOccupied.toLocaleString('en-IN')}}</td>
                       </tr>
                       <tr *ngFor='let st of LastStateCore'>
                         <td style="background-color:#39FF14;;font-size: 11px" colspan=2>
                         </td>
-                      
+
                         <td style="background-color:#39FF14;font-style:black;font-size: 11px" colspn=3>
                           <b>
                             <font style="color:black;;font-size: 11px">Total {{st.Component}}</font>
@@ -562,23 +598,28 @@
                         </td>
                         <td style="background-color:#39FF14;">
                           <font style="color:black;;font-size: 11px">
-                              <font color="black">
-                                {{st.Component}}</font>
-                                ({{st.recordBasedComp}})</font>
+                            <font color="black">
+                              {{st.Component}}</font>
+                            ({{st.recordBasedComp}})
+                          </font>
                         </td>
                         <td style="background-color:#39FF14;">
-                          <font style="color:black;font-size: 11px;padding-right: 10px;text-align: right">{{st.CASanctionedRel.toLocaleString('en-IN')}} </font>
-                        </td>
-                        
-                        <td style="background-color:#39FF14;">
-                            <font style="color:black;font-size: 11px">{{st.CASanctionedForRel.toLocaleString('en-IN')}} </font>
+                          <font style="color:black;font-size: 11px;padding-right: 10px;text-align: right">
+                            {{st.CASanctionedRel.toLocaleString('en-IN')}} </font>
                         </td>
 
                         <td style="background-color:#39FF14;">
-                          <font style="color:black;font-size: 11px">{{st.CentralAssistanceReleased.toLocaleString('en-IN')}}</font>
-                        </td>  
+                          <font style="color:black;font-size: 11px">{{st.CASanctionedForRel.toLocaleString('en-IN')}}
+                          </font>
+                        </td>
+
                         <td style="background-color:#39FF14;">
-                          <font style="color:black;font-size: 11px"> {{(st.CASanctionedForRel -st.CentralAssistanceReleased).toLocaleString('en-IN')  }}</font>
+                          <font style="color:black;font-size: 11px">
+                            {{st.CentralAssistanceReleased.toLocaleString('en-IN')}}</font>
+                        </td>
+                        <td style="background-color:#39FF14;">
+                          <font style="color:black;font-size: 11px">
+                            {{(st.CASanctionedForRel -st.CentralAssistanceReleased).toLocaleString('en-IN')  }}</font>
                         </td>
                         <td style="background-color:#39FF14;">
                           <font style="color:black;font-size: 11px">{{st.Housesinvolved.toLocaleString('en-IN')}}</font>
@@ -596,16 +637,16 @@
                       <tr>
                         <td style="background-color: rgb(221, 59, 19);" colspan=3>
                           <font style="color:black;"><b>Grand Total {{projects}} Projects </b></font>
-                        </td>  
+                        </td>
                         <td style="background-color: rgb(221, 59, 19);">
                         </td>
-                       
+
                         <td style="background-color:rgb(221, 59, 19);">
-                          <font style="color:black;">{{CASanctionedForRel_2.toLocaleString('en-IN') }}  </font>
+                          <font style="color:black;">{{CASanctionedForRel_2.toLocaleString('en-IN') }} </font>
                         </td>
-                        
+
                         <td style="background-color:rgb(221, 59, 19);">
-                            <font style="color:black;">{{CASanctioned_ForRel.toLocaleString('en-IN') }}  </font>
+                          <font style="color:black;">{{CASanctioned_ForRel.toLocaleString('en-IN') }} </font>
                         </td>
 
                         <td style="background-color:rgb(221, 59, 19);">
@@ -629,90 +670,131 @@
                       </tr>
                     </table>
                   </div>
-                </div>
               </div>
-              </div>
+            </div>
             <!-- </div> -->
-       
-       
-        
-<!-- modal -->
-<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayPop}" id="printpopup">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #021E38;color:white">
-            <div class="modal-header">
-              <div class="row">
-                <div class="col-md-11">
-                <h5 ><b>Details of Project for CSMC No-{{CmsNo}} ; Dated :{{DisplayDate| slice:0:11}}</b></h5>
-                <div>
-                       <button class="noprint" style="color: black;" (click)="exportAs('pdf', 'landscape')">
-                         <i class="fa fa-download" ></i> Click to Print</button>
-                         <button  printTitle="Details of Project for CSMC  No-' {{CmsNo}} ;Dated :{{DisplayDate| slice:0:11}}'"   printSectionId="print-section" style="color: black;" [useExistingCss]="true" ngxPrint>print</button> 
-                </div>
-              </div>
-                <div class="col-md-1">
-                    <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()"><span aria-hidden="true" style="color: white;">&times;</span></button>
 
+
+
+            <!-- modal -->
+            <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayPop}" id="printpopup">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header" style="background-color: #021E38;color:white">
+                    <div class="modal-header">
+                      <div class="row">
+                        <div class="col-md-11">
+                          <h5><b>Details of Project for CSMC No-{{CmsNo}} ; Dated :{{DisplayDate| slice:0:11}}</b></h5>
+                          <div>
+                            <button class="noprint" style="color: black;" (click)="exportAs('pdf', 'landscape')">
+                              <i class="fa fa-download"></i> Click to Print</button>
+                            <button
+                              printTitle="Details of Project for CSMC  No-' {{CmsNo}} ;Dated :{{DisplayDate| slice:0:11}}'"
+                              printSectionId="print-section" style="color: black;" [useExistingCss]="true"
+                              ngxPrint>print</button>
+                          </div>
+                        </div>
+                        <div class="col-md-1">
+                          <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()"><span
+                              aria-hidden="true" style="color: white;">&times;</span></button>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!-- modal-body -->
+                  <div class="modal-body">
+                    <div class="row">
+
+
+                      <div id="print-section" style="width:1040px;overflow-y: scroll;height: 410px;">
+
+                        <table id="mytable" border="1" class="table table-bordered table-custom1111"
+                          style="width:1020px;">
+                          <tr style="background-color: gray;">
+                            <td><b>
+                                <font color="black" size="2">Sr No</font>
+                              </b></td>
+                            <td><b>
+                                <font color="black" size="2">City</font>
+                              </b></td>
+                            <td style="width: 200px"><b>
+                                <font color="black" size="2">Project Title</font>
+                              </b></td>
+                            <td align="center"><b>
+                                <font color="black" size="2">Central <br />Assistance <br />Committed</font>
+                              </b></td>
+                            <td align="center"><b>
+                                <font color="black" size="2">Central <br />Assistance <br />Sanctioned</font>
+                              </b></td>
+                            <td align="center"><b>
+                                <font color="black" size="2">Houses<br /> Sanctioned</font>
+                              </b></td>
+                            <td align="center"><b>
+                                <font color="black" size="2">Houses<br />Grounded</font>
+                              </b></td>
+                            <td align="center"><b>
+                                <font color="black" size="2">Houses<br />Completed</font>
+                              </b></td>
+                            <td align="center"><b>
+                                <font color="black" size="2">Houses<br />Occupied</font>
+                              </b></td>
+                          </tr>
+                          <tr *ngFor='let state of lastPopResult; let i=index'>
+                            <td>
+                              <font size='3'>{{i+1}}</font>
+                            </td>
+                            <td>
+                              <font size='3'>{{state.City}}</font>
+                            </td>
+                            <td>
+                              <font size='2'>{{state.ProjectTitle}}</font>
+                            </td>
+                            <td align="right">
+                              <font size='3'> {{state.CASanctioned}}</font>
+                            </td>
+                            <td align="right">
+                              <font size='3'>{{state.CentralAssistanceReleased}}</font>
+                            </td>
+
+                            <td align="right">
+                              <font size='3'>{{state.HousesSanctioned}}</font>
+                            </td>
+                            <td align="right">
+                              <font size='3'>{{state.Houses_Grounded}}</font>
+                            </td>
+                            <td align="right">
+                              <font size='3'>{{state.Houses_Completed}}</font>
+                            </td>
+                            <td align="right">
+                              <font size='3'>{{state.HousesOccupied}}</font>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+
+
+
+                    </div>
+                  </div>
+                  <!-- modal-footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="closeModalDialog()">Close</button>
+                  </div>
                 </div>
               </div>
             </div>
-         
-        </div>
-  
-        <!-- modal-body -->
-        <div class="modal-body">
-          <div class="row">
-          
 
-              <div id="print-section" style="width:1040px;overflow-y: scroll;height: 410px;">
-     
-                  <table id="mytable" border="1"  class="table table-bordered table-custom1111" style="width:1020px;">
-                    <tr style="background-color: gray;">
-                      <td><b><font color="black" size="2">Sr No</font></b></td>
-                      <td><b><font color="black" size="2">City</font></b></td>
-                      <td style="width: 200px"><b><font color="black" size="2">Project Title</font></b></td>
-                       <td align="center"><b><font color="black"  size="2">Central <br/>Assistance <br/>Committed</font></b></td>
-                      <td align="center"><b><font color="black"  size="2">Central <br/>Assistance <br/>Sanctioned</font></b></td>
-                      <td align="center"><b><font color="black"  size="2">Houses<br/> Sanctioned</font></b></td>
-                      <td align="center"><b><font color="black"  size="2">Houses<br/>Grounded</font></b></td>
-                      <td align="center"><b><font color="black"  size="2">Houses<br/>Completed</font></b></td>
-                      <td align="center"><b><font color="black"  size="2">Houses<br/>Occupied</font></b></td>
-                    </tr>
-                    <tr *ngFor='let state of lastPopResult; let i=index'>
-                      <td ><font  size='3' >{{i+1}}</font></td>
-                      <td > <font  size='3' >{{state.City}}</font></td>
-                       <td > <font  size='2'>{{state.ProjectTitle}}</font></td>
-                      <td align="right"><font  size='3' > {{state.CASanctioned}}</font></td>
-                      <td align="right"><font  size='3' >{{state.CentralAssistanceReleased}}</font></td>
-  
-                      <td align="right"><font  size='3' >{{state.HousesSanctioned}}</font></td>
-                      <td align="right"><font  size='3' >{{state.Houses_Grounded}}</font></td>
-                      <td align="right"><font  size='3' >{{state.Houses_Completed}}</font></td>
-                      <td align="right"><font  size='3' >{{state.HousesOccupied}}</font></td> 
-                    </tr>
-                  </table>
-                </div>
 
+
+          </div>
 
 
         </div>
-      </div>
-        <!-- modal-footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" (click)="closeModalDialog()" >Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
+   
+  </section>
+  <!-- </body>
+</html> -->
 </div>
-       
-       
-        </div>
-      </div> </div>
-</table>     
-</body>
-</html>

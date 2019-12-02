@@ -4,7 +4,7 @@
         <div id="drpdown">
           <div class="col-lg-12 col-md-12 col-sm-12" >
             <div id='filter' class="row">
-              <div class="col-md-3 col-sm-4" >
+              <div class="col-md-3 col-sm-3" >
                   <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
                       style="width: 200px;font-display: #FF00FF;color: black">
                     <option value={{stValue}}>{{StateMessage}}</option>
@@ -14,7 +14,7 @@
                   </select> 
             </div>
             
-            <div class="col-md-3 col-sm-4">
+            <div class="col-md-3 col-sm-3">
             <select class="form-control" placeholder="Choose Distt" (change)="getDistrictDetails($event.target.value)"
                     style="width: 200px;font-display: #FF00FF;color: black">
                       <option  value={{distValue}}>{{DistrictMessage}}</option>
@@ -25,7 +25,7 @@
              </div>
 
 
-            <div class="col-md-3 col-sm-4">
+            <div class="col-md-3 col-sm-3">
              <select class="form-control" placeholder="Choose City" (change)="getCityDetails($event.target.value)"
                     style="width: 200px;font-display: rgb(134, 133, 134);color: black">
                       <option value={{cityValue}}>{{CityMessage}}</option>
@@ -34,7 +34,7 @@
                       </option>
                     </select>
             </div>
-            <div class="col-md-3 col-sm-4">
+            <div class="col-md-3 col-sm-3">
                 <button class="Downloadbtn" (click)="pdfReport()"><i class="fa fa-download"></i> Click to Print</button>
 
                </div>
