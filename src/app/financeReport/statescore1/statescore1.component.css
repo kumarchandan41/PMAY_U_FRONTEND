@@ -62,12 +62,7 @@ hr{margin-top: 5px;margin-bottom: 5px;border: 2px solid #000;}
 .table-score th{border: none!important;font-weight: normal;font-size:25px;}
 .table-score td{border: none!important;font-weight: normal;font-size:14px;} 
 
-.borderCA{
-    border-bottom:  4px solid #808080;
-}
-/* .borderLine{
-    border-right:  4px solid #808080;
-}  */
+
 
 body {
     margin: 0;
@@ -134,14 +129,21 @@ a{
 }
 table{
     width: 100%;
+    background-color: initial;
 }    
 table, th, td {
    font-family: "Open Sans", Arial, sans-serif;
    font-size: 12px;
-   border: 1px solid #5a5a5a;
+   border: 1px solid #000;
+   border-bottom-color: #000 !important;
    max-width: 100%;
    padding :3px 4px;
+   text-align: center;
+   -webkit-print-color-adjust: exact; 
      /* border: 1px solid black;  */
+ }
+ table tr{
+    -webkit-print-color-adjust: exact; 
  }
 
  .headerStateName{
@@ -164,9 +166,24 @@ table, th, td {
 
    @media print {
     #drpdown{display : none};
+    tr:nth-child(even) td,  tr:nth-child(odd) td{
+        /* background-color: red !important; */
+        -webkit-print-color-adjust: exact; 
+      }
+    tr.PMYHeading{
+        background-color: #000 !important;
+        -webkit-print-color-adjust: exact; 
+    }
     
-    
-    table, td, th {border: 1px solid black;}
+    tr.printHeader{
+        background-color: #cccc !important;
+        -webkit-print-color-adjust: exact; 
+    }
+    tr.PMYHeading td, tr.PMYHeading td b{
+        color: #fff !important;
+    }
+
+    table, td, th {border: 1px solid black; }
     #statescore { padding-left :0px; padding-top :5px}
 
     .noprint { display: none; }
