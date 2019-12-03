@@ -55,8 +55,8 @@
 				<div class="col-md-12">
 					<div class="left-logo">
 						<img src="https://pmay-urban.gov.in/assets/newHome/img/minister-of-housing-logo.jpg" alt="">
-						<a href="https://pmay-urban.gov.in"><img
-								src="https://pmay-urban.gov.in/assets/newHome/img/pmay-logo.jpg" alt=""></a>
+						<a href="https://pmay-urban.gov.in"><img src="https://pmay-urban.gov.in/assets/newHome/img/pmay-logo.jpg"
+								alt=""></a>
 					</div>
 					<div class="right-logo"> <img src="https://pmay-urban.gov.in/assets/newHome/img/ghtc_angikaar.png">
 
@@ -102,11 +102,9 @@
 							<div class="dropdown lang-button text-center">
 								<!-- <button class="dropbtnbg-tr bg-tr color-white"><img style="width: 22px;" src="https://pmay-urban.gov.in/assets/newHome/img/download-app.png"></button> -->
 								<div class="dropdown-content">
-									<a href="https://play.google.com/store/apps/details?id=com.pmay.app_s"><img
-											style="max-width: 140px;"
+									<a href="https://play.google.com/store/apps/details?id=com.pmay.app_s"><img style="max-width: 140px;"
 											src="https://pmay-urban.gov.in/assets/newHome/img/googleplay-store.png"></a>
-									<a href="https://itunes.apple.com/in/app/pmay-urban/id1454478722?mt=8"><img
-											style="max-width: 140px;"
+									<a href="https://itunes.apple.com/in/app/pmay-urban/id1454478722?mt=8"><img style="max-width: 140px;"
 											src="https://pmay-urban.gov.in/assets/newHome/img/apple-store.png"></a>
 								</div>
 							</div>
@@ -124,15 +122,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<div class="modal-dialog" >
-	<div class="modal-content" style="width:480px;">
+<div class="modal-dialog" style="min-height:calc(100vh - 278px); max-width:480px;">
+	<div class="modal-content">
 		<div class="modal-heading">
 			<h2 class="text-center">Login</h2>
 		</div>
 		<hr />
 		<!-- Register -->
-		<div class="login-page" style="border-left: 100px"> 
-			<form class="login-form" >
+		<div class="login-page" style="border-left: 100px">
+			<form class="login-form">
 				<div class="modal-body" style="padding-left: 80px;padding-right:80px;">
 					<form role="form" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit(loginForm.value)">
 						<div class="form-group" style="padding-top: 10px;">
@@ -140,8 +138,7 @@
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-user"></span>
 								</span>
-								<input formControlName="UserName" type="text" class="form-control"
-									placeholder="User Name" id="user" />
+								<input formControlName="UserName" type="text" class="form-control" placeholder="User Name" id="user" />
 							</div>
 						</div>
 						<div class="form-group " style="padding-top: 10px;">
@@ -149,11 +146,10 @@
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-lock"></span>
 								</span>
-								<input type="password" formControlName="Password" class="form-control"
-									placeholder="Password" />
+								<input type="password" formControlName="Password" class="form-control" placeholder="Password" />
 							</div>
 						</div>
-						
+
 
 						<div class="form-group form-inline">
 							<span>Retype the characters from the picture:</span>
@@ -171,14 +167,14 @@
 
 						</div>
 						<div class="form-group">
-							  
-								<input type="text" class="form-control"  autocomplete="off" id="UserCaptacha" placeholder="Validate Captcha" required name="UserCaptacha" formControlName="UserCaptacha"/>
+
+							<input type="text" class="form-control" autocomplete="off" id="UserCaptacha"
+								placeholder="Validate Captcha" required name="UserCaptacha" formControlName="UserCaptacha" />
 						</div>
 						<div class="form-group text-center" style="padding-top: 10px;">
 							<button type="submit" class="btn btn-success btn-lg">Login</button>
 							<!-- <a href="#" class="btn btn-link">forget Password</a> -->
-							&nbsp;&nbsp;&nbsp;<a [routerLink]="['/Register']"
-								class="btn btn-success btn-lg">Register</a>
+							&nbsp;&nbsp;&nbsp;<a [routerLink]="['/Register']" class="btn btn-success btn-lg">Register</a>
 						</div>
 					</form>
 				</div>
@@ -220,8 +216,7 @@
 							<a class="bg-tr color-white" href="javascript:void(0)"> | </a>
 						</li>
 						<li>
-							<a class="bg-tr color-white"
-								href="https://pmay-urban.gov.in/hyperlinking_policy">Hyperlinking Policy</a>
+							<a class="bg-tr color-white" href="https://pmay-urban.gov.in/hyperlinking_policy">Hyperlinking Policy</a>
 						</li>
 						<li>
 							<a class="bg-tr color-white" href="javascript:void(0)"> | </a>

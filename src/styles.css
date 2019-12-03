@@ -19,7 +19,6 @@ body {
     outline: 0;
     font-size: 15px;
     height: 500px;
-    left:-200px;
 }
 
 @media (min-width: 775px) {
