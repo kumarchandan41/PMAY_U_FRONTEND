@@ -502,12 +502,11 @@ Cid:string;
     })
   }
   ngOnInit() {
-
     this.districtCodes = "0";
     this.cityCodes = "0";
     this.Compid="0";
     this.stateCode="0";
-   this.HouseInvolved1=0;
+    this.HouseInvolved1=0;
     this.HouseInvolved2=0;
     this.THouseInvolved=0;
     this.fistNumber=0;
@@ -984,6 +983,10 @@ AdminPage()
   this.router.navigate(['/Admin/ConsphyfinChart1']);
 }   
 
+ShowPage()
+{
+  this.router.navigate(['/Admin/PMAYuCompWise']);
+}   
 
 
 
@@ -2907,4 +2910,5 @@ getCityDetails(cityCode) {
     this.GetFilterDatanew(this.stateCode,this.districtCodes ,this.cityCodes, this.Compid );
     }
   }
+  
 }

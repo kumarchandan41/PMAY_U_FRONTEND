@@ -104,6 +104,7 @@ import { ClassificationMasterComponent } from './Master/classification-master/cl
 import { ComponentMasterComponent } from './Master/component-master/component-master.component';
 import { MappingClassificationMasterComponent } from './Master/mapping-classification-master/mapping-classification-master.component';
 import { SchemeMasterComponent } from './Master/scheme-master/scheme-master.component';
+import { PMAYuCriticalComponent } from './AdminPanel/pmayu-critical/pmayu-critical.component';
 // import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
 // import { ProjectDetailsComponent } from './DRMC/project-details/project-details.component';
 // import { ProjectReleaseFundFlowComponent } from './DRMC/project-release-fund-flow/project-release-fund-flow.component';
@@ -181,7 +182,9 @@ const routes: Routes = [
       {path: 'SchemeMaster', component: SchemeMasterComponent},
       {path: 'ClassificationMaster', component: ClassificationMasterComponent},
       {path: 'MappingClassificationMaster', component: MappingClassificationMasterComponent},
+      {path: 'PMAYuCritical', component: PMAYuCriticalComponent},
 
+      
       
     ] 
   },
@@ -278,7 +281,8 @@ const routes: Routes = [
     ClassificationMasterComponent,
     ComponentMasterComponent,
     MappingClassificationMasterComponent,
-    SchemeMasterComponent 
+    SchemeMasterComponent,
+    PMAYuCriticalComponent 
   ],
   imports: [
     CountoModule,

@@ -12,5 +12,7 @@ canvas{
     height: 15px!important;
 }
 
-
+.input-group-addon, .input-group-btn{
+    width: initial;
+}
  

@@ -25,6 +25,7 @@ import { Route, Router } from '@angular/router';
 import { Houses_Status } from '../model/chart';
 import { float } from 'html2canvas/dist/types/css/property-descriptors/float';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { PMAY_DATA } from '../model/chart.model';
 
 
 const localString = (number, format = 'en-IN') => {
@@ -84,7 +85,7 @@ export class ClassA{
 
 export class ConsPhyFinReportComponent implements OnInit {
   // StateDetails : States[];
-  // DisttDetails : Observable<District[]>;
+  // DisttDetails : Observable<District[]>; PhyfinChartComponent
   // CityDetails  : City[];
   //stateCode:string,districtCode:string,cityCode:string,compId:string
 classall:ClassA;
@@ -824,7 +825,8 @@ display2="none";
   HouseInvolved511: any;
   HouseInvolved611: any;
   Houses_Grounded1B141: any;
-
+  LstPayData1:PMAY_DATA[];
+  
 
 // declaration end
 
@@ -894,6 +896,10 @@ display2="none";
 
    this.GetFinancialData (this.stateCodes, this.districtCodes, this.cityCodes, this.Compid);
    this.BindGetStatus1(this.stateCodes, this.districtCodes, this.cityCodes, this.Compid);
+
+   this.service.FinYearHouses_Report(this.stateCodes, this.districtCodes, this.cityCodes).subscribe(result_Houses_Status => {
+    this.LstPayData1 = result_Houses_Status;   
+   });
 }
 clearfindata()
 {

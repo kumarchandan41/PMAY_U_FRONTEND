@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Excel_CLSSCityWisefile, Excelfile, Excel_PMAY_Data, ExcelSheet, Excel_CLSSCityMain, ExcelfilePhyDash, Excel_JNNURN_Data, Excel_CLSSStateWisefile, Excel_DemandCityWise } from '../model/excelfile';
-import { ConstantUrlService } from 'src/app/Shared/constant-url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +16,8 @@ export class GraphService {
   CLSS_ValuesList(stateCode: any) {
     throw new Error("Method not implemented.");
   }
-  // url="http://localhost:58396/api/Buldings/";
-  // url1 ="http://localhost:58396/API/RegistrationApi/";
-
-  url:string;
-  url1:string;
-   //url="http://10.196.69.102/hfa_api/api/Buldings/";
-   //url1 ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
-   
+   url="http://localhost:58396/api/Buldings/";
+   url1 ="http://localhost:58396/API/RegistrationApi/";
 
   StateDetails : States[];
   StateDetails1: States[];
@@ -41,13 +34,7 @@ export class GraphService {
   ChartDetail:Charts;
   ComponentData : Comp_Values[];
 
-  constructor(private http:HttpClient, private locationStrategy: LocationStrategy ,private constantUrlService: ConstantUrlService ) { 
-       
-     this.url=this.constantUrlService.url;
-     this.url1=this.constantUrlService.url1;
-
-  }
-
+  constructor(private http:HttpClient, private locationStrategy: LocationStrategy) { }
 
 PriventBackButton()
 {
@@ -130,6 +117,13 @@ StateListbyHFA_14():Observable<States[]>{
   AllCitiesList(){
      this.http.get(this.url + 'HFA_City_Details').toPromise().then(result=>this.CityDetails= result as City[])
   } 
+
+ 
+  AllCitiesListFor_Constutiency(DisttName)
+  {
+    return this.http.get<City[]>(this.url + "HFA_AllCityDetails?dCode="+ DisttName).toPromise().then(result=>this.CityDetails= result as City[]);
+  }
+  
 
   DisttList(stateName)
   {   
@@ -535,7 +529,9 @@ ServiceUserAdminDetails():Observable<UserMaster[]>
           const httpOptions = { headers: headers};  
           return  this.http.post<string>(this.url + "UploadExcel_CLSS", formData,httpOptions);
      }
-    //--------------------------------------
+    
+
+//--------------------------------------
     UploadScore_Excel(formData:FormData):Observable<string>
     { 
           let headers = new  HttpHeaders();
@@ -928,20 +924,77 @@ ServiceUserAdminDetails():Observable<UserMaster[]>
          // alert(2);
            return this.http.get<Houses_Status[]>(this.url + "GetRayHouses?stateCode="+ stateCode + "&DisttCode=" + DisttCode + "&cityCode=" + cityCode + "&finYear=" + finYear);
      }
+     //--------------- PMAY Start-----------------------
      sp_create_PMAY_DATACons(stateCode:string,DisttCode:string,cityCode:string,Comp:string):Observable<PMAY_DATA_New[]>
      {
           //alert(); 
             return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_PMAYDATA?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&cid=" + Comp);
      }
+     sp_create_PMAY_DATAConsNew(stateCode:string,DisttCode:string,cityCode:string,Fin_Year:string):Observable<PMAY_DATA_New[]>
+     {
+          //alert(); 
+          debugger;
+            return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_PMAYDATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year);
+     }
+     //--------------- PMAY end-----------------------
+    
+     //---------------BLCS START------------------
      sp_create_BLC_AHP_DATA(stateCode:string,DisttCode:string,cityCode:string,Comp:string):Observable<PMAY_DATA_New[]>
      {
         //  alert(); 
           debugger;
             return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_BLC_AHP_DATA?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&cid=" + Comp);
      }
+     sp_create_BLC_DATANew(stateCode:string,DisttCode:string,cityCode:string,Fin_Year:string):Observable<PMAY_DATA_New[]>
+     {
+          debugger;
+            return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_BLCS_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year);
+     }
+      //---------------BLCS END-------------------
+      sp_create_ISSR_DATANew(stateCode:string,DisttCode:string,cityCode:string,Fin_Year:string):Observable<PMAY_DATA_New[]>
+      {
+           debugger;
+             return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_ISSR_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year);
+      }
+
+     sp_create_AHP_DATANew(stateCode:string,DisttCode:string,cityCode:string,Fin_Year:string):Observable<PMAY_DATA_New[]>
+     {
+          debugger;
+            return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_AHP_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year);
+     }
+     sp_create_ISSR_DATAFinYeraWise(stateCode:string,DisttCode:string,cityCode:string,Fin_Year:string):Observable<PMAY_DATA_New[]>
+     {
+          debugger;
+            return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_ISSR_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year);
+     }
+     //------------------------------------------
+
      sp_create_ISSR_DATA(stateCode:string,DisttCode:string,cityCode:string,Comp:string):Observable<PMAY_DATA_New[]>
      {
           //alert(); 
             return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_ISSR_DATA?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&cid=" + Comp);
      }
+
+     sp_create_PMAY_Critical_DATA(stateCode:string,DisttCode:string,cityCode:string,Comp:string,FinYear:string):Observable<PMAY_DATA_New[]>
+     {
+        //  alert(); 
+          debugger;
+            return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_PMAYCriticalDATA?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&cid=" + Comp + "&finYear=" + FinYear); 
+     }
+
+     sp_create_PMAY_Critical_FinYearWiseDATA(stateCode:string,DisttCode:string,cityCode:string,Fin_Year:string):Observable<PMAY_DATA_New[]>
+     {
+        // alert(); 
+          debugger;
+            return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_CRITICAL_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year); 
+     }
+     
+
+     sp_create__Grid_PMAY_Critical_DATA(stateCode:string,DisttCode:string,cityCode:string,Comp:string,FinYear:string):Observable<PMAY_DATA_New[]>
+     {
+        //  alert(); 
+          debugger;
+            return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_Grid_Critical_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&cid=" + Comp + "&finYear=" + FinYear); 
+     }
+
 }

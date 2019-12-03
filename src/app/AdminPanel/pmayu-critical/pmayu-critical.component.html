@@ -1,0 +1,161 @@
+<div class="row">
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <div  style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px">State :</div>
+      <div >
+          <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
+            style="width: 200px;font-size: 18px;font-display: black;color: black;;border-color: black;font-family: Arial, Geneva, Tahoma, sans-serif">
+            <option value={{stValue}}>{{StateMessage}}</option>
+            <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+              {{sntry.States_UT}}
+            </option>
+          </select></div>
+          
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+    
+        <!-- <div class="info-box" style="min-height: 40px;"> -->
+            <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px"> District :</div> 
+        <!-- <select class="form-control" placeholder="Choose Distt"
+        (change)="getCitytDetails($event.target.value)"
+        style="width: 200px;font-display: black;color:black;font-family: Arial, Helvetica, sans-serif">
+        <option value={{distValue}}>{{DistrictMessage}}</option>
+        <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+          {{sntry.District}}
+        </option>
+      </select>  -->
+
+      <div style="border: black"><select class="form-control" placeholder="Choose Distt"
+        (change)="getDistrictDetails($event.target.value)"
+        style="width: 200px;font-size: 18px;font-display: black;color:black;border-color: black;font-family: Arial, Helvetica, sans-serif">
+        <option value={{distValue}}>{{DistrictMessage}}</option>
+        <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+          {{sntry.District}}
+        </option>
+      </select></div>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <!-- <div class="info-box" style="min-height: 40px;"> -->
+            <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px">City :</div> 
+         <div style="color:arial-narrow;border: black"> <select class="form-control" placeholder="Choose City"
+              (change)="getCityDetails($event.target.value)"
+              style="width: 200px;font-size: 18px;font-display: black;color:black;border-color: black;font-family: Arial, Helvetica, sans-serif">
+              <option value={{cityValue}}>{{CityMessage}}</option>
+              <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+                {{sntry.City}}
+              </option>
+            </select>  </div>
+  
+    </div>
+   
+
+    <div class="col-md-3 col-sm-3 col-xs-12">
+      <label> Select :</label>
+      <select class="form-control" (change)="getMySelection($event.target.value)" placeholder="Select Choice"
+        style="width: 120px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif">
+        <option value="0" selected>--Select--</option>
+        <option value="Graph" selected>Graph</option>
+        <option value="Data">Data</option>
+       </select>
+    </div>
+
+    <!-- <div class="col-md-3 col-sm-3 col-xs-12">
+    
+        <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px">Fin Year :</div> 
+        <select class="form-control"   placeholder="Select Role"  id="Fin_Year"
+        style="width: 200px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif"   
+        (change)="getFinDetails($event.target.value)">
+        <option value="0">--Select--</option>
+        <option value="2014-15">2014-15</option>
+        <option value="2015-16">2015-16</option>
+        <option value="2016-17">2016-17</option>
+        <option value="2017-18">2017-18</option>
+        <option value="2018-19">2018-19</option>
+        <option value="2019-20">2019-20</option>
+        </select>
+    </div> -->
+  <br/>
+   
+</div>
+<div class="info-box-inline" style="padding-left:450px;font-family: Arial, Helvetica, sans-serif;font-size: 18px">
+  <span class="info-box-header" ><b>Select Financial Year</b></span>
+  <span  ><input type="checkbox"  (change)="ProjectCost($event)" name="Project Cost" value="SUM(BENE2014_15)" > 2014-15 &nbsp;</span> 
+  <input type="checkbox"  (change)="ProjectCost($event)" name="CA Sanctioned" value="SUM(BENE2015_16)" > 2015-16 &nbsp;
+ <input type="checkbox" (change)="ProjectCost($event)" name="1st Installment Released" value="SUM(BENE2016_17)">2016-17&nbsp;
+  <input type="checkbox" (change)="ProjectCost($event)" name="2nd Installment Released" value="SUM(BENE2017_18)"> 2017-18&nbsp;
+  <input type="checkbox" (change)="ProjectCost($event)" name="3rd Installment Released" value="SUM(BENE2018_19)"> 2018-19&nbsp;
+  <input type="checkbox" (change)="ProjectCost($event)" name="UC Receieved" value="SUM(BENE2019_20)">2019-20 
+</div>
+   
+
+     <div >
+        
+      <section style="align-items: center;">
+
+        <div class="row">
+          <div class="col-sm-12" style="background-color:lavender;"> 
+            <div id="chartPMAY_Critical" style="height: 400px; width: 1300px;margin-left: 20px; "></div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-sm-12" style="background-color:lavenderblush;">
+            <!-- <div id="chartBLCS" style="height: 500px; width: 1400px;;margin-left: 50px;"></div> -->
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12" style="background-color:lavenderblush;">
+            <!-- <div id="chartISSR" style="height: 500px; width: 1400px;;margin-left: 50px;"></div> -->
+          </div>
+        </div>
+
+        
+
+        <div class="row">
+          <div class="col-sm-12" style="background-color:lavender;">
+            <!-- <div id="chartPMAYU" style="height: 500px; width: 1400px;;margin-left: 50px;"></div> -->
+          </div>
+        </div>
+      </section>
+
+      <div style="width:20%;height:100px;margin-left:70px" id ="mytable">   
+        <table class="table table-striped" style="border:1;background-color: white" align="center" border="1">
+            <thead class="thead-dark" >
+              <tr  style="color: white;background-color: gray">
+                <td font-bold="true"> Fin-Year</td>
+                <td font-bold="true">Houses-Involved</td>
+                <td font-bold="true">Ist inst yet to be released</td>
+                <td font-bold="true">IInd inst yet to be released</td>
+                <td font-bold="true">III Inst yet tobe released</td>
+                <td font-bold="true">Grounded but yet to be Completed</td>
+                <td font-bold="true">Completed but yet to be Occupied</td>
+            </tr>
+            </thead>
+            <tbody style="overflow-y:scroll; width:100px;">
+                <tr *ngFor="let data of LstPayData1 | paginate: { itemsPerPage: 10, currentPage: p }">
+                    <td  align="right">{{data.FinYear}}</td>
+                    <td  align="right">{{data.Housesinvolved}}</td>
+                    <td  align="right">{{data.Istinstyettobereleased}}</td>
+                    <td  align="right">{{data.IIndinstyettobereleased}}</td>
+                    <td  align="right">{{data.ThirdInstyettobereleased}}</td>
+                    <td  align="right">{{data.GroundedbutyettobeCompleted}}</td>
+                    <td  align="right">{{data.CompletedbutyettobeOccupied}}</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>      
+    </div>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br><br>
+ <br>
+ <br>
+ <br>
+ <br><br>
+ <br>
+ <br>
+ <br>
+ <br>

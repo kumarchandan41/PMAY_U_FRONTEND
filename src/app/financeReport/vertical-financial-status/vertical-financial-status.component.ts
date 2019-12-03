@@ -615,7 +615,9 @@ PC15BLC : any=0;
   Second16BLC: any=0;
   Second17BLC: any=0;
   UC_Received16BLC: any=0;
-  
+  CentralDisplay:any;
+  PCOST: any;
+
 //----------------------------------- 
 
 
@@ -725,8 +727,33 @@ PC15BLC : any=0;
 
      //stateCodes, districtCodes, cityCodes, Compid
 
+} 
+test($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+  if (checked)
+  {
+    this.CentralDisplay ='block';
+  }   
+  else 
+  {
+    this.CentralDisplay ='none';
+  }
 }
-
+ProjectCost($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.PCOST ='block';
+    }   
+    else 
+    {
+      this.PCOST ='none';
+    }
+}
 
 download_csv(csv, filename) {
   var csvFile;
@@ -2306,7 +2333,7 @@ getCityDetails(cityCode) {
         }
         catch{}
         finally{}
-//alert(this.PC14AHP);
+alert(this.PC14AHP);
         
         
         this.PC15AHP= 0;

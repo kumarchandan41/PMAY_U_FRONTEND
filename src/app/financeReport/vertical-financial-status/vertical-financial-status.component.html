@@ -52,19 +52,17 @@
                 </div>
               </div>
 
-              <br><br>
-              <!-- <div class="col-md-4" style="padding-left: 100px">
+              <!-- <br><br>
+              <div class="col-md-4" style="padding-left: 100px">
               <div class="col-md-5">
-                  <button class="Downloadbtn" (click)="pdfReport()" style="background-color:cadetblue">
-                    <i class="fa fa-download"></i>  
-                    Click to Print</button>
-                  <button (click)="exportExcel()" class="btn btn-success" style="background-color:cadetblue">ExportTOExcel</button> 
+                  <button class="Downloadbtn" (click)="pdfReport()"><i class="fa fa-download"></i> Click to Print</button>
+                  <button (click)="exportExcel()" class="btn btn-success">ExportTOExcel</button> 
 
                 </div>
               </div>  
               <div class="col-md-4">
               <div >
-                <input type="button" (click)="AdminPage()" value="Back" style="color:white;background-color:cadetblue;width:60px" />
+                <input type="button" (click)="AdminPage()" value="Back" style="color:white;background-color:blue;width:60px" />
             </div>
           </div> -->
 
@@ -72,30 +70,37 @@
   </div> 
 </div>
 
+ 
 <div class="row">
   <div class="col-md-3"></div>  
   <div class="col-md-2">
-      <button class="Downloadbtn" (click)="pdfReport()" style="background-color: cadetblue;"><i class="fa fa-download"></i> Click to Print</button>
+      <button  class="btn btn-success" (click)="pdfReport()"  style="background-color:cadetblue;"> Click to Print</button>
     </div>
 
     <div class="col-md-2">
-      <button (click)="ExportTOExcel()" class="btn btn-success" style="background-color: cadetblue;">ExportTOExcel</button> 
+      <button (click)="ExportTOExcel()" class="btn btn-success" style="background-color:cadetblue;">ExportTOExcel</button> 
 
     </div>
     <div class="col-md-2">
-      <input type="button" (click)="AdminPage()" value="Back" style="background-color: cadetblue;" class="btn btn-warning" />
+      <input type="button" (click)="AdminPage()" value="Back" style="background-color:cadetblue;" class="btn btn-success" />
 
     </div>
 </div>
- 
+
 
 <div class="info-box-inline" style="padding-left:250px;font-family: Arial, Helvetica, sans-serif;font-size: 18px">
-    <span class="info-box-header" style="padding:40px"><b>Component</b></span>
-    <input type="checkbox"  (change)="sendComp($event)" name="CA Sanctioned" value="CA Sanctioned">CA Sanct. &nbsp;
+    <span class="info-box-header" style="padding:40px"><b>Show /Hide</b></span>
+    
+    <span [ngStyle]="{'display':JvrmDisplay1}"><input    type="checkbox"  (change)="ProjectCost($event)" name="Project Cost" value="Project Cost" checked="true"> Project Cost &nbsp;</span> 
+    
+    <input type="checkbox"  (change)="test($event)" name="CA Sanctioned" value="CA Sanctioned" checked="true"> CA Sanct. &nbsp;
+
+
     <input type="checkbox" (change)="sendComp($event)" name="1st Installment Released" value="1st Installment Released">1st Inst Rel.&nbsp;
     <input type="checkbox" (change)="sendComp($event)" name="2nd Installment Released" value="2nd Installment Released"> 2nd Inst Rel.&nbsp;
     <input type="checkbox" (change)="sendComp($event)" name="3rd Installment Released" value="3rd Installment Released"> 3rd Inst Rel.&nbsp;
     <span [ngStyle]="{'display':JvrmDisplay}"><input type="checkbox"  (change)="sendComp($event)" name="Total Central Assistance Released" value="Total Central Assistance Released">Total CA Rel.&nbsp;</span> 
+    
     <input type="checkbox" (change)="sendComp($event)" name="UC Receieved" value="UC Receieved"> UC Receieved&nbsp;
     <input type="checkbox" id="chkAll" (change)="sendComp($event)" name="ALL" value="ALL" checked> ALL <br><br> 
 `</div>
@@ -109,8 +114,10 @@
           <td   rowspan="1" style="width:50px;text-align:center;font-size: 13px; font-family: Arial, Helvetica, sans-serif"><b> SrNo</b></td>
           <td    style="width:40px;text-align:center;font-size: 13px;font-family: Arial, Helvetica, sans-serif"><b>Comp.</b></td>
           <td    style="width:100px;text-align:center;font-size: 13px;font-family: Arial, Helvetica, sans-serif"><b>Financial Year</b></td>
-          <td style="width:80px;font-size: 13px;font-family: Arial, Helvetica, sans-serif"><b>Project <br/> Cost	</b></td>
-          <td  style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif"><b>Central Assistance Sanctioned	</b></td>
+          <td  [ngStyle]="{'display':PCOST}"   style="width:80px;font-size: 13px;font-family: Arial, Helvetica, sans-serif"><b>Project <br/> Cost	</b></td>
+          <td  [ngStyle]="{'display':CentralDisplay}"  style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif"><b>Central Assistance Sanctioned	</b></td>
+
+
           <td  style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" ><b>1st Installment Released</b></td>
           <td  style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif"><b>2nd Installment Released</b></td>
           <td  style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif"><b>3rd Installment Released</b></td>
@@ -125,9 +132,9 @@
           <td  height="10" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">BLC </td> 
           <td  height="10" style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2014-15</td>
        
-          <td   height="10" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{PC_BLC14.toLocaleString('en-IN')}}  </td>        
+          <td   [ngStyle]="{'display':PCOST}"  height="10" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{PC_BLC14.toLocaleString('en-IN')}}  </td>        
           
-          <td   height="10" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{CAI_BLC14.toLocaleString('en-IN')}}   </td>
+          <td  [ngStyle]="{'display':CentralDisplay}" height="10" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{CAI_BLC14.toLocaleString('en-IN')}}   </td>
           <td   height="10" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{First_BLC14.toLocaleString('en-IN')}} </td>
           <td   height="10" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Second_BLC14.toLocaleString('en-IN')}} </td>
           <td  height="10"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third_BLC14.toLocaleString('en-IN')}} </td>
@@ -142,8 +149,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2015-16
             <!-- <a style="cursor: pointer" (click)="openModalDialog('BLCS','2015-16','0')">2015-16</a> -->  
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{PC15BLC.toLocaleString('en-IN')}}  </td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{CAI15BLC.toLocaleString('en-IN')}}   </td>
+          <td  [ngStyle]="{'display':PCOST}"   style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{PC15BLC.toLocaleString('en-IN')}}  </td>        
+          <td  [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{CAI15BLC.toLocaleString('en-IN')}}   </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{First15BLC.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Second15BLC.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third15BLC.toLocaleString('en-IN')}} </td>
@@ -158,8 +165,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2016-17
             <!-- <a style="cursor: pointer" (click)="openModalDialog('BLCS','2016-17','0')">2016-17</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC16BLC.toLocaleString('en-IN')}}  </td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{CAI16BLC.toLocaleString('en-IN')}}   </td>
+          <td   [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC16BLC.toLocaleString('en-IN')}}  </td>        
+          <td  [ngStyle]="{'display':CentralDisplay}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{CAI16BLC.toLocaleString('en-IN')}}   </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{First16BLC.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Second16BLC.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third16.toLocaleString('en-IN')}} </td>
@@ -175,9 +182,9 @@
             <!-- <a style="cursor: pointer" (click)="openModalDialog('BLCS','2017-18','0')">2017-18</a> -->
         </td>
         
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC17BLC.toLocaleString('en-IN')}} </td>        
+          <td   [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC17BLC.toLocaleString('en-IN')}} </td>        
           
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI17BLC.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI17BLC.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{First17BLC.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Second17BLC.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Third17.toLocaleString('en-IN')}}  </td>
@@ -193,9 +200,9 @@
             <!-- <a style="cursor: pointer" (click)="openModalDialog('BLCS','2018-19','0')">2018-19</a> -->
         </td>
         
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC18BLC.toLocaleString('en-IN')}} </td>        
+          <td  [ngStyle]="{'display':PCOST}"   style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC18BLC.toLocaleString('en-IN')}} </td>        
           
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI18BLC.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI18BLC.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{First18BLC.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Second18.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third18.toLocaleString('en-IN')}} </td>
@@ -211,9 +218,9 @@
             <!-- <a style="cursor: pointer" (click)="openModalDialog('BLCS','2019-20','0')">2019-20</a> -->
         </td>
         
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC19BLC.toLocaleString('en-IN')}} </td>        
+          <td  [ngStyle]="{'display':PCOST}"   style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC19BLC.toLocaleString('en-IN')}} </td>        
           
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI19BLC.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI19BLC.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{First19BLC.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Second19.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Third19.toLocaleString('en-IN')}} </td>
@@ -226,9 +233,9 @@
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  </td>
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">Total</td>
         
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{TcolBLC1.toLocaleString('en-IN')}}</td>        
+          <td  [ngStyle]="{'display':PCOST}"   style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{TcolBLC1.toLocaleString('en-IN')}}</td>        
           
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{TcolBLC2.toLocaleString('en-IN')}} </td>
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{TcolBLC2.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{TcolBLC3.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{TcolBLC4.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{TcolBLC5.toLocaleString('en-IN')}}</td>
@@ -241,8 +248,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2014-15
             <!-- <a style="cursor: pointer" (click)="openModalDialog('AHP','2014-15','0')">2014-15</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC14AHP.toLocaleString('en-IN')}}  </td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI14AHP.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC14AHP.toLocaleString('en-IN')}}  </td>        
+          <td  [ngStyle]="{'display':CentralDisplay}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI14AHP.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{First14AHP.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Second14AHP.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third14AHP.toLocaleString('en-IN')}} </td>
@@ -257,8 +264,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center" >2015-16
             <!-- <a style="cursor: pointer" (click)="openModalDialog('AHP','2015-16','0')">2015-16</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC15AHP.toLocaleString('en-IN')}}  </td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI15AHP.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC15AHP.toLocaleString('en-IN')}}  </td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI15AHP.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{First15AHP.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Second15AHP.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third15AHP.toLocaleString('en-IN')}} </td>
@@ -273,8 +280,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2016-17
             <!-- <a style="cursor: pointer" (click)="openModalDialog('AHP','2016-17','0')">2016-17</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC16AHP.toLocaleString('en-IN')}}  </td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI16AHP.toLocaleString('en-IN')}}  </td>
+          <td [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC16AHP.toLocaleString('en-IN')}}  </td>        
+          <td   [ngStyle]="{'display':CentralDisplay}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI16AHP.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{First16AHP.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Second16AHP.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third16AHP.toLocaleString('en-IN')}} </td>
@@ -288,8 +295,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2017-18
             <!-- <a style="cursor: pointer" (click)="openModalDialog('AHP','2017-18','0')">2017-18</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC17AHP.toLocaleString('en-IN')}}  </td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI17AHP.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC17AHP.toLocaleString('en-IN')}}  </td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI17AHP.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{First17AHP.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{Second17AHP.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third17AHP.toLocaleString('en-IN')}} </td>
@@ -305,8 +312,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2018-19
             <!-- <a style="cursor: pointer" (click)="openModalDialog('AHP','2017-18','0')">2017-18</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC18AHP.toLocaleString('en-IN')}}  </td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI18AHP.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC18AHP.toLocaleString('en-IN')}}  </td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI18AHP.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{First18AHP.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{Second18AHP.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third18AHP.toLocaleString('en-IN')}} </td>
@@ -322,8 +329,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2019-20
             <!-- <a style="cursor: pointer" (click)="openModalDialog('AHP','2017-18','0')">2017-18</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC19AHP.toLocaleString('en-IN')}}  </td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI19AHP.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC19AHP.toLocaleString('en-IN')}}  </td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI19AHP.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{First19AHP.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{Second19AHP.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third19AHP.toLocaleString('en-IN')}} </td>
@@ -339,9 +346,9 @@
         <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  </td>
         <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">Total</td>
       
-        <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{T_AHP_PC.toLocaleString('en-IN')}}</td>        
+        <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{T_AHP_PC.toLocaleString('en-IN')}}</td>        
         
-        <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{T_AHP_CAI.toLocaleString('en-IN')}} </td>
+        <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{T_AHP_CAI.toLocaleString('en-IN')}} </td>
         <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{T_AHP_First.toLocaleString('en-IN')}} </td>
         <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{T_AHP_Second.toLocaleString('en-IN')}}  </td>
         <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{T_AHP_Third.toLocaleString('en-IN')}}</td>
@@ -360,8 +367,8 @@
          
             <!-- <a style="cursor: pointer" (click)="openModalDialog('ISSR','2015-16','0')">2015-16</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{PC14ISS.toLocaleString('en-IN')}}</td>        
-          <td style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI14ISS.toLocaleString('en-IN')}}  </td>
+          <td [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{PC14ISS.toLocaleString('en-IN')}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI14ISS.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">   {{First14ISS.toLocaleString('en-IN')}}</td>
           <td style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Second14ISS.toLocaleString('en-IN')}} </td>
           <td style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third14ISS.toLocaleString('en-IN')}} </td> 
@@ -376,8 +383,8 @@
             <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2015-16
             <!-- <a style="cursor: pointer" (click)="openModalDialog('ISSR','2015-16','0')">2015-16</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC15ISS.toLocaleString('en-IN')}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{CAI15ISS.toLocaleString('en-IN')}}  </td>
+          <td [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC15ISS.toLocaleString('en-IN')}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{CAI15ISS.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">   {{First15ISS.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Second15ISS.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third15ISS.toLocaleString('en-IN')}} </td> 
@@ -392,8 +399,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2016-17
             <!-- <a style="cursor: pointer" (click)="openModalDialog('ISSR','2015-16','0')">2015-16</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC16ISS.toLocaleString('en-IN')}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI16ISS.toLocaleString('en-IN')}}  </td>
+          <td [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC16ISS.toLocaleString('en-IN')}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI16ISS.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">   {{First16ISS.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Second16ISS.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third16ISS.toLocaleString('en-IN')}} </td> 
@@ -409,8 +416,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2017-18
             <!-- <a style="cursor: pointer" (click)="openModalDialog('ISSR','2015-16','0')">2015-16</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC17ISS.toLocaleString('en-IN')}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI17ISS.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC17ISS.toLocaleString('en-IN')}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI17ISS.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">   {{First17ISS.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Second17ISS.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third17ISS.toLocaleString('en-IN')}} </td> 
@@ -426,8 +433,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2018-19
             <!-- <a style="cursor: pointer" (click)="openModalDialog('ISSR','2015-16','0')">2015-16</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC18ISS.toLocaleString('en-IN')}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI18ISS.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC18ISS.toLocaleString('en-IN')}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI18ISS.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">   {{First18ISS.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Second18ISS.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third18ISS.toLocaleString('en-IN')}} </td> 
@@ -442,8 +449,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2019-20
             <!-- <a style="cursor: pointer" (click)="openModalDialog('ISSR','2015-16','0')">2015-16</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC19ISS.toLocaleString('en-IN')}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI19ISS.toLocaleString('en-IN')}}  </td>
+          <td [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{PC19ISS.toLocaleString('en-IN')}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{CAI19ISS.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">   {{First19ISS.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Second19ISS.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Third19ISS.toLocaleString('en-IN')}} </td> 
@@ -458,9 +465,9 @@
         <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  </td>
         <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">Total</td>
       
-        <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Tot_ISS_PC.toLocaleString('en-IN')}}</td>        
+        <td [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Tot_ISS_PC.toLocaleString('en-IN')}}</td>        
         
-        <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{Tot_ISS_CAI.toLocaleString('en-IN')}} </td>
+        <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{Tot_ISS_CAI.toLocaleString('en-IN')}} </td>
         <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Tot_ISS_OneInst.toLocaleString('en-IN')}} </td>
         <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Tot_ISS_TwoInst.toLocaleString('en-IN')}}  </td>
         <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Tot_ISS_ThreeInst.toLocaleString('en-IN')}}</td>
@@ -479,8 +486,8 @@
         </td>
        
   
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Loan_TOTAL_14_15}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2014_15_CL.toLocaleString('en-IN')}}   </td>
+          <td   [ngStyle]="{'display':PCOST}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Loan_TOTAL_14_15}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2014_15_CL.toLocaleString('en-IN')}}   </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2014_15_CL.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">0</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> 0  </td>
@@ -497,8 +504,8 @@
             <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2015-16','0')">2015-16</a> "Loan_Amt"-->
             
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Loan_TOTAL_15_16}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2015_16_CL.toLocaleString('en-IN')}}</td>
+          <td   [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Loan_TOTAL_15_16}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2015_16_CL.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2015_16_CL.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">0</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">0</td>
@@ -514,8 +521,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2016-17 
             <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2015-16','0')">2015-16</a> "Loan_Amt"-->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Loan_TOTAL_16_17}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2016_17_CL.toLocaleString('en-IN')}}</td>
+          <td   [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Loan_TOTAL_16_17}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2016_17_CL.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2016_17_CL.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">0</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">0</td>
@@ -530,8 +537,8 @@
           <td  style="padding-right: 10px;text-align: right;font-size: l6px;font-family: Arial, Helvetica, sans-serif"></td>
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2017-18
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Loan_TOTAL_17_18}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2017_18_CL.toLocaleString('en-IN')}}</td>
+          <td   [ngStyle]="{'display':PCOST}"   style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Loan_TOTAL_17_18}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2017_18_CL.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2017_18_CL.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">0</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">0</td>
@@ -547,8 +554,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2018-19
             <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2015-16','0')">2015-16</a> "Loan_Amt"-->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Loan_TOTAL_18_19}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2018_19_CL.toLocaleString('en-IN')}}</td>
+          <td   [ngStyle]="{'display':PCOST}"   style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Loan_TOTAL_18_19}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2018_19_CL.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2018_19_CL.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">0</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">0</td>
@@ -562,8 +569,8 @@
           <td  align="center"> </td>
           <td  style="padding-right: 10px;text-align: right;font-size: l6px;font-family: Arial, Helvetica, sans-serif"></td>
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2019-20 
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Loan_TOTAL_19_20}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2019_20_CL.toLocaleString('en-IN')}}</td>
+          <td   [ngStyle]="{'display':PCOST}"   style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Loan_TOTAL_19_20}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2019_20_CL.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">{{Sub2019_20_CL.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">0</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">0</td>
@@ -578,9 +585,9 @@
             <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  </td>
             <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">Total</td>
           
-            <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Loan_TOTAL_CL.toLocaleString('en-IN')}}</td>        
+            <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Loan_TOTAL_CL.toLocaleString('en-IN')}}</td>        
             
-            <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{CA_SANCT_CLSS.toLocaleString('en-IN')}} </td>
+            <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{CA_SANCT_CLSS.toLocaleString('en-IN')}} </td>
             <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{FirstI_CLSS.toLocaleString('en-IN')}} </td>
             <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{SecondI_CLSS.toLocaleString('en-IN')}}  </td>
             <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{ThirdI_CLSS.toLocaleString('en-IN')}}</td>
@@ -598,8 +605,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2014-15
             <!-- <a style="cursor: pointer" (click)="openModalDialog('AHP','2014-15','0')">2014-15</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_1415.toLocaleString('en-IN')}}  </td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col2_1415.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_1415.toLocaleString('en-IN')}}  </td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col2_1415.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col3_1415.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col4_1415.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col5_1415.toLocaleString('en-IN')}} </td>
@@ -616,8 +623,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2015-16
             <!-- <a style="cursor: pointer" (click)="openModalDialog('ISSR','2015-16','0')">2015-16</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_1516.toLocaleString('en-IN')}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col2_1516.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_1516.toLocaleString('en-IN')}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col2_1516.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">   {{Col3_1516.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col4_1516.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col5_1516.toLocaleString('en-IN')}} </td> 
@@ -635,8 +642,8 @@
           <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2016-17
             <!-- <a style="cursor: pointer" (click)="openModalDialog('ISSR','2015-16','0')">2015-16</a> -->
         </td>
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_1617.toLocaleString('en-IN')}}</td>        
-          <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col2_1617.toLocaleString('en-IN')}}  </td>
+          <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_1617.toLocaleString('en-IN')}}</td>        
+          <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col2_1617.toLocaleString('en-IN')}}  </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">   {{Col3_1617.toLocaleString('en-IN')}}</td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col4_1617.toLocaleString('en-IN')}} </td>
           <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col5_1617.toLocaleString('en-IN')}} </td> 
@@ -653,8 +660,8 @@
         <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2017-18
           <!-- <a style="cursor: pointer" (click)="openModalDialog('ISSR','2015-16','0')">2015-16</a> -->
       </td>
-        <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_1718.toLocaleString('en-IN')}}</td>        
-        <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col2_1718.toLocaleString('en-IN')}}  </td>
+        <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_1718.toLocaleString('en-IN')}}</td>        
+        <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col2_1718.toLocaleString('en-IN')}}  </td>
         <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">   {{Col3_1718.toLocaleString('en-IN')}}</td>
         <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col4_1718.toLocaleString('en-IN')}} </td>
         <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col5_1718.toLocaleString('en-IN')}} </td> 
@@ -671,8 +678,8 @@
       <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2018-19
         <!-- <a style="cursor: pointer" (click)="openModalDialog('ISSR','2015-16','0')">2015-16</a> -->
     </td>
-      <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_1819.toLocaleString('en-IN')}}</td>        
-      <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col2_1819.toLocaleString('en-IN')}}  </td>
+      <td  [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_1819.toLocaleString('en-IN')}}</td>        
+      <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col2_1819.toLocaleString('en-IN')}}  </td>
       <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">   {{Col3_1819.toLocaleString('en-IN')}}</td>
       <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col4_1819.toLocaleString('en-IN')}} </td>
       <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col5_1819.toLocaleString('en-IN')}} </td> 
@@ -689,8 +696,8 @@
     <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">2019-20
       <!-- <a style="cursor: pointer" (click)="openModalDialog('ISSR','2015-16','0')">2015-16</a> -->
   </td>
-    <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_1920.toLocaleString('en-IN')}}</td>        
-    <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col2_1920.toLocaleString('en-IN')}}  </td>
+    <td [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_1920.toLocaleString('en-IN')}}</td>        
+    <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col2_1920.toLocaleString('en-IN')}}  </td>
     <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">   {{Col3_1920.toLocaleString('en-IN')}}</td>
     <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col4_1920.toLocaleString('en-IN')}} </td>
     <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col5_1920.toLocaleString('en-IN')}} </td> 
@@ -708,9 +715,9 @@
                               <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  </td>
                               <td style="width:100px;font-size: 13px;font-family: Arial, Helvetica, sans-serif" align="center">Total</td>
                             
-                              <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_Total.toLocaleString('en-IN')}}</td>        
+                              <td [ngStyle]="{'display':PCOST}"  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col1_Total.toLocaleString('en-IN')}}</td>        
                               
-                              <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{Col2_Total.toLocaleString('en-IN')}} </td>
+                              <td   [ngStyle]="{'display':CentralDisplay}" style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif">  {{Col2_Total.toLocaleString('en-IN')}} </td>
                               <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col3_Total.toLocaleString('en-IN')}} </td>
                               <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col4_Total.toLocaleString('en-IN')}}  </td>
                               <td  style="padding-right: 10px;text-align: right;font-size: 13px;font-family: Arial, Helvetica, sans-serif"> {{Col5_Total.toLocaleString('en-IN')}}</td>

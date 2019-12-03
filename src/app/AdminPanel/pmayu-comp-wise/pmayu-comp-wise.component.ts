@@ -76,7 +76,7 @@ const indianFormat1 = (number, currency = 'INR') => {
   styleUrls: ['./pmayu-comp-wise.component.css']
 })
 
-export class PMAYuCompWiseComponent implements OnInit {
+export class PMAYuCompWiseComponent implements OnInit {  
   modalRef;
   display='none';
   display1='none';
@@ -194,6 +194,10 @@ export class PMAYuCompWiseComponent implements OnInit {
   cidCount: string = '';
   // lstCid: Array<any> = new Array<any>();
   lstCid: number[] = [];
+  lstYear: string[] = [];
+  lstYearBene: string[] = [];
+
+  selectedYears:any;
   lstDivision: string[] = [];
   TotSubsidy: number;
   CA_SanctforReleaseTotal: number;
@@ -235,7 +239,7 @@ export class PMAYuCompWiseComponent implements OnInit {
   CASanct_forReleas: string;
   CASanct_for_Release: number;
   CASanct_forRelease1: string;
-  
+
 
   //@ViewChild('editModal') editModal: TemplateRef<any>;
   CASanct_forReleaseNEW: string;
@@ -327,13 +331,13 @@ export class PMAYuCompWiseComponent implements OnInit {
   CAR151: number;
   CAI161: number;
   CAR161: number;
-  CAI171: number; 
+  CAI171: number;
   CAR171: number; CAI181: number;
    CAR181: number; CAI191: number;
     CAR191: number;
   Sanction_Total_New1: string;
   // Demand: number;
-
+  Fin_Year: any;
   page:string;
   isDone = true;
   Sanction_Total_New4: any;
@@ -357,7 +361,7 @@ export class PMAYuCompWiseComponent implements OnInit {
        Fin_Year14_15 : any;
        Housesinvolved14_15 : any;
        FundsDisbursed_in_Houses14_15 : any =0;
-       Houses_Grounde14_15  : any =0; 
+       Houses_Grounde14_15  : any =0;
        Houses_Complete14_15  : any =0;
        First_Houses14_15 : any =0;
        Second_Houses14_15  : any =0;
@@ -366,7 +370,7 @@ export class PMAYuCompWiseComponent implements OnInit {
        Fin_Year15_16 : any =0;
        Housesinvolved15_16 : any =0;
        FundsDisbursed_in_Houses15_16 : any =0;
-       Houses_Grounde15_16  : any =0; 
+       Houses_Grounde15_16  : any =0;
        Houses_Complete15_16  : any =0;
        First_Houses15_16 : any =0;
        Second_Houses15_16  : any =0;
@@ -420,6 +424,16 @@ export class PMAYuCompWiseComponent implements OnInit {
   //Fin_Year20_21: string =0;
   Houses_Grounde20_21: any =0;
   Houses_Complete20_21: any =0;
+  a: any;
+  b: any;
+  c: any;
+  d: any;
+  e: any;
+  f: any;
+  g: any;
+  h: any;
+  i: any;
+  selectedYearsBene: string;
 //--------------------------------------------
 
   constructor(private router: Router,private gevent:GlobalEvent, public service: GraphService, private modalService: NgbModal) {
@@ -433,7 +447,7 @@ export class PMAYuCompWiseComponent implements OnInit {
       this.jstoday = formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
     },1000);
 
-  
+
     this.service.HFACityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes).subscribe(result => {
       this.Houses_Grounded = result.Houses_Grounded;
     });
@@ -450,15 +464,29 @@ export class PMAYuCompWiseComponent implements OnInit {
     this.service.GetStateWiseFinYrData(this.stateCodes).subscribe(result_State => {
     });
 
- 
+    this.service.sp_create_PMAY_DATAConsNew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year).subscribe(result_PMU => {
+    });
+    
+    this.service.sp_create_BLC_DATANew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year).subscribe(result_PMU => {
+    });
+
+    // this.BindAHP_Datanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year).subscribe(result_PMU => {
+    // });
+    this.service.sp_create_AHP_DATANew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year).subscribe(result_PMU => {
+    });
+
+    this.service.sp_create_ISSR_DATANew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year).subscribe(result_PMU => {
+    });
+     // this.service.BindBLC_DataNew(this.stateCodes, this.districtCodes, this.cityCodes,"0" ,this.Fin_Year).subscribe(result_PMU => {
+     // });
   }
 
   ngOnInit() {
     this.gevent.ColorObservable.subscribe(x=>{
       console.log('color:'+x);
-      debugger;
+    //  debugger;
     });
-   
+
    this.backgroundColor = "#ffffff";// "#B3E5FC"// '#FFDD00';
    this.stateCodes = "0";
    this.districtCodes = "0";
@@ -468,7 +496,7 @@ export class PMAYuCompWiseComponent implements OnInit {
    this.Division = "0";
    this.DivisionCodes = "0";
    this.State="--Select--";
-    
+
     this.service.StateList();
     this.service.DisttList(this.stateCodes);
     this.service.CityList(this.districtCodes);
@@ -481,16 +509,19 @@ export class PMAYuCompWiseComponent implements OnInit {
       this.lstHFACodes = result;
       //***************************************** */
     })
-    
+
     //this.BindGroundedGraph(this.stateCode,this.districtCode,this.cityCode);
     this.DivisionCodes ='HFA-1';
 
-    this.GetPsyChart(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes); 
-    this.BindPMayData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp);
-    this.BindBLC_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp);
-    this.BindAHP_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp);
-    this.BindISSRData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp);
-    
+    this.GetPsyChart(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes);
+    this.BindPMayData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"0");
+    this.BindBLC_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
+    this.BindAHP_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
+    this.BindISSRData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
+    this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,"");
+    this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
+    this.BindAHP_Datanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
+
 
     this.service.HFACityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes);
     this.service.CLSSCityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes);
@@ -510,9 +541,22 @@ export class PMAYuCompWiseComponent implements OnInit {
 
   }
 
+getFinDetails (Fin_Year)
+{
+ // alert(Fin_Year);
+  this.BindPMayData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,Fin_Year) ;
+  this.BindBLC_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,Fin_Year);
+  this.BindAHP_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,Fin_Year);
+  this.BindISSRData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,Fin_Year);
+  this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,Fin_Year);
+  this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
+  this.BindBLC_DataNew(this.stateCodes, this.districtCodes, this.cityCodes,"0" ,this.Fin_Year);
+  this.BindAHP_Datanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
+
+}
   getStateDetails(stateCodes) {
-    debugger;
-    
+   // debugger;
+
     //alert(stateCodes);
    // alert(this.districtCodes);
     if (stateCodes == "0") {
@@ -541,13 +585,18 @@ export class PMAYuCompWiseComponent implements OnInit {
          this.service.DisttList(this.stateCodes);
          this.service.CityList(this.districtCodes);
              this.GetPsyChart(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes);
-            
-             this.BindPMayData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp) ;
-             this.BindBLC_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp);
-             this.BindAHP_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp);
-             this.BindISSRData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp);
+
+             this.BindPMayData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"") ;
+             this.BindBLC_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
+             this.BindAHP_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
+             this.BindISSRData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
+             this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYears);
+
+             this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
+             this.BindAHP_Datanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
+
+             this.BindBLC_DataNew(this.stateCodes, this.districtCodes, this.cityCodes,"0" ,this.Fin_Year);
             }
-   
      }
     else {
       this.stateCodes = stateCodes;
@@ -556,17 +605,4762 @@ export class PMAYuCompWiseComponent implements OnInit {
       this.service.CityList(this.districtCodes);//
       this.DisabledCheckBox=true;
       this.GetPsyChart(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes);
-     
-      this.BindAHP_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp);
-     
-      this.BindPMayData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp) ;
-       this.BindBLC_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp);
-       this.BindISSRData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp);
+
+      this.BindAHP_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
+
+      this.BindPMayData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"") ;
+       this.BindBLC_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
+       this.BindISSRData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
+       this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYears);
+
+       this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
+       this.BindAHP_Datanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
+
+       
+     //  this.BindBLC_DataNew(this.stateCodes, this.districtCodes, this.cityCodes,"0" ,this.Fin_Year);
     }
   }
-  
-  
+  // Fin_Year(stateCodes: string, districtCodes: string, cityCodes: string, Fin_Year: any) {
+  //   throw new Error("Method not implemented.");
+  // }
 
+  ProjectCost(event)
+  {
+  const checked= event.target.checked;
+  const yearValue=event.target.value;
+    if (checked) {
+      this.lstYear.push(yearValue);
+      this.selectedYears = this.lstYear.toString();
+  }
+    else {
+      let index = this.lstYear.findIndex(a => a == yearValue);
+      if (index !== -1) {
+        this.lstYear.splice(index, 1);
+      }
+      this.selectedYears = this.lstYear.toString();
+  }
+  //alert(this.selectedYears );
+ if (this.selectedYears.length >  0 )
+ {
+  this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYears);
+     this.BindAHP_Datanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYears);
+   this.BindBLC_DataNew(this.stateCodes, this.districtCodes, this.cityCodes,"0" ,this.selectedYears);
+   this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYears);
+ }
+  else
+  {
+  this.BindPMayData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"0") ;
+  this.BindAHP_Data(this.stateCodes, this.districtCodes, this.cityCodes,"0",this.selectedYears);
+  this.BindBLC_Data(this.stateCodes, this.districtCodes, this.cityCodes,"0" ,this.selectedYears);
+  this.BindISSRData(this.stateCodes, this.districtCodes, this.cityCodes,"0" ,this.selectedYears);
+
+  }
+}
+ 
+ShowPage()
+{
+  this.router.navigate(['/Admin/ConsphyfinChart1']);
+}
+BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
+{
+       var str = Fin_Year ;//'SUM(BENE2014_15),SUM(BENE2015_16)';
+     //   alert(str.length);
+      if (str.length==101)
+      {
+          var splitted = str.split(",", str.length);
+          //alert(splitted[0]);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+          var z1 =  splitted[2].substring(8,str.length-3);
+          var z2 =  splitted[3].substring(8,str.length-3);
+          var z3 =  splitted[4].substring(8,str.length-3);
+          var z4 =  splitted[5].substring(8,str.length-3);
+      }
+      if (str.length==84)
+      {
+          var splitted = str.split(",", str.length);
+          //alert(splitted[0]);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+          var z1 =  splitted[2].substring(8,str.length-3);
+          var z2 =  splitted[3].substring(8,str.length-3);
+          var z3 =  splitted[4].substring(8,str.length-3);
+      }
+      if (str.length==67)
+      {
+          var splitted = str.split(",", str.length);
+          //alert(splitted[0]);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+          var z1 =  splitted[2].substring(8,str.length-3);
+          var z2 =  splitted[3].substring(8,str.length-3);
+         // alert(x1);
+        //  alert(Y1); 
+      }
+      if (str.length==50)
+      {
+          var splitted = str.split(",", str.length);
+          //alert(splitted[0]);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+          var z1 =  splitted[2].substring(8,str.length-3);
+         // alert(x1);
+        //  alert(Y1); 
+      }
+      if (str.length==33)
+      {
+          var splitted = str.split(",", str.length);
+          //alert(splitted[0]);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+         // alert(x1);
+        //  alert(Y1); 
+      }
+      if (str.length==16)
+      {
+          var splitted = str.split(",", str.length);
+//          alert(splitted[0]);
+          var x2 =  splitted[0].substring(8,str.length-1);
+//          alert(splitted.length);
+
+      }
+    //  let x = stringToSplit.split(" ");
+
+     if (splitted.length ==1)
+     {
+          this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+            if (result[0].FinYear !="0" )
+          {
+              this.Fin_Year14_15 = result[0].FinYear;
+              this.Housesinvolved14_15 = result[0].Housesinvolved;
+              this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+              this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+              this.Houses_Complete14_15 = result[0].Houses_Completed;
+              this.HousesOccupied14_15 = result[0].HousesOccupied;
+              this.First_Houses14_15 = result[0].First_Houses;
+              this.Second_Houses14_15 = result[0].Second_Houses;
+              this.Third_Houses14_15 = result[0].Third_Houses;
+          }
+
+          let chart = new CanvasJS.Chart("chartPMAYU", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: " Physical Data Consolidated (PMaAU)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Housesinvolved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                // { x: "14-15", y: this.Fin_Year15_16 },
+                { label: x2, y: this.Housesinvolved14_15 },
+         
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "FundsDisbursed_in_Houses",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.FundsDisbursed_in_Houses14_15 },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Grounded",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.Houses_Grounde14_15 },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Completed",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.Houses_Complete14_15 },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Occupied",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.HousesOccupied14_15 },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "First Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.First_Houses14_15 },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Second Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.Second_Houses14_15 },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Third Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.Third_Houses14_15 },
+              ]
+            },
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+      //     let chart = new CanvasJS.Chart("chartPMAYU", {
+      //       theme: "light2",
+      //       animationEnabled: true,
+      //       exportEnabled: false,
+      //       title: {
+      //         text: "Physical Data Consolidated (PMAYU)",
+      //         fontSize: "25",
+      //       },
+      //       backgroundColor: this.backgroundColor, 
+      //       colorSet: "greenShades",
+
+      //       data: [{
+
+      //         options: {
+      //           scales: {
+      //               xAxes: [{
+      //                   stacked: true
+      //               }],
+      //               yAxes: [{
+      //                   stacked: true
+      //               }]
+      //           }
+      //       },
+
+      //        type: "column",
+      //         dockInsidePlotArea: true,
+      //          indexLabel: "{y}", 
+      //         bevelEnabled: true,
+      //         showInLegend: true,
+      //         legendText: "Housesinvolved",
+      //          stValue: "Q",
+      //         indexLabelFontSize: 12,
+      //         indexLabelOrientation: "vertical",
+      //         dataPoints: [
+      //            { label: x2, y: this.Housesinvolved14_15 },
+      //           { label: x2, y: this.FundsDisbursed_in_Houses14_15 },
+      //           { label: x2, y: this.Houses_Grounde14_15 },
+      //           { label: x2, y: this.Houses_Complete14_15 },
+      //           { label: x2, y: this.HousesOccupied14_15 },
+      //           { label: x2, y: this.First_Houses14_15 },
+      //           { label: x2, y: this.Second_Houses14_15 },
+      //           { label: x2, y: this.Third_Houses14_15 }
+      //         ]
+      //       }  ,
+
+      //     ],
+      //       options: {
+      //         legend: {
+      //           display: true,
+      //           labels: {
+      //             fontColor: 'rgb(255, 99, 132)'
+      //           }
+      //         }
+      //       }
+      //     });
+      //     chart.render();
+      // });
+
+
+    }
+    if (splitted.length ==2)
+    {
+      this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+            
+      //this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        //    if (result[0].FinYear !="0" )
+        //  {
+
+             this.Fin_Year14_15 = result[0].FinYear;
+             this.Housesinvolved14_15 = result[0].Housesinvolved;
+             this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+             this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+             this.Houses_Complete14_15 = result[0].Houses_Completed;
+             this.HousesOccupied14_15 = result[0].HousesOccupied;
+             this.First_Houses14_15 = result[0].First_Houses;
+             this.Second_Houses14_15 = result[0].Second_Houses;
+             this.Third_Houses14_15 = result[0].Third_Houses;
+        //  }
+        //  if (result[1].FinYear !="0" )
+        //  {
+
+            // 
+            try {
+              this.Fin_Year15_16 = result[1].FinYear; 
+            this.Housesinvolved15_16 = result[1].Housesinvolved;
+             this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+             this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+             this.Houses_Complete15_16 = result[1].Houses_Completed;
+             this.HousesOccupied15_16 = result[1].HousesOccupied;
+             this.First_Houses15_16 = result[1].First_Houses;
+             this.Second_Houses15_16 = result[1].Second_Houses;
+             this.Third_Houses15_16 = result[1].Third_Houses;
+          }
+          catch{}
+          finally{}
+
+
+         let chart = new CanvasJS.Chart("chartPMAYU", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: " Physical Data Consolidated (PMAyU)",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Housesinvolved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Housesinvolved14_15 },
+              { label: Y1, y: this.Housesinvolved15_16 }
+
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "FundsDisbursed_in_Houses",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+              { label: Y1, y: this.FundsDisbursed_in_Houses15_16 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Grounded",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Grounde14_15 },
+              { label: Y1, y: this.Houses_Grounde15_16 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Completed",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Complete14_15 },
+              { label: Y1, y: this.Houses_Complete15_16 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Occupied",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.HousesOccupied14_15 },
+              { label: Y1, y: this.HousesOccupied15_16 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "First Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.First_Houses14_15 },
+              { label: Y1, y: this.First_Houses15_16 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Second Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Second_Houses14_15 },
+              { label: Y1, y: this.Second_Houses15_16 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Third Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Third_Houses14_15 },
+              { label: Y1, y: this.Third_Houses15_16 }
+            ]
+          },
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+    if (splitted.length ==3)
+    {
+      this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+      
+      //   this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        //    if (result[0].FinYear !="0" )
+        //  {
+
+             this.Fin_Year14_15 = result[0].FinYear;
+             this.Housesinvolved14_15 = result[0].Housesinvolved;
+             this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+             this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+             this.Houses_Complete14_15 = result[0].Houses_Completed;
+             this.HousesOccupied14_15 = result[0].HousesOccupied;
+             this.First_Houses14_15 = result[0].First_Houses;
+             this.Second_Houses14_15 = result[0].Second_Houses;
+             this.Third_Houses14_15 = result[0].Third_Houses;
+        //  }
+        //  if (result[1].FinYear !="0" )
+        //  {
+
+            // 
+            try {
+              this.Fin_Year15_16 = result[1].FinYear; 
+            this.Housesinvolved15_16 = result[1].Housesinvolved;
+             this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+             this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+             this.Houses_Complete15_16 = result[1].Houses_Completed;
+             this.HousesOccupied15_16 = result[1].HousesOccupied;
+             this.First_Houses15_16 = result[1].First_Houses;
+             this.Second_Houses15_16 = result[1].Second_Houses;
+             this.Third_Houses15_16 = result[1].Third_Houses;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+            this.Fin_Year16_17 = result[2].FinYear; 
+          this.Housesinvolved16_17 = result[2].Housesinvolved;
+           this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+           this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+           this.Houses_Complete16_17 = result[2].Houses_Completed;
+           this.HousesOccupied16_17 = result[2].HousesOccupied;
+           this.First_Houses16_17 = result[2].First_Houses;
+           this.Second_Houses16_17 = result[2].Second_Houses;
+           this.Third_Houses16_17 = result[2].Third_Houses;
+        }
+        catch{}
+        finally{}
+
+
+         let chart = new CanvasJS.Chart("chartPMAYU", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: " Physical Data Consolidated (PMAyU)",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Housesinvolved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Housesinvolved14_15 },
+              { label: Y1, y: this.Housesinvolved15_16 },
+              { label: z1, y: this.Housesinvolved16_17 }
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "FundsDisbursed_in_Houses",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+              { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+              { label: z1, y: this.FundsDisbursed_in_Houses16_17 }
+
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Grounded",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Grounde14_15 },
+              { label: Y1, y: this.Houses_Grounde15_16 },
+              { label: z1, y: this.Houses_Grounde16_17 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Completed",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Complete14_15 },
+              { label: Y1, y: this.Houses_Complete15_16 },
+              { label: z1, y: this.Houses_Complete16_17 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Occupied",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.HousesOccupied14_15 },
+              { label: Y1, y: this.HousesOccupied15_16 },
+              { label: z1, y: this.HousesOccupied16_17} 
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "First Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.First_Houses14_15 },
+              { label: Y1, y: this.First_Houses15_16 },
+              { label: z1, y: this.First_Houses16_17 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Second Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Second_Houses14_15 },
+              { label: Y1, y: this.Second_Houses15_16 },
+              { label: z1, y: this.Second_Houses16_17 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Third Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Third_Houses14_15 },
+              { label: Y1, y: this.Third_Houses15_16 },
+              { label: z1, y: this.Third_Houses16_17 }
+            ]
+          },
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+
+    if (splitted.length ==4)
+    {
+
+      this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+      
+       //  this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        //    if (result[0].FinYear !="0" )
+        //  {
+
+             this.Fin_Year14_15 = result[0].FinYear;
+             this.Housesinvolved14_15 = result[0].Housesinvolved;
+             this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+             this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+             this.Houses_Complete14_15 = result[0].Houses_Completed;
+             this.HousesOccupied14_15 = result[0].HousesOccupied;
+             this.First_Houses14_15 = result[0].First_Houses;
+             this.Second_Houses14_15 = result[0].Second_Houses;
+             this.Third_Houses14_15 = result[0].Third_Houses;
+        //  }
+        //  if (result[1].FinYear !="0" )
+        //  {
+
+            // 
+            try {
+              this.Fin_Year15_16 = result[1].FinYear; 
+            this.Housesinvolved15_16 = result[1].Housesinvolved;
+             this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+             this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+             this.Houses_Complete15_16 = result[1].Houses_Completed;
+             this.HousesOccupied15_16 = result[1].HousesOccupied;
+             this.First_Houses15_16 = result[1].First_Houses;
+             this.Second_Houses15_16 = result[1].Second_Houses;
+             this.Third_Houses15_16 = result[1].Third_Houses;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+            this.Fin_Year16_17 = result[2].FinYear; 
+          this.Housesinvolved16_17 = result[2].Housesinvolved;
+           this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+           this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+           this.Houses_Complete16_17 = result[2].Houses_Completed;
+           this.HousesOccupied16_17 = result[2].HousesOccupied;
+           this.First_Houses16_17 = result[2].First_Houses;
+           this.Second_Houses16_17 = result[2].Second_Houses;
+           this.Third_Houses16_17 = result[2].Third_Houses;
+        }
+        catch{}
+        finally{}
+
+        try {
+          this.Fin_Year17_18 = result[3].FinYear; 
+        this.Housesinvolved17_18 = result[3].Housesinvolved;
+         this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+         this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+         this.Houses_Complete17_18 = result[3].Houses_Completed;
+         this.HousesOccupied17_18 = result[3].HousesOccupied;
+         this.First_Houses17_18 = result[3].First_Houses;
+         this.Second_Houses17_18 = result[3].Second_Houses;
+         this.Third_Houses17_18 = result[3].Third_Houses;
+      }
+      catch{}
+      finally{}
+
+
+         let chart = new CanvasJS.Chart("chartPMAYU", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: " Physical Data Consolidated (PMAyU)",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Housesinvolved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Housesinvolved14_15 },
+              { label: Y1, y: this.Housesinvolved15_16 },
+              { label: z1, y: this.Housesinvolved16_17 },
+              { label: z2, y: this.Housesinvolved17_18 }
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "FundsDisbursed_in_Houses",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+              { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+              { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
+              { label: z2, y: this.FundsDisbursed_in_Houses17_18 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Grounded",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Grounde14_15 },
+              { label: Y1, y: this.Houses_Grounde15_16 },
+              { label: z1, y: this.Houses_Grounde16_17 },
+              { label: z2, y: this.Houses_Grounde17_18 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Completed",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Complete14_15 },
+              { label: Y1, y: this.Houses_Complete15_16 },
+              { label: z1, y: this.Houses_Complete16_17 },
+              { label: z2, y: this.Houses_Complete17_18 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Occupied",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.HousesOccupied14_15 },
+              { label: Y1, y: this.HousesOccupied15_16 },
+              { label: z1, y: this.HousesOccupied16_17},
+              { label: z2, y: this.HousesOccupied17_18} 
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "First Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.First_Houses14_15 },
+              { label: Y1, y: this.First_Houses15_16 },
+              { label: z1, y: this.First_Houses16_17 },
+              { label: z2, y: this.First_Houses17_18 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Second Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Second_Houses14_15 },
+              { label: Y1, y: this.Second_Houses15_16 },
+              { label: z1, y: this.Second_Houses16_17 },
+              { label: z2, y: this.Second_Houses17_18 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Third Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Third_Houses14_15 },
+              { label: Y1, y: this.Third_Houses15_16 },
+              { label: z1, y: this.Third_Houses16_17 },
+              { label: z2, y: this.Third_Houses17_18 }
+            ]
+          },
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+    if (splitted.length ==5)
+    {
+      this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+         
+     // this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        //    if (result[0].FinYear !="0" )
+        //  {
+
+             this.Fin_Year14_15 = result[0].FinYear;
+             this.Housesinvolved14_15 = result[0].Housesinvolved;
+             this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+             this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+             this.Houses_Complete14_15 = result[0].Houses_Completed;
+             this.HousesOccupied14_15 = result[0].HousesOccupied;
+             this.First_Houses14_15 = result[0].First_Houses;
+             this.Second_Houses14_15 = result[0].Second_Houses;
+             this.Third_Houses14_15 = result[0].Third_Houses;
+        //  }
+        //  if (result[1].FinYear !="0" )
+        //  {
+
+            // 
+            try {
+              this.Fin_Year15_16 = result[1].FinYear; 
+            this.Housesinvolved15_16 = result[1].Housesinvolved;
+             this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+             this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+             this.Houses_Complete15_16 = result[1].Houses_Completed;
+             this.HousesOccupied15_16 = result[1].HousesOccupied;
+             this.First_Houses15_16 = result[1].First_Houses;
+             this.Second_Houses15_16 = result[1].Second_Houses;
+             this.Third_Houses15_16 = result[1].Third_Houses;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+            this.Fin_Year16_17 = result[2].FinYear; 
+          this.Housesinvolved16_17 = result[2].Housesinvolved;
+           this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+           this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+           this.Houses_Complete16_17 = result[2].Houses_Completed;
+           this.HousesOccupied16_17 = result[2].HousesOccupied;
+           this.First_Houses16_17 = result[2].First_Houses;
+           this.Second_Houses16_17 = result[2].Second_Houses;
+           this.Third_Houses16_17 = result[2].Third_Houses;
+        }
+        catch{}
+        finally{}
+
+        try {
+          this.Fin_Year17_18 = result[3].FinYear; 
+        this.Housesinvolved17_18 = result[3].Housesinvolved;
+         this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+         this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+         this.Houses_Complete17_18 = result[3].Houses_Completed;
+         this.HousesOccupied17_18 = result[3].HousesOccupied;
+         this.First_Houses17_18 = result[3].First_Houses;
+         this.Second_Houses17_18 = result[3].Second_Houses;
+         this.Third_Houses17_18 = result[3].Third_Houses;
+      }
+      catch{}
+      finally{}
+
+      try {
+        this.Fin_Year18_19 = result[4].FinYear; 
+      this.Housesinvolved18_19 = result[4].Housesinvolved;
+       this.FundsDisbursed_in_Houses18_19 = result[4].FundsDisbursed_in_Houses;
+       this.Houses_Grounde18_19 = result[4].Houses_Grounded;
+       this.Houses_Complete18_19 = result[4].Houses_Completed;
+       this.HousesOccupied18_19 = result[4].HousesOccupied;
+       this.First_Houses18_19 = result[4].First_Houses;
+       this.Second_Houses18_19 = result[4].Second_Houses;
+       this.Third_Houses18_19 = result[4].Third_Houses;
+    }
+    catch{}
+    finally{}
+
+
+         let chart = new CanvasJS.Chart("chartPMAYU", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: " Physical Data Consolidated (PMAyU)",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Housesinvolved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Housesinvolved14_15 },
+              { label: Y1, y: this.Housesinvolved15_16 },
+              { label: z1, y: this.Housesinvolved16_17 },
+              { label: z2, y: this.Housesinvolved17_18 },
+              { label: z3, y: this.Housesinvolved18_19 }
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "FundsDisbursed_in_Houses",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+              { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+              { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
+              { label: z2, y: this.FundsDisbursed_in_Houses17_18 },
+              { label: z3, y: this.FundsDisbursed_in_Houses18_19 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Grounded",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Grounde14_15 },
+              { label: Y1, y: this.Houses_Grounde15_16 },
+              { label: z1, y: this.Houses_Grounde16_17 },
+              { label: z2, y: this.Houses_Grounde17_18 },
+              { label: z3, y: this.Houses_Grounde18_19 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Completed",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Complete14_15 },
+              { label: Y1, y: this.Houses_Complete15_16 },
+              { label: z1, y: this.Houses_Complete16_17 },
+              { label: z2, y: this.Houses_Complete17_18 },
+              { label: z3, y: this.Houses_Complete18_19 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Occupied",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.HousesOccupied14_15 },
+              { label: Y1, y: this.HousesOccupied15_16 },
+              { label: z1, y: this.HousesOccupied16_17},
+              { label: z2, y: this.HousesOccupied17_18},
+              { label: z3, y: this.HousesOccupied18_19} 
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "First Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.First_Houses14_15 },
+              { label: Y1, y: this.First_Houses15_16 },
+              { label: z1, y: this.First_Houses16_17 },
+              { label: z2, y: this.First_Houses17_18 },
+              { label: z3, y: this.First_Houses18_19 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Second Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Second_Houses14_15 },
+              { label: Y1, y: this.Second_Houses15_16 },
+              { label: z1, y: this.Second_Houses16_17 },
+              { label: z2, y: this.Second_Houses17_18 },
+              { label: z3, y: this.Second_Houses18_19 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Third Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Third_Houses14_15 },
+              { label: Y1, y: this.Third_Houses15_16 },
+              { label: z1, y: this.Third_Houses16_17 },
+              { label: z2, y: this.Third_Houses17_18 },
+              { label: z3, y: this.Third_Houses18_19 }
+            ]
+          },
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+    if (splitted.length ==6)
+    {
+      this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+         
+     // this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        //    if (result[0].FinYear !="0" )
+        //  {
+
+             this.Fin_Year14_15 = result[0].FinYear;
+             this.Housesinvolved14_15 = result[0].Housesinvolved;
+             this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+             this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+             this.Houses_Complete14_15 = result[0].Houses_Completed;
+             this.HousesOccupied14_15 = result[0].HousesOccupied;
+             this.First_Houses14_15 = result[0].First_Houses;
+             this.Second_Houses14_15 = result[0].Second_Houses;
+             this.Third_Houses14_15 = result[0].Third_Houses;
+        //  }
+        //  if (result[1].FinYear !="0" )
+        //  {
+
+            // 
+            try {
+              this.Fin_Year15_16 = result[1].FinYear; 
+            this.Housesinvolved15_16 = result[1].Housesinvolved;
+             this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+             this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+             this.Houses_Complete15_16 = result[1].Houses_Completed;
+             this.HousesOccupied15_16 = result[1].HousesOccupied;
+             this.First_Houses15_16 = result[1].First_Houses;
+             this.Second_Houses15_16 = result[1].Second_Houses;
+             this.Third_Houses15_16 = result[1].Third_Houses;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+            this.Fin_Year16_17 = result[2].FinYear; 
+          this.Housesinvolved16_17 = result[2].Housesinvolved;
+           this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+           this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+           this.Houses_Complete16_17 = result[2].Houses_Completed;
+           this.HousesOccupied16_17 = result[2].HousesOccupied;
+           this.First_Houses16_17 = result[2].First_Houses;
+           this.Second_Houses16_17 = result[2].Second_Houses;
+           this.Third_Houses16_17 = result[2].Third_Houses;
+        }
+        catch{}
+        finally{}
+
+        try {
+          this.Fin_Year17_18 = result[3].FinYear; 
+        this.Housesinvolved17_18 = result[3].Housesinvolved;
+         this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+         this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+         this.Houses_Complete17_18 = result[3].Houses_Completed;
+         this.HousesOccupied17_18 = result[3].HousesOccupied;
+         this.First_Houses17_18 = result[3].First_Houses;
+         this.Second_Houses17_18 = result[3].Second_Houses;
+         this.Third_Houses17_18 = result[3].Third_Houses;
+      }
+      catch{}
+      finally{}
+
+      try {
+        this.Fin_Year18_19 = result[4].FinYear; 
+      this.Housesinvolved18_19 = result[4].Housesinvolved;
+       this.FundsDisbursed_in_Houses18_19 = result[4].FundsDisbursed_in_Houses;
+       this.Houses_Grounde18_19 = result[4].Houses_Grounded;
+       this.Houses_Complete18_19 = result[4].Houses_Completed;
+       this.HousesOccupied18_19 = result[4].HousesOccupied;
+       this.First_Houses18_19 = result[4].First_Houses;
+       this.Second_Houses18_19 = result[4].Second_Houses;
+       this.Third_Houses18_19 = result[4].Third_Houses;
+    }
+    catch{}
+    finally{}
+
+    try {
+      this.Fin_Year19_20 = result[5].FinYear; 
+    this.Housesinvolved19_20 = result[5].Housesinvolved;
+     this.FundsDisbursed_in_Houses19_20 = result[5].FundsDisbursed_in_Houses;
+     this.Houses_Grounde19_20 = result[5].Houses_Grounded;
+     this.Houses_Complete19_20 = result[5].Houses_Completed;
+     this.HousesOccupied19_20 = result[5].HousesOccupied;
+     this.First_Houses19_20 = result[5].First_Houses;
+     this.Second_Houses19_20 = result[5].Second_Houses;
+     this.Third_Houses19_20 = result[5].Third_Houses;
+  }
+  catch{}
+  finally{}
+
+         let chart = new CanvasJS.Chart("chartPMAYU", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: " Physical Data Consolidated (PMAyU)",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Housesinvolved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Housesinvolved14_15 },
+              { label: Y1, y: this.Housesinvolved15_16 },
+              { label: z1, y: this.Housesinvolved16_17 },
+              { label: z2, y: this.Housesinvolved17_18 },
+              { label: z3, y: this.Housesinvolved18_19 },
+              { label: z4, y: this.Housesinvolved19_20 }
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "FundsDisbursed_in_Houses",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+              { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+              { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
+              { label: z2, y: this.FundsDisbursed_in_Houses17_18 },
+              { label: z3, y: this.FundsDisbursed_in_Houses18_19 },
+              { label: z4, y: this.FundsDisbursed_in_Houses19_20 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Grounded",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Grounde14_15 },
+              { label: Y1, y: this.Houses_Grounde15_16 },
+              { label: z1, y: this.Houses_Grounde16_17 },
+              { label: z2, y: this.Houses_Grounde17_18 },
+              { label: z3, y: this.Houses_Grounde18_19 },
+              { label: z4, y: this.Houses_Grounde19_20 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Completed",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Complete14_15 },
+              { label: Y1, y: this.Houses_Complete15_16 },
+              { label: z1, y: this.Houses_Complete16_17 },
+              { label: z2, y: this.Houses_Complete17_18 },
+              { label: z3, y: this.Houses_Complete18_19 },
+              { label: z4, y: this.Houses_Complete19_20 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Occupied",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.HousesOccupied14_15 },
+              { label: Y1, y: this.HousesOccupied15_16 },
+              { label: z1, y: this.HousesOccupied16_17},
+              { label: z2, y: this.HousesOccupied17_18},
+              { label: z3, y: this.HousesOccupied18_19} ,
+              { label: z4, y: this.HousesOccupied19_20} 
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "First Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.First_Houses14_15 },
+              { label: Y1, y: this.First_Houses15_16 },
+              { label: z1, y: this.First_Houses16_17 },
+              { label: z2, y: this.First_Houses17_18 },
+              { label: z3, y: this.First_Houses18_19 },
+              { label: z4, y: this.First_Houses19_20 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Second Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Second_Houses14_15 },
+              { label: Y1, y: this.Second_Houses15_16 },
+              { label: z1, y: this.Second_Houses16_17 },
+              { label: z2, y: this.Second_Houses17_18 },
+              { label: z3, y: this.Second_Houses18_19 },
+              { label: z4, y: this.Second_Houses19_20 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Third Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Third_Houses14_15 },
+              { label: Y1, y: this.Third_Houses15_16 },
+              { label: z1, y: this.Third_Houses16_17 },
+              { label: z2, y: this.Third_Houses17_18 },
+              { label: z3, y: this.Third_Houses18_19 },
+              { label: z4, y: this.Third_Houses19_20 }
+            ]
+          },
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+  }
+
+  BindISSRDatanew(stateCode, DisttCode, cityCode, Fin_Year )
+  {
+         var str = Fin_Year ;//'SUM(BENE2014_15),SUM(BENE2015_16)';
+       //   alert(str.length);
+        if (str.length==101)
+        {
+            var splitted = str.split(",", str.length);
+            //alert(splitted[0]);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+            var z1 =  splitted[2].substring(8,str.length-3);
+            var z2 =  splitted[3].substring(8,str.length-3);
+            var z3 =  splitted[4].substring(8,str.length-3);
+            var z4 =  splitted[5].substring(8,str.length-3);
+        }
+        if (str.length==84)
+        {
+            var splitted = str.split(",", str.length);
+            //alert(splitted[0]);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+            var z1 =  splitted[2].substring(8,str.length-3);
+            var z2 =  splitted[3].substring(8,str.length-3);
+            var z3 =  splitted[4].substring(8,str.length-3);
+        }
+        if (str.length==67)
+        {
+            var splitted = str.split(",", str.length);
+            //alert(splitted[0]);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+            var z1 =  splitted[2].substring(8,str.length-3);
+            var z2 =  splitted[3].substring(8,str.length-3);
+           // alert(x1);
+          //  alert(Y1); 
+        }
+        if (str.length==50)
+        {
+            var splitted = str.split(",", str.length);
+            //alert(splitted[0]);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+            var z1 =  splitted[2].substring(8,str.length-3);
+           // alert(x1);
+          //  alert(Y1); 
+        }
+        if (str.length==33)
+        {
+            var splitted = str.split(",", str.length);
+            //alert(splitted[0]);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+           // alert(x1);
+          //  alert(Y1); 
+        }
+        if (str.length==16)
+        {
+            var splitted = str.split(",", str.length);
+  //          alert(splitted[0]);
+            var x2 =  splitted[0].substring(8,str.length-1);
+  //          alert(splitted.length);
+  
+        }
+      //  let x = stringToSplit.split(" ");
+  
+       if (splitted.length ==1)
+       {
+            this.service.sp_create_ISSR_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+              if (result[0].FinYear !="0" )
+            {
+                this.Fin_Year14_15 = result[0].FinYear;
+                this.Housesinvolved14_15 = result[0].Housesinvolved;
+                this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+                this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+                this.Houses_Complete14_15 = result[0].Houses_Completed;
+                this.HousesOccupied14_15 = result[0].HousesOccupied;
+                this.First_Houses14_15 = result[0].First_Houses;
+                this.Second_Houses14_15 = result[0].Second_Houses;
+                this.Third_Houses14_15 = result[0].Third_Houses;
+            }
+  
+            let chart = new CanvasJS.Chart("chartISSR", {
+              theme: "light2",
+              animationEnabled: true,
+              exportEnabled: false,
+              title: {
+                text: " Physical Data Consolidated (ISSR)",
+                fontSize: "25",
+              },
+              backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+              colorSet: "greenShades",
+    
+              data: [{
+    
+                options: {
+                  scales: {
+                      xAxes: [{
+                          stacked: true
+                      }],
+                      yAxes: [{
+                          stacked: true
+                      }]
+                  }
+              },
+    
+           
+           
+        
+    
+              type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Housesinvolved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  // { x: "14-15", y: this.Fin_Year15_16 },
+                  { label: x2, y: this.Housesinvolved14_15 },
+           
+                ]
+              },
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "FundsDisbursed_in_Houses",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.FundsDisbursed_in_Houses14_15 },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Houses_Grounded",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.Houses_Grounde14_15 },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Houses_Completed",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.Houses_Complete14_15 },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Houses_Occupied",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.HousesOccupied14_15 },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "First Inst",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.First_Houses14_15 },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Second Inst",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.Second_Houses14_15 },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Third Inst",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.Third_Houses14_15 },
+                ]
+              },
+    
+            ],
+              options: {
+                legend: {
+                  display: true,
+                  labels: {
+                    fontColor: 'rgb(255, 99, 132)'
+                  }
+                }
+              }
+            });
+            chart.render();
+        });
+        //     let chart = new CanvasJS.Chart("chartPMAYU", {
+        //       theme: "light2",
+        //       animationEnabled: true,
+        //       exportEnabled: false,
+        //       title: {
+        //         text: "Physical Data Consolidated (PMAYU)",
+        //         fontSize: "25",
+        //       },
+        //       backgroundColor: this.backgroundColor, 
+        //       colorSet: "greenShades",
+  
+        //       data: [{
+  
+        //         options: {
+        //           scales: {
+        //               xAxes: [{
+        //                   stacked: true
+        //               }],
+        //               yAxes: [{
+        //                   stacked: true
+        //               }]
+        //           }
+        //       },
+  
+        //        type: "column",
+        //         dockInsidePlotArea: true,
+        //          indexLabel: "{y}", 
+        //         bevelEnabled: true,
+        //         showInLegend: true,
+        //         legendText: "Housesinvolved",
+        //          stValue: "Q",
+        //         indexLabelFontSize: 12,
+        //         indexLabelOrientation: "vertical",
+        //         dataPoints: [
+        //            { label: x2, y: this.Housesinvolved14_15 },
+        //           { label: x2, y: this.FundsDisbursed_in_Houses14_15 },
+        //           { label: x2, y: this.Houses_Grounde14_15 },
+        //           { label: x2, y: this.Houses_Complete14_15 },
+        //           { label: x2, y: this.HousesOccupied14_15 },
+        //           { label: x2, y: this.First_Houses14_15 },
+        //           { label: x2, y: this.Second_Houses14_15 },
+        //           { label: x2, y: this.Third_Houses14_15 }
+        //         ]
+        //       }  ,
+  
+        //     ],
+        //       options: {
+        //         legend: {
+        //           display: true,
+        //           labels: {
+        //             fontColor: 'rgb(255, 99, 132)'
+        //           }
+        //         }
+        //       }
+        //     });
+        //     chart.render();
+        // });
+  
+  
+      }
+      if (splitted.length ==2)
+      {
+        this.service.sp_create_ISSR_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+              
+        //this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          //    if (result[0].FinYear !="0" )
+          //  {
+  
+               this.Fin_Year14_15 = result[0].FinYear;
+               this.Housesinvolved14_15 = result[0].Housesinvolved;
+               this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+               this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+               this.Houses_Complete14_15 = result[0].Houses_Completed;
+               this.HousesOccupied14_15 = result[0].HousesOccupied;
+               this.First_Houses14_15 = result[0].First_Houses;
+               this.Second_Houses14_15 = result[0].Second_Houses;
+               this.Third_Houses14_15 = result[0].Third_Houses;
+          //  }
+          //  if (result[1].FinYear !="0" )
+          //  {
+  
+              // 
+              try {
+                this.Fin_Year15_16 = result[1].FinYear; 
+              this.Housesinvolved15_16 = result[1].Housesinvolved;
+               this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+               this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+               this.Houses_Complete15_16 = result[1].Houses_Completed;
+               this.HousesOccupied15_16 = result[1].HousesOccupied;
+               this.First_Houses15_16 = result[1].First_Houses;
+               this.Second_Houses15_16 = result[1].Second_Houses;
+               this.Third_Houses15_16 = result[1].Third_Houses;
+            }
+            catch{}
+            finally{}
+  
+  
+           let chart = new CanvasJS.Chart("chartISSR", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: " Physical Data Consolidated (ISSR)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Housesinvolved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                // { x: "14-15", y: this.Fin_Year15_16 },
+                { label: x1, y: this.Housesinvolved14_15 },
+                { label: Y1, y: this.Housesinvolved15_16 }
+  
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "FundsDisbursed_in_Houses",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+                { label: Y1, y: this.FundsDisbursed_in_Houses15_16 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Grounded",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Grounde14_15 },
+                { label: Y1, y: this.Houses_Grounde15_16 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Completed",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Complete14_15 },
+                { label: Y1, y: this.Houses_Complete15_16 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Occupied",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.HousesOccupied14_15 },
+                { label: Y1, y: this.HousesOccupied15_16 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "First Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.First_Houses14_15 },
+                { label: Y1, y: this.First_Houses15_16 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Second Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Second_Houses14_15 },
+                { label: Y1, y: this.Second_Houses15_16 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Third Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Third_Houses14_15 },
+                { label: Y1, y: this.Third_Houses15_16 }
+              ]
+            },
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+      if (splitted.length ==3)
+      {
+        this.service.sp_create_ISSR_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        
+        //   this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          //    if (result[0].FinYear !="0" )
+          //  {
+  
+               this.Fin_Year14_15 = result[0].FinYear;
+               this.Housesinvolved14_15 = result[0].Housesinvolved;
+               this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+               this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+               this.Houses_Complete14_15 = result[0].Houses_Completed;
+               this.HousesOccupied14_15 = result[0].HousesOccupied;
+               this.First_Houses14_15 = result[0].First_Houses;
+               this.Second_Houses14_15 = result[0].Second_Houses;
+               this.Third_Houses14_15 = result[0].Third_Houses;
+          //  }
+          //  if (result[1].FinYear !="0" )
+          //  {
+  
+              // 
+              try {
+                this.Fin_Year15_16 = result[1].FinYear; 
+              this.Housesinvolved15_16 = result[1].Housesinvolved;
+               this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+               this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+               this.Houses_Complete15_16 = result[1].Houses_Completed;
+               this.HousesOccupied15_16 = result[1].HousesOccupied;
+               this.First_Houses15_16 = result[1].First_Houses;
+               this.Second_Houses15_16 = result[1].Second_Houses;
+               this.Third_Houses15_16 = result[1].Third_Houses;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+              this.Fin_Year16_17 = result[2].FinYear; 
+            this.Housesinvolved16_17 = result[2].Housesinvolved;
+             this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+             this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+             this.Houses_Complete16_17 = result[2].Houses_Completed;
+             this.HousesOccupied16_17 = result[2].HousesOccupied;
+             this.First_Houses16_17 = result[2].First_Houses;
+             this.Second_Houses16_17 = result[2].Second_Houses;
+             this.Third_Houses16_17 = result[2].Third_Houses;
+          }
+          catch{}
+          finally{}
+  
+  
+           let chart = new CanvasJS.Chart("chartISSR", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: " Physical Data Consolidated (ISSR)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Housesinvolved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                // { x: "14-15", y: this.Fin_Year15_16 },
+                { label: x1, y: this.Housesinvolved14_15 },
+                { label: Y1, y: this.Housesinvolved15_16 },
+                { label: z1, y: this.Housesinvolved16_17 }
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "FundsDisbursed_in_Houses",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+                { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+                { label: z1, y: this.FundsDisbursed_in_Houses16_17 }
+  
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Grounded",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Grounde14_15 },
+                { label: Y1, y: this.Houses_Grounde15_16 },
+                { label: z1, y: this.Houses_Grounde16_17 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Completed",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Complete14_15 },
+                { label: Y1, y: this.Houses_Complete15_16 },
+                { label: z1, y: this.Houses_Complete16_17 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Occupied",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.HousesOccupied14_15 },
+                { label: Y1, y: this.HousesOccupied15_16 },
+                { label: z1, y: this.HousesOccupied16_17} 
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "First Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.First_Houses14_15 },
+                { label: Y1, y: this.First_Houses15_16 },
+                { label: z1, y: this.First_Houses16_17 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Second Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Second_Houses14_15 },
+                { label: Y1, y: this.Second_Houses15_16 },
+                { label: z1, y: this.Second_Houses16_17 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Third Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Third_Houses14_15 },
+                { label: Y1, y: this.Third_Houses15_16 },
+                { label: z1, y: this.Third_Houses16_17 }
+              ]
+            },
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+  
+      if (splitted.length ==4)
+      {
+  
+        this.service.sp_create_ISSR_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        
+         //  this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          //    if (result[0].FinYear !="0" )
+          //  {
+  
+               this.Fin_Year14_15 = result[0].FinYear;
+               this.Housesinvolved14_15 = result[0].Housesinvolved;
+               this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+               this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+               this.Houses_Complete14_15 = result[0].Houses_Completed;
+               this.HousesOccupied14_15 = result[0].HousesOccupied;
+               this.First_Houses14_15 = result[0].First_Houses;
+               this.Second_Houses14_15 = result[0].Second_Houses;
+               this.Third_Houses14_15 = result[0].Third_Houses;
+          //  }
+          //  if (result[1].FinYear !="0" )
+          //  {
+  
+              // 
+              try {
+                this.Fin_Year15_16 = result[1].FinYear; 
+              this.Housesinvolved15_16 = result[1].Housesinvolved;
+               this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+               this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+               this.Houses_Complete15_16 = result[1].Houses_Completed;
+               this.HousesOccupied15_16 = result[1].HousesOccupied;
+               this.First_Houses15_16 = result[1].First_Houses;
+               this.Second_Houses15_16 = result[1].Second_Houses;
+               this.Third_Houses15_16 = result[1].Third_Houses;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+              this.Fin_Year16_17 = result[2].FinYear; 
+            this.Housesinvolved16_17 = result[2].Housesinvolved;
+             this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+             this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+             this.Houses_Complete16_17 = result[2].Houses_Completed;
+             this.HousesOccupied16_17 = result[2].HousesOccupied;
+             this.First_Houses16_17 = result[2].First_Houses;
+             this.Second_Houses16_17 = result[2].Second_Houses;
+             this.Third_Houses16_17 = result[2].Third_Houses;
+          }
+          catch{}
+          finally{}
+  
+          try {
+            this.Fin_Year17_18 = result[3].FinYear; 
+          this.Housesinvolved17_18 = result[3].Housesinvolved;
+           this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+           this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+           this.Houses_Complete17_18 = result[3].Houses_Completed;
+           this.HousesOccupied17_18 = result[3].HousesOccupied;
+           this.First_Houses17_18 = result[3].First_Houses;
+           this.Second_Houses17_18 = result[3].Second_Houses;
+           this.Third_Houses17_18 = result[3].Third_Houses;
+        }
+        catch{}
+        finally{}
+  
+  
+           let chart = new CanvasJS.Chart("chartISSR", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: " Physical Data Consolidated (ISSR)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Housesinvolved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                // { x: "14-15", y: this.Fin_Year15_16 },
+                { label: x1, y: this.Housesinvolved14_15 },
+                { label: Y1, y: this.Housesinvolved15_16 },
+                { label: z1, y: this.Housesinvolved16_17 },
+                { label: z2, y: this.Housesinvolved17_18 }
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "FundsDisbursed_in_Houses",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+                { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+                { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
+                { label: z2, y: this.FundsDisbursed_in_Houses17_18 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Grounded",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Grounde14_15 },
+                { label: Y1, y: this.Houses_Grounde15_16 },
+                { label: z1, y: this.Houses_Grounde16_17 },
+                { label: z2, y: this.Houses_Grounde17_18 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Completed",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Complete14_15 },
+                { label: Y1, y: this.Houses_Complete15_16 },
+                { label: z1, y: this.Houses_Complete16_17 },
+                { label: z2, y: this.Houses_Complete17_18 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Occupied",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.HousesOccupied14_15 },
+                { label: Y1, y: this.HousesOccupied15_16 },
+                { label: z1, y: this.HousesOccupied16_17},
+                { label: z2, y: this.HousesOccupied17_18} 
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "First Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.First_Houses14_15 },
+                { label: Y1, y: this.First_Houses15_16 },
+                { label: z1, y: this.First_Houses16_17 },
+                { label: z2, y: this.First_Houses17_18 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Second Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Second_Houses14_15 },
+                { label: Y1, y: this.Second_Houses15_16 },
+                { label: z1, y: this.Second_Houses16_17 },
+                { label: z2, y: this.Second_Houses17_18 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Third Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Third_Houses14_15 },
+                { label: Y1, y: this.Third_Houses15_16 },
+                { label: z1, y: this.Third_Houses16_17 },
+                { label: z2, y: this.Third_Houses17_18 }
+              ]
+            },
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+      if (splitted.length ==5)
+      {
+        this.service.sp_create_ISSR_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+           
+       // this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          //    if (result[0].FinYear !="0" )
+          //  {
+  
+               this.Fin_Year14_15 = result[0].FinYear;
+               this.Housesinvolved14_15 = result[0].Housesinvolved;
+               this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+               this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+               this.Houses_Complete14_15 = result[0].Houses_Completed;
+               this.HousesOccupied14_15 = result[0].HousesOccupied;
+               this.First_Houses14_15 = result[0].First_Houses;
+               this.Second_Houses14_15 = result[0].Second_Houses;
+               this.Third_Houses14_15 = result[0].Third_Houses;
+          //  }
+          //  if (result[1].FinYear !="0" )
+          //  {
+  
+              // 
+              try {
+                this.Fin_Year15_16 = result[1].FinYear; 
+              this.Housesinvolved15_16 = result[1].Housesinvolved;
+               this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+               this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+               this.Houses_Complete15_16 = result[1].Houses_Completed;
+               this.HousesOccupied15_16 = result[1].HousesOccupied;
+               this.First_Houses15_16 = result[1].First_Houses;
+               this.Second_Houses15_16 = result[1].Second_Houses;
+               this.Third_Houses15_16 = result[1].Third_Houses;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+              this.Fin_Year16_17 = result[2].FinYear; 
+            this.Housesinvolved16_17 = result[2].Housesinvolved;
+             this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+             this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+             this.Houses_Complete16_17 = result[2].Houses_Completed;
+             this.HousesOccupied16_17 = result[2].HousesOccupied;
+             this.First_Houses16_17 = result[2].First_Houses;
+             this.Second_Houses16_17 = result[2].Second_Houses;
+             this.Third_Houses16_17 = result[2].Third_Houses;
+          }
+          catch{}
+          finally{}
+  
+          try {
+            this.Fin_Year17_18 = result[3].FinYear; 
+          this.Housesinvolved17_18 = result[3].Housesinvolved;
+           this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+           this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+           this.Houses_Complete17_18 = result[3].Houses_Completed;
+           this.HousesOccupied17_18 = result[3].HousesOccupied;
+           this.First_Houses17_18 = result[3].First_Houses;
+           this.Second_Houses17_18 = result[3].Second_Houses;
+           this.Third_Houses17_18 = result[3].Third_Houses;
+        }
+        catch{}
+        finally{}
+  
+        try {
+          this.Fin_Year18_19 = result[4].FinYear; 
+        this.Housesinvolved18_19 = result[4].Housesinvolved;
+         this.FundsDisbursed_in_Houses18_19 = result[4].FundsDisbursed_in_Houses;
+         this.Houses_Grounde18_19 = result[4].Houses_Grounded;
+         this.Houses_Complete18_19 = result[4].Houses_Completed;
+         this.HousesOccupied18_19 = result[4].HousesOccupied;
+         this.First_Houses18_19 = result[4].First_Houses;
+         this.Second_Houses18_19 = result[4].Second_Houses;
+         this.Third_Houses18_19 = result[4].Third_Houses;
+      }
+      catch{}
+      finally{}
+  
+  
+           let chart = new CanvasJS.Chart("chartISSR", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: " Physical Data Consolidated (ISSR)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Housesinvolved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                // { x: "14-15", y: this.Fin_Year15_16 },
+                { label: x1, y: this.Housesinvolved14_15 },
+                { label: Y1, y: this.Housesinvolved15_16 },
+                { label: z1, y: this.Housesinvolved16_17 },
+                { label: z2, y: this.Housesinvolved17_18 },
+                { label: z3, y: this.Housesinvolved18_19 }
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "FundsDisbursed_in_Houses",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+                { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+                { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
+                { label: z2, y: this.FundsDisbursed_in_Houses17_18 },
+                { label: z3, y: this.FundsDisbursed_in_Houses18_19 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Grounded",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Grounde14_15 },
+                { label: Y1, y: this.Houses_Grounde15_16 },
+                { label: z1, y: this.Houses_Grounde16_17 },
+                { label: z2, y: this.Houses_Grounde17_18 },
+                { label: z3, y: this.Houses_Grounde18_19 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Completed",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Complete14_15 },
+                { label: Y1, y: this.Houses_Complete15_16 },
+                { label: z1, y: this.Houses_Complete16_17 },
+                { label: z2, y: this.Houses_Complete17_18 },
+                { label: z3, y: this.Houses_Complete18_19 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Occupied",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.HousesOccupied14_15 },
+                { label: Y1, y: this.HousesOccupied15_16 },
+                { label: z1, y: this.HousesOccupied16_17},
+                { label: z2, y: this.HousesOccupied17_18},
+                { label: z3, y: this.HousesOccupied18_19} 
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "First Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.First_Houses14_15 },
+                { label: Y1, y: this.First_Houses15_16 },
+                { label: z1, y: this.First_Houses16_17 },
+                { label: z2, y: this.First_Houses17_18 },
+                { label: z3, y: this.First_Houses18_19 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Second Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Second_Houses14_15 },
+                { label: Y1, y: this.Second_Houses15_16 },
+                { label: z1, y: this.Second_Houses16_17 },
+                { label: z2, y: this.Second_Houses17_18 },
+                { label: z3, y: this.Second_Houses18_19 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Third Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Third_Houses14_15 },
+                { label: Y1, y: this.Third_Houses15_16 },
+                { label: z1, y: this.Third_Houses16_17 },
+                { label: z2, y: this.Third_Houses17_18 },
+                { label: z3, y: this.Third_Houses18_19 }
+              ]
+            },
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+      if (splitted.length ==6)
+      {
+        this.service.sp_create_ISSR_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+           
+       // this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          //    if (result[0].FinYear !="0" )
+          //  {
+  
+               this.Fin_Year14_15 = result[0].FinYear;
+               this.Housesinvolved14_15 = result[0].Housesinvolved;
+               this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+               this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+               this.Houses_Complete14_15 = result[0].Houses_Completed;
+               this.HousesOccupied14_15 = result[0].HousesOccupied;
+               this.First_Houses14_15 = result[0].First_Houses;
+               this.Second_Houses14_15 = result[0].Second_Houses;
+               this.Third_Houses14_15 = result[0].Third_Houses;
+          //  }
+          //  if (result[1].FinYear !="0" )
+          //  {
+  
+              // 
+              try {
+                this.Fin_Year15_16 = result[1].FinYear; 
+              this.Housesinvolved15_16 = result[1].Housesinvolved;
+               this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+               this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+               this.Houses_Complete15_16 = result[1].Houses_Completed;
+               this.HousesOccupied15_16 = result[1].HousesOccupied;
+               this.First_Houses15_16 = result[1].First_Houses;
+               this.Second_Houses15_16 = result[1].Second_Houses;
+               this.Third_Houses15_16 = result[1].Third_Houses;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+              this.Fin_Year16_17 = result[2].FinYear; 
+            this.Housesinvolved16_17 = result[2].Housesinvolved;
+             this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+             this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+             this.Houses_Complete16_17 = result[2].Houses_Completed;
+             this.HousesOccupied16_17 = result[2].HousesOccupied;
+             this.First_Houses16_17 = result[2].First_Houses;
+             this.Second_Houses16_17 = result[2].Second_Houses;
+             this.Third_Houses16_17 = result[2].Third_Houses;
+          }
+          catch{}
+          finally{}
+  
+          try {
+            this.Fin_Year17_18 = result[3].FinYear; 
+          this.Housesinvolved17_18 = result[3].Housesinvolved;
+           this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+           this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+           this.Houses_Complete17_18 = result[3].Houses_Completed;
+           this.HousesOccupied17_18 = result[3].HousesOccupied;
+           this.First_Houses17_18 = result[3].First_Houses;
+           this.Second_Houses17_18 = result[3].Second_Houses;
+           this.Third_Houses17_18 = result[3].Third_Houses;
+        }
+        catch{}
+        finally{}
+  
+        try {
+          this.Fin_Year18_19 = result[4].FinYear; 
+        this.Housesinvolved18_19 = result[4].Housesinvolved;
+         this.FundsDisbursed_in_Houses18_19 = result[4].FundsDisbursed_in_Houses;
+         this.Houses_Grounde18_19 = result[4].Houses_Grounded;
+         this.Houses_Complete18_19 = result[4].Houses_Completed;
+         this.HousesOccupied18_19 = result[4].HousesOccupied;
+         this.First_Houses18_19 = result[4].First_Houses;
+         this.Second_Houses18_19 = result[4].Second_Houses;
+         this.Third_Houses18_19 = result[4].Third_Houses;
+      }
+      catch{}
+      finally{}
+  
+      try {
+        this.Fin_Year19_20 = result[5].FinYear; 
+      this.Housesinvolved19_20 = result[5].Housesinvolved;
+       this.FundsDisbursed_in_Houses19_20 = result[5].FundsDisbursed_in_Houses;
+       this.Houses_Grounde19_20 = result[5].Houses_Grounded;
+       this.Houses_Complete19_20 = result[5].Houses_Completed;
+       this.HousesOccupied19_20 = result[5].HousesOccupied;
+       this.First_Houses19_20 = result[5].First_Houses;
+       this.Second_Houses19_20 = result[5].Second_Houses;
+       this.Third_Houses19_20 = result[5].Third_Houses;
+    }
+    catch{}
+    finally{}
+  
+           let chart = new CanvasJS.Chart("chartISSR", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: " Physical Data Consolidated (ISSR)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Housesinvolved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                // { x: "14-15", y: this.Fin_Year15_16 },
+                { label: x1, y: this.Housesinvolved14_15 },
+                { label: Y1, y: this.Housesinvolved15_16 },
+                { label: z1, y: this.Housesinvolved16_17 },
+                { label: z2, y: this.Housesinvolved17_18 },
+                { label: z3, y: this.Housesinvolved18_19 },
+                { label: z4, y: this.Housesinvolved19_20 }
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "FundsDisbursed_in_Houses",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+                { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+                { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
+                { label: z2, y: this.FundsDisbursed_in_Houses17_18 },
+                { label: z3, y: this.FundsDisbursed_in_Houses18_19 },
+                { label: z4, y: this.FundsDisbursed_in_Houses19_20 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Grounded",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Grounde14_15 },
+                { label: Y1, y: this.Houses_Grounde15_16 },
+                { label: z1, y: this.Houses_Grounde16_17 },
+                { label: z2, y: this.Houses_Grounde17_18 },
+                { label: z3, y: this.Houses_Grounde18_19 },
+                { label: z4, y: this.Houses_Grounde19_20 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Completed",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Complete14_15 },
+                { label: Y1, y: this.Houses_Complete15_16 },
+                { label: z1, y: this.Houses_Complete16_17 },
+                { label: z2, y: this.Houses_Complete17_18 },
+                { label: z3, y: this.Houses_Complete18_19 },
+                { label: z4, y: this.Houses_Complete19_20 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Occupied",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.HousesOccupied14_15 },
+                { label: Y1, y: this.HousesOccupied15_16 },
+                { label: z1, y: this.HousesOccupied16_17},
+                { label: z2, y: this.HousesOccupied17_18},
+                { label: z3, y: this.HousesOccupied18_19} ,
+                { label: z4, y: this.HousesOccupied19_20} 
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "First Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.First_Houses14_15 },
+                { label: Y1, y: this.First_Houses15_16 },
+                { label: z1, y: this.First_Houses16_17 },
+                { label: z2, y: this.First_Houses17_18 },
+                { label: z3, y: this.First_Houses18_19 },
+                { label: z4, y: this.First_Houses19_20 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Second Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Second_Houses14_15 },
+                { label: Y1, y: this.Second_Houses15_16 },
+                { label: z1, y: this.Second_Houses16_17 },
+                { label: z2, y: this.Second_Houses17_18 },
+                { label: z3, y: this.Second_Houses18_19 },
+                { label: z4, y: this.Second_Houses19_20 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Third Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Third_Houses14_15 },
+                { label: Y1, y: this.Third_Houses15_16 },
+                { label: z1, y: this.Third_Houses16_17 },
+                { label: z2, y: this.Third_Houses17_18 },
+                { label: z3, y: this.Third_Houses18_19 },
+                { label: z4, y: this.Third_Houses19_20 }
+              ]
+            },
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+    }
+  
+  
+  BindAHP_Datanew(stateCode, DisttCode, cityCode, Fin_Year )
+  {
+    //debugger ;
+    //debugger ;
+   // alert('Prabodh');
+         var str = Fin_Year ;//'SUM(BENE2014_15),SUM(BENE2015_16)';
+        //  alert(str.length);
+        if (str.length==101)
+        {
+            var splitted = str.split(",", str.length);
+            //alert(splitted[0]);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+            var z1 =  splitted[2].substring(8,str.length-3);
+            var z2 =  splitted[3].substring(8,str.length-3);
+            var z3 =  splitted[4].substring(8,str.length-3);
+            var z4 =  splitted[5].substring(8,str.length-3);
+        }
+        if (str.length==84)
+        {
+            var splitted = str.split(",", str.length);
+            //alert(splitted[0]);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+            var z1 =  splitted[2].substring(8,str.length-3);
+            var z2 =  splitted[3].substring(8,str.length-3);
+            var z3 =  splitted[4].substring(8,str.length-3);
+        }
+        if (str.length==67)
+        {
+            var splitted = str.split(",", str.length);
+            //alert(splitted[0]);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+            var z1 =  splitted[2].substring(8,str.length-3);
+            var z2 =  splitted[3].substring(8,str.length-3);
+           // alert(x1);
+          //  alert(Y1); 
+        }
+        if (str.length==50)
+        {
+            var splitted = str.split(",", str.length);
+            //alert(splitted[0]);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+            var z1 =  splitted[2].substring(8,str.length-3);
+           // alert(x1);
+          //  alert(Y1); 
+        }
+        if (str.length==33)
+        {
+            var splitted = str.split(",", str.length);
+            //alert(splitted[0]);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+           // alert(x1);
+          //  alert(Y1); 
+        }
+        if (str.length==16)
+        {
+            var splitted = str.split(",", str.length);
+  //          alert(splitted[0]);
+            var x2 =  splitted[0].substring(8,str.length-1);
+  //          alert(splitted.length);
+  
+        }
+      //  let x = stringToSplit.split(" ");
+      debugger ;
+       if (splitted.length ==1)
+       {
+            this.service.sp_create_AHP_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+            if (result[0].FinYear !="0" )
+            {
+              //try{
+                this.Fin_Year14_15 = result[0].FinYear;
+                this.Housesinvolved14_15 = result[0].Housesinvolved;
+                this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+                this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+                this.Houses_Complete14_15 = result[0].Houses_Completed;
+                this.HousesOccupied14_15 = result[0].HousesOccupied;
+                this.First_Houses14_15 = result[0].First_Houses;
+                this.Second_Houses14_15 = result[0].Second_Houses;
+                this.Third_Houses14_15 = result[0].Third_Houses;
+               }
+            //   catch{}
+            //   finally{}
+            // }
+            // else 
+            // {
+            //   this.Fin_Year14_15 =0;
+            //   this.Housesinvolved14_15 = 0;
+            //   this.FundsDisbursed_in_Houses14_15 = 0;
+            //   this.Houses_Grounde14_15 = 0;
+            //   this.Houses_Complete14_15 = 0;
+            //   this.HousesOccupied14_15 = 0;
+            //   this.First_Houses14_15 = 0;
+            //   this.Second_Houses14_15 = 0;
+            //   this.Third_Houses14_15 = 0;
+            // }
+  
+            let chart = new CanvasJS.Chart("chartAHP", {
+              theme: "light2",
+              animationEnabled: true,
+              exportEnabled: false,
+              title: {
+                text: " Physical Data Consolidated (AHP)",
+                fontSize: "25",
+              },
+              backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+              colorSet: "greenShades",
+    
+              data: [{
+    
+                options: {
+                  scales: {
+                      xAxes: [{
+                          stacked: true
+                      }],
+                      yAxes: [{
+                          stacked: true
+                      }]
+                  }
+              },
+    
+           
+           
+        
+    
+              type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Housesinvolved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  // { x: "14-15", y: this.Fin_Year15_16 },
+                  { label: x2, y: this.Housesinvolved14_15 },
+           
+                ]
+              },
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "FundsDisbursed_in_Houses",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.FundsDisbursed_in_Houses14_15 },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Houses_Grounded",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.Houses_Grounde14_15 },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Houses_Completed",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.Houses_Complete14_15 },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Houses_Occupied",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.HousesOccupied14_15 },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "First Inst",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.First_Houses14_15 },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Second Inst",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.Second_Houses14_15 },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Third Inst",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.Third_Houses14_15 },
+                ]
+              },
+    
+            ],
+              options: {
+                legend: {
+                  display: true,
+                  labels: {
+                    fontColor: 'rgb(255, 99, 132)'
+                  }
+                }
+              }
+            });
+            chart.render();
+        });
+        //     let chart = new CanvasJS.Chart("chartPMAYU", {
+        //       theme: "light2",
+        //       animationEnabled: true,
+        //       exportEnabled: false,
+        //       title: {
+        //         text: "Physical Data Consolidated (PMAYU)",
+        //         fontSize: "25",
+        //       },
+        //       backgroundColor: this.backgroundColor, 
+        //       colorSet: "greenShades",
+  
+        //       data: [{
+  
+        //         options: {
+        //           scales: {
+        //               xAxes: [{
+        //                   stacked: true
+        //               }],
+        //               yAxes: [{
+        //                   stacked: true
+        //               }]
+        //           }
+        //       },
+  
+        //        type: "column",
+        //         dockInsidePlotArea: true,
+        //          indexLabel: "{y}", 
+        //         bevelEnabled: true,
+        //         showInLegend: true,
+        //         legendText: "Housesinvolved",
+        //          stValue: "Q",
+        //         indexLabelFontSize: 12,
+        //         indexLabelOrientation: "vertical",
+        //         dataPoints: [
+        //            { label: x2, y: this.Housesinvolved14_15 },
+        //           { label: x2, y: this.FundsDisbursed_in_Houses14_15 },
+        //           { label: x2, y: this.Houses_Grounde14_15 },
+        //           { label: x2, y: this.Houses_Complete14_15 },
+        //           { label: x2, y: this.HousesOccupied14_15 },
+        //           { label: x2, y: this.First_Houses14_15 },
+        //           { label: x2, y: this.Second_Houses14_15 },
+        //           { label: x2, y: this.Third_Houses14_15 }
+        //         ]
+        //       }  ,
+  
+        //     ],
+        //       options: {
+        //         legend: {
+        //           display: true,
+        //           labels: {
+        //             fontColor: 'rgb(255, 99, 132)'
+        //           }
+        //         }
+        //       }
+        //     });
+        //     chart.render();
+        // });
+  
+  
+      }
+      if (splitted.length ==2)
+      {
+        this.service.sp_create_AHP_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+              
+        //this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          //    if (result[0].FinYear !="0" )
+          //  {
+  
+               this.Fin_Year14_15 = result[0].FinYear;
+               this.Housesinvolved14_15 = result[0].Housesinvolved;
+               this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+               this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+               this.Houses_Complete14_15 = result[0].Houses_Completed;
+               this.HousesOccupied14_15 = result[0].HousesOccupied;
+               this.First_Houses14_15 = result[0].First_Houses;
+               this.Second_Houses14_15 = result[0].Second_Houses;
+               this.Third_Houses14_15 = result[0].Third_Houses;
+          //  }
+          //  if (result[1].FinYear !="0" )
+          //  {
+  
+              // 
+              try {
+                this.Fin_Year15_16 = result[1].FinYear; 
+              this.Housesinvolved15_16 = result[1].Housesinvolved;
+               this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+               this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+               this.Houses_Complete15_16 = result[1].Houses_Completed;
+               this.HousesOccupied15_16 = result[1].HousesOccupied;
+               this.First_Houses15_16 = result[1].First_Houses;
+               this.Second_Houses15_16 = result[1].Second_Houses;
+               this.Third_Houses15_16 = result[1].Third_Houses;
+            }
+            catch{}
+            finally{}
+  
+  
+           let chart = new CanvasJS.Chart("chartAHP", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: " Physical Data Consolidated (AHP)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Housesinvolved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                // { x: "14-15", y: this.Fin_Year15_16 },
+                { label: x1, y: this.Housesinvolved14_15 },
+                { label: Y1, y: this.Housesinvolved15_16 }
+  
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "FundsDisbursed_in_Houses",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+                { label: Y1, y: this.FundsDisbursed_in_Houses15_16 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Grounded",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Grounde14_15 },
+                { label: Y1, y: this.Houses_Grounde15_16 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Completed",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Complete14_15 },
+                { label: Y1, y: this.Houses_Complete15_16 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Occupied",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.HousesOccupied14_15 },
+                { label: Y1, y: this.HousesOccupied15_16 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "First Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.First_Houses14_15 },
+                { label: Y1, y: this.First_Houses15_16 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Second Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Second_Houses14_15 },
+                { label: Y1, y: this.Second_Houses15_16 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Third Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Third_Houses14_15 },
+                { label: Y1, y: this.Third_Houses15_16 }
+              ]
+            },
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+      if (splitted.length ==3)
+      {
+        this.service.sp_create_AHP_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        
+        //   this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          //    if (result[0].FinYear !="0" )
+          //  {
+  
+               this.Fin_Year14_15 = result[0].FinYear;
+               this.Housesinvolved14_15 = result[0].Housesinvolved;
+               this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+               this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+               this.Houses_Complete14_15 = result[0].Houses_Completed;
+               this.HousesOccupied14_15 = result[0].HousesOccupied;
+               this.First_Houses14_15 = result[0].First_Houses;
+               this.Second_Houses14_15 = result[0].Second_Houses;
+               this.Third_Houses14_15 = result[0].Third_Houses;
+          //  }
+          //  if (result[1].FinYear !="0" )
+          //  {
+  
+              // 
+              try {
+                this.Fin_Year15_16 = result[1].FinYear; 
+              this.Housesinvolved15_16 = result[1].Housesinvolved;
+               this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+               this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+               this.Houses_Complete15_16 = result[1].Houses_Completed;
+               this.HousesOccupied15_16 = result[1].HousesOccupied;
+               this.First_Houses15_16 = result[1].First_Houses;
+               this.Second_Houses15_16 = result[1].Second_Houses;
+               this.Third_Houses15_16 = result[1].Third_Houses;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+              this.Fin_Year16_17 = result[2].FinYear; 
+            this.Housesinvolved16_17 = result[2].Housesinvolved;
+             this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+             this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+             this.Houses_Complete16_17 = result[2].Houses_Completed;
+             this.HousesOccupied16_17 = result[2].HousesOccupied;
+             this.First_Houses16_17 = result[2].First_Houses;
+             this.Second_Houses16_17 = result[2].Second_Houses;
+             this.Third_Houses16_17 = result[2].Third_Houses;
+          }
+          catch{}
+          finally{}
+  
+  
+           let chart = new CanvasJS.Chart("chartAHP", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: " Physical Data Consolidated (AHP)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Housesinvolved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                // { x: "14-15", y: this.Fin_Year15_16 },
+                { label: x1, y: this.Housesinvolved14_15 },
+                { label: Y1, y: this.Housesinvolved15_16 },
+                { label: z1, y: this.Housesinvolved16_17 }
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "FundsDisbursed_in_Houses",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+                { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+                { label: z1, y: this.FundsDisbursed_in_Houses16_17 }
+  
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Grounded",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Grounde14_15 },
+                { label: Y1, y: this.Houses_Grounde15_16 },
+                { label: z1, y: this.Houses_Grounde16_17 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Completed",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Complete14_15 },
+                { label: Y1, y: this.Houses_Complete15_16 },
+                { label: z1, y: this.Houses_Complete16_17 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Occupied",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.HousesOccupied14_15 },
+                { label: Y1, y: this.HousesOccupied15_16 },
+                { label: z1, y: this.HousesOccupied16_17} 
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "First Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.First_Houses14_15 },
+                { label: Y1, y: this.First_Houses15_16 },
+                { label: z1, y: this.First_Houses16_17 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Second Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Second_Houses14_15 },
+                { label: Y1, y: this.Second_Houses15_16 },
+                { label: z1, y: this.Second_Houses16_17 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Third Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Third_Houses14_15 },
+                { label: Y1, y: this.Third_Houses15_16 },
+                { label: z1, y: this.Third_Houses16_17 }
+              ]
+            },
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+  
+      if (splitted.length ==4)
+      {
+  
+        this.service.sp_create_AHP_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        
+         //  this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          //    if (result[0].FinYear !="0" )
+          //  {
+  
+               this.Fin_Year14_15 = result[0].FinYear;
+               this.Housesinvolved14_15 = result[0].Housesinvolved;
+               this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+               this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+               this.Houses_Complete14_15 = result[0].Houses_Completed;
+               this.HousesOccupied14_15 = result[0].HousesOccupied;
+               this.First_Houses14_15 = result[0].First_Houses;
+               this.Second_Houses14_15 = result[0].Second_Houses;
+               this.Third_Houses14_15 = result[0].Third_Houses;
+          //  }
+          //  if (result[1].FinYear !="0" )
+          //  {
+  
+              // 
+              try {
+                this.Fin_Year15_16 = result[1].FinYear; 
+              this.Housesinvolved15_16 = result[1].Housesinvolved;
+               this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+               this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+               this.Houses_Complete15_16 = result[1].Houses_Completed;
+               this.HousesOccupied15_16 = result[1].HousesOccupied;
+               this.First_Houses15_16 = result[1].First_Houses;
+               this.Second_Houses15_16 = result[1].Second_Houses;
+               this.Third_Houses15_16 = result[1].Third_Houses;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+              this.Fin_Year16_17 = result[2].FinYear; 
+            this.Housesinvolved16_17 = result[2].Housesinvolved;
+             this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+             this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+             this.Houses_Complete16_17 = result[2].Houses_Completed;
+             this.HousesOccupied16_17 = result[2].HousesOccupied;
+             this.First_Houses16_17 = result[2].First_Houses;
+             this.Second_Houses16_17 = result[2].Second_Houses;
+             this.Third_Houses16_17 = result[2].Third_Houses;
+          }
+          catch{}
+          finally{}
+  
+          try {
+            this.Fin_Year17_18 = result[3].FinYear; 
+          this.Housesinvolved17_18 = result[3].Housesinvolved;
+           this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+           this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+           this.Houses_Complete17_18 = result[3].Houses_Completed;
+           this.HousesOccupied17_18 = result[3].HousesOccupied;
+           this.First_Houses17_18 = result[3].First_Houses;
+           this.Second_Houses17_18 = result[3].Second_Houses;
+           this.Third_Houses17_18 = result[3].Third_Houses;
+        }
+        catch{}
+        finally{}
+  
+  
+           let chart = new CanvasJS.Chart("chartAHP", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: " Physical Data Consolidated (AHP)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Housesinvolved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                // { x: "14-15", y: this.Fin_Year15_16 },
+                { label: x1, y: this.Housesinvolved14_15 },
+                { label: Y1, y: this.Housesinvolved15_16 },
+                { label: z1, y: this.Housesinvolved16_17 },
+                { label: z2, y: this.Housesinvolved17_18 }
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "FundsDisbursed_in_Houses",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+                { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+                { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
+                { label: z2, y: this.FundsDisbursed_in_Houses17_18 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Grounded",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Grounde14_15 },
+                { label: Y1, y: this.Houses_Grounde15_16 },
+                { label: z1, y: this.Houses_Grounde16_17 },
+                { label: z2, y: this.Houses_Grounde17_18 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Completed",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Complete14_15 },
+                { label: Y1, y: this.Houses_Complete15_16 },
+                { label: z1, y: this.Houses_Complete16_17 },
+                { label: z2, y: this.Houses_Complete17_18 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Occupied",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.HousesOccupied14_15 },
+                { label: Y1, y: this.HousesOccupied15_16 },
+                { label: z1, y: this.HousesOccupied16_17},
+                { label: z2, y: this.HousesOccupied17_18} 
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "First Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.First_Houses14_15 },
+                { label: Y1, y: this.First_Houses15_16 },
+                { label: z1, y: this.First_Houses16_17 },
+                { label: z2, y: this.First_Houses17_18 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Second Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Second_Houses14_15 },
+                { label: Y1, y: this.Second_Houses15_16 },
+                { label: z1, y: this.Second_Houses16_17 },
+                { label: z2, y: this.Second_Houses17_18 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Third Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Third_Houses14_15 },
+                { label: Y1, y: this.Third_Houses15_16 },
+                { label: z1, y: this.Third_Houses16_17 },
+                { label: z2, y: this.Third_Houses17_18 }
+              ]
+            },
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+      if (splitted.length ==5)
+      {
+        this.service.sp_create_AHP_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+           
+       // this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          //    if (result[0].FinYear !="0" )
+          //  {
+  
+               this.Fin_Year14_15 = result[0].FinYear;
+               this.Housesinvolved14_15 = result[0].Housesinvolved;
+               this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+               this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+               this.Houses_Complete14_15 = result[0].Houses_Completed;
+               this.HousesOccupied14_15 = result[0].HousesOccupied;
+               this.First_Houses14_15 = result[0].First_Houses;
+               this.Second_Houses14_15 = result[0].Second_Houses;
+               this.Third_Houses14_15 = result[0].Third_Houses;
+          //  }
+          //  if (result[1].FinYear !="0" )
+          //  {
+  
+              // 
+              try {
+                this.Fin_Year15_16 = result[1].FinYear; 
+              this.Housesinvolved15_16 = result[1].Housesinvolved;
+               this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+               this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+               this.Houses_Complete15_16 = result[1].Houses_Completed;
+               this.HousesOccupied15_16 = result[1].HousesOccupied;
+               this.First_Houses15_16 = result[1].First_Houses;
+               this.Second_Houses15_16 = result[1].Second_Houses;
+               this.Third_Houses15_16 = result[1].Third_Houses;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+              this.Fin_Year16_17 = result[2].FinYear; 
+            this.Housesinvolved16_17 = result[2].Housesinvolved;
+             this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+             this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+             this.Houses_Complete16_17 = result[2].Houses_Completed;
+             this.HousesOccupied16_17 = result[2].HousesOccupied;
+             this.First_Houses16_17 = result[2].First_Houses;
+             this.Second_Houses16_17 = result[2].Second_Houses;
+             this.Third_Houses16_17 = result[2].Third_Houses;
+          }
+          catch{}
+          finally{}
+  
+          try {
+            this.Fin_Year17_18 = result[3].FinYear; 
+          this.Housesinvolved17_18 = result[3].Housesinvolved;
+           this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+           this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+           this.Houses_Complete17_18 = result[3].Houses_Completed;
+           this.HousesOccupied17_18 = result[3].HousesOccupied;
+           this.First_Houses17_18 = result[3].First_Houses;
+           this.Second_Houses17_18 = result[3].Second_Houses;
+           this.Third_Houses17_18 = result[3].Third_Houses;
+        }
+        catch{}
+        finally{}
+  
+        try {
+          this.Fin_Year18_19 = result[4].FinYear; 
+        this.Housesinvolved18_19 = result[4].Housesinvolved;
+         this.FundsDisbursed_in_Houses18_19 = result[4].FundsDisbursed_in_Houses;
+         this.Houses_Grounde18_19 = result[4].Houses_Grounded;
+         this.Houses_Complete18_19 = result[4].Houses_Completed;
+         this.HousesOccupied18_19 = result[4].HousesOccupied;
+         this.First_Houses18_19 = result[4].First_Houses;
+         this.Second_Houses18_19 = result[4].Second_Houses;
+         this.Third_Houses18_19 = result[4].Third_Houses;
+      }
+      catch{}
+      finally{}
+  
+  
+           let chart = new CanvasJS.Chart("chartAHP", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: " Physical Data Consolidated (AHP)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Housesinvolved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                // { x: "14-15", y: this.Fin_Year15_16 },
+                { label: x1, y: this.Housesinvolved14_15 },
+                { label: Y1, y: this.Housesinvolved15_16 },
+                { label: z1, y: this.Housesinvolved16_17 },
+                { label: z2, y: this.Housesinvolved17_18 },
+                { label: z3, y: this.Housesinvolved18_19 }
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "FundsDisbursed_in_Houses",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+                { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+                { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
+                { label: z2, y: this.FundsDisbursed_in_Houses17_18 },
+                { label: z3, y: this.FundsDisbursed_in_Houses18_19 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Grounded",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Grounde14_15 },
+                { label: Y1, y: this.Houses_Grounde15_16 },
+                { label: z1, y: this.Houses_Grounde16_17 },
+                { label: z2, y: this.Houses_Grounde17_18 },
+                { label: z3, y: this.Houses_Grounde18_19 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Completed",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Complete14_15 },
+                { label: Y1, y: this.Houses_Complete15_16 },
+                { label: z1, y: this.Houses_Complete16_17 },
+                { label: z2, y: this.Houses_Complete17_18 },
+                { label: z3, y: this.Houses_Complete18_19 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Occupied",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.HousesOccupied14_15 },
+                { label: Y1, y: this.HousesOccupied15_16 },
+                { label: z1, y: this.HousesOccupied16_17},
+                { label: z2, y: this.HousesOccupied17_18},
+                { label: z3, y: this.HousesOccupied18_19} 
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "First Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.First_Houses14_15 },
+                { label: Y1, y: this.First_Houses15_16 },
+                { label: z1, y: this.First_Houses16_17 },
+                { label: z2, y: this.First_Houses17_18 },
+                { label: z3, y: this.First_Houses18_19 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Second Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Second_Houses14_15 },
+                { label: Y1, y: this.Second_Houses15_16 },
+                { label: z1, y: this.Second_Houses16_17 },
+                { label: z2, y: this.Second_Houses17_18 },
+                { label: z3, y: this.Second_Houses18_19 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Third Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Third_Houses14_15 },
+                { label: Y1, y: this.Third_Houses15_16 },
+                { label: z1, y: this.Third_Houses16_17 },
+                { label: z2, y: this.Third_Houses17_18 },
+                { label: z3, y: this.Third_Houses18_19 }
+              ]
+            },
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+      if (splitted.length ==6)
+      {
+        this.service.sp_create_AHP_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+           
+       // this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          //    if (result[0].FinYear !="0" )
+          //  {
+  
+               this.Fin_Year14_15 = result[0].FinYear;
+               this.Housesinvolved14_15 = result[0].Housesinvolved;
+               this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+               this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+               this.Houses_Complete14_15 = result[0].Houses_Completed;
+               this.HousesOccupied14_15 = result[0].HousesOccupied;
+               this.First_Houses14_15 = result[0].First_Houses;
+               this.Second_Houses14_15 = result[0].Second_Houses;
+               this.Third_Houses14_15 = result[0].Third_Houses;
+          //  }
+          //  if (result[1].FinYear !="0" )
+          //  {
+  
+              // 
+              try {
+                this.Fin_Year15_16 = result[1].FinYear; 
+              this.Housesinvolved15_16 = result[1].Housesinvolved;
+               this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+               this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+               this.Houses_Complete15_16 = result[1].Houses_Completed;
+               this.HousesOccupied15_16 = result[1].HousesOccupied;
+               this.First_Houses15_16 = result[1].First_Houses;
+               this.Second_Houses15_16 = result[1].Second_Houses;
+               this.Third_Houses15_16 = result[1].Third_Houses;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+              this.Fin_Year16_17 = result[2].FinYear; 
+            this.Housesinvolved16_17 = result[2].Housesinvolved;
+             this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+             this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+             this.Houses_Complete16_17 = result[2].Houses_Completed;
+             this.HousesOccupied16_17 = result[2].HousesOccupied;
+             this.First_Houses16_17 = result[2].First_Houses;
+             this.Second_Houses16_17 = result[2].Second_Houses;
+             this.Third_Houses16_17 = result[2].Third_Houses;
+          }
+          catch{}
+          finally{}
+  
+          try {
+            this.Fin_Year17_18 = result[3].FinYear; 
+          this.Housesinvolved17_18 = result[3].Housesinvolved;
+           this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+           this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+           this.Houses_Complete17_18 = result[3].Houses_Completed;
+           this.HousesOccupied17_18 = result[3].HousesOccupied;
+           this.First_Houses17_18 = result[3].First_Houses;
+           this.Second_Houses17_18 = result[3].Second_Houses;
+           this.Third_Houses17_18 = result[3].Third_Houses;
+        }
+        catch{}
+        finally{}
+  
+        try {
+          this.Fin_Year18_19 = result[4].FinYear; 
+        this.Housesinvolved18_19 = result[4].Housesinvolved;
+         this.FundsDisbursed_in_Houses18_19 = result[4].FundsDisbursed_in_Houses;
+         this.Houses_Grounde18_19 = result[4].Houses_Grounded;
+         this.Houses_Complete18_19 = result[4].Houses_Completed;
+         this.HousesOccupied18_19 = result[4].HousesOccupied;
+         this.First_Houses18_19 = result[4].First_Houses;
+         this.Second_Houses18_19 = result[4].Second_Houses;
+         this.Third_Houses18_19 = result[4].Third_Houses;
+      }
+      catch{}
+      finally{}
+  
+      try {
+        this.Fin_Year19_20 = result[5].FinYear; 
+      this.Housesinvolved19_20 = result[5].Housesinvolved;
+       this.FundsDisbursed_in_Houses19_20 = result[5].FundsDisbursed_in_Houses;
+       this.Houses_Grounde19_20 = result[5].Houses_Grounded;
+       this.Houses_Complete19_20 = result[5].Houses_Completed;
+       this.HousesOccupied19_20 = result[5].HousesOccupied;
+       this.First_Houses19_20 = result[5].First_Houses;
+       this.Second_Houses19_20 = result[5].Second_Houses;
+       this.Third_Houses19_20 = result[5].Third_Houses;
+    }
+    catch{}
+    finally{}
+
+           let chart = new CanvasJS.Chart("chartAHP", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: " Physical Data Consolidated (AHP)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Housesinvolved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                // { x: "14-15", y: this.Fin_Year15_16 },
+                { label: x1, y: this.Housesinvolved14_15 },
+                { label: Y1, y: this.Housesinvolved15_16 },
+                { label: z1, y: this.Housesinvolved16_17 },
+                { label: z2, y: this.Housesinvolved17_18 },
+                { label: z3, y: this.Housesinvolved18_19 },
+                { label: z4, y: this.Housesinvolved19_20 } 
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "FundsDisbursed_in_Houses",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+                { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+                { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
+                { label: z2, y: this.FundsDisbursed_in_Houses17_18 },
+                { label: z3, y: this.FundsDisbursed_in_Houses18_19 },
+                { label: z4, y: this.FundsDisbursed_in_Houses19_20 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Grounded",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Grounde14_15 },
+                { label: Y1, y: this.Houses_Grounde15_16 },
+                { label: z1, y: this.Houses_Grounde16_17 },
+                { label: z2, y: this.Houses_Grounde17_18 },
+                { label: z3, y: this.Houses_Grounde18_19 },
+                { label: z4, y: this.Houses_Grounde19_20 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Completed",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Houses_Complete14_15 },
+                { label: Y1, y: this.Houses_Complete15_16 },
+                { label: z1, y: this.Houses_Complete16_17 },
+                { label: z2, y: this.Houses_Complete17_18 },
+                { label: z3, y: this.Houses_Complete18_19 },
+                { label: z4, y: this.Houses_Complete19_20 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Occupied",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.HousesOccupied14_15 },
+                { label: Y1, y: this.HousesOccupied15_16 },
+                { label: z1, y: this.HousesOccupied16_17},
+                { label: z2, y: this.HousesOccupied17_18},
+                { label: z3, y: this.HousesOccupied18_19},
+                { label: z4, y: this.HousesOccupied19_20} 
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "First Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.First_Houses14_15 },
+                { label: Y1, y: this.First_Houses15_16 },
+                { label: z1, y: this.First_Houses16_17 },
+                { label: z2, y: this.First_Houses17_18 },
+                { label: z3, y: this.First_Houses18_19 },
+                { label: z4, y: this.First_Houses19_20 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Second Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Second_Houses14_15 },
+                { label: Y1, y: this.Second_Houses15_16 },
+                { label: z1, y: this.Second_Houses16_17 },
+                { label: z2, y: this.Second_Houses17_18 },
+                { label: z3, y: this.Second_Houses18_19 },
+                { label: z4, y: this.Second_Houses19_20 }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Third Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Third_Houses14_15 },
+                { label: Y1, y: this.Third_Houses15_16 },
+                { label: z1, y: this.Third_Houses16_17 },
+                { label: z2, y: this.Third_Houses17_18 },
+                { label: z3, y: this.Third_Houses18_19 },
+                { label: z4, y: this.Third_Houses19_20 }
+              ]
+            },
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+    }
+  
   GetPsyChart(stateCode, DisttCode, cityCode, Comp, DivisionCodes) {
 
     this.service.GetStateWiseFinYrData_Div(stateCode, DivisionCodes).subscribe(result_State => { // new code
@@ -575,7 +5369,7 @@ export class PMAYuCompWiseComponent implements OnInit {
       this.BeneficiaryShareS = result_State.BeneficiaryShare;
       this.CentralShareS = result_State.CentralShare;
       this.totalCost = result_State.totalCost;//Investment
-       
+
       this.service.HFACompWiseReportPMayList_Div(stateCode, DisttCode, cityCode, Comp, DivisionCodes).subscribe(result => {
         this.ULBShare = (result.ULBShare);
         this.StateShare = (result.StateShare);
@@ -633,7 +5427,7 @@ export class PMAYuCompWiseComponent implements OnInit {
               this.Total_CostNw = <number><any>(result_clss.Total_LoanAmt) ;
       }
       else if ((DivisionCodes != 0 && Comp != 0 && DisttCode != 0 && cityCode == 0 && stateCode != 0) || (stateCode != 0 && DivisionCodes != 0 && Comp != 0  && DisttCode != 0 && cityCode != 0 ) || (DivisionCodes != 0 && Comp != 0 && DisttCode == 0 && cityCode == 0 && stateCode != 0)|| (DivisionCodes != 0 && Comp != 0 && DisttCode != 0 && cityCode == 0 && stateCode != 0) ||  (DivisionCodes != 0 && Comp != 0 && DisttCode != 0 && cityCode != 0 && stateCode != 0) ||  (DivisionCodes != 0 && Comp != 0 && DisttCode == 0 && cityCode == 0 && stateCode == 0)||  (DivisionCodes != 0 && Comp == 0 && DisttCode != 0 && cityCode == 0 && stateCode != 0) ||  (DivisionCodes != 0 && Comp == 0 && DisttCode != 0 && cityCode != 0 && stateCode != 0)) {
-       // alert('City Multiple Comp wise Cost of Project'); 
+       // alert('City Multiple Comp wise Cost of Project');
         this.boolCheck =false;
         // && value6==-1
         if (value ==-1 )
@@ -646,7 +5440,7 @@ export class PMAYuCompWiseComponent implements OnInit {
               this.Total_CostNw = result.Investment_in_Project;
         }
         // && value6==-1
-        else if ((Comp != 0)  )   
+        else if ((Comp != 0)  )
         {
         // alert('2');
          var arr=[];
@@ -670,7 +5464,7 @@ export class PMAYuCompWiseComponent implements OnInit {
                    this.BeneShareNew = (result.BeneficiaryShare +(<number><any>result_clss.Total_LoanAmt - <number><any>result_clss.Total_SubsidyAmt));
                    this.CentralShareNew = <number><any>(result.CentralShare + result_clss.Total_SubsidyAmt);
                     this.Total_CostNw = <number><any>(result.Investment_in_Project) + <number><any>(result_clss.Total_LoanAmt);
-      
+
          }
         }
       }
@@ -691,8 +5485,8 @@ export class PMAYuCompWiseComponent implements OnInit {
        else  if ((DivisionCodes != 0 && Comp == 5    && Comp != 6  && DisttCode != 0 && cityCode == 0 && stateCode != 0) || (DivisionCodes != 0 && Comp == 5  && Comp != 6  && DisttCode != 0 && cityCode != 0 && stateCode != 0) ) {
        // alert('Distt- city wise -CLSS Wise');
          this.Total_Subsidy =  result_clss.EWS_Subsidy	+ result_clss.LIG_Subsidy	+ result_clss.MIG1_SubsidyAmt	+ result_clss.MIG2_SubsidyAmt
-         this.ULBShareNew =   0; 
-         this.StateShareNew = 0; 
+         this.ULBShareNew =   0;
+         this.StateShareNew = 0;
          this.BeneShareNew = ( (<number><any>result_clss.Total_LoanAmt - <number><any>result_clss.Total_SubsidyAmt));
          this.CentralShareNew = <number><any>( this.Total_Subsidy);
          this.Total_CostNw = <number><any>result_clss.Total_LoanAmt ;
@@ -876,7 +5670,7 @@ export class PMAYuCompWiseComponent implements OnInit {
                 { y:  (this.ULBShareNew.toFixed(2)), name: "US", color: "#FFFF00", link: "http:/yahoo.com/" },
                 { y:  (this.BeneShareNew.toFixed(2)), name: "BS", color: "#dc3545", link: "http://gmail.com/" },
                 { y:  (this.CentralShareNew.toFixed(2)), name: "Central Share", color: "#66FF33", link: "http://google.com/" }
-              ]  
+              ]
             }]
           });
           //---------------------------------------------------------  <!--28a745-->
@@ -1027,14 +5821,14 @@ export class PMAYuCompWiseComponent implements OnInit {
                 this.HO_18_19 = result4.HO_18_19;
                 this.HG_18_19 = result4.HG_18_19;
 
-                
+
                 this.service.FIN_Data1920(stateCode, DisttCode, cityCode, Comp).subscribe(result5 => {
                   //this.service.FIN_PHY_Houses1819(stateCode,DisttCode,cityCode).subscribe(result4 => {
                   this.HS_19_20 = <number><any>result5.HS_19_20;
                   this.HC_19_20 = <number><any>result5.HC_19_20;
                   this.HO_19_20 = <number><any>result5.HO_19_20;
                   this.HG_19_20 = <number><any>result5.HG_19_20;
-    
+
 
                 this.compArray = Comp.split(",");
                 const value = this.compArray.indexOf("5");
@@ -1065,14 +5859,14 @@ export class PMAYuCompWiseComponent implements OnInit {
                   this.HS_16_17 = resultS.HS_16_17;
                   this.HS_17_18 = resultS.HS17_18;
                   this.HS_18_19 = resultS.HS18_19;
-                  this.HS_19_20 = resultS.HS19_20; 
+                  this.HS_19_20 = resultS.HS19_20;
 
                   this.HC_15_16 = resultS.HC_15_16;
                   this.HC_16_17 = resultS.HC_16_17;
                   this.HC_17_18 = resultS.HC_17_18;
                   this.HC_18_19 = resultS.HC_18_19;
                   this.HC_19_20 = resultS.HC_19_20;
-                   
+
 
                   this.HO_15_16 = resultS.HO_15_16;
                   this.HO_16_17 = resultS.HO_16_17;
@@ -1268,7 +6062,7 @@ export class PMAYuCompWiseComponent implements OnInit {
                       { label: "15-16", y: this.HS_15_16 },
                       { label: "16-17", y: this.HS_16_17 },
                       { label: "17-18", y: this.HS_17_18 },
-                      { label: "18-19", y: this.HS_18_19 },  
+                      { label: "18-19", y: this.HS_18_19 },
                       { label: "19-20", y: this.HS_19_20 }
                     ]
                   },
@@ -1360,7 +6154,7 @@ BindColumnGraphFinancialData(stateCode, DisttCode, cityCode, Comp, DivisionCodes
       this.CASanctioned_17_18 = result.CASanctioned_17_18;
       this.CASanctioned_18_19 = result.CASanctioned_18_19;
       this.CASanctioned_19_20 = result.CASanctioned_19_20;
-      
+
 
       this.CumuCAReleased = result.CumuCAReleased;
       this.CumuCA_Released_15_16 = result.CumuCA_Released_15_16;
@@ -1394,7 +6188,7 @@ BindColumnGraphFinancialData(stateCode, DisttCode, cityCode, Comp, DivisionCodes
                   this.CAI191 = result5.CAI / 1;
                   this.CAR191 = result5.CAR / 1;
 
-                  
+
                 this.compArray = Comp.split(",");
                 const value = this.compArray.indexOf("5");
 
@@ -1507,9 +6301,9 @@ BindColumnGraphFinancialData(stateCode, DisttCode, cityCode, Comp, DivisionCodes
     })
   })
 }
-BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
+BindBLC_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
 {
- 
+
       Comp ="BLCS";
       this.service.sp_create_BLC_AHP_DATA(stateCode, DisttCode, cityCode,Comp).subscribe(result => { // new code
       ///first row data
@@ -1541,7 +6335,7 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
       this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
       this.Houses_Grounde16_17 = result[2].Houses_Grounded;
       this.Houses_Complete16_17 = result[2].Houses_Completed;
-      this.HousesOccupied16_17= result[2].HousesOccupied; 
+      this.HousesOccupied16_17= result[2].HousesOccupied;
       this.First_Houses16_17 = result[2].First_Houses;
       this.Second_Houses16_17 = result[2].Second_Houses;
       this.Third_Houses16_17 = result[2].Third_Houses;
@@ -1579,8 +6373,9 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
             this.First_Houses19_20 = result[5].First_Houses;
             this.Second_Houses19_20 = result[5].Second_Houses;
             this.Third_Houses19_20 = result[5].Third_Houses;
- 
-            
+
+            this.Test(Fin_Year);
+
                   let chartBLCS = new CanvasJS.Chart("chartBLCS", {
                     theme: "light2",
                     animationEnabled: true,
@@ -1591,7 +6386,7 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
                     },
                     backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
                     colorSet: "greenShades",
-                    
+
                     data: [{
 
                       options: {
@@ -1604,7 +6399,7 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
                             }]
                         }
                     },
-                
+
                     type: "column",
                       dockInsidePlotArea: true,
                        indexLabel: "{y}", //HG
@@ -1619,11 +6414,11 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Housesinvolved14_15 },
                         { label: "15_16", y: this.Housesinvolved15_16 },
                         { label: "16_17", y: this.Housesinvolved16_17 },
-                        { label: "17_18", y: this.Housesinvolved17_18 },  
+                        { label: "17_18", y: this.Housesinvolved17_18 },
                         { label: "18_19", y: this.Housesinvolved18_19 },
                         { label: "19_20", y: this.Housesinvolved19_20 }
                         // ,
-                        // { label: "20_21", y: this.Housesinvolved20_21 } 
+                        // { label: "20_21", y: this.Housesinvolved20_21 }
                       ]
                     },
                     {
@@ -1640,11 +6435,11 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.FundsDisbursed_in_Houses14_15 },
                         { label: "15_16", y: this.FundsDisbursed_in_Houses15_16 },
                         { label: "16_17", y: this.FundsDisbursed_in_Houses16_17 },
-                        { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },  
+                        { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },
                         { label: "18_19", y: this.FundsDisbursed_in_Houses18_19 },
                         { label: "19_20", y: this.FundsDisbursed_in_Houses19_20 }
                         // ,
-                        // { label: "20_21", y: this.FundsDisbursed_in_Houses20_21 } 
+                        // { label: "20_21", y: this.FundsDisbursed_in_Houses20_21 }
                       ]
                     },
 
@@ -1662,11 +6457,11 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Houses_Grounde14_15 },
                         { label: "15_16", y: this.Houses_Grounde15_16 },
                         { label: "16_17", y: this.Houses_Grounde16_17 },
-                        { label: "17_18", y: this.Houses_Grounde17_18 },  
+                        { label: "17_18", y: this.Houses_Grounde17_18 },
                         { label: "18_19", y: this.Houses_Grounde18_19 },
                         { label: "19_20", y: this.Houses_Grounde19_20 }
                         // ,
-                        // { label: "20_21", y: this.Houses_Grounde20_21 } 
+                        // { label: "20_21", y: this.Houses_Grounde20_21 }
                       ]
                     },
 
@@ -1684,11 +6479,11 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Houses_Complete14_15 },
                         { label: "15_16", y: this.Houses_Complete15_16 },
                         { label: "16_17", y: this.Houses_Complete16_17 },
-                        { label: "17_18", y: this.Houses_Complete17_18 },  
+                        { label: "17_18", y: this.Houses_Complete17_18 },
                         { label: "18_19", y: this.Houses_Complete18_19 },
                         { label: "19_20", y: this.Houses_Complete19_20 }
                         // ,
-                        // { label: "20_21", y: this.Houses_Complete20_21 } 
+                        // { label: "20_21", y: this.Houses_Complete20_21 }
                       ]
                     },
 
@@ -1706,11 +6501,11 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.HousesOccupied14_15 },
                         { label: "15_16", y: this.HousesOccupied15_16 },
                         { label: "16_17", y: this.HousesOccupied16_17 },
-                        { label: "17_18", y: this.HousesOccupied17_18 },  
+                        { label: "17_18", y: this.HousesOccupied17_18 },
                         { label: "18_19", y: this.HousesOccupied18_19 },
                         { label: "19_20", y: this.HousesOccupied19_20 }
                         // ,
-                        // { label: "20_21", y: this.HousesOccupied20_21 } 
+                        // { label: "20_21", y: this.HousesOccupied20_21 }
                       ]
                     },
 
@@ -1728,11 +6523,11 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.First_Houses14_15 },
                         { label: "15_16", y: this.First_Houses15_16 },
                         { label: "16_17", y: this.First_Houses16_17 },
-                        { label: "17_18", y: this.First_Houses17_18 },  
+                        { label: "17_18", y: this.First_Houses17_18 },
                         { label: "18_19", y: this.First_Houses18_19 },
                         { label: "19_20", y: this.First_Houses19_20 }
                         // ,
-                        // { label: "20_21", y: this.First_Houses20_21 } 
+                        // { label: "20_21", y: this.First_Houses20_21 }
                       ]
                     },
 
@@ -1750,11 +6545,11 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Second_Houses14_15 },
                         { label: "15_16", y: this.Second_Houses15_16 },
                         { label: "16_17", y: this.Second_Houses16_17 },
-                        { label: "17_18", y: this.Second_Houses17_18 },  
+                        { label: "17_18", y: this.Second_Houses17_18 },
                         { label: "18_19", y: this.Second_Houses18_19 },
                         { label: "19_20", y: this.Second_Houses19_20 }
                         // ,
-                        // { label: "20_21", y: this.Second_Houses20_21 } 
+                        // { label: "20_21", y: this.Second_Houses20_21 }
                       ]
                     },
 
@@ -1772,11 +6567,11 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Third_Houses14_15 },
                         { label: "15_16", y: this.Third_Houses15_16 },
                         { label: "16_17", y: this.Third_Houses16_17 },
-                        { label: "17_18", y: this.Third_Houses17_18 },  
+                        { label: "17_18", y: this.Third_Houses17_18 },
                         { label: "18_19", y: this.Third_Houses18_19 },
-                        { label: "19_20", y: this.Third_Houses19_20 } 
+                        { label: "19_20", y: this.Third_Houses19_20 }
                         // ,
-                        // { label: "20_21", y: this.Third_Houses20_21 } 
+                        // { label: "20_21", y: this.Third_Houses20_21 }
                       ]
                     },
                   ],
@@ -1792,10 +6587,1551 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp)
                   chartBLCS.render();
               });
   }
-  
-BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
+
+
+BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
 {
-  debugger;
+ // alert('pm');
+ // Comp ="BLCS";
+  var str = Fin_Year ;//'SUM(BENE2014_15),SUM(BENE2015_16)';
+       // alert(str.length);
+      
+      if (str.length==101)
+      {
+          var splitted = str.split(",", str.length);
+          //alert(splitted[0]);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+          var z1 =  splitted[2].substring(8,str.length-3);
+          var z2 =  splitted[3].substring(8,str.length-3);
+          var z3 =  splitted[4].substring(8,str.length-3);
+          var z4 =  splitted[5].substring(8,str.length-3);
+      }
+      if (str.length==84)
+      {
+          var splitted = str.split(",", str.length);
+          //alert(splitted[0]);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+          var z1 =  splitted[2].substring(8,str.length-3);
+          var z2 =  splitted[3].substring(8,str.length-3);
+          var z3 =  splitted[4].substring(8,str.length-3);
+      }
+      if (str.length==67)
+      {
+          var splitted = str.split(",", str.length);
+          //alert(splitted[0]);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+          var z1 =  splitted[2].substring(8,str.length-3);
+          var z2 =  splitted[3].substring(8,str.length-3);
+         // alert(x1);
+        //  alert(Y1); 
+      }
+      if (str.length==50)
+      {
+          var splitted = str.split(",", str.length);
+          //alert(splitted[0]);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+          var z1 =  splitted[2].substring(8,str.length-3);
+         // alert(x1);
+        //  alert(Y1); 
+      }
+      if (str.length==33)
+      {
+          var splitted = str.split(",", str.length);
+          //alert(splitted[0]);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+         // alert(x1);
+        //  alert(Y1); 
+      }
+      if (str.length==16)
+      {
+          var splitted = str.split(",", str.length);
+//          alert(splitted[0]);
+          var x2 =  splitted[0].substring(8,str.length-1);
+//          alert(splitted.length);
+
+      }
+    //  let x = stringToSplit.split(" ");
+
+     if (splitted.length ==1)
+     {
+          this.service.sp_create_BLC_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { 
+         // this.service.sp_create_BLC_AHP_DATA(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+            if (result[0].FinYear !="0" )
+          {
+
+              this.Fin_Year14_15 = result[0].FinYear;
+              this.Housesinvolved14_15 = result[0].Housesinvolved;
+              this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+              this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+              this.Houses_Complete14_15 = result[0].Houses_Completed;
+              this.HousesOccupied14_15 = result[0].HousesOccupied;
+              this.First_Houses14_15 = result[0].First_Houses;
+              this.Second_Houses14_15 = result[0].Second_Houses;
+              this.Third_Houses14_15 = result[0].Third_Houses;
+          }
+
+          let chart = new CanvasJS.Chart("chartBLCS", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: " Physical Data Consolidated (BLCS)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Housesinvolved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                // { x: "14-15", y: this.Fin_Year15_16 },
+                { label: x2, y: this.Housesinvolved14_15 },
+         
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "FundsDisbursed_in_Houses",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.FundsDisbursed_in_Houses14_15 },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Grounded",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.Houses_Grounde14_15 },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Completed",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.Houses_Complete14_15 },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Houses_Occupied",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.HousesOccupied14_15 },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "First Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.First_Houses14_15 },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Second Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.Second_Houses14_15 },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Third Inst",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.Third_Houses14_15 },
+              ]
+            },
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+      //     let chart = new CanvasJS.Chart("chartPMAYU", {
+      //       theme: "light2",
+      //       animationEnabled: true,
+      //       exportEnabled: false,
+      //       title: {
+      //         text: "Physical Data Consolidated (PMAYU)",
+      //         fontSize: "25",
+      //       },
+      //       backgroundColor: this.backgroundColor, 
+      //       colorSet: "greenShades",
+
+      //       data: [{
+
+      //         options: {
+      //           scales: {
+      //               xAxes: [{
+      //                   stacked: true
+      //               }],
+      //               yAxes: [{
+      //                   stacked: true
+      //               }]
+      //           }
+      //       },
+
+      //        type: "column",
+      //         dockInsidePlotArea: true,
+      //          indexLabel: "{y}", 
+      //         bevelEnabled: true,
+      //         showInLegend: true,
+      //         legendText: "Housesinvolved",
+      //          stValue: "Q",
+      //         indexLabelFontSize: 12,
+      //         indexLabelOrientation: "vertical",
+      //         dataPoints: [
+      //            { label: x2, y: this.Housesinvolved14_15 },
+      //           { label: x2, y: this.FundsDisbursed_in_Houses14_15 },
+      //           { label: x2, y: this.Houses_Grounde14_15 },
+      //           { label: x2, y: this.Houses_Complete14_15 },
+      //           { label: x2, y: this.HousesOccupied14_15 },
+      //           { label: x2, y: this.First_Houses14_15 },
+      //           { label: x2, y: this.Second_Houses14_15 },
+      //           { label: x2, y: this.Third_Houses14_15 }
+      //         ]
+      //       }  ,
+
+      //     ],
+      //       options: {
+      //         legend: {
+      //           display: true,
+      //           labels: {
+      //             fontColor: 'rgb(255, 99, 132)'
+      //           }
+      //         }
+      //       }
+      //     });
+      //     chart.render();
+      // });
+
+
+    }
+    if (splitted.length ==2)
+    {
+         this.service.sp_create_BLC_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        //    if (result[0].FinYear !="0" )
+        //  {
+
+             this.Fin_Year14_15 = result[0].FinYear;
+             this.Housesinvolved14_15 = result[0].Housesinvolved;
+             this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+             this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+             this.Houses_Complete14_15 = result[0].Houses_Completed;
+             this.HousesOccupied14_15 = result[0].HousesOccupied;
+             this.First_Houses14_15 = result[0].First_Houses;
+             this.Second_Houses14_15 = result[0].Second_Houses;
+             this.Third_Houses14_15 = result[0].Third_Houses;
+        //  }
+        //  if (result[1].FinYear !="0" )
+        //  {
+
+            // 
+            try {
+              this.Fin_Year15_16 = result[1].FinYear; 
+            this.Housesinvolved15_16 = result[1].Housesinvolved;
+             this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+             this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+             this.Houses_Complete15_16 = result[1].Houses_Completed;
+             this.HousesOccupied15_16 = result[1].HousesOccupied;
+             this.First_Houses15_16 = result[1].First_Houses;
+             this.Second_Houses15_16 = result[1].Second_Houses;
+             this.Third_Houses15_16 = result[1].Third_Houses;
+          }
+          catch{}
+          finally{}
+
+
+         let chart = new CanvasJS.Chart("chartBLCS", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: " Physical Data Consolidated (PMAyU)",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Housesinvolved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Housesinvolved14_15 },
+              { label: Y1, y: this.Housesinvolved15_16 }
+
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "FundsDisbursed_in_Houses",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+              { label: Y1, y: this.FundsDisbursed_in_Houses15_16 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Grounded",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Grounde14_15 },
+              { label: Y1, y: this.Houses_Grounde15_16 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Completed",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Complete14_15 },
+              { label: Y1, y: this.Houses_Complete15_16 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Occupied",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.HousesOccupied14_15 },
+              { label: Y1, y: this.HousesOccupied15_16 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "First Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.First_Houses14_15 },
+              { label: Y1, y: this.First_Houses15_16 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Second Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Second_Houses14_15 },
+              { label: Y1, y: this.Second_Houses15_16 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Third Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Third_Houses14_15 },
+              { label: Y1, y: this.Third_Houses15_16 }
+            ]
+          },
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+    if (splitted.length ==3)
+    {
+         this.service.sp_create_BLC_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        //    if (result[0].FinYear !="0" )
+        //  {
+
+             this.Fin_Year14_15 = result[0].FinYear;
+             this.Housesinvolved14_15 = result[0].Housesinvolved;
+             this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+             this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+             this.Houses_Complete14_15 = result[0].Houses_Completed;
+             this.HousesOccupied14_15 = result[0].HousesOccupied;
+             this.First_Houses14_15 = result[0].First_Houses;
+             this.Second_Houses14_15 = result[0].Second_Houses;
+             this.Third_Houses14_15 = result[0].Third_Houses;
+        //  }
+        //  if (result[1].FinYear !="0" )
+        //  {
+
+            // 
+            try {
+              this.Fin_Year15_16 = result[1].FinYear; 
+            this.Housesinvolved15_16 = result[1].Housesinvolved;
+             this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+             this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+             this.Houses_Complete15_16 = result[1].Houses_Completed;
+             this.HousesOccupied15_16 = result[1].HousesOccupied;
+             this.First_Houses15_16 = result[1].First_Houses;
+             this.Second_Houses15_16 = result[1].Second_Houses;
+             this.Third_Houses15_16 = result[1].Third_Houses;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+            this.Fin_Year16_17 = result[2].FinYear; 
+          this.Housesinvolved16_17 = result[2].Housesinvolved;
+           this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+           this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+           this.Houses_Complete16_17 = result[2].Houses_Completed;
+           this.HousesOccupied16_17 = result[2].HousesOccupied;
+           this.First_Houses16_17 = result[2].First_Houses;
+           this.Second_Houses16_17 = result[2].Second_Houses;
+           this.Third_Houses16_17 = result[2].Third_Houses;
+        }
+        catch{}
+        finally{}
+
+
+         let chart = new CanvasJS.Chart("chartBLCS", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: " Physical Data Consolidated (PMAyU)",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Housesinvolved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Housesinvolved14_15 },
+              { label: Y1, y: this.Housesinvolved15_16 },
+              { label: z1, y: this.Housesinvolved16_17 }
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "FundsDisbursed_in_Houses",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+              { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+              { label: z1, y: this.FundsDisbursed_in_Houses16_17 }
+
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Grounded",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Grounde14_15 },
+              { label: Y1, y: this.Houses_Grounde15_16 },
+              { label: z1, y: this.Houses_Grounde16_17 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Completed",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Complete14_15 },
+              { label: Y1, y: this.Houses_Complete15_16 },
+              { label: z1, y: this.Houses_Complete16_17 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Occupied",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.HousesOccupied14_15 },
+              { label: Y1, y: this.HousesOccupied15_16 },
+              { label: z1, y: this.HousesOccupied16_17} 
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "First Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.First_Houses14_15 },
+              { label: Y1, y: this.First_Houses15_16 },
+              { label: z1, y: this.First_Houses16_17 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Second Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Second_Houses14_15 },
+              { label: Y1, y: this.Second_Houses15_16 },
+              { label: z1, y: this.Second_Houses16_17 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Third Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Third_Houses14_15 },
+              { label: Y1, y: this.Third_Houses15_16 },
+              { label: z1, y: this.Third_Houses16_17 }
+            ]
+          },
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+
+    if (splitted.length ==4)
+    {
+         this.service.sp_create_BLC_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        //    if (result[0].FinYear !="0" )
+        //  {
+
+             this.Fin_Year14_15 = result[0].FinYear;
+             this.Housesinvolved14_15 = result[0].Housesinvolved;
+             this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+             this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+             this.Houses_Complete14_15 = result[0].Houses_Completed;
+             this.HousesOccupied14_15 = result[0].HousesOccupied;
+             this.First_Houses14_15 = result[0].First_Houses;
+             this.Second_Houses14_15 = result[0].Second_Houses;
+             this.Third_Houses14_15 = result[0].Third_Houses;
+        //  }
+        //  if (result[1].FinYear !="0" )
+        //  {
+
+            // 
+            try {
+              this.Fin_Year15_16 = result[1].FinYear; 
+            this.Housesinvolved15_16 = result[1].Housesinvolved;
+             this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+             this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+             this.Houses_Complete15_16 = result[1].Houses_Completed;
+             this.HousesOccupied15_16 = result[1].HousesOccupied;
+             this.First_Houses15_16 = result[1].First_Houses;
+             this.Second_Houses15_16 = result[1].Second_Houses;
+             this.Third_Houses15_16 = result[1].Third_Houses;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+            this.Fin_Year16_17 = result[2].FinYear; 
+          this.Housesinvolved16_17 = result[2].Housesinvolved;
+           this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+           this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+           this.Houses_Complete16_17 = result[2].Houses_Completed;
+           this.HousesOccupied16_17 = result[2].HousesOccupied;
+           this.First_Houses16_17 = result[2].First_Houses;
+           this.Second_Houses16_17 = result[2].Second_Houses;
+           this.Third_Houses16_17 = result[2].Third_Houses;
+        }
+        catch{}
+        finally{}
+
+        try {
+          this.Fin_Year17_18 = result[3].FinYear; 
+        this.Housesinvolved17_18 = result[3].Housesinvolved;
+         this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+         this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+         this.Houses_Complete17_18 = result[3].Houses_Completed;
+         this.HousesOccupied17_18 = result[3].HousesOccupied;
+         this.First_Houses17_18 = result[3].First_Houses;
+         this.Second_Houses17_18 = result[3].Second_Houses;
+         this.Third_Houses17_18 = result[3].Third_Houses;
+      }
+      catch{}
+      finally{}
+
+
+         let chart = new CanvasJS.Chart("chartBLCS", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: " Physical Data Consolidated (PMAyU)",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Housesinvolved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Housesinvolved14_15 },
+              { label: Y1, y: this.Housesinvolved15_16 },
+              { label: z1, y: this.Housesinvolved16_17 },
+              { label: z2, y: this.Housesinvolved17_18 }
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "FundsDisbursed_in_Houses",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+              { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+              { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
+              { label: z2, y: this.FundsDisbursed_in_Houses17_18 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Grounded",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Grounde14_15 },
+              { label: Y1, y: this.Houses_Grounde15_16 },
+              { label: z1, y: this.Houses_Grounde16_17 },
+              { label: z2, y: this.Houses_Grounde17_18 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Completed",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Complete14_15 },
+              { label: Y1, y: this.Houses_Complete15_16 },
+              { label: z1, y: this.Houses_Complete16_17 },
+              { label: z2, y: this.Houses_Complete17_18 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Occupied",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.HousesOccupied14_15 },
+              { label: Y1, y: this.HousesOccupied15_16 },
+              { label: z1, y: this.HousesOccupied16_17},
+              { label: z2, y: this.HousesOccupied17_18} 
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "First Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.First_Houses14_15 },
+              { label: Y1, y: this.First_Houses15_16 },
+              { label: z1, y: this.First_Houses16_17 },
+              { label: z2, y: this.First_Houses17_18 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Second Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Second_Houses14_15 },
+              { label: Y1, y: this.Second_Houses15_16 },
+              { label: z1, y: this.Second_Houses16_17 },
+              { label: z2, y: this.Second_Houses17_18 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Third Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Third_Houses14_15 },
+              { label: Y1, y: this.Third_Houses15_16 },
+              { label: z1, y: this.Third_Houses16_17 },
+              { label: z2, y: this.Third_Houses17_18 }
+            ]
+          },
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+    if (splitted.length ==5)
+    {
+         this.service.sp_create_BLC_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        //    if (result[0].FinYear !="0" )
+        //  {
+
+             this.Fin_Year14_15 = result[0].FinYear;
+             this.Housesinvolved14_15 = result[0].Housesinvolved;
+             this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+             this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+             this.Houses_Complete14_15 = result[0].Houses_Completed;
+             this.HousesOccupied14_15 = result[0].HousesOccupied;
+             this.First_Houses14_15 = result[0].First_Houses;
+             this.Second_Houses14_15 = result[0].Second_Houses;
+             this.Third_Houses14_15 = result[0].Third_Houses;
+        //  }
+        //  if (result[1].FinYear !="0" )
+        //  {
+
+            // 
+            try {
+              this.Fin_Year15_16 = result[1].FinYear; 
+            this.Housesinvolved15_16 = result[1].Housesinvolved;
+             this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+             this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+             this.Houses_Complete15_16 = result[1].Houses_Completed;
+             this.HousesOccupied15_16 = result[1].HousesOccupied;
+             this.First_Houses15_16 = result[1].First_Houses;
+             this.Second_Houses15_16 = result[1].Second_Houses;
+             this.Third_Houses15_16 = result[1].Third_Houses;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+            this.Fin_Year16_17 = result[2].FinYear; 
+          this.Housesinvolved16_17 = result[2].Housesinvolved;
+           this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+           this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+           this.Houses_Complete16_17 = result[2].Houses_Completed;
+           this.HousesOccupied16_17 = result[2].HousesOccupied;
+           this.First_Houses16_17 = result[2].First_Houses;
+           this.Second_Houses16_17 = result[2].Second_Houses;
+           this.Third_Houses16_17 = result[2].Third_Houses;
+        }
+        catch{}
+        finally{}
+
+        try {
+          this.Fin_Year17_18 = result[3].FinYear; 
+        this.Housesinvolved17_18 = result[3].Housesinvolved;
+         this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+         this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+         this.Houses_Complete17_18 = result[3].Houses_Completed;
+         this.HousesOccupied17_18 = result[3].HousesOccupied;
+         this.First_Houses17_18 = result[3].First_Houses;
+         this.Second_Houses17_18 = result[3].Second_Houses;
+         this.Third_Houses17_18 = result[3].Third_Houses;
+      }
+      catch{}
+      finally{}
+
+      try {
+        this.Fin_Year18_19 = result[4].FinYear; 
+      this.Housesinvolved18_19 = result[4].Housesinvolved;
+       this.FundsDisbursed_in_Houses18_19 = result[4].FundsDisbursed_in_Houses;
+       this.Houses_Grounde18_19 = result[4].Houses_Grounded;
+       this.Houses_Complete18_19 = result[4].Houses_Completed;
+       this.HousesOccupied18_19 = result[4].HousesOccupied;
+       this.First_Houses18_19 = result[4].First_Houses;
+       this.Second_Houses18_19 = result[4].Second_Houses;
+       this.Third_Houses18_19 = result[4].Third_Houses;
+    }
+    catch{}
+    finally{}
+
+
+         let chart = new CanvasJS.Chart("chartBLCS", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: " Physical Data Consolidated (PMAyU)",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Housesinvolved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Housesinvolved14_15 },
+              { label: Y1, y: this.Housesinvolved15_16 },
+              { label: z1, y: this.Housesinvolved16_17 },
+              { label: z2, y: this.Housesinvolved17_18 },
+              { label: z3, y: this.Housesinvolved18_19 }
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "FundsDisbursed_in_Houses",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+              { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+              { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
+              { label: z2, y: this.FundsDisbursed_in_Houses17_18 },
+              { label: z3, y: this.FundsDisbursed_in_Houses18_19 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Grounded",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Grounde14_15 },
+              { label: Y1, y: this.Houses_Grounde15_16 },
+              { label: z1, y: this.Houses_Grounde16_17 },
+              { label: z2, y: this.Houses_Grounde17_18 },
+              { label: z3, y: this.Houses_Grounde18_19 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Completed",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Complete14_15 },
+              { label: Y1, y: this.Houses_Complete15_16 },
+              { label: z1, y: this.Houses_Complete16_17 },
+              { label: z2, y: this.Houses_Complete17_18 },
+              { label: z3, y: this.Houses_Complete18_19 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Occupied",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.HousesOccupied14_15 },
+              { label: Y1, y: this.HousesOccupied15_16 },
+              { label: z1, y: this.HousesOccupied16_17},
+              { label: z2, y: this.HousesOccupied17_18},
+              { label: z3, y: this.HousesOccupied18_19} 
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "First Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.First_Houses14_15 },
+              { label: Y1, y: this.First_Houses15_16 },
+              { label: z1, y: this.First_Houses16_17 },
+              { label: z2, y: this.First_Houses17_18 },
+              { label: z3, y: this.First_Houses18_19 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Second Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Second_Houses14_15 },
+              { label: Y1, y: this.Second_Houses15_16 },
+              { label: z1, y: this.Second_Houses16_17 },
+              { label: z2, y: this.Second_Houses17_18 },
+              { label: z3, y: this.Second_Houses18_19 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Third Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Third_Houses14_15 },
+              { label: Y1, y: this.Third_Houses15_16 },
+              { label: z1, y: this.Third_Houses16_17 },
+              { label: z2, y: this.Third_Houses17_18 },
+              { label: z3, y: this.Third_Houses18_19 }
+            ]
+          },
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+    if (splitted.length ==6)
+    {
+         this.service.sp_create_BLC_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        //    if (result[0].FinYear !="0" )
+        //  {
+
+             this.Fin_Year14_15 = result[0].FinYear;
+             this.Housesinvolved14_15 = result[0].Housesinvolved;
+             this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+             this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+             this.Houses_Complete14_15 = result[0].Houses_Completed;
+             this.HousesOccupied14_15 = result[0].HousesOccupied;
+             this.First_Houses14_15 = result[0].First_Houses;
+             this.Second_Houses14_15 = result[0].Second_Houses;
+             this.Third_Houses14_15 = result[0].Third_Houses;
+        //  }
+        //  if (result[1].FinYear !="0" )
+        //  {
+
+            // 
+            try {
+              this.Fin_Year15_16 = result[1].FinYear; 
+            this.Housesinvolved15_16 = result[1].Housesinvolved;
+             this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+             this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+             this.Houses_Complete15_16 = result[1].Houses_Completed;
+             this.HousesOccupied15_16 = result[1].HousesOccupied;
+             this.First_Houses15_16 = result[1].First_Houses;
+             this.Second_Houses15_16 = result[1].Second_Houses;
+             this.Third_Houses15_16 = result[1].Third_Houses;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+            this.Fin_Year16_17 = result[2].FinYear; 
+          this.Housesinvolved16_17 = result[2].Housesinvolved;
+           this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+           this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+           this.Houses_Complete16_17 = result[2].Houses_Completed;
+           this.HousesOccupied16_17 = result[2].HousesOccupied;
+           this.First_Houses16_17 = result[2].First_Houses;
+           this.Second_Houses16_17 = result[2].Second_Houses;
+           this.Third_Houses16_17 = result[2].Third_Houses;
+        }
+        catch{}
+        finally{}
+
+        try {
+          this.Fin_Year17_18 = result[3].FinYear; 
+        this.Housesinvolved17_18 = result[3].Housesinvolved;
+         this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+         this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+         this.Houses_Complete17_18 = result[3].Houses_Completed;
+         this.HousesOccupied17_18 = result[3].HousesOccupied;
+         this.First_Houses17_18 = result[3].First_Houses;
+         this.Second_Houses17_18 = result[3].Second_Houses;
+         this.Third_Houses17_18 = result[3].Third_Houses;
+      }
+      catch{}
+      finally{}
+
+      try {
+        this.Fin_Year18_19 = result[4].FinYear; 
+      this.Housesinvolved18_19 = result[4].Housesinvolved;
+       this.FundsDisbursed_in_Houses18_19 = result[4].FundsDisbursed_in_Houses;
+       this.Houses_Grounde18_19 = result[4].Houses_Grounded;
+       this.Houses_Complete18_19 = result[4].Houses_Completed;
+       this.HousesOccupied18_19 = result[4].HousesOccupied;
+       this.First_Houses18_19 = result[4].First_Houses;
+       this.Second_Houses18_19 = result[4].Second_Houses;
+       this.Third_Houses18_19 = result[4].Third_Houses;
+    }
+    catch{}
+    finally{}
+
+
+         let chart = new CanvasJS.Chart("chartBLCS", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: " Physical Data Consolidated (BLCS)",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Housesinvolved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Housesinvolved14_15 },
+              { label: Y1, y: this.Housesinvolved15_16 },
+              { label: z1, y: this.Housesinvolved16_17 },
+              { label: z2, y: this.Housesinvolved17_18 },
+              { label: z3, y: this.Housesinvolved18_19 },
+              { label: z4, y: this.Housesinvolved19_20 }
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "FundsDisbursed_in_Houses",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+              { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
+              { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
+              { label: z2, y: this.FundsDisbursed_in_Houses17_18 },
+              { label: z3, y: this.FundsDisbursed_in_Houses18_19 },
+              { label: z4, y: this.FundsDisbursed_in_Houses19_20 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Grounded",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Grounde14_15 },
+              { label: Y1, y: this.Houses_Grounde15_16 },
+              { label: z1, y: this.Houses_Grounde16_17 },
+              { label: z2, y: this.Houses_Grounde17_18 },
+              { label: z3, y: this.Houses_Grounde18_19 },
+              { label: z4, y: this.Houses_Grounde19_20 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Completed",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Houses_Complete14_15 },
+              { label: Y1, y: this.Houses_Complete15_16 },
+              { label: z1, y: this.Houses_Complete16_17 },
+              { label: z2, y: this.Houses_Complete17_18 },
+              { label: z3, y: this.Houses_Complete18_19 },
+              { label: z4, y: this.Houses_Complete19_20 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Houses_Occupied",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.HousesOccupied14_15 },
+              { label: Y1, y: this.HousesOccupied15_16 },
+              { label: z1, y: this.HousesOccupied16_17},
+              { label: z2, y: this.HousesOccupied17_18},
+              { label: z3, y: this.HousesOccupied18_19} ,
+              { label: z4, y: this.HousesOccupied19_20} 
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "First Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.First_Houses14_15 },
+              { label: Y1, y: this.First_Houses15_16 },
+              { label: z1, y: this.First_Houses16_17 },
+              { label: z2, y: this.First_Houses17_18 },
+              { label: z3, y: this.First_Houses18_19 },
+              { label: z4, y: this.First_Houses19_20 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Second Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Second_Houses14_15 },
+              { label: Y1, y: this.Second_Houses15_16 },
+              { label: z1, y: this.Second_Houses16_17 },
+              { label: z2, y: this.Second_Houses17_18 },
+              { label: z3, y: this.Second_Houses18_19 },
+              { label: z4, y: this.Second_Houses19_20 }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Third Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Third_Houses14_15 },
+              { label: Y1, y: this.Third_Houses15_16 },
+              { label: z1, y: this.Third_Houses16_17 },
+              { label: z2, y: this.Third_Houses17_18 },
+              { label: z3, y: this.Third_Houses18_19 },
+              { label: z4, y: this.Third_Houses19_20 }
+            ]
+          },
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }  
+  }
+BindAHP_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
+{
+ // debugger;
     //  alert(stateCode);
       Comp ="AHP";
       this.service.sp_create_BLC_AHP_DATA(stateCode, DisttCode, cityCode,Comp).subscribe(result => { // new code
@@ -1807,7 +8143,7 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
       this.Houses_Grounde14_15 = result[0].Houses_Grounded;
       this.Houses_Complete14_15 = result[0].Houses_Completed;
       this.HousesOccupied14_15 = result[0].HousesOccupied ;
-      
+
       this.First_Houses14_15 = result[0].First_Houses;
       this.Second_Houses14_15 = result[0].Second_Houses;
       this.Third_Houses14_15 = result[0].Third_Houses;
@@ -1877,7 +8213,9 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
             this.Second_Houses19_20 = result[5].Second_Houses;
             this.Third_Houses19_20 = result[5].Third_Houses;
 
-            
+            this.Test(Fin_Year);
+
+
                   let chart = new CanvasJS.Chart("chartAHP", {
                     theme: "light2",
                     animationEnabled: true,
@@ -1888,7 +8226,7 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
                     },
                     backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
                     colorSet: "greenShades",
-                    
+
                     data: [{
 
                       options: {
@@ -1901,31 +8239,6 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
                             }]
                         }
                     },
-                
-                    //   backgroundColor: this.backgroundColor,//"#B3E5FC",
-                    //   bevelEnabled: true,
-                    //   indexLabelPlacement:"auto",
-                    //   //this.backgroundColor: this.backgroundColor,
-                    //   indexLabelOrientation: "vertical",
-                    //   type: "column",
-                    //   showInLegend: true,
-                    //   legendText: "14-15",
-                    //   indexLabel: "{y}", // HS
-                    //   stValue: "HS",
-                    //   indexLabelFontSize: 12,
-                    //   fontSize: "15",
-                    //   dataPoints: [
-                    //    // { label: "14-15", y: this.Fin_Year14_15 },
-                    //     { label: "14_15", y: this.Housesinvolved14_15 },
-                    //     { label: "14_15", y: this.FundsDisbursed_in_Houses14_15 },
-                    //     { label: "14_15", y: this.Houses_Grounde14_15 },
-                    //     { label: "14_15", y: this.Houses_Complete14_15 },  
-                    //     { label: "14_15", y: this.First_Houses14_15 },
-                    //     { label: "14_15", y: this.Second_Houses14_15 },
-                    //     { label: "14_15", y: this.Third_Houses14_15 }
-                    //   ]
-                    // },
-                    //{
                     type: "column",
                       dockInsidePlotArea: true,
                        indexLabel: "{y}", //HG
@@ -1940,9 +8253,9 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Housesinvolved14_15 },
                         { label: "15_16", y: this.Housesinvolved15_16 },
                         { label: "16_17", y: this.Housesinvolved16_17 },
-                        { label: "17_18", y: this.Housesinvolved17_18 },  
+                        { label: "17_18", y: this.Housesinvolved17_18 },
                         { label: "18_19", y: this.Housesinvolved18_19 },
-                        { label: "19_20", y: this.Housesinvolved19_20 } 
+                        { label: "19_20", y: this.Housesinvolved19_20 }
                       ]
                     },
                     {
@@ -1959,9 +8272,9 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.FundsDisbursed_in_Houses14_15 },
                         { label: "15_16", y: this.FundsDisbursed_in_Houses15_16 },
                         { label: "16_17", y: this.FundsDisbursed_in_Houses16_17 },
-                        { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },  
+                        { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },
                         { label: "18_19", y: this.FundsDisbursed_in_Houses18_19 },
-                        { label: "19_20", y: this.FundsDisbursed_in_Houses19_20 } 
+                        { label: "19_20", y: this.FundsDisbursed_in_Houses19_20 }
                       ]
                     },
 
@@ -1979,9 +8292,9 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Houses_Grounde14_15 },
                         { label: "15_16", y: this.Houses_Grounde15_16 },
                         { label: "16_17", y: this.Houses_Grounde16_17 },
-                        { label: "17_18", y: this.Houses_Grounde17_18 },  
+                        { label: "17_18", y: this.Houses_Grounde17_18 },
                         { label: "18_19", y: this.Houses_Grounde18_19 },
-                        { label: "19_20", y: this.Houses_Grounde19_20 } 
+                        { label: "19_20", y: this.Houses_Grounde19_20 }
                       ]
                     },
 
@@ -1999,9 +8312,9 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Houses_Complete14_15 },
                         { label: "15_16", y: this.Houses_Complete15_16 },
                         { label: "16_17", y: this.Houses_Complete16_17 },
-                        { label: "17_18", y: this.Houses_Complete17_18 },  
+                        { label: "17_18", y: this.Houses_Complete17_18 },
                         { label: "18_19", y: this.Houses_Complete18_19 },
-                        { label: "19_20", y: this.Houses_Complete19_20 } 
+                        { label: "19_20", y: this.Houses_Complete19_20 }
                       ]
                     },
 
@@ -2019,9 +8332,9 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.HousesOccupied14_15 },
                         { label: "15_16", y: this.HousesOccupied15_16 },
                         { label: "16_17", y: this.HousesOccupied16_17 },
-                        { label: "17_18", y: this.HousesOccupied17_18 },  
+                        { label: "17_18", y: this.HousesOccupied17_18 },
                         { label: "18_19", y: this.HousesOccupied18_19 },
-                        { label: "19_20", y: this.HousesOccupied19_20 } 
+                        { label: "19_20", y: this.HousesOccupied19_20 }
                       ]
                     },
 
@@ -2039,9 +8352,9 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.First_Houses14_15 },
                         { label: "15_16", y: this.First_Houses15_16 },
                         { label: "16_17", y: this.First_Houses16_17 },
-                        { label: "17_18", y: this.First_Houses17_18 },  
+                        { label: "17_18", y: this.First_Houses17_18 },
                         { label: "18_19", y: this.First_Houses18_19 },
-                        { label: "19_20", y: this.First_Houses19_20 } 
+                        { label: "19_20", y: this.First_Houses19_20 }
                       ]
                     },
 
@@ -2059,9 +8372,9 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Second_Houses14_15 },
                         { label: "15_16", y: this.Second_Houses15_16 },
                         { label: "16_17", y: this.Second_Houses16_17 },
-                        { label: "17_18", y: this.Second_Houses17_18 },  
+                        { label: "17_18", y: this.Second_Houses17_18 },
                         { label: "18_19", y: this.Second_Houses18_19 },
-                        { label: "19_20", y: this.Second_Houses19_20 } 
+                        { label: "19_20", y: this.Second_Houses19_20 }
                       ]
                     },
 
@@ -2079,117 +8392,12 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Third_Houses14_15 },
                         { label: "15_16", y: this.Third_Houses15_16 },
                         { label: "16_17", y: this.Third_Houses16_17 },
-                        { label: "17_18", y: this.Third_Houses17_18 },  
+                        { label: "17_18", y: this.Third_Houses17_18 },
                         { label: "18_19", y: this.Third_Houses18_19 },
-                        { label: "19_20", y: this.Third_Houses19_20 } 
+                        { label: "19_20", y: this.Third_Houses19_20 }
                       ]
                     },
 
-                  //   {
-                  //     type: "column",
-                  //     dockInsidePlotArea: true,
-                  //      indexLabel: "{y}", //HG
-                  //     bevelEnabled: true,
-                  //     showInLegend: true,
-                  //     legendText: "15-16",
-                  //      stValue: "Q",
-                  //     indexLabelFontSize: 12,
-                  //     indexLabelOrientation: "vertical",
-                  //     dataPoints: [
-                  //       { label: "15_16", y: this.Housesinvolved15_16 },
-                  //       { label: "15_16", y: this.FundsDisbursed_in_Houses15_16 },
-                  //       { label: "15_16", y: this.Houses_Grounde15_16 },
-                  //       { label: "15_16", y: this.Houses_Complete15_16 },  
-                  //       { label: "15_16", y: this.First_Houses15_16 },
-                  //       { label: "15_16", y: this.Second_Houses15_16 },
-                  //       { label: "15_16", y: this.Third_Houses15_16 },
-                  //     ]
-                  //   },
-
-                  //   {
-                  //     type: "column",
-                  //     dockInsidePlotArea: true,
-                  //      indexLabel: "{y}", //HG
-                  //     bevelEnabled: true,
-                  //     showInLegend: true,
-                  //     legendText: "16-17",
-                  //      stValue: "W",
-                  //     indexLabelFontSize: 12,
-                  //     indexLabelOrientation: "vertical",
-                  //     dataPoints: [
-                  //       // { x: "14-15", y: this.Fin_Year15_16 },
-                  //       { label: "16_17", y: this.Housesinvolved16_17 },
-                  //       { label: "16_17", y: this.FundsDisbursed_in_Houses16_17 },
-                  //       { label: "16_17", y: this.Houses_Grounde16_17 },
-                  //       { label: "16_17", y: this.Houses_Complete16_17 },  
-                  //       { label: "16_17", y: this.First_Houses16_17 },
-                  //       { label: "16_17", y: this.Second_Houses16_17 },
-                  //       { label: "16_17", y: this.Third_Houses16_17 },
-                  //     ]
-                  //   },
-                  //   {
-                  //     type: "column",
-                  //     dockInsidePlotArea: true,
-                  //     indexLabel: "{y}", //HG
-                  //     bevelEnabled: true,
-                  //     showInLegend: true,
-                  //     legendText: "17-18",
-                  //     stValue: "T",
-                  //     indexLabelFontSize: 12,
-                  //     indexLabelOrientation: "vertical",
-                  //     dataPoints: [
-                  //       // { x: "14-15", y: this.Fin_Year15_16 },
-                  //       { label: "17_18", y: this.Housesinvolved17_18 },
-                  //       { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },
-                  //       { label: "17_18", y: this.Houses_Grounde17_18 },
-                  //       { label: "17_18", y: this.Houses_Complete17_18 },  
-                  //       { label: "17_18", y: this.First_Houses17_18 },
-                  //       { label: "17_18", y: this.Second_Houses17_18 },
-                  //       { label: "17_18", y: this.Third_Houses17_18 },
-                  //     ]
-                  //   },
-                  // {
-                  //   type: "column",
-                  //   dockInsidePlotArea: true,
-                  //   indexLabel: "{y}", //HG
-                  //   bevelEnabled: true,
-                  //   showInLegend: true,
-                  //   legendText: "18-19",
-                  //   stValue: "T",
-                  //   indexLabelFontSize: 12,
-                  //   indexLabelOrientation: "vertical",
-                  //   dataPoints: [
-                  //     // { x: "14-15", y: this.Fin_Year15_16 },
-                  //     { label: "18-19", y: this.Housesinvolved18_19 },
-                  //     { label: "18-19", y: this.FundsDisbursed_in_Houses18_19 },
-                  //     { label: "18-19", y: this.Houses_Grounde18_19 },
-                  //     { label: "18-19", y: this.Houses_Complete18_19 },  
-                  //     { label: "18-19", y: this.First_Houses18_19 },
-                  //     { label: "18-19", y: this.Second_Houses18_19 },
-                  //     { label: "18-19", y: this.Third_Houses18_19 },
-                  //   ]
-                  // },
-                  //   {
-                  //     type: "column",
-                  //     dockInsidePlotArea: true,
-                  //     indexLabel: "{y}", //HG
-                  //     bevelEnabled: true,
-                  //     showInLegend: true,
-                  //     legendText: "19-20",
-                  //     stValue: "W",
-                  //     indexLabelFontSize: 12,
-                  //     indexLabelOrientation: "vertical",
-                  //     dataPoints: [
-                  //       // { x: "14-15", y: this.Fin_Year15_16 },
-                  //       { label: "19-20", y: this.Housesinvolved19_20 },
-                  //       { label: "19-20", y: this.FundsDisbursed_in_Houses19_20 },
-                  //       { label: "19-20", y: this.Houses_Grounde19_20 },
-                  //       { label: "19-20", y: this.Houses_Complete19_20 },  
-                  //       { label: "19-20", y: this.First_Houses19_20 },
-                  //       { label: "19-20", y: this.Second_Houses19_20 },
-                  //       { label: "84", y: this.Third_Houses19_20 },
-                  //     ]
-                    // }
                   ],
                     options: {
                       legend: {
@@ -2204,9 +8412,429 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp)
               });
   }
 
-BindPMayData(stateCode, DisttCode, cityCode,Comp)
+  public Test(Fin_Year)
+  {
+    if (Fin_Year =="2014-15")
+    {
+       //this.Housesinvolved14_15 =0;
+      this.Housesinvolved15_16 =0;
+      this.Housesinvolved16_17  =0;
+      this.Housesinvolved17_18   =0;
+      this.Housesinvolved18_19 =0;
+      this.Housesinvolved19_20=0;
+
+       //this.FundsDisbursed_in_Houses14_15 },
+       this.FundsDisbursed_in_Houses15_16 =0;
+       this.FundsDisbursed_in_Houses16_17 =0;
+       this.FundsDisbursed_in_Houses17_18 =0;
+       this.FundsDisbursed_in_Houses18_19 =0;
+       this.FundsDisbursed_in_Houses19_20 =0;
+
+       //this.Houses_Grounde14_15  =0;
+                       this.Houses_Grounde15_16 =0;
+                       this.Houses_Grounde16_17 =0;
+                       this.Houses_Grounde17_18 =0;
+                       this.Houses_Grounde18_19 =0;
+                       this.Houses_Grounde19_20 =0;
+
+
+//this.Houses_Complete14_15 =0;
+
+this.Houses_Complete15_16 =0;
+ this.Houses_Complete16_17 =0;
+  this.Houses_Complete17_18 =0;
+   this.Houses_Complete18_19 =0;
+  this.Houses_Complete19_20 =0;
+
+         //               this.HousesOccupied14_15 =0;
+                       this.HousesOccupied15_16 =0;
+                       this.HousesOccupied16_17 =0;
+                       this.HousesOccupied17_18 =0;
+                       this.HousesOccupied18_19 =0;
+                       this.HousesOccupied19_20 =0;
+
+           //            this.HousesOccupied14_15 =0;
+                       this.HousesOccupied15_16 =0;
+                       this.HousesOccupied16_17 =0;
+                       this.HousesOccupied17_18 =0;
+                       this.HousesOccupied18_19 =0;
+                       this.HousesOccupied19_20 =0;
+                       this.HousesOccupied20_21 =0;
+
+             //          this.First_Houses14_15 =0;
+                       this.First_Houses15_16 =0;
+                       this.First_Houses16_17 =0;
+                       this.First_Houses17_18 =0;
+                       this.First_Houses18_19 =0;
+                       this.First_Houses19_20 =0;
+
+               //         this.Second_Houses14_15 =0;
+                       this.Second_Houses15_16 =0;
+                       this.Second_Houses16_17 =0;
+                       this.Second_Houses17_18 =0;
+                       this.Second_Houses18_19 =0;
+                       this.Second_Houses19_20 =0;
+
+                 //      this.Third_Houses14_15 =0;
+                       this.Third_Houses15_16 =0;
+                       this.Third_Houses16_17 =0;
+                        this.Third_Houses17_18 =0;
+                       this.Third_Houses18_19 =0;
+                       this.Third_Houses19_20 =0;
+                       this.Third_Houses20_21 =0;
+                    }
+                    if (Fin_Year =="2015-16")
+                    {
+                      this.Housesinvolved14_15 =0;
+                      //this.Housesinvolved15_16 =0;
+                      this.Housesinvolved16_17  =0;
+                      this.Housesinvolved17_18   =0;
+                      this.Housesinvolved18_19 =0;
+                      this.Housesinvolved19_20=0;
+
+                       this.FundsDisbursed_in_Houses14_15=0;
+                       //this.FundsDisbursed_in_Houses15_16 =0;
+                       this.FundsDisbursed_in_Houses16_17 =0;
+                       this.FundsDisbursed_in_Houses17_18 =0;
+                       this.FundsDisbursed_in_Houses18_19 =0;
+                       this.FundsDisbursed_in_Houses19_20 =0;
+
+                       this.Houses_Grounde14_15  =0;
+                       //                this.Houses_Grounde15_16 =0;
+                                       this.Houses_Grounde16_17 =0;
+                                       this.Houses_Grounde17_18 =0;
+                                       this.Houses_Grounde18_19 =0;
+                                       this.Houses_Grounde19_20 =0;
+
+
+               this.Houses_Complete14_15 =0;
+
+               // this.Houses_Complete15_16 =0;
+                 this.Houses_Complete16_17 =0;
+                  this.Houses_Complete17_18 =0;
+                   this.Houses_Complete18_19 =0;
+                  this.Houses_Complete19_20 =0;
+
+                                        this.HousesOccupied14_15 =0;
+                         //              this.HousesOccupied15_16 =0;
+                                       this.HousesOccupied16_17 =0;
+                                       this.HousesOccupied17_18 =0;
+                                       this.HousesOccupied18_19 =0;
+                                       this.HousesOccupied19_20 =0;
+
+                                       this.HousesOccupied14_15 =0;
+                           //            this.HousesOccupied15_16 =0;
+                                       this.HousesOccupied16_17 =0;
+                                       this.HousesOccupied17_18 =0;
+                                       this.HousesOccupied18_19 =0;
+                                       this.HousesOccupied19_20 =0;
+                                       this.HousesOccupied20_21 =0;
+
+                                       this.First_Houses14_15 =0;
+                             //          this.First_Houses15_16 =0;
+                                       this.First_Houses16_17 =0;
+                                       this.First_Houses17_18 =0;
+                                       this.First_Houses18_19 =0;
+                                       this.First_Houses19_20 =0;
+
+                                        this.Second_Houses14_15 =0;
+                               //        this.Second_Houses15_16 =0;
+                                       this.Second_Houses16_17 =0;
+                                       this.Second_Houses17_18 =0;
+                                       this.Second_Houses18_19 =0;
+                                       this.Second_Houses19_20 =0;
+
+                                       this.Third_Houses14_15 =0;
+                                 //      this.Third_Houses15_16 =0;
+                                       this.Third_Houses16_17 =0;
+                                        this.Third_Houses17_18 =0;
+                                       this.Third_Houses18_19 =0;
+                                       this.Third_Houses19_20 =0;
+                                       this.Third_Houses20_21 =0;
+                                    }
+                                    if (Fin_Year =="2016-17")
+                                    {
+                                      this.Housesinvolved14_15 =0;
+                                      this.Housesinvolved15_16 =0;
+                                      //this.Housesinvolved16_17  =0;
+                                      this.Housesinvolved17_18   =0;
+                                      this.Housesinvolved18_19 =0;
+                                      this.Housesinvolved19_20=0;
+
+                                       this.FundsDisbursed_in_Houses14_15=0;
+                                       this.FundsDisbursed_in_Houses15_16 =0;
+                                       //this.FundsDisbursed_in_Houses16_17 =0;
+                                       this.FundsDisbursed_in_Houses17_18 =0;
+                                       this.FundsDisbursed_in_Houses18_19 =0;
+                                       this.FundsDisbursed_in_Houses19_20 =0;
+
+                                       this.Houses_Grounde14_15  =0;
+                                                      this.Houses_Grounde15_16 =0;
+                                      //                 this.Houses_Grounde16_17 =0;
+                                                       this.Houses_Grounde17_18 =0;
+                                                       this.Houses_Grounde18_19 =0;
+                                                       this.Houses_Grounde19_20 =0;
+
+
+                               this.Houses_Complete14_15 =0;
+
+                               this.Houses_Complete15_16 =0;
+                               //  this.Houses_Complete16_17 =0;
+                                  this.Houses_Complete17_18 =0;
+                                   this.Houses_Complete18_19 =0;
+                                  this.Houses_Complete19_20 =0;
+
+                                                        this.HousesOccupied14_15 =0;
+                                                       this.HousesOccupied15_16 =0;
+                                         //              this.HousesOccupied16_17 =0;
+                                                       this.HousesOccupied17_18 =0;
+                                                       this.HousesOccupied18_19 =0;
+                                                       this.HousesOccupied19_20 =0;
+
+                                                       this.HousesOccupied14_15 =0;
+                                                       this.HousesOccupied15_16 =0;
+                                           //            this.HousesOccupied16_17 =0;
+                                                       this.HousesOccupied17_18 =0;
+                                                       this.HousesOccupied18_19 =0;
+                                                       this.HousesOccupied19_20 =0;
+                                                       this.HousesOccupied20_21 =0;
+
+                                                       this.First_Houses14_15 =0;
+                                                       this.First_Houses15_16 =0;
+                                             //          this.First_Houses16_17 =0;
+                                                       this.First_Houses17_18 =0;
+                                                       this.First_Houses18_19 =0;
+                                                       this.First_Houses19_20 =0;
+
+                                                        this.Second_Houses14_15 =0;
+                                                       this.Second_Houses15_16 =0;
+                                               //        this.Second_Houses16_17 =0;
+                                                       this.Second_Houses17_18 =0;
+                                                       this.Second_Houses18_19 =0;
+                                                       this.Second_Houses19_20 =0;
+
+                                                       this.Third_Houses14_15 =0;
+                                                       this.Third_Houses15_16 =0;
+                                                 //      this.Third_Houses16_17 =0;
+                                                        this.Third_Houses17_18 =0;
+                                                       this.Third_Houses18_19 =0;
+                                                       this.Third_Houses19_20 =0;
+                                                       this.Third_Houses20_21 =0;
+                                                    }
+
+                                                    if (Fin_Year =="2017-18")
+                                    {
+                                      this.Housesinvolved14_15 =0;
+                                      this.Housesinvolved15_16 =0;
+                                      this.Housesinvolved16_17  =0;
+                                      //this.Housesinvolved17_18   =0;
+                                      this.Housesinvolved18_19 =0;
+                                      this.Housesinvolved19_20=0;
+
+                                       this.FundsDisbursed_in_Houses14_15=0;
+                                       this.FundsDisbursed_in_Houses15_16 =0;
+                                       this.FundsDisbursed_in_Houses16_17 =0;
+                                       //this.FundsDisbursed_in_Houses17_18 =0;
+                                       this.FundsDisbursed_in_Houses18_19 =0;
+                                       this.FundsDisbursed_in_Houses19_20 =0;
+
+                                       this.Houses_Grounde14_15  =0;
+                                                      this.Houses_Grounde15_16 =0;
+                                                      this.Houses_Grounde16_17 =0;
+                                      //                 this.Houses_Grounde17_18 =0;
+                                                       this.Houses_Grounde18_19 =0;
+                                                       this.Houses_Grounde19_20 =0;
+
+
+                               this.Houses_Complete14_15 =0;
+
+                               this.Houses_Complete15_16 =0;
+                                 this.Houses_Complete16_17 =0;
+                               //   this.Houses_Complete17_18 =0;
+                                   this.Houses_Complete18_19 =0;
+                                  this.Houses_Complete19_20 =0;
+
+                                                        this.HousesOccupied14_15 =0;
+                                                       this.HousesOccupied15_16 =0;
+                                                       this.HousesOccupied16_17 =0;
+                                         //              this.HousesOccupied17_18 =0;
+                                                       this.HousesOccupied18_19 =0;
+                                                       this.HousesOccupied19_20 =0;
+
+                                                       this.HousesOccupied14_15 =0;
+                                                       this.HousesOccupied15_16 =0;
+                                                       this.HousesOccupied16_17 =0;
+                                           //            this.HousesOccupied17_18 =0;
+                                                       this.HousesOccupied18_19 =0;
+                                                       this.HousesOccupied19_20 =0;
+                                                       this.HousesOccupied20_21 =0;
+
+                                                       this.First_Houses14_15 =0;
+                                                       this.First_Houses15_16 =0;
+                                                       this.First_Houses16_17 =0;
+                                             //          this.First_Houses17_18 =0;
+                                                       this.First_Houses18_19 =0;
+                                                       this.First_Houses19_20 =0;
+
+                                                        this.Second_Houses14_15 =0;
+                                                       this.Second_Houses15_16 =0;
+                                                       this.Second_Houses16_17 =0;
+                                               //        this.Second_Houses17_18 =0;
+                                                       this.Second_Houses18_19 =0;
+                                                       this.Second_Houses19_20 =0;
+
+                                                       this.Third_Houses14_15 =0;
+                                                       this.Third_Houses15_16 =0;
+                                                       this.Third_Houses16_17 =0;
+                                                 //       this.Third_Houses17_18 =0;
+                                                       this.Third_Houses18_19 =0;
+                                                       this.Third_Houses19_20 =0;
+                                                       this.Third_Houses20_21 =0;
+                                                    }
+
+                                                    if (Fin_Year =="2018-19")
+                                                    {
+                                                      this.Housesinvolved14_15 =0;
+                                                      this.Housesinvolved15_16 =0;
+                                                      this.Housesinvolved16_17  =0;
+                                                      this.Housesinvolved17_18   =0;
+                                                      //this.Housesinvolved18_19 =0;
+                                                      this.Housesinvolved19_20=0;
+
+                                                       this.FundsDisbursed_in_Houses14_15=0;
+                                                       this.FundsDisbursed_in_Houses15_16 =0;
+                                                       this.FundsDisbursed_in_Houses16_17 =0;
+                                                       this.FundsDisbursed_in_Houses17_18 =0;
+                                                       //this.FundsDisbursed_in_Houses18_19 =0;
+                                                       this.FundsDisbursed_in_Houses19_20 =0;
+
+                                                       this.Houses_Grounde14_15  =0;
+                                                                      this.Houses_Grounde15_16 =0;
+                                                                      this.Houses_Grounde16_17 =0;
+                                                                      this.Houses_Grounde17_18 =0;
+                                                      //                 this.Houses_Grounde18_19 =0;
+                                                                       this.Houses_Grounde19_20 =0;
+
+
+                                               this.Houses_Complete14_15 =0;
+
+                                               this.Houses_Complete15_16 =0;
+                                                 this.Houses_Complete16_17 =0;
+                                                  this.Houses_Complete17_18 =0;
+                                               //    this.Houses_Complete18_19 =0;
+                                                  this.Houses_Complete19_20 =0;
+
+                                                                        this.HousesOccupied14_15 =0;
+                                                                       this.HousesOccupied15_16 =0;
+                                                                       this.HousesOccupied16_17 =0;
+                                                                       this.HousesOccupied17_18 =0;
+                                                         //              this.HousesOccupied18_19 =0;
+                                                                       this.HousesOccupied19_20 =0;
+
+                                                                       this.HousesOccupied14_15 =0;
+                                                                       this.HousesOccupied15_16 =0;
+                                                                       this.HousesOccupied16_17 =0;
+                                                                       this.HousesOccupied17_18 =0;
+                                                           //            this.HousesOccupied18_19 =0;
+                                                                       this.HousesOccupied19_20 =0;
+                                                                       this.HousesOccupied20_21 =0;
+
+                                                                       this.First_Houses14_15 =0;
+                                                                       this.First_Houses15_16 =0;
+                                                                       this.First_Houses16_17 =0;
+                                                                       this.First_Houses17_18 =0;
+                                                             //          this.First_Houses18_19 =0;
+                                                                       this.First_Houses19_20 =0;
+
+                                                                        this.Second_Houses14_15 =0;
+                                                                       this.Second_Houses15_16 =0;
+                                                                       this.Second_Houses16_17 =0;
+                                                                       this.Second_Houses17_18 =0;
+                                                               //        this.Second_Houses18_19 =0;
+                                                                       this.Second_Houses19_20 =0;
+
+                                                                       this.Third_Houses14_15 =0;
+                                                                       this.Third_Houses15_16 =0;
+                                                                       this.Third_Houses16_17 =0;
+                                                                        this.Third_Houses17_18 =0;
+                                                                 //      this.Third_Houses18_19 =0;
+                                                                       this.Third_Houses19_20 =0;
+                                                                       this.Third_Houses20_21 =0;
+                                                                    }
+                                                                    if (Fin_Year =="2019-20")
+                                                                    {
+                                                                      this.Housesinvolved14_15 =0;
+                                                                      this.Housesinvolved15_16 =0;
+                                                                      this.Housesinvolved16_17  =0;
+                                                                      this.Housesinvolved17_18   =0;
+                                                                      this.Housesinvolved18_19 =0;
+                                                                      //this.Housesinvolved19_20=0;
+
+                                                                       this.FundsDisbursed_in_Houses14_15=0;
+                                                                       this.FundsDisbursed_in_Houses15_16 =0;
+                                                                       this.FundsDisbursed_in_Houses16_17 =0;
+                                                                       this.FundsDisbursed_in_Houses17_18 =0;
+                                                                       this.FundsDisbursed_in_Houses18_19 =0;
+                                                                       //this.FundsDisbursed_in_Houses19_20 =0;
+
+                                                                       this.Houses_Grounde14_15  =0;
+                                                                                      this.Houses_Grounde15_16 =0;
+                                                                                      this.Houses_Grounde16_17 =0;
+                                                                                      this.Houses_Grounde17_18 =0;
+                                                                                       this.Houses_Grounde18_19 =0;
+                                                                      //                 this.Houses_Grounde19_20 =0;
+
+
+                                                               this.Houses_Complete14_15 =0;
+
+                                                               this.Houses_Complete15_16 =0;
+                                                                 this.Houses_Complete16_17 =0;
+                                                                  this.Houses_Complete17_18 =0;
+                                                                   this.Houses_Complete18_19 =0;
+                                                               //   this.Houses_Complete19_20 =0;
+
+                                                                                        this.HousesOccupied14_15 =0;
+                                                                                       this.HousesOccupied15_16 =0;
+                                                                                       this.HousesOccupied16_17 =0;
+                                                                                       this.HousesOccupied17_18 =0;
+                                                                                       this.HousesOccupied18_19 =0;
+                                                                         //              this.HousesOccupied19_20 =0;
+
+                                                                                       this.HousesOccupied14_15 =0;
+                                                                                       this.HousesOccupied15_16 =0;
+                                                                                       this.HousesOccupied16_17 =0;
+                                                                                       this.HousesOccupied17_18 =0;
+                                                                                       this.HousesOccupied18_19 =0;
+                                                                           //            this.HousesOccupied19_20 =0;
+                                                                                       this.HousesOccupied20_21 =0;
+
+                                                                                       this.First_Houses14_15 =0;
+                                                                                       this.First_Houses15_16 =0;
+                                                                                       this.First_Houses16_17 =0;
+                                                                                       this.First_Houses17_18 =0;
+                                                                                       this.First_Houses18_19 =0;
+                                                                             //          this.First_Houses19_20 =0;
+
+                                                                                        this.Second_Houses14_15 =0;
+                                                                                       this.Second_Houses15_16 =0;
+                                                                                       this.Second_Houses16_17 =0;
+                                                                                       this.Second_Houses17_18 =0;
+                                                                                       this.Second_Houses18_19 =0;
+                                                                               //        this.Second_Houses19_20 =0;
+
+                                                                                       this.Third_Houses14_15 =0;
+                                                                                       this.Third_Houses15_16 =0;
+                                                                                       this.Third_Houses16_17 =0;
+                                                                                        this.Third_Houses17_18 =0;
+                                                                                       this.Third_Houses18_19 =0;
+                                                                                 //      this.Third_Houses19_20 =0;
+                                                                                       this.Third_Houses20_21 =0;
+                                                                                    }
+  }
+BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
 {
-     // alert();
+    if (Fin_Year ==0)
+    {
       this.service.sp_create_PMAY_DATACons(stateCode, DisttCode, cityCode,Comp).subscribe(result => { // new code
       ///first row data
       this.Fin_Year14_15 = result[0].FinYear;
@@ -2219,6 +8847,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
       this.First_Houses14_15 = result[0].First_Houses;
       this.Second_Houses14_15 = result[0].Second_Houses;
       this.Third_Houses14_15 = result[0].Third_Houses;
+
 
       //second row data
       this.Fin_Year15_16 = result[1].FinYear;
@@ -2277,6 +8906,9 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
             this.Second_Houses19_20 = result[5].Second_Houses;
             this.Third_Houses19_20 = result[5].Third_Houses;
 
+            this.Test(Fin_Year);
+
+
                   let chart = new CanvasJS.Chart("chartPMAYU", {
                     theme: "light2",
                     animationEnabled: true,
@@ -2287,7 +8919,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                     },
                     backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
                     colorSet: "greenShades",
-                    
+
                     data: [{
 
                       options: {
@@ -2300,31 +8932,6 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                             }]
                         }
                     },
-                
-                    //   backgroundColor: this.backgroundColor,//"#B3E5FC",
-                    //   bevelEnabled: true,
-                    //   indexLabelPlacement:"auto",
-                    //   //this.backgroundColor: this.backgroundColor,
-                    //   indexLabelOrientation: "vertical",
-                    //   type: "column",
-                    //   showInLegend: true,
-                    //   legendText: "14-15",
-                    //   indexLabel: "{y}", // HS
-                    //   stValue: "HS",
-                    //   indexLabelFontSize: 12,
-                    //   fontSize: "15",
-                    //   dataPoints: [
-                    //    // { label: "14-15", y: this.Fin_Year14_15 },
-                    //     { label: "14_15", y: this.Housesinvolved14_15 },
-                    //     { label: "14_15", y: this.FundsDisbursed_in_Houses14_15 },
-                    //     { label: "14_15", y: this.Houses_Grounde14_15 },
-                    //     { label: "14_15", y: this.Houses_Complete14_15 },  
-                    //     { label: "14_15", y: this.First_Houses14_15 },
-                    //     { label: "14_15", y: this.Second_Houses14_15 },
-                    //     { label: "14_15", y: this.Third_Houses14_15 }
-                    //   ]
-                    // },
-                    //{
                     type: "column",
                       dockInsidePlotArea: true,
                        indexLabel: "{y}", //HG
@@ -2339,9 +8946,9 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Housesinvolved14_15 },
                         { label: "15_16", y: this.Housesinvolved15_16 },
                         { label: "16_17", y: this.Housesinvolved16_17 },
-                        { label: "17_18", y: this.Housesinvolved17_18 },  
+                        { label: "17_18", y: this.Housesinvolved17_18 },
                         { label: "18_19", y: this.Housesinvolved18_19 },
-                        { label: "19_20", y: this.Housesinvolved19_20 } 
+                        { label: "19_20", y: this.Housesinvolved19_20 }
                       ]
                     },
                     {
@@ -2358,9 +8965,9 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.FundsDisbursed_in_Houses14_15 },
                         { label: "15_16", y: this.FundsDisbursed_in_Houses15_16 },
                         { label: "16_17", y: this.FundsDisbursed_in_Houses16_17 },
-                        { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },  
+                        { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },
                         { label: "18_19", y: this.FundsDisbursed_in_Houses18_19 },
-                        { label: "19_20", y: this.FundsDisbursed_in_Houses19_20 } 
+                        { label: "19_20", y: this.FundsDisbursed_in_Houses19_20 }
                       ]
                     },
 
@@ -2378,9 +8985,9 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Houses_Grounde14_15 },
                         { label: "15_16", y: this.Houses_Grounde15_16 },
                         { label: "16_17", y: this.Houses_Grounde16_17 },
-                        { label: "17_18", y: this.Houses_Grounde17_18 },  
+                        { label: "17_18", y: this.Houses_Grounde17_18 },
                         { label: "18_19", y: this.Houses_Grounde18_19 },
-                        { label: "19_20", y: this.Houses_Grounde19_20 } 
+                        { label: "19_20", y: this.Houses_Grounde19_20 }
                       ]
                     },
 
@@ -2398,9 +9005,9 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.HousesOccupied14_15 },
                         { label: "15_16", y: this.HousesOccupied15_16 },
                         { label: "16_17", y: this.HousesOccupied16_17 },
-                        { label: "17_18", y: this.HousesOccupied17_18 },  
+                        { label: "17_18", y: this.HousesOccupied17_18 },
                         { label: "18_19", y: this.HousesOccupied18_19 },
-                        { label: "19_20", y: this.HousesOccupied19_20 } 
+                        { label: "19_20", y: this.HousesOccupied19_20 }
                       ]
                     },
                     {
@@ -2417,9 +9024,9 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Houses_Complete14_15 },
                         { label: "15_16", y: this.Houses_Complete15_16 },
                         { label: "16_17", y: this.Houses_Complete16_17 },
-                        { label: "17_18", y: this.Houses_Complete17_18 },  
+                        { label: "17_18", y: this.Houses_Complete17_18 },
                         { label: "18_19", y: this.Houses_Complete18_19 },
-                        { label: "19_20", y: this.Houses_Complete19_20 } 
+                        { label: "19_20", y: this.Houses_Complete19_20 }
                       ]
                     },
 
@@ -2437,9 +9044,9 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.First_Houses14_15 },
                         { label: "15_16", y: this.First_Houses15_16 },
                         { label: "16_17", y: this.First_Houses16_17 },
-                        { label: "17_18", y: this.First_Houses17_18 },  
+                        { label: "17_18", y: this.First_Houses17_18 },
                         { label: "18_19", y: this.First_Houses18_19 },
-                        { label: "19_20", y: this.First_Houses19_20 } 
+                        { label: "19_20", y: this.First_Houses19_20 }
                       ]
                     },
 
@@ -2457,9 +9064,9 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Second_Houses14_15 },
                         { label: "15_16", y: this.Second_Houses15_16 },
                         { label: "16_17", y: this.Second_Houses16_17 },
-                        { label: "17_18", y: this.Second_Houses17_18 },  
+                        { label: "17_18", y: this.Second_Houses17_18 },
                         { label: "18_19", y: this.Second_Houses18_19 },
-                        { label: "19_20", y: this.Second_Houses19_20 } 
+                        { label: "19_20", y: this.Second_Houses19_20 }
                       ]
                     },
 
@@ -2477,118 +9084,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                         { label: "14_15", y: this.Third_Houses14_15 },
                         { label: "15_16", y: this.Third_Houses15_16 },
                         { label: "16_17", y: this.Third_Houses16_17 },
-                        { label: "17_18", y: this.Third_Houses17_18 },  
+                        { label: "17_18", y: this.Third_Houses17_18 },
                         { label: "18_19", y: this.Third_Houses18_19 },
-                        { label: "19_20", y: this.Third_Houses19_20 } 
+                        { label: "19_20", y: this.Third_Houses19_20 }
                       ]
                     },
-
-                  //   {
-                  //     type: "column",
-                  //     dockInsidePlotArea: true,
-                  //      indexLabel: "{y}", //HG
-                  //     bevelEnabled: true,
-                  //     showInLegend: true,
-                  //     legendText: "15-16",
-                  //      stValue: "Q",
-                  //     indexLabelFontSize: 12,
-                  //     indexLabelOrientation: "vertical",
-                  //     dataPoints: [
-                  //       { label: "15_16", y: this.Housesinvolved15_16 },
-                  //       { label: "15_16", y: this.FundsDisbursed_in_Houses15_16 },
-                  //       { label: "15_16", y: this.Houses_Grounde15_16 },
-                  //       { label: "15_16", y: this.Houses_Complete15_16 },  
-                  //       { label: "15_16", y: this.First_Houses15_16 },
-                  //       { label: "15_16", y: this.Second_Houses15_16 },
-                  //       { label: "15_16", y: this.Third_Houses15_16 },
-                  //     ]
-                  //   },
-
-                  //   {
-                  //     type: "column",
-                  //     dockInsidePlotArea: true,
-                  //      indexLabel: "{y}", //HG
-                  //     bevelEnabled: true,
-                  //     showInLegend: true,
-                  //     legendText: "16-17",
-                  //      stValue: "W",
-                  //     indexLabelFontSize: 12,
-                  //     indexLabelOrientation: "vertical",
-                  //     dataPoints: [
-                  //       // { x: "14-15", y: this.Fin_Year15_16 },
-                  //       { label: "16_17", y: this.Housesinvolved16_17 },
-                  //       { label: "16_17", y: this.FundsDisbursed_in_Houses16_17 },
-                  //       { label: "16_17", y: this.Houses_Grounde16_17 },
-                  //       { label: "16_17", y: this.Houses_Complete16_17 },  
-                  //       { label: "16_17", y: this.First_Houses16_17 },
-                  //       { label: "16_17", y: this.Second_Houses16_17 },
-                  //       { label: "16_17", y: this.Third_Houses16_17 },
-                  //     ]
-                  //   },
-                  //   {
-                  //     type: "column",
-                  //     dockInsidePlotArea: true,
-                  //     indexLabel: "{y}", //HG
-                  //     bevelEnabled: true,
-                  //     showInLegend: true,
-                  //     legendText: "17-18",
-                  //     stValue: "T",
-                  //     indexLabelFontSize: 12,
-                  //     indexLabelOrientation: "vertical",
-                  //     dataPoints: [
-                  //       // { x: "14-15", y: this.Fin_Year15_16 },
-                  //       { label: "17_18", y: this.Housesinvolved17_18 },
-                  //       { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },
-                  //       { label: "17_18", y: this.Houses_Grounde17_18 },
-                  //       { label: "17_18", y: this.Houses_Complete17_18 },  
-                  //       { label: "17_18", y: this.First_Houses17_18 },
-                  //       { label: "17_18", y: this.Second_Houses17_18 },
-                  //       { label: "17_18", y: this.Third_Houses17_18 },
-                  //     ]
-                  //   },
-                  // {
-                  //   type: "column",
-                  //   dockInsidePlotArea: true,
-                  //   indexLabel: "{y}", //HG
-                  //   bevelEnabled: true,
-                  //   showInLegend: true,
-                  //   legendText: "18-19",
-                  //   stValue: "T",
-                  //   indexLabelFontSize: 12,
-                  //   indexLabelOrientation: "vertical",
-                  //   dataPoints: [
-                  //     // { x: "14-15", y: this.Fin_Year15_16 },
-                  //     { label: "18-19", y: this.Housesinvolved18_19 },
-                  //     { label: "18-19", y: this.FundsDisbursed_in_Houses18_19 },
-                  //     { label: "18-19", y: this.Houses_Grounde18_19 },
-                  //     { label: "18-19", y: this.Houses_Complete18_19 },  
-                  //     { label: "18-19", y: this.First_Houses18_19 },
-                  //     { label: "18-19", y: this.Second_Houses18_19 },
-                  //     { label: "18-19", y: this.Third_Houses18_19 },
-                  //   ]
-                  // },
-                  //   {
-                  //     type: "column",
-                  //     dockInsidePlotArea: true,
-                  //     indexLabel: "{y}", //HG
-                  //     bevelEnabled: true,
-                  //     showInLegend: true,
-                  //     legendText: "19-20",
-                  //     stValue: "W",
-                  //     indexLabelFontSize: 12,
-                  //     indexLabelOrientation: "vertical",
-                  //     dataPoints: [
-                  //       // { x: "14-15", y: this.Fin_Year15_16 },
-                  //       { label: "19-20", y: this.Housesinvolved19_20 },
-                  //       { label: "19-20", y: this.FundsDisbursed_in_Houses19_20 },
-                  //       { label: "19-20", y: this.Houses_Grounde19_20 },
-                  //       { label: "19-20", y: this.Houses_Complete19_20 },  
-                  //       { label: "19-20", y: this.First_Houses19_20 },
-                  //       { label: "19-20", y: this.Second_Houses19_20 },
-                  //       { label: "84", y: this.Third_Houses19_20 },
-                  //     ]
-                    // }
-                  ],
+                   ],
                     options: {
                       legend: {
                         display: true,
@@ -2601,96 +9102,168 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                   chart.render();
               });
   }
-
-
-  
-
-  BindISSRData(stateCode, DisttCode, cityCode,Comp)
+  else
+  if (Fin_Year !==0)
   {
-       // alert();
-        this.service.sp_create_ISSR_DATA(stateCode, DisttCode, cityCode,Comp).subscribe(result => { // new code
-        ///first row data
+    alert(Fin_Year);
+        this.service.sp_create_PMAY_DATACons(stateCode, DisttCode, cityCode,Comp).subscribe(result => { // new code
         this.Fin_Year14_15 = result[0].FinYear;
         this.Housesinvolved14_15 = result[0].Housesinvolved;
         this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
         this.Houses_Grounde14_15 = result[0].Houses_Grounded;
         this.Houses_Complete14_15 = result[0].Houses_Completed;
-  
         this.HousesOccupied14_15= result[0].HousesOccupied;
         this.First_Houses14_15 = result[0].First_Houses;
         this.Second_Houses14_15 = result[0].Second_Houses;
         this.Third_Houses14_15 = result[0].Third_Houses;
-  
+
+        if (Fin_Year ="2014-15")
+        {
+          this.a =this.Fin_Year14_15 ;
+          this.b = this.Housesinvolved14_15;
+          this.c =this.FundsDisbursed_in_Houses14_15;
+          this.d = this.Houses_Grounde14_15;
+          this.e =this.Houses_Complete14_15 ;
+          this.f =this.HousesOccupied14_15;
+          this.g =this.First_Houses14_15;
+          this.h =this.Second_Houses14_15;
+
+          this.i = this.Third_Houses14_15;
+        }
         //second row data
-        this.Fin_Year15_16 = result[1].FinYear;
-        this.Housesinvolved15_16 = result[1].Housesinvolved;
-        this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
-        this.Houses_Grounde15_16 = result[1].Houses_Grounded;
-        this.Houses_Complete15_16 = result[1].Houses_Completed;
-        this.HousesOccupied15_16= result[1].HousesOccupied;
-        this.First_Houses15_16 = result[1].First_Houses;
-        this.Second_Houses15_16 = result[1].Second_Houses;
-        this.Third_Houses15_16 = result[1].Third_Houses;
-  
-        //Third row data
-        this.Fin_Year16_17 = result[2].FinYear;
-        this.Housesinvolved16_17 = result[2].Housesinvolved;
-        this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
-        this.Houses_Grounde16_17 = result[2].Houses_Grounded;
-        this.Houses_Complete16_17 = result[2].Houses_Completed;
-        this.HousesOccupied16_17= result[2].HousesOccupied;
-  
-        this.First_Houses16_17 = result[2].First_Houses;
-        this.Second_Houses16_17 = result[2].Second_Houses;
-        this.Third_Houses16_17 = result[2].Third_Houses;
-  
-        //Fourth row data
-        this.Fin_Year17_18 = result[3].FinYear;
-        this.Housesinvolved17_18 = result[3].Housesinvolved;
-        this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
-        this.Houses_Grounde17_18 = result[3].Houses_Grounded;
-        this.Houses_Complete17_18 = result[3].Houses_Completed;
-        this.HousesOccupied17_18= result[3].HousesOccupied;
-  
-        this.First_Houses17_18 = result[3].First_Houses;
-        this.Second_Houses17_18 = result[3].Second_Houses;
-        this.Third_Houses17_18 = result[3].Third_Houses;
-  
-        //Fifth row data
-        this.Fin_Year18_19 = result[4].FinYear;
-        this.Housesinvolved18_19 = result[4].Housesinvolved;
-        this.FundsDisbursed_in_Houses18_19 = result[4].FundsDisbursed_in_Houses;
-        this.Houses_Grounde18_19 = result[4].Houses_Grounded;
-        this.Houses_Complete18_19 = result[4].Houses_Completed;
-        this.HousesOccupied18_19= result[4].HousesOccupied;
-        this.First_Houses18_19 = result[4].First_Houses;
-        this.Second_Houses18_19 = result[4].Second_Houses;
-        this.Third_Houses18_19 = result[4].Third_Houses;
-  
-              //Fifth row data
-              this.Fin_Year19_20 = result[5].FinYear;
-              this.Housesinvolved19_20 = result[5].Housesinvolved;
-              this.FundsDisbursed_in_Houses19_20 = result[5].FundsDisbursed_in_Houses;
-              this.Houses_Grounde19_20 = result[5].Houses_Grounded;
-              this.Houses_Complete19_20 = result[5].Houses_Completed;
-              this.HousesOccupied19_20= result[5].HousesOccupied;
-              this.First_Houses19_20 = result[5].First_Houses;
-              this.Second_Houses19_20 = result[5].Second_Houses;
-              this.Third_Houses19_20 = result[5].Third_Houses;
-  
-                    let chart = new CanvasJS.Chart("chartISSR", {
+        // this.Fin_Year15_16 = result[1].FinYear;
+        // this.Housesinvolved15_16 = result[1].Housesinvolved;
+        // this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+        // this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+        // this.Houses_Complete15_16 = result[1].Houses_Completed;
+        // this.HousesOccupied15_16= result[1].HousesOccupied;
+        // this.First_Houses15_16 = result[1].First_Houses;
+        // this.Second_Houses15_16 = result[1].Second_Houses;
+        // this.Third_Houses15_16 = result[1].Third_Houses;
+
+        // if (Fin_Year ="2015-16")
+        // {
+        //   this.a =this.Fin_Year15_16 ;
+        //   this.b = this.Housesinvolved15_16;
+        //   this.c =this.FundsDisbursed_in_Houses15_16;
+        //   this.d = this.Houses_Grounde15_16;
+        //   this.e =this.Houses_Complete15_16 ;
+        //   this.f =this.HousesOccupied15_16;
+        //   this.g =this.First_Houses15_16;
+        //   this.h = this.Third_Houses15_16;
+        // }
+
+        // //Third row data
+        // this.Fin_Year16_17 = result[2].FinYear;
+        // this.Housesinvolved16_17 = result[2].Housesinvolved;
+        // this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+        // this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+        // this.Houses_Complete16_17 = result[2].Houses_Completed;
+        // this.HousesOccupied16_17= result[2].HousesOccupied;
+
+        // this.First_Houses16_17 = result[2].First_Houses;
+        // this.Second_Houses16_17 = result[2].Second_Houses;
+        // this.Third_Houses16_17 = result[2].Third_Houses;
+
+        // if (Fin_Year ="2016-17")
+        // {
+        //   this.a =this.Fin_Year16_17 ;
+        //   this.b = this.Housesinvolved16_17;
+        //   this.c =this.FundsDisbursed_in_Houses16_17;
+        //   this.d = this.Houses_Grounde16_17;
+        //   this.e =this.Houses_Complete16_17 ;
+        //   this.f =this.HousesOccupied16_17;
+        //   this.g =this.First_Houses16_17;
+        //   this.h = this.Third_Houses16_17;
+        // }
+
+
+        // //Fourth row data
+        // this.Fin_Year17_18 = result[3].FinYear;
+        // this.Housesinvolved17_18 = result[3].Housesinvolved;
+        // this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+        // this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+        // this.Houses_Complete17_18 = result[3].Houses_Completed;
+        // this.HousesOccupied17_18= result[3].HousesOccupied;
+
+        // this.First_Houses17_18 = result[3].First_Houses;
+        // this.Second_Houses17_18 = result[3].Second_Houses;
+        // this.Third_Houses17_18 = result[3].Third_Houses;
+
+        // if (Fin_Year ="2017_18")
+        // {
+        //   this.a =this.Fin_Year17_18 ;
+        //   this.b = this.Housesinvolved17_18;
+        //   this.c =this.FundsDisbursed_in_Houses17_18;
+        //   this.d = this.Houses_Grounde17_18;
+        //   this.e =this.Houses_Complete17_18 ;
+        //   this.f =this.HousesOccupied17_18;
+        //   this.g =this.First_Houses17_18;
+        //   this.h = this.Third_Houses17_18;
+        // }
+
+        // //Fifth row data
+        // this.Fin_Year18_19 = result[4].FinYear;
+        // this.Housesinvolved18_19 = result[4].Housesinvolved;
+        // this.FundsDisbursed_in_Houses18_19 = result[4].FundsDisbursed_in_Houses;
+        // this.Houses_Grounde18_19 = result[4].Houses_Grounded;
+        // this.Houses_Complete18_19 = result[4].Houses_Completed;
+        // this.HousesOccupied18_19= result[4].HousesOccupied;
+        // this.First_Houses18_19 = result[4].First_Houses;
+        // this.Second_Houses18_19 = result[4].Second_Houses;
+        // this.Third_Houses18_19 = result[4].Third_Houses;
+
+        // if (Fin_Year ="2018_19")
+        // {
+        //   this.a =this.Fin_Year18_19 ;
+        //   this.b = this.Housesinvolved18_19;
+        //   this.c =this.FundsDisbursed_in_Houses18_19;
+        //   this.d = this.Houses_Grounde18_19;
+        //   this.e =this.Houses_Complete18_19 ;
+        //   this.f =this.HousesOccupied18_19;
+        //   this.g =this.First_Houses18_19;
+        //   this.h = this.Third_Houses18_19;
+        // }
+
+        //       //Fifth row data
+        //       this.Fin_Year19_20 = result[5].FinYear;
+        //       this.Housesinvolved19_20 = result[5].Housesinvolved;
+        //       this.FundsDisbursed_in_Houses19_20 = result[5].FundsDisbursed_in_Houses;
+        //       this.Houses_Grounde19_20 = result[5].Houses_Grounded;
+        //       this.Houses_Complete19_20 = result[5].Houses_Completed;
+        //       this.HousesOccupied19_20= result[5].HousesOccupied;
+        //       this.First_Houses19_20 = result[5].First_Houses;
+        //       this.Second_Houses19_20 = result[5].Second_Houses;
+        //       this.Third_Houses19_20 = result[5].Third_Houses;
+
+        //       if (Fin_Year ="2019_20")
+        // {
+        //   this.a =this.Fin_Year19_20 ;
+        //   this.b = this.Housesinvolved19_20;
+        //   this.c =this.FundsDisbursed_in_Houses19_20;
+        //   this.d = this.Houses_Grounde19_20;
+        //   this.e =this.Houses_Complete19_20 ;
+        //   this.f =this.HousesOccupied19_20;
+        //   this.g =this.First_Houses19_20;
+        //   this.h = this.Third_Houses19_20;
+        // }
+
+        //      this.Test(Fin_Year);
+
+
+                    let chart = new CanvasJS.Chart("chartPMAYU", {
                       theme: "light2",
                       animationEnabled: true,
                       exportEnabled: false,
                       title: {
-                        text: "Physical Data Consolidated (ISSR)",
+                        text: "Physical Data Consolidated (PMAYU)",
                         fontSize: "25",
                       },
                       backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
                       colorSet: "greenShades",
-                      
+
                       data: [{
-  
+
                         options: {
                           scales: {
                               xAxes: [{
@@ -2701,7 +9274,146 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                               }]
                           }
                       },
-                  
+                      type: "column",
+                        dockInsidePlotArea: true,
+                         indexLabel: "{y}", //HG
+                        bevelEnabled: true,
+                        showInLegend: true,
+                        legendText: "Housesinvolved Financial Year 20" + "14-15",
+                         stValue: "Q",
+                        indexLabelFontSize: 12,
+                        indexLabelOrientation: "vertical",
+                        dataPoints: [
+                          // { x: "14-15", y: this.Fin_Year15_16 },
+                          { label: "Housesinvolved14_15", y: this.b },
+                          { label: "FundsDisbursed_in_Houses14_15", y: this.c },
+                          { label: "Houses_Grounde14_15", y: this.d },
+                          { label: "Houses_Complete14_15", y: this.e },
+                          { label: "HousesOccupied14_15", y: this.f },
+                          { label: "First_Houses14_15", y: this.g },
+                          { label: "Third_Houses14_15", y: this.h } ,
+                          { label: "Third_Houses15_16", y: this.i }
+
+                        ]
+                      }
+
+                     ],
+                      options: {
+                        legend: {
+                          display: true,
+                          labels: {
+                            fontColor: 'rgb(255, 99, 132)'
+                          }
+                        }
+                      }
+                    });
+                    chart.render();
+                });
+    }
+}
+
+
+
+  BindISSRData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
+  {
+       // alert();
+        this.service.sp_create_ISSR_DATA(stateCode, DisttCode, cityCode,Comp).subscribe(result => { // new code
+        ///first row data
+        this.Fin_Year14_15 = result[0].FinYear;
+        this.Housesinvolved14_15 = result[0].Housesinvolved;
+        this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
+        this.Houses_Grounde14_15 = result[0].Houses_Grounded;
+        this.Houses_Complete14_15 = result[0].Houses_Completed;
+
+        this.HousesOccupied14_15= result[0].HousesOccupied;
+        this.First_Houses14_15 = result[0].First_Houses;
+        this.Second_Houses14_15 = result[0].Second_Houses;
+        this.Third_Houses14_15 = result[0].Third_Houses;
+
+        //second row data
+        this.Fin_Year15_16 = result[1].FinYear;
+        this.Housesinvolved15_16 = result[1].Housesinvolved;
+        this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
+        this.Houses_Grounde15_16 = result[1].Houses_Grounded;
+        this.Houses_Complete15_16 = result[1].Houses_Completed;
+        this.HousesOccupied15_16= result[1].HousesOccupied;
+        this.First_Houses15_16 = result[1].First_Houses;
+        this.Second_Houses15_16 = result[1].Second_Houses;
+        this.Third_Houses15_16 = result[1].Third_Houses;
+
+        //Third row data
+        this.Fin_Year16_17 = result[2].FinYear;
+        this.Housesinvolved16_17 = result[2].Housesinvolved;
+        this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
+        this.Houses_Grounde16_17 = result[2].Houses_Grounded;
+        this.Houses_Complete16_17 = result[2].Houses_Completed;
+        this.HousesOccupied16_17= result[2].HousesOccupied;
+
+        this.First_Houses16_17 = result[2].First_Houses;
+        this.Second_Houses16_17 = result[2].Second_Houses;
+        this.Third_Houses16_17 = result[2].Third_Houses;
+
+        //Fourth row data
+        this.Fin_Year17_18 = result[3].FinYear;
+        this.Housesinvolved17_18 = result[3].Housesinvolved;
+        this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
+        this.Houses_Grounde17_18 = result[3].Houses_Grounded;
+        this.Houses_Complete17_18 = result[3].Houses_Completed;
+        this.HousesOccupied17_18= result[3].HousesOccupied;
+
+        this.First_Houses17_18 = result[3].First_Houses;
+        this.Second_Houses17_18 = result[3].Second_Houses;
+        this.Third_Houses17_18 = result[3].Third_Houses;
+
+        //Fifth row data
+        this.Fin_Year18_19 = result[4].FinYear;
+        this.Housesinvolved18_19 = result[4].Housesinvolved;
+        this.FundsDisbursed_in_Houses18_19 = result[4].FundsDisbursed_in_Houses;
+        this.Houses_Grounde18_19 = result[4].Houses_Grounded;
+        this.Houses_Complete18_19 = result[4].Houses_Completed;
+        this.HousesOccupied18_19= result[4].HousesOccupied;
+        this.First_Houses18_19 = result[4].First_Houses;
+        this.Second_Houses18_19 = result[4].Second_Houses;
+        this.Third_Houses18_19 = result[4].Third_Houses;
+
+              //Fifth row data
+              this.Fin_Year19_20 = result[5].FinYear;
+              this.Housesinvolved19_20 = result[5].Housesinvolved;
+              this.FundsDisbursed_in_Houses19_20 = result[5].FundsDisbursed_in_Houses;
+              this.Houses_Grounde19_20 = result[5].Houses_Grounded;
+              this.Houses_Complete19_20 = result[5].Houses_Completed;
+              this.HousesOccupied19_20= result[5].HousesOccupied;
+              this.First_Houses19_20 = result[5].First_Houses;
+              this.Second_Houses19_20 = result[5].Second_Houses;
+              this.Third_Houses19_20 = result[5].Third_Houses;
+
+              this.Test(Fin_Year);
+
+
+                    let chart = new CanvasJS.Chart("chartISSR", {
+                      theme: "light2",
+                      animationEnabled: true,
+                      exportEnabled: false,
+                      title: {
+                        text: "Physical Data Consolidated (ISSR)",
+                        fontSize: "25",
+                      },
+                      backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
+                      colorSet: "greenShades",
+
+                      data: [{
+
+                        options: {
+                          scales: {
+                              xAxes: [{
+                                  stacked: true
+                              }],
+                              yAxes: [{
+                                  stacked: true
+                              }]
+                          }
+                      },
+
                       //   backgroundColor: this.backgroundColor,//"#B3E5FC",
                       //   bevelEnabled: true,
                       //   indexLabelPlacement:"auto",
@@ -2719,7 +9431,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                       //     { label: "14_15", y: this.Housesinvolved14_15 },
                       //     { label: "14_15", y: this.FundsDisbursed_in_Houses14_15 },
                       //     { label: "14_15", y: this.Houses_Grounde14_15 },
-                      //     { label: "14_15", y: this.Houses_Complete14_15 },  
+                      //     { label: "14_15", y: this.Houses_Complete14_15 },
                       //     { label: "14_15", y: this.First_Houses14_15 },
                       //     { label: "14_15", y: this.Second_Houses14_15 },
                       //     { label: "14_15", y: this.Third_Houses14_15 }
@@ -2740,9 +9452,9 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                           { label: "14_15", y: this.Housesinvolved14_15 },
                           { label: "15_16", y: this.Housesinvolved15_16 },
                           { label: "16_17", y: this.Housesinvolved16_17 },
-                          { label: "17_18", y: this.Housesinvolved17_18 },  
+                          { label: "17_18", y: this.Housesinvolved17_18 },
                           { label: "18_19", y: this.Housesinvolved18_19 },
-                          { label: "19_20", y: this.Housesinvolved19_20 } 
+                          { label: "19_20", y: this.Housesinvolved19_20 }
                         ]
                       },
                       {
@@ -2759,12 +9471,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                           { label: "14_15", y: this.FundsDisbursed_in_Houses14_15 },
                           { label: "15_16", y: this.FundsDisbursed_in_Houses15_16 },
                           { label: "16_17", y: this.FundsDisbursed_in_Houses16_17 },
-                          { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },  
+                          { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },
                           { label: "18_19", y: this.FundsDisbursed_in_Houses18_19 },
-                          { label: "19_20", y: this.FundsDisbursed_in_Houses19_20 } 
+                          { label: "19_20", y: this.FundsDisbursed_in_Houses19_20 }
                         ]
                       },
-  
+
                       {
                         type: "column",
                         dockInsidePlotArea: true,
@@ -2779,12 +9491,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                           { label: "14_15", y: this.Houses_Grounde14_15 },
                           { label: "15_16", y: this.Houses_Grounde15_16 },
                           { label: "16_17", y: this.Houses_Grounde16_17 },
-                          { label: "17_18", y: this.Houses_Grounde17_18 },  
+                          { label: "17_18", y: this.Houses_Grounde17_18 },
                           { label: "18_19", y: this.Houses_Grounde18_19 },
-                          { label: "19_20", y: this.Houses_Grounde19_20 } 
+                          { label: "19_20", y: this.Houses_Grounde19_20 }
                         ]
                       },
-  
+
                       {
                         type: "column",
                         dockInsidePlotArea: true,
@@ -2799,9 +9511,9 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                           { label: "14_15", y: this.HousesOccupied14_15 },
                           { label: "15_16", y: this.HousesOccupied15_16 },
                           { label: "16_17", y: this.HousesOccupied16_17 },
-                          { label: "17_18", y: this.HousesOccupied17_18 },  
+                          { label: "17_18", y: this.HousesOccupied17_18 },
                           { label: "18_19", y: this.HousesOccupied18_19 },
-                          { label: "19_20", y: this.HousesOccupied19_20 } 
+                          { label: "19_20", y: this.HousesOccupied19_20 }
                         ]
                       },
                       {
@@ -2818,12 +9530,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                           { label: "14_15", y: this.Houses_Complete14_15 },
                           { label: "15_16", y: this.Houses_Complete15_16 },
                           { label: "16_17", y: this.Houses_Complete16_17 },
-                          { label: "17_18", y: this.Houses_Complete17_18 },  
+                          { label: "17_18", y: this.Houses_Complete17_18 },
                           { label: "18_19", y: this.Houses_Complete18_19 },
-                          { label: "19_20", y: this.Houses_Complete19_20 } 
+                          { label: "19_20", y: this.Houses_Complete19_20 }
                         ]
                       },
-  
+
                       {
                         type: "column",
                         dockInsidePlotArea: true,
@@ -2838,12 +9550,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                           { label: "14_15", y: this.First_Houses14_15 },
                           { label: "15_16", y: this.First_Houses15_16 },
                           { label: "16_17", y: this.First_Houses16_17 },
-                          { label: "17_18", y: this.First_Houses17_18 },  
+                          { label: "17_18", y: this.First_Houses17_18 },
                           { label: "18_19", y: this.First_Houses18_19 },
-                          { label: "19_20", y: this.First_Houses19_20 } 
+                          { label: "19_20", y: this.First_Houses19_20 }
                         ]
                       },
-  
+
                       {
                         type: "column",
                         dockInsidePlotArea: true,
@@ -2858,12 +9570,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                           { label: "14_15", y: this.Second_Houses14_15 },
                           { label: "15_16", y: this.Second_Houses15_16 },
                           { label: "16_17", y: this.Second_Houses16_17 },
-                          { label: "17_18", y: this.Second_Houses17_18 },  
+                          { label: "17_18", y: this.Second_Houses17_18 },
                           { label: "18_19", y: this.Second_Houses18_19 },
-                          { label: "19_20", y: this.Second_Houses19_20 } 
+                          { label: "19_20", y: this.Second_Houses19_20 }
                         ]
                       },
-  
+
                       {
                         type: "column",
                         dockInsidePlotArea: true,
@@ -2878,12 +9590,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                           { label: "14_15", y: this.Third_Houses14_15 },
                           { label: "15_16", y: this.Third_Houses15_16 },
                           { label: "16_17", y: this.Third_Houses16_17 },
-                          { label: "17_18", y: this.Third_Houses17_18 },  
+                          { label: "17_18", y: this.Third_Houses17_18 },
                           { label: "18_19", y: this.Third_Houses18_19 },
-                          { label: "19_20", y: this.Third_Houses19_20 } 
+                          { label: "19_20", y: this.Third_Houses19_20 }
                         ]
                       },
-  
+
                     //   {
                     //     type: "column",
                     //     dockInsidePlotArea: true,
@@ -2898,13 +9610,13 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                     //       { label: "15_16", y: this.Housesinvolved15_16 },
                     //       { label: "15_16", y: this.FundsDisbursed_in_Houses15_16 },
                     //       { label: "15_16", y: this.Houses_Grounde15_16 },
-                    //       { label: "15_16", y: this.Houses_Complete15_16 },  
+                    //       { label: "15_16", y: this.Houses_Complete15_16 },
                     //       { label: "15_16", y: this.First_Houses15_16 },
                     //       { label: "15_16", y: this.Second_Houses15_16 },
                     //       { label: "15_16", y: this.Third_Houses15_16 },
                     //     ]
                     //   },
-  
+
                     //   {
                     //     type: "column",
                     //     dockInsidePlotArea: true,
@@ -2920,7 +9632,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                     //       { label: "16_17", y: this.Housesinvolved16_17 },
                     //       { label: "16_17", y: this.FundsDisbursed_in_Houses16_17 },
                     //       { label: "16_17", y: this.Houses_Grounde16_17 },
-                    //       { label: "16_17", y: this.Houses_Complete16_17 },  
+                    //       { label: "16_17", y: this.Houses_Complete16_17 },
                     //       { label: "16_17", y: this.First_Houses16_17 },
                     //       { label: "16_17", y: this.Second_Houses16_17 },
                     //       { label: "16_17", y: this.Third_Houses16_17 },
@@ -2941,7 +9653,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                     //       { label: "17_18", y: this.Housesinvolved17_18 },
                     //       { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },
                     //       { label: "17_18", y: this.Houses_Grounde17_18 },
-                    //       { label: "17_18", y: this.Houses_Complete17_18 },  
+                    //       { label: "17_18", y: this.Houses_Complete17_18 },
                     //       { label: "17_18", y: this.First_Houses17_18 },
                     //       { label: "17_18", y: this.Second_Houses17_18 },
                     //       { label: "17_18", y: this.Third_Houses17_18 },
@@ -2962,7 +9674,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                     //     { label: "18-19", y: this.Housesinvolved18_19 },
                     //     { label: "18-19", y: this.FundsDisbursed_in_Houses18_19 },
                     //     { label: "18-19", y: this.Houses_Grounde18_19 },
-                    //     { label: "18-19", y: this.Houses_Complete18_19 },  
+                    //     { label: "18-19", y: this.Houses_Complete18_19 },
                     //     { label: "18-19", y: this.First_Houses18_19 },
                     //     { label: "18-19", y: this.Second_Houses18_19 },
                     //     { label: "18-19", y: this.Third_Houses18_19 },
@@ -2983,7 +9695,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                     //       { label: "19-20", y: this.Housesinvolved19_20 },
                     //       { label: "19-20", y: this.FundsDisbursed_in_Houses19_20 },
                     //       { label: "19-20", y: this.Houses_Grounde19_20 },
-                    //       { label: "19-20", y: this.Houses_Complete19_20 },  
+                    //       { label: "19-20", y: this.Houses_Complete19_20 },
                     //       { label: "19-20", y: this.First_Houses19_20 },
                     //       { label: "19-20", y: this.Second_Houses19_20 },
                     //       { label: "84", y: this.Third_Houses19_20 },
@@ -3001,7 +9713,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                     });
                     chart.render();
                 });
-    }  
+    }
   BindPMayColumnData(stateCode, DisttCode, cityCode, Comp, DivisionCodes) {
 
     this.service.GetStateWiseFinYrData_Div(stateCode, DivisionCodes).subscribe(result => { // new code
@@ -3011,7 +9723,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
       this.CASanctioned_17_18 = result.CASanctioned_17_18;
       this.CASanctioned_18_19 = result.CASanctioned_18_19;
       this.CASanctioned_19_20 = result.CASanctioned_19_20;
-      
+
 
       this.CumuCAReleased = result.CumuCAReleased;
       this.CumuCA_Released_15_16 = result.CumuCA_Released_15_16;
@@ -3045,7 +9757,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
                   this.CAI191 = result5.CAI / 1;
                   this.CAR191 = result5.CAR / 1;
 
-                  
+
                 this.compArray = Comp.split(",");
                 const value = this.compArray.indexOf("5");
 
@@ -3158,6 +9870,6 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp)
     })
   })
   }
-  
+
 
 }

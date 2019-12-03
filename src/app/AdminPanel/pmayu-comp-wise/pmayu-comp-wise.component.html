@@ -1,7 +1,5 @@
 <div class="row">
-    <div class="col-md-4 col-sm-6 col-xs-12">
-   
- 
+    <div class="col-md-3 col-sm-3 col-xs-12">
       <div  style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px">State :</div>
      <div >
          <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
@@ -11,21 +9,11 @@
              {{sntry.States_UT}}
            </option>
          </select></div>
-         
    </div>
-   <!-- /.col -->
-   <div class="col-md-4 col-sm-6 col-xs-12">
-       <!-- <div class="info-box" style="min-height: 40px;"> -->
-           <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px"> District :</div> 
-       <!-- <select class="form-control" placeholder="Choose Distt"
-       (change)="getCitytDetails($event.target.value)"
-       style="width: 200px;font-display: black;color:black;font-family: Arial, Helvetica, sans-serif">
-       <option value={{distValue}}>{{DistrictMessage}}</option>
-       <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
-         {{sntry.District}}
-       </option>
-     </select>  -->
 
+   <!-- /.col -->
+   <div class="col-md-3 col-sm-3 col-xs-12">
+           <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 14px"> District :</div> 
      <div style="border: black"><select class="form-control" placeholder="Choose Distt"
        (change)="getDistrictDetails($event.target.value)"
        style="width: 200px;font-size: 18px;font-display: black;color:black;border-color: black;font-family: Arial, Helvetica, sans-serif">
@@ -34,24 +22,11 @@
          {{sntry.District}}
        </option>
      </select></div>
-
-     <!-- </div> -->
-     <!-- /.info-box -->
    </div>
 
 
-   <div class="col-md-4 col-sm-6 col-xs-12">
-     <!-- <div class="info-box" style="min-height: 40px;"> -->
+   <div class="col-md-3 col-sm-3 col-xs-12">
          <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px">City :</div> 
-
-         <!-- <div style="color:arial-narrow;border: black"> <select class="form-control" placeholder="Choose City"
-           (change)="getCityDetails($event.target.value)"
-           style="width: 200px;font-display: black;color:black;font-family: Arial, Helvetica, sans-serif">
-           <option value={{cityValue}}>{{CityMessage}}</option>
-           <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
-             {{sntry.City}}
-           </option>
-         </select>  </div> -->
          <div style="color:arial-narrow;border: black"> <select class="form-control" placeholder="Choose City"
            (change)="getCityDetails($event.target.value)"
            style="width: 200px;font-size: 18px;font-display: black;color:black;border-color: black;font-family: Arial, Helvetica, sans-serif">
@@ -60,55 +35,73 @@
              {{sntry.City}}
            </option>
          </select>  </div>
-
         </div>
+        
+        <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="col-md-2">
+            <input type="button" (click)="ShowPage()" value="Back" style="background-color:cadetblue;" class="btn btn-warning" />
+        </div>
+      </div>
+
+        <div class="info-box-inline" style="padding-left:450px;font-family: Arial, Helvetica, sans-serif;font-size: 18px">
+            <span class="info-box-header" ><b>Select Financial Year</b></span>
+            <span  ><input type="checkbox"  (change)="ProjectCost($event)" name="Project Cost" value="SUM(BENE2014_15)" > 2014-15 &nbsp;</span> 
+            <input type="checkbox"  (change)="ProjectCost($event)" name="CA Sanctioned" value="SUM(BENE2015_16)" > 2015-16 &nbsp;
+           <input type="checkbox" (change)="ProjectCost($event)" name="1st Installment Released" value="SUM(BENE2016_17)">2016-17&nbsp;
+            <input type="checkbox" (change)="ProjectCost($event)" name="2nd Installment Released" value="SUM(BENE2017_18)"> 2017-18&nbsp;
+            <input type="checkbox" (change)="ProjectCost($event)" name="3rd Installment Released" value="SUM(BENE2018_19)"> 2018-19&nbsp;
+            <input type="checkbox" (change)="ProjectCost($event)" name="UC Receieved" value="SUM(BENE2019_20)">2019-20 
+            <!-- <input type="checkbox" id="chkAll" (change)="ProjectCost($event)" name="ALL" value="ALL" checked> ALL <br><br>  -->
+        </div>
+         <!-- <div class="col-md-3 col-sm-3 col-xs-12">
+          <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px">Fin Year :</div> 
+           <select class="form-control"   placeholder="Select Role"  id="Fin_Year"
+          style="width: 200px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif"   
+          (change)="getFinDetails($event.target.value)">
+           <option value="0">--Select--</option>
+           <option value="2014-15">2014-15</option>
+           <option value="2015-16">2015-16</option>
+           <option value="2016-17">2016-17</option>
+           <option value="2017-18">2017-18</option>
+           <option value="2018-19">2018-19</option>
+           <option value="2019-20">2019-20</option>
+          </select>
+        </div> -->
+   
+        
 
      <div >
         
       <section style="align-items: center;">
-
         <div class="row">
           <div class="col-sm-12" style="background-color:lavender;"> 
-            <div id="chartAHP" style="height: 500px; width: 1400px;margin-left: 50px; "></div>
+            <div id="chartPMAYU" style="height: 500px; width: 1400px;;margin-left: 50px;"></div>
+
+          
           </div>
-          <!-- <div class="col-sm-4" style="background-color:lavenderblush;">
-            
-          </div>
-          <div class="col-sm-4" style="background-color:lavender;">
- 
-          </div> -->
         </div>
 
 
         <div class="row">
-          <!-- <div class="col-sm-4" style="background-color:lavender;"> 
-          </div> -->
           <div class="col-sm-12" style="background-color:lavenderblush;">
             <div id="chartBLCS" style="height: 500px; width: 1400px;;margin-left: 50px;"></div>
           </div>
-          <!-- <div class="col-sm-4" style="background-color:lavender;">
-          </div> -->
         </div>
 
         <div class="row">
-          <!-- <div class="col-sm-4" style="background-color:lavender;"> 
-          </div> -->
           <div class="col-sm-12" style="background-color:lavenderblush;">
-            <div id="chartISSR" style="height: 500px; width: 1400px;;margin-left: 50px;"></div>
+            <div id="chartAHP" style="height: 500px; width: 1400px;margin-left: 50px; "></div>
+           
           </div>
-          <!-- <div class="col-sm-4" style="background-color:lavender;">
-          </div> -->
         </div>
 
         
 
         <div class="row">
-          <!-- <div class="col-sm-4" style="background-color:lavender;"> 
-          </div>
-          <div class="col-sm-4" style="background-color:lavenderblush;">
-          </div> -->
+         
           <div class="col-sm-12" style="background-color:lavender;">
-            <div id="chartPMAYU" style="height: 500px; width: 1400px;;margin-left: 50px;"></div>
+
+            <div id="chartISSR" style="height: 500px; width: 1400px;;margin-left: 50px;"></div>
           </div>
         </div>
       </section>

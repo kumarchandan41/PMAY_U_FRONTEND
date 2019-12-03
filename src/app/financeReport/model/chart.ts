@@ -461,6 +461,14 @@ export class PMAY_DATA_New{
     Third_Houses: string;
  
 
+ 
+    Istinstyettobereleased : string;  
+     IIndinstyettobereleased: string;
+    ThirdInstyettobereleased: string;
+    GroundedbutyettobeCompleted: string;
+    CompletedbutyettobeOccupied: string;
+
+
 }
 
 export class Houses_Status {

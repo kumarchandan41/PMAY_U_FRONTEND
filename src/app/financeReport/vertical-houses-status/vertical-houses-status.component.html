@@ -52,55 +52,36 @@
                 </div>
               </div>
 
-              <!-- <br><br>
-              <div class="col-md-4" style="padding-left: 100px">
-              <div class="col-md-5">
-                  <button class="Downloadbtn" (click)="pdfReport()"><i class="fa fa-download"></i> Click to Print</button>
-                </div>
-              </div>  
+              <br><br>
+             
+          <!-- </div>
+           -->
 
-              <div class="col-md-4">
-              <div >
-                <button (click)="ExportTOExcel()" class="btn btn-success">ExportTOExcel</button> 
-                <input type="button" (click)="AdminPage()" value="Back" style="color:white;background-color:blue;width:60px" />
-              </div>
-             </div> -->
+        </div>
 
-             <!-- <div class="container">
-              <div class="row">
-              <div class="col-md-4">
-                  <button class="Downloadbtn" (click)="pdfReport()"><i class="fa fa-download"></i> Click to Print</button>
-          
-              </div>
-              <div class="col-md-4">
-                  <button (click)="ExportTOExcel()" class="btn btn-success">ExportTOExcel</button> 
-          
-              </div>
-              <div class="col-md-4">
-                  <input type="button" (click)="AdminPage()" value="Back" />
-          
-              </div>
-          </div>
-          </div> -->
-          
-        </div>     
+
+         
   </div> 
 </div>
 
 <div class="row">
   <div class="col-md-3"></div>  
   <div class="col-md-2">
-      <button class="Downloadbtn" (click)="pdfReport()" style="background-color: cadetblue;"><i class="fa fa-download"></i> Click to Print</button>
+      <button class="Downloadbtn" (click)="pdfReport()"><i class="fa fa-download" style="background-color:cadetblue;"></i> Click to Print</button>
     </div>
 
     <div class="col-md-2">
-      <button (click)="ExportTOExcel()" class="btn btn-success" style="background-color: cadetblue;">ExportTOExcel</button> 
+      <button (click)="ExportTOExcel()" class="btn btn-success" style="background-color:cadetblue;">ExportTOExcel</button> 
 
     </div>
     <div class="col-md-2">
-      <input type="button" (click)="AdminPage()" value="Back" style="background-color: cadetblue;" class="btn btn-warning" />
+      <input type="button" (click)="AdminPage()" value="Back" style="background-color:cadetblue;" class="btn btn-warning" />
 
     </div>
+
+    <div class="col-md-2">
+        <input type="button" (click)="ShowPage()" value="Show Graph" style="background-color:cadetblue;" class="btn btn-warning" />
+      </div>
 </div>
 
 <div id ="toPrint" #TABLE #table>
