@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +24,7 @@
 
   <!-- Google Font -->
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 
@@ -32,411 +33,410 @@
 
 
 
-<body class="hold-transition skin-blue sidebar-mini"  style="background-color: azure">
-<div class="wrapper" style="background-color:white;border: black">
+<body class="hold-transition skin-blue sidebar-mini" style="background-color: azure">
+  <div class="wrapper" style="background-color:white;border: black">
 
-  <header class="main-header">
-   
-    <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><font name="Arial" font-size="8px">DASHBOARD-PMAY(U)</font></span>
-    </a>
+    <header class="main-header">
 
-    <!-- <div  style="float: left; width: 200px;">
+      <!-- Logo -->
+      <a href="index2.html" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>A</b>LT</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg">
+          <font name="Arial" font-size="8px">DASHBOARD-PMAY(U)</font>
+        </span>
+      </a>
+
+      <!-- <div  style="float: left; width: 200px;">
       <img src="src\assets\img\swatchbharta.png" height="50px" width="150px" />
     </div>
   -->
-    <!-- Header Navbar: style can be found in header.less -->
-    
-    <nav class="navbar navbar-static-top" >  
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-      <div style="width: 1100px; display: flex;">
+      <!-- Header Navbar: style can be found in header.less -->
+
+      <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div style="width: 1100px; display: flex;">
           <div style="width: 200px;">
-          <img src="/assets/img/PMAY-U LOGO _Transparent.png" height="50px" width="150px" />
-        </div>
-        <div style="width: 220px;float: left; padding: 10px;"> <b style="font-size:14px;color: white">{{jstoday}}</b>
-        </div>
-         <div style="width: 300px;float: left;" *ngIf="showcolourpicker" id ="colour_id" ng-hide="colour_id"  >
-              <app-color-picker  [color]="backgroundColor" [heading]="'Background'"
-               (event)="onChangeColor($event)" ></app-color-picker>
+            <img src="/assets/img/PMAY-U LOGO _Transparent.png" height="50px" width="150px" />
           </div>
-          <div  style="width: 200px;height: 20px;color:white;float: left;padding: 10px;" >
-            <strong> Welcome User :{{LoginTypeId}}</strong> 
+          <div style="width: 220px;float: left; padding: 10px;"> <b style="font-size:14px;color: white">{{jstoday}}</b>
           </div>
-          
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu" style="width: 200px;float: right;">
-          <ul class="nav navbar-nav">
-            <!-- Messages: style can be found in dropdown.less-->
-            <li class="dropdown messages-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-envelope-o"></i>
-                <span class="label label-success">4</span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="header">You have 4 messages</li>
-                <li>
-                  <ul class="menu">
-                    <li> 
-                      <a href="#">
-                        <div class="pull-left">
-                          <img src="./assets/dist/img/admin.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <h4>
-                          Support Team
-                          <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div class="pull-left">
-                          <img src="./assets/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <h4>
-                          AdminLTE Design Team
-                          <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div class="pull-left">
-                          <img src="./assets/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <h4>
-                          Developers
-                          <small><i class="fa fa-clock-o"></i> Today</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div class="pull-left">
-                          <img src="./assets/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <h4>
-                          Sales Department
-                          <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div class="pull-left">
-                          <img src="./assets/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <h4>
-                          Reviewers
-                          <small><i class="fa fa-clock-o"></i> 2 days</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="footer"><a href="#">See All Messages</a></li>
-              </ul>
-            </li>
-             
-            <li class="dropdown notifications-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-bell-o"></i>
-                <span class="label label-warning">10</span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="header">You have 10 notifications</li>
-                <li>
-                  <ul class="menu">
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                        page and may cause design problems
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-users text-red"></i> 5 new members joined
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-user text-red"></i> You changed your username
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="footer"><a href="#">View all</a></li>
-              </ul>
-            </li>
-            <li class="dropdown tasks-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-flag-o"></i>
-                <span class="label label-danger">9</span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="header">You have 9 tasks</li>
-                <li>
-                  <ul class="menu">
-                    <li> 
-                      <a href="#">
-                        <h3>
-                          Design some buttons
-                          <small class="pull-right">20%</small>
-                        </h3>
-                        <div class="progress xs">
-                          <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
-                               aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                            <span class="sr-only">20% Complete</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li> 
-                      
-                      
-                      
-                      <a href="#">
-                        <h3>
-                          Create a nice theme
-                          <small class="pull-right">40%</small>
-                        </h3>
-                        <div class="progress xs">
-                          <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
-                               aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                            <span class="sr-only">40% Complete</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <!-- end task item -->
-                    <li><!-- Task item -->
-                      <a href="#">
-                        <h3>
-                          Some task I need to do
-                          <small class="pull-right">60%</small>
-                        </h3>
-                        <div class="progress xs">
-                          <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
-                               aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                            <span class="sr-only">60% Complete</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <!-- end task item -->
-                    <li><!-- Task item -->
-                      <a href="#">
-                        <h3>
-                          Make beautiful transitions
-                          <small class="pull-right">80%</small>
-                        </h3>
-                        <div class="progress xs">
-                          <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
-                               aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                            <span class="sr-only">80% Complete</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <!-- end task item -->
-                  </ul>
-                </li>
-                <li class="footer">
-                  <a href="#">View all tasks</a>
-                </li>
-              </ul>
-            </li>
-            <!-- User Account: style can be found in dropdown.less -->
-            
-            <!-- Control Sidebar Toggle Button -->
-            <li>
-              <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-  
+          <div style="width: 300px;float: left;" *ngIf="showcolourpicker" id="colour_id" ng-hide="colour_id">
+            <app-color-picker [color]="backgroundColor" [heading]="'Background'" (event)="onChangeColor($event)">
+            </app-color-picker>
+          </div>
+          <div style="width: 200px;height: 20px;color:white;float: left;padding: 10px;">
+            <strong> Welcome User :{{LoginTypeId}}</strong>
+          </div>
 
-      
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu" style="width: 200px;float: right;">
+            <ul class="nav navbar-nav">
+              <!-- Messages: style can be found in dropdown.less-->
+              <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="label label-success">4</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header">You have 4 messages</li>
+                  <li>
+                    <ul class="menu">
+                      <li>
+                        <a href="#">
+                          <div class="pull-left">
+                            <img src="./assets/dist/img/admin.jpg" class="img-circle" alt="User Image">
+                          </div>
+                          <h4>
+                            Support Team
+                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                          </h4>
+                          <p>Why not buy a new awesome theme?</p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="pull-left">
+                            <img src="./assets/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                          </div>
+                          <h4>
+                            AdminLTE Design Team
+                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                          </h4>
+                          <p>Why not buy a new awesome theme?</p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="pull-left">
+                            <img src="./assets/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                          </div>
+                          <h4>
+                            Developers
+                            <small><i class="fa fa-clock-o"></i> Today</small>
+                          </h4>
+                          <p>Why not buy a new awesome theme?</p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="pull-left">
+                            <img src="./assets/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                          </div>
+                          <h4>
+                            Sales Department
+                            <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                          </h4>
+                          <p>Why not buy a new awesome theme?</p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="pull-left">
+                            <img src="./assets/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                          </div>
+                          <h4>
+                            Reviewers
+                            <small><i class="fa fa-clock-o"></i> 2 days</small>
+                          </h4>
+                          <p>Why not buy a new awesome theme?</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="footer"><a href="#">See All Messages</a></li>
+                </ul>
+              </li>
+
+              <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="label label-warning">10</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header">You have 10 notifications</li>
+                  <li>
+                    <ul class="menu">
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                          page and may cause design problems
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-users text-red"></i> 5 new members joined
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-user text-red"></i> You changed your username
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="footer"><a href="#">View all</a></li>
+                </ul>
+              </li>
+              <li class="dropdown tasks-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-flag-o"></i>
+                  <span class="label label-danger">9</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header">You have 9 tasks</li>
+                  <li>
+                    <ul class="menu">
+                      <li>
+                        <a href="#">
+                          <h3>
+                            Design some buttons
+                            <small class="pull-right">20%</small>
+                          </h3>
+                          <div class="progress xs">
+                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+                              aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">20% Complete</span>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
 
 
 
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="./assets/img/admin.jpg" class="img-circle" alt="User Image">
+                        <a href="#">
+                          <h3>
+                            Create a nice theme
+                            <small class="pull-right">40%</small>
+                          </h3>
+                          <div class="progress xs">
+                            <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
+                              aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">40% Complete</span>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <!-- end task item -->
+                      <li>
+                        <!-- Task item -->
+                        <a href="#">
+                          <h3>
+                            Some task I need to do
+                            <small class="pull-right">60%</small>
+                          </h3>
+                          <div class="progress xs">
+                            <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
+                              aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">60% Complete</span>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <!-- end task item -->
+                      <li>
+                        <!-- Task item -->
+                        <a href="#">
+                          <h3>
+                            Make beautiful transitions
+                            <small class="pull-right">80%</small>
+                          </h3>
+                          <div class="progress xs">
+                            <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
+                              aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">80% Complete</span>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <!-- end task item -->
+                    </ul>
+                  </li>
+                  <li class="footer">
+                    <a href="#">View all tasks</a>
+                  </li>
+                </ul>
+              </li>
+              <!-- User Account: style can be found in dropdown.less -->
+
+              <!-- Control Sidebar Toggle Button -->
+              <li>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+              </li>
+            </ul>
+          </div>
         </div>
-        
-        <div class="pull-left info">
-          <p>Admin/MIS Panel</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+
+
+
+
+
+
+      </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <img src="./assets/img/admin.jpg" class="img-circle" alt="User Image">
+          </div>
+
+          <div class="pull-left info">
+            <p>Admin/MIS Panel</p>
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          </div>
         </div>
-      </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                  <i class="fa fa-search"></i>
-                </button>
-          </span>
-        </div>
-      </form>
-      
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
-        <li id="dashboard_input" [ngStyle]="{'display':AdminDisplay}" #inputmenutitle [class.menu-open]="inputmenutitle.id == activeMenuId" class="active treeview" (click)="toggle(inputmenutitle.id)">
-          <a>
-            <!-- <i class="fa fa-dashboard"></i> <span>Dashboard</span> -->
-            <i class="fa fa-pie-chart"></i> <span>Dashboard</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                <i class="fa fa-search"></i>
+              </button>
             </span>
-          </a>
-        
-          <ul class="treeview-menu"   [style.display]="(inputmenutitle.id == activeMenuId) ? 'block' : 'none'">
-            <li   [ngStyle]="{'display':AdminDisplay}"><a [routerLink]="['/Admin/Dashboard']"><i class="fa fa-circle-o"></i>Dashboard</a></li>
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/MainGraph']"><i class="fa fa-circle-o"></i>PMAY-U Dashboard</a></li>
+          </div>
+        </form>
 
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA1']"><i class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-1</a></li>
-             <li   [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA3']"><i class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-3</a></li>
-             <li   [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA4']"><i class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-4</a></li>
-             <li   [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA5']"><i class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-5</a></li>
-             <!-- <li   [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/PMAYuCompWise']"><i class="fa fa-circle-o"></i>PMAYu CompWise </a></li> -->
-             <li   [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/PMAYuCritical']"><i class="fa fa-circle-o"></i>PMAYu Critical </a></li>
-             
-             
-            <!--<li   [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA4']"><i class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-4</a></li>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+          <li class="header">MAIN NAVIGATION</li>
+          <li id="dashboard_input" [ngStyle]="{'display':AdminDisplay}" #inputmenutitle
+            [class.menu-open]="inputmenutitle.id == activeMenuId" class="active treeview"
+            (click)="toggle(inputmenutitle.id)">
+            <a>
+              <!-- <i class="fa fa-dashboard"></i> <span>Dashboard</span> -->
+              <i class="fa fa-pie-chart"></i> <span>Dashboard</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+
+            <ul class="treeview-menu" [style.display]="(inputmenutitle.id == activeMenuId) ? 'block' : 'none'">
+              <li [ngStyle]="{'display':AdminDisplay}"><a [routerLink]="['/Admin/Dashboard']"><i
+                    class="fa fa-circle-o"></i>Dashboard</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/MainGraph']"><i
+                    class="fa fa-circle-o"></i>PMAY-U Dashboard</a></li>
+
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA1']"><i
+                    class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-1</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA3']"><i
+                    class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-3</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA4']"><i
+                    class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-4</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA5']"><i
+                    class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-5</a></li>
+              <!-- <li   [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/PMAYuCompWise']"><i class="fa fa-circle-o"></i>PMAYu CompWise </a></li> -->
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/PMAYuCritical']"><i
+                    class="fa fa-circle-o"></i>PMAYu Critical </a></li>
+
+
+              <!--<li   [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA4']"><i class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-4</a></li>
             <li   [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA5']"><i class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-5</a></li>
              -->
-            <!-- <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/statemaster']"><i class="fa fa-circle-o"></i>State Master Form</a></li> -->
-          </ul>
+              <!-- <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/statemaster']"><i class="fa fa-circle-o"></i>State Master Form</a></li> -->
+            </ul>
 
-          <ul  class="treeview-menu" [style.display]="(inputmenutitle.id == activeMenuId) ? 'block' : 'none'">
-              <li  [ngStyle]="{'display':DivDisplay}"><a [routerLink]="['/Admin/Dashboard']"><i class="fa fa-circle-o"></i>Dashboard</a></li>
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a [routerLink]="RoutLink"><i class="fa fa-circle-o"></i>PMAY-U Dashboard {{DivText}}</a></li>
-              
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a [routerLink]="['/Admin/statemaster']"><i class="fa fa-circle-o"></i>State Master Form</a></li>
-          </ul>
+            <ul class="treeview-menu" [style.display]="(inputmenutitle.id == activeMenuId) ? 'block' : 'none'">
+              <li [ngStyle]="{'display':DivDisplay}"><a [routerLink]="['/Admin/Dashboard']"><i
+                    class="fa fa-circle-o"></i>Dashboard</a></li>
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a [routerLink]="RoutLink"><i
+                    class="fa fa-circle-o"></i>PMAY-U Dashboard {{DivText}}</a></li>
 
-        </li>
-        
-        <!-- Reports Menu-->
-        <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="report_menu" #reportmenu [class.menu-open]="reportmenu.id == activeMenuId" (click)="toggle(reportmenu.id)">
-          <a>
-            <!-- <i class="fa fa-pie-chart"></i> -->
-            <!-- <i class="fa fa-dashboard"></i> -->
-                <i class="fa fa-laptop"></i>
-                <span>Reports</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>  
-          <ul class="treeview-menu"  [style.display]="(reportmenu.id == activeMenuId) ? 'block' : 'none'">
-            <!-- <li><a href="./assets/pages/charts/chartjs.html"><i class="fa fa-circle-o"></i>Home Page</a></li> -->
-            <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" (click)="OpenModalDialog()"><i class="fa fa-circle-o"></i>State Score</a></li>
-            <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  [routerLink]="['/Admin/AtaGlance']" ><i class="fa fa-circle-o"></i>At a Glance</a></li>
-            <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/AtaGlance1'><i class="fa fa-circle-o"></i>At a Glance1</a></li>
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a [routerLink]="['/Admin/statemaster']"><i
+                    class="fa fa-circle-o"></i>State Master Form</a></li>
+            </ul>
+
+          </li>
+
+          <!-- Reports Menu-->
+          <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="report_menu" #reportmenu
+            [class.menu-open]="reportmenu.id == activeMenuId" (click)="toggle(reportmenu.id)">
+            <a>
+              <!-- <i class="fa fa-pie-chart"></i> -->
+              <!-- <i class="fa fa-dashboard"></i> -->
+              <i class="fa fa-laptop"></i>
+              <span>Reports</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" [style.display]="(reportmenu.id == activeMenuId) ? 'block' : 'none'">
+              <!-- <li><a href="./assets/pages/charts/chartjs.html"><i class="fa fa-circle-o"></i>Home Page</a></li> -->
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" (click)="OpenModalDialog()"><i
+                    class="fa fa-circle-o"></i>State Score</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
+                  [routerLink]="['/Admin/AtaGlance']"><i class="fa fa-circle-o"></i>At a Glance</a></li>
+              <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/AtaGlance1'><i class="fa fa-circle-o"></i>At a Glance1</a></li>
             <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/AtaGlance3'><i class="fa fa-circle-o"></i>At a Glance3</a></li>
             <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/AtaGlance4'><i class="fa fa-circle-o"></i>At a Glance4</a></li>
             <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/AtaGlance5'><i class="fa fa-circle-o"></i>At a Glance5</a></li> -->
-            <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/phyfinChart'><i class="fa fa-circle-o"></i>Physical Fin Chart</a></li>
-            <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/ConsphyfinChart1'><i class="fa fa-circle-o"></i>Cons. Phy-Fin Report</a></li> -->
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/phyfinChart'><i
+                    class="fa fa-circle-o"></i>Physical Fin Chart</a></li>
+              <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/ConsphyfinChart1'><i class="fa fa-circle-o"></i>Cons. Phy-Fin Report</a></li> -->
 
-            <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Physical Report</a></li>
-
-
-            <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/VerticalHousesDetails']"  ><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li> -->
-            <li [ngStyle]="{'display':AdminDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/VerticalFinancialDetails'><i class="fa fa-circle-o"></i>Financial Houses Details</a></li> 
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
+                  href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Physical Report</a></li>
 
 
-            <!-- <a [routerLink]="['/Admin/DashboardHFA3']"><i class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-3</a></li> -->
+              <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/VerticalHousesDetails']"  ><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li> -->
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a style="cursor: pointer;"
+                  href='/Admin/VerticalFinancialDetails'><i class="fa fa-circle-o"></i>Financial Houses Details</a></li>
 
-            <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/IndiaMap'><i class="fa fa-circle-o"></i>India Map</a></li>
-            
-            <!-- <li><a href="./assets/pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
+
+              <!-- <a [routerLink]="['/Admin/DashboardHFA3']"><i class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-3</a></li> -->
+
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/IndiaMap'><i
+                    class="fa fa-circle-o"></i>India Map</a></li>
+
+              <!-- <li><a href="./assets/pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
             <li><a href="./assets/pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li> -->
-          </ul>
-          <ul class="treeview-menu" [style.display]="(reportmenu.id == activeMenuId) ? 'block' : 'none'">
+            </ul>
+            <ul class="treeview-menu" [style.display]="(reportmenu.id == activeMenuId) ? 'block' : 'none'">
               <!-- <li><a href="./assets/pages/charts/chartjs.html"><i class="fa fa-circle-o"></i>Home Page</a></li> -->
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;" (click)="OpenModalDialog()"><i class="fa fa-circle-o"></i>State Score</a></li>
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a [routerLink]="RoutRptLink"><i class="fa fa-circle-o"></i>PMAY-U Dashboard {{DivText}}</a></li>
-              
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/phyfinChart'><i class="fa fa-circle-o"></i>Physical Fin Chart</a></li>
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/ConsphyfinChart'><i class="fa fa-circle-o"></i>Cons. Phy-Fin Report</a></li>
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  (click)="OpenModalDialog()"><i class="fa fa-circle-o"></i>State Score</a></li>
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a [routerLink]="RoutRptLink"><i
+                    class="fa fa-circle-o"></i>PMAY-U Dashboard {{DivText}}</a></li>
+
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  href='/Admin/phyfinChart'><i class="fa fa-circle-o"></i>Physical Fin Chart</a></li>
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  href='/Admin/ConsphyfinChart'><i class="fa fa-circle-o"></i>Cons. Phy-Fin Report</a></li>
               <!-- <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li> -->
-              
+
               <!-- <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/VerticalFinancialDetails'><i class="fa fa-circle-o"></i>Fincncial Houses Details</a></li> -->
 
-              
+
 
               <!-- <li><a href="./assets/pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
               <li><a href="./assets/pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li> -->
-          </ul>
-      </li>
+            </ul>
+          </li>
 
-      <!-- fORMS Menu-->
-      <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Forms_menu" #reportmenu1 [class.menu-open]="reportmenu1.id == activeMenuId" (click)="toggle(reportmenu1.id)">
-          <a>
-            <!-- <i class="fa fa-pie-chart"></i> -->
-            <!-- <i class="fa fa-dashboard"></i> -->
-            <i class="fa fa-telegram"></i>
-            <span>Masters Forms</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu" [style.display]="(reportmenu1.id == activeMenuId) ? 'block' : 'none'">
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/statemaster']"><i class="fa fa-circle-o"></i>State Master</a></li>
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DistrictMaster']"><i class="fa fa-circle-o"></i>Distt Master</a></li>
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/CityMaster']"><i class="fa fa-circle-o"></i>City Master</a></li>
-            
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ConstituencyMaster']"><i class="fa fa-circle-o"></i>Constituency Master</a></li>
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ComponentMaster']"><i class="fa fa-circle-o"></i>Component Master</a></li>
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ClassificationMaster']"><i class="fa fa-circle-o"></i>Classification Master</a></li>
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/SchemeMaster']"><i class="fa fa-circle-o"></i>Scheme  Master </a></li>
-            <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/MappingClassificationMaster']"><i class="fa fa-circle-o"></i>Mapping Classification Master</a></li>
-
-             
-             
-
-
-          </ul>
-      </li>
-
-      <!-- State Wise  Menu-->
-      <li class="treeview" [ngStyle]="{'display':DivDisplay}"  id="Forms_menu" #reportmenu11 [class.menu-open]="reportmenu11.id == activeMenuId" (click)="toggle(reportmenu11.id)">
-          <a>
+          <!-- fORMS Menu-->
+          <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Forms_menu" #reportmenu1
+            [class.menu-open]="reportmenu1.id == activeMenuId" (click)="toggle(reportmenu1.id)">
+            <a>
               <!-- <i class="fa fa-pie-chart"></i> -->
               <!-- <i class="fa fa-dashboard"></i> -->
               <i class="fa fa-telegram"></i>
@@ -444,97 +444,172 @@
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-            </a>  
-        <ul class="treeview-menu" [style.display]="(reportmenu11.id == activeMenuId) ? 'block' : 'none'">
-              <li [ngStyle]="{'display':DivDisplay}"  class="active"><a style="cursor: pointer;" (click)="OpenModalDialog()"><i class="fa fa-circle-o"></i>State Score</a></li>
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a [routerLink]="RoutRptLink"><i class="fa fa-circle-o"></i>PMAY-U Dashboard {{DivText}}</a></li>
-              
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/phyfinChart'><i class="fa fa-circle-o"></i>Physical Fin Chart</a></li>
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/ConsphyfinChart'><i class="fa fa-circle-o"></i>Cons. Phy-Fin Report</a></li>
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li> 
+            </a>
+            <ul class="treeview-menu" [style.display]="(reportmenu1.id == activeMenuId) ? 'block' : 'none'">
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/statemaster']"><i
+                    class="fa fa-circle-o"></i>State Master</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DistrictMaster']"><i
+                    class="fa fa-circle-o"></i>Distt Master</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/CityMaster']"><i
+                    class="fa fa-circle-o"></i>City Master</a></li>
+
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ConstituencyMaster']"><i
+                    class="fa fa-circle-o"></i>Constituency Master</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ComponentMaster']"><i
+                    class="fa fa-circle-o"></i>Component Master</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
+                  [routerLink]="['/Admin/ClassificationMaster']"><i class="fa fa-circle-o"></i>Classification Master</a>
+              </li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/SchemeMaster']"><i
+                    class="fa fa-circle-o"></i>Scheme Master </a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
+                  [routerLink]="['/Admin/MappingClassificationMaster']"><i class="fa fa-circle-o"></i>Mapping
+                  Classification Master</a></li>
 
 
-              
+
+
+
+            </ul>
+          </li>
+
+          <!-- State Wise  Menu-->
+          <li class="treeview" [ngStyle]="{'display':DivDisplay}" id="Forms_menu" #reportmenu11
+            [class.menu-open]="reportmenu11.id == activeMenuId" (click)="toggle(reportmenu11.id)">
+            <a>
+              <!-- <i class="fa fa-pie-chart"></i> -->
+              <!-- <i class="fa fa-dashboard"></i> -->
+              <i class="fa fa-telegram"></i>
+              <span>Masters Forms</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" [style.display]="(reportmenu11.id == activeMenuId) ? 'block' : 'none'">
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  (click)="OpenModalDialog()"><i class="fa fa-circle-o"></i>State Score</a></li>
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a [routerLink]="RoutRptLink"><i
+                    class="fa fa-circle-o"></i>PMAY-U Dashboard {{DivText}}</a></li>
+
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  href='/Admin/phyfinChart'><i class="fa fa-circle-o"></i>Physical Fin Chart</a></li>
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  href='/Admin/ConsphyfinChart'><i class="fa fa-circle-o"></i>Cons. Phy-Fin Report</a></li>
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li>
+
+
+
               <!-- <li><a href="./assets/pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
               <li><a href="./assets/pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li> -->
             </ul>
-      </li>
+          </li>
 
 
-            <!-- Import Excel Data Menu-->
-            <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Upload_menu" #reportmenu2 [class.menu-open]="reportmenu2.id == activeMenuId" (click)="toggle(reportmenu2.id)">
-                <a>
-                  <i class="fa fa-star"></i>  
-                  <span>Data Uploads</span>
-                  <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                  </span>
-                </a>
-                <ul class="treeview-menu" [style.display]="(reportmenu2.id == activeMenuId) ? 'block' : 'none'">
-                  <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/Exceljnnurm']"><i class="fa fa-circle-o"></i>Jnnurm Upload Data</a></li>
-                  <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ExcelPMAY']"><i class="fa fa-circle-o"></i>PMAY Upload Data</a></li>
-                  <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ExcelStatescore']"><i class="fa fa-circle-o"></i>State Score Upload Data</a></li>
-                  <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ExcelPhyDashboard']"><i class="fa fa-circle-o"></i>Phy. Dashboard Upload Data</a></li>
-                  <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ExcelDemandCityWise']"><i class="fa fa-circle-o"></i>Demand City-Wise Upload Data</a></li>
-                  <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ExcelClssmainmaster']"><i class="fa fa-circle-o"></i>Clss main master Upload Data Old Format</a></li>
-                  <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ExcelCLSSCityMain']"><i class="fa fa-circle-o"></i>Clss City main Upload Data</a></li>
-                  <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ClssMasterUpload']"><i class="fa fa-circle-o"></i>Clss Main Master Upload Data</a></li>
-                  <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/StateScoreUpdationForm']"><i class="fa fa-circle-o"></i>State Score Updation Form</a></li>
-                  
-                  
-                  
-                  <!-- <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DisttMaster']"><i class="fa fa-circle-o"></i>Distt Master Form</a></li>
+          <!-- Import Excel Data Menu-->
+          <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Upload_menu" #reportmenu2
+            [class.menu-open]="reportmenu2.id == activeMenuId" (click)="toggle(reportmenu2.id)">
+            <a>
+              <i class="fa fa-star"></i>
+              <span>Data Uploads</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" [style.display]="(reportmenu2.id == activeMenuId) ? 'block' : 'none'">
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/Exceljnnurm']"><i
+                    class="fa fa-circle-o"></i>Jnnurm Upload Data</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ExcelPMAY']"><i
+                    class="fa fa-circle-o"></i>PMAY Upload Data</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ExcelStatescore']"><i
+                    class="fa fa-circle-o"></i>State Score Upload Data</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ExcelPhyDashboard']"><i
+                    class="fa fa-circle-o"></i>Phy. Dashboard Upload Data</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
+                  [routerLink]="['/Admin/ExcelDemandCityWise']"><i class="fa fa-circle-o"></i>Demand City-Wise Upload
+                  Data</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
+                  [routerLink]="['/Admin/ExcelClssmainmaster']"><i class="fa fa-circle-o"></i>Clss main master Upload
+                  Data Old Format</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ExcelCLSSCityMain']"><i
+                    class="fa fa-circle-o"></i>Clss City main Upload Data</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ClssMasterUpload']"><i
+                    class="fa fa-circle-o"></i>Clss Main Master Upload Data</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
+                  [routerLink]="['/Admin/StateScoreUpdationForm']"><i class="fa fa-circle-o"></i>State Score Updation
+                  Form</a></li>
+
+
+
+              <!-- <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DisttMaster']"><i class="fa fa-circle-o"></i>Distt Master Form</a></li>
                    -->
-                </ul>
-            </li>
+            </ul>
+          </li>
 
-             <!-- Administration Menu-->
-            <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Admin_menu" #Adminmenu [class.menu-open]="Adminmenu.id == activeMenuId" (click)="toggle(Adminmenu.id)">
-                <a>
-                  <i class="fa fa-shopping-basket"></i>
-                  <span>Administration</span>
-                  <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                  </span>
-                </a>
-                <ul class="treeview-menu" [style.display]="(Adminmenu.id == activeMenuId) ? 'block' : 'none'">
-                  <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['../Register']"><i class="fa fa-circle-o"></i>Registeration</a></li>
-                  <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/UsersMaster']"><i class="fa fa-circle-o"></i>Users Master</a></li>
-                  <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/MappingStates']"><i class="fa fa-circle-o"></i>Mapping of States</a></li>
-                </ul>
-            </li>
+          <!-- Administration Menu-->
+          <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Admin_menu" #Adminmenu
+            [class.menu-open]="Adminmenu.id == activeMenuId" (click)="toggle(Adminmenu.id)">
+            <a>
+              <i class="fa fa-shopping-basket"></i>
+              <span>Administration</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" [style.display]="(Adminmenu.id == activeMenuId) ? 'block' : 'none'">
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['../Register']"><i
+                    class="fa fa-circle-o"></i>Registeration</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/UsersMaster']"><i
+                    class="fa fa-circle-o"></i>Users Master</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/MappingStates']"><i
+                    class="fa fa-circle-o"></i>Mapping of States</a></li>
+            </ul>
+          </li>
 
-            <!-- DRMC Menu-->
-            <li class="treeview" [ngStyle]="{'display':DMRCDisplay}" id="DRMC_menu" #DMRC_menu [class.menu-open]="DMRC_menu.id == activeMenuId" (click)="toggle(DMRC_menu.id)">
-                <a>
-                  <i class="fa fa-phone-square"></i>
-                  <span>DRMC</span>
-                  <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                  </span>
-                </a>
-                <ul class="treeview-menu" [style.display]="(DMRC_menu.id == activeMenuId) ? 'block' : 'none'">
-                  <!-- <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/SchemeMaster']"><i class="fa fa-circle-o"></i>Scheme Master Form</a></li> -->
-                  <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/project-detail']"><i class="fa fa-circle-o"></i>Project-detail Form</a></li>
-                  <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/project-release-fund-flow']"><i class="fa fa-circle-o"></i>Project-release-fund-flow</a></li>
-                  <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/project-uc-submission']"><i class="fa fa-circle-o"></i>Project-UC-Submission</a></li>
-                  <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/ProjectReleaseOrder']"><i class="fa fa-circle-o"></i>Project-release-order</a></li>
-                  <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/ReportStateWise']"><i class="fa fa-circle-o"></i>Report-state-wise</a></li>
+          <!-- DRMC Menu-->
+          <li class="treeview" [ngStyle]="{'display':DMRCDisplay}" id="DRMC_menu" #DMRC_menu
+            [class.menu-open]="DMRC_menu.id == activeMenuId" (click)="toggle(DMRC_menu.id)">
+            <a>
+              <i class="fa fa-phone-square"></i>
+              <span>DRMC</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" [style.display]="(DMRC_menu.id == activeMenuId) ? 'block' : 'none'">
+              <!-- <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/SchemeMaster']"><i class="fa fa-circle-o"></i>Scheme Master Form</a></li> -->
+              <li [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/project-detail']"><i
+                    class="fa fa-circle-o"></i>Project-detail Form</a></li>
+              <li [ngStyle]="{'display':DMRCDisplay}" class="active"><a
+                  [routerLink]="['/DRMC/project-release-fund-flow']"><i
+                    class="fa fa-circle-o"></i>Project-release-fund-flow</a></li>
+              <li [ngStyle]="{'display':DMRCDisplay}" class="active"><a
+                  [routerLink]="['/DRMC/project-uc-submission']"><i class="fa fa-circle-o"></i>Project-UC-Submission</a>
+              </li>
+              <li [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/ProjectReleaseOrder']"><i
+                    class="fa fa-circle-o"></i>Project-release-order</a></li>
+              <li [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/ReportStateWise']"><i
+                    class="fa fa-circle-o"></i>Report-state-wise</a></li>
 
-                  <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/physical-progress']"><i class="fa fa-circle-o"></i>Physical Progress </a></li>
-                  <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/ProjectBriefDetail']"><i class="fa fa-circle-o"></i>Project-Brief Detail Report </a></li>
-                  <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/ReportStateDistrictCityWise']"><i class="fa fa-circle-o"></i>State -District -City Wise Report </a></li>
-                  <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/ReportDistrictWise']"><i class="fa fa-circle-o"></i>District -City Wise Report </a></li>
-                </ul>
-    
-                <!-- <ul class="treeview-menu" [style.display]="(DMRC_menu.id == activeMenuId) ? 'block' : 'none'">
+              <li [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/physical-progress']"><i
+                    class="fa fa-circle-o"></i>Physical Progress </a></li>
+              <li [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/ProjectBriefDetail']"><i
+                    class="fa fa-circle-o"></i>Project-Brief Detail Report </a></li>
+              <li [ngStyle]="{'display':DMRCDisplay}" class="active"><a
+                  [routerLink]="['/DRMC/ReportStateDistrictCityWise']"><i class="fa fa-circle-o"></i>State -District
+                  -City Wise Report </a></li>
+              <li [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/DRMC/ReportDistrictWise']"><i
+                    class="fa fa-circle-o"></i>District -City Wise Report </a></li>
+            </ul>
+
+            <!-- <ul class="treeview-menu" [style.display]="(DMRC_menu.id == activeMenuId) ? 'block' : 'none'">
                   <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/Admin/Exceljnnurm']"><i class="fa fa-circle-o"></i>Jnnurm Upload Data</a></li>
                   <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/Admin/DisttMaster']"><i class="fa fa-circle-o"></i>Distt Master Form</a></li>
                 </ul> -->
-            </li>
+          </li>
 
-      <!-- DMRC Menu-->
-      <!-- <li class="treeview"  [ngStyle]="{'display':DMRCDisplay}" id="DMRC_menu" #DMRCmenu [class.menu-open]="DMRCmenu.id == activeMenuId" (click)="toggle(DMRCmenu.id)">
+          <!-- DMRC Menu-->
+          <!-- <li class="treeview"  [ngStyle]="{'display':DMRCDisplay}" id="DMRC_menu" #DMRCmenu [class.menu-open]="DMRCmenu.id == activeMenuId" (click)="toggle(DMRCmenu.id)">
           <a>
             <i class="fa fa-laptop"></i>
             <span>Masters</span>
@@ -551,322 +626,325 @@
           </ul> 
       </li> -->
 
- 
-      <li class="treeview">
-          <a href="/ChangePassword">
+
+          <li class="treeview">
+            <a href="/ChangePassword">
               <i class="fa fa-shield"></i> <span>Change Password</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
 
-        <a href="Login">
-          <i class="fa fa-plane"></i> <span>Logout</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-      </li>
+            <a href="Login">
+              <i class="fa fa-plane"></i> <span>Logout</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="height: auto;">
+      <!-- Content Header (Page header) -->
+
+
+      <!-- Main content -->
+      <section>
+
+        <div>
+          <router-outlet></router-outlet>
+        </div>
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer" id="Cright">
+      <div class="pull-right hidden-xs">
+        <b>Version</b>Release 1.0
+      </div>
+      <strong>Copyright &copy; 2018-2019 <a href="http://mohua.gov.in">Govt. of India, Ministry of Housing and Urban
+          Affairs</a>.</strong> All rights
+      reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Create the tabs -->
+      <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+        <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+        <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
       </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <!-- Home tab content -->
+        <div class="tab-pane" id="control-sidebar-home-tab">
+          <h3 class="control-sidebar-heading">Recent Activity</h3>
+          <ul class="control-sidebar-menu">
+            <li>
+              <a href="javascript:void(0)">
+                <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="height: auto;" >
-    <!-- Content Header (Page header) -->
+                <div class="menu-info">
+                  <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
 
-
-    <!-- Main content -->
-    <section >
-     
-        <div >
-            <router-outlet></router-outlet>
-            </div>
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <footer class="main-footer" id="Cright">
-    <div class="pull-right hidden-xs">
-      <b>Version</b>Release 1.0
-    </div>
-    <strong>Copyright &copy; 2018-2019 <a href="http://mohua.gov.in">Govt. of India, Ministry of Housing and Urban Affairs</a>.</strong> All rights
-    reserved.
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-user bg-yellow"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                <p>New phone +1(800)555-1234</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                <p>nora@example.com</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Back End Framework
-                <span class="label label-primary pull-right">68%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-
-
-<!--  for Modal popup of report statescore-->
-<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}" style="padding-left: 500px">
-    <!-- modal-dialog -->
-    <div class="modal-dialog" role="document">
-      <!-- modal-content -->
-      <div class="modal-content">
-        <!-- modal-header -->
-        <div class="modal-header">
-          <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()"><span aria-hidden="true">&times;</span></button>
-          <!-- <h4 class="modal-title">Login</h4> -->
-        </div>
-  
-        <!-- modal-body -->
-        <div class="modal-body">
-            <img src="./assets/img/pmay_logo-2.png" width="150px"/>  
-          <div>
-  
-                <!-- <img src="./assets/img/pmay_logo-2.png" alt="Image" style="width:100%;height: 90%;opacity: 0.2"> -->
-                <div class="content-div">
-                    
-                  <div class="col-md-4">
-                        <label>Select State:</label>
-                    </div>
-                                <div class="col-md-5">
-                                        <div>
-                                    
-                                          <select class="form-control" placeholder="Choose State" [(ngModel)]="State"
-                                          style="width: 300px;" (change)="getStateDetails($event)">
-                                            <option [selected]="true" [ngValue]="State">{{State}}</option>
-                                            <option *ngFor='let sntry of StateDetails' [value]='sntry.Codes'>
-                                              {{sntry.States_UT}}
-                                            </option>
-                                          </select>
-                                        </div>
-                          </div>
-                          <div class="row" align='center' style="padding:50px;">
-                              <button class="btn btn-warning" (click)="GoNext()" ><i class="fa fa-envelope"></i>Show Report.</button>
- 
-                          </div>
-                 
+                  <p>Will be 23 on April 24th</p>
                 </div>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                <i class="menu-icon fa fa-user bg-yellow"></i>
+
+                <div class="menu-info">
+                  <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+
+                  <p>New phone +1(800)555-1234</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+                <div class="menu-info">
+                  <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                  <p>nora@example.com</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+                <div class="menu-info">
+                  <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                  <p>Execution time 5 seconds</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+          <!-- /.control-sidebar-menu -->
+
+          <h3 class="control-sidebar-heading">Tasks Progress</h3>
+          <ul class="control-sidebar-menu">
+            <li>
+              <a href="javascript:void(0)">
+                <h4 class="control-sidebar-subheading">
+                  Custom Template Design
+                  <span class="label label-danger pull-right">70%</span>
+                </h4>
+
+                <div class="progress progress-xxs">
+                  <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                <h4 class="control-sidebar-subheading">
+                  Update Resume
+                  <span class="label label-success pull-right">95%</span>
+                </h4>
+
+                <div class="progress progress-xxs">
+                  <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                <h4 class="control-sidebar-subheading">
+                  Laravel Integration
+                  <span class="label label-warning pull-right">50%</span>
+                </h4>
+
+                <div class="progress progress-xxs">
+                  <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                <h4 class="control-sidebar-subheading">
+                  Back End Framework
+                  <span class="label label-primary pull-right">68%</span>
+                </h4>
+
+                <div class="progress progress-xxs">
+                  <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+                </div>
+              </a>
+            </li>
+          </ul>
+          <!-- /.control-sidebar-menu -->
+
+        </div>
+        <!-- /.tab-pane -->
+
+        <!-- Settings tab content -->
+        <div class="tab-pane" id="control-sidebar-settings-tab">
+          <form method="post">
+            <h3 class="control-sidebar-heading">General Settings</h3>
+
+            <div class="form-group">
+              <label class="control-sidebar-subheading">
+                Report panel usage
+                <input type="checkbox" class="pull-right" checked>
+              </label>
+
+              <p>
+                Some information about this general settings option
+              </p>
             </div>
-              
-  
-  
-        <!-- modal-footer -->
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-default" (click)="closeModalDialog()" >Close1</button> -->
+            <!-- /.form-group -->
+
+            <div class="form-group">
+              <label class="control-sidebar-subheading">
+                Allow mail redirect
+                <input type="checkbox" class="pull-right" checked>
+              </label>
+
+              <p>
+                Other sets of options are available
+              </p>
+            </div>
+            <!-- /.form-group -->
+
+            <div class="form-group">
+              <label class="control-sidebar-subheading">
+                Expose author name in posts
+                <input type="checkbox" class="pull-right" checked>
+              </label>
+
+              <p>
+                Allow the user to show his name in blog posts
+              </p>
+            </div>
+            <!-- /.form-group -->
+
+            <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+            <div class="form-group">
+              <label class="control-sidebar-subheading">
+                Show me as online
+                <input type="checkbox" class="pull-right" checked>
+              </label>
+            </div>
+            <!-- /.form-group -->
+
+            <div class="form-group">
+              <label class="control-sidebar-subheading">
+                Turn off notifications
+                <input type="checkbox" class="pull-right">
+              </label>
+            </div>
+            <!-- /.form-group -->
+
+            <div class="form-group">
+              <label class="control-sidebar-subheading">
+                Delete chat history
+                <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+              </label>
+            </div>
+            <!-- /.form-group -->
+          </form>
+        </div>
+        <!-- /.tab-pane -->
+      </div>
+    </aside>
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+
+
+    <!--  for Modal popup of report statescore-->
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}" style="padding-left: 500px">
+      <!-- modal-dialog -->
+      <div class="modal-dialog" role="document">
+        <!-- modal-content -->
+        <div class="modal-content">
+          <!-- modal-header -->
+          <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()"><span
+                aria-hidden="true">&times;</span></button>
+            <!-- <h4 class="modal-title">Login</h4> -->
+          </div>
+
+          <!-- modal-body -->
+          <div class="modal-body">
+            <img src="./assets/img/pmay_logo-2.png" width="150px" />
+            <div>
+
+              <!-- <img src="./assets/img/pmay_logo-2.png" alt="Image" style="width:100%;height: 90%;opacity: 0.2"> -->
+              <div class="content-div">
+
+                <div class="col-md-4">
+                  <label>Select State:</label>
+                </div>
+                <div class="col-md-5">
+                  <div>
+
+                    <select class="form-control" placeholder="Choose State" [(ngModel)]="State" style="width: 300px;"
+                      (change)="getStateDetails($event)">
+                      <option [selected]="true" [ngValue]="State">{{State}}</option>
+                      <option *ngFor='let sntry of StateDetails' [value]='sntry.Codes'>
+                        {{sntry.States_UT}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row" align='center' style="padding:50px;">
+                  <button class="btn btn-warning" (click)="GoNext()"><i class="fa fa-envelope"></i>Show Report.</button>
+
+                </div>
+
+              </div>
+            </div>
+
+
+
+            <!-- modal-footer -->
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-default" (click)="closeModalDialog()" >Close1</button> -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  </div>
-<!-- pop up state score end-->  
+    <!-- pop up state score end-->
 
-</div>
-<!-- ./wrapper -->
+  </div>
+  <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
-<script src="./assets/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="./assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="./assets/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="./assets/dist/js/adminlte.min.js"></script>
-<!-- Sparkline -->
-<script src="./assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-<!-- jvectormap  -->
-<script src="./assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="./assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- SlimScroll -->
-<script src="./assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- ChartJS -->
-<script src="./assets/bower_components/chart.js/Chart.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="./assets/dist/js/pages/dashboard2.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="./assets/dist/js/demo.js"></script>
+  <!-- jQuery 3 -->
+  <script src="./assets/bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="./assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="./assets/bower_components/fastclick/lib/fastclick.js"></script>
+  <!-- AdminLTE App -->
+  <script src="./assets/dist/js/adminlte.min.js"></script>
+  <!-- Sparkline -->
+  <script src="./assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+  <!-- jvectormap  -->
+  <script src="./assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+  <script src="./assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+  <!-- SlimScroll -->
+  <script src="./assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+  <!-- ChartJS -->
+  <script src="./assets/bower_components/chart.js/Chart.js"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="./assets/dist/js/pages/dashboard2.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="./assets/dist/js/demo.js"></script>
 </body>
+
 </html>
