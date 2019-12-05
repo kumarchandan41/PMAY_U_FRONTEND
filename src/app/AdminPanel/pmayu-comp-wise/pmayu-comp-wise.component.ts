@@ -82,11 +82,7 @@ export class PMAYuCompWiseComponent implements OnInit {
   display1='none';
   Codes:string;
   StateDetails: States[];
-  // Demand: number;
-  //today= new Date();
-  //jstoday = '';
-
- // selectedColor = '';
+ 
   State:string;
 
   //modalRef;
@@ -96,69 +92,39 @@ export class PMAYuCompWiseComponent implements OnInit {
   stateCodes: string = "0";
   districtCodes: string = "0";
   cityCodes: string = "0";
-  DivisionCodes = "0";
+  
+ 
   chart: Charts;
   compArray: string[];
-  Houses_Grounded: number;
-  SubsidyAmountCredited: number;
-  Ground_Total: number;
-  Grounded: number;
-  Sanctioned: number;
-  NoofBeneficiaries: number;  ///////////
-  Sanction_Total: any; //*
-  Houses_Completed: number;
-  Completed1: number;
-  GTCompleted: number;
-  Houses_Occupied: number;
-  Occupied1: number;
-  GTOccupied: number;
-  CAC: number;
-  demand: number;
+  Houses_Grounded: any;
+  SubsidyAmountCredited: any;
+ 
   StateMessage: string;
   DistrictMessage: string;
   CityMessage: string;
-  Ground_TotalNew: any;
-  stmsg: string;
+ 
   stValue: string;
   distvalue: string;
   cityvalue: string;
   distValue: string;
   cityValue: string;
-  CASanctforRelease: number;
-  CA_Committed: number;
-  CA_Approved: number;
-  nett: number;
-  Central_Assistance_Released: number;
-  ULBShare: number;
-  StateShare: number;
-  BeneficiaryShare: number;
-  CentralShare: number;
-  CumSanctioned: number;
-  CASanctioned_15_16: number;
-  CASanctioned_16_17: number;
-  CASanctioned_17_18: number;
-  CASanctioned_18_19: number;
-  CumuCAReleased: number;
-  CumuCA_Released_15_16: number;
-  CumuCA_Released_17_18: number;
-  CumuCA_Released_16_17: number;
-  CumuCA_Released_18_19: number;
+
+  
   firstGraph: string[] = [];
   secondGraph: string[] = [];
   leble: string;
   Y: string;
-  ULBShare1: string;
-  StateShare1: string;
-  BeneficiaryShare1: string;
-  CentralShare1: string;
+ 
   HS_14_15: string;
+  
   HC_14_15: any;
   HO_14_15: any;
   HS_15_16: any;
   HS_16_17: any;
   HS_17_18: any;
   HS_18_19: any;
-  HC_15_16: any;
+
+   HC_15_16: any;
   HC_16_17: any;
   HC_17_18: any;
   HC_18_19: any;
@@ -166,21 +132,15 @@ export class PMAYuCompWiseComponent implements OnInit {
   HO_16_17: any;
   HO_17_18: any;
   HO_18_19: any;
-  CAI: number;
-  CAR: number;
-  CAI15: number;
-  CAR15: number;
-  CAI16: number;
-  CAR16: number;
-  CAI17: number;
-  CAR17: number;
-  CAI18: number;
-  CAR18: number;
+ 
+
   HG_14_15: string;
   HG_15_16: string;
   HG_16_17: string;
   HG_17_18: string;
   HG_18_19: string;
+
+
   label: string;
   y: string;
   Total_Cost: string;
@@ -199,27 +159,10 @@ export class PMAYuCompWiseComponent implements OnInit {
 
   selectedYears:any;
   lstDivision: string[] = [];
-  TotSubsidy: number;
-  CA_SanctforReleaseTotal: number;
-  TOT_CA_Approved: number;
-  CLSS_LoanTotal: number;
-  CLSS_SubsidyTotal: number;
-  CLSS_BeneTotal: number;
-  Total_CostNew: number;
-  Total_CostNw: any;
-  Total_CostNw1: string;
-  Investment_in_Project: number;
-  CentralShareNew: number;
-  ////StateShareNew: number; ?
+ 
   StateShareNew: any;
 
-  ULBShareNew: number;
-  BeneShareNew: number;
-  CAR_NEW: number;
-  CASanctforReleaseNew: number;
-  CAR_new: number;
-  CAR_NEW1: string;
-  Total_UC_Recd: number;
+ 
   cid: number;
   Comp: string;
   total_Demand: number;
@@ -242,50 +185,15 @@ export class PMAYuCompWiseComponent implements OnInit {
 
 
   //@ViewChild('editModal') editModal: TemplateRef<any>;
-  CASanct_forReleaseNEW: string;
-  CA_ReleasedNew: string;
-  clss_total: string;
-  Demand_Overall: any;
-  total_Demand1_: any;
-  CA_ReleasedNw: any;
-  CASanct_forReleaseNew: number;
-  CASanct_forReleaseNChange: any;
-  UC_RecdNewCh: any;
-  CA_ApprovdNew: any;
-  CA_ReleasedNw1: any;
-  clss_totalN: any;
-  ZeroDemand: any;
-  Bene_New: any;
-  GTOccupied_New: any;
-  GTCompleted_New: any;
-  Ground_Total_New: any;
-  CA_Released_Nw: any;
-  UC_RecdNew_Ch: any;
- // lstHFACodes: import("src/app/model/charts.model").getHFACodes[];
-  lstHFACodes: import("src/app/financeReport/model/chart.model").getHFACodes[];
-  DisabledCheckBox:boolean;
+   
 
-  Houses_Grounded_State: number;
-  Sanctioned_State: number;
-  ZeroDemand_State: number;
-  Demand_State: number;
-  CAApproved: number;
-  CASanctionedforRelease: number;
-  CASanctionedforReleaseN: number;
-  No_Bene_EWS_LIG: number;
-  No_Beneficiary_MIG: number;
-  NoBeneficiary_Total: number;
-  CLSS_SubsidyTotal_State: number;
-  CAReleased: number;
-  UC_RecdExpenditure: number;
-  Completed_State: number;
-  Occupied_State: number;
-  Subsidy_EWS_LIG: number;
-  Subsidy_MIG: number;
-  ULBShareS: number;
-  StateShareS: number;
-  BeneficiaryShareS: number;
-  CentralShareS: number;
+
+ // lstHFACodes: import("src/app/model/charts.model").getHFACodes[];
+
+// lstHFACodes: import("src/app/financeReport/model/chart.model").getHFACodes[];
+  DisabledCheckBox:boolean;
+ 
+ 
   HS_15_16S: number;
   HS_16_17S: number;
   HS_17_18S: number;
@@ -298,6 +206,7 @@ export class PMAYuCompWiseComponent implements OnInit {
   HO_16_17S: number;
   HO_17_18S: number;
   HO_18_19S: number;
+
   Ca_Sanct_: any;
   CASanct_forReleaseN1: any;
   GrndTotal: any;
@@ -310,9 +219,10 @@ export class PMAYuCompWiseComponent implements OnInit {
   HO_14_15S: number;
   Total_Subsidy: string;
   totalSubsidy_State: number;
-  strcsv:any;
-  boolCheck: boolean;
-  boolCheckJn: boolean;
+  // strcsv:any;
+  // boolCheck: boolean;
+  // boolCheckJn: boolean;
+
   Sanction_Total_New: number;
   HS_19_20S: number;
   HC_19_20S: number;
@@ -323,20 +233,9 @@ export class PMAYuCompWiseComponent implements OnInit {
   HG_19_20: number;
   CASanctioned_19_20: number;
   CumuCA_Released_19_20: number;
-  CAI19: number;
-  CAR19: number;
-  CAI1: number;
-  CAR1: number;
-  CAI151: number;
-  CAR151: number;
-  CAI161: number;
-  CAR161: number;
-  CAI171: number;
-  CAR171: number; CAI181: number;
-   CAR181: number; CAI191: number;
-    CAR191: number;
-  Sanction_Total_New1: string;
-  // Demand: number;
+  
+  
+  
   Fin_Year: any;
   page:string;
   isDone = true;
@@ -350,7 +249,6 @@ export class PMAYuCompWiseComponent implements OnInit {
   Ground_Total__New: any;
   GTCompletedNew_: any;
   CASanct_forReleaseN_Change: any;
-  //---------------------------------
   Housesinvolved: any;
   FundsDisbursed_in_Houses: any;
   Houses_Grounde  : any;
@@ -367,14 +265,15 @@ export class PMAYuCompWiseComponent implements OnInit {
        Second_Houses14_15  : any =0;
        Third_Houses14_15 : any =0;
 
-       Fin_Year15_16 : any =0;
-       Housesinvolved15_16 : any =0;
-       FundsDisbursed_in_Houses15_16 : any =0;
-       Houses_Grounde15_16  : any =0;
-       Houses_Complete15_16  : any =0;
-       First_Houses15_16 : any =0;
-       Second_Houses15_16  : any =0;
-       Third_Houses15_16 : any =0;
+         Fin_Year15_16 : any =0;
+         Housesinvolved15_16 : any =0;
+         FundsDisbursed_in_Houses15_16 : any =0;
+        Houses_Grounde15_16  : any =0;
+        Houses_Complete15_16  : any =0;
+        First_Houses15_16 : any =0;
+        Second_Houses15_16  : any =0;
+        Third_Houses15_16 : any =0;
+
   Fin_Year16_17: any =0;
   Housesinvolved16_17: any =0;
   FundsDisbursed_in_Houses16_17: any =0;
@@ -421,7 +320,6 @@ export class PMAYuCompWiseComponent implements OnInit {
   Third_Houses20_21: any =0;
   FundsDisbursed_in_Houses20_21: any =0;
   Housesinvolved20_21: any =0;
-  //Fin_Year20_21: string =0;
   Houses_Grounde20_21: any =0;
   Houses_Complete20_21: any =0;
   a: any;
@@ -434,7 +332,6 @@ export class PMAYuCompWiseComponent implements OnInit {
   h: any;
   i: any;
   selectedYearsBene: string;
-//--------------------------------------------
 
   constructor(private router: Router,private gevent:GlobalEvent, public service: GraphService, private modalService: NgbModal) {
     this.StateMessage = "Select State";
@@ -482,62 +379,49 @@ export class PMAYuCompWiseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gevent.ColorObservable.subscribe(x=>{
-      console.log('color:'+x);
-    //  debugger;
-    });
+    // this.gevent.ColorObservable.subscribe(x=>{
+    //   console.log('color:'+x);
+    // //  debugger;
+    // });
 
-   this.backgroundColor = "#ffffff";// "#B3E5FC"// '#FFDD00';
+  //  this.backgroundColor = "#ffffff";// "#B3E5FC"// '#FFDD00';
    this.stateCodes = "0";
    this.districtCodes = "0";
    this.cityCodes = "0";
-   this.cid = 0;
-   this.Comp = "0";
-   this.Division = "0";
-   this.DivisionCodes = "0";
+  //  this.cid = 0;
+  //  this.Comp = "0";
+  //  this.Division = "0";
+  //  this.DivisionCodes = "0";
    this.State="--Select--";
 
     this.service.StateList();
     this.service.DisttList(this.stateCodes);
     this.service.CityList(this.districtCodes);
     //***************************************** */
-    this.service.getComponent().subscribe(result => {
-      this.lstComp = result;
-      //***************************************** */
-    })
-    this.service.getHFA_Details().subscribe(result => {
-      this.lstHFACodes = result;
-      //***************************************** */
-    })
+    // this.service.getComponent().subscribe(result => {
+    //   this.lstComp = result;
+    //   //***************************************** */
+    // })
+    // this.service.getHFA_Details().subscribe(result => {
+    //   this.lstHFACodes = result;
+    //   //***************************************** */
+    // })
 
     //this.BindGroundedGraph(this.stateCode,this.districtCode,this.cityCode);
-    this.DivisionCodes ='HFA-1';
+   // this.DivisionCodes ='HFA-1';
 
-    this.GetPsyChart(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes);
+    //this.GetPsyChart(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes);
     this.BindPMayData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"0");
-    this.BindBLC_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
-    this.BindAHP_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
-    this.BindISSRData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
-    this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,"");
-    this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
-    this.BindAHP_Datanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
+    this.BindBLC_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"0");
+    this.BindAHP_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"0");
+    this.BindISSRData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"0");
+    
+    // this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
+    // this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
+    // this.BindAHP_Datanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
+    // this.BindBLC_DataNew(this.stateCodes, this.districtCodes, this.cityCodes,"0" ,this.Fin_Year);
 
-
-    this.service.HFACityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes);
-    this.service.CLSSCityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes);
-    this.service.JNNURMCityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes);
-    this.service.GetJNNURM_Detail(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes);
-    this.service.GetStateWiseFinYrData_Div(this.stateCodes, this.DivisionCodes);
-
-    this.GetPsyChart(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes);
-    this.GetPsyChart(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes)
-    this.BindColumnGraph(this.stateCodes, this.districtCodes, this.cityCodes)
-    this.BindColumnGraphHouses1(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes)
-    this.BindColumnGraphFinancialData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes)
-    this.service.DemandDynamic_Report(this.stateCodes, this.districtCodes, this.cityCodes,  this.DivisionCodes);
-
-  //  this.service.sp_create_PMAY_DATACons(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp);
-
+     
 
   }
 
@@ -584,17 +468,15 @@ getFinDetails (Fin_Year)
          this.service.StateList();
          this.service.DisttList(this.stateCodes);
          this.service.CityList(this.districtCodes);
-             this.GetPsyChart(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes);
+           //  this.GetPsyChart(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes);
 
              this.BindPMayData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"") ;
              this.BindBLC_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
              this.BindAHP_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
              this.BindISSRData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
-             this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYears);
-
+             this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
              this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
              this.BindAHP_Datanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
-
              this.BindBLC_DataNew(this.stateCodes, this.districtCodes, this.cityCodes,"0" ,this.Fin_Year);
             }
      }
@@ -604,18 +486,19 @@ getFinDetails (Fin_Year)
 
       this.service.CityList(this.districtCodes);//
       this.DisabledCheckBox=true;
-      this.GetPsyChart(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes);
+     // this.GetPsyChart(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp, this.DivisionCodes);
 
       this.BindAHP_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
 
       this.BindPMayData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"") ;
        this.BindBLC_Data(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
        this.BindISSRData(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp,"");
+
        this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYears);
 
        this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
        this.BindAHP_Datanew(this.stateCodes, this.districtCodes, this.cityCodes,this.Fin_Year);
-
+       this.BindBLC_DataNew(this.stateCodes, this.districtCodes, this.cityCodes,"0" ,this.Fin_Year);
        
      //  this.BindBLC_DataNew(this.stateCodes, this.districtCodes, this.cityCodes,"0" ,this.Fin_Year);
     }
@@ -659,7 +542,7 @@ getFinDetails (Fin_Year)
  
 ShowPage()
 {
-  this.router.navigate(['/Admin/ConsphyfinChart1']);
+  this.router.navigate(['/Admin/VerticalHousesDetails']);
 }
 BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
 {
@@ -728,6 +611,17 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
 
      if (splitted.length ==1)
      {
+       if (x2=="2014_15")
+           x2 ="2014-15";
+           if (x2=="2015_16")
+           x2 ="2015-16";
+           if (x2=="2016_17")
+           x2 ="2017-18";
+           if (x2=="2018_19")
+           x2 ="2018-19";
+           if (x2=="2019_20")
+           x2 ="2019-20";
+            
           this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
             if (result[0].FinYear !="0" )
           {
@@ -747,7 +641,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             animationEnabled: true,
             exportEnabled: false,
             title: {
-              text: " Physical Data Consolidated (PMaAU)",
+              text: "Physical Progress(No of Houses) Consolidated (PMAY(U))",
               fontSize: "25",
             },
             backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -775,12 +669,12 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Housesinvolved",
+              legendText: "Sanctioned",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
               dataPoints: [
-                // { x: "14-15", y: this.Fin_Year15_16 },
+               
                 { label: x2, y: this.Housesinvolved14_15 },
          
               ]
@@ -791,7 +685,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "FundsDisbursed_in_Houses",
+              legendText: "Funded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -806,7 +700,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Grounded",
+              legendText: "Grounded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -821,7 +715,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Completed",
+              legendText: "Completed",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -836,7 +730,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Occupied",
+              legendText: "Occupied",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -845,28 +739,14 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               ]
             },
   
+            
             {
               type: "column",
               dockInsidePlotArea: true,
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "First Inst",
-               stValue: "Q",
-              indexLabelFontSize: 12,
-              indexLabelOrientation: "vertical",
-              dataPoints: [
-                { label: x2, y: this.First_Houses14_15 },
-              ]
-            },
-  
-            {
-              type: "column",
-              dockInsidePlotArea: true,
-               indexLabel: "{y}", //HG
-              bevelEnabled: true,
-              showInLegend: true,
-              legendText: "Second Inst",
+              legendText: "2nd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -881,7 +761,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Third Inst",
+              legendText: "3rd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -902,74 +782,36 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
           });
           chart.render();
       });
-      //     let chart = new CanvasJS.Chart("chartPMAYU", {
-      //       theme: "light2",
-      //       animationEnabled: true,
-      //       exportEnabled: false,
-      //       title: {
-      //         text: "Physical Data Consolidated (PMAYU)",
-      //         fontSize: "25",
-      //       },
-      //       backgroundColor: this.backgroundColor, 
-      //       colorSet: "greenShades",
-
-      //       data: [{
-
-      //         options: {
-      //           scales: {
-      //               xAxes: [{
-      //                   stacked: true
-      //               }],
-      //               yAxes: [{
-      //                   stacked: true
-      //               }]
-      //           }
-      //       },
-
-      //        type: "column",
-      //         dockInsidePlotArea: true,
-      //          indexLabel: "{y}", 
-      //         bevelEnabled: true,
-      //         showInLegend: true,
-      //         legendText: "Housesinvolved",
-      //          stValue: "Q",
-      //         indexLabelFontSize: 12,
-      //         indexLabelOrientation: "vertical",
-      //         dataPoints: [
-      //            { label: x2, y: this.Housesinvolved14_15 },
-      //           { label: x2, y: this.FundsDisbursed_in_Houses14_15 },
-      //           { label: x2, y: this.Houses_Grounde14_15 },
-      //           { label: x2, y: this.Houses_Complete14_15 },
-      //           { label: x2, y: this.HousesOccupied14_15 },
-      //           { label: x2, y: this.First_Houses14_15 },
-      //           { label: x2, y: this.Second_Houses14_15 },
-      //           { label: x2, y: this.Third_Houses14_15 }
-      //         ]
-      //       }  ,
-
-      //     ],
-      //       options: {
-      //         legend: {
-      //           display: true,
-      //           labels: {
-      //             fontColor: 'rgb(255, 99, 132)'
-      //           }
-      //         }
-      //       }
-      //     });
-      //     chart.render();
-      // });
+       
 
 
     }
     if (splitted.length ==2)
     {
-      this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
-            
-      //this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
-        //    if (result[0].FinYear !="0" )
-        //  {
+      if (x1=="2014_15)")
+      x1 ="2014-15";
+      if (x1=="2015_16)")
+      x1 ="2015-16";
+      if (x1=="2016_17")
+      x1 ="2017-18";
+      if (x1=="2018_19")
+      x1 ="2018-19";
+      if (x1=="2019_20")
+      x1 ="2019-20";
 
+
+      if (Y1=="2014_15)")
+      Y1 ="2014-15";
+      if (Y1=="2015_16)")
+      Y1 ="2015-16";
+      if (Y1=="2016_17")
+      Y1 ="2017-18";
+      if (Y1=="2018_19")
+      Y1 ="2018-19";
+      if (Y1=="2019_20")
+      Y1 ="2019-20";
+
+      this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
              this.Fin_Year14_15 = result[0].FinYear;
              this.Housesinvolved14_15 = result[0].Housesinvolved;
              this.FundsDisbursed_in_Houses14_15 = result[0].FundsDisbursed_in_Houses;
@@ -979,11 +821,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              this.First_Houses14_15 = result[0].First_Houses;
              this.Second_Houses14_15 = result[0].Second_Houses;
              this.Third_Houses14_15 = result[0].Third_Houses;
-        //  }
-        //  if (result[1].FinYear !="0" )
-        //  {
-
-            // 
+             // 
             try {
               this.Fin_Year15_16 = result[1].FinYear; 
             this.Housesinvolved15_16 = result[1].Housesinvolved;
@@ -1004,7 +842,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
           animationEnabled: true,
           exportEnabled: false,
           title: {
-            text: " Physical Data Consolidated (PMAyU)",
+            text: "Physical Progress(No of Houses) Consolidated (PMAY(U))",
             fontSize: "25",
           },
           backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -1032,14 +870,14 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Housesinvolved",
+            legendText: "Sanctioned",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
               // { x: "14-15", y: this.Fin_Year15_16 },
               { label: x1, y: this.Housesinvolved14_15 },
-              { label: Y1, y: this.Housesinvolved15_16 }
+              { label:  Y1, y: this.Housesinvolved15_16 }
 
             ]
           },
@@ -1049,13 +887,13 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "FundsDisbursed_in_Houses",
+            legendText: "Funded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
-              { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
-              { label: Y1, y: this.FundsDisbursed_in_Houses15_16 }
+              { label:  x1, y: this.FundsDisbursed_in_Houses14_15 },
+              { label:  Y1, y: this.FundsDisbursed_in_Houses15_16 }
             ]
           },
 
@@ -1065,7 +903,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Grounded",
+            legendText: "Grounded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1081,13 +919,13 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Completed",
+            legendText: "Completed",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
               { label: x1, y: this.Houses_Complete14_15 },
-              { label: Y1, y: this.Houses_Complete15_16 }
+              { label:  Y1, y: this.Houses_Complete15_16 }
             ]
           },
 
@@ -1097,13 +935,45 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Occupied",
+            legendText: "Occupied",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
-              { label: x1, y: this.HousesOccupied14_15 },
-              { label: Y1, y: this.HousesOccupied15_16 }
+              { label:  x1, y: this.HousesOccupied14_15 },
+              { label:  Y1, y: this.HousesOccupied15_16 }
+            ]
+          },
+
+         // {
+          //   type: "column",
+          //   dockInsidePlotArea: true,
+          //    indexLabel: "{y}", //HG
+          //   bevelEnabled: true,
+          //   showInLegend: true,
+          //   legendText: "First Inst",
+          //    stValue: "Q",
+          //   indexLabelFontSize: 12,
+          //   indexLabelOrientation: "vertical",
+          //   dataPoints: [
+          //     { label: x1, y: this.First_Houses14_15 },
+          //     { label: Y1, y: this.First_Houses15_16 }
+          //   ]
+          // },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "2nd Inst",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label:  x1, y: this.Second_Houses14_15 },
+              { label:  Y1, y: this.Second_Houses15_16 }
             ]
           },
 
@@ -1113,44 +983,12 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "First Inst",
+            legendText: "3rd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
-              { label: x1, y: this.First_Houses14_15 },
-              { label: Y1, y: this.First_Houses15_16 }
-            ]
-          },
-
-          {
-            type: "column",
-            dockInsidePlotArea: true,
-             indexLabel: "{y}", //HG
-            bevelEnabled: true,
-            showInLegend: true,
-            legendText: "Second Inst",
-             stValue: "Q",
-            indexLabelFontSize: 12,
-            indexLabelOrientation: "vertical",
-            dataPoints: [
-              { label: x1, y: this.Second_Houses14_15 },
-              { label: Y1, y: this.Second_Houses15_16 }
-            ]
-          },
-
-          {
-            type: "column",
-            dockInsidePlotArea: true,
-             indexLabel: "{y}", //HG
-            bevelEnabled: true,
-            showInLegend: true,
-            legendText: "Third Inst",
-             stValue: "Q",
-            indexLabelFontSize: 12,
-            indexLabelOrientation: "vertical",
-            dataPoints: [
-              { label: x1, y: this.Third_Houses14_15 },
+              { label:x1, y: this.Third_Houses14_15 },
               { label: Y1, y: this.Third_Houses15_16 }
             ]
           },
@@ -1171,6 +1009,41 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
     }
     if (splitted.length ==3)
     {
+
+      if (x1=="2014_15)")
+      x1 ="2014-15";
+      if (x1=="2015_16)")
+      x1 ="2015-16";
+      if (x1=="2016_17)")
+      x1 ="2017-18";
+      if (x1=="2018_19)")
+      x1 ="2018-19";
+      if (x1=="2019_20)" || x1=="2019_20")
+      x1 ="2019-20";
+
+
+      if (Y1=="2014_15)")
+      Y1 ="2014-15";
+      if (Y1=="2015_16)")
+      Y1 ="2015-16";
+      if (Y1=="2016_17)")
+      Y1 ="2017-18";
+      if (Y1=="2018_19)")
+      Y1 ="2018-19";
+      if (Y1=="2019_20)" || Y1=="2019_20")
+      Y1 ="2019-20";
+
+      if (z1=="2014_15)")
+      z1 ="2014-15";
+      if (z1=="2015_16)")
+      z1 ="2015-16";
+      if (z1=="2016_17)")
+      z1 ="2017-18";
+      if (z1=="2018_19)")
+      z1 ="2018-19";
+      if (z1=="2019_20)" || z1=="2019_20")
+      z1 ="2019-20";
+      
       this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
       
       //   this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -1226,7 +1099,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
           animationEnabled: true,
           exportEnabled: false,
           title: {
-            text: " Physical Data Consolidated (PMAyU)",
+            text: "Physical Progress(No of Houses) Consolidated (PMAY(U))",
             fontSize: "25",
           },
           backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -1254,7 +1127,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Housesinvolved",
+            legendText: "Sanctioned",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1271,7 +1144,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "FundsDisbursed_in_Houses",
+            legendText: "Funded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1289,7 +1162,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Grounded",
+            legendText: "Grounded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1306,7 +1179,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Completed",
+            legendText: "Completed",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1323,33 +1196,33 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Occupied",
+            legendText: "Occupied",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
-              { label: x1, y: this.HousesOccupied14_15 },
+              { label:x1, y: this.HousesOccupied14_15 },
               { label: Y1, y: this.HousesOccupied15_16 },
               { label: z1, y: this.HousesOccupied16_17} 
             ]
           },
 
-          {
-            type: "column",
-            dockInsidePlotArea: true,
-             indexLabel: "{y}", //HG
-            bevelEnabled: true,
-            showInLegend: true,
-            legendText: "First Inst",
-             stValue: "Q",
-            indexLabelFontSize: 12,
-            indexLabelOrientation: "vertical",
-            dataPoints: [
-              { label: x1, y: this.First_Houses14_15 },
-              { label: Y1, y: this.First_Houses15_16 },
-              { label: z1, y: this.First_Houses16_17 }
-            ]
-          },
+          // {
+          //   type: "column",
+          //   dockInsidePlotArea: true,
+          //    indexLabel: "{y}", //HG
+          //   bevelEnabled: true,
+          //   showInLegend: true,
+          //   legendText: "First Inst",
+          //    stValue: "Q",
+          //   indexLabelFontSize: 12,
+          //   indexLabelOrientation: "vertical",
+          //   dataPoints: [
+          //     { label: x1, y: this.First_Houses14_15 },
+          //     { label: Y1, y: this.First_Houses15_16 },
+          //     { label: z1, y: this.First_Houses16_17 }
+          //   ]
+          // },
 
           {
             type: "column",
@@ -1357,7 +1230,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Second Inst",
+            legendText: "2nd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1374,14 +1247,14 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Third Inst",
+            legendText: "3rd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
               { label: x1, y: this.Third_Houses14_15 },
               { label: Y1, y: this.Third_Houses15_16 },
-              { label: z1, y: this.Third_Houses16_17 }
+              { label:z1, y: this.Third_Houses16_17 }
             ]
           },
 
@@ -1402,6 +1275,35 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
 
     if (splitted.length ==4)
     {
+      if (x1=="2014_15)") x1 ="2014-15";
+      if (x1=="2015_16)") x1 ="2015-16";
+      if (x1=="2016_17)") x1 ="2016-17";
+      if (x1=="2017_18)") x1 ="2017-18";
+      
+      if (x1=="2018_19)") x1 ="2018-19";
+      if (x1=="2019_20)") x1 ="2019-20";
+
+
+      if (Y1=="2014_15)") Y1 ="2014-15";
+      if (Y1=="2015_16") Y1 ="2015-16";
+      if (Y1=="2016_17)") Y1 ="2016-17";
+      if (Y1=="2017_18)") Y1 ="2017-18";
+      if (Y1=="2018_19)") Y1 ="2018-19";
+      if (Y1=="2019_20)") Y1 ="2019-20";
+
+      if (z1=="2014_15)") z1 ="2014-15";
+      if (z1=="2015_16)") z1 ="2015-16";
+      if (z1=="2016_17)")  z1 ="2016-17";
+      if (z1=="2017_18)")  z1 ="2017-18";
+      if (z1=="2018_19)")  z1 ="2018-19"; 
+      if (z1=="2019_20)")  z1 ="2019-20";
+
+      if (z2=="2014_15)")   z2 ="2014-15";
+      if (z2=="2015_16)")  z2 ="2015-16";
+      if (z2=="2016_17)")  z2 ="2016-17";
+      if (z2=="2017_18)")  z2 ="2017-18";
+      if (z2=="2018_19)")  z2 ="2018-19";
+      if (z2=="2019_20)") z2 ="2019-20";
 
       this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
       
@@ -1472,7 +1374,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
           animationEnabled: true,
           exportEnabled: false,
           title: {
-            text: " Physical Data Consolidated (PMAyU)",
+            text: "Physical Progress(No of Houses) Consolidated (PMAY(U))",
             fontSize: "25",
           },
           backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -1500,7 +1402,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Housesinvolved",
+            legendText: "Sanctioned",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1518,12 +1420,12 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "FundsDisbursed_in_Houses",
+            legendText: "Funded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
-              { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+              { label:x1, y: this.FundsDisbursed_in_Houses14_15 },
               { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
               { label: z1, y: this.FundsDisbursed_in_Houses16_17 },
               { label: z2, y: this.FundsDisbursed_in_Houses17_18 }
@@ -1536,7 +1438,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Grounded",
+            legendText: "Grounded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1554,7 +1456,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Completed",
+            legendText: "Completed",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1572,7 +1474,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Occupied",
+            legendText: "Occupied",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1584,23 +1486,23 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             ]
           },
 
-          {
-            type: "column",
-            dockInsidePlotArea: true,
-             indexLabel: "{y}", //HG
-            bevelEnabled: true,
-            showInLegend: true,
-            legendText: "First Inst",
-             stValue: "Q",
-            indexLabelFontSize: 12,
-            indexLabelOrientation: "vertical",
-            dataPoints: [
-              { label: x1, y: this.First_Houses14_15 },
-              { label: Y1, y: this.First_Houses15_16 },
-              { label: z1, y: this.First_Houses16_17 },
-              { label: z2, y: this.First_Houses17_18 }
-            ]
-          },
+          // {
+          //   type: "column",
+          //   dockInsidePlotArea: true,
+          //    indexLabel: "{y}", //HG
+          //   bevelEnabled: true,
+          //   showInLegend: true,
+          //   legendText: "First Inst",
+          //    stValue: "Q",
+          //   indexLabelFontSize: 12,
+          //   indexLabelOrientation: "vertical",
+          //   dataPoints: [
+          //     { label: x1, y: this.First_Houses14_15 },
+          //     { label: Y1, y: this.First_Houses15_16 },
+          //     { label: z1, y: this.First_Houses16_17 },
+          //     { label: z2, y: this.First_Houses17_18 }
+          //   ]
+          // },
 
           {
             type: "column",
@@ -1608,7 +1510,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Second Inst",
+            legendText: "2nd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1626,7 +1528,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Third Inst",
+            legendText: "3rd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1654,6 +1556,43 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
     }
     if (splitted.length ==5)
     {
+      if (x1=="2014_15)") x1 ="2014-15";
+      if (x1=="2015_16)") x1 ="2015-16";
+      if (x1=="2016_17)") x1 ="2016-17";
+      if (x1=="2017_18)") x1 ="2017-18";
+      
+      if (x1=="2018_19)") x1 ="2018-19";
+      if (x1=="2019_20)") x1 ="2019-20";
+
+
+      if (Y1=="2014_15)") Y1 ="2014-15";
+      if (Y1=="2015_16") Y1 ="2015-16";
+      if (Y1=="2016_17)") Y1 ="2016-17";
+      if (Y1=="2017_18)") Y1 ="2017-18";
+      if (Y1=="2018_19)") Y1 ="2018-19";
+      if (Y1=="2019_20)") Y1 ="2019-20";
+
+      if (z1=="2014_15)") z1 ="2014-15";
+      if (z1=="2015_16)") z1 ="2015-16";
+      if (z1=="2016_17)")  z1 ="2016-17";
+      if (z1=="2017_18)")  z1 ="2017-18";
+      if (z1=="2018_19)")  z1 ="2018-19"; 
+      if (z1=="2019_20)")  z1 ="2019-20";
+
+      if (z2=="2014_15)")   z2 ="2014-15";
+      if (z2=="2015_16)")  z2 ="2015-16";
+      if (z2=="2016_17)")  z2 ="2016-17";
+      if (z2=="2017_18)")  z2 ="2017-18";
+      if (z2=="2018_19)")  z2 ="2018-19";
+      if (z2=="2019_20)") z2 ="2019-20";
+
+      if (z3=="2014_15)")   z3 ="2014-15";
+      if (z3=="2015_16)")  z3 ="2015-16";
+      if (z3=="2016_17)")  z3 ="2016-17";
+      if (z3=="2017_18)")  z3 ="2017-18";
+      if (z3=="2018_19)")  z3 ="2018-19";
+      if (z3=="2019_20)") z3 ="2019-20";
+      
       this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
          
      // this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -1737,7 +1676,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
           animationEnabled: true,
           exportEnabled: false,
           title: {
-            text: " Physical Data Consolidated (PMAyU)",
+            text: "Physical Progress(No of Houses) Consolidated (PMAY(U))",
             fontSize: "25",
           },
           backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -1765,7 +1704,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Housesinvolved",
+            legendText: "Sanctioned",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1784,7 +1723,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "FundsDisbursed_in_Houses",
+            legendText: "Funded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1803,7 +1742,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Grounded",
+            legendText: "Grounded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1822,7 +1761,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Completed",
+            legendText: "Completed",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1841,7 +1780,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Occupied",
+            legendText: "Occupied",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1849,29 +1788,29 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               { label: x1, y: this.HousesOccupied14_15 },
               { label: Y1, y: this.HousesOccupied15_16 },
               { label: z1, y: this.HousesOccupied16_17},
-              { label: z2, y: this.HousesOccupied17_18},
+              { label:z2, y: this.HousesOccupied17_18},
               { label: z3, y: this.HousesOccupied18_19} 
             ]
           },
 
-          {
-            type: "column",
-            dockInsidePlotArea: true,
-             indexLabel: "{y}", //HG
-            bevelEnabled: true,
-            showInLegend: true,
-            legendText: "First Inst",
-             stValue: "Q",
-            indexLabelFontSize: 12,
-            indexLabelOrientation: "vertical",
-            dataPoints: [
-              { label: x1, y: this.First_Houses14_15 },
-              { label: Y1, y: this.First_Houses15_16 },
-              { label: z1, y: this.First_Houses16_17 },
-              { label: z2, y: this.First_Houses17_18 },
-              { label: z3, y: this.First_Houses18_19 }
-            ]
-          },
+          // {
+          //   type: "column",
+          //   dockInsidePlotArea: true,
+          //    indexLabel: "{y}", //HG
+          //   bevelEnabled: true,
+          //   showInLegend: true,
+          //   legendText: "First Inst",
+          //    stValue: "Q",
+          //   indexLabelFontSize: 12,
+          //   indexLabelOrientation: "vertical",
+          //   dataPoints: [
+          //     { label: x1, y: this.First_Houses14_15 },
+          //     { label: Y1, y: this.First_Houses15_16 },
+          //     { label: z1, y: this.First_Houses16_17 },
+          //     { label: z2, y: this.First_Houses17_18 },
+          //     { label: z3, y: this.First_Houses18_19 }
+          //   ]
+          // },
 
           {
             type: "column",
@@ -1879,7 +1818,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Second Inst",
+            legendText: "2nd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1898,7 +1837,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Third Inst",
+            legendText: "3rd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -1927,6 +1866,52 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
     }
     if (splitted.length ==6)
     {
+      if (x1=="2014_15)") x1 ="2014-15";
+      if (x1=="2015_16)") x1 ="2015-16";
+      if (x1=="2016_17)") x1 ="2016-17";
+      if (x1=="2017_18)") x1 ="2017-18";
+      
+      if (x1=="2018_19)") x1 ="2018-19";
+      if (x1=="2019_20)") x1 ="2019-20";
+
+
+      if (Y1=="2014_15)") Y1 ="2014-15";
+      if (Y1=="2015_16") Y1 ="2015-16";
+      if (Y1=="2016_17)") Y1 ="2016-17";
+      if (Y1=="2017_18)") Y1 ="2017-18";
+      if (Y1=="2018_19)") Y1 ="2018-19";
+      if (Y1=="2019_20)") Y1 ="2019-20";
+
+      if (z1=="2014_15)") z1 ="2014-15";
+      if (z1=="2015_16)") z1 ="2015-16";
+      if (z1=="2016_17)")  z1 ="2016-17";
+      if (z1=="2017_18)")  z1 ="2017-18";
+      if (z1=="2018_19)")  z1 ="2018-19"; 
+      if (z1=="2019_20)")  z1 ="2019-20";
+
+      if (z2=="2014_15)")   z2 ="2014-15";
+      if (z2=="2015_16)")  z2 ="2015-16";
+      if (z2=="2016_17)")  z2 ="2016-17";
+      if (z2=="2017_18)")  z2 ="2017-18";
+      if (z2=="2018_19)")  z2 ="2018-19";
+      if (z2=="2019_20)") z2 ="2019-20";
+
+      if (z3=="2014_15)")   z3 ="2014-15";
+      if (z3=="2015_16)")  z3 ="2015-16";
+      if (z3=="2016_17)")  z3 ="2016-17";
+      if (z3=="2017_18)")  z3 ="2017-18";
+      if (z3=="2018_19)")  z3 ="2018-19";
+      if (z3=="2019_20)") z3 ="2019-20";
+
+      if (z4=="2014_15)")   z4 ="2014-15";
+      if (z4=="2015_16)")  z4 ="2015-16";
+
+      if (z4=="2016_17)")  z4 ="2016-17";
+      if (z4=="2017_18)")  z4 ="2017-18";
+      if (z4=="2018_19)")  z4 ="2018-19";
+      if (z4=="2019_20)") z4 ="2019-20";
+      
+
       this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
          
      // this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -2023,7 +2008,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
           animationEnabled: true,
           exportEnabled: false,
           title: {
-            text: " Physical Data Consolidated (PMAyU)",
+            text: "Physical Progress(No of Houses) Consolidated (PMAY(U))",
             fontSize: "25",
           },
           backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -2051,7 +2036,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Housesinvolved",
+            legendText: "Sanctioned",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -2071,7 +2056,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "FundsDisbursed_in_Houses",
+            legendText: "Funded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -2091,12 +2076,12 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Grounded",
+            legendText: "Grounded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
-              { label: x1, y: this.Houses_Grounde14_15 },
+              { label:x1, y: this.Houses_Grounde14_15 },
               { label: Y1, y: this.Houses_Grounde15_16 },
               { label: z1, y: this.Houses_Grounde16_17 },
               { label: z2, y: this.Houses_Grounde17_18 },
@@ -2111,7 +2096,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Completed",
+            legendText: "Completed",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -2131,7 +2116,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Occupied",
+            legendText: "Occupied",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -2145,25 +2130,25 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             ]
           },
 
-          {
-            type: "column",
-            dockInsidePlotArea: true,
-             indexLabel: "{y}", //HG
-            bevelEnabled: true,
-            showInLegend: true,
-            legendText: "First Inst",
-             stValue: "Q",
-            indexLabelFontSize: 12,
-            indexLabelOrientation: "vertical",
-            dataPoints: [
-              { label: x1, y: this.First_Houses14_15 },
-              { label: Y1, y: this.First_Houses15_16 },
-              { label: z1, y: this.First_Houses16_17 },
-              { label: z2, y: this.First_Houses17_18 },
-              { label: z3, y: this.First_Houses18_19 },
-              { label: z4, y: this.First_Houses19_20 }
-            ]
-          },
+          // {
+          //   type: "column",
+          //   dockInsidePlotArea: true,
+          //    indexLabel: "{y}", //HG
+          //   bevelEnabled: true,
+          //   showInLegend: true,
+          //   legendText: "First Inst",
+          //    stValue: "Q",
+          //   indexLabelFontSize: 12,
+          //   indexLabelOrientation: "vertical",
+          //   dataPoints: [
+          //     { label: x1, y: this.First_Houses14_15 },
+          //     { label: Y1, y: this.First_Houses15_16 },
+          //     { label: z1, y: this.First_Houses16_17 },
+          //     { label: z2, y: this.First_Houses17_18 },
+          //     { label: z3, y: this.First_Houses18_19 },
+          //     { label: z4, y: this.First_Houses19_20 }
+          //   ]
+          // },
 
           {
             type: "column",
@@ -2171,7 +2156,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Second Inst",
+            legendText: "2nd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -2191,7 +2176,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Third Inst",
+            legendText: "3rd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -2223,9 +2208,13 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
 
   BindISSRDatanew(stateCode, DisttCode, cityCode, Fin_Year )
   {
-         var str = Fin_Year ;//'SUM(BENE2014_15),SUM(BENE2015_16)';
-       //   alert(str.length);
-        if (str.length==101)
+
+    var str = new String(Fin_Year) ;
+    var len = str.length
+
+
+       //  var str = Fin_Year ; 
+        if (len==101)
         {
             var splitted = str.split(",", str.length);
             //alert(splitted[0]);
@@ -2236,7 +2225,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             var z3 =  splitted[4].substring(8,str.length-3);
             var z4 =  splitted[5].substring(8,str.length-3);
         }
-        if (str.length==84)
+        if (len==84)
         {
             var splitted = str.split(",", str.length);
             //alert(splitted[0]);
@@ -2246,7 +2235,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             var z2 =  splitted[3].substring(8,str.length-3);
             var z3 =  splitted[4].substring(8,str.length-3);
         }
-        if (str.length==67)
+        if (len==67)
         {
             var splitted = str.split(",", str.length);
             //alert(splitted[0]);
@@ -2257,7 +2246,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
            // alert(x1);
           //  alert(Y1); 
         }
-        if (str.length==50)
+        if (len==50)
         {
             var splitted = str.split(",", str.length);
             //alert(splitted[0]);
@@ -2267,7 +2256,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
            // alert(x1);
           //  alert(Y1); 
         }
-        if (str.length==33)
+        if (len==33)
         {
             var splitted = str.split(",", str.length);
             //alert(splitted[0]);
@@ -2276,7 +2265,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
            // alert(x1);
           //  alert(Y1); 
         }
-        if (str.length==16)
+        if (len==16)
         {
             var splitted = str.split(",", str.length);
   //          alert(splitted[0]);
@@ -2285,9 +2274,24 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
   
         }
       //  let x = stringToSplit.split(" ");
-  
+  debugger;
        if (splitted.length ==1)
        {
+        if (x2=="2014_15)" || x2=="2014_15")
+        x2 ="2014-15";
+        if (x2=="2015_16)"  || x2=="2015_16")
+        x2 ="2015-16";
+        if (x2=="2016_17)" || x2=="2016_17")
+        x2 ="2016-17";
+        
+        if (x2=="2017_18)" || x2=="2017_18")
+        x2 ="2017-18";
+
+        if (x2=="2018_19)" || x2=="2018_19")
+        x2 ="2018-19";
+        if (x2=="2019_20)" || x2=="2019_20")
+        x2 ="2019-20";
+        
             this.service.sp_create_ISSR_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
               if (result[0].FinYear !="0" )
             {
@@ -2307,7 +2311,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               animationEnabled: true,
               exportEnabled: false,
               title: {
-                text: " Physical Data Consolidated (ISSR)",
+                text: "Physical Progress (Nos) for ISSR under PMAY(U)",
                 fontSize: "25",
               },
               backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -2335,7 +2339,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "Housesinvolved",
+                legendText: "Sanctioned",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -2351,12 +2355,12 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "FundsDisbursed_in_Houses",
+                legendText: "Funded",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
                 dataPoints: [
-                  { label: x2, y: this.FundsDisbursed_in_Houses14_15 },
+                  { label:x2, y: this.FundsDisbursed_in_Houses14_15 },
                 ]
               },
     
@@ -2366,7 +2370,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "Houses_Grounded",
+                legendText: "Grounded",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -2381,7 +2385,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "Houses_Completed",
+                legendText: "Completed",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -2396,7 +2400,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "Houses_Occupied",
+                legendText: "Occupied",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -2405,20 +2409,20 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                 ]
               },
     
-              {
-                type: "column",
-                dockInsidePlotArea: true,
-                 indexLabel: "{y}", //HG
-                bevelEnabled: true,
-                showInLegend: true,
-                legendText: "First Inst",
-                 stValue: "Q",
-                indexLabelFontSize: 12,
-                indexLabelOrientation: "vertical",
-                dataPoints: [
-                  { label: x2, y: this.First_Houses14_15 },
-                ]
-              },
+              // {
+              //   type: "column",
+              //   dockInsidePlotArea: true,
+              //    indexLabel: "{y}", //HG
+              //   bevelEnabled: true,
+              //   showInLegend: true,
+              //   legendText: "First Inst",
+              //    stValue: "Q",
+              //   indexLabelFontSize: 12,
+              //   indexLabelOrientation: "vertical",
+              //   dataPoints: [
+              //     { label: "2014-15", y: this.First_Houses14_15 },
+              //   ]
+              // },
     
               {
                 type: "column",
@@ -2426,7 +2430,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "Second Inst",
+                legendText: "2nd Inst",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -2441,7 +2445,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "Third Inst",
+                legendText: "3rd Inst",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -2462,68 +2466,27 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             });
             chart.render();
         });
-        //     let chart = new CanvasJS.Chart("chartPMAYU", {
-        //       theme: "light2",
-        //       animationEnabled: true,
-        //       exportEnabled: false,
-        //       title: {
-        //         text: "Physical Data Consolidated (PMAYU)",
-        //         fontSize: "25",
-        //       },
-        //       backgroundColor: this.backgroundColor, 
-        //       colorSet: "greenShades",
-  
-        //       data: [{
-  
-        //         options: {
-        //           scales: {
-        //               xAxes: [{
-        //                   stacked: true
-        //               }],
-        //               yAxes: [{
-        //                   stacked: true
-        //               }]
-        //           }
-        //       },
-  
-        //        type: "column",
-        //         dockInsidePlotArea: true,
-        //          indexLabel: "{y}", 
-        //         bevelEnabled: true,
-        //         showInLegend: true,
-        //         legendText: "Housesinvolved",
-        //          stValue: "Q",
-        //         indexLabelFontSize: 12,
-        //         indexLabelOrientation: "vertical",
-        //         dataPoints: [
-        //            { label: x2, y: this.Housesinvolved14_15 },
-        //           { label: x2, y: this.FundsDisbursed_in_Houses14_15 },
-        //           { label: x2, y: this.Houses_Grounde14_15 },
-        //           { label: x2, y: this.Houses_Complete14_15 },
-        //           { label: x2, y: this.HousesOccupied14_15 },
-        //           { label: x2, y: this.First_Houses14_15 },
-        //           { label: x2, y: this.Second_Houses14_15 },
-        //           { label: x2, y: this.Third_Houses14_15 }
-        //         ]
-        //       }  ,
-  
-        //     ],
-        //       options: {
-        //         legend: {
-        //           display: true,
-        //           labels: {
-        //             fontColor: 'rgb(255, 99, 132)'
-        //           }
-        //         }
-        //       }
-        //     });
-        //     chart.render();
-        // });
+        
   
   
       }
       if (splitted.length ==2)
       {
+
+        if (x1=="2014_15)") x1 ="2014-15";
+        if (x1=="2015_16)") x1 ="2015-16";
+        if (x1=="2016_17)") x1 ="2017-18";
+        if (x1=="2018_19)") x1 ="2018-19";
+        if (x1=="2019_20)") x1 ="2019-20";
+  
+  
+        if (Y1=="2014_15)") Y1 ="2014-15";
+        if (Y1=="2015_16)") Y1 ="2015-16";
+        if (Y1=="2016_17)") Y1 ="2017-18";
+        if (Y1=="2018_19)") Y1 ="2018-19";
+        if (Y1=="2019_20)") Y1 ="2019-20";
+  
+         
         this.service.sp_create_ISSR_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
               
         //this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -2564,7 +2527,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             animationEnabled: true,
             exportEnabled: false,
             title: {
-              text: " Physical Data Consolidated (ISSR)",
+              text: "Physical Progress (Nos) for ISSR under PMAY(U)",
               fontSize: "25",
             },
             backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -2592,7 +2555,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Housesinvolved",
+              legendText: "Sanctioned",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2609,7 +2572,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "FundsDisbursed_in_Houses",
+              legendText: "Funded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2625,7 +2588,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Grounded",
+              legendText: "Grounded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2641,7 +2604,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Completed",
+              legendText: "Completed",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2657,7 +2620,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Occupied",
+              legendText: "Occupied",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2667,21 +2630,21 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               ]
             },
   
-            {
-              type: "column",
-              dockInsidePlotArea: true,
-               indexLabel: "{y}", //HG
-              bevelEnabled: true,
-              showInLegend: true,
-              legendText: "First Inst",
-               stValue: "Q",
-              indexLabelFontSize: 12,
-              indexLabelOrientation: "vertical",
-              dataPoints: [
-                { label: x1, y: this.First_Houses14_15 },
-                { label: Y1, y: this.First_Houses15_16 }
-              ]
-            },
+            // {
+            //   type: "column",
+            //   dockInsidePlotArea: true,
+            //    indexLabel: "{y}", //HG
+            //   bevelEnabled: true,
+            //   showInLegend: true,
+            //   legendText: "First Inst",
+            //    stValue: "Q",
+            //   indexLabelFontSize: 12,
+            //   indexLabelOrientation: "vertical",
+            //   dataPoints: [
+            //     { label: "2014-15", y: this.First_Houses14_15 },
+            //     { label: "2015-16", y: this.First_Houses15_16 }
+            //   ]
+            // },
   
             {
               type: "column",
@@ -2689,7 +2652,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Second Inst",
+              legendText: "2nd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2705,7 +2668,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Third Inst",
+              legendText: "3rd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2731,6 +2694,32 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
       }
       if (splitted.length ==3)
       {
+        if (x1=="2014_15)") x1 ="2014-15";
+        if (x1=="2015_16)") x1 ="2015-16";
+        if (x1=="2016_17)") x1 ="2016-17";
+        if (x1=="2017_18)") x1 ="2017-18";
+        if (x1=="2018_19)") x1 ="2018-19";
+        if (x1=="2019_20)") x1 ="2019-20";
+  
+  
+        if (Y1=="2014_15)") Y1 ="2014-15";
+        if (Y1=="2015_16)") Y1 ="2015-16";
+        if (Y1=="2016_17)") Y1 ="2016-17";
+        if (Y1=="2017_18)") Y1 ="2017-18";
+        if (Y1=="2018_19)") Y1 ="2018-19";
+        if (Y1=="2019_20)") Y1 ="2019-20";
+  
+        if (z1=="2014_15)") z1 ="2014-15";
+        if (z1=="2015_16)") z1 ="2015-16";
+
+        if (z1=="2016_17)")  z1 ="2016-17";
+        if (z1=="2017_18)")  z1 ="2017-18";
+        
+        if (z1=="2018_19)")  z1 ="2018-19"; 
+        if (z1=="2019_20)")  z1 ="2019-20";
+  
+ 
+  
         this.service.sp_create_ISSR_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
         
         //   this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -2786,7 +2775,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             animationEnabled: true,
             exportEnabled: false,
             title: {
-              text: " Physical Data Consolidated (ISSR)",
+              text: "Physical Progress (Nos) for ISSR under PMAY(U)",
               fontSize: "25",
             },
             backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -2814,7 +2803,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Housesinvolved",
+              legendText: "Sanctioned",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2822,7 +2811,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                 // { x: "14-15", y: this.Fin_Year15_16 },
                 { label: x1, y: this.Housesinvolved14_15 },
                 { label: Y1, y: this.Housesinvolved15_16 },
-                { label: z1, y: this.Housesinvolved16_17 }
+                { label:z1, y: this.Housesinvolved16_17 }
               ]
             },
             {
@@ -2831,7 +2820,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "FundsDisbursed_in_Houses",
+              legendText: "Funded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2849,7 +2838,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Grounded",
+              legendText: "Grounded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2866,7 +2855,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Completed",
+              legendText: "Completed",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2883,7 +2872,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Occupied",
+              legendText: "Occupied",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2894,22 +2883,22 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               ]
             },
   
-            {
-              type: "column",
-              dockInsidePlotArea: true,
-               indexLabel: "{y}", //HG
-              bevelEnabled: true,
-              showInLegend: true,
-              legendText: "First Inst",
-               stValue: "Q",
-              indexLabelFontSize: 12,
-              indexLabelOrientation: "vertical",
-              dataPoints: [
-                { label: x1, y: this.First_Houses14_15 },
-                { label: Y1, y: this.First_Houses15_16 },
-                { label: z1, y: this.First_Houses16_17 }
-              ]
-            },
+            // {
+            //   type: "column",
+            //   dockInsidePlotArea: true,
+            //    indexLabel: "{y}", //HG
+            //   bevelEnabled: true,
+            //   showInLegend: true,
+            //   legendText: "First Inst",
+            //    stValue: "Q",
+            //   indexLabelFontSize: 12,
+            //   indexLabelOrientation: "vertical",
+            //   dataPoints: [
+            //     { label: "2014-15", y: this.First_Houses14_15 },
+            //     { label: "2015-16", y: this.First_Houses15_16 },
+            //     { label: z1, y: this.First_Houses16_17 }
+            //   ]
+            // },
   
             {
               type: "column",
@@ -2917,7 +2906,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Second Inst",
+              legendText: "2nd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2934,7 +2923,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Third Inst",
+              legendText: "3rd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -2962,7 +2951,39 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
   
       if (splitted.length ==4)
       {
+        if (x1=="2014_15)") x1 ="2014-15";
+        if (x1=="2015_16)") x1 ="2015-16";
+        if (x1=="2016_17)") x1 ="2017-18";
+      
+        if (x1=="2017_18)")  x1 ="2017-18";
+
+        if (x1=="2018_19)") x1 ="2018-19";
+        if (x1=="2019_20)") x1 ="2019-20";
   
+  
+        if (Y1=="2014_15)") Y1 ="2014-15";
+        if (Y1=="2015_16)") Y1 ="2015-16";
+        if (Y1=="2016_17)") Y1 ="2016-17";
+        if (Y1=="2017_18)")  Y1 ="2017-18";
+        if (Y1=="2018_19)") Y1 ="2018-19";
+        if (Y1=="2019_20)") Y1 ="2019-20";
+  
+        if (z1=="2014_15)") z1 ="2014-15";
+        if (z1=="2015_16)") z1 ="2015-16";
+        if (z1=="2016_17)")  z1 ="2016-17";
+        if (z1=="2017_18)")  z1 ="2017-18";
+        if (z1=="2018_19)")  z1 ="2018-19"; 
+        if (z1=="2019_20)")  z1 ="2019-20";
+  
+        if (z2=="2014_15)")   z2 ="2014-15";
+        if (z2=="2015_16)")  z2 ="2015-16";
+        if (z2=="2016_17)")  z2 ="2016-17";
+        if (z2=="2017_18)")  z2 ="2017-18";
+        
+        if (z2=="2018_19)")  z2 ="2018-19";
+        if (z2=="2019_20)") z2 ="2019-20";
+  
+ 
         this.service.sp_create_ISSR_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
         
          //  this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -3032,7 +3053,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             animationEnabled: true,
             exportEnabled: false,
             title: {
-              text: " Physical Data Consolidated (ISSR)",
+              text: "Physical Progress (Nos) for ISSR under PMAY(U)",
               fontSize: "25",
             },
             backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -3060,7 +3081,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Housesinvolved",
+              legendText: "Sanctioned",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -3078,7 +3099,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "FundsDisbursed_in_Houses",
+              legendText: "Funded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -3096,7 +3117,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Grounded",
+              legendText: "Grounded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -3114,12 +3135,12 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Completed",
+              legendText: "Completed",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
               dataPoints: [
-                { label: x1, y: this.Houses_Complete14_15 },
+                { label: x1 ,y: this.Houses_Complete14_15 },
                 { label: Y1, y: this.Houses_Complete15_16 },
                 { label: z1, y: this.Houses_Complete16_17 },
                 { label: z2, y: this.Houses_Complete17_18 }
@@ -3132,7 +3153,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Occupied",
+              legendText: "Occupied",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -3144,23 +3165,23 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               ]
             },
   
-            {
-              type: "column",
-              dockInsidePlotArea: true,
-               indexLabel: "{y}", //HG
-              bevelEnabled: true,
-              showInLegend: true,
-              legendText: "First Inst",
-               stValue: "Q",
-              indexLabelFontSize: 12,
-              indexLabelOrientation: "vertical",
-              dataPoints: [
-                { label: x1, y: this.First_Houses14_15 },
-                { label: Y1, y: this.First_Houses15_16 },
-                { label: z1, y: this.First_Houses16_17 },
-                { label: z2, y: this.First_Houses17_18 }
-              ]
-            },
+            // {
+            //   type: "column",
+            //   dockInsidePlotArea: true,
+            //    indexLabel: "{y}", //HG
+            //   bevelEnabled: true,
+            //   showInLegend: true,
+            //   legendText: "First Inst",
+            //    stValue: "Q",
+            //   indexLabelFontSize: 12,
+            //   indexLabelOrientation: "vertical",
+            //   dataPoints: [
+            //     { label: "2014-15", y: this.First_Houses14_15 },
+            //     { label: Y1, y: this.First_Houses15_16 },
+            //     { label: "2016-17", y: this.First_Houses16_17 },
+            //     { label: z2, y: this.First_Houses17_18 }
+            //   ]
+            // },
   
             {
               type: "column",
@@ -3168,7 +3189,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Second Inst",
+              legendText: "2nd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -3186,7 +3207,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Third Inst",
+              legendText: "3rd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -3214,6 +3235,47 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
       }
       if (splitted.length ==5)
       {
+
+        if (x1=="2014_15)") x1 ="2014-15";
+        if (x1=="2015_16)") x1 ="2015-16";
+        if (x1=="2016_17)") x1 ="2016-17";
+        if (x1=="2017_18)") x1 ="2017-18";
+        
+        if (x1=="2018_19)") x1 ="2018-19";
+        if (x1=="2019_20)") x1 ="2019-20";
+  
+  
+        if (Y1=="2014_15)") Y1 ="2014-15";
+        if (Y1=="2015_16)") Y1 ="2015-16";
+        if (Y1=="2016_17)") Y1 ="2016-17";
+        if (Y1=="2017_18)") Y1 ="2017-18";
+        
+        if (Y1=="2018_19)") Y1 ="2018-19";
+        if (Y1=="2019_20)") Y1 ="2019-20";
+  
+        if (z1=="2014_15)") z1 ="2014-15";
+        if (z1=="2015_16)") z1 ="2015-16";
+        if (z1=="2016_17)")  z1 ="2016-17";
+        if (z1=="2017_18)")  z1 ="2017-18";
+        if (z1=="2018_19)")  z1 ="2018-19"; 
+        if (z1=="2019_20)")  z1 ="2019-20";
+  
+        if (z2=="2014_15)")   z2 ="2014-15";
+        if (z2=="2015_16)")  z2 ="2015-16";
+        if (z2=="2016_17)")  z2 ="2016-17";
+        if (z2=="2017_18)")  z2 ="2017-18";
+        if (z2=="2018_19)")  z2 ="2018-19";
+        if (z2=="2019_20)") z2 ="2019-20";
+  
+        if (z3=="2014_15)")   z3 ="2014-15";
+        if (z3=="2015_16)")  z3 ="2015-16";
+        if (z3=="2016_17)")  z3 ="2016-17";
+        if (z3=="2017_18)")  z3 ="2017-18";
+        
+        if (z3=="2018_19)")  z3 ="2018-19";
+        if (z3=="2019_20)") z3 ="2019-20";
+  
+         
         this.service.sp_create_ISSR_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
            
        // this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -3297,7 +3359,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             animationEnabled: true,
             exportEnabled: false,
             title: {
-              text: " Physical Data Consolidated (ISSR)",
+              text: "Physical Progress (Nos) for ISSR under PMAY(U)",
               fontSize: "25",
             },
             backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -3335,7 +3397,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                 { label: Y1, y: this.Housesinvolved15_16 },
                 { label: z1, y: this.Housesinvolved16_17 },
                 { label: z2, y: this.Housesinvolved17_18 },
-                { label: z3, y: this.Housesinvolved18_19 }
+                { label:  z3, y: this.Housesinvolved18_19 }
               ]
             },
             {
@@ -3390,7 +3452,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                 { label: x1, y: this.Houses_Complete14_15 },
                 { label: Y1, y: this.Houses_Complete15_16 },
                 { label: z1, y: this.Houses_Complete16_17 },
-                { label: z2, y: this.Houses_Complete17_18 },
+                { label:  z2, y: this.Houses_Complete17_18 },
                 { label: z3, y: this.Houses_Complete18_19 }
               ]
             },
@@ -3444,10 +3506,10 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
               dataPoints: [
-                { label: x1, y: this.Second_Houses14_15 },
+                { label:x1, y: this.Second_Houses14_15 },
                 { label: Y1, y: this.Second_Houses15_16 },
                 { label: z1, y: this.Second_Houses16_17 },
-                { label: z2, y: this.Second_Houses17_18 },
+                { label:  z2, y: this.Second_Houses17_18 },
                 { label: z3, y: this.Second_Houses18_19 }
               ]
             },
@@ -3464,9 +3526,9 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               indexLabelOrientation: "vertical",
               dataPoints: [
                 { label: x1, y: this.Third_Houses14_15 },
-                { label: Y1, y: this.Third_Houses15_16 },
+                { label:Y1, y: this.Third_Houses15_16 },
                 { label: z1, y: this.Third_Houses16_17 },
-                { label: z2, y: this.Third_Houses17_18 },
+                { label:  z2, y: this.Third_Houses17_18 },
                 { label: z3, y: this.Third_Houses18_19 }
               ]
             },
@@ -3487,6 +3549,43 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
       }
       if (splitted.length ==6)
       {
+
+        if (x1=="2014_15)") x1 ="2014-15";
+      if (x1=="2015_16)") x1 ="2015-16";
+      if (x1=="2016_17)") x1 ="2017-18";
+      if (x1=="2018_19)") x1 ="2018-19";
+      if (x1=="2019_20)") x1 ="2019-20";
+
+
+      if (Y1=="2014_15)") Y1 ="2014-15";
+      if (Y1=="2015_16)") Y1 ="2015-16";
+      if (Y1=="2016_17)") Y1 ="2017-18";
+      if (Y1=="2018_19)") Y1 ="2018-19";
+      if (Y1=="2019_20)") Y1 ="2019-20";
+
+      if (z1=="2014_15)") z1 ="2014-15";
+      if (z1=="2015_16)") z1 ="2015-16";
+      if (z1=="2016_17)")  z1 ="2017-18";
+      if (z1=="2018_19)")  z1 ="2018-19"; 
+      if (z1=="2019_20)")  z1 ="2019-20";
+
+      if (z2=="2014_15)")   z2 ="2014-15";
+      if (z2=="2015_16)")  z2 ="2015-16";
+      if (z2=="2016_17)")  z2 ="2017-18";
+      if (z2=="2018_19)")  z2 ="2018-19";
+      if (z2=="2019_20)") z2 ="2019-20";
+
+      if (z3=="2014_15)")   z3 ="2014-15";
+      if (z3=="2015_16)")  z3 ="2015-16";
+      if (z3=="2016_17)")  z3 ="2017-18";
+      if (z3=="2018_19)")  z3 ="2018-19";
+      if (z3=="2019_20)") z3 ="2019-20";
+
+      if (z4=="2014_15)")   z4 ="2014-15";
+      if (z4=="2015_16)")  z4 ="2015-16";
+      if (z4=="2016_17)")  z4 ="2017-18";
+      if (z4=="2018_19)")  z4 ="2018-19";
+      if (z4=="2019_20)") z4 ="2019-20";
         this.service.sp_create_ISSR_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
            
        // this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -3583,7 +3682,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             animationEnabled: true,
             exportEnabled: false,
             title: {
-              text: " Physical Data Consolidated (ISSR)",
+              text: "Physical Progress (Nos) for ISSR under PMAY(U)",
               fontSize: "25",
             },
             backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -3659,7 +3758,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                 { label: x1, y: this.Houses_Grounde14_15 },
                 { label: Y1, y: this.Houses_Grounde15_16 },
                 { label: z1, y: this.Houses_Grounde16_17 },
-                { label: z2, y: this.Houses_Grounde17_18 },
+                { label:z2, y: this.Houses_Grounde17_18 },
                 { label: z3, y: this.Houses_Grounde18_19 },
                 { label: z4, y: this.Houses_Grounde19_20 }
               ]
@@ -3738,7 +3837,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               dataPoints: [
                 { label: x1, y: this.Second_Houses14_15 },
                 { label: Y1, y: this.Second_Houses15_16 },
-                { label: z1, y: this.Second_Houses16_17 },
+                { label:z1, y: this.Second_Houses16_17 },
                 { label: z2, y: this.Second_Houses17_18 },
                 { label: z3, y: this.Second_Houses18_19 },
                 { label: z4, y: this.Second_Houses19_20 }
@@ -3852,6 +3951,16 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
       debugger ;
        if (splitted.length ==1)
        {
+        if (x2=="2014_15)")
+        x2 ="2014-15";
+        if (x2=="2015_16)")
+        x2 ="2015-16";
+        if (x2=="2016_17)")
+        x2 ="2017-18";
+        if (x2=="2018_19)")
+        x2 ="2018-19";
+        if (x2=="2019_20)")
+        x2 ="2019-20";
             this.service.sp_create_AHP_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
             if (result[0].FinYear !="0" )
             {
@@ -3887,7 +3996,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               animationEnabled: true,
               exportEnabled: false,
               title: {
-                text: " Physical Data Consolidated (AHP)",
+                text: "Physical Progress Nos) for AHP under PMAY(U)",
                 fontSize: "25",
               },
               backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -3915,7 +4024,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "Housesinvolved",
+                legendText: "Sanctioned",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -3931,7 +4040,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "FundsDisbursed_in_Houses",
+                legendText: "Funded",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -3946,7 +4055,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "Houses_Grounded",
+                legendText: "Grounded",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -3961,7 +4070,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "Houses_Completed",
+                legendText: "Completed",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -3976,7 +4085,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "Houses_Occupied",
+                legendText: "Occupied",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -3985,20 +4094,20 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                 ]
               },
     
-              {
-                type: "column",
-                dockInsidePlotArea: true,
-                 indexLabel: "{y}", //HG
-                bevelEnabled: true,
-                showInLegend: true,
-                legendText: "First Inst",
-                 stValue: "Q",
-                indexLabelFontSize: 12,
-                indexLabelOrientation: "vertical",
-                dataPoints: [
-                  { label: x2, y: this.First_Houses14_15 },
-                ]
-              },
+              // {
+              //   type: "column",
+              //   dockInsidePlotArea: true,
+              //    indexLabel: "{y}", //HG
+              //   bevelEnabled: true,
+              //   showInLegend: true,
+              //   legendText: "First Inst",
+              //    stValue: "Q",
+              //   indexLabelFontSize: 12,
+              //   indexLabelOrientation: "vertical",
+              //   dataPoints: [
+              //     { label: x2, y: this.First_Houses14_15 },
+              //   ]
+              // },
     
               {
                 type: "column",
@@ -4006,7 +4115,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "Second Inst",
+                legendText: "2nd Inst",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -4021,7 +4130,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                  indexLabel: "{y}", //HG
                 bevelEnabled: true,
                 showInLegend: true,
-                legendText: "Third Inst",
+                legendText: "3rd Inst",
                  stValue: "Q",
                 indexLabelFontSize: 12,
                 indexLabelOrientation: "vertical",
@@ -4104,6 +4213,21 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
       }
       if (splitted.length ==2)
       {
+
+        if (x1=="2014_15") x1 ="2014-15";
+        if (x1=="2015_16") x1 ="2015-16";
+        if (x1=="2016_17") x1 ="2017-18";
+        if (x1=="2018_19)") x1 ="2018-19";
+        if (x1=="2019_20)") x1 ="2019-20";
+  
+  
+        if (Y1=="2014_15") Y1 ="2014-15";
+        if (Y1=="2015_16") Y1 ="2015-16";
+        if (Y1=="2016_17") Y1 ="2017-18";
+        if (Y1=="2018_19)") Y1 ="2018-19";
+        if (Y1=="2019_20)") Y1 ="2019-20";
+  
+         
         this.service.sp_create_AHP_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
               
         //this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -4144,7 +4268,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             animationEnabled: true,
             exportEnabled: false,
             title: {
-              text: " Physical Data Consolidated (AHP)",
+              text: "Physical Progress Nos) for AHP under PMAY(U)",
               fontSize: "25",
             },
             backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -4172,7 +4296,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Housesinvolved",
+              legendText: "Sanctioned",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4189,7 +4313,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "FundsDisbursed_in_Houses",
+              legendText: "Funded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4205,7 +4329,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Grounded",
+              legendText: "Grounded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4221,7 +4345,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Completed",
+              legendText: "Completed",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4237,7 +4361,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Occupied",
+              legendText: "Occupied",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4247,21 +4371,21 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               ]
             },
   
-            {
-              type: "column",
-              dockInsidePlotArea: true,
-               indexLabel: "{y}", //HG
-              bevelEnabled: true,
-              showInLegend: true,
-              legendText: "First Inst",
-               stValue: "Q",
-              indexLabelFontSize: 12,
-              indexLabelOrientation: "vertical",
-              dataPoints: [
-                { label: x1, y: this.First_Houses14_15 },
-                { label: Y1, y: this.First_Houses15_16 }
-              ]
-            },
+            // {
+            //   type: "column",
+            //   dockInsidePlotArea: true,
+            //    indexLabel: "{y}", //HG
+            //   bevelEnabled: true,
+            //   showInLegend: true,
+            //   legendText: "First Inst",
+            //    stValue: "Q",
+            //   indexLabelFontSize: 12,
+            //   indexLabelOrientation: "vertical",
+            //   dataPoints: [
+            //     { label: "2014-15", y: this.First_Houses14_15 },
+            //     { label: "2015-16", y: this.First_Houses15_16 }
+            //   ]
+            // },
   
             {
               type: "column",
@@ -4269,7 +4393,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Second Inst",
+              legendText: "2nd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4285,7 +4409,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Third Inst",
+              legendText: "3rd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4311,6 +4435,25 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
       }
       if (splitted.length ==3)
       {
+
+        if (x1=="2014_15") x1 ="2014-15";
+        if (x1=="2015_16") x1 ="2015-16";
+        if (x1=="2016_17") x1 ="2017-18";
+        if (x1=="2018_19") x1 ="2018-19";
+        if (x1=="2019_20") x1 ="2019-20";
+  
+  
+        if (Y1=="2014_15") Y1 ="2014-15";
+        if (Y1=="2015_16") Y1 ="2015-16";
+        if (Y1=="2016_17") Y1 ="2017-18";
+        if (Y1=="2018_19") Y1 ="2018-19";
+        if (Y1=="2019_20") Y1 ="2019-20";
+  
+        if (z1=="2014_15") z1 ="2014-15";
+        if (z1=="2015_16") z1 ="2015-16";
+        if (z1=="2016_17")  z1 ="2017-18";
+        if (z1=="2018_19")  z1 ="2018-19"; 
+        if (z1=="2019_20")  z1 ="2019-20";
         this.service.sp_create_AHP_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
         
         //   this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -4366,7 +4509,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             animationEnabled: true,
             exportEnabled: false,
             title: {
-              text: " Physical Data Consolidated (AHP)",
+              text: "Physical Progress Nos) for AHP under PMAY(U)",
               fontSize: "25",
             },
             backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -4394,14 +4537,14 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Housesinvolved",
+              legendText: "Sanctioned",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
               dataPoints: [
                 // { x: "14-15", y: this.Fin_Year15_16 },
                 { label: x1, y: this.Housesinvolved14_15 },
-                { label: Y1, y: this.Housesinvolved15_16 },
+                { label:  Y1, y: this.Housesinvolved15_16 },
                 { label: z1, y: this.Housesinvolved16_17 }
               ]
             },
@@ -4411,12 +4554,12 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "FundsDisbursed_in_Houses",
+              legendText: "Funded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
               dataPoints: [
-                { label: x1, y: this.FundsDisbursed_in_Houses14_15 },
+                { label:x1, y: this.FundsDisbursed_in_Houses14_15 },
                 { label: Y1, y: this.FundsDisbursed_in_Houses15_16 },
                 { label: z1, y: this.FundsDisbursed_in_Houses16_17 }
   
@@ -4429,7 +4572,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Grounded",
+              legendText: "Grounded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4446,13 +4589,13 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Completed",
+              legendText: "Completed",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
               dataPoints: [
                 { label: x1, y: this.Houses_Complete14_15 },
-                { label: Y1, y: this.Houses_Complete15_16 },
+                { label:Y1, y: this.Houses_Complete15_16 },
                 { label: z1, y: this.Houses_Complete16_17 }
               ]
             },
@@ -4463,7 +4606,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Occupied",
+              legendText: "Occupied",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4474,22 +4617,22 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               ]
             },
   
-            {
-              type: "column",
-              dockInsidePlotArea: true,
-               indexLabel: "{y}", //HG
-              bevelEnabled: true,
-              showInLegend: true,
-              legendText: "First Inst",
-               stValue: "Q",
-              indexLabelFontSize: 12,
-              indexLabelOrientation: "vertical",
-              dataPoints: [
-                { label: x1, y: this.First_Houses14_15 },
-                { label: Y1, y: this.First_Houses15_16 },
-                { label: z1, y: this.First_Houses16_17 }
-              ]
-            },
+            // {
+            //   type: "column",
+            //   dockInsidePlotArea: true,
+            //    indexLabel: "{y}", //HG
+            //   bevelEnabled: true,
+            //   showInLegend: true,
+            //   legendText: "First Inst",
+            //    stValue: "Q",
+            //   indexLabelFontSize: 12,
+            //   indexLabelOrientation: "vertical",
+            //   dataPoints: [
+            //     { label: "2014-15", y: this.First_Houses14_15 },
+            //     { label: Y1, y: this.First_Houses15_16 },
+            //     { label: z1, y: this.First_Houses16_17 }
+            //   ]
+            // },
   
             {
               type: "column",
@@ -4497,7 +4640,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Second Inst",
+              legendText: "2nd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4514,7 +4657,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Third Inst",
+              legendText: "3rd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4542,7 +4685,30 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
   
       if (splitted.length ==4)
       {
+        if (x1=="2014_15") x1 ="2014-15";
+        if (x1=="2015_16") x1 ="2015-16";
+        if (x1=="2016_17") x1 ="2017-18";
+        if (x1=="2018_19") x1 ="2018-19";
+        if (x1=="2019_20") x1 ="2019-20";
   
+  
+        if (Y1=="2014_15") Y1 ="2014-15";
+        if (Y1=="2015_16") Y1 ="2015-16";
+        if (Y1=="2016_17") Y1 ="2017-18";
+        if (Y1=="2018_19") Y1 ="2018-19";
+        if (Y1=="2019_20") Y1 ="2019-20";
+  
+        if (z1=="2014_15") z1 ="2014-15";
+        if (z1=="2015_16") z1 ="2015-16";
+        if (z1=="2016_17")  z1 ="2017-18";
+        if (z1=="2018_19")  z1 ="2018-19"; 
+        if (z1=="2019_20")  z1 ="2019-20";
+  
+        if (z2=="2014_15")   z2 ="2014-15";
+        if (z2=="2015_16")  z2 ="2015-16";
+        if (z2=="2016_17")  z2 ="2017-18";
+        if (z2=="2018_19")  z2 ="2018-19";
+        if (z2=="2019_20") z2 ="2019-20";
         this.service.sp_create_AHP_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
         
          //  this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -4612,7 +4778,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             animationEnabled: true,
             exportEnabled: false,
             title: {
-              text: " Physical Data Consolidated (AHP)",
+              text: "Physical Progress Nos) for AHP under PMAY(U)",
               fontSize: "25",
             },
             backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -4640,7 +4806,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Housesinvolved",
+              legendText: "Sanctioned",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4658,7 +4824,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "FundsDisbursed_in_Houses",
+              legendText: "Funded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4676,7 +4842,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Grounded",
+              legendText: "Grounded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4694,14 +4860,14 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Completed",
+              legendText: "Completed",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
               dataPoints: [
                 { label: x1, y: this.Houses_Complete14_15 },
-                { label: Y1, y: this.Houses_Complete15_16 },
-                { label: z1, y: this.Houses_Complete16_17 },
+                { label: Y1 , y: this.Houses_Complete15_16 },
+                { label:z1, y: this.Houses_Complete16_17 },
                 { label: z2, y: this.Houses_Complete17_18 }
               ]
             },
@@ -4712,7 +4878,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Occupied",
+              legendText: "Occupied",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4724,23 +4890,23 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               ]
             },
   
-            {
-              type: "column",
-              dockInsidePlotArea: true,
-               indexLabel: "{y}", //HG
-              bevelEnabled: true,
-              showInLegend: true,
-              legendText: "First Inst",
-               stValue: "Q",
-              indexLabelFontSize: 12,
-              indexLabelOrientation: "vertical",
-              dataPoints: [
-                { label: x1, y: this.First_Houses14_15 },
-                { label: Y1, y: this.First_Houses15_16 },
-                { label: z1, y: this.First_Houses16_17 },
-                { label: z2, y: this.First_Houses17_18 }
-              ]
-            },
+            // {
+            //   type: "column",
+            //   dockInsidePlotArea: true,
+            //    indexLabel: "{y}", //HG
+            //   bevelEnabled: true,
+            //   showInLegend: true,
+            //   legendText: "First Inst",
+            //    stValue: "Q",
+            //   indexLabelFontSize: 12,
+            //   indexLabelOrientation: "vertical",
+            //   dataPoints: [
+            //     { label: "2014-15", y: this.First_Houses14_15 },
+            //     { label: "2015-16", y: this.First_Houses15_16 },
+            //     { label: "2016-17", y: this.First_Houses16_17 },
+            //     { label: "2017-18", y: this.First_Houses17_18 }
+            //   ]
+            // },
   
             {
               type: "column",
@@ -4748,7 +4914,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Second Inst",
+              legendText: "2nd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4766,7 +4932,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Third Inst",
+              legendText: "3rd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4794,6 +4960,36 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
       }
       if (splitted.length ==5)
       {
+        if (x1=="2014_15") x1 ="2014-15";
+      if (x1=="2015_16") x1 ="2015-16";
+      if (x1=="2016_17") x1 ="2017-18";
+      if (x1=="2018_19") x1 ="2018-19";
+      if (x1=="2019_20") x1 ="2019-20";
+
+
+      if (Y1=="2014_15") Y1 ="2014-15";
+      if (Y1=="2015_16") Y1 ="2015-16";
+      if (Y1=="2016_17") Y1 ="2017-18";
+      if (Y1=="2018_19") Y1 ="2018-19";
+      if (Y1=="2019_20") Y1 ="2019-20";
+
+      if (z1=="2014_15") z1 ="2014-15";
+      if (z1=="2015_16") z1 ="2015-16";
+      if (z1=="2016_17")  z1 ="2017-18";
+      if (z1=="2018_19")  z1 ="2018-19"; 
+      if (z1=="2019_20")  z1 ="2019-20";
+
+      if (z2=="2014_15")   z2 ="2014-15";
+      if (z2=="2015_16")  z2 ="2015-16";
+      if (z2=="2016_17")  z2 ="2017-18";
+      if (z2=="2018_19")  z2 ="2018-19";
+      if (z2=="2019_20") z2 ="2019-20";
+
+      if (z3=="2014_15")   z3 ="2014-15";
+      if (z3=="2015_16")  z3 ="2015-16";
+      if (z3=="2016_17")  z3 ="2017-18";
+      if (z3=="2018_19")  z3 ="2018-19";
+      if (z3=="2019_20") z3 ="2019-20";
         this.service.sp_create_AHP_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
            
        // this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -4877,7 +5073,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             animationEnabled: true,
             exportEnabled: false,
             title: {
-              text: " Physical Data Consolidated (AHP)",
+              text: "Physical Progress Nos) for AHP under PMAY(U)",
               fontSize: "25",
             },
             backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -4905,7 +5101,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Housesinvolved",
+              legendText: "Sanctioned",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4924,7 +5120,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "FundsDisbursed_in_Houses",
+              legendText: "Funded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4943,7 +5139,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Grounded",
+              legendText: "Grounded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4962,7 +5158,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Completed",
+              legendText: "Completed",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4981,7 +5177,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Occupied",
+              legendText: "Occupied",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -4994,24 +5190,24 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               ]
             },
   
-            {
-              type: "column",
-              dockInsidePlotArea: true,
-               indexLabel: "{y}", //HG
-              bevelEnabled: true,
-              showInLegend: true,
-              legendText: "First Inst",
-               stValue: "Q",
-              indexLabelFontSize: 12,
-              indexLabelOrientation: "vertical",
-              dataPoints: [
-                { label: x1, y: this.First_Houses14_15 },
-                { label: Y1, y: this.First_Houses15_16 },
-                { label: z1, y: this.First_Houses16_17 },
-                { label: z2, y: this.First_Houses17_18 },
-                { label: z3, y: this.First_Houses18_19 }
-              ]
-            },
+            // {
+            //   type: "column",
+            //   dockInsidePlotArea: true,
+            //    indexLabel: "{y}", //HG
+            //   bevelEnabled: true,
+            //   showInLegend: true,
+            //   legendText: "First Inst",
+            //    stValue: "Q",
+            //   indexLabelFontSize: 12,
+            //   indexLabelOrientation: "vertical",
+            //   dataPoints: [
+            //     { label: "2014-15", y: this.First_Houses14_15 },
+            //     { label: "2015-16", y: this.First_Houses15_16 },
+            //     { label: "2016-17", y: this.First_Houses16_17 },
+            //     { label: "2017-18", y: this.First_Houses17_18 },
+            //     { label: "2018-19", y: this.First_Houses18_19 }
+            //   ]
+            // },
   
             {
               type: "column",
@@ -5019,13 +5215,13 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Second Inst",
+              legendText: "2nd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
               dataPoints: [
                 { label: x1, y: this.Second_Houses14_15 },
-                { label: Y1, y: this.Second_Houses15_16 },
+                { label:Y1, y: this.Second_Houses15_16 },
                 { label: z1, y: this.Second_Houses16_17 },
                 { label: z2, y: this.Second_Houses17_18 },
                 { label: z3, y: this.Second_Houses18_19 }
@@ -5038,7 +5234,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Third Inst",
+              legendText: "3rd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -5067,6 +5263,41 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
       }
       if (splitted.length ==6)
       {
+        if (x1=="2014_15") x1 ="2014-15";
+      if (x1=="2015_16") x1 ="2015-16";
+      if (x1=="2016_17") x1 ="2017-18";
+      if (x1=="2018_19") x1 ="2018-19";
+      if (x1=="2019_20") x1 ="2019-20";
+
+
+      if (Y1=="2014_15") Y1 ="2014-15";
+      if (Y1=="2015_16") Y1 ="2015-16";
+      if (Y1=="2016_17") Y1 ="2017-18";
+      if (Y1=="2018_19") Y1 ="2018-19";
+      if (Y1=="2019_20") Y1 ="2019-20";
+
+      if (z1=="2014_15") z1 ="2014-15";
+      if (z1=="2015_16") z1 ="2015-16";
+      if (z1=="2016_17")  z1 ="2017-18";
+      if (z1=="2018_19")  z1 ="2018-19"; 
+      if (z1=="2019_20")  z1 ="2019-20";
+
+      if (z2=="2014_15")   z2 ="2014-15";
+      if (z2=="2015_16")  z2 ="2015-16";
+      if (z2=="2016_17")  z2 ="2017-18";
+      if (z2=="2018_19")  z2 ="2018-19";
+      if (z2=="2019_20") z2 ="2019-20";
+
+      if (z3=="2014_15")   z3 ="2014-15";
+      if (z3=="2015_16")  z3 ="2015-16";
+      if (z3=="2016_17")  z3 ="2017-18";
+      if (z3=="2018_19")  z3 ="2018-19";
+      if (z3=="2019_20") z3 ="2019-20";
+
+      if (z4=="2014_15")   z4 ="2014-15";
+      if (z4=="2015_16")  z4 ="2015-16";
+      if (z4=="2016_17")  z4 ="2017-18";
+      if (z4=="2018_19")  z4 ="2018-19";
         this.service.sp_create_AHP_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
            
        // this.service.sp_create_PMAY_DATAConsNew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
@@ -5163,7 +5394,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
             animationEnabled: true,
             exportEnabled: false,
             title: {
-              text: " Physical Data Consolidated (AHP)",
+              text: "Physical Progress Nos) for AHP under PMAY(U)",
               fontSize: "25",
             },
             backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -5238,7 +5469,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               dataPoints: [
                 { label: x1, y: this.Houses_Grounde14_15 },
                 { label: Y1, y: this.Houses_Grounde15_16 },
-                { label: z1, y: this.Houses_Grounde16_17 },
+                { label:z1, y: this.Houses_Grounde16_17 },
                 { label: z2, y: this.Houses_Grounde17_18 },
                 { label: z3, y: this.Houses_Grounde18_19 },
                 { label: z4, y: this.Houses_Grounde19_20 }
@@ -5258,7 +5489,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
               dataPoints: [
                 { label: x1, y: this.Houses_Complete14_15 },
                 { label: Y1, y: this.Houses_Complete15_16 },
-                { label: z1, y: this.Houses_Complete16_17 },
+                { label:z1, y: this.Houses_Complete16_17 },
                 { label: z2, y: this.Houses_Complete17_18 },
                 { label: z3, y: this.Houses_Complete18_19 },
                 { label: z4, y: this.Houses_Complete19_20 }
@@ -5299,7 +5530,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                 { label: x1, y: this.First_Houses14_15 },
                 { label: Y1, y: this.First_Houses15_16 },
                 { label: z1, y: this.First_Houses16_17 },
-                { label: z2, y: this.First_Houses17_18 },
+                { label:z2, y: this.First_Houses17_18 },
                 { label: z3, y: this.First_Houses18_19 },
                 { label: z4, y: this.First_Houses19_20 }
               ]
@@ -5321,7 +5552,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
                 { label: z1, y: this.Second_Houses16_17 },
                 { label: z2, y: this.Second_Houses17_18 },
                 { label: z3, y: this.Second_Houses18_19 },
-                { label: z4, y: this.Second_Houses19_20 }
+                { label:z4, y: this.Second_Houses19_20 }
               ]
             },
   
@@ -5360,401 +5591,6 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
   
       }
     }
-  
-  GetPsyChart(stateCode, DisttCode, cityCode, Comp, DivisionCodes) {
-
-    this.service.GetStateWiseFinYrData_Div(stateCode, DivisionCodes).subscribe(result_State => { // new code
-      this.ULBShareS = result_State.ULBShare;
-      this.StateShareS = result_State.StateShare;
-      this.BeneficiaryShareS = result_State.BeneficiaryShare;
-      this.CentralShareS = result_State.CentralShare;
-      this.totalCost = result_State.totalCost;//Investment
-
-      this.service.HFACompWiseReportPMayList_Div(stateCode, DisttCode, cityCode, Comp, DivisionCodes).subscribe(result => {
-        this.ULBShare = (result.ULBShare);
-        this.StateShare = (result.StateShare);
-        this.BeneficiaryShare = (result.BeneficiaryShare);
-        this.CentralShare = (result.CentralShare);
-        this.CA_Approved = result.CA_Approved;
-        this.Investment_in_Project = result.Investment_in_Project;
-        // CLSS_MainMaster
-        this.service.HFA_sp_CLSS_CompWise(stateCode, DisttCode, cityCode).subscribe(result1 => {
-          this.CLSS_LoanTotal = result1.MIG_Loan_AmtTotal + result1.EWS_LIG_Loan_Amt;
-          this.CLSS_SubsidyTotal = result1.EWS_LIG_Subsidy + result1.MIG_SubsidyAmtTotal;
-          this.CLSS_BeneTotal = result1.EWS_LIG_Bene + result1.MIG_Loan_AmtTotal;
-
-          this.service.GetCLSS_Detail(stateCode, DisttCode, cityCode,Comp,DivisionCodes).subscribe(result_clss => {
-          this.compArray = Comp.split(",");
-          const value = this.compArray.indexOf("5");
-          const value6 = this.compArray.indexOf("6");
-
-         // this.service.CLSS_Values_List(stateCode).subscribe(result_CLSSState => {
-          this.service.CLSS_Values_ListNew(stateCode,DivisionCodes).subscribe(result_State => {
-
-          //   alert('stateCode');
-
-         if ((DivisionCodes != 0 && Comp == 0 && DisttCode == 0 && cityCode == 0 && stateCode == 0) || (stateCode != 0 && DivisionCodes != 0 && Comp == 0 && DisttCode == 0 && cityCode == 0 )|| (stateCode != 0 && DivisionCodes != 0 && Comp == 0 && DisttCode == 0 && cityCode == 0 )|| (stateCode == 0 && DivisionCodes != 0 && Comp == 0 && DisttCode == 0 && cityCode == 0 )) {
-               // alert('Page Load');
-                this.ULBShareNew = this.ULBShareS;
-                this.StateShareNew = this.StateShareS;
-                this.BeneShareNew = this.BeneficiaryShareS;
-                this.CentralShareNew = this.CentralShareS;
-                this.Total_CostNw = this.totalCost;
-         }
-         else  if ((DivisionCodes != 0 && Comp == 0 && DisttCode != 0 && cityCode == 0 && stateCode != 0) || (DivisionCodes != 0 && Comp == 0 && DisttCode != 0 && cityCode != 0 && stateCode != 0) ) {
-           //alert('Distt- city wise');
-            this.Total_Subsidy =  result_clss.EWS_Subsidy	+ result_clss.LIG_Subsidy	+ result_clss.MIG1_SubsidyAmt	+ result_clss.MIG2_SubsidyAmt
-             this.ULBShareNew =   this.ULBShare   ;
-             this.StateShareNew = (result.StateShare ) ;
-             this.BeneShareNew = (result.BeneficiaryShare +(<number><any>result_clss.Total_LoanAmt - <number><any>result_clss.Total_SubsidyAmt));
-             this.CentralShareNew = <number><any>(result.CentralShare + this.Total_Subsidy);
-              this.Total_CostNw = result.Investment_in_Project + <number><any>result_clss.Total_LoanAmt;
-        }
-        else if ((DivisionCodes != 0 && Comp == 5   && DisttCode == 0 && cityCode == 0 && stateCode != 0) ||(DivisionCodes != 0 && Comp == 5   && DisttCode == 0 && cityCode == 0 && stateCode == 0) ||(DivisionCodes != 0 && Comp == 5   && DisttCode == 0 && cityCode == 0 && stateCode == 0)  ) {
-         //  alert(' CLSS Div Comp State wise Cost of Project');
-                this.ULBShareNew = 0 ;
-                this.StateShareNew = 0;
-                this.BeneShareNew = result_State.Loan_TOTAL -result_State.Subsidy_Total;
-                this.CentralShareNew =  result_State.Subsidy_Total ;
-                this.Total_CostNw =  result_State.Loan_TOTAL;
-       }
-        else if ((DivisionCodes != 0 && Comp == 5   && DisttCode == 0 && cityCode == 0 && stateCode != 0) || (DivisionCodes != 0 && Comp == 5   && DisttCode != 0 && cityCode == 0 && stateCode != 0)|| (DivisionCodes != 0 && Comp == 5   && DisttCode != 0 && cityCode != 0 && stateCode != 0) ) {
-             //alert(' CLSS Div Comp City wise Cost of Project');
-              this.ULBShareNew =  0;
-              this.StateShareNew = 0;
-              this.BeneShareNew = ((<number><any>result_clss.Total_LoanAmt - <number><any>result_clss.Total_SubsidyAmt));
-              this.CentralShareNew = <number><any>(result_clss.Total_SubsidyAmt);
-              this.Total_CostNw = <number><any>(result_clss.Total_LoanAmt) ;
-      }
-      else if ((DivisionCodes != 0 && Comp != 0 && DisttCode != 0 && cityCode == 0 && stateCode != 0) || (stateCode != 0 && DivisionCodes != 0 && Comp != 0  && DisttCode != 0 && cityCode != 0 ) || (DivisionCodes != 0 && Comp != 0 && DisttCode == 0 && cityCode == 0 && stateCode != 0)|| (DivisionCodes != 0 && Comp != 0 && DisttCode != 0 && cityCode == 0 && stateCode != 0) ||  (DivisionCodes != 0 && Comp != 0 && DisttCode != 0 && cityCode != 0 && stateCode != 0) ||  (DivisionCodes != 0 && Comp != 0 && DisttCode == 0 && cityCode == 0 && stateCode == 0)||  (DivisionCodes != 0 && Comp == 0 && DisttCode != 0 && cityCode == 0 && stateCode != 0) ||  (DivisionCodes != 0 && Comp == 0 && DisttCode != 0 && cityCode != 0 && stateCode != 0)) {
-       // alert('City Multiple Comp wise Cost of Project');
-        this.boolCheck =false;
-        // && value6==-1
-        if (value ==-1 )
-        {
- //           alert('1-4');
-              this.ULBShareNew = result.ULBShare;
-              this.StateShareNew = result.StateShare;
-              this.BeneShareNew = result.BeneficiaryShare;
-              this.CentralShareNew = result.CentralShare;
-              this.Total_CostNw = result.Investment_in_Project;
-        }
-        // && value6==-1
-        else if ((Comp != 0)  )
-        {
-        // alert('2');
-         var arr=[];
-         arr=Comp.split(',');
-         arr.forEach(a=>{
-           if(a=='5')
-           {
-            arr.forEach(a=>{
-              if(a=='1' || a=='2' || a=='3'|| a=='4'|| a=='5'|| a=='6')
-              {
-                this.boolCheck = true;
-              }
-            })
-           }
-         })
-         if (this.boolCheck = true)
-         {
-                // alert('1-4,5');
-                   this.ULBShareNew = result.ULBShare + 0;
-                   this.StateShareNew = result.StateShare +0;
-                   this.BeneShareNew = (result.BeneficiaryShare +(<number><any>result_clss.Total_LoanAmt - <number><any>result_clss.Total_SubsidyAmt));
-                   this.CentralShareNew = <number><any>(result.CentralShare + result_clss.Total_SubsidyAmt);
-                    this.Total_CostNw = <number><any>(result.Investment_in_Project) + <number><any>(result_clss.Total_LoanAmt);
-
-         }
-        }
-      }
-
-
-
-
-      else  if ((DivisionCodes != 0 && Comp != 0  && Comp != 5 && Comp != 6  && DisttCode != 0 && cityCode == 0 && stateCode != 0) || (DivisionCodes != 0 && Comp != 0 && Comp != 5 && Comp != 6  && DisttCode != 0 && cityCode != 0 && stateCode != 0) ) {
-         //  alert('Distt- city wise -COMP Wise');
-       // this.Total_Subsidy =   result_clss.EWS_Subsidy	+ result_clss.LIG_Subsidy	+ result_clss.MIG1_SubsidyAmt	+ result_clss.MIG2_SubsidyAmt
-        // this.ULBShareNew =   this.ULBShare   ;
-        // this.StateShareNew = (result.StateShare ) ;
-        // this.BeneShareNew = (result.BeneficiaryShare +(<number><any>result_clss.Total_LoanAmt - <number><any>result_clss.Total_SubsidyAmt));
-        // this.CentralShareNew = <number><any>(result.CentralShare + this.Total_Subsidy);
-         // this.Total_CostNw = result.Investment_in_Project;
-       }
-
-       else  if ((DivisionCodes != 0 && Comp == 5    && Comp != 6  && DisttCode != 0 && cityCode == 0 && stateCode != 0) || (DivisionCodes != 0 && Comp == 5  && Comp != 6  && DisttCode != 0 && cityCode != 0 && stateCode != 0) ) {
-       // alert('Distt- city wise -CLSS Wise');
-         this.Total_Subsidy =  result_clss.EWS_Subsidy	+ result_clss.LIG_Subsidy	+ result_clss.MIG1_SubsidyAmt	+ result_clss.MIG2_SubsidyAmt
-         this.ULBShareNew =   0;
-         this.StateShareNew = 0;
-         this.BeneShareNew = ( (<number><any>result_clss.Total_LoanAmt - <number><any>result_clss.Total_SubsidyAmt));
-         this.CentralShareNew = <number><any>( this.Total_Subsidy);
-         this.Total_CostNw = <number><any>result_clss.Total_LoanAmt ;
-     }
-
-
-
-
-
-
-
-//-----------------------------------------------------------
-          //else if ((Comp == '1' || Comp == '2' || Comp == '3' || Comp == '4') || (DisttCode != 0 && cityCode == 0) || (DisttCode != 0 && cityCode != 0)) {
-          else if ((Comp == '1' || Comp == '2' || Comp == '3' || Comp == '4'||Comp == '1,2' ||Comp == '2,1' ||Comp == '1,2,3' ||Comp == '1,3,2'||Comp == '2,3,1'||Comp == '2,1,3'||Comp == '3,1.2'||Comp == '3,2.1' ||Comp == '1,2,3,4' ||Comp == '1,2,4,3' ||Comp == '1,4,2,3'||Comp == '1,4,3,2' ||Comp == '1,3,4,2'||Comp == '1,3,2,4' ||Comp == '4,1,3,2'||Comp == '4,1,2,3' ||Comp == '4,2,1,3' ||Comp == '4,2,3,1') && stateCode ==0 && DisttCode == 0 && cityCode == 0 ) {
-           //  alert('ULBShareNew');
-            this.Total_CostNw = this.Investment_in_Project;
-            this.CentralShareNew = this.CentralShare;
-            this.StateShareNew = result.StateShare + 0;
-            this.ULBShareNew = result.ULBShare + 0;
-            //  alert(this.ULBShareNew);
-            this.BeneShareNew = result.BeneficiaryShare;
-          }
-          else if ((Comp == '1' || Comp == '2' || Comp == '3' || Comp == '4'||Comp == '1,2' ||Comp == '2,1' ||Comp == '1,2,3' ||Comp == '1,3,2'||Comp == '2,3,1'||Comp == '2,1,3'||Comp == '3,1.2'||Comp == '3,2.1' ||Comp == '1,2,3,4' ||Comp == '1,2,4,3' ||Comp == '1,4,2,3'||Comp == '1,4,3,2' ||Comp == '1,3,4,2'||Comp == '1,3,2,4' ||Comp == '4,1,3,2'||Comp == '4,1,2,3' ||Comp == '4,2,1,3' ||Comp == '4,2,3,1') && stateCode !=0 && DisttCode == 0 && cityCode == 0 ) {
-           // alert('ULBShareNew1');
-           this.Total_CostNw = this.Investment_in_Project;
-           this.CentralShareNew = this.CentralShare;
-           this.StateShareNew = result.StateShare + 0;
-           this.ULBShareNew = result.ULBShare + 0;
-           //  alert(this.ULBShareNew);
-           this.BeneShareNew = result.BeneficiaryShare;
-          }
-          else if (Comp == '5') {
-           // alert('5');
-            this.Total_CostNw = this.CLSS_LoanTotal;
-            this.CentralShareNew = this.CLSS_SubsidyTotal;
-            this.StateShareNew = 0;
-            this.ULBShareNew = 0;
-            this.BeneShareNew = this.CLSS_LoanTotal - this.CLSS_SubsidyTotal;
-          }
-          else if (Comp == '6') {
-            this.StateShareNew =0;
-            this.ULBShareNew =0;
-            this.BeneShareNew =0;
-            this.CentralShareNew=0;
-            this.Total_CostNw =0;
-            this.Investment_in_Project=0;
-            this.CLSS_LoanTotal=0;
-          }
-          else if ((stateCode != 0 && Comp.length > 0 && value == -1 && Comp != 0) || (DivisionCodes != 0 && Comp.length > 0 && value == -1 && Comp != 0) || (DivisionCodes != 0 && value == -1 && Comp == 0)) //
-          {
-            //alert('zz');
-            this.Total_CostNw = this.Investment_in_Project;// + this.CLSS_LoanTotal;
-            this.CentralShareNew = this.CentralShare;//+ this.CLSS_SubsidyTotal;
-            this.StateShareNew = result.StateShare + 0;
-            this.ULBShareNew = result.ULBShare + 0;
-            this.BeneShareNew = result.BeneficiaryShare;;//+  this.CLSS_LoanTotal -this.CLSS_SubsidyTotal;
-
-          }
-          //  this.compArray=Comp.split(",");
-          //  const value=this.compArray.indexOf("5");
-
-          // alert(Comp.length);
-          // alert(value);
-          else if ((( Comp.length >= 1 && value == 0) ||( Comp.length >= 1 && value6 >= 0) && DivisionCodes !=0 && stateCode ==0 && DisttCode == 0 && cityCode == 0 )) {
-           // alert('comp1');
-            this.Total_CostNw = this.Investment_in_Project + this.CLSS_LoanTotal;
-            this.CentralShareNew = this.CentralShare + this.CLSS_SubsidyTotal;
-            this.StateShareNew = result.StateShare + 0;
-            this.ULBShareNew = result.ULBShare + 0;
-            this.BeneShareNew = result.BeneficiaryShare + this.CLSS_LoanTotal - this.CLSS_SubsidyTotal;
-          }
-          else if ((( Comp.length >= 1 && value == 0) ||( Comp.length >= 1 && value6 >= 0) && DivisionCodes !=0 && stateCode !=0 && DisttCode == 0 && cityCode == 0 )) {
-           // alert('comp1');
-            this.Total_CostNw = this.Investment_in_Project + this.CLSS_LoanTotal;
-            this.CentralShareNew = this.CentralShare + this.CLSS_SubsidyTotal;
-            this.StateShareNew = result.StateShare + 0;
-            this.ULBShareNew = result.ULBShare + 0;
-            this.BeneShareNew = result.BeneficiaryShare + this.CLSS_LoanTotal - this.CLSS_SubsidyTotal;
-          }
-
-         else if ((( Comp.length >= 1 && value == 0) ||( Comp.length >= 1 && value6 >= 0) && ((Comp == '1' || Comp == '2' || Comp == '3' || Comp == '4'||Comp == '1,2' ||Comp == '2,1' ||Comp == '1,2,3' ||Comp == '1,3,2'||Comp == '2,3,1'||Comp == '2,1,3'||Comp == '3,1.2'||Comp == '3,2.1' ||Comp == '1,2,3,4' ||Comp == '1,2,4,3' ||Comp == '1,4,2,3'||Comp == '1,4,3,2' ||Comp == '1,3,4,2'||Comp == '1,3,2,4' ||Comp == '4,1,3,2'||Comp == '4,1,2,3' ||Comp == '4,2,1,3' ||Comp == '4,2,3,1') && DivisionCodes !=0 && stateCode ==0 && DisttCode == 0 && cityCode == 0 ))) {
-           // alert('comp1');
-            this.Total_CostNw = this.Investment_in_Project + this.CLSS_LoanTotal;
-            this.CentralShareNew = this.CentralShare + this.CLSS_SubsidyTotal;
-            this.StateShareNew = result.StateShare + 0;
-            this.ULBShareNew = result.ULBShare + 0;
-            this.BeneShareNew = result.BeneficiaryShare + this.CLSS_LoanTotal - this.CLSS_SubsidyTotal;
-          }
-          else if ((( Comp.length >= 1 && value == 0) ||( Comp.length >= 1 && value6 >= 0) && ((Comp == '1' || Comp == '2' || Comp == '3' || Comp == '4'||Comp == '1,2' ||Comp == '2,1' ||Comp == '1,2,3' ||Comp == '1,3,2'||Comp == '2,3,1'||Comp == '2,1,3'||Comp == '3,1.2'||Comp == '3,2.1' ||Comp == '1,2,3,4' ||Comp == '1,2,4,3' ||Comp == '1,4,2,3'||Comp == '1,4,3,2' ||Comp == '1,3,4,2'||Comp == '1,3,2,4' ||Comp == '4,1,3,2'||Comp == '4,1,2,3' ||Comp == '4,2,1,3' ||Comp == '4,2,3,1') && DivisionCodes !=0 && stateCode !=0 && DisttCode == 0 && cityCode == 0 ))) {
-           // alert('comp2');
-            this.Total_CostNw = this.Investment_in_Project + this.CLSS_LoanTotal;
-            this.CentralShareNew = this.CentralShare + this.CLSS_SubsidyTotal;
-            this.StateShareNew = result.StateShare + 0;
-            this.ULBShareNew = result.ULBShare + 0;
-            this.BeneShareNew = result.BeneficiaryShare + this.CLSS_LoanTotal - this.CLSS_SubsidyTotal;
-          }
-
-          else if ((( Comp.length >= 1 && value == 0) ||( Comp.length >= 1 && value6 >= 0) && DivisionCodes !=0 && stateCode ==0 && DisttCode == 0 && cityCode == 0 )) {
-           // alert('comp5');
-            this.Total_CostNw = this.Investment_in_Project + this.CLSS_LoanTotal;
-            this.CentralShareNew = this.CentralShare + this.CLSS_SubsidyTotal;
-            this.StateShareNew = result.StateShare + 0;
-            this.ULBShareNew = result.ULBShare + 0;
-            this.BeneShareNew = result.BeneficiaryShare + this.CLSS_LoanTotal - this.CLSS_SubsidyTotal;
-          }
-          else if ((( Comp.length >= 1 && value == 0) ||( Comp.length >= 1 && value6 >= 0) && DivisionCodes !=0 && stateCode !=0 && DisttCode == 0 && cityCode == 0 )) {
-            //alert('comp1');
-            this.Total_CostNw = this.Investment_in_Project + this.CLSS_LoanTotal;
-            this.CentralShareNew = this.CentralShare + this.CLSS_SubsidyTotal;
-            this.StateShareNew = result.StateShare + 0;
-            this.ULBShareNew = result.ULBShare + 0;
-            this.BeneShareNew = result.BeneficiaryShare + this.CLSS_LoanTotal - this.CLSS_SubsidyTotal;
-          }
-
-          else if ((( Comp.length >= 1 && value == 0) ||( Comp.length >= 1 && value6 >= 0) && ((Comp == '1' || Comp == '2' || Comp == '3' || Comp == '4'||Comp == '1,2' ||Comp == '2,1' ||Comp == '1,2,3' ||Comp == '1,3,2'||Comp == '2,3,1'||Comp == '2,1,3'||Comp == '3,1.2'||Comp == '3,2.1' ||Comp == '1,2,3,4' ||Comp == '1,2,4,3' ||Comp == '1,4,2,3'||Comp == '1,4,3,2' ||Comp == '1,3,4,2'||Comp == '1,3,2,4' ||Comp == '4,1,3,2'||Comp == '4,1,2,3' ||Comp == '4,2,1,3' ||Comp == '4,2,3,1') && DivisionCodes !=0 && stateCode ==0 && DisttCode == 0 && cityCode == 0 ))) {
-            //alert('comp1');
-            this.Total_CostNw = this.Investment_in_Project + this.CLSS_LoanTotal;
-            this.CentralShareNew = this.CentralShare + this.CLSS_SubsidyTotal;
-            this.StateShareNew = result.StateShare + 0;
-            this.ULBShareNew = result.ULBShare + 0;
-            this.BeneShareNew = result.BeneficiaryShare + this.CLSS_LoanTotal - this.CLSS_SubsidyTotal;
-          }
-          else if ((( Comp.length >= 1 && value == 0) ||( Comp.length >= 1 && value6 >= 0) && ((Comp == '1' || Comp == '2' || Comp == '3' || Comp == '4'||Comp == '1,2' ||Comp == '2,1' ||Comp == '1,2,3' ||Comp == '1,3,2'||Comp == '2,3,1'||Comp == '2,1,3'||Comp == '3,1.2'||Comp == '3,2.1' ||Comp == '1,2,3,4' ||Comp == '1,2,4,3' ||Comp == '1,4,2,3'||Comp == '1,4,3,2' ||Comp == '1,3,4,2'||Comp == '1,3,2,4' ||Comp == '4,1,3,2'||Comp == '4,1,2,3' ||Comp == '4,2,1,3' ||Comp == '4,2,3,1') && DivisionCodes !=0 && stateCode !=0 && DisttCode == 0 && cityCode == 0 ))) {
-            //alert('comp2');
-            this.Total_CostNw = this.Investment_in_Project + this.CLSS_LoanTotal;
-            this.CentralShareNew = this.CentralShare + this.CLSS_SubsidyTotal;
-            this.StateShareNew = result.StateShare + 0;
-            this.ULBShareNew = result.ULBShare + 0;
-            this.BeneShareNew = result.BeneficiaryShare + this.CLSS_LoanTotal - this.CLSS_SubsidyTotal;
-          }
-          else if ((( Comp.length >= 1 && value == 0) ||( Comp.length >= 1 && value6 >= 0) && ((Comp == '1' || Comp == '2' || Comp == '3' || Comp == '4'||Comp == '1,2' ||Comp == '2,1' ||Comp == '1,2,3' ||Comp == '1,3,2'||Comp == '2,3,1'||Comp == '2,1,3'||Comp == '3,1.2'||Comp == '3,2.1' ||Comp == '1,2,3,4' ||Comp == '1,2,4,3' ||Comp == '1,4,2,3'||Comp == '1,4,3,2' ||Comp == '1,3,4,2'||Comp == '1,3,2,4' ||Comp == '4,1,3,2'||Comp == '4,1,2,3' ||Comp == '4,2,1,3' ||Comp == '4,2,3,1') && DivisionCodes !=0 && stateCode !=0 && DisttCode != 0 && cityCode == 0 ))) {
-            //alert('comp2');
-            this.Total_CostNw = this.Investment_in_Project + this.CLSS_LoanTotal;
-            this.CentralShareNew = this.CentralShare + this.CLSS_SubsidyTotal;
-            this.StateShareNew = result.StateShare + 0;
-            this.ULBShareNew = result.ULBShare + 0;
-            this.BeneShareNew = result.BeneficiaryShare + this.CLSS_LoanTotal - this.CLSS_SubsidyTotal;
-          }
-          else if ((( Comp.length >= 1 && value == 0) ||( Comp.length >= 1 && value6 >= 0) && ((Comp == '1' || Comp == '2' || Comp == '3' || Comp == '4'||Comp == '1,2' ||Comp == '2,1' ||Comp == '1,2,3' ||Comp == '1,3,2'||Comp == '2,3,1'||Comp == '2,1,3'||Comp == '3,1.2'||Comp == '3,2.1' ||Comp == '1,2,3,4' ||Comp == '1,2,4,3' ||Comp == '1,4,2,3'||Comp == '1,4,3,2' ||Comp == '1,3,4,2'||Comp == '1,3,2,4' ||Comp == '4,1,3,2'||Comp == '4,1,2,3' ||Comp == '4,2,1,3' ||Comp == '4,2,3,1') && DivisionCodes !=0 && stateCode !=0 && DisttCode != 0 && cityCode != 0 ))) {
-           // alert('comp2');
-            this.Total_CostNw = this.Investment_in_Project + this.CLSS_LoanTotal;
-            this.CentralShareNew = this.CentralShare + this.CLSS_SubsidyTotal;
-            this.StateShareNew = result.StateShare + 0;
-            this.ULBShareNew = result.ULBShare + 0;
-            this.BeneShareNew = result.BeneficiaryShare + this.CLSS_LoanTotal - this.CLSS_SubsidyTotal;
-          }
-
-          //this.backgroundColor =this.color;
-          this.backgroundColor=this.backgroundColor,
-          // alert(this.StateShareNew);
-          // this.StateShareNew =indianFormat1(this.StateShareNew);
-          this.Total_CostNw = indianFormat(this.Total_CostNw);
-
-          let chart = new CanvasJS.Chart("chartContainer1", {
-            theme: "light2",
-            animationEnabled: true,
-            exportEnabled: false,
-            // backgroundColor: "#B3E5FC",
-            backgroundColor: this.backgroundColor,
-            labelFontWeight: "25px",
-            labelFontSize: "25px",
-            // toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
-            colorSet: "customColorSet1",
-            data: [{
-              type: "pie",
-              cursor: "pointer",
-              //colorSet:
-              startAngle: 25,
-              //  backgroundColor: "#0074D9",
-              backgroundColor: this.backgroundColor,
-              labelFontWeight: "28px",
-              indexLabelFontSize: 14,
-              showInLegend: false,
-              toolTipContent: "{name}: {y}",
-              indexLabelWrap: true,
-              indexLabel: "{name}: {y}",
-              fontSize: "25px",
-              //.toFixed(2) ..toFixed(2).toFixed(2).toFixed(2)
-              dataPoints: [
-                { y:  ( this.StateShareNew.toFixed(2) ), name: "SS", color: "#007bff", link: "http://google.com/" },
-                { y:  (this.ULBShareNew.toFixed(2)), name: "US", color: "#FFFF00", link: "http:/yahoo.com/" },
-                { y:  (this.BeneShareNew.toFixed(2)), name: "BS", color: "#dc3545", link: "http://gmail.com/" },
-                { y:  (this.CentralShareNew.toFixed(2)), name: "Central Share", color: "#66FF33", link: "http://google.com/" }
-              ]
-            }]
-          });
-          //---------------------------------------------------------  <!--28a745-->
-          //http://jsfiddle.net/canvasjs/qK3Se/
-          // chart.options.data[0].click = function(e){
-          //   this.modalService.open(this.editModal);
-          //   var dataSeries = e.dataSeries;
-          //   var dataPoint = e.dataPoint;
-          //   var dataPointIndex = e.dataPointIndex;
-          //   if(!dataPoint.exploded)
-
-          //   for(var i = 0; i < dataSeries.dataPoints.length; i++){
-          //           if(i === dataPointIndex){
-          //               continue;
-          //      }
-          //      dataSeries.dataPoints[i].exploded = false;
-          //   }
-          // };
-          //---------------------------------------------------------
-          chart.render();
-        })
-      })
-    })
-  })
-})
-  }
-
-
-  BindColumnGraph(stateCode, DisttCode, cityCode) {
-    //CompBar
-    //      this.service.CompBar(stateCode,DisttCode,cityCode).subscribe(result:FinDetails => {
-    //     //  result.forEach((key)=>{
-    //     //  this.firstGraph.push({'label':key.CAI});
-
-    //      for(let res in result)
-    //      {
-    //       this.firstGraph.push(res)
-    //      }
-
-
-
-
-
-    //  let chart = new CanvasJS.Chart("chartContainer_", {
-    //       theme: "light2",
-    //      animationEnabled: true,
-    //      exportEnabled: false,
-    //      title: {
-    //        text: "Financial Progress(Lakhs)"
-    //      },
-    //      backgroundColor: "#CAE9F5",
-    //      colorSet: "greenShades",
-    //      axisY:{
-    //        labelFontSize: 12
-    //      },
-    //      axisX:{
-    //        labelFontSize: 12
-    //      },
-    //      data: [{
-    //        backgroundColor: "#CAE9F5",
-    //        type: "column",
-    //        indexLabel: "{y}",
-    //       // indexLabelPlacement: "outside",
-    //       // indexLabelOrientation: "horizontal",
-
-    //       dataPoints:key
-    //      },
-    //      {
-    //        type: "column",
-    //       // name: "Oil Production (million/day)",
-    //       // legendText: "Oil Production",
-    //        axisYType: "secondary",
-    //       // showInLegend: true,
-    //        dataPoints:key
-    //      }
-    //       ]
-
-    //    //}]
-    //  });
-    //    chart.render();
-    //   });
-    // });
-
-  }
   //3rd row
   BindColumnGraphHouses1(stateCode, DisttCode, cityCode, Comp, DivisionCodes) {
     this.service.GetStateWiseFinYrData_Div(stateCode, DivisionCodes).subscribe(resultS => { // new code
@@ -6145,162 +5981,7 @@ BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
   })
   }
 
-BindColumnGraphFinancialData(stateCode, DisttCode, cityCode, Comp, DivisionCodes) {
-
-    this.service.GetStateWiseFinYrData_Div(stateCode, DivisionCodes).subscribe(result => { // new code
-      this.CumSanctioned = result.CumSanctioned;
-      this.CASanctioned_15_16 = result.CASanctioned_15_16;
-      this.CASanctioned_16_17 = result.CASanctioned_16_17;
-      this.CASanctioned_17_18 = result.CASanctioned_17_18;
-      this.CASanctioned_18_19 = result.CASanctioned_18_19;
-      this.CASanctioned_19_20 = result.CASanctioned_19_20;
-
-
-      this.CumuCAReleased = result.CumuCAReleased;
-      this.CumuCA_Released_15_16 = result.CumuCA_Released_15_16;
-      this.CumuCA_Released_16_17 = result.CumuCA_Released_16_17;
-      this.CumuCA_Released_17_18 = result.CumuCA_Released_17_18;
-      this.CumuCA_Released_18_19 = result.CumuCA_Released_18_19;
-      this.CumuCA_Released_19_20 = result.CumuCA_Released_18_19;
-
-
-       this.service.FIN_Prog1415(stateCode, DisttCode, cityCode, Comp).subscribe(result0 => {
-        this.CAI1 = result0.CAI / 1;
-        this.CAR1 = result0.CAR / 1;
-
-        this.service.FIN_Prog1516(stateCode, DisttCode, cityCode, Comp).subscribe(result1 => {
-          this.CAI151 = result1.CAI / 1;
-          this.CAR151 = result1.CAR / 1;
-
-          this.service.FIN_Prog1617(stateCode, DisttCode, cityCode, Comp).subscribe(result2 => {
-            this.CAI161 = result2.CAI / 1;
-            this.CAR161 = result2.CAR / 1;
-
-            this.service.FIN_Prog1718(stateCode, DisttCode, cityCode, Comp).subscribe(result3 => {
-              this.CAI171 = result3.CAI / 1;
-              this.CAR171 = result3.CAR / 1;
-
-              this.service.FIN_Prog1819(stateCode, DisttCode, cityCode, Comp).subscribe(result4 => {
-                this.CAI181 = result4.CAI / 1;
-                this.CAR181 = result4.CAR / 1;
-
-                this.service.FIN_Prog1920(stateCode, DisttCode, cityCode, Comp).subscribe(result5 => {
-                  this.CAI191 = result5.CAI / 1;
-                  this.CAR191 = result5.CAR / 1;
-
-
-                this.compArray = Comp.split(",");
-                const value = this.compArray.indexOf("5");
-
-                if ((DivisionCodes != 0 && Comp == 0 && stateCode ==0 && DisttCode ==0 && cityCode ==0) || (DivisionCodes == 0 && Comp == 0 && stateCode !=0 && DisttCode ==0 && cityCode ==0) || (DivisionCodes != 0 && Comp == 0 && stateCode !=0 && DisttCode ==0 && cityCode ==0)|| (DivisionCodes == 0 && Comp == 0 && stateCode ==0 && DisttCode ==0 && cityCode ==0))
-                {
-                  this.CAI = this.CASanctioned_15_16;
-                  this.CAR = this.CumuCA_Released_15_16;
-
-                  this.CAI15 = this.CASanctioned_15_16;
-                  this.CAR15 = this.CumuCA_Released_15_16;
-
-                  this.CAI16 = this.CASanctioned_16_17;
-                  this.CAR16 = this.CumuCA_Released_16_17;
-
-                  this.CAI17 = this.CASanctioned_17_18;
-                  this.CAR17 = this.CumuCA_Released_17_18;
-
-                  this.CAI18 = this.CASanctioned_18_19;
-                  this.CAR18 = this.CumuCA_Released_18_19;
-
-                  this.CAI19 = this.CASanctioned_19_20;
-                  this.CAR19 = this.CumuCA_Released_19_20;
-                }
-                if ((DivisionCodes != 0 && Comp == 0 && stateCode !=0 && DisttCode !=0 && cityCode ==0) || (DivisionCodes == 0 && Comp == 0 && stateCode !=0 && DisttCode !=0 && cityCode !=0) || (DivisionCodes != 0 && Comp > 0 && stateCode !=0 && DisttCode ==0 && cityCode ==0))
-                {
-                  this.CAI = this.CAI1;
-                  this.CAR = this.CAR1;
-
-                  this.CAI15 = this.CAI151;
-                  this.CAR15 = this.CAR151;
-
-                  this.CAI16 = this.CAI161;
-                  this.CAR16 = this.CAR161;
-
-                  this.CAI17 = this.CAI171;
-                  this.CAR17 = this.CAR171;
-
-                  this.CAI18 = this.CAI181;
-                  this.CAR18 = this.CAR181;
-
-                  this.CAI19 = this.CAI191;
-                  this.CAR19 = this.CAR191;
-                }
-
-                let chart = new CanvasJS.Chart("chartContainer2", {
-                  theme: "light2",
-                  animationEnabled: true,
-                  exportEnabled: false,
-                  title: {
-                    text: "Financial Progress(Lakhs) (CA ,CAR)"
-
-                  },
-                  backgroundColor: this.backgroundColor,//"#B3E5FC",
-                  colorSet: "greenShades",
-
-                  data: [{
-                    backgroundColor: this.backgroundColor,//"#B3E5FC",
-                    type: "column",
-                    indexLabelFontSize: 14,
-                    indexLabel: "{y}",
-                    showInLegend: true,
-                    legendText: "CA Involved",
-
-                    name: "Central assist Involved",
-                    indexLabelPlacement: "outside",
-                    indexLabelOrientation: "vertical",
-
-                    dataPoints: [
-                      { label: "14-15", y: this.CAI },//CA_Committed },
-                      { label: "15-16", y: this.CAI15 },
-                      { label: "16-17", y: this.CAI16 },
-                      { label: "17-18", y: this.CAI17 },
-                      { label: "18-19", y: this.CAI18 },
-                      { label: "19-20", y: this.CAI19 }
-                    ]
-                  },
-                  {
-                    type: "column",
-                    indexLabel: "{y}",
-                    name: "Central assist Rel",
-                    // legendText: "Oil Production",
-                    showInLegend: true,
-                    legendText: "CA Released",
-
-                    indexLabelPlacement: "outside",
-                    indexLabelFontSize: 14,
-                    // axisYType: "secondary",
-                    // indexLabelPlacement: "outside",
-
-                    indexLabelOrientation: "vertical",
-
-                    // showInLegend: true,
-                    dataPoints: [
-                      { label: "14-15", y: this.CAR },
-                      { label: "15-16", y: this.CAR15 },
-                      { label: "16-17", y: this.CAR16 },
-                      { label: "17-18", y: this.CAR17 },
-                      { label: "18-19", y: this.CAR18 },
-                      { label: "19-20", y: this.CAR19 }
-                    ]
-                  }
-                  ]
-                });
-                chart.render();
-              })
-            })
-          })
-        })
-      })
-    })
-  })
-}
+ 
 BindBLC_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
 {
 
@@ -6381,7 +6062,7 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                     animationEnabled: true,
                     exportEnabled: false,
                     title: {
-                      text: " Physical Data Consolidated (BLCS)",
+                      text: "Physical Progress(Nos) for  BLC under PMAY(U)",
                       fontSize: "25",
                     },
                     backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -6405,18 +6086,18 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Housesinvolved",
+                      legendText: "Sanctioned",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
                         // { x: "14-15", y: this.Fin_Year15_16 },
-                        { label: "14_15", y: this.Housesinvolved14_15 },
-                        { label: "15_16", y: this.Housesinvolved15_16 },
-                        { label: "16_17", y: this.Housesinvolved16_17 },
-                        { label: "17_18", y: this.Housesinvolved17_18 },
-                        { label: "18_19", y: this.Housesinvolved18_19 },
-                        { label: "19_20", y: this.Housesinvolved19_20 }
+                        { label: "2014-15", y: this.Housesinvolved14_15 },
+                        { label: "2015-16", y: this.Housesinvolved15_16 },
+                        { label: "2016-17", y: this.Housesinvolved16_17 },
+                        { label: "2017-18", y: this.Housesinvolved17_18 },
+                        { label: "2018-19", y: this.Housesinvolved18_19 },
+                        { label: "2019-20", y: this.Housesinvolved19_20 }
                         // ,
                         // { label: "20_21", y: this.Housesinvolved20_21 }
                       ]
@@ -6427,17 +6108,17 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{100}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "FundsDisbursed_in_Houses",
+                      legendText: "Funded",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.FundsDisbursed_in_Houses14_15 },
-                        { label: "15_16", y: this.FundsDisbursed_in_Houses15_16 },
-                        { label: "16_17", y: this.FundsDisbursed_in_Houses16_17 },
-                        { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },
-                        { label: "18_19", y: this.FundsDisbursed_in_Houses18_19 },
-                        { label: "19_20", y: this.FundsDisbursed_in_Houses19_20 }
+                        { label: "2014-15", y: this.FundsDisbursed_in_Houses14_15 },
+                        { label: "2015-16", y: this.FundsDisbursed_in_Houses15_16 },
+                        { label: "2016-17", y: this.FundsDisbursed_in_Houses16_17 },
+                        { label: "2017-18", y: this.FundsDisbursed_in_Houses17_18 },
+                        { label: "2018-19", y: this.FundsDisbursed_in_Houses18_19 },
+                        { label: "2019-20", y: this.FundsDisbursed_in_Houses19_20 }
                         // ,
                         // { label: "20_21", y: this.FundsDisbursed_in_Houses20_21 }
                       ]
@@ -6449,17 +6130,17 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{100}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Houses_Grounded",
+                      legendText: "Grounded",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.Houses_Grounde14_15 },
-                        { label: "15_16", y: this.Houses_Grounde15_16 },
-                        { label: "16_17", y: this.Houses_Grounde16_17 },
-                        { label: "17_18", y: this.Houses_Grounde17_18 },
-                        { label: "18_19", y: this.Houses_Grounde18_19 },
-                        { label: "19_20", y: this.Houses_Grounde19_20 }
+                        { label: "2014-15", y: this.Houses_Grounde14_15 },
+                        { label: "2015-16", y: this.Houses_Grounde15_16 },
+                        { label: "2016-17", y: this.Houses_Grounde16_17 },
+                        { label: "2017-18", y: this.Houses_Grounde17_18 },
+                        { label: "2018-19", y: this.Houses_Grounde18_19 },
+                        { label: "2019-20", y: this.Houses_Grounde19_20 }
                         // ,
                         // { label: "20_21", y: this.Houses_Grounde20_21 }
                       ]
@@ -6471,17 +6152,17 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Houses_Completed",
+                      legendText: "Completed",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.Houses_Complete14_15 },
-                        { label: "15_16", y: this.Houses_Complete15_16 },
-                        { label: "16_17", y: this.Houses_Complete16_17 },
-                        { label: "17_18", y: this.Houses_Complete17_18 },
-                        { label: "18_19", y: this.Houses_Complete18_19 },
-                        { label: "19_20", y: this.Houses_Complete19_20 }
+                        { label: "2014-15", y: this.Houses_Complete14_15 },
+                        { label: "2015-16", y: this.Houses_Complete15_16 },
+                        { label: "2016-17", y: this.Houses_Complete16_17 },
+                        { label: "2017-18", y: this.Houses_Complete17_18 },
+                        { label: "2018-19", y: this.Houses_Complete18_19 },
+                        { label: "2019-20", y: this.Houses_Complete19_20 }
                         // ,
                         // { label: "20_21", y: this.Houses_Complete20_21 }
                       ]
@@ -6493,43 +6174,43 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Houses_Occupied",
+                      legendText: "Occupied",
                        stValue: "Q1",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.HousesOccupied14_15 },
-                        { label: "15_16", y: this.HousesOccupied15_16 },
-                        { label: "16_17", y: this.HousesOccupied16_17 },
-                        { label: "17_18", y: this.HousesOccupied17_18 },
-                        { label: "18_19", y: this.HousesOccupied18_19 },
-                        { label: "19_20", y: this.HousesOccupied19_20 }
+                        { label: "2014-15", y: this.HousesOccupied14_15 },
+                        { label: "2015-16", y: this.HousesOccupied15_16 },
+                        { label: "2016-17", y: this.HousesOccupied16_17 },
+                        { label: "2017-18", y: this.HousesOccupied17_18 },
+                        { label: "2018-19", y: this.HousesOccupied18_19 },
+                        { label: "2019-20", y: this.HousesOccupied19_20 }
                         // ,
                         // { label: "20_21", y: this.HousesOccupied20_21 }
                       ]
                     },
 
-                    {
-                      type: "column",
-                      dockInsidePlotArea: true,
-                       indexLabel: "{y}", //HG
-                      bevelEnabled: true,
-                      showInLegend: true,
-                      legendText: "First Inst",
-                       stValue: "Q",
-                      indexLabelFontSize: 12,
-                      indexLabelOrientation: "vertical",
-                      dataPoints: [
-                        { label: "14_15", y: this.First_Houses14_15 },
-                        { label: "15_16", y: this.First_Houses15_16 },
-                        { label: "16_17", y: this.First_Houses16_17 },
-                        { label: "17_18", y: this.First_Houses17_18 },
-                        { label: "18_19", y: this.First_Houses18_19 },
-                        { label: "19_20", y: this.First_Houses19_20 }
-                        // ,
-                        // { label: "20_21", y: this.First_Houses20_21 }
-                      ]
-                    },
+                    // {
+                    //   type: "column",
+                    //   dockInsidePlotArea: true,
+                    //    indexLabel: "{y}", //HG
+                    //   bevelEnabled: true,
+                    //   showInLegend: true,
+                    //   legendText: "First Inst",
+                    //    stValue: "Q",
+                    //   indexLabelFontSize: 12,
+                    //   indexLabelOrientation: "vertical",
+                    //   dataPoints: [
+                    //     { label: "2014-15", y: this.First_Houses14_15 },
+                    //     { label: "2015-16", y: this.First_Houses15_16 },
+                    //     { label: "2016-17", y: this.First_Houses16_17 },
+                    //     { label: "2017-18", y: this.First_Houses17_18 },
+                    //     { label: "2018-19"", y: this.First_Houses18_19 },
+                    //     { label: "(2019-20)", y: this.First_Houses19_20 }
+                    //     // ,
+                    //     // { label: "20_21", y: this.First_Houses20_21 }
+                    //   ]
+                    // },
 
                     {
                       type: "column",
@@ -6537,17 +6218,17 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Second Inst",
+                      legendText: "2nd Inst",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.Second_Houses14_15 },
-                        { label: "15_16", y: this.Second_Houses15_16 },
-                        { label: "16_17", y: this.Second_Houses16_17 },
-                        { label: "17_18", y: this.Second_Houses17_18 },
-                        { label: "18_19", y: this.Second_Houses18_19 },
-                        { label: "19_20", y: this.Second_Houses19_20 }
+                        { label: "2014-15", y: this.Second_Houses14_15 },
+                        { label: "2015-16", y: this.Second_Houses15_16 },
+                        { label: "2016-17", y: this.Second_Houses16_17 },
+                        { label: "2017-18", y: this.Second_Houses17_18 },
+                        { label: "2018-19", y: this.Second_Houses18_19 },
+                        { label: "2019-20", y: this.Second_Houses19_20 }
                         // ,
                         // { label: "20_21", y: this.Second_Houses20_21 }
                       ]
@@ -6559,17 +6240,17 @@ BindBLC_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Third Inst",
+                      legendText: "3rd Inst",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.Third_Houses14_15 },
-                        { label: "15_16", y: this.Third_Houses15_16 },
-                        { label: "16_17", y: this.Third_Houses16_17 },
-                        { label: "17_18", y: this.Third_Houses17_18 },
-                        { label: "18_19", y: this.Third_Houses18_19 },
-                        { label: "19_20", y: this.Third_Houses19_20 }
+                        { label: "2014-15", y: this.Third_Houses14_15 },
+                        { label: "2015-16", y: this.Third_Houses15_16 },
+                        { label: "2016-17", y: this.Third_Houses16_17 },
+                        { label: "2017-18", y: this.Third_Houses17_18 },
+                        { label: "2018-19", y: this.Third_Houses18_19 },
+                        { label: "2019-20", y: this.Third_Houses19_20 }
                         // ,
                         // { label: "20_21", y: this.Third_Houses20_21 }
                       ]
@@ -6659,6 +6340,17 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
 
      if (splitted.length ==1)
      {
+
+      if (x2=="2014_15")
+        x2 ="2014-15";
+        if (x2=="2015_16")
+        x2 ="2015-16";
+        if (x2=="2016_17")
+        x2 ="2017-18";
+        if (x2=="2018_19)")
+        x2 ="2018-19";
+        if (x2=="2019_20)")
+        x2 ="2019-20";
           this.service.sp_create_BLC_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { 
          // this.service.sp_create_BLC_AHP_DATA(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
             if (result[0].FinYear !="0" )
@@ -6680,7 +6372,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
             animationEnabled: true,
             exportEnabled: false,
             title: {
-              text: " Physical Data Consolidated (BLCS)",
+              text: "Physical Progress(Nos) for BLC under PMAY(U)",
               fontSize: "25",
             },
             backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -6708,7 +6400,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Housesinvolved",
+              legendText: "Sanctioned",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -6724,7 +6416,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "FundsDisbursed_in_Houses",
+              legendText: "Funded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -6739,7 +6431,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Grounded",
+              legendText: "Grounded",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -6754,7 +6446,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Completed",
+              legendText: "Completed",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -6769,7 +6461,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Houses_Occupied",
+              legendText: "Occupied",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -6778,20 +6470,20 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
               ]
             },
   
-            {
-              type: "column",
-              dockInsidePlotArea: true,
-               indexLabel: "{y}", //HG
-              bevelEnabled: true,
-              showInLegend: true,
-              legendText: "First Inst",
-               stValue: "Q",
-              indexLabelFontSize: 12,
-              indexLabelOrientation: "vertical",
-              dataPoints: [
-                { label: x2, y: this.First_Houses14_15 },
-              ]
-            },
+            // {
+            //   type: "column",
+            //   dockInsidePlotArea: true,
+            //    indexLabel: "{y}", //HG
+            //   bevelEnabled: true,
+            //   showInLegend: true,
+            //   legendText: "First Inst",
+            //    stValue: "Q",
+            //   indexLabelFontSize: 12,
+            //   indexLabelOrientation: "vertical",
+            //   dataPoints: [
+            //     { label: x2, y: this.First_Houses14_15 },
+            //   ]
+            // },
   
             {
               type: "column",
@@ -6799,7 +6491,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Second Inst",
+              legendText: "2nd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -6814,7 +6506,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                indexLabel: "{y}", //HG
               bevelEnabled: true,
               showInLegend: true,
-              legendText: "Third Inst",
+              legendText: "3rd Inst",
                stValue: "Q",
               indexLabelFontSize: 12,
               indexLabelOrientation: "vertical",
@@ -6897,6 +6589,29 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
     }
     if (splitted.length ==2)
     {
+
+      if (x1=="2014_15)" ||x1=="2014_15")
+      x1 ="2014-15";
+      if (x1=="2015_16)" ||x1=="2015_16")
+      x1 ="2015-16";
+      if (x1=="2016_17" ||x1=="2016_17)")
+      x1 ="2017-18";
+      if (x1=="2018_19" ||x1=="2018_19)")
+      x1 ="2018-19";
+      if (x1=="2019_20" ||x1=="2019_20)")
+      x1 ="2019-20";
+
+
+      if (Y1=="2014_15)" || Y1=="2014_15")
+      Y1 ="2014-15";
+      if (Y1=="2015_16)" ||Y1=="2015_16")
+      Y1 ="2015-16";
+      if (Y1=="2016_17" || Y1=="2016_17)")
+      Y1 ="2017-18";
+      if (Y1=="2018_19" ||Y1=="2018_19)")
+      Y1 ="2018-19";
+      if (Y1=="2019_20" || Y1=="2019_20)")
+      Y1 ="2019-20";
          this.service.sp_create_BLC_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
         //    if (result[0].FinYear !="0" )
         //  {
@@ -6935,7 +6650,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
           animationEnabled: true,
           exportEnabled: false,
           title: {
-            text: " Physical Data Consolidated (PMAyU)",
+            text: "Physical Progress(Nos) for BLC under PMAY(U)",
             fontSize: "25",
           },
           backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -6963,13 +6678,13 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Housesinvolved",
+            legendText: "Sanctioned",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
               // { x: "14-15", y: this.Fin_Year15_16 },
-              { label: x1, y: this.Housesinvolved14_15 },
+              { label:x1, y: this.Housesinvolved14_15 },
               { label: Y1, y: this.Housesinvolved15_16 }
 
             ]
@@ -6980,7 +6695,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "FundsDisbursed_in_Houses",
+            legendText: "Funded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -6996,13 +6711,13 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Grounded",
+            legendText: "Grounded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
               { label: x1, y: this.Houses_Grounde14_15 },
-              { label: Y1, y: this.Houses_Grounde15_16 }
+              { label:Y1, y: this.Houses_Grounde15_16 }
             ]
           },
 
@@ -7012,7 +6727,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Completed",
+            legendText: "Completed",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7028,7 +6743,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Occupied",
+            legendText: "Occupied",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7038,21 +6753,21 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
             ]
           },
 
-          {
-            type: "column",
-            dockInsidePlotArea: true,
-             indexLabel: "{y}", //HG
-            bevelEnabled: true,
-            showInLegend: true,
-            legendText: "First Inst",
-             stValue: "Q",
-            indexLabelFontSize: 12,
-            indexLabelOrientation: "vertical",
-            dataPoints: [
-              { label: x1, y: this.First_Houses14_15 },
-              { label: Y1, y: this.First_Houses15_16 }
-            ]
-          },
+          // {
+          //   type: "column",
+          //   dockInsidePlotArea: true,
+          //    indexLabel: "{y}", //HG
+          //   bevelEnabled: true,
+          //   showInLegend: true,
+          //   legendText: "First Inst",
+          //    stValue: "Q",
+          //   indexLabelFontSize: 12,
+          //   indexLabelOrientation: "vertical",
+          //   dataPoints: [
+          //     { label: x1, y: this.First_Houses14_15 },
+          //     { label: Y1, y: this.First_Houses15_16 }
+          //   ]
+          // },
 
           {
             type: "column",
@@ -7060,7 +6775,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Second Inst",
+            legendText: "2nd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7076,7 +6791,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Third Inst",
+            legendText: "3rd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7102,6 +6817,41 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
     }
     if (splitted.length ==3)
     {
+
+      if (x1=="2014_15)" ||x1=="2014_15")
+      x1 ="2014-15";
+      if (x1=="2015_16)" ||x1=="2015_16")
+      x1 ="2015-16";
+      if (x1=="2016_17" || x1=="2016_17)")
+      x1 ="2017-18";
+      if (x1=="2018_19" ||x1=="2018_19)")
+      x1 ="2018-19";
+      if (x1=="2019_20" || x1=="2019_20)")
+      x1 ="2019-20";
+
+
+      if (Y1=="2014_15)" || Y1=="2014_15")
+      Y1 ="2014-15";
+      if (Y1=="2015_16)" || Y1=="2015_16")
+      Y1 ="2015-16";
+      if (Y1=="2016_17" || Y1=="2016_17)")
+      Y1 ="2017-18";
+      if (Y1=="2018_19" ||Y1=="2018_19)")
+      Y1 ="2018-19";
+      if (Y1=="2019_20" ||Y1=="2019_20)")
+      Y1 ="2019-20";
+
+      if (z1=="2014_15)")
+      z1 ="2014-15";
+      if (z1=="2015_16)")
+      z1 ="2015-16";
+      if (z1=="2016_17")
+      z1 ="2017-18";
+      if (z1=="2018_19")
+      z1 ="2018-19";
+      if (z1=="2019_20")
+      z1 ="2019-20";
+
          this.service.sp_create_BLC_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
         //    if (result[0].FinYear !="0" )
         //  {
@@ -7155,7 +6905,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
           animationEnabled: true,
           exportEnabled: false,
           title: {
-            text: " Physical Data Consolidated (PMAyU)",
+            text: "Physical Progress(Nos) for BLC under PMAY(U)",
             fontSize: "25",
           },
           backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -7183,7 +6933,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Housesinvolved",
+            legendText: "Sanctioned",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7200,7 +6950,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "FundsDisbursed_in_Houses",
+            legendText: "Funded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7218,7 +6968,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Grounded",
+            legendText: "Grounded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7235,7 +6985,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Completed",
+            legendText: "Completed",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7252,7 +7002,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Occupied",
+            legendText: "Occupied",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7263,22 +7013,22 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
             ]
           },
 
-          {
-            type: "column",
-            dockInsidePlotArea: true,
-             indexLabel: "{y}", //HG
-            bevelEnabled: true,
-            showInLegend: true,
-            legendText: "First Inst",
-             stValue: "Q",
-            indexLabelFontSize: 12,
-            indexLabelOrientation: "vertical",
-            dataPoints: [
-              { label: x1, y: this.First_Houses14_15 },
-              { label: Y1, y: this.First_Houses15_16 },
-              { label: z1, y: this.First_Houses16_17 }
-            ]
-          },
+          // {
+          //   type: "column",
+          //   dockInsidePlotArea: true,
+          //    indexLabel: "{y}", //HG
+          //   bevelEnabled: true,
+          //   showInLegend: true,
+          //   legendText: "First Inst",
+          //    stValue: "Q",
+          //   indexLabelFontSize: 12,
+          //   indexLabelOrientation: "vertical",
+          //   dataPoints: [
+          //     { label: "2014-15", y: this.First_Houses14_15 },
+          //     { label: "2015-16", y: this.First_Houses15_16 },
+          //     { label: "2016-17", y: this.First_Houses16_17 }
+          //   ]
+          // },
 
           {
             type: "column",
@@ -7286,7 +7036,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Second Inst",
+            legendText: "2nd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7303,7 +7053,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Third Inst",
+            legendText: "3rd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7331,6 +7081,52 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
 
     if (splitted.length ==4)
     {
+      if (x1=="2014_15)" ||x1=="2014_15")
+      x1 ="2014-15";
+      if (x1=="2015_16)" ||x1=="2015_16")
+      x1 ="2015-16";
+      if (x1=="2016_17" || x1=="2016_17)")
+      x1 ="2017-18";
+      if (x1=="2018_19" ||x1=="2018_19)")
+      x1 ="2018-19";
+      if (x1=="2019_20" || x1=="2019_20)")
+      x1 ="2019-20";
+
+
+      if (Y1=="2014_15)" || Y1=="2014_15")
+      Y1 ="2014-15";
+      if (Y1=="2015_16)" || Y1=="2015_16")
+      Y1 ="2015-16";
+      if (Y1=="2016_17" || Y1=="2016_17)")
+      Y1 ="2017-18";
+      if (Y1=="2018_19" ||Y1=="2018_19)")
+      Y1 ="2018-19";
+      if (Y1=="2019_20" ||Y1=="2019_20)")
+      Y1 ="2019-20";
+
+      if (z1=="2014_15)")
+      z1 ="2014-15";
+      if (z1=="2015_16)")
+      z1 ="2015-16";
+      if (z1=="2016_17")
+      z1 ="2017-18";
+      if (z1=="2018_19")
+      z1 ="2018-19";
+      if (z1=="2019_20")
+      z1 ="2019-20";
+
+
+      if (z2=="2014_15)")
+      z2 ="2014-15";
+      if (z2=="2015_16)")
+      z2="2015-16";
+      if (z2=="2016_17")
+      z2 ="2017-18";
+      if (z2=="2018_19")
+      z2 ="2018-19";
+      if (z2=="2019_20")
+      z2 ="2019-20";
+
          this.service.sp_create_BLC_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
         //    if (result[0].FinYear !="0" )
         //  {
@@ -7398,7 +7194,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
           animationEnabled: true,
           exportEnabled: false,
           title: {
-            text: " Physical Data Consolidated (PMAyU)",
+            text: "Physical Progress(Nos) for BLC under PMAY(U)",
             fontSize: "25",
           },
           backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -7426,7 +7222,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Housesinvolved",
+            legendText: "Sanctioned",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7444,7 +7240,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "FundsDisbursed_in_Houses",
+            legendText: "Funded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7462,7 +7258,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Grounded",
+            legendText: "Grounded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7480,7 +7276,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Completed",
+            legendText: "Completed",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7498,7 +7294,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Occupied",
+            legendText: "Occupied",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7510,23 +7306,23 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
             ]
           },
 
-          {
-            type: "column",
-            dockInsidePlotArea: true,
-             indexLabel: "{y}", //HG
-            bevelEnabled: true,
-            showInLegend: true,
-            legendText: "First Inst",
-             stValue: "Q",
-            indexLabelFontSize: 12,
-            indexLabelOrientation: "vertical",
-            dataPoints: [
-              { label: x1, y: this.First_Houses14_15 },
-              { label: Y1, y: this.First_Houses15_16 },
-              { label: z1, y: this.First_Houses16_17 },
-              { label: z2, y: this.First_Houses17_18 }
-            ]
-          },
+          // {
+          //   type: "column",
+          //   dockInsidePlotArea: true,
+          //    indexLabel: "{y}", //HG
+          //   bevelEnabled: true,
+          //   showInLegend: true,
+          //   legendText: "First Inst",
+          //    stValue: "Q",
+          //   indexLabelFontSize: 12,
+          //   indexLabelOrientation: "vertical",
+          //   dataPoints: [
+          //     { label: "2014-15", y: this.First_Houses14_15 },
+          //     { label: "2015-16", y: this.First_Houses15_16 },
+          //     { label: "2016-17", y: this.First_Houses16_17 },
+          //     { label: "2017-18", y: this.First_Houses17_18 }
+          //   ]
+          // },
 
           {
             type: "column",
@@ -7534,15 +7330,15 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Second Inst",
+            legendText: "2nd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
               { label: x1, y: this.Second_Houses14_15 },
-              { label: Y1, y: this.Second_Houses15_16 },
+              { label:Y1, y: this.Second_Houses15_16 },
               { label: z1, y: this.Second_Houses16_17 },
-              { label: z2, y: this.Second_Houses17_18 }
+              { label:z2, y: this.Second_Houses17_18 }
             ]
           },
 
@@ -7552,7 +7348,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Third Inst",
+            legendText: "3rd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7560,7 +7356,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
               { label: x1, y: this.Third_Houses14_15 },
               { label: Y1, y: this.Third_Houses15_16 },
               { label: z1, y: this.Third_Houses16_17 },
-              { label: z2, y: this.Third_Houses17_18 }
+              { label:z2, y: this.Third_Houses17_18 }
             ]
           },
 
@@ -7580,6 +7376,63 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
     }
     if (splitted.length ==5)
     {
+
+      if (x1=="2014_15)" ||x1=="2014_15")
+      x1 ="2014-15";
+      if (x1=="2015_16)" ||x1=="2015_16")
+      x1 ="2015-16";
+      if (x1=="2016_17" || x1=="2016_17)")
+      x1 ="2017-18";
+      if (x1=="2018_19" ||x1=="2018_19)")
+      x1 ="2018-19";
+      if (x1=="2019_20" || x1=="2019_20)")
+      x1 ="2019-20";
+
+
+      if (Y1=="2014_15)" || Y1=="2014_15")
+      Y1 ="2014-15";
+      if (Y1=="2015_16)" || Y1=="2015_16")
+      Y1 ="2015-16";
+      if (Y1=="2016_17" || Y1=="2016_17)")
+      Y1 ="2017-18";
+      if (Y1=="2018_19" ||Y1=="2018_19)")
+      Y1 ="2018-19";
+      if (Y1=="2019_20" ||Y1=="2019_20)")
+      Y1 ="2019-20";
+
+      if (z1=="2014_15)")
+      z1 ="2014-15";
+      if (z1=="2015_16)")
+      z1 ="2015-16";
+      if (z1=="2016_17")
+      z1 ="2017-18";
+      if (z1=="2018_19")
+      z1 ="2018-19";
+      if (z1=="2019_20")
+      z1 ="2019-20";
+
+
+      if (z2=="2014_15)")
+      z2 ="2014-15";
+      if (z2=="2015_16)")
+      z2="2015-16";
+      if (z2=="2016_17")
+      z2 ="2017-18";
+      if (z2=="2018_19")
+      z2 ="2018-19";
+      if (z2=="2019_20")
+      z2 ="2019-20";
+
+      if (z3=="2014_15)")
+      z3 ="2014-15";
+      if (z3=="2015_16)")
+      z3="2015-16";
+      if (z3=="2016_17")
+      z3 ="2017-18";
+      if (z3=="2018_19")
+      z3 ="2018-19";
+      if (z3=="2019_20")
+      z3 ="2019-20";
          this.service.sp_create_BLC_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
         //    if (result[0].FinYear !="0" )
         //  {
@@ -7661,7 +7514,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
           animationEnabled: true,
           exportEnabled: false,
           title: {
-            text: " Physical Data Consolidated (PMAyU)",
+            text: "Physical Progress(Nos) for BLC under PMAY(U)",
             fontSize: "25",
           },
           backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -7689,7 +7542,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Housesinvolved",
+            legendText: "Sanctioned",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7708,7 +7561,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "FundsDisbursed_in_Houses",
+            legendText: "Funded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7727,7 +7580,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Grounded",
+            legendText: "Grounded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7746,7 +7599,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Completed",
+            legendText: "Completed",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7765,7 +7618,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Occupied",
+            legendText: "Occupied",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7778,24 +7631,24 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
             ]
           },
 
-          {
-            type: "column",
-            dockInsidePlotArea: true,
-             indexLabel: "{y}", //HG
-            bevelEnabled: true,
-            showInLegend: true,
-            legendText: "First Inst",
-             stValue: "Q",
-            indexLabelFontSize: 12,
-            indexLabelOrientation: "vertical",
-            dataPoints: [
-              { label: x1, y: this.First_Houses14_15 },
-              { label: Y1, y: this.First_Houses15_16 },
-              { label: z1, y: this.First_Houses16_17 },
-              { label: z2, y: this.First_Houses17_18 },
-              { label: z3, y: this.First_Houses18_19 }
-            ]
-          },
+          // {
+          //   type: "column",
+          //   dockInsidePlotArea: true,
+          //    indexLabel: "{y}", //HG
+          //   bevelEnabled: true,
+          //   showInLegend: true,
+          //   legendText: "First Inst",
+          //    stValue: "Q",
+          //   indexLabelFontSize: 12,
+          //   indexLabelOrientation: "vertical",
+          //   dataPoints: [
+          //     { label: "2014-15", y: this.First_Houses14_15 },
+          //     { label: "2015-16", y: this.First_Houses15_16 },
+          //     { label: "2016-17", y: this.First_Houses16_17 },
+          //     { label: "2017-18", y: this.First_Houses17_18 },
+          //     { label: "2018-19", y: this.First_Houses18_19 }
+          //   ]
+          // },
 
           {
             type: "column",
@@ -7803,7 +7656,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Second Inst",
+            legendText: "2nd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7822,7 +7675,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Third Inst",
+            legendText: "3rd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7851,6 +7704,75 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
     }
     if (splitted.length ==6)
     {
+
+      if (x1=="2014_15)" ||x1=="2014_15")
+      x1 ="2014-15";
+      if (x1=="2015_16)" ||x1=="2015_16")
+      x1 ="2015-16";
+      if (x1=="2016_17" || x1=="2016_17)")
+      x1 ="2017-18";
+      if (x1=="2018_19" ||x1=="2018_19)")
+      x1 ="2018-19";
+      if (x1=="2019_20" || x1=="2019_20)")
+      x1 ="2019-20";
+
+
+      if (Y1=="2014_15)" || Y1=="2014_15")
+      Y1 ="2014-15";
+      if (Y1=="2015_16)" || Y1=="2015_16")
+      Y1 ="2015-16";
+      if (Y1=="2016_17" || Y1=="2016_17)")
+      Y1 ="2017-18";
+      if (Y1=="2018_19" ||Y1=="2018_19)")
+      Y1 ="2018-19";
+      if (Y1=="2019_20" ||Y1=="2019_20)")
+      Y1 ="2019-20";
+
+      if (z1=="2014_15)")
+      z1 ="2014-15";
+      if (z1=="2015_16)")
+      z1 ="2015-16";
+      if (z1=="2016_17")
+      z1 ="2017-18";
+      if (z1=="2018_19")
+      z1 ="2018-19";
+      if (z1=="2019_20")
+      z1 ="2019-20";
+
+
+      if (z2=="2014_15)")
+      z2 ="2014-15";
+      if (z2=="2015_16)")
+      z2="2015-16";
+      if (z2=="2016_17")
+      z2 ="2017-18";
+      if (z2=="2018_19")
+      z2 ="2018-19";
+      if (z2=="2019_20")
+      z2 ="2019-20";
+
+      if (z3=="2014_15)")
+      z3 ="2014-15";
+      if (z3=="2015_16)")
+      z3="2015-16";
+      if (z3=="2016_17")
+      z3 ="2017-18";
+      if (z3=="2018_19")
+      z3 ="2018-19";
+      if (z3=="2019_20")
+      z3 ="2019-20";
+
+      if (z4=="2014_15)")
+      z4 ="2014-15";
+      if (z4=="2015_16)")
+      z4="2015-16";
+      if (z4=="2016_17")
+      z4 ="2017-18";
+      if (z4=="2018_19")
+      z4 ="2018-19";
+      if (z4=="2019_20")
+      z4 ="2019-20";
+      
          this.service.sp_create_BLC_DATANew(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
         //    if (result[0].FinYear !="0" )
         //  {
@@ -7932,7 +7854,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
           animationEnabled: true,
           exportEnabled: false,
           title: {
-            text: " Physical Data Consolidated (BLCS)",
+            text: "Physical Progress(Nos) for BLC under PMAY(U)",
             fontSize: "25",
           },
           backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -7960,7 +7882,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Housesinvolved",
+            legendText: "Sanctioned",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -7968,8 +7890,8 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
               // { x: "14-15", y: this.Fin_Year15_16 },
               { label: x1, y: this.Housesinvolved14_15 },
               { label: Y1, y: this.Housesinvolved15_16 },
-              { label: z1, y: this.Housesinvolved16_17 },
-              { label: z2, y: this.Housesinvolved17_18 },
+              { label:z1, y: this.Housesinvolved16_17 },
+              { label:z2, y: this.Housesinvolved17_18 },
               { label: z3, y: this.Housesinvolved18_19 },
               { label: z4, y: this.Housesinvolved19_20 }
             ]
@@ -7980,7 +7902,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "FundsDisbursed_in_Houses",
+            legendText: "Funded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -8000,7 +7922,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Grounded",
+            legendText: "Grounded",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -8009,8 +7931,8 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
               { label: Y1, y: this.Houses_Grounde15_16 },
               { label: z1, y: this.Houses_Grounde16_17 },
               { label: z2, y: this.Houses_Grounde17_18 },
-              { label: z3, y: this.Houses_Grounde18_19 },
-              { label: z4, y: this.Houses_Grounde19_20 }
+              { label:z3, y: this.Houses_Grounde18_19 },
+              { label:z4, y: this.Houses_Grounde19_20 }
             ]
           },
 
@@ -8020,7 +7942,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Completed",
+            legendText: "Completed",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -8040,7 +7962,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Houses_Occupied",
+            legendText: "Occupied",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -8050,9 +7972,29 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
               { label: z1, y: this.HousesOccupied16_17},
               { label: z2, y: this.HousesOccupied17_18},
               { label: z3, y: this.HousesOccupied18_19} ,
-              { label: z4, y: this.HousesOccupied19_20} 
+              { label:z4, y: this.HousesOccupied19_20} 
             ]
           },
+
+          // {
+          //   type: "column",
+          //   dockInsidePlotArea: true,
+          //    indexLabel: "{y}", //HG
+          //   bevelEnabled: true,
+          //   showInLegend: true,
+          //   legendText: "First Inst",
+          //    stValue: "Q",
+          //   indexLabelFontSize: 12,
+          //   indexLabelOrientation: "vertical",
+          //   dataPoints: [
+          //     { label: "2014-15", y: this.First_Houses14_15 },
+          //     { label: "2015-16", y: this.First_Houses15_16 },
+          //     { label: "2016-17", y: this.First_Houses16_17 },
+          //     { label: "2017-18", y: this.First_Houses17_18 },
+          //     { label: "2018-19", y: this.First_Houses18_19 },
+          //     { label: "2019-20", y: this.First_Houses19_20 }
+          //   ]
+          // },
 
           {
             type: "column",
@@ -8060,37 +8002,17 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "First Inst",
+            legendText: "2nd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
             dataPoints: [
-              { label: x1, y: this.First_Houses14_15 },
-              { label: Y1, y: this.First_Houses15_16 },
-              { label: z1, y: this.First_Houses16_17 },
-              { label: z2, y: this.First_Houses17_18 },
-              { label: z3, y: this.First_Houses18_19 },
-              { label: z4, y: this.First_Houses19_20 }
-            ]
-          },
-
-          {
-            type: "column",
-            dockInsidePlotArea: true,
-             indexLabel: "{y}", //HG
-            bevelEnabled: true,
-            showInLegend: true,
-            legendText: "Second Inst",
-             stValue: "Q",
-            indexLabelFontSize: 12,
-            indexLabelOrientation: "vertical",
-            dataPoints: [
-              { label: x1, y: this.Second_Houses14_15 },
+              { label:x1, y: this.Second_Houses14_15 },
               { label: Y1, y: this.Second_Houses15_16 },
               { label: z1, y: this.Second_Houses16_17 },
-              { label: z2, y: this.Second_Houses17_18 },
+              { label:z2, y: this.Second_Houses17_18 },
               { label: z3, y: this.Second_Houses18_19 },
-              { label: z4, y: this.Second_Houses19_20 }
+              { label:z4, y: this.Second_Houses19_20 }
             ]
           },
 
@@ -8100,7 +8022,7 @@ BindBLC_DataNew(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
              indexLabel: "{y}", //HG
             bevelEnabled: true,
             showInLegend: true,
-            legendText: "Third Inst",
+            legendText: "3rd Inst",
              stValue: "Q",
             indexLabelFontSize: 12,
             indexLabelOrientation: "vertical",
@@ -8221,7 +8143,7 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                     animationEnabled: true,
                     exportEnabled: false,
                     title: {
-                      text: " Physical Data Consolidated (AHP)",
+                      text: "Physical Progress Nos) for AHP under PMAY(U)",
                       fontSize: "25",
                     },
                     backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -8244,18 +8166,18 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Housesinvolved",
+                      legendText: "Sanctioned",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
                         // { x: "14-15", y: this.Fin_Year15_16 },
-                        { label: "14_15", y: this.Housesinvolved14_15 },
-                        { label: "15_16", y: this.Housesinvolved15_16 },
-                        { label: "16_17", y: this.Housesinvolved16_17 },
-                        { label: "17_18", y: this.Housesinvolved17_18 },
-                        { label: "18_19", y: this.Housesinvolved18_19 },
-                        { label: "19_20", y: this.Housesinvolved19_20 }
+                        { label: "2014-15", y: this.Housesinvolved14_15 },
+                        { label: "2015-16", y: this.Housesinvolved15_16 },
+                        { label: "2016-17", y: this.Housesinvolved16_17 },
+                        { label: "2017-18", y: this.Housesinvolved17_18 },
+                        { label: "2018-19", y: this.Housesinvolved18_19 },
+                        { label: "2019-20", y: this.Housesinvolved19_20 }
                       ]
                     },
                     {
@@ -8264,37 +8186,17 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "FundsDisbursed_in_Houses",
+                      legendText: "Funded",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.FundsDisbursed_in_Houses14_15 },
-                        { label: "15_16", y: this.FundsDisbursed_in_Houses15_16 },
-                        { label: "16_17", y: this.FundsDisbursed_in_Houses16_17 },
-                        { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },
-                        { label: "18_19", y: this.FundsDisbursed_in_Houses18_19 },
-                        { label: "19_20", y: this.FundsDisbursed_in_Houses19_20 }
-                      ]
-                    },
-
-                    {
-                      type: "column",
-                      dockInsidePlotArea: true,
-                       indexLabel: "{y}", //HG
-                      bevelEnabled: true,
-                      showInLegend: true,
-                      legendText: "Houses_Grounded",
-                       stValue: "Q",
-                      indexLabelFontSize: 12,
-                      indexLabelOrientation: "vertical",
-                      dataPoints: [
-                        { label: "14_15", y: this.Houses_Grounde14_15 },
-                        { label: "15_16", y: this.Houses_Grounde15_16 },
-                        { label: "16_17", y: this.Houses_Grounde16_17 },
-                        { label: "17_18", y: this.Houses_Grounde17_18 },
-                        { label: "18_19", y: this.Houses_Grounde18_19 },
-                        { label: "19_20", y: this.Houses_Grounde19_20 }
+                        { label: "2014-15", y: this.FundsDisbursed_in_Houses14_15 },
+                        { label: "2015-16", y: this.FundsDisbursed_in_Houses15_16 },
+                        { label: "2016-17", y: this.FundsDisbursed_in_Houses16_17 },
+                        { label:  "2017-18", y: this.FundsDisbursed_in_Houses17_18 },
+                        { label: "2018-19", y: this.FundsDisbursed_in_Houses18_19 },
+                        { label: "2019-20", y: this.FundsDisbursed_in_Houses19_20 }
                       ]
                     },
 
@@ -8304,17 +8206,17 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Houses_Completed",
+                      legendText: "Grounded",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.Houses_Complete14_15 },
-                        { label: "15_16", y: this.Houses_Complete15_16 },
-                        { label: "16_17", y: this.Houses_Complete16_17 },
-                        { label: "17_18", y: this.Houses_Complete17_18 },
-                        { label: "18_19", y: this.Houses_Complete18_19 },
-                        { label: "19_20", y: this.Houses_Complete19_20 }
+                        { label: "2014-15", y: this.Houses_Grounde14_15 },
+                        { label: "2015-16", y: this.Houses_Grounde15_16 },
+                        { label: "2016-17", y: this.Houses_Grounde16_17 },
+                        { label:  "2017-18", y: this.Houses_Grounde17_18 },
+                        { label: "2018-19", y: this.Houses_Grounde18_19 },
+                        { label: "2019-20", y: this.Houses_Grounde19_20 }
                       ]
                     },
 
@@ -8324,17 +8226,17 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Houses_Occupied",
+                      legendText: "Completed",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.HousesOccupied14_15 },
-                        { label: "15_16", y: this.HousesOccupied15_16 },
-                        { label: "16_17", y: this.HousesOccupied16_17 },
-                        { label: "17_18", y: this.HousesOccupied17_18 },
-                        { label: "18_19", y: this.HousesOccupied18_19 },
-                        { label: "19_20", y: this.HousesOccupied19_20 }
+                        { label: "2014-15", y: this.Houses_Complete14_15 },
+                        { label: "2015-16", y: this.Houses_Complete15_16 },
+                        { label: "2016-17", y: this.Houses_Complete16_17 },
+                        { label:  "2017-18", y: this.Houses_Complete17_18 },
+                        { label: "2018-19", y: this.Houses_Complete18_19 },
+                        { label: "2019-20", y: this.Houses_Complete19_20 }
                       ]
                     },
 
@@ -8344,17 +8246,57 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "First Inst",
+                      legendText: "Occupied",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.First_Houses14_15 },
-                        { label: "15_16", y: this.First_Houses15_16 },
-                        { label: "16_17", y: this.First_Houses16_17 },
-                        { label: "17_18", y: this.First_Houses17_18 },
-                        { label: "18_19", y: this.First_Houses18_19 },
-                        { label: "19_20", y: this.First_Houses19_20 }
+                        { label: "2014-15", y: this.HousesOccupied14_15 },
+                        { label: "2015-16", y: this.HousesOccupied15_16 },
+                        { label: "2016-17", y: this.HousesOccupied16_17 },
+                        { label:  "2017-18", y: this.HousesOccupied17_18 },
+                        { label: "2018-19", y: this.HousesOccupied18_19 },
+                        { label: "2019-20", y: this.HousesOccupied19_20 }
+                      ]
+                    },
+
+                    // {
+                    //   type: "column",
+                    //   dockInsidePlotArea: true,
+                    //    indexLabel: "{y}", //HG
+                    //   bevelEnabled: true,
+                    //   showInLegend: true,
+                    //   legendText: "First Inst",
+                    //    stValue: "Q",
+                    //   indexLabelFontSize: 12,
+                    //   indexLabelOrientation: "vertical",
+                    //   dataPoints: [
+                    //     { label: "14_15", y: this.First_Houses14_15 },
+                    //     { label: "15_16", y: this.First_Houses15_16 },
+                    //     { label: "16_17", y: this.First_Houses16_17 },
+                    //     { label: "17_18", y: this.First_Houses17_18 },
+                    //     { label: "18_19", y: this.First_Houses18_19 },
+                    //     { label: "19_20", y: this.First_Houses19_20 }
+                    //   ]
+                    // },
+
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "2nd Inst",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.Second_Houses14_15 },
+                        { label: "2015-16", y: this.Second_Houses15_16 },
+                        { label: "2016-17", y: this.Second_Houses16_17 },
+                        { label:  "2017-18", y: this.Second_Houses17_18 },
+                        { label: "2018-19", y: this.Second_Houses18_19 },
+                        { label: "2019-20", y: this.Second_Houses19_20 }
                       ]
                     },
 
@@ -8364,37 +8306,17 @@ BindAHP_Data(stateCode, DisttCode, cityCode,Comp ,Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Second Inst",
+                      legendText: "3rd Inst",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.Second_Houses14_15 },
-                        { label: "15_16", y: this.Second_Houses15_16 },
-                        { label: "16_17", y: this.Second_Houses16_17 },
-                        { label: "17_18", y: this.Second_Houses17_18 },
-                        { label: "18_19", y: this.Second_Houses18_19 },
-                        { label: "19_20", y: this.Second_Houses19_20 }
-                      ]
-                    },
-
-                    {
-                      type: "column",
-                      dockInsidePlotArea: true,
-                       indexLabel: "{y}", //HG
-                      bevelEnabled: true,
-                      showInLegend: true,
-                      legendText: "Third Inst",
-                       stValue: "Q",
-                      indexLabelFontSize: 12,
-                      indexLabelOrientation: "vertical",
-                      dataPoints: [
-                        { label: "14_15", y: this.Third_Houses14_15 },
-                        { label: "15_16", y: this.Third_Houses15_16 },
-                        { label: "16_17", y: this.Third_Houses16_17 },
-                        { label: "17_18", y: this.Third_Houses17_18 },
-                        { label: "18_19", y: this.Third_Houses18_19 },
-                        { label: "19_20", y: this.Third_Houses19_20 }
+                        { label: "2014-15", y: this.Third_Houses14_15 },
+                        { label: "2015-16", y: this.Third_Houses15_16 },
+                        { label: "2016-17", y: this.Third_Houses16_17 },
+                        { label:  "2017-18", y: this.Third_Houses17_18 },
+                        { label:"2018-19", y: this.Third_Houses18_19 },
+                        { label: "2019-20", y: this.Third_Houses19_20 }
                       ]
                     },
 
@@ -8914,7 +8836,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                     animationEnabled: true,
                     exportEnabled: false,
                     title: {
-                      text: "Physical Data Consolidated (PMAYU)",
+                      text: "Physical Progress(No of Houses) Consolidated (PMAY(U))",
                       fontSize: "25",
                     },
                     backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -8937,18 +8859,18 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Housesinvolved",
+                      legendText: "Sanctioned",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
                         // { x: "14-15", y: this.Fin_Year15_16 },
-                        { label: "14_15", y: this.Housesinvolved14_15 },
-                        { label: "15_16", y: this.Housesinvolved15_16 },
-                        { label: "16_17", y: this.Housesinvolved16_17 },
-                        { label: "17_18", y: this.Housesinvolved17_18 },
-                        { label: "18_19", y: this.Housesinvolved18_19 },
-                        { label: "19_20", y: this.Housesinvolved19_20 }
+                        { label: "2014-15", y: this.Housesinvolved14_15 },
+                        { label: "2015-16", y: this.Housesinvolved15_16 },
+                        { label: "2016-17", y: this.Housesinvolved16_17 },
+                        { label: "2017-18", y: this.Housesinvolved17_18 },
+                        { label: "2018-19", y: this.Housesinvolved18_19 },
+                        { label: "2019-20", y: this.Housesinvolved19_20 }
                       ]
                     },
                     {
@@ -8957,37 +8879,17 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "FundsDisbursed_in_Houses",
+                      legendText: "Funded",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.FundsDisbursed_in_Houses14_15 },
-                        { label: "15_16", y: this.FundsDisbursed_in_Houses15_16 },
-                        { label: "16_17", y: this.FundsDisbursed_in_Houses16_17 },
-                        { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },
-                        { label: "18_19", y: this.FundsDisbursed_in_Houses18_19 },
-                        { label: "19_20", y: this.FundsDisbursed_in_Houses19_20 }
-                      ]
-                    },
-
-                    {
-                      type: "column",
-                      dockInsidePlotArea: true,
-                       indexLabel: "{y}", //HG
-                      bevelEnabled: true,
-                      showInLegend: true,
-                      legendText: "Houses_Grounded",
-                       stValue: "Q",
-                      indexLabelFontSize: 12,
-                      indexLabelOrientation: "vertical",
-                      dataPoints: [
-                        { label: "14_15", y: this.Houses_Grounde14_15 },
-                        { label: "15_16", y: this.Houses_Grounde15_16 },
-                        { label: "16_17", y: this.Houses_Grounde16_17 },
-                        { label: "17_18", y: this.Houses_Grounde17_18 },
-                        { label: "18_19", y: this.Houses_Grounde18_19 },
-                        { label: "19_20", y: this.Houses_Grounde19_20 }
+                        { label: "2014-15", y: this.FundsDisbursed_in_Houses14_15 },
+                        { label: "2015-16", y: this.FundsDisbursed_in_Houses15_16 },
+                        { label: "2016-17", y: this.FundsDisbursed_in_Houses16_17 },
+                        { label: "2017-18", y: this.FundsDisbursed_in_Houses17_18 },
+                        { label: "2018-19", y: this.FundsDisbursed_in_Houses18_19 },
+                        { label: "2019-20", y: this.FundsDisbursed_in_Houses19_20 }
                       ]
                     },
 
@@ -8997,36 +8899,17 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Houses_Completed",
+                      legendText: "Grounded",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.HousesOccupied14_15 },
-                        { label: "15_16", y: this.HousesOccupied15_16 },
-                        { label: "16_17", y: this.HousesOccupied16_17 },
-                        { label: "17_18", y: this.HousesOccupied17_18 },
-                        { label: "18_19", y: this.HousesOccupied18_19 },
-                        { label: "19_20", y: this.HousesOccupied19_20 }
-                      ]
-                    },
-                    {
-                      type: "column",
-                      dockInsidePlotArea: true,
-                       indexLabel: "{y}", //HG
-                      bevelEnabled: true,
-                      showInLegend: true,
-                      legendText: "Houses Occupied",
-                       stValue: "Q",
-                      indexLabelFontSize: 12,
-                      indexLabelOrientation: "vertical",
-                      dataPoints: [
-                        { label: "14_15", y: this.Houses_Complete14_15 },
-                        { label: "15_16", y: this.Houses_Complete15_16 },
-                        { label: "16_17", y: this.Houses_Complete16_17 },
-                        { label: "17_18", y: this.Houses_Complete17_18 },
-                        { label: "18_19", y: this.Houses_Complete18_19 },
-                        { label: "19_20", y: this.Houses_Complete19_20 }
+                        { label: "2014-15", y: this.Houses_Grounde14_15 },
+                        { label: "2015-16", y: this.Houses_Grounde15_16 },
+                        { label: "2016-17", y: this.Houses_Grounde16_17 },
+                        { label: "2017-18", y: this.Houses_Grounde17_18 },
+                        { label: "2018-19", y: this.Houses_Grounde18_19 },
+                        { label: "2019-20", y: this.Houses_Grounde19_20 }
                       ]
                     },
 
@@ -9036,17 +8919,57 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "First Inst",
+                      legendText: "Completed",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.First_Houses14_15 },
-                        { label: "15_16", y: this.First_Houses15_16 },
-                        { label: "16_17", y: this.First_Houses16_17 },
-                        { label: "17_18", y: this.First_Houses17_18 },
-                        { label: "18_19", y: this.First_Houses18_19 },
-                        { label: "19_20", y: this.First_Houses19_20 }
+                        { label: "2014-15", y: this.HousesOccupied14_15 },
+                        { label: "2015-16", y: this.HousesOccupied15_16 },
+                        { label: "2016-17", y: this.HousesOccupied16_17 },
+                        { label: "2017-18", y: this.HousesOccupied17_18 },
+                        { label: "2018-19", y: this.HousesOccupied18_19 },
+                        { label: "2019-20", y: this.HousesOccupied19_20 }
+                      ]
+                    },
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "Occupied",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.Houses_Complete14_15 },
+                        { label: "2015-16", y: this.Houses_Complete15_16 },
+                        { label: "2016-17", y: this.Houses_Complete16_17 },
+                        { label: "2017-18", y: this.Houses_Complete17_18 },
+                        { label: "2018-19", y: this.Houses_Complete18_19 },
+                        { label: "2019-20", y: this.Houses_Complete19_20 }
+                      ]
+                    },
+
+                   
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "2nd Inst",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.Second_Houses14_15 },
+                        { label: "2015-16", y: this.Second_Houses15_16 },
+                        { label: "2016-17", y: this.Second_Houses16_17 },
+                        { label: "2017-18", y: this.Second_Houses17_18 },
+                        { label: "2018-19", y: this.Second_Houses18_19 },
+                        { label: "2019-20", y: this.Second_Houses19_20 }
                       ]
                     },
 
@@ -9056,37 +8979,17 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                        indexLabel: "{y}", //HG
                       bevelEnabled: true,
                       showInLegend: true,
-                      legendText: "Second Inst",
+                      legendText: "3rd Inst",
                        stValue: "Q",
                       indexLabelFontSize: 12,
                       indexLabelOrientation: "vertical",
                       dataPoints: [
-                        { label: "14_15", y: this.Second_Houses14_15 },
-                        { label: "15_16", y: this.Second_Houses15_16 },
-                        { label: "16_17", y: this.Second_Houses16_17 },
-                        { label: "17_18", y: this.Second_Houses17_18 },
-                        { label: "18_19", y: this.Second_Houses18_19 },
-                        { label: "19_20", y: this.Second_Houses19_20 }
-                      ]
-                    },
-
-                    {
-                      type: "column",
-                      dockInsidePlotArea: true,
-                       indexLabel: "{y}", //HG
-                      bevelEnabled: true,
-                      showInLegend: true,
-                      legendText: "Third Inst",
-                       stValue: "Q",
-                      indexLabelFontSize: 12,
-                      indexLabelOrientation: "vertical",
-                      dataPoints: [
-                        { label: "14_15", y: this.Third_Houses14_15 },
-                        { label: "15_16", y: this.Third_Houses15_16 },
-                        { label: "16_17", y: this.Third_Houses16_17 },
-                        { label: "17_18", y: this.Third_Houses17_18 },
-                        { label: "18_19", y: this.Third_Houses18_19 },
-                        { label: "19_20", y: this.Third_Houses19_20 }
+                        { label: "2014-15", y: this.Third_Houses14_15 },
+                        { label: "2015-16", y: this.Third_Houses15_16 },
+                        { label: "2016-17", y: this.Third_Houses16_17 },
+                        { label: "2017-18", y: this.Third_Houses17_18 },
+                        { label: "2018-19", y: this.Third_Houses18_19 },
+                        { label: "2019-20", y: this.Third_Houses19_20 }
                       ]
                     },
                    ],
@@ -9130,126 +9033,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
 
           this.i = this.Third_Houses14_15;
         }
-        //second row data
-        // this.Fin_Year15_16 = result[1].FinYear;
-        // this.Housesinvolved15_16 = result[1].Housesinvolved;
-        // this.FundsDisbursed_in_Houses15_16 = result[1].FundsDisbursed_in_Houses;
-        // this.Houses_Grounde15_16 = result[1].Houses_Grounded;
-        // this.Houses_Complete15_16 = result[1].Houses_Completed;
-        // this.HousesOccupied15_16= result[1].HousesOccupied;
-        // this.First_Houses15_16 = result[1].First_Houses;
-        // this.Second_Houses15_16 = result[1].Second_Houses;
-        // this.Third_Houses15_16 = result[1].Third_Houses;
-
-        // if (Fin_Year ="2015-16")
-        // {
-        //   this.a =this.Fin_Year15_16 ;
-        //   this.b = this.Housesinvolved15_16;
-        //   this.c =this.FundsDisbursed_in_Houses15_16;
-        //   this.d = this.Houses_Grounde15_16;
-        //   this.e =this.Houses_Complete15_16 ;
-        //   this.f =this.HousesOccupied15_16;
-        //   this.g =this.First_Houses15_16;
-        //   this.h = this.Third_Houses15_16;
-        // }
-
-        // //Third row data
-        // this.Fin_Year16_17 = result[2].FinYear;
-        // this.Housesinvolved16_17 = result[2].Housesinvolved;
-        // this.FundsDisbursed_in_Houses16_17 = result[2].FundsDisbursed_in_Houses;
-        // this.Houses_Grounde16_17 = result[2].Houses_Grounded;
-        // this.Houses_Complete16_17 = result[2].Houses_Completed;
-        // this.HousesOccupied16_17= result[2].HousesOccupied;
-
-        // this.First_Houses16_17 = result[2].First_Houses;
-        // this.Second_Houses16_17 = result[2].Second_Houses;
-        // this.Third_Houses16_17 = result[2].Third_Houses;
-
-        // if (Fin_Year ="2016-17")
-        // {
-        //   this.a =this.Fin_Year16_17 ;
-        //   this.b = this.Housesinvolved16_17;
-        //   this.c =this.FundsDisbursed_in_Houses16_17;
-        //   this.d = this.Houses_Grounde16_17;
-        //   this.e =this.Houses_Complete16_17 ;
-        //   this.f =this.HousesOccupied16_17;
-        //   this.g =this.First_Houses16_17;
-        //   this.h = this.Third_Houses16_17;
-        // }
-
-
-        // //Fourth row data
-        // this.Fin_Year17_18 = result[3].FinYear;
-        // this.Housesinvolved17_18 = result[3].Housesinvolved;
-        // this.FundsDisbursed_in_Houses17_18 = result[3].FundsDisbursed_in_Houses;
-        // this.Houses_Grounde17_18 = result[3].Houses_Grounded;
-        // this.Houses_Complete17_18 = result[3].Houses_Completed;
-        // this.HousesOccupied17_18= result[3].HousesOccupied;
-
-        // this.First_Houses17_18 = result[3].First_Houses;
-        // this.Second_Houses17_18 = result[3].Second_Houses;
-        // this.Third_Houses17_18 = result[3].Third_Houses;
-
-        // if (Fin_Year ="2017_18")
-        // {
-        //   this.a =this.Fin_Year17_18 ;
-        //   this.b = this.Housesinvolved17_18;
-        //   this.c =this.FundsDisbursed_in_Houses17_18;
-        //   this.d = this.Houses_Grounde17_18;
-        //   this.e =this.Houses_Complete17_18 ;
-        //   this.f =this.HousesOccupied17_18;
-        //   this.g =this.First_Houses17_18;
-        //   this.h = this.Third_Houses17_18;
-        // }
-
-        // //Fifth row data
-        // this.Fin_Year18_19 = result[4].FinYear;
-        // this.Housesinvolved18_19 = result[4].Housesinvolved;
-        // this.FundsDisbursed_in_Houses18_19 = result[4].FundsDisbursed_in_Houses;
-        // this.Houses_Grounde18_19 = result[4].Houses_Grounded;
-        // this.Houses_Complete18_19 = result[4].Houses_Completed;
-        // this.HousesOccupied18_19= result[4].HousesOccupied;
-        // this.First_Houses18_19 = result[4].First_Houses;
-        // this.Second_Houses18_19 = result[4].Second_Houses;
-        // this.Third_Houses18_19 = result[4].Third_Houses;
-
-        // if (Fin_Year ="2018_19")
-        // {
-        //   this.a =this.Fin_Year18_19 ;
-        //   this.b = this.Housesinvolved18_19;
-        //   this.c =this.FundsDisbursed_in_Houses18_19;
-        //   this.d = this.Houses_Grounde18_19;
-        //   this.e =this.Houses_Complete18_19 ;
-        //   this.f =this.HousesOccupied18_19;
-        //   this.g =this.First_Houses18_19;
-        //   this.h = this.Third_Houses18_19;
-        // }
-
-        //       //Fifth row data
-        //       this.Fin_Year19_20 = result[5].FinYear;
-        //       this.Housesinvolved19_20 = result[5].Housesinvolved;
-        //       this.FundsDisbursed_in_Houses19_20 = result[5].FundsDisbursed_in_Houses;
-        //       this.Houses_Grounde19_20 = result[5].Houses_Grounded;
-        //       this.Houses_Complete19_20 = result[5].Houses_Completed;
-        //       this.HousesOccupied19_20= result[5].HousesOccupied;
-        //       this.First_Houses19_20 = result[5].First_Houses;
-        //       this.Second_Houses19_20 = result[5].Second_Houses;
-        //       this.Third_Houses19_20 = result[5].Third_Houses;
-
-        //       if (Fin_Year ="2019_20")
-        // {
-        //   this.a =this.Fin_Year19_20 ;
-        //   this.b = this.Housesinvolved19_20;
-        //   this.c =this.FundsDisbursed_in_Houses19_20;
-        //   this.d = this.Houses_Grounde19_20;
-        //   this.e =this.Houses_Complete19_20 ;
-        //   this.f =this.HousesOccupied19_20;
-        //   this.g =this.First_Houses19_20;
-        //   this.h = this.Third_Houses19_20;
-        // }
-
-        //      this.Test(Fin_Year);
-
+         
 
                     let chart = new CanvasJS.Chart("chartPMAYU", {
                       theme: "light2",
@@ -9293,10 +9077,8 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                           { label: "First_Houses14_15", y: this.g },
                           { label: "Third_Houses14_15", y: this.h } ,
                           { label: "Third_Houses15_16", y: this.i }
-
                         ]
                       }
-
                      ],
                       options: {
                         legend: {
@@ -9395,7 +9177,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                       animationEnabled: true,
                       exportEnabled: false,
                       title: {
-                        text: "Physical Data Consolidated (ISSR)",
+                        text: "Physical Progress (Nos) for  ISSR under PMAY(U)",
                         fontSize: "25",
                       },
                       backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
@@ -9414,30 +9196,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                           }
                       },
 
-                      //   backgroundColor: this.backgroundColor,//"#B3E5FC",
-                      //   bevelEnabled: true,
-                      //   indexLabelPlacement:"auto",
-                      //   //this.backgroundColor: this.backgroundColor,
-                      //   indexLabelOrientation: "vertical",
-                      //   type: "column",
-                      //   showInLegend: true,
-                      //   legendText: "14-15",
-                      //   indexLabel: "{y}", // HS
-                      //   stValue: "HS",
-                      //   indexLabelFontSize: 12,
-                      //   fontSize: "15",
-                      //   dataPoints: [
-                      //    // { label: "14-15", y: this.Fin_Year14_15 },
-                      //     { label: "14_15", y: this.Housesinvolved14_15 },
-                      //     { label: "14_15", y: this.FundsDisbursed_in_Houses14_15 },
-                      //     { label: "14_15", y: this.Houses_Grounde14_15 },
-                      //     { label: "14_15", y: this.Houses_Complete14_15 },
-                      //     { label: "14_15", y: this.First_Houses14_15 },
-                      //     { label: "14_15", y: this.Second_Houses14_15 },
-                      //     { label: "14_15", y: this.Third_Houses14_15 }
-                      //   ]
-                      // },
-                      //{
+                      
                       type: "column",
                         dockInsidePlotArea: true,
                          indexLabel: "{y}", //HG
@@ -9449,12 +9208,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                         indexLabelOrientation: "vertical",
                         dataPoints: [
                           // { x: "14-15", y: this.Fin_Year15_16 },
-                          { label: "14_15", y: this.Housesinvolved14_15 },
-                          { label: "15_16", y: this.Housesinvolved15_16 },
-                          { label: "16_17", y: this.Housesinvolved16_17 },
-                          { label: "17_18", y: this.Housesinvolved17_18 },
-                          { label: "18_19", y: this.Housesinvolved18_19 },
-                          { label: "19_20", y: this.Housesinvolved19_20 }
+                          { label: "2014-15", y: this.Housesinvolved14_15 },
+                          { label: "2015-16", y: this.Housesinvolved15_16 },
+                          { label: "2016-17", y: this.Housesinvolved16_17 },
+                          { label: "2017-18", y: this.Housesinvolved17_18 },
+                          { label: "2018-19", y: this.Housesinvolved18_19 },
+                          { label: "2019-20", y: this.Housesinvolved19_20 }
                         ]
                       },
                       {
@@ -9468,12 +9227,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                         indexLabelFontSize: 12,
                         indexLabelOrientation: "vertical",
                         dataPoints: [
-                          { label: "14_15", y: this.FundsDisbursed_in_Houses14_15 },
-                          { label: "15_16", y: this.FundsDisbursed_in_Houses15_16 },
-                          { label: "16_17", y: this.FundsDisbursed_in_Houses16_17 },
-                          { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },
-                          { label: "18_19", y: this.FundsDisbursed_in_Houses18_19 },
-                          { label: "19_20", y: this.FundsDisbursed_in_Houses19_20 }
+                          { label: "2014-15", y: this.FundsDisbursed_in_Houses14_15 },
+                          { label: "2015-16", y: this.FundsDisbursed_in_Houses15_16 },
+                          { label: "2016-17", y: this.FundsDisbursed_in_Houses16_17 },
+                          { label: "2017-18", y: this.FundsDisbursed_in_Houses17_18 },
+                          { label: "2018-19", y: this.FundsDisbursed_in_Houses18_19 },
+                          { label: "2019-20", y: this.FundsDisbursed_in_Houses19_20 }
                         ]
                       },
 
@@ -9488,12 +9247,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                         indexLabelFontSize: 12,
                         indexLabelOrientation: "vertical",
                         dataPoints: [
-                          { label: "14_15", y: this.Houses_Grounde14_15 },
-                          { label: "15_16", y: this.Houses_Grounde15_16 },
-                          { label: "16_17", y: this.Houses_Grounde16_17 },
-                          { label: "17_18", y: this.Houses_Grounde17_18 },
-                          { label: "18_19", y: this.Houses_Grounde18_19 },
-                          { label: "19_20", y: this.Houses_Grounde19_20 }
+                          { label: "2014-15", y: this.Houses_Grounde14_15 },
+                          { label: "2015-16", y: this.Houses_Grounde15_16 },
+                          { label: "2016-17", y: this.Houses_Grounde16_17 },
+                          { label: "2017-18", y: this.Houses_Grounde17_18 },
+                          { label: "2018-19", y: this.Houses_Grounde18_19 },
+                          { label: "2019-20", y: this.Houses_Grounde19_20 }
                         ]
                       },
 
@@ -9508,12 +9267,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                         indexLabelFontSize: 12,
                         indexLabelOrientation: "vertical",
                         dataPoints: [
-                          { label: "14_15", y: this.HousesOccupied14_15 },
-                          { label: "15_16", y: this.HousesOccupied15_16 },
-                          { label: "16_17", y: this.HousesOccupied16_17 },
-                          { label: "17_18", y: this.HousesOccupied17_18 },
-                          { label: "18_19", y: this.HousesOccupied18_19 },
-                          { label: "19_20", y: this.HousesOccupied19_20 }
+                          { label: "2014-15", y: this.HousesOccupied14_15 },
+                          { label: "2015-16", y: this.HousesOccupied15_16 },
+                          { label: "2016-17", y: this.HousesOccupied16_17 },
+                          { label: "2017-18", y: this.HousesOccupied17_18 },
+                          { label: "2018-19", y: this.HousesOccupied18_19 },
+                          { label: "2019-20", y: this.HousesOccupied19_20 }
                         ]
                       },
                       {
@@ -9527,12 +9286,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                         indexLabelFontSize: 12,
                         indexLabelOrientation: "vertical",
                         dataPoints: [
-                          { label: "14_15", y: this.Houses_Complete14_15 },
-                          { label: "15_16", y: this.Houses_Complete15_16 },
-                          { label: "16_17", y: this.Houses_Complete16_17 },
-                          { label: "17_18", y: this.Houses_Complete17_18 },
-                          { label: "18_19", y: this.Houses_Complete18_19 },
-                          { label: "19_20", y: this.Houses_Complete19_20 }
+                          { label: "2014-15", y: this.Houses_Complete14_15 },
+                          { label: "2015-16", y: this.Houses_Complete15_16 },
+                          { label: "2016-17", y: this.Houses_Complete16_17 },
+                          { label: "2017-18", y: this.Houses_Complete17_18 },
+                          { label: "2018-19", y: this.Houses_Complete18_19 },
+                          { label: "2019-20", y: this.Houses_Complete19_20 }
                         ]
                       },
 
@@ -9547,12 +9306,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                         indexLabelFontSize: 12,
                         indexLabelOrientation: "vertical",
                         dataPoints: [
-                          { label: "14_15", y: this.First_Houses14_15 },
-                          { label: "15_16", y: this.First_Houses15_16 },
-                          { label: "16_17", y: this.First_Houses16_17 },
-                          { label: "17_18", y: this.First_Houses17_18 },
-                          { label: "18_19", y: this.First_Houses18_19 },
-                          { label: "19_20", y: this.First_Houses19_20 }
+                          { label: "2014-15", y: this.First_Houses14_15 },
+                          { label: "2015-16", y: this.First_Houses15_16 },
+                          { label: "2016-17", y: this.First_Houses16_17 },
+                          { label: "2017-18", y: this.First_Houses17_18 },
+                          { label: "2018-19", y: this.First_Houses18_19 },
+                          { label: "2019-20", y: this.First_Houses19_20 }
                         ]
                       },
 
@@ -9567,12 +9326,12 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                         indexLabelFontSize: 12,
                         indexLabelOrientation: "vertical",
                         dataPoints: [
-                          { label: "14_15", y: this.Second_Houses14_15 },
-                          { label: "15_16", y: this.Second_Houses15_16 },
-                          { label: "16_17", y: this.Second_Houses16_17 },
-                          { label: "17_18", y: this.Second_Houses17_18 },
-                          { label: "18_19", y: this.Second_Houses18_19 },
-                          { label: "19_20", y: this.Second_Houses19_20 }
+                          { label: "2014-15", y: this.Second_Houses14_15 },
+                          { label: "2015-16", y: this.Second_Houses15_16 },
+                          { label: "2016-17", y: this.Second_Houses16_17 },
+                          { label: "2017-18", y: this.Second_Houses17_18 },
+                          { label: "2018-19", y: this.Second_Houses18_19 },
+                          { label: "2019-20", y: this.Second_Houses19_20 }
                         ]
                       },
 
@@ -9587,120 +9346,16 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                         indexLabelFontSize: 12,
                         indexLabelOrientation: "vertical",
                         dataPoints: [
-                          { label: "14_15", y: this.Third_Houses14_15 },
-                          { label: "15_16", y: this.Third_Houses15_16 },
-                          { label: "16_17", y: this.Third_Houses16_17 },
-                          { label: "17_18", y: this.Third_Houses17_18 },
-                          { label: "18_19", y: this.Third_Houses18_19 },
-                          { label: "19_20", y: this.Third_Houses19_20 }
+                          { label: "2014-15", y: this.Third_Houses14_15 },
+                          { label: "2015-16", y: this.Third_Houses15_16 },
+                          { label: "2016-17", y: this.Third_Houses16_17 },
+                          { label: "2017-18", y: this.Third_Houses17_18 },
+                          { label: "2018-19", y: this.Third_Houses18_19 },
+                          { label: "2019-20", y: this.Third_Houses19_20 }
                         ]
                       },
 
-                    //   {
-                    //     type: "column",
-                    //     dockInsidePlotArea: true,
-                    //      indexLabel: "{y}", //HG
-                    //     bevelEnabled: true,
-                    //     showInLegend: true,
-                    //     legendText: "15-16",
-                    //      stValue: "Q",
-                    //     indexLabelFontSize: 12,
-                    //     indexLabelOrientation: "vertical",
-                    //     dataPoints: [
-                    //       { label: "15_16", y: this.Housesinvolved15_16 },
-                    //       { label: "15_16", y: this.FundsDisbursed_in_Houses15_16 },
-                    //       { label: "15_16", y: this.Houses_Grounde15_16 },
-                    //       { label: "15_16", y: this.Houses_Complete15_16 },
-                    //       { label: "15_16", y: this.First_Houses15_16 },
-                    //       { label: "15_16", y: this.Second_Houses15_16 },
-                    //       { label: "15_16", y: this.Third_Houses15_16 },
-                    //     ]
-                    //   },
-
-                    //   {
-                    //     type: "column",
-                    //     dockInsidePlotArea: true,
-                    //      indexLabel: "{y}", //HG
-                    //     bevelEnabled: true,
-                    //     showInLegend: true,
-                    //     legendText: "16-17",
-                    //      stValue: "W",
-                    //     indexLabelFontSize: 12,
-                    //     indexLabelOrientation: "vertical",
-                    //     dataPoints: [
-                    //       // { x: "14-15", y: this.Fin_Year15_16 },
-                    //       { label: "16_17", y: this.Housesinvolved16_17 },
-                    //       { label: "16_17", y: this.FundsDisbursed_in_Houses16_17 },
-                    //       { label: "16_17", y: this.Houses_Grounde16_17 },
-                    //       { label: "16_17", y: this.Houses_Complete16_17 },
-                    //       { label: "16_17", y: this.First_Houses16_17 },
-                    //       { label: "16_17", y: this.Second_Houses16_17 },
-                    //       { label: "16_17", y: this.Third_Houses16_17 },
-                    //     ]
-                    //   },
-                    //   {
-                    //     type: "column",
-                    //     dockInsidePlotArea: true,
-                    //     indexLabel: "{y}", //HG
-                    //     bevelEnabled: true,
-                    //     showInLegend: true,
-                    //     legendText: "17-18",
-                    //     stValue: "T",
-                    //     indexLabelFontSize: 12,
-                    //     indexLabelOrientation: "vertical",
-                    //     dataPoints: [
-                    //       // { x: "14-15", y: this.Fin_Year15_16 },
-                    //       { label: "17_18", y: this.Housesinvolved17_18 },
-                    //       { label: "17_18", y: this.FundsDisbursed_in_Houses17_18 },
-                    //       { label: "17_18", y: this.Houses_Grounde17_18 },
-                    //       { label: "17_18", y: this.Houses_Complete17_18 },
-                    //       { label: "17_18", y: this.First_Houses17_18 },
-                    //       { label: "17_18", y: this.Second_Houses17_18 },
-                    //       { label: "17_18", y: this.Third_Houses17_18 },
-                    //     ]
-                    //   },
-                    // {
-                    //   type: "column",
-                    //   dockInsidePlotArea: true,
-                    //   indexLabel: "{y}", //HG
-                    //   bevelEnabled: true,
-                    //   showInLegend: true,
-                    //   legendText: "18-19",
-                    //   stValue: "T",
-                    //   indexLabelFontSize: 12,
-                    //   indexLabelOrientation: "vertical",
-                    //   dataPoints: [
-                    //     // { x: "14-15", y: this.Fin_Year15_16 },
-                    //     { label: "18-19", y: this.Housesinvolved18_19 },
-                    //     { label: "18-19", y: this.FundsDisbursed_in_Houses18_19 },
-                    //     { label: "18-19", y: this.Houses_Grounde18_19 },
-                    //     { label: "18-19", y: this.Houses_Complete18_19 },
-                    //     { label: "18-19", y: this.First_Houses18_19 },
-                    //     { label: "18-19", y: this.Second_Houses18_19 },
-                    //     { label: "18-19", y: this.Third_Houses18_19 },
-                    //   ]
-                    // },
-                    //   {
-                    //     type: "column",
-                    //     dockInsidePlotArea: true,
-                    //     indexLabel: "{y}", //HG
-                    //     bevelEnabled: true,
-                    //     showInLegend: true,
-                    //     legendText: "19-20",
-                    //     stValue: "W",
-                    //     indexLabelFontSize: 12,
-                    //     indexLabelOrientation: "vertical",
-                    //     dataPoints: [
-                    //       // { x: "14-15", y: this.Fin_Year15_16 },
-                    //       { label: "19-20", y: this.Housesinvolved19_20 },
-                    //       { label: "19-20", y: this.FundsDisbursed_in_Houses19_20 },
-                    //       { label: "19-20", y: this.Houses_Grounde19_20 },
-                    //       { label: "19-20", y: this.Houses_Complete19_20 },
-                    //       { label: "19-20", y: this.First_Houses19_20 },
-                    //       { label: "19-20", y: this.Second_Houses19_20 },
-                    //       { label: "84", y: this.Third_Houses19_20 },
-                    //     ]
-                      // }
+                     
                     ],
                       options: {
                         legend: {
@@ -9714,162 +9369,7 @@ BindPMayData(stateCode, DisttCode, cityCode,Comp, Fin_Year)
                     chart.render();
                 });
     }
-  BindPMayColumnData(stateCode, DisttCode, cityCode, Comp, DivisionCodes) {
-
-    this.service.GetStateWiseFinYrData_Div(stateCode, DivisionCodes).subscribe(result => { // new code
-      this.CumSanctioned = result.CumSanctioned;
-      this.CASanctioned_15_16 = result.CASanctioned_15_16;
-      this.CASanctioned_16_17 = result.CASanctioned_16_17;
-      this.CASanctioned_17_18 = result.CASanctioned_17_18;
-      this.CASanctioned_18_19 = result.CASanctioned_18_19;
-      this.CASanctioned_19_20 = result.CASanctioned_19_20;
-
-
-      this.CumuCAReleased = result.CumuCAReleased;
-      this.CumuCA_Released_15_16 = result.CumuCA_Released_15_16;
-      this.CumuCA_Released_16_17 = result.CumuCA_Released_16_17;
-      this.CumuCA_Released_17_18 = result.CumuCA_Released_17_18;
-      this.CumuCA_Released_18_19 = result.CumuCA_Released_18_19;
-      this.CumuCA_Released_19_20 = result.CumuCA_Released_18_19;
-
-
-       this.service.FIN_Prog1415(stateCode, DisttCode, cityCode, Comp).subscribe(result0 => {
-        this.CAI1 = result0.CAI / 1;
-        this.CAR1 = result0.CAR / 1;
-
-        this.service.FIN_Prog1516(stateCode, DisttCode, cityCode, Comp).subscribe(result1 => {
-          this.CAI151 = result1.CAI / 1;
-          this.CAR151 = result1.CAR / 1;
-
-          this.service.FIN_Prog1617(stateCode, DisttCode, cityCode, Comp).subscribe(result2 => {
-            this.CAI161 = result2.CAI / 1;
-            this.CAR161 = result2.CAR / 1;
-
-            this.service.FIN_Prog1718(stateCode, DisttCode, cityCode, Comp).subscribe(result3 => {
-              this.CAI171 = result3.CAI / 1;
-              this.CAR171 = result3.CAR / 1;
-
-              this.service.FIN_Prog1819(stateCode, DisttCode, cityCode, Comp).subscribe(result4 => {
-                this.CAI181 = result4.CAI / 1;
-                this.CAR181 = result4.CAR / 1;
-
-                this.service.FIN_Prog1920(stateCode, DisttCode, cityCode, Comp).subscribe(result5 => {
-                  this.CAI191 = result5.CAI / 1;
-                  this.CAR191 = result5.CAR / 1;
-
-
-                this.compArray = Comp.split(",");
-                const value = this.compArray.indexOf("5");
-
-                if ((DivisionCodes != 0 && Comp == 0 && stateCode ==0 && DisttCode ==0 && cityCode ==0) || (DivisionCodes == 0 && Comp == 0 && stateCode !=0 && DisttCode ==0 && cityCode ==0) || (DivisionCodes != 0 && Comp == 0 && stateCode !=0 && DisttCode ==0 && cityCode ==0)|| (DivisionCodes == 0 && Comp == 0 && stateCode ==0 && DisttCode ==0 && cityCode ==0))
-                {
-                  this.CAI = this.CASanctioned_15_16;
-                  this.CAR = this.CumuCA_Released_15_16;
-
-                  this.CAI15 = this.CASanctioned_15_16;
-                  this.CAR15 = this.CumuCA_Released_15_16;
-
-                  this.CAI16 = this.CASanctioned_16_17;
-                  this.CAR16 = this.CumuCA_Released_16_17;
-
-                  this.CAI17 = this.CASanctioned_17_18;
-                  this.CAR17 = this.CumuCA_Released_17_18;
-
-                  this.CAI18 = this.CASanctioned_18_19;
-                  this.CAR18 = this.CumuCA_Released_18_19;
-
-                  this.CAI19 = this.CASanctioned_19_20;
-                  this.CAR19 = this.CumuCA_Released_19_20;
-                }
-                if ((DivisionCodes != 0 && Comp == 0 && stateCode !=0 && DisttCode !=0 && cityCode ==0) || (DivisionCodes == 0 && Comp == 0 && stateCode !=0 && DisttCode !=0 && cityCode !=0) || (DivisionCodes != 0 && Comp > 0 && stateCode !=0 && DisttCode ==0 && cityCode ==0))
-                {
-                  this.CAI = this.CAI1;
-                  this.CAR = this.CAR1;
-
-                  this.CAI15 = this.CAI151;
-                  this.CAR15 = this.CAR151;
-
-                  this.CAI16 = this.CAI161;
-                  this.CAR16 = this.CAR161;
-
-                  this.CAI17 = this.CAI171;
-                  this.CAR17 = this.CAR171;
-
-                  this.CAI18 = this.CAI181;
-                  this.CAR18 = this.CAR181;
-
-                  this.CAI19 = this.CAI191;
-                  this.CAR19 = this.CAR191;
-                }
-
-                let chart = new CanvasJS.Chart("chartContainer2", {
-                  theme: "light2",
-                  animationEnabled: true,
-                  exportEnabled: false,
-                  title: {
-                    text: "Financial Progress(Lakhs) (CA ,CAR)"
-
-                  },
-                  backgroundColor: this.backgroundColor,//"#B3E5FC",
-                  colorSet: "greenShades",
-
-                  data: [{
-                    backgroundColor: this.backgroundColor,//"#B3E5FC",
-                    type: "column",
-                    indexLabelFontSize: 14,
-                    indexLabel: "{y}",
-                    showInLegend: true,
-                    legendText: "CA Involved",
-
-                    name: "Central assist Involved",
-                    indexLabelPlacement: "outside",
-                    indexLabelOrientation: "vertical",
-
-                    dataPoints: [
-                      { label: "14-15", y: this.CAI },//CA_Committed },
-                      { label: "15-16", y: this.CAI15 },
-                      { label: "16-17", y: this.CAI16 },
-                      { label: "17-18", y: this.CAI17 },
-                      { label: "18-19", y: this.CAI18 },
-                      { label: "19-20", y: this.CAI19 }
-                    ]
-                  },
-                  {
-                    type: "column",
-                    indexLabel: "{y}",
-                    name: "Central assist Rel",
-                    // legendText: "Oil Production",
-                    showInLegend: true,
-                    legendText: "CA Released",
-
-                    indexLabelPlacement: "outside",
-                    indexLabelFontSize: 14,
-                    // axisYType: "secondary",
-                    // indexLabelPlacement: "outside",
-
-                    indexLabelOrientation: "vertical",
-
-                    // showInLegend: true,
-                    dataPoints: [
-                      { label: "14-15", y: this.CAR },
-                      { label: "15-16", y: this.CAR15 },
-                      { label: "16-17", y: this.CAR16 },
-                      { label: "17-18", y: this.CAR17 },
-                      { label: "18-19", y: this.CAR18 },
-                      { label: "19-20", y: this.CAR19 }
-                    ]
-                  }
-                  ]
-                });
-                chart.render();
-              })
-            })
-          })
-        })
-      })
-    })
-  })
-  }
+   
 
 
 }

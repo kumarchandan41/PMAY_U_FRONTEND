@@ -1,19 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-pmayu-critical',
-//   templateUrl: './pmayu-critical.component.html',
-//   styleUrls: ['./pmayu-critical.component.css']
-// })
-// export class PMAYuCriticalComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
-
 import {NgbModule, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { Component, OnInit, ViewChild, TemplateRef, Renderer2, ElementRef } from '@angular/core';
@@ -101,7 +85,7 @@ const indianFormat1 = (number, currency = 'INR') => {
 })
 
 export class PMAYuCriticalComponent implements OnInit {
-  modalRef;
+  //modalRef;
   display='none';
   display1='none';
   Codes:string;
@@ -120,103 +104,26 @@ export class PMAYuCriticalComponent implements OnInit {
   stateCodes: string = "0";
   districtCodes: string = "0";
   cityCodes: string = "0";
-  DivisionCodes = "0";
+//  DivisionCodes = "0";
   chart: Charts;
+  
   compArray: string[];
-  Houses_Grounded: number;
-  SubsidyAmountCredited: number;
-  Ground_Total: number;
-  Grounded: number;
-  Sanctioned: number;
-  NoofBeneficiaries: number;  ///////////
-  Sanction_Total: any; //*
-  Houses_Completed: number;
-  Completed1: number;
-  GTCompleted: number;
-  Houses_Occupied: number;
-  Occupied1: number;
-  GTOccupied: number;
-  CAC: number;
-  demand: number;
   StateMessage: string;
   DistrictMessage: string;
   CityMessage: string;
-  Ground_TotalNew: any;
-  stmsg: string;
   stValue: string;
   distvalue: string;
   cityvalue: string;
   distValue: string;
   cityValue: string;
-  CASanctforRelease: number;
-  CA_Committed: number;
-  CA_Approved: number;
-  nett: number;
-  Central_Assistance_Released: number;
-  ULBShare: number;
-  StateShare: number;
-  BeneficiaryShare: number;
-  CentralShare: number;
-  CumSanctioned: number;
-  CASanctioned_15_16: number;
-  CASanctioned_16_17: number;
-  CASanctioned_17_18: number;
-  CASanctioned_18_19: number;
-  CumuCAReleased: number;
-  CumuCA_Released_15_16: number;
-  CumuCA_Released_17_18: number;
-  CumuCA_Released_16_17: number;
-  CumuCA_Released_18_19: number;
-  firstGraph: string[] = [];
+   firstGraph: string[] = [];
   secondGraph: string[] = [];
   leble: string;
   Y: string;
-  ULBShare1: string;
-  StateShare1: string;
-  BeneficiaryShare1: string;
-  CentralShare1: string;
-  HS_14_15: string;
-  HC_14_15: any;
-  HO_14_15: any;
-  HS_15_16: any;
-  HS_16_17: any;
-  HS_17_18: any;
-  HS_18_19: any;
-  HC_15_16: any;
-  HC_16_17: any;
-  HC_17_18: any;
-  HC_18_19: any;
-  HO_15_16: any;
-  HO_16_17: any;
-  HO_17_18: any;
-  HO_18_19: any;
-  CAI: number;
-  CAR: number;
-  CAI15: number;
-  CAR15: number;
-  CAI16: number;
-  CAR16: number;
-  CAI17: number;
-  CAR17: number;
-  CAI18: number;
-  CAR18: number;
-  HG_14_15: string;
-  HG_15_16: string;
-  HG_16_17: string;
-  HG_17_18: string;
-  HG_18_19: string;
-  label: string;
-  y: string;
-  Total_Cost: string;
-  UC_Recd: number;
+   y: string;
+
   lstComp: CompMaster[];
-  SubsTotal: number;
-  MIG_SubsTotal: number;
-  EWS_LIG_Total: number;
-  EWS_LIG_Bene: any;
-  MIGBene: number;
   cidCount: string = '';
-  // lstCid: Array<any> = new Array<any>();
   TotSubsidy: number;
   CA_SanctforReleaseTotal: number;
   TOT_CA_Approved: number;
@@ -228,154 +135,26 @@ export class PMAYuCriticalComponent implements OnInit {
   Total_CostNw1: string;
   Investment_in_Project: number;
   CentralShareNew: number;
-  ////StateShareNew: number; ?
   StateShareNew: any;
-
-  ULBShareNew: number;
-  BeneShareNew: number;
-  CAR_NEW: number;
-  CASanctforReleaseNew: number;
-  CAR_new: number;
-  CAR_NEW1: string;
-  Total_UC_Recd: number;
-  cid: number;
-  Comp: string;
-  total_Demand: number;
-  total_DemandNEW: number;
-  total_DemandISSR: number;
-  total_Demand_: any;
-  CLSSBeneficiaries: number;
-  ComponentWiseSanctioned: number;
-  CASanct_forRelease: number;
-  CA_Approvd: number;
-  CA_SanctforRelease: number;
-  CA_Aproved: number;
-  CA_Released: number;
-  CASanct_forReleaseN: number;
-  CARNew: number;
-  UC_RecdNew: number;
-  CASanct_forReleas: string;
-  CASanct_for_Release: number;
-  CASanct_forRelease1: string;
-  
-
-  //@ViewChild('editModal') editModal: TemplateRef<any>;
-  CASanct_forReleaseNEW: string;
-  CA_ReleasedNew: string;
-  clss_total: string;
-  Demand_Overall: any;
-  total_Demand1_: any;
-  CA_ReleasedNw: any;
-  CASanct_forReleaseNew: number;
-  CASanct_forReleaseNChange: any;
-  UC_RecdNewCh: any;
-  CA_ApprovdNew: any;
-  CA_ReleasedNw1: any;
-  clss_totalN: any;
-  ZeroDemand: any;
-  Bene_New: any;
-  GTOccupied_New: any;
-  GTCompleted_New: any;
-  Ground_Total_New: any;
-  CA_Released_Nw: any;
-  UC_RecdNew_Ch: any;
+   cid: number;
+   Comp: string;
+ 
  // lstHFACodes: import("src/app/model/charts.model").getHFACodes[];
   lstHFACodes: import("src/app/financeReport/model/chart.model").getHFACodes[];
   DisabledCheckBox:boolean;
-
-  Houses_Grounded_State: number;
-  Sanctioned_State: number;
-  ZeroDemand_State: number;
-  Demand_State: number;
-  CAApproved: number;
-  CASanctionedforRelease: number;
-  CASanctionedforReleaseN: number;
-  No_Bene_EWS_LIG: number;
-  No_Beneficiary_MIG: number;
-  NoBeneficiary_Total: number;
-  CLSS_SubsidyTotal_State: number;
-  CAReleased: number;
-  UC_RecdExpenditure: number;
-  Completed_State: number;
-  Occupied_State: number;
-  Subsidy_EWS_LIG: number;
-  Subsidy_MIG: number;
-  ULBShareS: number;
-  StateShareS: number;
-  BeneficiaryShareS: number;
-  CentralShareS: number;
-  HS_15_16S: number;
-  HS_16_17S: number;
-  HS_17_18S: number;
-  HS_18_19S: number;
-  HC_15_16S: number;
-  HC_16_17S: number;
-  HC_17_18S: number;
-  HC_18_19S: number;
-  HO_15_16S: number;
-  HO_16_17S: number;
-  HO_17_18S: number;
-  HO_18_19S: number;
-  Ca_Sanct_: any;
-  CASanct_forReleaseN1: any;
-  GrndTotal: any;
-  Sanction_TotalN1: any;
-  Division: string;
-  totalCost: number;
-  EWS_LIG_BeneDIV: string;
-  MIG_SubsTotalDIV: string;
-  EWS_Subsidy:string;
-  HO_14_15S: number;
-  Total_Subsidy: string;
-  totalSubsidy_State: number;
-  strcsv:any;
-  boolCheck: boolean;
-  boolCheckJn: boolean;
-  Sanction_Total_New: number;
-  HS_19_20S: number;
-  HC_19_20S: number;
-  HO_19_20S: number;
-  HC_19_20: number;
-  HO_19_20: number;
-  HS_19_20: number;
-  HG_19_20: number;
-  CASanctioned_19_20: number;
-  CumuCA_Released_19_20: number;
-  CAI19: number;
-  CAR19: number;
-  CAI1: number;
-  CAR1: number;
-  CAI151: number;
-  CAR151: number;
-  CAI161: number;
-  CAR161: number;
-  CAI171: number; 
-  CAR171: number; CAI181: number;
-   CAR181: number; CAI191: number;
-    CAR191: number;
-  Sanction_Total_New1: string;
-  // Demand: number;
-
-  lstCid: number[] = [];
-  lstYear: string[] = [];
-  lstYearBene: string[] = [];
+ 
+ 
+ // lstCid: number[] = [];
+ lstYear: string[] = [];
+ lstYearBene: string[] = [];
 
   selectedYears:any;
-  lstDivision: string[] = [];
+  //lstDivision: string[] = [];
 
-  page:string;
-  isDone = true;
-  Sanction_Total_New4: any;
-  today= new Date();
-  jstoday = '';
-  selectedColor = '';
+     selectedColor = '';
+
   public backgroundColor: string;
-  public show = false;
-  GTCompleted__New: any;
-  Ground_Total__New: any;
-  GTCompletedNew_: any;
-  CASanct_forReleaseN_Change: any;
-  //---------------------------------
+   //---------------------------------
   Housesinvolved: any;
   FundsDisbursed_in_Houses: any;
   Houses_Grounde  : any;
@@ -400,6 +179,8 @@ export class PMAYuCriticalComponent implements OnInit {
        First_Houses15_16 : any =0;
        Second_Houses15_16  : any =0;
        Third_Houses15_16 : any =0;
+
+
   Fin_Year16_17: any =0;
   Housesinvolved16_17: any =0;
   FundsDisbursed_in_Houses16_17: any =0;
@@ -445,8 +226,10 @@ export class PMAYuCriticalComponent implements OnInit {
   Second_Houses20_21: any =0;
   Third_Houses20_21: any =0;
   FundsDisbursed_in_Houses20_21: any =0;
+
+
+
   Housesinvolved20_21: any =0;
-  //Fin_Year20_21: string =0;
   Houses_Grounde20_21: any =0;
   Houses_Complete20_21: any =0;
   IstInst14_15: string;
@@ -480,6 +263,9 @@ export class PMAYuCriticalComponent implements OnInit {
   Grounded19_20: string;
   Completed19_20: string;
   MyChoice:any;
+  tableDisplay:string="block";
+  graphDisplay:string="none";
+
  // LstPayData1: import("f:/AngularAll/nbo/hfawebsite/Pmayu/src/app/financeReport/model/chart").PMAY_DATA_New[];
 //--------------------------------------------
 //constructor(private router: Router,private gevent:GlobalEvent, public service: GraphService, private modalService: NgbModal) {
@@ -493,23 +279,24 @@ export class PMAYuCriticalComponent implements OnInit {
     this.stValue = "0";
     this.distValue = "0";
     this.cityValue = "0";
-    setInterval(()=>{
-      this.jstoday = formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
-    },1000);
+
+    // setInterval(()=>{
+    //   this.jstoday = formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
+    // },1000);
 
   
-    this.service.HFACityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes).subscribe(result => {
-      this.Houses_Grounded = result.Houses_Grounded;
-    });
-    this.service.CLSSCityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes).subscribe(result => {
-      this.SubsidyAmountCredited = result.SubsidyAmountCredited;
-    });
-    this.service.JNNURMCityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes).subscribe(result => {
-      // this.SubsidyAmountCredited = result.SubsidyAmountCredited;
-    });
-    this.service.DemandCityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes).subscribe(result => {
-      // this.SubsidyAmountCredited = result.SubsidyAmountCredited;
-    });
+    // this.service.HFACityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes).subscribe(result => {
+    //   this.Houses_Grounded = result.Houses_Grounded;
+    // });
+    // this.service.CLSSCityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes).subscribe(result => {
+    //   this.SubsidyAmountCredited = result.SubsidyAmountCredited;
+    // });
+    // this.service.JNNURMCityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes).subscribe(result => {
+    //   // this.SubsidyAmountCredited = result.SubsidyAmountCredited;
+    // });
+    // this.service.DemandCityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes).subscribe(result => {
+    //   // this.SubsidyAmountCredited = result.SubsidyAmountCredited;
+    // });
 
     this.service.GetStateWiseFinYrData(this.stateCodes).subscribe(result_State => {
     });
@@ -521,9 +308,6 @@ export class PMAYuCriticalComponent implements OnInit {
 
    this.service.sp_create_PMAY_Critical_FinYearWiseDATA(this.stateCodes, this.districtCodes, this.cityCodes,"0").subscribe(result_PMU => {
   });
- 
- 
-
   }
 
 
@@ -564,22 +348,33 @@ getMySelection(choice)
 {
    // alert(choice);
     this.MyChoice =choice;
+    if(choice === "Table")
+    {
+      this.tableDisplay="block";
+      this.graphDisplay="none";
+    }
+    else{
+      this.tableDisplay="none";
+      this.graphDisplay="block";
+    }
 }
+
+
   ngOnInit() {
   
-    this.gevent.ColorObservable.subscribe(x=>{
-      console.log('color:'+x);
-      debugger;
-    });
+    // this.gevent.ColorObservable.subscribe(x=>{
+    //   console.log('color:'+x);
+    //   debugger;
+    // });
    
-   this.backgroundColor = "#ffffff";// "#B3E5FC"// '#FFDD00';
+  // this.backgroundColor = "#ffffff";// "#B3E5FC"// '#FFDD00';
    this.stateCodes = "0";
    this.districtCodes = "0";
    this.cityCodes = "0";
    this.cid = 0;
    this.Comp = "0";
-   this.Division = "0";
-   this.DivisionCodes = "0";
+   //this.Division = "0";
+   //this.DivisionCodes = "0";
    this.State="--Select--";
     
    //LstPayData:PMAY_DATA[];
@@ -590,16 +385,16 @@ getMySelection(choice)
     this.service.DisttList(this.stateCodes);
     this.service.CityList(this.districtCodes);
     //***************************************** */
-    this.service.getComponent().subscribe(result => {
-      this.lstComp = result;
-      //***************************************** */
-    })
-    this.service.getHFA_Details().subscribe(result => {
-      this.lstHFACodes = result;
-      //***************************************** */
-    })
+    // this.service.getComponent().subscribe(result => {
+    //   this.lstComp = result;
+    //   //***************************************** */
+    // })
+    // this.service.getHFA_Details().subscribe(result => {
+    //   this.lstHFACodes = result;
+    //   //***************************************** */
+    // })
     
-    this.DivisionCodes ='HFA-1';
+    //this.DivisionCodes ='HFA-1';
     this.BindPMAY_Critical_Data(this.stateCodes, this.districtCodes, this.cityCodes,"0", "0");
 
     this.service.sp_create_PMAY_Critical_DATA(this.stateCodes, this.districtCodes, this.cityCodes,"0","0").subscribe(result_Houses_Status => { // new code
@@ -811,9 +606,11 @@ getMySelection(choice)
                     title: {
                       text: " Critical PMAYu Data Consolidated",
                       fontSize: "25",
+                    
                     },
                     backgroundColor: this.backgroundColor,//"#B3E5FC",  commented
                     colorSet: "greenShades",
+                  
                     
                     data: [{
 

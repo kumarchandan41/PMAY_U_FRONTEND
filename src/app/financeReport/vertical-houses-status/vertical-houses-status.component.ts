@@ -402,6 +402,7 @@ Cid:string;
 
   @ViewChild('TABLE', { static: false }) TABLE: ElementRef;  
   title = 'Excel'; 
+  RdStatus: any;
 //  PMAYT_1: any;
 
   constructor( private router: Router,private routers: ActivatedRoute, public service: GraphService) { 
@@ -518,25 +519,28 @@ Cid:string;
     // this.States_UT ="Delhi";
     this.lblStateDisttCity = "All India";
     
-    this.routers.queryParams.subscribe(p => {
-    this.stateCodes = p['stateCode'];
-    this.districtCodes = p['distCode'];
-    this.cityCodes = p['cityCode'];
+  //   this.routers.queryParams.subscribe(p => {
+  //   this.stateCodes = p['stateCode'];
+  //   this.districtCodes = p['distCode'];
+  //   this.cityCodes = p['cityCode'];
 
-//--------------------------------------
-    this.service.DisttList(this.stateCodes);
-    this.districtCodes = p['distCode'];
+ 
+  //   this.service.DisttList(this.stateCodes);
+  //   this.districtCodes = p['distCode'];
 
-    this.service.CityList(this.districtCodes);
-    this.cityCodes = p['cityCode'];
+  //   this.service.CityList(this.districtCodes);
+  //   this.cityCodes = p['cityCode'];
       
-    this.Compid = p['compId'];    
-    //  alert(this.districtCodes);  
+  //   this.Compid = p['compId'];    
+ 
    
-  //    this.LoadData(this.stateCodes,this.districtCodes,this.cityCodes);
-  this.GetFilterDatanew(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid);
-    }); 
+  // //    this.LoadData(this.stateCodes,this.districtCodes,this.cityCodes);
+  // this.GetFilterDatanew(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid);
+  //   }); 
      
+
+    this.GetFilterDatanew(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid);
+
 //------------------------------------------
      
  //     this.GetFilterDatanew(this.stateCode,this.districtCodes ,this.cityCodes, this.Compid );
@@ -989,6 +993,19 @@ ShowPage()
 }   
 
 
+checkForm($event)
+{
+  debugger;
+     this.RdStatus=$event.target.value;       
+     if(this.RdStatus === 'Phy1')
+     {
+
+         this.router.navigate(['/Admin/VerticalHousesDetails'])
+     }
+     else{
+          this.router.navigate(['/Admin/VerticalFinancialDetails'])
+     }
+}
 
 GetFilterDatanew (stateCode,districtCodes ,cityCodes, Compid)
 {

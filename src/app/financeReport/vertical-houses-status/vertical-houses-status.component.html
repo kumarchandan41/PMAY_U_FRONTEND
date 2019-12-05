@@ -70,12 +70,16 @@
       <b>
         Vertical wise Status of Houses Sanctioned under PMAY(U) for {{lblStateDisttCity}}
       </b>
+      <div class="info-box-inline" style="padding-left:470px;font-family: Arial, Helvetica, sans-serif;font-size: 18px">
+        <input type="radio" name="progress" value="Phy1" (change)="checkForm($event)"> Physical
+        <input type="radio" name="progress" value="Fin1" (change)="checkForm($event)"> Financial<br>  
+    </div>
     </div>
 
 
     <table id="mytable" class="bodyataglance" border="1px"
       style="font-size:12px; background-color:white; align-content: center; width: 100%;" id="printme" align="center">
-      <tr style="text-align:center; background-color:#E3E2C5">
+      <tr style="text-align:center; background-color:#ccc">
         <!-- <td   rowspan="1" style="text-align:center;font-size: 18px; font-family: Arial, Helvetica, sans-serif"><b> SrNo</b></td>
           <td    style="text-align:center;font-size: 18px;font-family: Arial, Helvetica, sans-serif"><b>Component</b></td>
           <td    style="text-align:center;font-size: 18px;font-family: Arial, Helvetica, sans-serif"><b>Financial Year</b></td>
@@ -277,7 +281,7 @@
         <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
           {{HousesOccupied5}} </td>
       </tr>
-      <tr style="background-color:#E3E2C5">
+      <tr style="background-color:#ccc">
         <td align="center"> </td>
         <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
         </td>
@@ -453,7 +457,7 @@
         <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
           {{HousesOccupied5_AHP.toLocaleString('en-IN')}}</td>
       </tr>
-      <tr style="background-color:#E3E2C5">
+      <tr style="background-color:#ccc">
         <td align="center"> </td>
         <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
         </td>
@@ -629,7 +633,7 @@
           {{HousesOccupied5_ISSR.toLocaleString('en-IN')}} </td>
       </tr>
 
-      <tr style="background-color:#E3E2C5">
+      <tr style="background-color:#ccc">
         <td align="center"> </td>
         <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
         </td>
@@ -823,7 +827,7 @@
           {{Bene2019_20_CLSS.toLocaleString('en-IN')}}</td>
         <!-- <td  style="padding-right: 10px;text-align: right;font-size: 14px;font-family: Arial, Helvetica, sans-serif"> {{Bene2019_20_CLSS}}</td> -->
       </tr>
-      <tr style="background-color:#E3E2C5">
+      <tr style="background-color:#ccc">
         <td align="center"> </td>
         <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
         </td>
@@ -883,7 +887,7 @@
         <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
           {{HousesOccupiedJNT.toLocaleString('en-IN')}} </td>
       </tr>
-      <tr style="background-color:#E3E2C5">
+      <tr style="background-color:#ccc">
         <td align="center"> </td>
         <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
         </td>

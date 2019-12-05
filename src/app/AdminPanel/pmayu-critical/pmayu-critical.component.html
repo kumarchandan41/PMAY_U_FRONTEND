@@ -49,30 +49,20 @@
    
 
     <div class="col-md-3 col-sm-3 col-xs-12">
-      <label> Select :</label>
-      <select class="form-control" (change)="getMySelection($event.target.value)" placeholder="Select Choice"
-        style="width: 120px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif">
-        <option value="0" selected>--Select--</option>
-        <option value="Graph" selected>Graph</option>
-        <option value="Data">Data</option>
-       </select>
+      <div class="col-md-4">  <label> Select :</label></div>
+      <div class="col-md-6">
+          <select class="form-control" class="form-control" (change)="getMySelection($event.target.value)" placeholder="Select Choice"
+              style="width: 120px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif">
+              <option value="0">--Select--</option>
+              <option value="Table" selected>Table  </option>
+              <option value="Graph" >Graph</option>
+           </select>
+      </div>
+         
+         
     </div>
 
-    <!-- <div class="col-md-3 col-sm-3 col-xs-12">
-    
-        <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 18px;padding-top: 5px">Fin Year :</div> 
-        <select class="form-control"   placeholder="Select Role"  id="Fin_Year"
-        style="width: 200px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif"   
-        (change)="getFinDetails($event.target.value)">
-        <option value="0">--Select--</option>
-        <option value="2014-15">2014-15</option>
-        <option value="2015-16">2015-16</option>
-        <option value="2016-17">2016-17</option>
-        <option value="2017-18">2017-18</option>
-        <option value="2018-19">2018-19</option>
-        <option value="2019-20">2019-20</option>
-        </select>
-    </div> -->
+
   <br/>
    
 </div>
@@ -88,41 +78,25 @@
    
 
      <div >
+    
         
-      <section style="align-items: center;">
+      <section   style="align-items: center;">
 
-        <div class="row">
-          <div class="col-sm-12" style="background-color:lavender;"> 
-            <div id="chartPMAY_Critical" style="height: 400px; width: 1300px;margin-left: 20px; "></div>
-          </div>
-        </div>
-
-
-        <div class="row">
-          <div class="col-sm-12" style="background-color:lavenderblush;">
-            <!-- <div id="chartBLCS" style="height: 500px; width: 1400px;;margin-left: 50px;"></div> -->
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12" style="background-color:lavenderblush;">
-            <!-- <div id="chartISSR" style="height: 500px; width: 1400px;;margin-left: 50px;"></div> -->
-          </div>
-        </div>
-
-        
-
-        <div class="row">
-          <div class="col-sm-12" style="background-color:lavender;">
-            <!-- <div id="chartPMAYU" style="height: 500px; width: 1400px;;margin-left: 50px;"></div> -->
+        <div class="row" [ngStyle]="{'display':graphDisplay}">
+          <div class="col-sm-12"  style="background-color:lavender;"> 
+            <div id="chartPMAY_Critical"  style="height: 400px; width: 1300px !important;margin-left: 20px; "></div>
           </div>
         </div>
       </section>
 
-      <div style="width:20%;height:100px;margin-left:70px" id ="mytable">   
-        <table class="table table-striped" style="border:1;background-color: white" align="center" border="1">
+
+
+<div [ngStyle]="{'display':tableDisplay}">    
+    <div style="width:50%;height:100px;margin-left:250px;border: grey;" id ="mytable">   
+        <table class="table table-striped" style="border:1;background-color: white"   style="align-items: center;"  >
             <thead class="thead-dark" >
               <tr  style="color: white;background-color: gray">
+                  <td font-bold="true"> Sr No</td>
                 <td font-bold="true"> Fin-Year</td>
                 <td font-bold="true">Houses-Involved</td>
                 <td font-bold="true">Ist inst yet to be released</td>
@@ -131,31 +105,29 @@
                 <td font-bold="true">Grounded but yet to be Completed</td>
                 <td font-bold="true">Completed but yet to be Occupied</td>
             </tr>
-            </thead>
+            </thead>  
+            <!-- | paginate: { itemsPerPage: 10, currentPage: p } -->
             <tbody style="overflow-y:scroll; width:100px;">
-                <tr *ngFor="let data of LstPayData1 | paginate: { itemsPerPage: 10, currentPage: p }">
-                    <td  align="right">{{data.FinYear}}</td>
-                    <td  align="right">{{data.Housesinvolved}}</td>
-                    <td  align="right">{{data.Istinstyettobereleased}}</td>
-                    <td  align="right">{{data.IIndinstyettobereleased}}</td>
-                    <td  align="right">{{data.ThirdInstyettobereleased}}</td>
-                    <td  align="right">{{data.GroundedbutyettobeCompleted}}</td>
-                    <td  align="right">{{data.CompletedbutyettobeOccupied}}</td>
+                <tr *ngFor="let data of LstPayData1 ; let i =index">
+                    <td>
+                        {{i+1}} 
+                    </td>
+                    <td   style="align-items: right;width:100px"  >{{data.FinYear}}</td>
+                    <td   style="align-items: right;" >{{data.Housesinvolved}}</td>
+                    <td   style="align-items: right;" >{{data.Istinstyettobereleased}}</td>
+                    <td   style="align-items: right;" >{{data.IIndinstyettobereleased}}</td>
+                    <td  style="align-items: right;" >{{data.ThirdInstyettobereleased}}</td>
+                    <td   style="align-items: right;" >{{data.GroundedbutyettobeCompleted}}</td>
+                    <td   style="align-items: right;" >{{data.CompletedbutyettobeOccupied}}</td>
                 </tr>
             </tbody>
         </table>
-      </div>      
+      </div>  
+      
     </div>
- <br>
- <br>
- <br>
- <br>
- <br><br>
- <br>
- <br>
- <br>
- <br><br>
- <br>
- <br>
- <br>
- <br>
+
+
+
+
+    </div>
+ 

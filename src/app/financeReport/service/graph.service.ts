@@ -16,8 +16,13 @@ export class GraphService {
   CLSS_ValuesList(stateCode: any) {
     throw new Error("Method not implemented.");
   }
-   url="http://localhost:58396/api/Buldings/";
-   url1 ="http://localhost:58396/API/RegistrationApi/";
+   //url="http://localhost:58396/api/Buldings/";
+   //url1 ="http://localhost:58396/API/RegistrationApi/";
+
+   url="http://10.196.69.102/hfa_api/api/Buldings/";
+   url1 ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
+   
+
 
   StateDetails : States[];
   StateDetails1: States[];
@@ -936,7 +941,7 @@ ServiceUserAdminDetails():Observable<UserMaster[]>
           debugger;
             return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_PMAYDATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year);
      }
-     //--------------- PMAY end-----------------------
+     //--------------- PMAY end-----------------------`
     
      //---------------BLCS START------------------
      sp_create_BLC_AHP_DATA(stateCode:string,DisttCode:string,cityCode:string,Comp:string):Observable<PMAY_DATA_New[]>
@@ -977,14 +982,14 @@ ServiceUserAdminDetails():Observable<UserMaster[]>
 
      sp_create_PMAY_Critical_DATA(stateCode:string,DisttCode:string,cityCode:string,Comp:string,FinYear:string):Observable<PMAY_DATA_New[]>
      {
-        //  alert(); 
+        //  alert();   1
           debugger;
             return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_PMAYCriticalDATA?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&cid=" + Comp + "&finYear=" + FinYear); 
      }
 
      sp_create_PMAY_Critical_FinYearWiseDATA(stateCode:string,DisttCode:string,cityCode:string,Fin_Year:string):Observable<PMAY_DATA_New[]>
      {
-        // alert(); 
+        // alert();  2 
           debugger;
             return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_CRITICAL_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year); 
      }
@@ -992,7 +997,7 @@ ServiceUserAdminDetails():Observable<UserMaster[]>
 
      sp_create__Grid_PMAY_Critical_DATA(stateCode:string,DisttCode:string,cityCode:string,Comp:string,FinYear:string):Observable<PMAY_DATA_New[]>
      {
-        //  alert(); 
+        //  alert();   gRID dATA 
           debugger;
             return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_Grid_Critical_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&cid=" + Comp + "&finYear=" + FinYear); 
      }

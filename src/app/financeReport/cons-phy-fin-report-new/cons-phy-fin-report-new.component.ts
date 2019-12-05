@@ -5653,12 +5653,14 @@ if (typeof this.comp_id=== "undefined")
   }
   SendData()
   {
-      this.router.navigate(['/Admin/VerticalHousesDetails'],{ queryParams: { 
-      stateCode: this.stateCode,
-      distCode:this.districtCode,
-      cityCode:this.cityCode,
-      compId:this.Compid
-    } });
+    this.router.navigate(['/Admin/VerticalHousesDetails']);
+
+    //   this.router.navigate(['/Admin/VerticalHousesDetails'],{ queryParams: { 
+    //   stateCode: this.stateCode,
+    //   distCode:this.districtCode,
+    //   cityCode:this.cityCode,
+    //   compId:this.Compid
+    // } });
   }
   SendDataFin()
   {
