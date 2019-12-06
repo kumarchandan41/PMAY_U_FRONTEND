@@ -640,6 +640,8 @@ Cid:string;
   RdStatus: any;
   DisplayTable: string;
   DisplyaGraph: string;
+  FundsFirst: string;
+  SConst: string;
 //  PMAYT_1: any;
 
   constructor( private router: Router,private routers: ActivatedRoute, public service: GraphService ,private gevent:GlobalEvent, private modalService: NgbModal) { 
@@ -1312,6 +1314,7 @@ AdminPage()
     if (status === "graph") {
       this.DisplyaGraph = "block";
       this.DisplayTable = "none";
+
     }
     else {
       this.DisplyaGraph = "none";
@@ -1319,7 +1322,32 @@ AdminPage()
     }
   }
 
-
+HSubjConst($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.SConst ='block';
+    }   
+    else 
+    {
+      this.SConst ='none';
+    }
+}
+CASanct($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.FundsFirst ='block';
+    }   
+    else 
+    {
+      this.FundsFirst ='none';
+    }
+}
 
 GetFilterDatanew (stateCode,districtCodes ,cityCodes, Compid)
 {

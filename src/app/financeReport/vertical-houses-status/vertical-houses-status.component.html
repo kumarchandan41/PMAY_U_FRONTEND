@@ -4,10 +4,10 @@
     <div id="drpdown">
       <div class="row">
         <div id='filter' class="col-lg-12 col-md-12 col-sm-12">
-          <div class="col-lg-1 col-md-1 col-sm-1">
+          <!-- <div class="col-lg-1 col-md-1 col-sm-1">
             <button title="Go Back" class="btn btn-block btn-primary" (click)="AdminPage()">
               <i class="fa fa-arrow-left"></i> Back</button>
-          </div>
+          </div> -->
 
           <div class="col-lg-2 col-md-2 col-sm-2">
             <select class="form-control" [(ngModel)]="stateCodes" title="Choose State" placeholder="Choose State"
@@ -40,7 +40,7 @@
             </select>
           </div>
 
-          <div class="col-lg-1 col-md-1 col-sm-1">
+          <div class="col-lg-2 col-md-2 col-sm-2">
             <button title="Print" class="btn btn-block btn-primary" (click)="pdfReport()">
               <i class="fa fa-print"></i> Print</button>
           </div>
@@ -52,12 +52,12 @@
           </div>
 
           <div class="col-lg-2 col-md-2 col-sm-2">
-            <button title="Show Graph" type="button" (click)="ShowPageM('graph')" class="btn btn-block btn-warning">
+            <button title="Show Graph"   [ngStyle]="{'display':DisplayTable}" type="button" (click)="ShowPageM('graph')" class="btn btn-block btn-warning">
               <i class="fa fa-map-o"></i>
               Show Graph</button>
-              <button title="Show Graph" type="button" (click)="ShowPageM('table')" class="btn btn-block btn-warning">
-                <i class="fa fa-map-o"></i>
-                Show Graph</button>
+              <button title="Show Table"  [ngStyle]="{'display':DisplyaGraph}" type="button" (click)="ShowPageM('table')" class="btn btn-block btn-warning">
+                <i class="fa fa-table"></i>
+                Show Table</button>
           </div>
         </div>
       </div>
@@ -68,17 +68,17 @@
 
   <div id="urlSwitcher">
     <span style="cursor: pointer;">
-      <input type="radio" checked="true" name="progress" value="Phy1"> Physical
+      <input type="radio" checked="true" name="progress" value="Phy1">Physical
     </span>
     <span style="cursor: pointer;" (click)="checkForm($event)">
-      <input type="radio" name="progress" value="Fin1"> Financial<br>
+      <input type="radio" name="progress" value="Fin1">Financial<br>
     </span>
   </div>
 
 
 
-  <div class="container">
-    <div class="row"  [ngStyle]="{'display':DisplyaGraph}">a1
+  <div class="container-fluid">
+    <div class="row"  [ngStyle]="{'display':DisplyaGraph}"> <!--Graph View -->
       <div class="info-box-inline" style="padding-left:150px;font-family: Arial, Helvetica, sans-serif;font-size: 18px">
             <span class="info-box-header" ><b>Select Financial Year</b></span>
             <span  ><input type="checkbox"  (change)="ProjectCost($event)" name="Project Cost" value="SUM(BENE2014_15)" > 2014-15 &nbsp;</span> 
@@ -87,7 +87,6 @@
             <input type="checkbox" (change)="ProjectCost($event)" name="2nd Installment Released" value="SUM(BENE2017_18)"> 2017-18&nbsp;
             <input type="checkbox" (change)="ProjectCost($event)" name="3rd Installment Released" value="SUM(BENE2018_19)"> 2018-19&nbsp;
             <input type="checkbox" (change)="ProjectCost($event)" name="UC Receieved" value="SUM(BENE2019_20)">2019-20 
-            <!-- <input type="checkbox" id="chkAll" (change)="ProjectCost($event)" name="ALL" value="ALL" checked> ALL <br><br>  -->
         </div>
         <div >
         
@@ -130,35 +129,32 @@
     </div>
     
     <div class="row"  [ngStyle]="{'display':DisplayTable}">
-      b1
+      <!--Table View -->
       <div class="container-fluid" style="padding-bottom: 20px;" id="toPrint" #TABLE #table>
           <div style="text-align:center; padding: 15px 10px; font-size: 20px;">
             <b>
               Vertical wise Status of Houses Sanctioned under PMAY(U) for {{lblStateDisttCity}}
             </b>
-            <div class="info-box-inline" style="padding-left:470px;font-family: Arial, Helvetica, sans-serif;font-size: 18px">
-                <input type="radio" name="progress" value="Phy1" (change)="checkForm($event)"> Physical
-                <input type="radio" name="progress" value="Fin1" (change)="checkForm($event)"> Financial<br>  
-            </div>
           </div>
       
+                <!-- new code-->
+        <div class="info-box-inline" style="padding-left:150px;font-family: Arial, Helvetica, sans-serif;font-size: 18px">
+          <span class="info-box-header" style="padding:40px"><b>Show /Hide</b></span>
+          <span [ngStyle]="{'display':JvrmDisplay1}"><input    type="checkbox"  (change)="HSubjConst($event)" name="Project Cost" value="Project Cost" checked="true"> Houses Subjected to Construction &nbsp;</span> 
+          <input type="checkbox"  (change)="CASanct($event)" name="CA Sanctioned" value="CA Sanctioned" checked="true"> First Inst &nbsp;
+          <input type="checkbox" (change)="sendComp($event)" name="1st Installment Released" value="1st Installment Released">Second Inst &nbsp;
+          <input type="checkbox" (change)="sendComp($event)" name="3rd Installment Released" value="3rd Installment Released"> Third Inst&nbsp;
+          <span [ngStyle]="{'display':JvrmDisplay}"><input type="checkbox"  (change)="sendComp($event)" name="Total Central Assistance Released" value="Total Central Assistance Released">Grounded&nbsp;</span> 
+          <input type="checkbox" (change)="sendComp($event)" name="UC Receieved" value="UC Receieved">Completed&nbsp;
+          <input type="checkbox" (change)="sendComp($event)" name="UC Receieved" value="UC Receieved">Occupied&nbsp;
+      `</div>
+      <!-- new code-->
+
       
           <table id="mytable" class="bodyataglance" border="1px"
             style="font-size:12px; background-color:white; align-content: center; width: 100%;" id="printme" align="center">
             <tr style="text-align:center; background-color:#ccc">
-              <!-- <td   rowspan="1" style="text-align:center;font-size: 18px; font-family: Arial, Helvetica, sans-serif"><b> SrNo</b></td>
-                <td    style="text-align:center;font-size: 18px;font-family: Arial, Helvetica, sans-serif"><b>Component</b></td>
-                <td    style="text-align:center;font-size: 18px;font-family: Arial, Helvetica, sans-serif"><b>Financial Year</b></td>
-                <td style="font-size: 18px;font-family: Arial, Helvetica, sans-serif;width: 25px;" ><b>Houses subjected  <br/> to Construction</b></td>
-                <td   style="font-size: 18px;font-family: Arial, Helvetica, sans-serif;width: 25px;"><b>Houses for which Funds Released I</b></td>
-      
-                <td  style="font-size: 18px;font-family: Arial, Helvetica, sans-serif;width: 25px;"><b>II</b></td>
-                <td  style="font-size: 18px;font-family: Arial, Helvetica, sans-serif;width: 25px;"><b>III</b></td>
-                <td  style="font-size: 18px;font-family: Arial, Helvetica, sans-serif;width: 25px;" ><b>Houses Grounded*</b></td>
-                <td  style="font-size: 18px;font-family: Arial, Helvetica, sans-serif;width: 25px;"><b>Houses Completed*</b></td>
-                <td  style="font-size: 18px;font-family: Arial, Helvetica, sans-serif;width: 25px;"><b>Houses Occupied*</b></td>
-               <tr>-->
-      
+                     
             <tr class="tableHeader">
               <td rowspan="2" style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
                 <b>SrNo</b></td>
@@ -166,7 +162,7 @@
                 <b>Component</b></td>
               <td rowspan="2" style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
                 <b>Financial Year</b></td>
-              <td rowspan="2" style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
+              <td rowspan="2" [ngStyle]="{'display':SConst}"  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
                 <b>Houses subjected
                   to Construction </b></td>
               <td colspan="3" style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
@@ -178,8 +174,10 @@
               <td rowspan="2" style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
                 <b>Houses Occupied*</b></td>
             </tr>
+
+
             <tr class="tableHeader">
-              <td style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif"><b>
+              <td [ngStyle]="{'display':FundsFirst}" style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif"><b>
                   First</b>
               </td>
               <td style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif"><b>
@@ -188,8 +186,8 @@
                 <b>Third</b>
               </td>
             </tr>
-            <tr>
-            </tr>
+            <!-- <tr>
+            </tr> -->
       
             <tr height="10">
               <td align="center" height="20"
@@ -200,10 +198,10 @@
               </td>
               <td height="10" style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">
                 2014-15</td>
-              <td height="10"
+              <td height="10"  [ngStyle]="{'display':SConst}"
                 style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
-                {{HouseInvolved01.toLocaleString('en-IN')}} </td>
-              <td height="10"
+                {{HouseInvolved01.toLocaleString('en-IN')}}  </td>
+              <td [ngStyle]="{'display':FundsFirst}"  height="10"
                 style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses01.toLocaleString('en-IN')}} </td>
       
@@ -230,9 +228,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2015-16</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved1.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses1.toLocaleString('en-IN')}} </td>
               <td height="10"
                 style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
@@ -253,9 +251,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2016-17</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved2.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td  [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses2}} </td>
       
               <td height="10"
@@ -277,9 +275,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2017-18 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td  [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved3.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses3.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -302,9 +300,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2018-19</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved4.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses4}} </td>
       
               <td height="10"
@@ -327,9 +325,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2019-20 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved5.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses5}} </td>
       
               <td height="10"
@@ -352,9 +350,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">Total</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{THouseInvolved.toLocaleString('en-IN')}}</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{TFundsDisbursed_in_Houses.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -379,9 +377,9 @@
                 AHP
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2014-15 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved0_AHP.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses0_AHP.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -404,9 +402,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2015-16 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td  [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved1_AHP.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses1_AHP.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -429,9 +427,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2016-17 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved2_AHP.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses2_AHP.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -454,9 +452,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2017-18 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved3_AHP.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td  [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses3_AHP.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -478,9 +476,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2018-19 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved4_AHP.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td  [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses4_AHP.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -503,9 +501,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2019-20 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved5_AHP.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses5_AHP.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -528,9 +526,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">Total</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{THouseInvolved_AHP.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{TotalFundsDisbursedAHP.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -554,9 +552,9 @@
               <td style="padding-right: 10px;text-align: center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
                 ISSR</td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2014-15 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved0_ISSR.toLocaleString('en-IN')}}</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses0_ISSR.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -579,9 +577,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2015-16 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved1_ISSR.toLocaleString('en-IN')}}</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses1_ISSR.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -604,9 +602,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2016-17 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved2_ISSR.toLocaleString('en-IN')}}</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses2_ISSR.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -628,9 +626,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2017-18 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved3_ISSR.toLocaleString('en-IN')}}</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses3_ISSR.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -654,9 +652,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2018-19 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved4_ISSR.toLocaleString('en-IN')}}</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses4_ISSR.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -678,9 +676,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2019-20 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolved5_ISSR.toLocaleString('en-IN')}}</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_Houses5_ISSR.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -704,9 +702,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">Total</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{THouseInvolved1_ISSR.toLocaleString('en-IN')}}</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{TFundsDisbursed_in_Houses1_ISSR.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -731,9 +729,9 @@
               <td style="padding-right: 10px;text-align: center;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 CLSS </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2014-15 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -756,9 +754,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2015-16 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
       
               <td height="10"
@@ -781,9 +779,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2016-17 </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td  [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -810,10 +808,10 @@
                 <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2017-18','0')">2017-18</a> -->
               </td>
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -840,10 +838,10 @@
                 <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2018-19','0')">2018-19</a> -->
               </td>
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
       
       
@@ -871,10 +869,10 @@
                 <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2019-20','0')">2019-20</a> -->
               </td>
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{Bene2019_20_CLSS.toLocaleString('en-IN')}} </td>
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{Bene2019_20_CLSS.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -899,10 +897,10 @@
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">Total</td>
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -931,10 +929,10 @@
                 <!-- <a style="cursor: pointer" (click)="openModalDialog('JNNURM','2014-15','0')">2014-15</a> -->
               </td>
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">--
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">--
               </td>
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 --
               </td>
       
@@ -957,9 +955,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">Total</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">--
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">--
               </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 --
               </td>
       
@@ -984,9 +982,9 @@
               <td style="padding-right: 10px;text-align: center;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 PMAY(U) </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2014-15</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolvedT1.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_HousesT1.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -1011,10 +1009,10 @@
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2015-16</td>
       
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolvedT2.toLocaleString('en-IN')}} </td>
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_HousesT2.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -1038,9 +1036,9 @@
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2016-17</td>
       
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolvedT3.toLocaleString('en-IN')}}</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_HousesT3.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -1063,9 +1061,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2017-18</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolvedT4.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_HousesT4.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -1088,9 +1086,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 16px;font-family: Arial, Helvetica, sans-serif" align="center">2018-19</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolvedT5.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 16px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_HousesT5.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -1113,9 +1111,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 14px;font-family: Arial, Helvetica, sans-serif" align="center">2019-20</td>
-              <td style="padding-right: 10px;text-align: right;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
                 {{HouseInvolvedT6.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}"  style="padding-right: 10px;text-align: right;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
                 {{FundsDisbursed_in_HousesT6.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -1138,9 +1136,9 @@
               <td style="padding-right: 10px;text-align: right;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
               </td>
               <td style="font-size: 14px;font-family: Arial, Helvetica, sans-serif" align="center">Total </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':SConst}"  style="padding-right: 10px;text-align: right;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
                 {{THouseInvolvedGT.toLocaleString('en-IN')}} </td>
-              <td style="padding-right: 10px;text-align: right;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
+              <td [ngStyle]="{'display':FundsFirst}" style="padding-right: 10px;text-align: right;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
                 {{TFundsDisbursed_in_HousesGT.toLocaleString('en-IN')}} </td>
       
               <td height="10"
@@ -1156,15 +1154,6 @@
                 {{THouses_CompletedGT.toLocaleString('en-IN')}} </td>
               <td style="padding-right: 10px;text-align: right;font-size: 14px;font-family: Arial, Helvetica, sans-serif">
                 {{THousesOccupiedGT.toLocaleString('en-IN')}}</td>
-            </tr>
-            <tr>
-              <td colspan="10">
-                <i>
-                  <p style="margin: 0; padding: 10px;"><label id="Note7"> "* includes incomplete work of earlier
-                      JnNURM"</label>
-                  </p>
-                </i>
-              </td>
             </tr>
           </table>
       
