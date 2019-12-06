@@ -27,20 +27,58 @@ th{
   table, th, td {
      height: 8px;
      font-family: "Open Sans", Arial, sans-serif;
-    font-size: 10px;
+    font-size: 14px;
+    padding: 1px 2px;
   }
    
   .tableHeader{
     background-color: #f0ad4e;
   }
   
+#urlSwitcher{
+  text-align: center; 
+  font-size: 18px; 
+  padding-top: 10px;
+}
+
   @media print {
-    body *, #drpdown, #buttonGroup{display : none};
-    body #toPrint * {display:none} 
+    body *, #drpdown, #buttonGroup{display : none;}
+    body #toPrint *, #urlSwitcher {display:none} 
     table {border-collapse: collapse;}
-    
+    #toPrint div:first-child{
+      font-size: 18px !important;
+      padding-top: 0px !important;
+    }
     table, td, th {border: 1px solid black}
-    #toPrint { padding-left :1px; padding-top :20px;padding-right :1px;}  
+    #toPrint { padding-left :15px; padding-top :20px;padding-right :15px;} 
+    
+    tr:nth-child(even) td,  tr:nth-child(odd) td{
+      /* background-color: red !important; */
+      -webkit-print-color-adjust: exact; 
+    }
+  tr.tableHeader, .blackPrintHeader{
+      background-color: #000 !important;
+      -webkit-print-color-adjust: exact; 
+  }
+  
+  tr.printHeader{
+      background-color: #cccc !important;
+      -webkit-print-color-adjust: exact; 
+  }
+  tr.tableHeader td, tr.tableHeader td b{
+      color: #fff !important;
+  }
+  tr.tableHeader td{
+    border-color: #fff !important;
+  }
+  tr.tableHeader td:first-child{
+    border-left-color:  #000 !important;
+  }
+
+  tr.tableHeader td:last-child{
+    border-right-color:  #000 !important;
+  }
+
    }
   
    
