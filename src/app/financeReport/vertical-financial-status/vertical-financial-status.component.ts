@@ -1251,7 +1251,7 @@ this.display='none';
 }
 AdminPage()
 {
-  this.router.navigate(['/Admin/ConsphyfinChart1']);
+  this.router.navigate(['/Admin/VerticalHousesDetails']);
 }   
 
 GetFilterDatanew (stateCode,districtCodes ,cityCodes, Compid)
