@@ -642,6 +642,11 @@ Cid:string;
   DisplyaGraph: string;
   FundsFirst: string;
   SConst: string;
+  FundsThird: string;
+  FundsSecond: string;
+  Grounded: string;
+  Completed: string;
+  Occupied: string;
 //  PMAYT_1: any;
 
   constructor( private router: Router,private routers: ActivatedRoute, public service: GraphService ,private gevent:GlobalEvent, private modalService: NgbModal) { 
@@ -1314,7 +1319,6 @@ AdminPage()
     if (status === "graph") {
       this.DisplyaGraph = "block";
       this.DisplayTable = "none";
-
     }
     else {
       this.DisplyaGraph = "none";
@@ -1348,7 +1352,73 @@ CASanct($event)
       this.FundsFirst ='none';
     }
 }
+CASanct2($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.FundsSecond ='block';
+    }   
+    else 
+    {
+      this.FundsSecond ='none';
+    }
+}
 
+CASanct3($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.FundsThird ='block';
+    }   
+    else 
+    {
+      this.FundsThird ='none';
+    }
+}
+sendGround($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.Grounded ='block';
+    }   
+    else 
+    {
+      this.Grounded ='none';
+    }
+}
+sendComp($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.Completed ='block';
+    }   
+    else 
+    {
+      this.Completed ='none';
+    }
+}
+
+sendOccu($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.Occupied ='block';
+    }   
+    else 
+    {
+      this.Occupied ='none';
+    }
+}
 GetFilterDatanew (stateCode,districtCodes ,cityCodes, Compid)
 {
   //alert(stateCode);
@@ -1414,6 +1484,123 @@ GetFilterDatanew (stateCode,districtCodes ,cityCodes, Compid)
          this.HouseInvolved5_ISSR =0;
           this.Bene2019_20_CLSS=0;
      
+
+
+          this.THouseInvolved1_ISSR=0;
+          this.TFundsDisbursed_in_Houses1_ISSR=0;
+          this.ISSR_1_TOT=0;
+          this.ISSR_2_TOT=0;
+          this.THouses_Grounded1_ISSR=0;
+          this.THouses_Completed1_ISSR=0;
+          this.THousesOccupied1_ISSR=0;
+
+          this.ISSR_1516_1=0;
+          this.ISSR_1516_2=0;
+          
+          this.HouseInvolved2_ISSR=0;
+          this.FundsDisbursed_in_Houses2_ISSR=0;
+          this.ISSR_1617_1=0;
+          this.ISSR_1617_2=0;
+          this.Houses_Grounded2_ISSR=0;
+          this.Houses_Completed2_ISSR=0;
+          this.HousesOccupied2_ISSR=0;
+          
+
+          this.HouseInvolved3_ISSR=0;
+          this.FundsDisbursed_in_Houses3_ISSR=0;
+          this.ISSR_1718_1=0;
+          this.ISSR_1718_2=0;
+          this.Houses_Grounded3_ISSR=0;
+          this.Houses_Completed3_ISSR=0;
+          this.HousesOccupied3_ISSR=0;
+          
+
+          this.HouseInvolved4_ISSR=0;
+          this.FundsDisbursed_in_Houses4_ISSR=0;
+          this.ISSR_1718_1=0;
+          this.ISSR_1718_2=0;
+          this.Houses_Grounded4_ISSR=0;
+          this.Houses_Completed4_ISSR=0;
+          this.HousesOccupied4_ISSR=0;
+          
+          this.Bene2014_15_CLSS =0;
+          this.Bene2015_16_CLSS =0;
+          this.Bene2016_17_CLSS =0;
+          this.Bene2017_18_CLSS =0;
+          this.Bene2018_19_CLSS =0;
+          this.Bene2019_20_CLSS =0;
+
+//---------------------------------------------------------------
+          this.HouseInvolved0_AHP =0;
+          this.FundsDisbursed_in_Houses0_AHP =0;
+          this.AHP_1415_1 =0;
+          this.AHP_1415_2 =0;
+          this.Houses_Grounded0_AHP =0;
+          this.Houses_Completed0_AHP =0;
+          this.HousesOccupied0_AHP =0;
+
+          this.HouseInvolved1_AHP =0;
+          this.FundsDisbursed_in_Houses1_AHP =0;
+          this.AHP_1516_1 =0;
+          this.AHP_1516_2 =0;
+          this.Houses_Grounded1_AHP =0;
+          this.Houses_Completed1_AHP =0;
+          this.HousesOccupied1_AHP =0;
+
+          this.HouseInvolved2_AHP =0;
+          this.FundsDisbursed_in_Houses2_AHP =0;
+          this.AHP_1617_1 =0;
+          this.AHP_1617_2 =0;
+          this.Houses_Grounded2_AHP =0;
+          this.Houses_Completed2_AHP =0;
+          this.HousesOccupied2_AHP =0;
+
+          this.HouseInvolved3_AHP =0;
+          this.FundsDisbursed_in_Houses3_AHP =0;
+          this.AHP_1718_1 =0;
+          this.AHP_1718_2 =0;
+          this.Houses_Grounded3_AHP =0;
+          this.Houses_Completed3_AHP =0;
+          this.HousesOccupied3_AHP =0;
+
+          this.HouseInvolved4_AHP =0;
+          this.FundsDisbursed_in_Houses4_AHP =0;
+          this.AHP_1819_1 =0;
+          this.AHP_1819_2 =0;
+          this.Houses_Grounded4_AHP =0;
+          this.Houses_Completed4_AHP =0;
+          this.HousesOccupied4_AHP =0;
+
+          this.HouseInvolved5_AHP =0;
+          this.FundsDisbursed_in_Houses5_AHP =0;
+          this.AHP_1920_1 =0;
+          this.AHP_1920_2 =0;
+          this.Houses_Grounded5_AHP =0;
+          this.Houses_Completed5_AHP =0;
+          this.HousesOccupied5_AHP =0;
+//---------------------------------------------------------------
+
+
+          this.HouseInvolved5_ISSR=0;
+          this.FundsDisbursed_in_Houses5_ISSR=0;
+          this.ISSR_1819_1=0;
+          this.ISSR_1819_2=0;
+          this.Houses_Grounded5_ISSR=0;
+          this.Houses_Completed5_ISSR=0;
+          this.HousesOccupied5_ISSR=0;
+          
+          this.THouseInvolved1_ISSR=0;
+          this.TFundsDisbursed_in_Houses1_ISSR=0;
+          this.ISSR_1_TOT=0;
+          this.ISSR_2_TOT=0;
+          this.THouses_Grounded1_ISSR=0;
+          this.THouses_Completed1_ISSR=0;
+          this.THousesOccupied1_ISSR=0;
+
+          
+          this.ISSR_1920_1=0;
+          this.ISSR_1920_2=0;
+        
       // 15- 16  col2
       this.FundsDisbursed_in_HousesT1 =0;
       this.FundsDisbursed_in_Houses01=0; 
@@ -1624,6 +1811,44 @@ GetFilterDatanew (stateCode,districtCodes ,cityCodes, Compid)
   this.THousesOccupied1_ISSR =0;
 
 
+  
+      this.ISSR_1516_1=0;
+   
+      this.ISSR_1516_2=0;
+      this.ISSR_1_TOT=0;
+      this.ISSR_2_TOT=0;
+     
+      this.ISSR_1617_1=0;
+     
+      this.ISSR_1617_2=0;
+
+      this.HouseInvolvedT1=0;
+      this.FundsDisbursed_in_HousesT1=0;
+      this.PMAY1415_1=0;
+      this.PMAY1415_2=0;
+      this.Houses_GroundedT1=0;
+      this.Houses_CompletedT1=0;
+      this.HousesOccupiedT1=0;
+
+     
+
+     
+      this.ISSR_1718_1=0;
+     
+     
+      this.ISSR_1718_2=0;
+     
+
+    
+      this.ISSR_1819_1=0;
+     
+      this.ISSR_1819_2=0;
+     
+      this.ISSR_1920_1=0;
+     
+       this.ISSR_1920_2=0;
+     
+
   this.service.GetStatusofHouses_CompWiseNew(stateCode,districtCodes ,cityCodes,"BLCS","2014-15").subscribe(result_BLCS=>{
     try{
       this.HouseInvolved01=result_BLCS[0].Housesinvolved;
@@ -1728,6 +1953,8 @@ GetFilterDatanew (stateCode,districtCodes ,cityCodes, Compid)
               this.blc_1_TOT =this.blc_1415_1 +this.blc_1516_1 +this.blc_1617_1 +this.blc_1718_1 +this.blc_1819_1 +this.blc_1920_1;
               this.blc_2_TOT =this.blc_1415_2 +this.blc_1516_2 +this.blc_1617_2 +this.blc_1718_2 +this.blc_1819_2 +this.blc_1920_2;
 
+ 
+ 
               this.THouseInvolved =  this.HouseInvolved01 +this.HouseInvolved1 + this.HouseInvolved2+ this.HouseInvolved3 + this.HouseInvolved4 +this.HouseInvolved5;
               this.TFundsDisbursed_in_Houses  = this.FundsDisbursed_in_Houses01 +this.FundsDisbursed_in_Houses1 +this.FundsDisbursed_in_Houses2 +this.FundsDisbursed_in_Houses3+this.FundsDisbursed_in_Houses4+this.FundsDisbursed_in_Houses5;
               this.THouses_Grounded =this.Houses_Grounded01 +this.Houses_Grounded1 +this.Houses_Grounded2 +this.Houses_Grounded3 +this.Houses_Grounded4 +this.Houses_Grounded5;
@@ -1839,7 +2066,7 @@ this.HousesOccupied5_AHP =0;
           }
           catch{}
           finally{}
-          //})
+ 
           this.AHP_1_TOT=this.AHP_1415_1 +this.AHP_1516_1+this.AHP_1617_1 +this.AHP_1718_1 +this.AHP_1819_1 +this.AHP_1920_1;
           this.AHP_2_TOT=this.AHP_1415_2 +this.AHP_1516_2+this.AHP_1617_2 +this.AHP_1718_2 +this.AHP_1819_2 +this.AHP_1920_2;
           
@@ -2253,6 +2480,62 @@ if (this.HouseInvolved01 =="0" )
       this.HouseInvolved4="-";
     }
 
+    if (this.ISSR_1415_1 =="0")   
+    {
+      this.ISSR_1415_1="-";
+    }
+    if (this.ISSR_1415_2 =="0")   
+    {
+      this.ISSR_1415_2="-";
+    }
+    
+
+    if (this.ISSR_1516_1 =="0")   
+    {
+      this.ISSR_1516_1="-";
+    }
+    if (this.ISSR_1516_2 =="0")   
+    {
+      this.ISSR_1516_2="-";
+    }
+
+    if (this.ISSR_1617_1 =="0")   
+    {
+      this.ISSR_1617_1="-";
+    }
+    if (this.ISSR_1617_2 =="0")   
+    {
+      this.ISSR_1617_2="-";
+    }
+
+    if (this.ISSR_1718_1 =="0")   
+    {
+      this.ISSR_1718_1="-";
+    }
+    if (this.ISSR_1718_2 =="0")   
+    {
+      this.ISSR_1718_2="-";
+    }
+
+    if (this.ISSR_1819_1 =="0")   
+    {
+      this.ISSR_1819_1="-";
+    }
+    if (this.ISSR_1819_2 =="0")   
+    {
+      this.ISSR_1819_2="-";
+    }
+
+    if (this.ISSR_1920_1 =="0")   
+    {
+      this.ISSR_1920_1="-";
+    }
+    if (this.ISSR_1920_2 =="0")   
+    {
+      this.ISSR_1920_2="-";
+    }
+
+
     if (this.FundsDisbursed_in_Houses4 =="0")   
     {
       this.FundsDisbursed_in_Houses4="-";
@@ -2639,7 +2922,8 @@ if (this.Bene2018_19_CLSS =="0")
   this.Bene2018_19_CLSS="-";
 }
 
-     
+ 
+
 if (this.Bene2019_20_CLSS =="0")   
 {
   this.Bene2019_20_CLSS="-";
@@ -2858,6 +3142,247 @@ if (this.THousesOccupiedGT =="0")
   this.THousesOccupiedGT="-";
 }
 
+if (this.blc_1415_1 =="0")   
+{
+  this.blc_1415_1="-";
+}
+if (this.blc_1415_2 =="0")   
+{
+  this.blc_1415_2="-";
+}
+
+if (this.blc_1516_1 =="0")   
+{
+  this.blc_1516_1="-";
+}
+if (this.blc_1516_2 =="0")   
+{
+  this.blc_1516_2="-";
+}
+
+if (this.blc_1617_1 =="0")   
+{
+  this.blc_1617_1="-";
+}
+if (this.blc_1617_2 =="0")   
+{
+  this.blc_1617_2="-";
+}
+
+if (this.blc_1718_1 =="0")   
+{
+  this.blc_1718_1="-";
+}
+if (this.blc_1718_2 =="0")   
+{
+  this.blc_1718_2="-";
+}
+
+if (this.blc_1819_1 =="0")   
+{
+  this.blc_1819_1="-";
+}
+if (this.blc_1819_2 =="0")   
+{
+  this.blc_1819_2="-";
+}
+
+if (this.blc_1920_1 =="0")   
+{
+  this.blc_1920_1="-";
+}
+if (this.blc_1920_2 =="0")   
+{
+  this.blc_1920_2="-";
+}
+
+if (this.blc_1_TOT =="0")   
+{
+  this.blc_1_TOT="-";
+}
+if (this.blc_2_TOT =="0")   
+{
+  this.blc_2_TOT="-";
+}
+
+if (this.AHP_1415_1 =="0")   
+{
+  this.AHP_1415_1="-";
+}
+if (this.AHP_1415_2 =="0")   
+{
+  this.AHP_1415_2="-";
+}
+
+if (this.AHP_1516_1 =="0")   
+{
+  this.AHP_1516_1="-";
+}
+if (this.AHP_1516_2 =="0")   
+{
+  this.AHP_1516_2="-";
+}
+
+if (this.AHP_1617_1 =="0")   
+{
+  this.AHP_1617_1="-";
+}
+if (this.AHP_1617_2 =="0")   
+{
+  this.AHP_1617_2="-";
+}
+
+if (this.AHP_1718_1 =="0")   
+{
+  this.AHP_1718_1="-";
+}
+if (this.AHP_1718_2 =="0")   
+{
+  this.AHP_1718_2="-";
+}
+
+
+if (this.AHP_1819_1 =="0")   
+{
+  this.AHP_1819_1="-";
+}
+if (this.AHP_1819_2 =="0")   
+{
+  this.AHP_1819_2="-";
+}
+
+if (this.AHP_1920_1 =="0")   
+{
+  this.AHP_1920_1="-";
+}
+if (this.AHP_1920_2 =="0")   
+{
+  this.AHP_1920_2="-";
+}
+if (this.TotalFundsDisbursedAHP =="0" ||this.TotalFundsDisbursedAHP == "0-"	)
+{
+  this.TotalFundsDisbursedAHP ="-";
+}
+if (this.AHP_1_TOT =="0" || this.AHP_1_TOT =="0-")   
+{
+  this.AHP_1_TOT="-";
+}
+if (this.AHP_2_TOT =="0" || this.AHP_2_TOT =="0-----")   
+{
+  this.AHP_2_TOT="-";
+}
+if (this.ISSR_1_TOT =="0")   
+{
+  this.ISSR_1_TOT="-";
+}
+if (this.ISSR_2_TOT =="0")   
+{
+  this.ISSR_2_TOT="-";
+}
+
+
+
+
+if (this.THouseInvolved =="0")   
+{
+  this.THouseInvolved="-";
+}
+if (this.TFundsDisbursed_in_Houses =="0")   
+{
+  this.TFundsDisbursed_in_Houses="-";
+}
+if (this.THouses_Grounded =="0")   
+{
+  this.THouses_Grounded="-";
+}
+if (this.THouses_Completed =="0")   
+{
+  this.THouses_Completed="-";
+}
+if (this.THousesOccupied =="0")   
+{
+  this.THousesOccupied="-";
+}
+
+
+if (this.PMAY1415_1 =="0")   
+{
+  this.PMAY1415_1="-";
+}
+if (this.PMAY1415_2 =="0")   
+{
+  this.PMAY1415_2="-";
+}
+
+if (this.PMAY1516_1 =="0" || this.PMAY1516_1 =="0-null")   
+{
+  this.PMAY1516_1="-";
+}
+if (this.PMAY1516_2 =="0" || this.PMAY1516_2 =="0-null")   
+{
+  this.PMAY1516_2="-";
+}
+
+
+if (this.PMAY1617_1 =="0" || this.PMAY1617_1 =="0-null")   
+{
+  this.PMAY1617_1="-";
+}
+if (this.PMAY1617_2 =="0" || this.PMAY1617_2 =="0-null")   
+{
+  this.PMAY1617_2="-";
+}
+
+
+
+if (this.PMAY1718_1 =="0" || this.PMAY1718_1 =="0-null")   
+{
+  this.PMAY1718_1="-";
+}
+if (this.PMAY1718_2 =="0"|| this.PMAY1718_2 =="0-null")   
+{
+  this.PMAY1718_2="-";
+}
+
+if (this.PMAY1819_1 =="0"|| this.PMAY1819_1 =="0-null")   
+{
+  this.PMAY1819_1="-";
+}
+if (this.PMAY1819_2 =="0"|| this.PMAY1819_2 =="0-null")   
+{
+  this.PMAY1819_2="-";
+}
+
+
+if (this.PMAY1920_1 =="0" || this.PMAY1920_1 =="0-null")   
+{
+  this.PMAY1920_1="-";
+}
+if (this.PMAY1920_2 =="0" || this.PMAY1920_2 =="0-null")   
+{
+  this.PMAY1920_2="-";
+}
+
+if (this.PMAYT_1 =="0" || this.PMAYT_1 =="0-null")   
+{
+  this.PMAYT_1="-";
+}
+if (this.PMAYT_2 =="0" || this.PMAYT_2 =="00-null0-null0-null0-null0-null	")   
+{
+  this.PMAYT_2="-";
+}
+
+
+
+
+
+
+
+
+
+
+
+
 })
 })
 })
@@ -2996,15 +3521,7 @@ this.HouseInvolved01=0;
             this.Houses_Grounded4 = result_BLCS18[0].Houses_Grounded;
             this.Houses_Completed4 = result_BLCS18[0].Houses_Completed;
             this.HousesOccupied4= result_BLCS18[0].HousesOccupied;
-   //       })
-  //           alert(4);
-  // alert(this.HouseInvolved01);
-  //    alert(this.HouseInvolved1);
-  //    alert(this.HouseInvolved2);
-  //    alert(this.HouseInvolved3);
-  //    alert(this.HouseInvolved4);
-  //    alert(this.HouseInvolved5);
-     
+   
 
   this.service.GetStatusofHouses_CompWiseNew(stateCode,districtCodes ,cityCodes,"BLCS","2019-20").subscribe(result_BLCS19=>{
     try{
