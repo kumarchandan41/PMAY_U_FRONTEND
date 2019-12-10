@@ -275,6 +275,14 @@ export class IndianmapComponent implements OnInit {
       'overColor': '#ffcc5f',
       'downColor': '#477cb2',
       'enable': true,
+    },
+    'map_37': {
+      'hover': 'LADAKH',
+
+      'upColor': '#eff9ff',
+      'overColor': '#ffcc5f',
+      'downColor': '#477cb2',
+      'enable': true,
     }
   }
   map_config: any = {

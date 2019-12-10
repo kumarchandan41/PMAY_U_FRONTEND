@@ -74,16 +74,10 @@ const indianFormat1 = (number, currency = 'INR') => {
 })
 
 export class VerticalFinancialStatusComponent implements OnInit {
-  
-
   stateCode: string= "0";
   districtCode:string= "0";
   cityCode:string = "0";
-
-
   HousesOccupied6:any="0";
-
-
   stateCodes: string = "0";
   districtCodes: string = "0";
   cityCodes: string = "0";
@@ -617,7 +611,14 @@ PC15BLC : any=0;
   UC_Received16BLC: any=0;
   CentralDisplay:any;
   PCOST: any;
-
+  TotalUC: string;
+  Inst_III: string;
+  TotalCAR: string;
+  Inst_II: string;
+  Inst_I: string;
+  DisplayTable: string;
+  DisplyaGraph: string;
+  RdStatus: any;
 //----------------------------------- 
 
 
@@ -722,11 +723,13 @@ PC15BLC : any=0;
     // this.States_UT ="Delhi";
     this.lblStateDisttCity = "All India";
      //this.LoadData(this.stateCodes,this.districtCodes,this.cityCodes);
-     this.GetFilterDatanew(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid );
+  //   this.GetFilterDatanew(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid );
      this.GetFinancialData(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid);
 
      //stateCodes, districtCodes, cityCodes, Compid
 
+     this.DisplyaGraph = "none";
+     this.DisplayTable = "block";
 } 
 test($event)
 {
@@ -755,6 +758,102 @@ ProjectCost($event)
     }
 }
 
+checkForm($event)
+{
+  debugger;
+     this.RdStatus=$event.target.value;      
+     if(this.RdStatus === 'Phy1')
+     {
+
+         this.router.navigate(['/Admin/VerticalHousesDetails'])
+     }
+     else{
+          this.router.navigate(['/Admin/VerticalFinancialDetails'])
+     }
+}
+
+
+
+Firstinst($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.Inst_I ='block';
+    }   
+    else 
+    {
+      this.Inst_I ='none';
+    }
+}
+
+Secondinst($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.Inst_II ='block';
+    }   
+    else 
+    {
+      this.Inst_II ='none';
+    }
+}
+Thirdinst($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.Inst_III ='block';
+    }   
+    else 
+    {
+      this.Inst_III ='none';
+    }
+}
+ 
+TotalCA($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.TotalCAR ='block';
+    }   
+    else 
+    {
+      this.TotalCAR ='none';
+    }
+}
+
+ShowPageM(status: string) {
+  if (status === "graph") {
+    this.DisplyaGraph = "block";
+    this.DisplayTable = "none";
+  }
+  else {
+    this.DisplyaGraph = "none";
+    this.DisplayTable = "block";
+  }
+}
+
+
+UCrecd($event)
+{
+    var data:string;
+    const checked=$event.target.checked;
+    if (checked)
+    {
+      this.TotalUC ='block';
+    }   
+    else 
+    {
+      this.TotalUC ='none';
+    }
+}
 download_csv(csv, filename) {
   var csvFile;
   var downloadLink;
@@ -1981,9 +2080,16 @@ getStateDetails(stateCodes) {
       this.service.GetStateNameByCode(this.stateCode).subscribe(resultName => {
       this.lblStateDisttCity = resultName.States_UT;
     });
+
+        this.districtCodes ="0";
+        this.cityCodes="0";
+       // this.stateCodes = "0";
+        this.districtCodes = "0";
+        this.cityCodes = "0";
+
       this.service.DisttList( this.stateCode);
       this.service.CityList(this.districtCodes);//
-      this.GetFilterDatanew(this.stateCode,this.districtCodes ,this.cityCodes, this.Compid );
+    //  this.GetFilterDatanew(this.stateCode,this.districtCodes ,this.cityCodes, this.Compid );
       this.GetFinancialData(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid);
    }   
 }
@@ -2002,10 +2108,14 @@ getDistrictDetails(DisttCode) {
         this.LoadData(this.stateCodes,this.districtCodes,this.cityCodes);
     }
     else {
-        this.districtCodes = DisttCode;
+        
+      this.cityValue = "0";
+      this.districtCodes = DisttCode;
         this.service.CityList(DisttCode);
         //this.GetFilterData();
-        this.GetFilterDatanew(this.stateCode,this.districtCodes ,this.cityCodes, this.Compid );
+       // this.GetFilterDatanew(this.stateCode,this.districtCodes ,this.cityCodes, this.Compid );
+        this.GetFinancialData(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid);
+
     }
 
 }
@@ -2027,7 +2137,10 @@ getCityDetails(cityCode) {
       // alert(cityCode);
     this.cityCodes = cityCode;
     //this.GetFilterData();
-    this.GetFilterDatanew(this.stateCode,this.districtCodes ,this.cityCodes, this.Compid );
+    
+    //this.GetFilterDatanew(this.stateCode,this.districtCodes ,this.cityCodes, this.Compid );
+    this.GetFinancialData(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid);
+
     }
   }
 
@@ -2826,11 +2939,18 @@ alert(this.PC14AHP);
       this.UC_Received15BLC = 0;
       this.Total15BLC  =  0;
       
-this.PC_BLC14=0;
-        this.CAI_BLC14 = 0;
+      this.PC_BLC14=0;
+      this.CAI_BLC14 = 0;
+
         this.First_BLC14 = 0;
         this.Second_BLC14 = 0;
         this.Third_BLC14 = 0;
+        this.Second16BLC = 0;
+        this.Second17BLC = 0;
+        this.Second18 = 0;
+        this.Second19 = 0;
+        this.TcolBLC2 = 0;
+
         this.UC_Received_BLC14 = 0; 
         this.Total_BLC14  =  0;
         this.sTotalPC =  0;
