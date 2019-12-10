@@ -45,26 +45,33 @@
         </div>
 
         <div class="col-lg-2 col-md-2 col-sm-2">
-          <button title="Show Graph" type="button" (click)="ShowPageM('graph')" class="btn btn-block btn-warning">
+          <button title="Show Graph" type="button" [ngStyle]="{'display':DisplayTable}" (click)="ShowPageM('graph')" class="btn btn-block btn-warning">
             <i class="fa fa-map-o"></i>
             Show Graph</button>
-          <button title="Show Table" type="button" (click)="ShowPageM('table')" class="btn btn-block btn-warning">
+          <button title="Show Table" type="button" [ngStyle]="{'display':DisplyaGraph}" (click)="ShowPageM('table')" class="btn btn-block btn-warning">
             <i class="fa fa-table"></i>
             Show Table</button>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
 
-<div id="urlSwitcher">
+<!-- <div id="urlSwitcher">
   <span style="cursor: pointer;" (click)="checkForm($event)">
     <input type="radio" name="progress" value="Phy1"> Physical
   </span>
   <span style="cursor: pointer;">
     <input type="radio" name="progress" checked="true" value="Fin1"> Financial<br>
+  </span>
+</div> -->
+<div id="urlSwitcher">
+  <span style="cursor: pointer;" (click)="checkForm($event)">
+    <input type="radio" name="progress" value="Phy1">Physical
+  </span>
+  <span style="cursor: pointer;" >
+    <input type="radio"  checked="true" name="progress" value="Fin1">Financial<br>
   </span>
 </div>
 
@@ -79,24 +86,26 @@
     <input type="checkbox" (change)="test($event)" name="CA Sanctioned" value="CA Sanctioned" checked="true">
     CA Sanct.
   </span>
+
+  
   <span>
-    <input type="checkbox" (change)="sendComp($event)" name="1st Installment Released" value="1st Installment Released">
+    <input type="checkbox" (change)="Firstinst($event)" name="1st Installment Released" value="1st Installment Released" checked="true">
     1st Inst Rel.
   </span>
   <span>
-    <input type="checkbox" (change)="sendComp($event)" name="2nd Installment Released" value="2nd Installment Released">
+    <input type="checkbox" (change)="Secondinst($event)" name="2nd Installment Released" value="2nd Installment Released" checked="true">
     2nd Inst Rel.
   </span>
   <span>
-    <input type="checkbox" (change)="sendComp($event)" name="3rd Installment Released" value="3rd Installment Released">
+    <input type="checkbox" (change)="Thirdinst($event)" name="3rd Installment Released" value="3rd Installment Released" checked="true">
     3rd Inst Rel.
   </span>
   <span [ngStyle]="{'display':JvrmDisplay}">
-    <input type="checkbox" (change)="sendComp($event)" name="Total Central Assistance Released"
-      value="Total Central Assistance Released">Total CA Rel.
+    <input type="checkbox" (change)="TotalCA($event)" name="Total Central Assistance Released"
+      value="Total Central Assistance Released" checked="true">Total CA Rel.
   </span>
   <span>
-    <input type="checkbox" (change)="sendComp($event)" name="UC Receieved" value="UC Receieved">
+    <input type="checkbox" (change)="UCrecd($event)" name="UC Receieved" value="UC Receieved" checked="true"> 
     UC Receieved
   </span>
 
@@ -108,9 +117,26 @@
       Financial Progress of Houses Sanctioned under PMAY(U) for {{lblStateDisttCity}}
     </b>
   </div>
-  <table class="bodyataglance" border="1px"
+
+  <table class="bodyataglance"  border="1px"
     style="font-size:12px; background-color:white; align-content: center; width: 100%;" id="printme" align="center">
     <tr class="tableHeader">
+      <td rowspan="2"  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">SrNo</td>
+      <td rowspan="2"  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">Component</td>
+      <td rowspan="2"  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">Financial Year	</td>
+      <td rowspan="2" [ngStyle]="{'display':PCOST}"  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">Project Cost	</td>
+      <td rowspan="2" [ngStyle]="{'display':CentralDisplay}"  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">Central Assistance Sanctioned	</td>
+      <td colspan="3" [ngStyle]="{'display':TotalCAR}"  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">Central Assistance Released </td>
+      <td rowspan="2"  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">Total Central Assistance Released	</td>
+      <td rowspan="2" [ngStyle]="{'display':TotalUC}"   style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">UC Received</td>
+  </tr>
+  <tr class="tableHeader">
+      <td [ngStyle]="{'display':Inst_I}"  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">First</td>
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">Second</td>
+      <td [ngStyle]="{'display':Inst_III}"  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif">Third</td>
+  </tr>
+    
+    <!-- <tr class="tableHeader">
       <td rowspan="1" style="width:40px;text-align:center;font-size: 13px; ">
         <b> SrNo</b></td>
       <td style="text-align:center;font-size: 13px;"><b>Comp.</b>
@@ -119,21 +145,26 @@
           Year</b></td>
       <td [ngStyle]="{'display':PCOST}" style="font-size: 13px;">
         <b>Project <br /> Cost </b></td>
-      <td [ngStyle]="{'display':CentralDisplay}" style="font-size: 13px;"><b>Central Assistance Sanctioned
+      <td [ngStyle]="{'display':CentralDisplay}"  style="font-size: 13px;"><b>Central Assistance Sanctioned
         </b></td>
 
+ 
 
-      <td style="font-size: 13px;"><b>1st Installment Released</b>
+      <td [ngStyle]="{'display':Inst_I}"  style="font-size: 13px;"><b>1st Installment Released</b>
       </td>
-      <td style="font-size: 13px;"><b>2nd Installment Released</b>
+      <td [ngStyle]="{'display':Inst_II}" style="font-size: 13px;"><b>2nd Installment Released</b>
       </td>
-      <td style="font-size: 13px;"><b>3rd Installment Released</b>
+      <td [ngStyle]="{'display':Inst_III}" style="font-size: 13px;"><b>3rd Installment Released</b>
       </td>
-      <td style="font-size: 13px;"><b>Total Central Assistance Released</b></td>
-      <td style="font-size: 13px;"><b>UC Received</b></td>
+      <td [ngStyle]="{'display':TotalCAR}"  style="font-size: 13px;"><b>Total Central Assistance Released</b></td>
+      <td [ngStyle]="{'display':TotalUC}"  style="font-size: 13px;"><b>UC Received</b></td>
 
-    </tr>
+    </tr> -->
+ 
+ 
+ 
 
+  
 
     <tr height="10">
       <td align="center" height="20" rowspan="7"> 1</td>
@@ -147,19 +178,20 @@
 
       <td [ngStyle]="{'display':CentralDisplay}" height="10" style="text-align: right;font-size: 13px;">
         {{CAI_BLC14.toLocaleString('en-IN')}} </td>
-      <td height="10" style="text-align: right;font-size: 13px;">
+      <td height="10"  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First_BLC14.toLocaleString('en-IN')}} </td>
-      <td height="10" style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  height="10" style="text-align: right;font-size: 13px;">
         {{Second_BLC14.toLocaleString('en-IN')}} </td>
-      <td height="10" style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" height="10" style="text-align: right;font-size: 13px;">
         {{Third_BLC14.toLocaleString('en-IN')}} </td>
 
-      <td height="10" style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" height="10" style="text-align: right;font-size: 13px;">
         {{Total_BLC14.toLocaleString('en-IN')}} </td>
-      <td height="10" style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  height="10" style="text-align: right;font-size: 13px;">
         {{UC_Received_BLC14.toLocaleString('en-IN')}} </td>
 
     </tr>
+
     <tr>
 
       <td style="font-size: 13px;" align="center">2015-16
@@ -169,16 +201,16 @@
         {{PC15BLC.toLocaleString('en-IN')}} </td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI15BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td   [ngStyle]="{'display':Inst_I}"  style="text-align: right;font-size: 13px;">
         {{First15BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{Second15BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third15BLC.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total15BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received15BLC.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -191,16 +223,16 @@
         {{PC16BLC.toLocaleString('en-IN')}} </td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI16BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First16BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{Second16BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third16.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total16.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received16BLC.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -215,16 +247,16 @@
 
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI17BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First17BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Second17BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third17.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total17.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received17.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -239,16 +271,16 @@
 
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI18BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First18BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{Second18.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third18.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total18.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received18.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -263,16 +295,16 @@
 
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI19BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}"  style="text-align: right;font-size: 13px;">
         {{First19BLC.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{Second19.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third19.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total19.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received19.toLocaleString('en-IN')}} </td>
     </tr>
     <tr class="printHeader" style="background-color:#E3E2C5">
@@ -284,15 +316,18 @@
 
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{TcolBLC2.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td   [ngStyle]="{'display':Inst_I}"    style="text-align: right;font-size: 13px;">
         {{TcolBLC3.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{TcolBLC4.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      
+        <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{TcolBLC5.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      
+      
+        <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{TcolBLC6.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{TcolBLC7.toLocaleString('en-IN')}}</td>
     </tr>
     <tr>
@@ -306,16 +341,16 @@
         {{PC14AHP.toLocaleString('en-IN')}} </td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI14AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First14AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{Second14AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third14AHP.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total14AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received14AHP.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -328,16 +363,16 @@
         {{PC15AHP.toLocaleString('en-IN')}} </td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI15AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First15AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{Second15AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third15AHP.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total15AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received15AHP.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -350,16 +385,16 @@
         {{PC16AHP.toLocaleString('en-IN')}} </td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI16AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First16AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{Second16AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third16AHP.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total16AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received16AHP.toLocaleString('en-IN')}} </td>
     </tr>
     <tr>
@@ -371,16 +406,16 @@
         {{PC17AHP.toLocaleString('en-IN')}} </td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI17AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First17AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{Second17AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third17AHP.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total17AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received17AHP.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -394,16 +429,16 @@
         {{PC18AHP.toLocaleString('en-IN')}} </td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI18AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First18AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{Second18AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third18AHP.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total18AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received18AHP.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -417,16 +452,16 @@
         {{PC19AHP.toLocaleString('en-IN')}} </td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI19AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First19AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Second19AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third19AHP.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total19AHP.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received19AHP.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -441,15 +476,15 @@
 
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{T_AHP_CAI.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{T_AHP_First.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{T_AHP_Second.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{T_AHP_Third.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{T_AHP_TotalInst.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{T_AHP_TotalUC.toLocaleString('en-IN')}}</td>
     </tr>
 
@@ -464,16 +499,16 @@
         {{PC14ISS.toLocaleString('en-IN')}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI14ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First14ISS.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{Second14ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third14ISS.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total14ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received14ISS.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -484,16 +519,16 @@
         {{PC15ISS.toLocaleString('en-IN')}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI15ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}"  style="text-align: right;font-size: 13px;">
         {{First15ISS.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Second15ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third15ISS.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total15ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received15ISS.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -505,16 +540,16 @@
         {{PC16ISS.toLocaleString('en-IN')}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI16ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}"  style="text-align: right;font-size: 13px;">
         {{First16ISS.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Second16ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third16ISS.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total16ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received16ISS.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -528,16 +563,16 @@
         {{PC17ISS.toLocaleString('en-IN')}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI17ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First17ISS.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Second17ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third17ISS.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total17ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received17ISS.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -550,16 +585,16 @@
         {{PC18ISS.toLocaleString('en-IN')}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI18ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First18ISS.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{Second18ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third18ISS.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total18ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received18ISS.toLocaleString('en-IN')}} </td>
     </tr>
 
@@ -571,16 +606,16 @@
         {{PC19ISS.toLocaleString('en-IN')}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CAI19ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{First19ISS.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Second19ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Third19ISS.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Total19ISS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{UC_Received19ISS.toLocaleString('en-IN')}} </td>
     </tr>
 
@@ -594,15 +629,16 @@
 
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Tot_ISS_CAI.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+
+        <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{Tot_ISS_OneInst.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">
         {{Tot_ISS_TwoInst.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Tot_ISS_ThreeInst.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Tot_ISS_Inst.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Tot_ISS_UC.toLocaleString('en-IN')}}</td>
     </tr>
 
@@ -619,16 +655,16 @@
         {{Loan_TOTAL_14_15}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Sub2014_15_CL.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td   [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{Sub2014_15_CL.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">0
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">-
       </td>
-      <td style="text-align: right;font-size: 13px;"> 0
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;"> -
       </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Sub2014_15_CL.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Sub2014_15_CL.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -641,15 +677,15 @@
         {{Loan_TOTAL_15_16}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Sub2015_16_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{Sub2015_16_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">0
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">-
       </td>
-      <td style="text-align: right;font-size: 13px;">0
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">-
       </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Sub2015_16_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':TotalUC}" style="text-align: right;font-size: 13px;">
         {{Sub2015_16_CL.toLocaleString('en-IN')}}</td>
 
     </tr>
@@ -663,15 +699,15 @@
         {{Loan_TOTAL_16_17}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Sub2016_17_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{Sub2016_17_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">0
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">-
       </td>
-      <td style="text-align: right;font-size: 13px;">0
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">-
       </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Sub2016_17_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Sub2016_17_CL.toLocaleString('en-IN')}}</td>
 
       <!-- <td  style="text-align: right;font-size: 18px;">{{Bene2015_16_CLSS}} 5 </td> -->
@@ -685,15 +721,15 @@
         {{Loan_TOTAL_17_18}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Sub2017_18_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td   [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{Sub2017_18_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">0
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">-
       </td>
-      <td style="text-align: right;font-size: 13px;">0
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">-
       </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Sub2017_18_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Sub2017_18_CL.toLocaleString('en-IN')}}</td>
 
       <!-- <td  style="text-align: right;font-size: 18px;">{{Bene2015_16_CLSS}} 5 </td> -->
@@ -708,15 +744,15 @@
         {{Loan_TOTAL_18_19}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Sub2018_19_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}"  style="text-align: right;font-size: 13px;">
         {{Sub2018_19_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">0
+      <td [ngStyle]="{'display':Inst_II}"  style="text-align: right;font-size: 13px;">-
       </td>
-      <td style="text-align: right;font-size: 13px;">0
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">-
       </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Sub2018_19_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Sub2018_19_CL.toLocaleString('en-IN')}}</td>
 
       <!-- <td  style="text-align: right;font-size: 18px;">{{Bene2015_16_CLSS}} 5 </td> -->
@@ -729,15 +765,15 @@
         {{Loan_TOTAL_19_20}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Sub2019_20_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}"  style="text-align: right;font-size: 13px;">
         {{Sub2019_20_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">0
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">-
       </td>
-      <td style="text-align: right;font-size: 13px;">0
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">-
       </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Sub2019_20_CL.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Sub2019_20_CL.toLocaleString('en-IN')}}</td>
 
     </tr>
@@ -752,15 +788,15 @@
 
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{CA_SANCT_CLSS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{FirstI_CLSS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{SecondI_CLSS.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{ThirdI_CLSS.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{totalI_CLSS.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Total_UC_RecdClss.toLocaleString('en-IN')}}</td>
     </tr>
 
@@ -778,16 +814,18 @@
         {{Col1_1415.toLocaleString('en-IN')}} </td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Col2_1415.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}"  style="text-align: right;font-size: 13px;">
         {{Col3_1415.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+
+
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Col4_1415.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Col5_1415.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Col6_1415.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Col7_1415.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -801,16 +839,16 @@
         {{Col1_1516.toLocaleString('en-IN')}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Col2_1516.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{Col3_1516.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Col4_1516.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Col5_1516.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Col6_1516.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Col7_1516.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -825,16 +863,16 @@
         {{Col1_1617.toLocaleString('en-IN')}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Col2_1617.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{Col3_1617.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Col4_1617.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Col5_1617.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':TotalCAR}"  style="text-align: right;font-size: 13px;">
         {{Col6_1617.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Col7_1617.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -848,16 +886,16 @@
         {{Col1_1718.toLocaleString('en-IN')}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Col2_1718.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_I}"  style="text-align: right;font-size: 13px;">
         {{Col3_1718.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Col4_1718.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Col5_1718.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Col6_1718.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Col7_1718.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -871,16 +909,16 @@
         {{Col1_1819.toLocaleString('en-IN')}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Col2_1819.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{Col3_1819.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Col4_1819.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Col5_1819.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Col6_1819.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Col7_1819.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -894,16 +932,16 @@
         {{Col1_1920.toLocaleString('en-IN')}}</td>
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Col2_1920.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{Col3_1920.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Col4_1920.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Col5_1920.toLocaleString('en-IN')}} </td>
 
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Col6_1920.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Col7_1920.toLocaleString('en-IN')}} </td>
 
     </tr>
@@ -920,17 +958,25 @@
 
       <td [ngStyle]="{'display':CentralDisplay}" style="text-align: right;font-size: 13px;">
         {{Col2_Total.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_I}" style="text-align: right;font-size: 13px;">
         {{Col3_Total.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':Inst_II}" style="text-align: right;font-size: 13px;">
         {{Col4_Total.toLocaleString('en-IN')}} </td>
-      <td style="text-align: right;font-size: 13px;">
+      <td  [ngStyle]="{'display':Inst_III}" style="text-align: right;font-size: 13px;">
         {{Col5_Total.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalCAR}" style="text-align: right;font-size: 13px;">
         {{Col6_Total.toLocaleString('en-IN')}}</td>
-      <td style="text-align: right;font-size: 13px;">
+      <td [ngStyle]="{'display':TotalUC}"  style="text-align: right;font-size: 13px;">
         {{Col7_Total.toLocaleString('en-IN')}}</td>
     </tr>
 
   </table>
 </div>
+
+
+<style type="text/css">
+  .auto-style1 {
+      width: 100%;
+      float: left;
+  }
+</style>
