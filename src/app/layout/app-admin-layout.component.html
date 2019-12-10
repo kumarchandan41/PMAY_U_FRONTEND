@@ -59,22 +59,24 @@
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
           <span class="sr-only">Toggle navigation</span>
         </a>
-        <div style="width: 1100px; display: flex;">
-          <div style="width: 200px;">
-            <img src="/assets/img/PMAY-U LOGO _Transparent.png" height="50px" width="150px" />
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex;">
+            <div style="width: 200px;">
+              <img src="/assets/img/PMAY-U LOGO _Transparent.png" height="50px" width="150px" />
+            </div>
+            <div style="padding: 10px;  display: flex; align-items: center; justify-content: center;"> <b
+                style="font-size:14px;color: white">{{jstoday}}</b>
+            </div>
+            <div style="width: 190px; " *ngIf="showcolourpicker" id="colour_id" ng-hide="colour_id">
+              <app-color-picker [color]="backgroundColor" [heading]="'Background'" (event)="onChangeColor($event)">
+              </app-color-picker>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; color:white; padding: 10px;">
+              <strong> Welcome User :{{LoginTypeId}}</strong>
+            </div>
           </div>
-          <div style="width: 220px;float: left; padding: 10px;"> <b style="font-size:14px;color: white">{{jstoday}}</b>
-          </div>
-          <div style="width: 300px;float: left;" *ngIf="showcolourpicker" id="colour_id" ng-hide="colour_id">
-            <app-color-picker [color]="backgroundColor" [heading]="'Background'" (event)="onChangeColor($event)">
-            </app-color-picker>
-          </div>
-          <div style="width: 200px;height: 20px;color:white;float: left;padding: 10px;">
-            <strong> Welcome User :{{LoginTypeId}}</strong>
-          </div>
-
           <!-- Navbar Right Menu -->
-          <div class="navbar-custom-menu" style="width: 200px;float: right;">
+          <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
               <li class="dropdown messages-menu">
@@ -397,14 +399,15 @@
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
                   href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Physical Report</a></li>
 
-            <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Progress Report</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
+                  href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Progress Report</a></li>
 
               <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/VerticalHousesDetails']"  ><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li> -->
               <!-- <li [ngStyle]="{'display':AdminDisplay}" class="active"><a style="cursor: pointer;"
                   href='/Admin/VerticalFinancialDetails'><i class="fa fa-circle-o"></i>Financial Houses Details</a></li> -->
 
-            <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/VerticalHousesDetails']"  ><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li> -->
-            <!-- <li [ngStyle]="{'display':AdminDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/VerticalFinancialDetails'><i class="fa fa-circle-o"></i>Financial Houses Details</a></li>  -->
+              <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/VerticalHousesDetails']"  ><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li> -->
+              <!-- <li [ngStyle]="{'display':AdminDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/VerticalFinancialDetails'><i class="fa fa-circle-o"></i>Financial Houses Details</a></li>  -->
 
               <!-- <a [routerLink]="['/Admin/DashboardHFA3']"><i class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-3</a></li> -->
 
