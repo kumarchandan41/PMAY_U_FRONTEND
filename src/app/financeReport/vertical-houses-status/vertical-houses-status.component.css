@@ -50,6 +50,16 @@ button{
   padding-top: 10px;
 }
 
+
+.box.box-default {
+  /* border: 1px solid #d2d6de; */
+  border-style: solid;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-color: #d2d6de;
+}
+
   @media print {
     body *, #drpdown, #buttonGroup{display : none;}
     body #toPrint *, #urlSwitcher, #checkboxFilter {display:none} 

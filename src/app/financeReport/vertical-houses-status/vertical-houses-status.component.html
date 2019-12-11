@@ -1,1064 +1,1117 @@
-<div>
+<div class="container-fluid">
+  <!-- <div id="chartPMAYU" style="height: 500px; width: 100%;"></div> -->
 
-  <div class="container-fluid">
-    <div id="drpdown">
-      <div class="row">
-        <div id='filter' class="col-lg-12 col-md-12 col-sm-12">
-          <!-- <div class="col-lg-1 col-md-1 col-sm-1">
+
+  <div id="drpdown">
+    <div class="row">
+      <div id='filter' class="col-lg-12 col-md-12 col-sm-12">
+        <!-- <div class="col-lg-1 col-md-1 col-sm-1">
             <button title="Go Back" class="btn btn-block btn-primary" (click)="AdminPage()">
               <i class="fa fa-arrow-left"></i> Back</button>
           </div> -->
 
-          <div class="col-lg-2 col-md-2 col-sm-2">
-            <select class="form-control" [(ngModel)]="stateCodes" title="Choose State" placeholder="Choose State"
-              (change)="getStateDetails($event.target)" style="width: 100%">
-              <option value={{stValue}}>{{StateMessage}}</option>
-              <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
-                {{sntry.States_UT}}
-              </option>
-            </select>
-          </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+          <select class="form-control" [(ngModel)]="stateCodes" title="Choose State" placeholder="Choose State"
+            (change)="getStateDetails($event.target)" style="width: 100%">
+            <option value={{stValue}}>{{StateMessage}}</option>
+            <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+              {{sntry.States_UT}}
+            </option>
+          </select>
+        </div>
 
-          <div class="col-lg-2 col-md-2 col-sm-2">
-            <select class="form-control" title="Choose District" placeholder="Choose Distt" [(ngModel)]="districtCodes"
-              (change)="getDistrictDetails($event.target.value)" style="width: 100%">
-              <option value={{distValue}}>{{DistrictMessage}}</option>
-              <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
-                {{sntry.District}}
-              </option>
-            </select>
-          </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+          <select class="form-control" title="Choose District" placeholder="Choose Distt" [(ngModel)]="districtCodes"
+            (change)="getDistrictDetails($event.target.value)" style="width: 100%">
+            <option value={{distValue}}>{{DistrictMessage}}</option>
+            <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+              {{sntry.District}}
+            </option>
+          </select>
+        </div>
 
 
-          <div class="col-lg-2 col-md-2 col-sm-2">
-            <select class="form-control" title="Choose City" placeholder="Choose City" [(ngModel)]="cityCodes"
-              (change)="getCityDetails($event.target.value)" style="width: 100%">
-              <option value={{cityValue}}>{{CityMessage}}</option>
-              <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
-                {{sntry.City}}
-              </option>
-            </select>
-          </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+          <select class="form-control" title="Choose City" placeholder="Choose City" [(ngModel)]="cityCodes"
+            (change)="getCityDetails($event.target.value)" style="width: 100%">
+            <option value={{cityValue}}>{{CityMessage}}</option>
+            <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+              {{sntry.City}}
+            </option>
+          </select>
+        </div>
 
-          <div class="col-lg-2 col-md-2 col-sm-2">
-            <button title="Print" class="btn btn-block btn-primary" (click)="pdfReport()">
-              <i class="fa fa-print"></i> Print</button>
-          </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+          <button title="Print" class="btn btn-block btn-primary" (click)="pdfReport()">
+            <i class="fa fa-print"></i> Print</button>
+        </div>
 
-          <div class="col-lg-2 col-md-2 col-sm-2">
-            <button (click)="ExportTOExcel()" title="Export to Excel" class="btn btn-block btn-success">
-              <i class="fa fa-file-excel-o"></i>
-              Export</button>
-          </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+          <button (click)="ExportTOExcel()" title="Export to Excel" class="btn btn-block btn-success">
+            <i class="fa fa-file-excel-o"></i>
+            Export</button>
+        </div>
 
-          <div class="col-lg-2 col-md-2 col-sm-2">
-            <button title="Show Graph" [ngStyle]="{'display':DisplayTable}" type="button" (click)="ShowPageM('graph')"
-              class="btn btn-block btn-warning">
-              <i class="fa fa-map-o"></i>
-              Show Graph</button>
-            <button title="Show Table" [ngStyle]="{'display':DisplyaGraph}" type="button" (click)="ShowPageM('table')"
-              class="btn btn-block btn-warning">
-              <i class="fa fa-table"></i>
-              Show Table</button>
-          </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+          <button title="Show Graph" [ngStyle]="{'display':DisplayTable}" type="button" (click)="ShowPageM('graph')"
+            class="btn btn-block btn-warning">
+            <i class="fa fa-map-o"></i>
+            Show Graph</button>
+          <button title="Show Table" [ngStyle]="{'display':DisplyaGraph}" type="button" (click)="ShowPageM('table')"
+            class="btn btn-block btn-warning">
+            <i class="fa fa-table"></i>
+            Show Table</button>
         </div>
       </div>
-
     </div>
+
   </div>
+</div>
 
 
-  <div id="urlSwitcher">
-    <span style="cursor: pointer;">
-      <input type="radio" checked="true" name="progress" value="Phy1">Physical
-    </span>
-    <span style="cursor: pointer;" (click)="checkForm($event)">
-      <input type="radio" name="progress" value="Fin1">Financial<br>
-    </span>
-  </div>
+<div id="urlSwitcher">
+  <span style="cursor: pointer;">
+    <input type="radio" checked="true" name="progress" value="Phy1">Physical
+  </span>
+  <span style="cursor: pointer;" (click)="checkForm($event)">
+    <input type="radio" name="progress" value="Fin1">Financial<br>
+  </span>
+</div>
 
 
 
-  <div class="container-fluid">
+<div class="container-fluid">
 
-    <div class="row" [ngStyle]="{'display':DisplayTable}">
-      <!--Table View -->
-      <div class="container-fluid" style="padding-bottom: 20px;" id="toPrint" #TABLE #table>
-        <!-- new code-->
-        <div id="checkboxFilter">
-          <span><b>Show /Hide</b></span>
-          <span [ngStyle]="{'display':JvrmDisplay1}">
-            <input type="checkbox" (change)="HSubjConst($event)" name="Project Cost" value="Project Cost"
-              checked="true">
-            Houses Subjected to Construction
-          </span>
-          <span>
-            <input type="checkbox" (change)="CASanct($event)" name="CA Sanctioned" value="CA Sanctioned" checked="true">
-            First Inst
-          </span>
-          <span>
-            <input type="checkbox" (change)="CASanct2($event)" name="1st Installment Released"
-              value="1st Installment Released" checked="true">Second Inst
-          </span>
-          <span>
-            <input type="checkbox" (change)="CASanct3($event)" name="3rd Installment Released"
-              value="3rd Installment Released" checked="true"> Third Inst
-          </span>
-          <span [ngStyle]="{'display':JvrmDisplay}">
-            <input type="checkbox" (change)="sendGround($event)" name="Total Central Assistance Released"
-              value="Total Central Assistance Released" checked="true">Grounded
-          </span>
-          <span>
-            <input type="checkbox" (change)="sendComp($event)" name="UC Receieved" value="UC Receieved"
-              checked="true">Completed
-          </span>
-          <span>
-            <input type="checkbox" (change)="sendOccu($event)" name="UC Receieved" value="UC Receieved"
-              checked="true">Occupied
-          </span>
-        </div>
-        <!-- new code-->
-
-
-        <div style="text-align:center; padding: 15px 10px; font-size: 20px;">
-          <b>
-            Vertical wise Status of Houses Sanctioned under PMAY(U) for {{lblStateDisttCity}}
-          </b>
-        </div>
+  <div class="row" [ngStyle]="{'display':DisplayTable}">
+    <!--Table View -->
+    <div class="container-fluid" style="padding-bottom: 20px;" id="toPrint" #TABLE #table>
+      <!-- new code-->
+      <div id="checkboxFilter">
+        <span><b>Show /Hide</b></span>
+        <span [ngStyle]="{'display':JvrmDisplay1}">
+          <input type="checkbox" (change)="HSubjConst($event)" name="Project Cost" value="Project Cost" checked="true">
+          Houses Subjected to Construction
+        </span>
+        <span>
+          <input type="checkbox" (change)="CASanct($event)" name="CA Sanctioned" value="CA Sanctioned" checked="true">
+          First Inst
+        </span>
+        <span>
+          <input type="checkbox" (change)="CASanct2($event)" name="1st Installment Released"
+            value="1st Installment Released" checked="true">Second Inst
+        </span>
+        <span>
+          <input type="checkbox" (change)="CASanct3($event)" name="3rd Installment Released"
+            value="3rd Installment Released" checked="true"> Third Inst
+        </span>
+        <span [ngStyle]="{'display':JvrmDisplay}">
+          <input type="checkbox" (change)="sendGround($event)" name="Total Central Assistance Released"
+            value="Total Central Assistance Released" checked="true">Grounded
+        </span>
+        <span>
+          <input type="checkbox" (change)="sendComp($event)" name="UC Receieved" value="UC Receieved"
+            checked="true">Completed
+        </span>
+        <span>
+          <input type="checkbox" (change)="sendOccu($event)" name="UC Receieved" value="UC Receieved"
+            checked="true">Occupied
+        </span>
+      </div>
+      <!-- new code-->
 
 
-        <table id="mytable" class="bodyataglance" border="1px"
-          style="font-size:12px; background-color:white; align-content: center; width: 100%;" id="printme"
-          align="center">
-          <tr style="text-align:center; background-color:#ccc" class="printHeader">
+      <div style="text-align:center; padding: 15px 10px; font-size: 20px;">
+        <b>
+          Vertical wise Status of Houses Sanctioned under PMAY(U) for {{lblStateDisttCity}}
+        </b>
+      </div>
 
-          <tr class="tableHeader">
-            <td rowspan="2" style="text-align:center;font-size: 13px;">
-              <b>SrNo</b></td>
-            <td rowspan="2" style="text-align:center;font-size: 13px;">
-              <b>Component</b></td>
-            <td rowspan="2" style="text-align:center;font-size: 13px;">
-              <b>Financial Year</b></td>
-            <td rowspan="2" [ngStyle]="{'display':SConst}" style="text-align:center;font-size: 13px;">
-              <b>Houses subjected
-                to Construction </b></td>
-            <td colspan="3" style="text-align:center;font-size: 13px;">
-              <b>Houses for which Funds Released </b></td>
-            <td rowspan="2" [ngStyle]="{'display':Grounded}" style="text-align:center;font-size: 13px;">
-              <b>Houses Grounded*</b></td>
-            <td rowspan="2" [ngStyle]="{'display':Completed}" style="text-align:center;font-size: 13px;">
-              <b>Houses Completed*</b></td>
-            <td rowspan="2" [ngStyle]="{'display':Occupied}" style="text-align:center;font-size: 13px;">
-              <b>Houses Occupied*</b></td>
-          </tr>
+      <table id="mytable" class="bodyataglance" border="1px"
+        style="font-size:12px; background-color:white; align-content: center; width: 100%;" id="printme" align="center">
+        <tr style="text-align:center; background-color:#ccc" class="printHeader">
+
+        <tr class="tableHeader">
+          <td rowspan="2" style="text-align:center;font-size: 13px;">
+            <b>SrNo</b></td>
+          <td rowspan="2" style="text-align:center;font-size: 13px;">
+            <b>Component</b></td>
+          <td rowspan="2" style="text-align:center;font-size: 13px;">
+            <b>Financial Year</b></td>
+          <td rowspan="2" [ngStyle]="{'display':SConst}" style="text-align:center;font-size: 13px;">
+            <b>Houses subjected to Construction </b>
+          </td>
+          <td [attr.colspan]="ReleasedFundsCol" [ngStyle]="{'display':ReleasedFundsCol=== 0 ? 'none' : 'table-cell'}"
+            style="text-align:center;font-size: 13px;">
+            <b>Houses for which Funds Released </b></td>
+          <td rowspan="2" [ngStyle]="{'display':Grounded}" style="text-align:center;font-size: 13px;">
+            <b>Houses Grounded*</b></td>
+          <td rowspan="2" [ngStyle]="{'display':Completed}" style="text-align:center;font-size: 13px;">
+            <b>Houses Completed*</b></td>
+          <td rowspan="2" [ngStyle]="{'display':Occupied}" style="text-align:center;font-size: 13px;">
+            <b>Houses Occupied*</b></td>
+        </tr>
 
 
-          <tr class="tableHeader">
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align:center;font-size: 13px;"><b>
-                First</b>
-            </td>
-            <td [ngStyle]="{'display':FundsSecond}" style="text-align:center;font-size: 13px;"><b>
-                Second</b></td>
-            <td [ngStyle]="{'display':FundsThird}" style="text-align:center;font-size: 13px;">
-              <b>Third</b>
-            </td>
-          </tr>
-          <!-- <tr>
+        <tr class="tableHeader">
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align:center;font-size: 13px;"><b>
+              First</b>
+          </td>
+          <td [ngStyle]="{'display':FundsSecond}" style="text-align:center;font-size: 13px;"><b>
+              Second</b></td>
+          <td [ngStyle]="{'display':FundsThird}" style="text-align:center;font-size: 13px;">
+            <b>Third</b>
+          </td>
+        </tr>
+        <!-- <tr>
             </tr> -->
 
-          <tr height="10">
-            <td align="center" height="20" rowspan="7" style="text-align:center;font-size: 13px;">
-              1
-            </td>
-            <td height="10" rowspan="7" style="text-align: center;font-size: 13px;">
-              BLC
-            </td>
-            <td height="10" style="font-size: 13px;" align="center">
-              2014-15</td>
-            <td height="10" [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved01.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" height="10" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses01.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1415_1.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1415_2.toLocaleString('en-IN')}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" height="10" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded01.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" height="10" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed01.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" height="10" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied01.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-            <td style="font-size: 13px;" align="center">2015-16</td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1516_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1516_2.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied1.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-            <td style="font-size: 13px;" align="center">2016-17</td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved2.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses2}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1617_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1617_2.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded2.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed2.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied2.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-            <td style="font-size: 13px;" align="center">2017-18 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved3.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses3.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1718_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1718_2.toLocaleString('en-IN')}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded3.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed3.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied3.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-            <td style="font-size: 13px;" align="center">2018-19</td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved4.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses4.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1819_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1819_2.toLocaleString('en-IN')}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded4.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed4.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied4.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-            <td style="font-size: 13px;" align="center">2019-20 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved5.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses5}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1920_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1920_2.toLocaleString('en-IN')}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded5.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed5.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied5.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr style="background-color:#ccc" class="printHeader">
-            <td style="font-size: 13px;" align="center">Total</td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{THouseInvolved.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{TFundsDisbursed_in_Houses.toLocaleString('en-IN')}} </td>
-
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_1_TOT.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{blc_2_TOT.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{THouses_Grounded.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{THouses_Completed.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{THousesOccupied.toLocaleString('en-IN')}}</td>
-          </tr>
-          <tr>
-            <td align="center" rowspan="7" style="text-align:center;font-size: 13px;">
-              2
-            </td>
-            <td rowspan="7" style="text-align: center;font-size: 13px;">
-              AHP
-            </td>
-            <td style="font-size: 13px;" align="center">2014-15 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved0_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses0_AHP.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1415_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1415_2.toLocaleString('en-IN')}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded0_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed0_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied0_AHP.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2015-16 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved1_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses1_AHP.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1516_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1516_2.toLocaleString('en-IN')}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded1_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed1_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied1_AHP.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2016-17 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved2_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses2_AHP.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1617_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1617_2.toLocaleString('en-IN')}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded2_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed2_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied2_AHP.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2017-18 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved3_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses3_AHP.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1718_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1718_2.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded3_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed3_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied3_AHP.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2018-19 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved4_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses4_AHP.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1819_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1819_2.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded4_AHP.toLocaleString('en-IN') }} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed4_AHP.toLocaleString('en-IN') }} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied4_AHP.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2019-20 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved5_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses5_AHP.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1920_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1920_2.toLocaleString('en-IN')}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded5_AHP.toLocaleString('en-IN') }} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed5_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied5_AHP.toLocaleString('en-IN')}}</td>
-          </tr>
-          <tr style="background-color:#ccc" class="printHeader">
-
-            <td style="font-size: 13px;" align="center">Total</td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{THouseInvolved_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{TotalFundsDisbursedAHP.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_1_TOT}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{AHP_2_TOT}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{THouses_Grounded_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{THouses_Completed_AHP.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{THousesOccupied_AHP.toLocaleString('en-IN')}}</td>
-          </tr>
-
-          <tr>
-            <td align="center" rowspan="7"> 3</td>
-            <td rowspan="7" style="text-align: center;font-size: 13px;">
-              ISSR</td>
-            <td style="font-size: 13px;" align="center">2014-15 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved0_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses0_ISSR.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1415_1}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1415_2}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded0_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed0_ISSR.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied0_ISSR.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-            <td style="font-size: 13px;" align="center">2015-16 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved1_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses1_ISSR.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1516_1}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1516_2}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded1_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed1_ISSR.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied1_ISSR.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-            <td style="font-size: 13px;" align="center">2016-17 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved2_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses2_ISSR.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1617_1}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1617_2}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded2_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed2_ISSR.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied2_ISSR.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-            <td style="font-size: 13px;" align="center">2017-18 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved3_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses3_ISSR.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1718_1}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1718_2}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded3_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed3_ISSR.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied3_ISSR.toLocaleString('en-IN')}} </td>
-          </tr>
-
-          <tr>
-            <td style="font-size: 13px;" align="center">2018-19 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved4_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses4_ISSR.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1819_1}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1819_2}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded4_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed4_ISSR.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied4_ISSR.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-            <td style="font-size: 13px;" align="center">2019-20 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolved5_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_Houses5_ISSR.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1920_1}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1920_2}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_Grounded5_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_Completed5_ISSR.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupied5_ISSR.toLocaleString('en-IN')}} </td>
-          </tr>
-
-          <tr style="background-color:#ccc" class="printHeader">
-            <td style="font-size: 13px;" align="center">Total</td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{THouseInvolved1_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{TFundsDisbursed_in_Houses1_ISSR.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_1_TOT}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{ISSR_2_TOT}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{THouses_Grounded1_ISSR.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{THouses_Completed1_ISSR.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{THousesOccupied1_ISSR.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-            <td align="center" rowspan="7" style="text-align:center;font-size: 13px;">
-              4
-            </td>
-            <td rowspan="7" style="text-align: center;font-size: 13px;">
-              CLSS </td>
-            <td style="font-size: 13px;" align="center">2014-15 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              --
-            </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              --
-            </td>
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2015-16 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;"> -
-            </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;"> -
-            </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
-            <!-- <td  style="text-align: right;font-size: 13px;">{{Bene2015_16_CLSS}} 5 </td> -->
-          </tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2016-17 </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;"> -
-            </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;"> -
-            </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Bene2016_17_CLSS.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
-            <!-- <td  style="text-align: right;font-size: 13px;"> {{Bene2016_17_CLSS}} </td> -->
-          </tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2017-18
-              <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2017-18','0')">2017-18</a> -->
-            </td>
-
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;"> -
-            </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;"> -
-            </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
-            <!-- <td  style="text-align: right;font-size: 13px;"> {{Bene2017_18_CLSS}} </td> -->
-          </tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2018-19
-              <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2018-19','0')">2018-19</a> -->
-            </td>
-
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
-
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;"> -
-            </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;"> -
-            </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
-            <!-- <td  style="text-align: right;font-size: 13px;"> {{Bene2018_19_CLSS}} </td> -->
-          </tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2019-20
-              <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2019-20','0')">2019-20</a> -->
-            </td>
-
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{Bene2019_20_CLSS.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{Bene2019_20_CLSS.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;"> -
-            </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;"> -
-            </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Bene2019_20_CLSS.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Bene2019_20_CLSS.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{Bene2019_20_CLSS.toLocaleString('en-IN')}}</td>
-            <!-- <td  style="text-align: right;font-size: 13px;"> {{Bene2019_20_CLSS}}</td> -->
-          </tr>
-          <tr style="background-color:#ccc" class="printHeader">
-
-            <td style="font-size: 13px;" align="center">Total</td>
-
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;"> -
-            </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;"> -
-            </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
-            <!-- <td  style="text-align: right;font-size: 13px;">{{BeneCLSS_Total}} </td> -->
-          </tr>
-          <tr>
-            <td align="center" rowspan="2" style="text-align:center;font-size: 13px;">
-              5
-            </td>
-            <td rowspan="2" style="text-align: center;font-size: 13px;">
-              JNNURM </td>
-            <td style="font-size: 13px;" align="center">2014-15
-              <!-- <a style="cursor: pointer" (click)="openModalDialog('JNNURM','2014-15','0')">2014-15</a> -->
-            </td>
-
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">-
-            </td>
-
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              -
-            </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-            </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-            </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_GroundedJN_T.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{THouses_CompletedJN.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupiedJNT.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr style="background-color:#ccc" class="printHeader">
-
-            <td style="font-size: 13px;" align="center">Total</td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">-
-            </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              -
-            </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-            </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-            </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_GroundedJN_T.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{THouses_CompletedJN.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{ HousesOccupiedJNT.toLocaleString('en-IN')}} </td>
-          </tr>
-
-          <tr>
-            <td rowspan="7" align="center" style="border-bottom-color: transparent;"> 6</td>
-            <td rowspan="7" style="text-align: center;font-size: 13px; border-bottom-color: transparent;">
-              PMAY(U) </td>
-            <td style="font-size: 13px;" align="center">2014-15</td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolvedT1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_HousesT1.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAY1415_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAY1415_2.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_GroundedT1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_CompletedT1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupiedT1.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-            <td style="font-size: 13px;" align="center">2015-16</td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolvedT2.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_HousesT2.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAY1516_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAY1516_2.toLocaleString('en-IN')}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_GroundedT2.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_CompletedT2.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupiedT2.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2016-17</td>
-
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolvedT3.toLocaleString('en-IN')}}</td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_HousesT3.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAY1617_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAY1617_2.toLocaleString('en-IN')}} </td>
-
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_GroundedT3.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_CompletedT3.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupiedT3.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2017-18</td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolvedT4.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_HousesT4.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAY1718_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAY1718_2.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_GroundedT4.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_CompletedT4.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupiedT4.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-          <tr>
-
-            <td style="font-size: 13px;" align="center">2018-19</td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolvedT5.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_HousesT5.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAY1819_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAY1819_2.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_GroundedT5.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_CompletedT5.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupiedT5.toLocaleString('en-IN')}} </td>
-          </tr>
-          <tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td style="font-size: 13px;" align="center">2019-20</td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{HouseInvolvedT6.toLocaleString('en-IN')}}
-            </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{FundsDisbursed_in_HousesT6.toLocaleString('en-IN')}}
-            </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAY1920_1.toLocaleString('en-IN')}}
-            </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAY1920_2.toLocaleString('en-IN')}}
-            </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{Houses_GroundedT6.toLocaleString('en-IN')}}
-            </td>
-            <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
-              {{Houses_CompletedT6.toLocaleString('en-IN')}}
-            </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{HousesOccupiedT6.toLocaleString('en-IN')}}
-            </td>
-          </tr>
-
-          <tr class="tableHeader">
-            <td align="center"> </td>
-            <td style="text-align: right;font-size: 13px;">
-            </td>
-            <td style="font-size: 13px;" align="center">Total </td>
-            <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
-              {{THouseInvolvedGT.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
-              {{TFundsDisbursed_in_HousesGT.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAYT_1.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
-              {{PMAYT_2.toLocaleString('en-IN')}} </td>
-
-            <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
-              {{THouses_GroundedGT.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Completed}" [ngStyle]="{'display':Completed}"
-              style="text-align: right;font-size: 13px;">
-              {{THouses_CompletedGT.toLocaleString('en-IN')}} </td>
-            <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
-              {{THousesOccupiedGT.toLocaleString('en-IN')}}</td>
-          </tr>
-        </table>
-
-
-      </div>
+        <tr height="10">
+          <td align="center" height="20" rowspan="7" style="text-align:center;font-size: 13px;">
+            1
+          </td>
+          <td height="10" rowspan="7" style="text-align: center;font-size: 13px;">
+            BLC
+          </td>
+          <td height="10" style="font-size: 13px;" align="center">
+            2014-15</td>
+          <td height="10" [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved01.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" height="10" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses01.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1415_1.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1415_2.toLocaleString('en-IN')}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" height="10" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded01.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" height="10" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed01.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" height="10" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied01.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+          <td style="font-size: 13px;" align="center">2015-16</td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1516_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1516_2.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied1.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+          <td style="font-size: 13px;" align="center">2016-17</td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved2.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses2}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1617_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1617_2.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded2.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed2.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied2.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+          <td style="font-size: 13px;" align="center">2017-18 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved3.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses3.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1718_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1718_2.toLocaleString('en-IN')}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded3.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed3.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied3.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+          <td style="font-size: 13px;" align="center">2018-19</td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved4.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses4.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1819_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1819_2.toLocaleString('en-IN')}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded4.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed4.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied4.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+          <td style="font-size: 13px;" align="center">2019-20 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved5.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses5}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1920_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1920_2.toLocaleString('en-IN')}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded5.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed5.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied5.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr style="background-color:#ccc" class="printHeader">
+          <td style="font-size: 13px;" align="center">Total</td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{THouseInvolved.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{TFundsDisbursed_in_Houses.toLocaleString('en-IN')}} </td>
+
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_1_TOT.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{blc_2_TOT.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{THouses_Grounded.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{THouses_Completed.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{THousesOccupied.toLocaleString('en-IN')}}</td>
+        </tr>
+        <tr>
+          <td align="center" rowspan="7" style="text-align:center;font-size: 13px;">
+            2
+          </td>
+          <td rowspan="7" style="text-align: center;font-size: 13px;">
+            AHP
+          </td>
+          <td style="font-size: 13px;" align="center">2014-15 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved0_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses0_AHP.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1415_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1415_2.toLocaleString('en-IN')}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded0_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed0_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied0_AHP.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2015-16 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved1_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses1_AHP.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1516_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1516_2.toLocaleString('en-IN')}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded1_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed1_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied1_AHP.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2016-17 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved2_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses2_AHP.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1617_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1617_2.toLocaleString('en-IN')}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded2_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed2_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied2_AHP.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2017-18 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved3_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses3_AHP.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1718_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1718_2.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded3_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed3_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied3_AHP.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2018-19 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved4_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses4_AHP.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1819_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1819_2.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded4_AHP.toLocaleString('en-IN') }} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed4_AHP.toLocaleString('en-IN') }} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied4_AHP.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2019-20 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved5_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses5_AHP.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1920_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1920_2.toLocaleString('en-IN')}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded5_AHP.toLocaleString('en-IN') }} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed5_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied5_AHP.toLocaleString('en-IN')}}</td>
+        </tr>
+        <tr style="background-color:#ccc" class="printHeader">
+
+          <td style="font-size: 13px;" align="center">Total</td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{THouseInvolved_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{TotalFundsDisbursedAHP.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_1_TOT}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{AHP_2_TOT}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{THouses_Grounded_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{THouses_Completed_AHP.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{THousesOccupied_AHP.toLocaleString('en-IN')}}</td>
+        </tr>
+
+        <tr>
+          <td align="center" rowspan="7"> 3</td>
+          <td rowspan="7" style="text-align: center;font-size: 13px;">
+            ISSR</td>
+          <td style="font-size: 13px;" align="center">2014-15 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved0_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses0_ISSR.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1415_1}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1415_2}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded0_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed0_ISSR.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied0_ISSR.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+          <td style="font-size: 13px;" align="center">2015-16 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved1_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses1_ISSR.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1516_1}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1516_2}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded1_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed1_ISSR.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied1_ISSR.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+          <td style="font-size: 13px;" align="center">2016-17 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved2_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses2_ISSR.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1617_1}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1617_2}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded2_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed2_ISSR.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied2_ISSR.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+          <td style="font-size: 13px;" align="center">2017-18 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved3_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses3_ISSR.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1718_1}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1718_2}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded3_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed3_ISSR.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied3_ISSR.toLocaleString('en-IN')}} </td>
+        </tr>
+
+        <tr>
+          <td style="font-size: 13px;" align="center">2018-19 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved4_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses4_ISSR.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1819_1}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1819_2}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded4_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed4_ISSR.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied4_ISSR.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+          <td style="font-size: 13px;" align="center">2019-20 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolved5_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_Houses5_ISSR.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1920_1}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1920_2}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_Grounded5_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_Completed5_ISSR.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupied5_ISSR.toLocaleString('en-IN')}} </td>
+        </tr>
+
+        <tr style="background-color:#ccc" class="printHeader">
+          <td style="font-size: 13px;" align="center">Total</td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{THouseInvolved1_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{TFundsDisbursed_in_Houses1_ISSR.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_1_TOT}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{ISSR_2_TOT}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{THouses_Grounded1_ISSR.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{THouses_Completed1_ISSR.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{THousesOccupied1_ISSR.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+          <td align="center" rowspan="7" style="text-align:center;font-size: 13px;">
+            4
+          </td>
+          <td rowspan="7" style="text-align: center;font-size: 13px;">
+            CLSS </td>
+          <td style="font-size: 13px;" align="center">2014-15 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            --
+          </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            --
+          </td>
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2015-16 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;"> -
+          </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;"> -
+          </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
+          <!-- <td  style="text-align: right;font-size: 13px;">{{Bene2015_16_CLSS}} 5 </td> -->
+        </tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2016-17 </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;"> -
+          </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;"> -
+          </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Bene2016_17_CLSS.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
+          <!-- <td  style="text-align: right;font-size: 13px;"> {{Bene2016_17_CLSS}} </td> -->
+        </tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2017-18
+            <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2017-18','0')">2017-18</a> -->
+          </td>
+
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;"> -
+          </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;"> -
+          </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
+          <!-- <td  style="text-align: right;font-size: 13px;"> {{Bene2017_18_CLSS}} </td> -->
+        </tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2018-19
+            <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2018-19','0')">2018-19</a> -->
+          </td>
+
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
+
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;"> -
+          </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;"> -
+          </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
+          <!-- <td  style="text-align: right;font-size: 13px;"> {{Bene2018_19_CLSS}} </td> -->
+        </tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2019-20
+            <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2019-20','0')">2019-20</a> -->
+          </td>
+
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{Bene2019_20_CLSS.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{Bene2019_20_CLSS.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;"> -
+          </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;"> -
+          </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Bene2019_20_CLSS.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Bene2019_20_CLSS.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{Bene2019_20_CLSS.toLocaleString('en-IN')}}</td>
+          <!-- <td  style="text-align: right;font-size: 13px;"> {{Bene2019_20_CLSS}}</td> -->
+        </tr>
+        <tr style="background-color:#ccc" class="printHeader">
+
+          <td style="font-size: 13px;" align="center">Total</td>
+
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;"> -
+          </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;"> -
+          </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
+          <!-- <td  style="text-align: right;font-size: 13px;">{{BeneCLSS_Total}} </td> -->
+        </tr>
+        <tr>
+          <td align="center" rowspan="2" style="text-align:center;font-size: 13px;">
+            5
+          </td>
+          <td rowspan="2" style="text-align: center;font-size: 13px;">
+            JNNURM </td>
+          <td style="font-size: 13px;" align="center">2014-15
+            <!-- <a style="cursor: pointer" (click)="openModalDialog('JNNURM','2014-15','0')">2014-15</a> -->
+          </td>
+
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">-
+          </td>
+
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            -
+          </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+          </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+          </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_GroundedJN_T.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{THouses_CompletedJN.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupiedJNT.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr style="background-color:#ccc" class="printHeader">
+
+          <td style="font-size: 13px;" align="center">Total</td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">-
+          </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            -
+          </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+          </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+          </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_GroundedJN_T.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{THouses_CompletedJN.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{ HousesOccupiedJNT.toLocaleString('en-IN')}} </td>
+        </tr>
+
+        <tr>
+          <td rowspan="7" align="center" style="border-bottom-color: transparent;"> 6</td>
+          <td rowspan="7" style="text-align: center;font-size: 13px; border-bottom-color: transparent;">
+            PMAY(U) </td>
+          <td style="font-size: 13px;" align="center">2014-15</td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolvedT1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_HousesT1.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAY1415_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAY1415_2.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_GroundedT1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_CompletedT1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupiedT1.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+          <td style="font-size: 13px;" align="center">2015-16</td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolvedT2.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_HousesT2.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAY1516_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAY1516_2.toLocaleString('en-IN')}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_GroundedT2.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_CompletedT2.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupiedT2.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2016-17</td>
+
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolvedT3.toLocaleString('en-IN')}}</td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_HousesT3.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAY1617_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAY1617_2.toLocaleString('en-IN')}} </td>
+
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_GroundedT3.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_CompletedT3.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupiedT3.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2017-18</td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolvedT4.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_HousesT4.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAY1718_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAY1718_2.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_GroundedT4.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_CompletedT4.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupiedT4.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+        <tr>
+
+          <td style="font-size: 13px;" align="center">2018-19</td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolvedT5.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_HousesT5.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAY1819_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAY1819_2.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_GroundedT5.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_CompletedT5.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupiedT5.toLocaleString('en-IN')}} </td>
+        </tr>
+        <tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td style="font-size: 13px;" align="center">2019-20</td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{HouseInvolvedT6.toLocaleString('en-IN')}}
+          </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{FundsDisbursed_in_HousesT6.toLocaleString('en-IN')}}
+          </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAY1920_1.toLocaleString('en-IN')}}
+          </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAY1920_2.toLocaleString('en-IN')}}
+          </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{Houses_GroundedT6.toLocaleString('en-IN')}}
+          </td>
+          <td [ngStyle]="{'display':Completed}" style="text-align: right;font-size: 13px;">
+            {{Houses_CompletedT6.toLocaleString('en-IN')}}
+          </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{HousesOccupiedT6.toLocaleString('en-IN')}}
+          </td>
+        </tr>
+
+        <tr class="tableHeader">
+          <td align="center"> </td>
+          <td style="text-align: right;font-size: 13px;">
+          </td>
+          <td style="font-size: 13px;" align="center">Total </td>
+          <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
+            {{THouseInvolvedGT.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsFirst}" style="text-align: right;font-size: 13px;">
+            {{TFundsDisbursed_in_HousesGT.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':FundsSecond}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAYT_1.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':FundsThird}" height="10" style="text-align: right;font-size: 13px;">
+            {{PMAYT_2.toLocaleString('en-IN')}} </td>
+
+          <td [ngStyle]="{'display':Grounded}" style="text-align: right;font-size: 13px;">
+            {{THouses_GroundedGT.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Completed}" [ngStyle]="{'display':Completed}"
+            style="text-align: right;font-size: 13px;">
+            {{THouses_CompletedGT.toLocaleString('en-IN')}} </td>
+          <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
+            {{THousesOccupiedGT.toLocaleString('en-IN')}}</td>
+        </tr>
+      </table>
+
+
     </div>
+  </div>
 
 
-    <!--Graph View -->
-    <div class="row" [ngStyle]="{'display':DisplyaGraph}">
-      <!-- Graph filter -->
-      <div id="checkboxFilter">
-        <span class="info-box-header"><b>Select Financial Year</b></span>
-        <span>
-          <input type="checkbox" (change)="ProjectCost($event)" name="Project Cost" value="SUM(BENE2014_15)">
-          2014-15
-        </span>
-        <span>
-          <input type="checkbox" (change)="ProjectCost($event)" name="CA Sanctioned" value="SUM(BENE2015_16)"> 2015-16
-        </span>
-        <span>
-          <input type="checkbox" (change)="ProjectCost($event)" name="1st Installment Released"
-            value="SUM(BENE2016_17)">2016-17
-        </span>
-        <span>
-          <input type="checkbox" (change)="ProjectCost($event)" name="2nd Installment Released"
-            value="SUM(BENE2017_18)">
-          2017-18
-        </span>
-        <span>
-          <input type="checkbox" (change)="ProjectCost($event)" name="3rd Installment Released"
-            value="SUM(BENE2018_19)">
-          2018-19
-        </span>
-        <span>
-          <input type="checkbox" (change)="ProjectCost($event)" name="UC Receieved" value="SUM(BENE2019_20)">2019-20
-        </span>
-      </div>
-      <div>
-
-        <section style="align-items: left;">
-          <div class="row">
-            <div class="col-sm-12" style="background-color:lavender;">
-              <div id="chartPMAYU" style="height: 500px; width: 1400px;;margin-left: 1px;"></div>
-
-
-            </div>
-          </div>
-
-
-          <div class="row">
-            <div class="col-sm-12" style="background-color:lavenderblush;">
-              <div id="chartBLCS" style="height: 500px; width: 1400px;;margin-left: 1px;"></div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-12" style="background-color:lavenderblush;">
-              <div id="chartAHP" style="height: 500px; width: 1400px;margin-left: 1px; "></div>
-
-            </div>
-          </div>
-
-
-
-          <div class="row">
-
-            <div class="col-sm-12" style="background-color:lavender;">
-
-              <div id="chartISSR" style="height: 500px; width: 1400px;;margin-left: 1px;"></div>
-            </div>
-          </div>
-        </section>
-
-
-      </div>
+  <!--Graph View -->
+  <div class="row"
+    [ngStyle]="{'opacity':DisplyaGraph === 'none' ? 0 : 1, 'height': DisplyaGraph === 'none' ? 0 : 'auto', 'overflow': DisplyaGraph === 'none' ? 'hidden' : 'visible' }">
+    <!-- Graph filter -->
+    <div id="checkboxFilter">
+      <span class="info-box-header"><b>Select Financial Year</b></span>
+      <span>
+        <input type="checkbox" (change)="ProjectCost($event)" name="Project Cost" value="SUM(BENE2014_15)">
+        2014-15
+      </span>
+      <span>
+        <input type="checkbox" (change)="ProjectCost($event)" name="CA Sanctioned" value="SUM(BENE2015_16)"> 2015-16
+      </span>
+      <span>
+        <input type="checkbox" (change)="ProjectCost($event)" name="1st Installment Released"
+          value="SUM(BENE2016_17)">2016-17
+      </span>
+      <span>
+        <input type="checkbox" (change)="ProjectCost($event)" name="2nd Installment Released" value="SUM(BENE2017_18)">
+        2017-18
+      </span>
+      <span>
+        <input type="checkbox" (change)="ProjectCost($event)" name="3rd Installment Released" value="SUM(BENE2018_19)">
+        2018-19
+      </span>
+      <span>
+        <input type="checkbox" (change)="ProjectCost($event)" name="UC Receieved" value="SUM(BENE2019_20)">2019-20
+      </span>
     </div>
+    <div>
 
+      <section class="clearfix" style="align-items: left;">
+
+
+        <div class="col-md-12" style="margin-top: 20px;">
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title text-bold text-center">Physical Progress(No of Houses) Consolidated (PMAY(U))</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="collapse"
+                  data-target="#graphData1" aria-expanded="true" aria-controls="graphData1"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body clearfix" id="graphData1">
+              <div id="chartPMAYU" style="height: 500px; width: 100%;"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+
+
+        <div class="col-md-12" style="margin-top: 20px;">
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <h3 style="margin: 0 auto;" class="box-title text-bold">Physical Progress(Nos) for BLC under
+                PMAY(U)</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="collapse"
+                  data-target="#graphData2" aria-expanded="true" aria-controls="graphData2"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body clearfix" id="graphData2">
+              <div id="chartBLCS" style="height: 500px; width: 100%;"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+
+        <div class="col-md-12" style="margin-top: 20px;">
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title text-bold">Physical Progress (Nos) for AHP under PMAY(U)</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="collapse"
+                  data-target="#graphData3" aria-expanded="true" aria-controls="graphData3"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body clearfix" id="graphData3">
+              <div id="chartAHP" style="height: 500px; width: 100%;"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+
+        <div class="col-md-12" style="margin-top: 20px;">
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title text-bold">Physical Progress (Nos) for ISSR under PMAY(U)</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="collapse"
+                  data-target="#graphData4" aria-expanded="true" aria-controls="graphData4"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body clearfix" id="graphData4">
+              <div id="chartISSR" style="height: 500px; width: 100%;"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+
+      </section>
+
+
+    </div>
   </div>
