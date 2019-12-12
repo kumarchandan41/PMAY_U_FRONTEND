@@ -76,41 +76,97 @@
 </div>
 
 
-<div id="checkboxFilter">
-  <span><b>Show /Hide</b></span>
-  <span [ngStyle]="{'display':JvrmDisplay1}">
-    <input type="checkbox" (change)="ProjectCost($event)" name="Project Cost" value="Project Cost" checked="true">
-    Project Cost
-  </span>
-  <span>
-    <input type="checkbox" (change)="test($event)" name="CA Sanctioned" value="CA Sanctioned" checked="true">
-    CA Sanct.
-  </span>
 
-  
-  <span>
-    <input type="checkbox" (change)="Firstinst($event)" name="1st Installment Released" value="1st Installment Released" checked="true">
-    1st Inst Rel.
-  </span>
-  <span>
-    <input type="checkbox" (change)="Secondinst($event)" name="2nd Installment Released" value="2nd Installment Released" checked="true">
-    2nd Inst Rel.
-  </span>
-  <span>
-    <input type="checkbox" (change)="Thirdinst($event)" name="3rd Installment Released" value="3rd Installment Released" checked="true">
-    3rd Inst Rel.
-  </span>
-  <span [ngStyle]="{'display':JvrmDisplay}">
-    <input type="checkbox" (change)="TotalCA($event)" name="Total Central Assistance Released"
-      value="Total Central Assistance Released" checked="true">Total CA Rel.
-  </span>
-  <span>
-    <input type="checkbox" (change)="UCrecd($event)" name="UC Receieved" value="UC Receieved" checked="true"> 
-    UC Receieved
-  </span>
-
+<div class="container-fluid">
+<div class="row"  [ngStyle]="{'display':DisplyaGraph}"> <!--Graph View -->
+  <div class="row"  > <!--Graph View -->
+    <div class="info-box-inline" style="padding-left:150px;font-family: Arial, Helvetica, sans-serif;font-size: 18px">
+          <span class="info-box-header" ><b>Select Financial Year</b></span>
+          <span  ><input type="checkbox"  (change)="ProjectCost($event)" name="Project Cost" value="SUM(BENE2014_15)" > 2014-15 &nbsp;</span> 
+          <input type="checkbox"  (change)="ProjectCost($event)" name="CA Sanctioned" value="SUM(BENE2015_16)" > 2015-16 &nbsp;
+         <input type="checkbox" (change)="ProjectCost($event)" name="1st Installment Released" value="SUM(BENE2016_17)">2016-17&nbsp;
+          <input type="checkbox" (change)="ProjectCost($event)" name="2nd Installment Released" value="SUM(BENE2017_18)"> 2017-18&nbsp;
+          <input type="checkbox" (change)="ProjectCost($event)" name="3rd Installment Released" value="SUM(BENE2018_19)"> 2018-19&nbsp;
+          <input type="checkbox" (change)="ProjectCost($event)" name="UC Receieved" value="SUM(BENE2019_20)">2019-20 
+      </div>
+      <div >
+      
+          <section style="align-items: left;">
+            <div class="row">
+              <div class="col-sm-12" style="background-color:lavender;"> 
+                <div id="chartPMAYU" style="height: 500px; width: 1400px;;margin-left: 1px;"></div>
+    
+              
+              </div>
+            </div>
+    
+    
+            <div class="row">
+              <div class="col-sm-12" style="background-color:lavenderblush;">
+                <div id="chartBLCS" style="height: 500px; width: 1400px;;margin-left: 1px;"></div>
+              </div>
+            </div>
+    
+            <div class="row">
+              <div class="col-sm-12" style="background-color:lavenderblush;">
+                <div id="chartAHP" style="height: 500px; width: 1400px;margin-left: 1px; "></div>
+               
+              </div>
+            </div>
+    
+            
+    
+            <div class="row">
+             
+              <div class="col-sm-12" style="background-color:lavender;">
+    
+                <div id="chartISSR" style="height: 500px; width: 1400px;;margin-left: 1px;"></div>
+              </div>
+            </div>
+          </section>
+    
+          
+        </div>
+  </div>
 </div>
 
+<div class="row"  [ngStyle]="{'display':DisplayTable}">
+  <!--Table View -->
+  <div id="checkboxFilter">
+    <span><b>Show /Hide</b></span>
+    <span [ngStyle]="{'display':JvrmDisplay1}">
+      <input type="checkbox" (change)="ProjectCost($event)" name="Project Cost" value="Project Cost" checked="true">
+      Project Cost
+    </span>
+    <span>
+      <input type="checkbox" (change)="test($event)" name="CA Sanctioned" value="CA Sanctioned" checked="true">
+      CA Sanct.
+    </span>
+  
+    
+    <span>
+      <input type="checkbox" (change)="Firstinst($event)" name="1st Installment Released" value="1st Installment Released" checked="true">
+      1st Inst Rel.
+    </span>
+    <span>
+      <input type="checkbox" (change)="Secondinst($event)" name="2nd Installment Released" value="2nd Installment Released" checked="true">
+      2nd Inst Rel.
+    </span>
+    <span>
+      <input type="checkbox" (change)="Thirdinst($event)" name="3rd Installment Released" value="3rd Installment Released" checked="true">
+      3rd Inst Rel.
+    </span>
+    <span [ngStyle]="{'display':JvrmDisplay}">
+      <input type="checkbox" (change)="TotalCA($event)" name="Total Central Assistance Released"
+        value="Total Central Assistance Released" checked="true">Total CA Rel.
+    </span>
+    <span>
+      <input type="checkbox" (change)="UCrecd($event)" name="UC Receieved" value="UC Receieved" checked="true"> 
+      UC Receieved
+    </span>
+  
+  </div>
+  
 <div class="container-fluid" style="padding-bottom: 20px;" id="toPrint">
   <div style="text-align:center; padding: 15px 10px; font-size: 20px;">
     <b>
@@ -972,11 +1028,7 @@
 
   </table>
 </div>
+</div>
+</div>
 
-
-<style type="text/css">
-  .auto-style1 {
-      width: 100%;
-      float: left;
-  }
-</style>
+ 

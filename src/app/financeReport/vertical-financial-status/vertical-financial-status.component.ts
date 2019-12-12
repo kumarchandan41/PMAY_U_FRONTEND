@@ -16,13 +16,14 @@ import jsPDF from 'jspdf';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 //import 'jspdf-autotable';
+import { States, District, City, CompMaster } from 'src/app/financeReport/model/chart';
 //import {  District, States, City } from 'src/app/model/charts.model';
 //import { Observable } from 'rxjs'
 
 //import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal, NgbModal, NgbModalConfig, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Route, Router, ActivatedRoute } from '@angular/router';
-import { Houses_Status } from '../model/chart';
+import { Houses_Status, Charts } from '../model/chart';
 import { float } from 'html2canvas/dist/types/css/property-descriptors/float';
 import * as $ from 'jquery';
 
@@ -81,7 +82,7 @@ export class VerticalFinancialStatusComponent implements OnInit {
   stateCodes: string = "0";
   districtCodes: string = "0";
   cityCodes: string = "0";
-
+  State:string;
   StateMessage: string;
   DistrictMessage: string;
   CityMessage: string;
@@ -618,7 +619,354 @@ PC15BLC : any=0;
   Inst_I: string;
   DisplayTable: string;
   DisplyaGraph: string;
+  public blnShowTable :boolean;
   RdStatus: any;
+
+  //------------------------------------ Graph Section
+  modalRef_G;
+  display_G='none';
+  display1_G='none';
+  Codes_G:string;
+  chart: Charts;
+  compArray_G: string[];
+  // Houses_Grounded_G: any;
+  // SubsidyAmountCredited_G: any;
+ 
+  StateMessage_G: string;
+  DistrictMessage_G: string;
+  CityMessage_G: string;
+ 
+  stValue_G: string;
+  
+  
+  firstGraph_G: string[] = [];
+  secondGraph_G: string[] = [];
+ // leble_G: string;
+ // Y_G: string;
+ 
+  HS_14_15_G: string;
+  
+  HC_14_15_G: any;
+  HO_14_15_G: any;
+  HS_15_16_G: any;
+  HS_16_17_G: any;
+  HS_17_18_G: any;
+  HS_18_19_G: any;
+
+   HC_15_16_G: any;
+  HC_16_17_G: any;
+  HC_17_18_G: any;
+  HC_18_19_G: any;
+  HO_15_16_G: any;
+  HO_16_17_G: any;
+  HO_17_18_G: any;
+  HO_18_19_G: any;
+ 
+
+  HG_14_15_G: string;
+  HG_15_16_G: string;
+  HG_16_17_G: string;
+  HG_17_18_G: string;
+  HG_18_19_G: string;
+
+
+  label_G: string;
+  y_G: string;
+  Total_Cost_G: string;
+  UC_Recd_G: number;
+  lstComp_G: CompMaster[];
+  SubsTotal_G: number;
+  MIG_SubsTotal_G: number;
+  EWS_LIG_Total_G: number;
+  EWS_LIG_Bene_G: any;
+  MIGBene_G: number;
+  cidCount_G: string = '';
+  lstCid_G: number[] = [];
+  lstYear_G: string[] = [];
+  lstYearBene_G: string[] = [];
+
+  selectedYear_G:any;
+  lstDivision_G: string[] = [];
+ 
+  StateShareNew_G: any;
+
+ 
+  cid_G: number;
+  Comp_G: string;
+  total_Demand_G: number;
+  total_DemandNEW_G: number;
+  total_DemandISSR_G: number;
+  total_Demand__G: any;
+  CLSSBeneficiaries_G: number;
+  ComponentWiseSanctioned_G: number;
+  CASanct_forRelease_G: number;
+  CA_Approvd_G: number;
+  CA_SanctforRelease_G: number;
+  CA_Aproved_G: number;
+  CA_Released_G: number;
+  CASanct_forReleaseN_G: number;
+  CARNew_G: number;
+  UC_RecdNew_G: number;
+  CASanct_forReleas_G: string;
+  CASanct_for_Release_G: number;
+  CASanct_forRelease1_G: string;
+
+  DisabledCheckBox_G:boolean;
+ 
+ 
+  HS_15_16S_G: number;
+  HS_16_17S_G: number;
+  HS_17_18S_G: number;
+  HS_18_19S_G: number;
+  HC_15_16S_G: number;
+  HC_16_17S_G: number;
+  HC_17_18S_G: number;
+  HC_18_19S_G: number;
+  HO_15_16S_G: number;
+  HO_16_17S_G: number;
+  HO_17_18S_G: number;
+  HO_18_19S_G: number;
+
+  Ca_Sanct__G: any;
+  CASanct_forReleaseN1_G: any;
+  GrndTotal_G: any;
+  Sanction_TotalN1_G: any;
+  Division_G: string;
+  totalCost_G: number;
+  EWS_LIG_BeneDIV_G: string;
+  MIG_SubsTotalDIV_G: string;
+  EWS_Subsidy_G:string;
+  HO_14_15S_G: number;
+  Total_Subsidy_G: string;
+  totalSubsidy_State_G: number;
+
+  Sanction_Total_New_G: number;
+  HS_19_20S_G: number;
+  HC_19_20S_G: number;
+  HO_19_20S_G: number;
+  HC_19_20_G: number;
+  HO_19_20_G: number;
+  HS_19_20_G: number;
+  HG_19_20_G: number;
+  CASanctioned_19_20_G: number;
+  CumuCA_Released_19_20_G: number;
+  
+  
+  
+  Fin_Year_G: any;
+  page_G:string;
+  isDone_G = true;
+  Sanction_Total_New4_G: any;
+  today_G= new Date();
+  jstoday_G = '';
+  selectedColor_G = '';
+  public backgroundColor_G: string;
+  public show_G = false;
+  Fin_Year14_15_G : any;
+        
+ 
+  a_G: any;
+  b_G: any;
+  c_G: any;
+  d_G: any;
+  e_G: any;
+  f_G: any;
+  g_G: any;
+  h_G: any;
+  i_G: any;
+  selectedYearsBene_G: string;
+  Project_Cost14_15_G: string;
+  CAI_14_15_G: string;
+  FirstInst_14_15_G: string;
+  SecondInst_14_15_G: string;
+  ThirdInst_14_15_G: string;
+  UC_Received14_15_G: string;
+  Fin_Year15_16_G: string;
+  Project_Cost15_16_G: string;
+  CAI_15_16_G: string;
+  FirstInst_15_16_G: string;
+  SecondInst_15_16_G: string;
+  ThirdInst_15_16_G: string;
+  UC_Received15_16_G: string;
+  Fin_Year16_17_G: string;
+  Project_Cost16_17_G: string;
+  CAI_16_17_G: string;
+  FirstInst_16_17_G: string;
+  SecondInst_16_17_G: string;
+  ThirdInst_16_17_G: string;
+  UC_Received16_17_G: string;
+  Fin_Year17_18_G: string;
+  Project_Cost17_18_G: string;
+  CAI_17_18_G: string;
+  FirstInst_17_18_G: string;
+  SecondInst_17_18_G: string;
+  ThirdInst_17_18_G: string;
+  UC_Received17_18_G: string;
+  Fin_Year18_19_G: string;
+  Project_Cost18_19_G: string;
+  CAI_18_19_G: string;
+  FirstInst_18_19_G: string;
+  SecondInst_18_19_G: string;
+  ThirdInst_18_19_G: string;
+  UC_Received18_19_G: string;
+
+  Fin_Year19_20_G : string;
+   Project_Cost19_20_G : string;
+  CAI_19_20_G : string;
+  FirstInst_19_20_G : string;
+  SecondInst_19_20_G : string;
+  ThirdInst_19_20_G : string;
+  UC_Received19_20_G: string;
+  Project_Cost14_15_G1: string;
+  CAI_14_15_G1: string;
+  FirstInst_14_15_G1: string;
+  SecondInst_14_15_G1: string;
+  ThirdInst_14_15_G1: string;
+  UC_Received14_15_G1: string;
+  Project_Cost15_16_G1: string;
+  CAI_15_16_G1: string;
+  FirstInst_15_16_G1: string;
+  SecondInst_15_16_G1: string;
+  ThirdInst_15_16_G1: string;
+  UC_Received15_16_G1: string;
+  Project_Cost17_18_G1: string;
+  CAI_17_18_G1: string;
+  FirstInst_17_18_G1: string;
+  SecondInst_17_18_G1: string;
+  ThirdInst_17_18_G1: string;
+  UC_Received17_18_G1: string;
+  Fin_Year18_19_G1: string;
+  Project_Cost18_19_G1: string;
+  FirstInst_18_19_G1: string;
+  SecondInst_18_19_G1: string;
+  ThirdInst_18_19_G1: string;
+  UC_Received18_19_G1: string;
+  Fin_Year19_20_G1: string;
+  Project_Cost19_20_G1: string;
+  CAI_19_20_G1: string;
+  FirstInst_19_20_G1: string;
+  SecondInst_19_20_G1: string;
+  ThirdInst_19_20_G1: string;
+  UC_Received19_20_G1: string;
+  CAI_18_19_G1: string;
+  Project_Cost16_17_G1: string;
+  CAI_16_17_G1: string;
+  FirstInst_16_17_G1: string;
+  SecondInst_16_17_G1: string;
+  ThirdInst_16_17_G1: string;
+  UC_Received16_17_G1: string;
+  Project_Cost14_15_G2: string;
+  CAI_14_15_G2: string;
+  FirstInst_14_15_G2: string;
+  SecondInst_14_15_G2: string;
+  ThirdInst_14_15_G2: string;
+  UC_Received14_15_G2: string;
+  Project_Cost15_16_G2: string;
+  CAI_15_16_G2: string;
+  FirstInst_15_16_G2: string;
+  SecondInst_15_16_G2: string;
+  ThirdInst_15_16_G2: string;
+  UC_Received15_16_G2: string;
+  Project_Cost16_17_G2: string;
+  CAI_16_17_G2: string;
+  FirstInst_16_17_G2: string;
+  SecondInst_16_17_G2: string;
+  ThirdInst_16_17_G2: string;
+  UC_Received16_17_G2: string;
+  Project_Cost17_18_G2: string;
+  CAI_17_18_G2: string;
+  FirstInst_17_18_G2: string;
+  SecondInst_17_18_G2: string;
+  ThirdInst_17_18_G2: string;
+  UC_Received17_18_G2: string;
+  Project_Cost18_19_G2: string;
+  CAI_18_19_G2: string;
+  FirstInst_18_19_G2: string;
+  SecondInst_18_19_G2: string;
+  ThirdInst_18_19_G2: string;
+  UC_Received18_19_G2: string;
+  Fin_Year19_20_G2: string;
+  Project_Cost19_20_G2: string;
+  CAI_19_20_G2: string;
+  FirstInst_19_20_G2: string;
+  SecondInst_19_20_G2: string;
+  ThirdInst_19_20_G2: string;
+  UC_Received19_20_G2: string;
+  Project_Cost14_15_G3: string;
+  CAI_14_15_G3: string;
+  FirstInst_14_15_G3: string;
+  SecondInst_14_15_G3: string;
+  ThirdInst_14_15_G3: string;
+  //SecondInst_14_15_G3: string;
+  UC_Received14_15_G3: string;
+  Project_Cost15_16_G3: string;
+  CAI_15_16_G3: string;
+  FirstInst_15_16_G3: string;
+  SecondInst_15_16_G3: string;
+  ThirdInst_15_16_G3: string;
+  UC_Received15_16_G3: string;
+  Project_Cost16_17_G3: string;
+  CAI_16_17_G3: string;
+  FirstInst_16_17_G3: string;
+  SecondInst_16_17_G3: string;
+  ThirdInst_16_17_G3: string;
+  UC_Received16_17_G3: string;
+  Project_Cost17_18_G3: string;
+  CAI_17_18_G3: string;
+  FirstInst_17_18_G3: string;
+  SecondInst_17_18_G3: string;
+  ThirdInst_17_18_G3: string;
+  UC_Received17_18_G3: string;
+  Project_Cost18_19_G3: string;
+  CAI_18_19_G3: string;
+  FirstInst_18_19_G3: string;
+  SecondInst_18_19_G3: string;
+  ThirdInst_18_19_G3: string;
+  UC_Received18_19_G3: string;
+  Project_Cost19_20_G3: string;
+  Fin_Year19_20_G3: string;
+  CAI_19_20_G3: string;
+  FirstInst_19_20_G3: string;
+  SecondInst_19_20_G3: string;
+  ThirdInst_19_20_G3: string;
+  UC_Received19_20_G3: string;
+  Project_Cost_G: string;
+  Project_Cost_14_15_G: string;
+  Central_Assistance_involved14_15_G: string;
+  FirstInstallmentReleased14_15_G: string;
+  SecondInstallmentReleased14_15_G: string;
+  ThirdInstallmentReleased14_15_G: string;
+  Project_Cost_15_16_G: string;
+  Central_Assistance_involved15_16_G: string;
+  FirstInstallmentReleased15_16_G: string;
+  SecondInstallmentReleased15_16_G: string;
+  ThirdInstallmentReleased15_16_G: string;
+  UC_Received_15_16_G: string;
+  UC_Received_14_15_G: string;
+  Project_Cost_16_17_G: string;
+  Central_Assistance_involved_16_17_G: string;
+  FirstInstallmentReleased_16_17_G: string;
+  SecondInstallmentReleased_16_17_G: string;
+  ThirdInstallmentReleased_16_17_G: string;
+  UC_Received_16_17_G: string;
+  Project_Cost_17_18_G: string;
+  Central_Assistance_involved_17_18_G: string;
+  FirstInstallmentReleased_17_18_G: string;
+  SecondInstallmentReleased_17_18_G: string;
+  ThirdInstallmentReleased_17_18_G: string;
+  UC_Received_17_18_G: string;
+  Project_Cost_18_19_G: string;
+  Central_Assistance_involved_18_19_G: string;
+  FirstInstallmentReleased_18_19_G: string;
+  SecondInstallmentReleased_18_19_G: string;
+  ThirdInstallmentReleased_18_19_G: string;
+  UC_Received_18_19_G: string;
+  Project_Cost_19_20_G: string;
+  Central_Assistance_involved_19_20_G: string;
+  FirstInstallmentReleased_19_20_G: string;
+  SecondInstallmentReleased_19_20_G: string;
+  ThirdInstallmentReleased_19_20_G: string;
+  UC_Received_19_20_G: string; 
 //----------------------------------- 
 
 
@@ -728,6 +1076,29 @@ PC15BLC : any=0;
 
      //stateCodes, districtCodes, cityCodes, Compid
 
+     //  <<<<<<<<<<<<<<<<<<<<<<<Graph >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+     this.districtCodes = "0";
+  this.cityCodes = "0";
+  this.Compid = "0";
+  this.stateCode = "0";
+  this.lblStateDisttCity = "All India";
+  this.stateCodes = "0";
+  this.districtCodes = "0";
+  this.cityCodes = "0";
+
+  this.State = "--Select--";
+
+  this.service.StateList();
+  this.service.DisttList(this.stateCodes);
+  this.service.CityList(this.districtCodes);
+
+  this.DisplyaGraph = "none";
+  this.DisplayTable = "block";
+  this.Bind_PMayData_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+  this.Bind_BLCS_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+  this.Bind_AHP_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+  this.Bind_ISSR_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
      this.DisplyaGraph = "none";
      this.DisplayTable = "block";
 } 
@@ -744,20 +1115,65 @@ test($event)
     this.CentralDisplay ='none';
   }
 }
-ProjectCost($event)
-{
-    var data:string;
-    const checked=$event.target.checked;
-    if (checked)
-    {
-      this.PCOST ='block';
-    }   
-    else 
-    {
-      this.PCOST ='none';
-    }
-}
 
+ShowPageM(status: string) {
+  if (status === "graph") {
+    this.DisplyaGraph = "block";
+    this.DisplayTable = "none";
+    this.blnShowTable =true;
+  }
+  else {
+    this.DisplyaGraph = "none";
+    this.DisplayTable = "block";
+    this.blnShowTable =false;
+  }
+}
+// ProjectCost($event)
+// {
+//     var data:string;
+//     const checked=$event.target.checked;
+//     if (checked)
+//     {
+//       this.PCOST ='block';
+//     }   
+//     else 
+//     {
+//       this.PCOST ='none';
+//     }
+// }
+ProjectCost(event)
+{
+const checked= event.target.checked;
+const yearValue=event.target.value;
+  if (checked) {
+    this.lstYear_G.push(yearValue);
+    this.selectedYear_G = this.lstYear_G.toString();
+}
+  else {
+    let index = this.lstYear_G.findIndex(a => a == yearValue);
+    if (index !== -1) {
+      this.lstYear_G.splice(index, 1);
+    }
+    this.selectedYear_G = this.lstYear_G.toString();
+}
+if (this.selectedYear_G.length >  0 )
+{
+this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+this.BindBLCDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+this.BindAHPDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+}
+else
+{
+
+  
+this.Bind_PMayData_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+this.Bind_BLCS_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+this.Bind_AHP_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+this.Bind_ISSR_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+
+}
+}
 checkForm($event)
 {
   debugger;
@@ -829,7 +1245,7 @@ TotalCA($event)
     }
 }
 
-ShowPageM(status: string) {
+ShowPage(status: string) {
   if (status === "graph") {
     this.DisplyaGraph = "block";
     this.DisplayTable = "none";
@@ -1840,16 +2256,7 @@ this.HouseInvolved01=0;
             this.Houses_Grounded4 = result_BLCS18[0].Houses_Grounded;
             this.Houses_Completed4 = result_BLCS18[0].Houses_Completed;
             this.HousesOccupied4= result_BLCS18[0].HousesOccupied;
-   //       })
-  //           alert(4);
-  // alert(this.HouseInvolved01);
-  //    alert(this.HouseInvolved1);
-  //    alert(this.HouseInvolved2);
-  //    alert(this.HouseInvolved3);
-  //    alert(this.HouseInvolved4);
-  //    alert(this.HouseInvolved5);
-     
-
+ 
   this.service.GetStatusofHouses_CompWiseNew(stateCode,districtCodes ,cityCodes,"BLCS","2019-20").subscribe(result_BLCS19=>{
     try{
     this.HouseInvolved5=result_BLCS19[0].Housesinvolved;
@@ -2058,6 +2465,8 @@ this.FundsDisbursed_in_HousesT1 =this.Bene2014_15_CLSS ;
 
 
 getStateDetails(stateCodes) {
+  //alert();
+ // alert(this.selectedYear_G.length);
      this.stateCode=  stateCodes.value;
      this.StateName=stateCodes[stateCodes.selectedIndex].text;
  if (this.stateCode =="0" )
@@ -2079,6 +2488,8 @@ getStateDetails(stateCodes) {
    {
       this.service.GetStateNameByCode(this.stateCode).subscribe(resultName => {
       this.lblStateDisttCity = resultName.States_UT;
+
+
     });
 
         this.districtCodes ="0";
@@ -2091,7 +2502,23 @@ getStateDetails(stateCodes) {
       this.service.CityList(this.districtCodes);//
     //  this.GetFilterDatanew(this.stateCode,this.districtCodes ,this.cityCodes, this.Compid );
       this.GetFinancialData(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid);
-   }   
+      
+      //this.BindBLC_DataNew(this.stateCodes, this.districtCodes, this.cityCodes,"0" ,this.Fin_Year_G);
+      if (this.selectedYear_G.length ==  0 )
+      {
+          this.Bind_PMayData_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+          this.Bind_BLCS_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+          this.Bind_AHP_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+          this.Bind_ISSR_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+      }
+      else 
+      {
+          this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+          this.BindBLCDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+          this.BindAHPDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+          this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);       
+      }   
+   }
 }
 getDistrictDetails(DisttCode) {
   // alert(DisttCode);
@@ -2116,6 +2543,21 @@ getDistrictDetails(DisttCode) {
        // this.GetFilterDatanew(this.stateCode,this.districtCodes ,this.cityCodes, this.Compid );
         this.GetFinancialData(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid);
 
+        if (this.selectedYear_G.length ==  0 )
+        {
+            this.Bind_PMayData_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+            this.Bind_BLCS_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+            this.Bind_AHP_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+            this.Bind_ISSR_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+        }
+        else 
+        {
+            this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+            this.BindBLCDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+            this.BindAHPDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+            this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);       
+        }  
+       
     }
 
 }
@@ -2141,6 +2583,21 @@ getCityDetails(cityCode) {
     //this.GetFilterDatanew(this.stateCode,this.districtCodes ,this.cityCodes, this.Compid );
     this.GetFinancialData(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid);
 
+    if (this.selectedYear_G.length ==  0 )
+    {
+        this.Bind_PMayData_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+        this.Bind_BLCS_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+        this.Bind_AHP_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+        this.Bind_ISSR_OnLoad(this.stateCodes, this.districtCodes, this.cityCodes, this.Comp_G, "0");
+    }
+    else 
+    {
+        this.BindPMayDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+        this.BindBLCDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+        this.BindAHPDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);
+        this.BindISSRDatanew(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedYear_G);       
+    }  
+   
     }
   }
 
@@ -2446,7 +2903,7 @@ getCityDetails(cityCode) {
         }
         catch{}
         finally{}
-alert(this.PC14AHP);
+//alert(this.PC14AHP);
         
         
         this.PC15AHP= 0;
@@ -4716,4 +5173,6433 @@ this.Col7_1415 =0;
  })
 }
 
+
+//------------------------  graph section
+ 
+Bind_BLCS_OnLoad(stateCode, DisttCode, cityCode,Comp, Fin_Year)
+{
+
+     Comp =0;
+     Fin_Year ="0";
+    this.service.sp_cOnsoloidated_PMAY_GraphDATA(stateCode, DisttCode, cityCode,"BLCS","0").subscribe(result => { // new code
+    ///first row data
+    this.Fin_Year14_15_G = result[0].FinYear;
+    this.Project_Cost14_15_G1 = result[0].Project_Cost;
+    this.CAI_14_15_G1 = result[0].Central_Assistance_involved;
+    this.FirstInst_14_15_G1 = result[0].FirstInstallmentReleased;
+    this.SecondInst_14_15_G1 = result[0].SecondInstallmentReleased;
+    this.ThirdInst_14_15_G1= result[0].ThirdInstallmentReleased;
+    this.UC_Received14_15_G1 = result[0].UC_Received;
+     
+
+
+    //second row data
+    this.Fin_Year15_16_G = result[1].FinYear;
+    this.Project_Cost15_16_G1 = result[1].Project_Cost;
+    this.CAI_15_16_G1 = result[1].Central_Assistance_involved;
+    this.FirstInst_15_16_G1 = result[1].FirstInstallmentReleased;
+    this.SecondInst_15_16_G1 = result[1].SecondInstallmentReleased;
+    this.ThirdInst_15_16_G1= result[1].ThirdInstallmentReleased;
+    this.UC_Received15_16_G1 = result[1].UC_Received;
+
+    //Third row data
+    this.Fin_Year16_17_G = result[2].FinYear;
+    this.Project_Cost16_17_G1 = result[2].Project_Cost;
+    this.CAI_16_17_G1 = result[2].Central_Assistance_involved;
+    this.FirstInst_16_17_G1 = result[2].FirstInstallmentReleased;
+    this.SecondInst_16_17_G1 = result[2].SecondInstallmentReleased;
+    this.ThirdInst_16_17_G1= result[2].ThirdInstallmentReleased;
+    this.UC_Received16_17_G1 = result[2].UC_Received;
+
+    //Fourth row data
+    this.Fin_Year17_18_G = result[3].FinYear;
+    this.Project_Cost17_18_G1 = result[3].Project_Cost;
+    this.CAI_17_18_G1 = result[3].Central_Assistance_involved;
+    this.FirstInst_17_18_G1 = result[3].FirstInstallmentReleased;
+    this.SecondInst_17_18_G1 = result[3].SecondInstallmentReleased;
+    this.ThirdInst_17_18_G1= result[3].ThirdInstallmentReleased;
+    this.UC_Received17_18_G1 = result[3].UC_Received;
+
+
+    //Fifth row data
+    this.Fin_Year18_19_G = result[4].FinYear;
+    this.Project_Cost18_19_G1 = result[4].Project_Cost;
+    this.CAI_18_19_G1 = result[4].Central_Assistance_involved;
+    this.FirstInst_18_19_G1 = result[4].FirstInstallmentReleased;
+    this.SecondInst_18_19_G1 = result[4].SecondInstallmentReleased;
+    this.ThirdInst_18_19_G1= result[4].ThirdInstallmentReleased;
+    this.UC_Received18_19_G1 = result[4].UC_Received;
+
+          //Fifth row data
+          this.Fin_Year19_20_G1 = result[5].FinYear;
+          this.Project_Cost19_20_G1 = result[5].Project_Cost;
+          this.CAI_19_20_G1 = result[5].Central_Assistance_involved;
+          this.FirstInst_19_20_G1 = result[5].FirstInstallmentReleased;
+          this.SecondInst_19_20_G1 = result[5].SecondInstallmentReleased;
+          this.ThirdInst_19_20_G1= result[5].ThirdInstallmentReleased;
+          this.UC_Received19_20_G1 = result[5].UC_Received;
+  
+
+ //         this.Test(Fin_Year);
+
+
+                let chart = new CanvasJS.Chart("chartBLCS", {
+                  theme: "light2",
+                  animationEnabled: true,
+                  exportEnabled: false,
+                  title: {
+                    text: "BLCS (PMAY(U))",
+                    fontSize: "25",
+                  },
+                  backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+                  colorSet: "greenShades",
+
+                  data: [{
+
+                    options: {
+                      scales: {
+                          xAxes: [{
+                              stacked: true
+                          }],
+                          yAxes: [{
+                              stacked: true
+                          }]
+                      }
+                  },
+                  type: "column",
+                    dockInsidePlotArea: true,
+                     indexLabel: "{y}", //HG
+                    bevelEnabled: true,
+                    showInLegend: true,
+                    legendText: "Project Cost",
+                     stValue: "Q",
+                    indexLabelFontSize: 12,
+                    indexLabelOrientation: "vertical",
+                    dataPoints: [
+                      // { x: "14-15", y: this.Fin_Year15_16 },
+                      { label: "2014-15", y: this.Project_Cost14_15_G1 },
+                      { label: "2015-16", y: this.Project_Cost15_16_G1 },
+                      { label: "2016-17", y: this.Project_Cost16_17_G1 },
+                      { label: "2017-18", y: this.Project_Cost17_18_G1 },
+                      { label: "2018-19", y: this.Project_Cost18_19_G1 },
+                      { label: "2019-20", y: this.Project_Cost19_20_G1 }
+                    ]
+                  },
+                  {
+                    type: "column",
+                    dockInsidePlotArea: true,
+                     indexLabel: "{y}", //HG
+                    bevelEnabled: true,
+                    showInLegend: true,
+                    legendText: "CA Involved",
+                     stValue: "Q",
+                    indexLabelFontSize: 12,
+                    indexLabelOrientation: "vertical",
+                    dataPoints: [
+                      { label: "2014-15", y: this.CAI_14_15_G1 },
+                      { label: "2015-16", y: this.CAI_15_16_G1 },
+                      { label: "2016-17", y: this.CAI_16_17_G1 },
+                      { label: "2017-18", y: this.CAI_17_18_G1 },
+                      { label: "2018-19", y: this.CAI_18_19_G1 },
+                      { label: "2019-20", y: this.CAI_19_20_G1 }
+                    ]
+                  },
+
+                  {
+                    type: "column",
+                    dockInsidePlotArea: true,
+                     indexLabel: "{y}", //HG
+                    bevelEnabled: true,
+                    showInLegend: true,
+                    legendText: "1sr Installment Released",
+                     stValue: "Q",
+                    indexLabelFontSize: 12,
+                    indexLabelOrientation: "vertical",
+                    dataPoints: [
+                      { label: "2014-15", y: this.FirstInst_14_15_G1 },
+                      { label: "2015-16", y: this.FirstInst_15_16_G1 },
+                      { label: "2016-17", y: this.FirstInst_16_17_G1 },
+                      { label: "2017-18", y: this.FirstInst_17_18_G1 },
+                      { label: "2018-19", y: this.FirstInst_18_19_G1 },
+                      { label: "2019-20", y: this.FirstInst_19_20_G1 }
+                    ]
+                  },
+
+                  {
+                    type: "column",
+                    dockInsidePlotArea: true,
+                     indexLabel: "{y}", //HG
+                    bevelEnabled: true,
+                    showInLegend: true,
+                    legendText: "2nd Installment Released",
+                     stValue: "Q",
+                    indexLabelFontSize: 12,
+                    indexLabelOrientation: "vertical",
+                    dataPoints: [
+                      { label: "2014-15", y: this.SecondInst_14_15_G1 },
+                      { label: "2015-16", y: this.SecondInst_15_16_G1 },
+                      { label: "2016-17", y: this.SecondInst_16_17_G1 },
+                      { label: "2017-18", y: this.SecondInst_17_18_G1 },
+                      { label: "2018-19", y: this.SecondInst_18_19_G1 },
+                      { label: "2019-20", y: this.SecondInst_19_20_G1 }
+                    ]
+                  },
+                  {
+                    type: "column",
+                    dockInsidePlotArea: true,
+                     indexLabel: "{y}", //HG
+                    bevelEnabled: true,
+                    showInLegend: true,
+                    legendText: "3rd Installment Released",
+                     stValue: "Q",
+                    indexLabelFontSize: 12,
+                    indexLabelOrientation: "vertical",
+                    dataPoints: [
+                      { label: "2014-15", y: this.ThirdInst_14_15_G1 },
+                      { label: "2015-16", y: this.ThirdInst_15_16_G1 },
+                      { label: "2016-17", y: this.ThirdInst_16_17_G1 },
+                      { label: "2017-18", y: this.ThirdInst_17_18_G1 },
+                      { label: "2018-19", y: this.ThirdInst_18_19_G1 },
+                      { label: "2019-20", y: this.ThirdInst_19_20_G1 }
+                    ]
+                  },
+
+                 
+                  {
+                    type: "column",
+                    dockInsidePlotArea: true,
+                     indexLabel: "{y}", //HG
+                    bevelEnabled: true,
+                    showInLegend: true,
+                    legendText: "UC Received",
+                     stValue: "Q",
+                    indexLabelFontSize: 12,
+                    indexLabelOrientation: "vertical",
+                    dataPoints: [
+                      { label: "2014-15", y: this.UC_Received14_15_G1 },
+                      { label: "2015-16", y: this.UC_Received15_16_G1 },
+                      { label: "2016-17", y: this.UC_Received16_17_G1 },
+                      { label: "2017-18", y: this.UC_Received17_18_G1 },
+                      { label: "2018-19", y: this.UC_Received18_19_G1 },
+                      { label: "2019-20", y: this.UC_Received19_20_G1 }
+                    ]
+                  },
+                 ],
+                  options: {
+                    legend: {
+                      display: true,
+                      labels: {
+                        fontColor: 'rgb(255, 99, 132)'
+                      }
+                    }
+                  }
+                });
+                chart.render();
+            });
+ }
+ Bind_AHP_OnLoad(stateCode, DisttCode, cityCode,Comp, Fin_Year)
+ {
+
+      Comp ="AHP";
+      Fin_Year ="0";
+     this.service.sp_cOnsoloidated_PMAY_GraphDATA(stateCode, DisttCode, cityCode,"AHP","0").subscribe(result => { // new code
+     ///first row data
+     this.Fin_Year14_15_G = result[0].FinYear;
+     this.Project_Cost14_15_G2 = result[0].Project_Cost;
+     this.CAI_14_15_G2 = result[0].Central_Assistance_involved;
+     this.FirstInst_14_15_G2 = result[0].FirstInstallmentReleased;
+     this.SecondInst_14_15_G2 = result[0].SecondInstallmentReleased;
+     this.ThirdInst_14_15_G2= result[0].ThirdInstallmentReleased;
+     this.UC_Received14_15_G2 = result[0].UC_Received;
+      
+
+
+     //second row data
+     this.Fin_Year15_16_G = result[1].FinYear;
+     this.Project_Cost15_16_G2 = result[1].Project_Cost;
+     this.CAI_15_16_G2 = result[1].Central_Assistance_involved;
+     this.FirstInst_15_16_G2 = result[1].FirstInstallmentReleased;
+     this.SecondInst_15_16_G2 = result[1].SecondInstallmentReleased;
+     this.ThirdInst_15_16_G2= result[1].ThirdInstallmentReleased;
+     this.UC_Received15_16_G2 = result[1].UC_Received;
+
+     //Third row data
+     this.Fin_Year16_17_G = result[2].FinYear;
+     this.Project_Cost16_17_G2 = result[2].Project_Cost;
+     this.CAI_16_17_G2 = result[2].Central_Assistance_involved;
+     this.FirstInst_16_17_G2 = result[2].FirstInstallmentReleased;
+     this.SecondInst_16_17_G2 = result[2].SecondInstallmentReleased;
+     this.ThirdInst_16_17_G2= result[2].ThirdInstallmentReleased;
+     this.UC_Received16_17_G2 = result[2].UC_Received;
+ 
+     //Fourth row data
+     this.Fin_Year17_18_G = result[3].FinYear;
+     this.Project_Cost17_18_G2 = result[3].Project_Cost;
+     this.CAI_17_18_G2 = result[3].Central_Assistance_involved;
+     this.FirstInst_17_18_G2 = result[3].FirstInstallmentReleased;
+     this.SecondInst_17_18_G2 = result[3].SecondInstallmentReleased;
+     this.ThirdInst_17_18_G2= result[3].ThirdInstallmentReleased;
+     this.UC_Received17_18_G2 = result[3].UC_Received;
+ 
+
+     //Fifth row data
+     this.Fin_Year18_19_G = result[4].FinYear;
+     this.Project_Cost18_19_G2 = result[4].Project_Cost;
+     this.CAI_18_19_G2 = result[4].Central_Assistance_involved;
+     this.FirstInst_18_19_G2 = result[4].FirstInstallmentReleased;
+     this.SecondInst_18_19_G2 = result[4].SecondInstallmentReleased;
+     this.ThirdInst_18_19_G2= result[4].ThirdInstallmentReleased;
+     this.UC_Received18_19_G2 = result[4].UC_Received;
+
+           //Fifth row data
+           this.Fin_Year19_20_G2 = result[5].FinYear;
+           this.Project_Cost19_20_G2 = result[5].Project_Cost;
+           this.CAI_19_20_G2 = result[5].Central_Assistance_involved;
+           this.FirstInst_19_20_G2 = result[5].FirstInstallmentReleased;
+           this.SecondInst_19_20_G2 = result[5].SecondInstallmentReleased;
+           this.ThirdInst_19_20_G2= result[5].ThirdInstallmentReleased;
+           this.UC_Received19_20_G2 = result[5].UC_Received;
+   
+
+  //         this.Test(Fin_Year);
+
+
+                 let chart = new CanvasJS.Chart("chartAHP", {
+                   theme: "light2",
+                   animationEnabled: true,
+                   exportEnabled: false,
+                   title: {
+                     text: "AHP (PMAY(U))",
+                     fontSize: "25",
+                   },
+                   backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+                   colorSet: "greenShades",
+
+                   data: [{
+
+                     options: {
+                       scales: {
+                           xAxes: [{
+                               stacked: true
+                           }],
+                           yAxes: [{
+                               stacked: true
+                           }]
+                       }
+                   },
+                   type: "column",
+                     dockInsidePlotArea: true,
+                      indexLabel: "{y}", //HG
+                     bevelEnabled: true,
+                     showInLegend: true,
+                     legendText: "Project Cost",
+                      stValue: "Q",
+                     indexLabelFontSize: 12,
+                     indexLabelOrientation: "vertical",
+                     dataPoints: [
+                       // { x: "14-15", y: this.Fin_Year15_16 },
+                       { label: "2014-15", y: this.Project_Cost14_15_G2 },
+                       { label: "2015-16", y: this.Project_Cost15_16_G2 },
+                       { label: "2016-17", y: this.Project_Cost16_17_G2 },
+                       { label: "2017-18", y: this.Project_Cost17_18_G2 },
+                       { label: "2018-19", y: this.Project_Cost18_19_G2 },
+                       { label: "2019-20", y: this.Project_Cost19_20_G2 }
+                     ]
+                   },
+                   {
+                     type: "column",
+                     dockInsidePlotArea: true,
+                      indexLabel: "{y}", //HG
+                     bevelEnabled: true,
+                     showInLegend: true,
+                     legendText: "CA Involved",
+                      stValue: "Q",
+                     indexLabelFontSize: 12,
+                     indexLabelOrientation: "vertical",
+                     dataPoints: [
+                       { label: "2014-15", y: this.CAI_14_15_G2 },
+                       { label: "2015-16", y: this.CAI_15_16_G2 },
+                       { label: "2016-17", y: this.CAI_16_17_G2 },
+                       { label: "2017-18", y: this.CAI_17_18_G2 },
+                       { label: "2018-19", y: this.CAI_18_19_G2 },
+                       { label: "2019-20", y: this.CAI_19_20_G2 }
+                     ]
+                   },
+
+                   {
+                     type: "column",
+                     dockInsidePlotArea: true,
+                      indexLabel: "{y}", //HG
+                     bevelEnabled: true,
+                     showInLegend: true,
+                     legendText: "1sr Installment Released",
+                      stValue: "Q",
+                     indexLabelFontSize: 12,
+                     indexLabelOrientation: "vertical",
+                     dataPoints: [
+                       { label: "2014-15", y: this.FirstInst_14_15_G2 },
+                       { label: "2015-16", y: this.FirstInst_15_16_G2 },
+                       { label: "2016-17", y: this.FirstInst_16_17_G2 },
+                       { label: "2017-18", y: this.FirstInst_17_18_G2 },
+                       { label: "2018-19", y: this.FirstInst_18_19_G2 },
+                       { label: "2019-20", y: this.FirstInst_19_20_G2 }
+                     ]
+                   },
+
+                   {
+                     type: "column",
+                     dockInsidePlotArea: true,
+                      indexLabel: "{y}", //HG
+                     bevelEnabled: true,
+                     showInLegend: true,
+                     legendText: "2nd Installment Released",
+                      stValue: "Q",
+                     indexLabelFontSize: 12,
+                     indexLabelOrientation: "vertical",
+                     dataPoints: [
+                       { label: "2014-15", y: this.SecondInst_14_15_G2 },
+                       { label: "2015-16", y: this.SecondInst_15_16_G2 },
+                       { label: "2016-17", y: this.SecondInst_16_17_G2 },
+                       { label: "2017-18", y: this.SecondInst_17_18_G2 },
+                       { label: "2018-19", y: this.SecondInst_18_19_G2 },
+                       { label: "2019-20", y: this.SecondInst_19_20_G2 }
+                     ]
+                   },
+                   {
+                     type: "column",
+                     dockInsidePlotArea: true,
+                      indexLabel: "{y}", //HG
+                     bevelEnabled: true,
+                     showInLegend: true,
+                     legendText: "3rd Installment Released",
+                      stValue: "Q",
+                     indexLabelFontSize: 12,
+                     indexLabelOrientation: "vertical",
+                     dataPoints: [
+                       { label: "2014-15", y: this.ThirdInst_14_15_G2 },
+                       { label: "2015-16", y: this.ThirdInst_15_16_G2 },
+                       { label: "2016-17", y: this.ThirdInst_16_17_G2 },
+                       { label: "2017-18", y: this.ThirdInst_17_18_G2 },
+                       { label: "2018-19", y: this.ThirdInst_18_19_G2 },
+                       { label: "2019-20", y: this.ThirdInst_19_20_G2 }
+                     ]
+                   },
+
+                  
+                   {
+                     type: "column",
+                     dockInsidePlotArea: true,
+                      indexLabel: "{y}", //HG
+                     bevelEnabled: true,
+                     showInLegend: true,
+                     legendText: "UC Received",
+                      stValue: "Q",
+                     indexLabelFontSize: 12,
+                     indexLabelOrientation: "vertical",
+                     dataPoints: [
+                       { label: "2014-15", y: this.UC_Received14_15_G2 },
+                       { label: "2015-16", y: this.UC_Received15_16_G2 },
+                       { label: "2016-17", y: this.UC_Received16_17_G2 },
+                       { label: "2017-18", y: this.UC_Received17_18_G2 },
+                       { label: "2018-19", y: this.UC_Received18_19_G2 },
+                       { label: "2019-20", y: this.UC_Received19_20_G2 }
+                     ]
+                   },
+                  ],
+                   options: {
+                     legend: {
+                       display: true,
+                       labels: {
+                         fontColor: 'rgb(255, 99, 132)'
+                       }
+                     }
+                   }
+                 });
+                 chart.render();
+             });
+  }
+  Bind_ISSR_OnLoad(stateCode, DisttCode, cityCode,Comp, Fin_Year)
+  {   
+       Comp ="ISSR";
+       Fin_Year ="0";
+      this.service.Finance_ISSR_DATA(stateCode, DisttCode, cityCode,Comp,"0").subscribe(result => { // new code
+      ///first row data
+      try {
+      this.Fin_Year14_15_G = result[0].FinYear;
+      this.Project_Cost14_15_G3 = result[0].Project_Cost;
+      this.CAI_14_15_G3 = result[0].Central_Assistance_involved;
+      this.FirstInst_14_15_G3 = result[0].FirstInstallmentReleased;
+      this.SecondInst_14_15_G3 = result[0].SecondInstallmentReleased;
+      this.ThirdInst_14_15_G3= result[0].ThirdInstallmentReleased;
+      this.UC_Received14_15_G3 = result[0].UC_Received;
+      }
+      catch{}
+      finally{}
+
+      try {
+      //second row data
+      this.Fin_Year15_16_G = result[1].FinYear;
+      this.Project_Cost15_16_G3 = result[1].Project_Cost;
+      this.CAI_15_16_G3 = result[1].Central_Assistance_involved;
+      this.FirstInst_15_16_G3 = result[1].FirstInstallmentReleased;
+      this.SecondInst_15_16_G3 = result[1].SecondInstallmentReleased;
+      this.ThirdInst_15_16_G3= result[1].ThirdInstallmentReleased;
+      this.UC_Received15_16_G3 = result[1].UC_Received;
+    }
+    catch{}
+    finally{}
+
+    try {
+
+      //Third row data
+      this.Fin_Year16_17_G = result[2].FinYear;
+      this.Project_Cost16_17_G3 = result[2].Project_Cost;
+      this.CAI_16_17_G3 = result[2].Central_Assistance_involved;
+      this.FirstInst_16_17_G3 = result[2].FirstInstallmentReleased;
+      this.SecondInst_16_17_G3 = result[2].SecondInstallmentReleased;
+      this.ThirdInst_16_17_G3= result[2].ThirdInstallmentReleased;
+      this.UC_Received16_17_G3 = result[2].UC_Received;
+    }
+    catch{}
+    finally{}
+
+    try {
+
+    //Fourth row data
+      this.Fin_Year17_18_G = result[3].FinYear;
+      this.Project_Cost17_18_G3 = result[3].Project_Cost;
+      this.CAI_17_18_G3 = result[3].Central_Assistance_involved;
+      this.FirstInst_17_18_G3 = result[3].FirstInstallmentReleased;
+      this.SecondInst_17_18_G3 = result[3].SecondInstallmentReleased;
+      this.ThirdInst_17_18_G3= result[3].ThirdInstallmentReleased;
+      this.UC_Received17_18_G3 = result[3].UC_Received;
+    }
+    catch{}
+    finally{}
+  
+    try {
+
+      //Fifth row data
+      this.Fin_Year18_19_G = result[4].FinYear;
+      this.Project_Cost18_19_G3 = result[4].Project_Cost;
+      this.CAI_18_19_G3 = result[4].Central_Assistance_involved;
+      this.FirstInst_18_19_G3 = result[4].FirstInstallmentReleased;
+      this.SecondInst_18_19_G3 = result[4].SecondInstallmentReleased;
+      this.ThirdInst_18_19_G3= result[4].ThirdInstallmentReleased;
+      this.UC_Received18_19_G3 = result[4].UC_Received;
+    }
+    catch{}
+    finally{}
+
+    try {
+
+            //Fifth row data
+            this.Fin_Year19_20_G3 = result[5].FinYear;
+            this.Project_Cost19_20_G3 = result[5].Project_Cost;
+            this.CAI_19_20_G3 = result[5].Central_Assistance_involved;
+            this.FirstInst_19_20_G3 = result[5].FirstInstallmentReleased;
+            this.SecondInst_19_20_G3 = result[5].SecondInstallmentReleased;
+            this.ThirdInst_19_20_G3= result[5].ThirdInstallmentReleased;
+            this.UC_Received19_20_G3 = result[5].UC_Received;
+          }
+          catch{}
+          finally{}
+          
+
+
+                  let chart = new CanvasJS.Chart("chartISSR", {
+                    theme: "light2",
+                    animationEnabled: true,
+                    exportEnabled: false,
+                    title: {
+                      text: "CLSS (PMAY(U))",
+                      fontSize: "25",
+                    },
+                    backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+                    colorSet: "greenShades",
+
+                    data: [{
+
+                      options: {
+                        scales: {
+                            xAxes: [{
+                                stacked: true
+                            }],
+                            yAxes: [{
+                                stacked: true
+                            }]
+                        }
+                    },
+                    type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "Project Cost",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.Project_Cost14_15_G3 },
+                        { label: "2015-16", y: this.Project_Cost15_16_G3 },
+                        { label: "2016-17", y: this.Project_Cost16_17_G3 },
+                        { label: "2017-18", y: this.Project_Cost17_18_G3 },
+                        { label: "2018-19", y: this.Project_Cost18_19_G3 },
+                        { label: "2019-20", y: this.Project_Cost19_20_G3 }
+                      ]
+                    },
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "CA Involved",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.CAI_14_15_G3 },
+                        { label: "2015-16", y: this.CAI_15_16_G3 },
+                        { label: "2016-17", y: this.CAI_16_17_G3 },
+                        { label: "2017-18", y: this.CAI_17_18_G3 },
+                        { label: "2018-19", y: this.CAI_18_19_G3 },
+                        { label: "2019-20", y: this.CAI_19_20_G3 }
+                      ]
+                    },
+
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "1sr Installment Released",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.FirstInst_14_15_G3 },
+                        { label: "2015-16", y: this.FirstInst_15_16_G3 },
+                        { label: "2016-17", y: this.FirstInst_16_17_G3 },
+                        { label: "2017-18", y: this.FirstInst_17_18_G3 },
+                        { label: "2018-19", y: this.FirstInst_18_19_G3 },
+                        { label: "2019-20", y: this.FirstInst_19_20_G3 }
+                      ]
+                    },
+
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "2nd Installment Released",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.SecondInst_14_15_G3 },
+                        { label: "2015-16", y: this.SecondInst_15_16_G3 },
+                        { label: "2016-17", y: this.SecondInst_16_17_G3 },
+                        { label: "2017-18", y: this.SecondInst_17_18_G3 },
+                        { label: "2018-19", y: this.SecondInst_18_19_G3 },
+                        { label: "2019-20", y: this.SecondInst_19_20_G3 }
+                      ]
+                    },
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "3rd Installment Released",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.ThirdInst_14_15_G3 },
+                        { label: "2015-16", y: this.ThirdInst_15_16_G3 },
+                        { label: "2016-17", y: this.ThirdInst_16_17_G3 },
+                        { label: "2017-18", y: this.ThirdInst_17_18_G3 },
+                        { label: "2018-19", y: this.ThirdInst_18_19_G3 },
+                        { label: "2019-20", y: this.ThirdInst_19_20_G3 }
+                      ]
+                    },
+
+                   
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "UC Received",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.UC_Received14_15_G3 },
+                        { label: "2015-16", y: this.UC_Received15_16_G3 },
+                        { label: "2016-17", y: this.UC_Received16_17_G3 },
+                        { label: "2017-18", y: this.UC_Received17_18_G3 },
+                        { label: "2018-19", y: this.UC_Received18_19_G3 },
+                        { label: "2019-20", y: this.UC_Received19_20_G3 }
+                      ]
+                    },
+                   ],
+                    options: {
+                      legend: {
+                        display: true,
+                        labels: {
+                          fontColor: 'rgb(255, 99, 132)'
+                        }
+                      }
+                    }
+                  });
+                  chart.render();
+              });
+   }
+Bind_PMayData_OnLoad(stateCode, DisttCode, cityCode,Comp, Fin_Year)
+{
+ Fin_Year ="0"  ;
+ Comp ="0";
+     
+      Comp =0;
+      this.service.sp_cOnsoloidated_PMAY_GraphDATA(stateCode, DisttCode, cityCode,Comp,"0").subscribe(result => { // new code
+      ///first row data
+      this.Fin_Year14_15_G = result[0].FinYear;
+      this.Project_Cost14_15_G = result[0].Project_Cost;
+      this.CAI_14_15_G = result[0].Central_Assistance_involved;
+      this.FirstInst_14_15_G = result[0].FirstInstallmentReleased;
+      this.SecondInst_14_15_G = result[0].SecondInstallmentReleased;
+      this.ThirdInst_14_15_G= result[0].ThirdInstallmentReleased;
+      this.UC_Received14_15_G = result[0].UC_Received;
+       
+
+
+      //second row data
+      this.Fin_Year15_16_G = result[1].FinYear;
+      this.Project_Cost15_16_G = result[1].Project_Cost;
+      this.CAI_15_16_G = result[1].Central_Assistance_involved;
+      this.FirstInst_15_16_G = result[1].FirstInstallmentReleased;
+      this.SecondInst_15_16_G = result[1].SecondInstallmentReleased;
+      this.ThirdInst_15_16_G= result[1].ThirdInstallmentReleased;
+      this.UC_Received15_16_G = result[1].UC_Received;
+
+      //Third row data
+      this.Fin_Year16_17_G = result[2].FinYear;
+      this.Project_Cost16_17_G = result[2].Project_Cost;
+      this.CAI_16_17_G = result[2].Central_Assistance_involved;
+      this.FirstInst_16_17_G = result[2].FirstInstallmentReleased;
+      this.SecondInst_16_17_G = result[2].SecondInstallmentReleased;
+      this.ThirdInst_16_17_G= result[2].ThirdInstallmentReleased;
+      this.UC_Received16_17_G = result[2].UC_Received;
+  
+      //Fourth row data
+      this.Fin_Year17_18_G = result[3].FinYear;
+      this.Project_Cost17_18_G = result[3].Project_Cost;
+      this.CAI_17_18_G = result[3].Central_Assistance_involved;
+      this.FirstInst_17_18_G = result[3].FirstInstallmentReleased;
+      this.SecondInst_17_18_G = result[3].SecondInstallmentReleased;
+      this.ThirdInst_17_18_G= result[3].ThirdInstallmentReleased;
+      this.UC_Received17_18_G = result[3].UC_Received;
+  
+
+      //Fifth row data
+      this.Fin_Year18_19_G = result[4].FinYear;
+      this.Project_Cost18_19_G = result[4].Project_Cost;
+      this.CAI_18_19_G = result[4].Central_Assistance_involved;
+      this.FirstInst_18_19_G = result[4].FirstInstallmentReleased;
+      this.SecondInst_18_19_G = result[4].SecondInstallmentReleased;
+      this.ThirdInst_18_19_G= result[4].ThirdInstallmentReleased;
+      this.UC_Received18_19_G = result[4].UC_Received;
+
+            //Fifth row data
+            this.Fin_Year19_20_G = result[5].FinYear;
+            this.Project_Cost19_20_G = result[5].Project_Cost;
+            this.CAI_19_20_G = result[5].Central_Assistance_involved;
+            this.FirstInst_19_20_G = result[5].FirstInstallmentReleased;
+            this.SecondInst_19_20_G = result[5].SecondInstallmentReleased;
+            this.ThirdInst_19_20_G= result[5].ThirdInstallmentReleased;
+            this.UC_Received19_20_G = result[5].UC_Received;
+    
+
+
+                  let chart = new CanvasJS.Chart("chartPMAYU", {
+                    theme: "light2",
+                    animationEnabled: true,
+                    exportEnabled: false,
+                    title: {
+                      text: "Fincncial Progress Consolidated (PMAY(U))",
+                      fontSize: "25",
+                    },
+                    backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+                    colorSet: "greenShades",
+
+                    data: [{
+
+                      options: {
+                        scales: {
+                            xAxes: [{
+                                stacked: true
+                            }],
+                            yAxes: [{
+                                stacked: true
+                            }]
+                        }
+                    },
+                    type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "Project Cost",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        // { x: "14-15", y: this.Fin_Year15_16 },
+                        { label: "2014-15", y: this.Project_Cost14_15_G },
+                        { label: "2015-16", y: this.Project_Cost15_16_G },
+                        { label: "2016-17", y: this.Project_Cost16_17_G },
+                        { label: "2017-18", y: this.Project_Cost17_18_G },
+                        { label: "2018-19", y: this.Project_Cost18_19_G },
+                        { label: "2019-20", y: this.Project_Cost19_20_G }
+                      ]
+                    },
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "CA Involved",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.CAI_14_15_G },
+                        { label: "2015-16", y: this.CAI_15_16_G },
+                        { label: "2016-17", y: this.CAI_16_17_G },
+                        { label: "2017-18", y: this.CAI_17_18_G },
+                        { label: "2018-19", y: this.CAI_18_19_G },
+                        { label: "2019-20", y: this.CAI_19_20_G }
+                      ]
+                    },
+
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "1st Installment",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.FirstInst_14_15_G },
+                        { label: "2015-16", y: this.FirstInst_15_16_G },
+                        { label: "2016-17", y: this.FirstInst_16_17_G },
+                        { label: "2017-18", y: this.FirstInst_17_18_G },
+                        { label: "2018-19", y: this.FirstInst_18_19_G },
+                        { label: "2019-20", y: this.FirstInst_19_20_G }
+                      ]
+                    },
+
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "2nd Installment",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.SecondInst_14_15_G },
+                        { label: "2015-16", y: this.SecondInst_15_16_G },
+                        { label: "2016-17", y: this.SecondInst_16_17_G },
+                        { label: "2017-18", y: this.SecondInst_17_18_G },
+                        { label: "2018-19", y: this.SecondInst_18_19_G },
+                        { label: "2019-20", y: this.SecondInst_19_20_G }
+                      ]
+                    },
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "3rd Installment",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.ThirdInst_14_15_G },
+                        { label: "2015-16", y: this.ThirdInst_15_16_G },
+                        { label: "2016-17", y: this.ThirdInst_16_17_G },
+                        { label: "2017-18", y: this.ThirdInst_17_18_G },
+                        { label: "2018-19", y: this.ThirdInst_18_19_G },
+                        { label: "2019-20", y: this.ThirdInst_19_20_G }
+                      ]
+                    },
+
+                   
+                    {
+                      type: "column",
+                      dockInsidePlotArea: true,
+                       indexLabel: "{y}", //HG
+                      bevelEnabled: true,
+                      showInLegend: true,
+                      legendText: "UC Received",
+                       stValue: "Q",
+                      indexLabelFontSize: 12,
+                      indexLabelOrientation: "vertical",
+                      dataPoints: [
+                        { label: "2014-15", y: this.UC_Received14_15_G },
+                        { label: "2015-16", y: this.UC_Received15_16_G },
+                        { label: "2016-17", y: this.UC_Received16_17_G },
+                        { label: "2017-18", y: this.UC_Received17_18_G },
+                        { label: "2018-19", y: this.UC_Received18_19_G },
+                        { label: "2019-20", y: this.UC_Received19_20_G }
+                      ]
+                    },
+                   ],
+                    options: {
+                      legend: {
+                        display: true,
+                        labels: {
+                          fontColor: 'rgb(255, 99, 132)'
+                        }
+                      }
+                    }
+                  });
+                  chart.render();
+              });
+
+}
+
+
+BindPMayDatanew(stateCode, DisttCode, cityCode, Fin_Year )
+{
+       var str = Fin_Year ;//'SUM(BENE2014_15),SUM(BENE2015_16)';
+      if (str.length==101)
+      {
+          var splitted = str.split(",", str.length);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+          var z1 =  splitted[2].substring(8,str.length-3);
+          var z2 =  splitted[3].substring(8,str.length-3);
+          var z3 =  splitted[4].substring(8,str.length-3);
+          var z4 =  splitted[5].substring(8,str.length-3);
+      }
+      if (str.length==84)
+      {
+          var splitted = str.split(",", str.length);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+          var z1 =  splitted[2].substring(8,str.length-3);
+          var z2 =  splitted[3].substring(8,str.length-3);
+          var z3 =  splitted[4].substring(8,str.length-3);
+      }
+      if (str.length==67)
+      {
+          var splitted = str.split(",", str.length);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+          var z1 =  splitted[2].substring(8,str.length-3);
+          var z2 =  splitted[3].substring(8,str.length-3);
+      }
+      if (str.length==50)
+      {
+          var splitted = str.split(",", str.length);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+          var z1 =  splitted[2].substring(8,str.length-3);
+      }
+      if (str.length==33)
+      {
+          var splitted = str.split(",", str.length);
+          var x1 =  splitted[0].substring(8,str.length-3);
+          var Y1 =  splitted[1].substring(8,str.length-3);
+      }
+      if (str.length==16)
+      {
+          var splitted = str.split(",", str.length);
+          var x2 =  splitted[0].substring(8,str.length-1);
+      }
+
+     if (splitted.length ==1)
+     {
+       if (x2=="2014_15")
+           x2 ="2014-15";
+           if (x2=="2015_16")
+           x2 ="2015-16";
+           if (x2=="2016_17")
+           x2 ="2017-18";
+           if (x2=="2018_19")
+           x2 ="2018-19";
+           if (x2=="2019_20")
+           x2 ="2019-20";
+            
+           this.service.sp_Finance_PMAY_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+            if (result[0].FinYear !="0" )
+            {
+                  this.Fin_Year14_15_G = result[0].FinYear;
+                  this.Project_Cost_14_15_G = result[0].Project_Cost;
+                  this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                  this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                  this.UC_Received14_15_G = result[0].UC_Received;
+            }
+
+          let chart = new CanvasJS.Chart("chartPMAYU", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: "Financial Progress Consolidated (PMAY(U))",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Projecvt Cost",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+               
+                { label: x2, y: this.Project_Cost_14_15_G },
+         
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "CA Involved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.Central_Assistance_involved14_15_G },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "1sr Installment Released",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "1st Installment Released",
+              dataPoints: [
+                { label: x2, y: this.FirstInstallmentReleased14_15_G },
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "2nd Installment Released",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.SecondInstallmentReleased14_15_G },
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "3rd Installment Released",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.ThirdInstallmentReleased14_15_G },
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "UC Receieved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x2, y: this.UC_Received14_15_G },
+              ]
+            },    
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+       
+
+
+    }
+    if (splitted.length ==2)
+    {
+      if (x1=="2014_15)")
+      x1 ="2014-15";
+      if (x1=="2015_16)")
+      x1 ="2015-16";
+      if (x1=="2016_17")
+      x1 ="2017-18";
+      if (x1=="2018_19")
+      x1 ="2018-19";
+      if (x1=="2019_20")
+      x1 ="2019-20";
+
+
+      if (Y1=="2014_15)")
+      Y1 ="2014-15";
+      if (Y1=="2015_16)")
+      Y1 ="2015-16";
+      if (Y1=="2016_17")
+      Y1 ="2017-18";
+      if (Y1=="2018_19")
+      Y1 ="2018-19";
+      if (Y1=="2019_20")
+      Y1 ="2019-20";
+
+      this.service.sp_Finance_PMAY_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        if (result[0].FinYear !="0" )
+        {
+              this.Fin_Year14_15_G = result[0].FinYear;
+              this.Project_Cost_14_15_G = result[0].Project_Cost;
+              this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+              this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+              this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+              this.UC_Received_14_15_G = result[0].UC_Received;
+        }
+             // 
+            try {
+              this.Fin_Year15_16_G = result[1].FinYear;
+              this.Project_Cost_15_16_G = result[1].Project_Cost;
+              this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+              this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+              this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+              this.UC_Received_15_16_G = result[1].UC_Received;
+          }
+          catch{}
+          finally{}
+
+
+         let chart = new CanvasJS.Chart("chartPMAYU", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: "Financial Progress  Consolidated (PMAY(U))",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Project Cost",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Project_Cost_14_15_G },
+              { label:  Y1, y: this.Project_Cost_15_16_G }
+
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "CA Involved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label:  x1, y: this.Central_Assistance_involved14_15_G },
+              { label:  Y1, y: this.Central_Assistance_involved15_16_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}",
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "1st Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FirstInstallmentReleased14_15_G },
+              { label: Y1, y: this.FirstInstallmentReleased15_16_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "2nd Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.SecondInstallmentReleased14_15_G },
+              { label:  Y1, y: this.SecondInstallmentReleased15_16_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "3rd Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label:  x1, y: this.ThirdInstallmentReleased14_15_G },
+              { label:  Y1, y: this.ThirdInstallmentReleased15_16_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "UC Receieved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label:  x1, y: this.UC_Received_14_15_G },
+              { label:  Y1, y: this.UC_Received_15_16_G }
+            ]
+          },
+ 
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+    else  if (splitted.length ==3)
+    {
+
+      if (x1=="2014_15)")
+      x1 ="2014-15";
+      if (x1=="2015_16)")
+      x1 ="2015-16";
+      if (x1=="2016_17)")
+      x1 ="2017-18";
+      if (x1=="2018_19)")
+      x1 ="2018-19";
+      if (x1=="2019_20)" || x1=="2019_20")
+      x1 ="2019-20";
+
+
+      if (Y1=="2014_15)")
+      Y1 ="2014-15";
+      if (Y1=="2015_16)")
+      Y1 ="2015-16";
+      if (Y1=="2016_17)")
+      Y1 ="2017-18";
+      if (Y1=="2018_19)")
+      Y1 ="2018-19";
+      if (Y1=="2019_20)" || Y1=="2019_20")
+      Y1 ="2019-20";
+
+      if (z1=="2014_15)")
+      z1 ="2014-15";
+      if (z1=="2015_16)")
+      z1 ="2015-16";
+      if (z1=="2016_17)")
+      z1 ="2017-18";
+      if (z1=="2018_19)")
+      z1 ="2018-19";
+      if (z1=="2019_20)" || z1=="2019_20")
+      z1 ="2019-20";
+      
+      this.service.sp_Finance_PMAY_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        if (result[0].FinYear !="0" )
+        {
+              this.Fin_Year14_15_G = result[0].FinYear;
+              this.Project_Cost_14_15_G = result[0].Project_Cost;
+              this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+              this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+              this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+              this.UC_Received_14_15_G = result[0].UC_Received;
+        }
+             // 
+            try {
+              this.Fin_Year15_16_G = result[1].FinYear;
+              this.Project_Cost_15_16_G = result[1].Project_Cost;
+              this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+              this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+              this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+              this.UC_Received_15_16_G = result[1].UC_Received;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+            this.Fin_Year16_17_G = result[2].FinYear;
+            this.Project_Cost_16_17_G = result[2].Project_Cost;
+            this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+            this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+            this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+            this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+            this.UC_Received_16_17_G = result[2].UC_Received;
+        }
+        catch{}
+        finally{}
+
+
+         let chart = new CanvasJS.Chart("chartPMAYU", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: "Financial Progress  Consolidated (PMAY(U))",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Project Cost",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Project_Cost_14_15_G },
+              { label: Y1, y: this.Project_Cost_15_16_G },
+              { label: z1, y: this.Project_Cost_16_17_G }
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "CA Involved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Central_Assistance_involved14_15_G },
+              { label: Y1, y: this.Central_Assistance_involved15_16_G },
+              { label: z1, y: this.Central_Assistance_involved_16_17_G }
+
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "1st Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FirstInstallmentReleased14_15_G },
+              { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+              { label: z1, y: this.FirstInstallmentReleased_16_17_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "2nd Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.SecondInstallmentReleased14_15_G },
+              { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+              { label: z1, y: this.SecondInstallmentReleased_16_17_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "3rd Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label:x1, y: this.ThirdInstallmentReleased14_15_G },
+              { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+              { label: z1, y: this.ThirdInstallmentReleased_16_17_G} 
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "UC Receieved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.UC_Received_14_15_G },
+              { label: Y1, y: this.UC_Received_15_16_G },
+              { label: z1, y: this.UC_Received_16_17_G }
+            ]
+          },
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+
+    else if (splitted.length ==4)
+    {
+      if (x1=="2014_15)") x1 ="2014-15";
+      if (x1=="2015_16)") x1 ="2015-16";
+      if (x1=="2016_17)") x1 ="2016-17";
+      if (x1=="2017_18)") x1 ="2017-18";
+      
+      if (x1=="2018_19)") x1 ="2018-19";
+      if (x1=="2019_20)") x1 ="2019-20";
+
+
+      if (Y1=="2014_15)") Y1 ="2014-15";
+      if (Y1=="2015_16") Y1 ="2015-16";
+      if (Y1=="2016_17)") Y1 ="2016-17";
+      if (Y1=="2017_18)") Y1 ="2017-18";
+      if (Y1=="2018_19)") Y1 ="2018-19";
+      if (Y1=="2019_20)") Y1 ="2019-20";
+
+      if (z1=="2014_15)") z1 ="2014-15";
+      if (z1=="2015_16)") z1 ="2015-16";
+      if (z1=="2016_17)")  z1 ="2016-17";
+      if (z1=="2017_18)")  z1 ="2017-18";
+      if (z1=="2018_19)")  z1 ="2018-19"; 
+      if (z1=="2019_20)")  z1 ="2019-20";
+
+      if (z2=="2014_15)")   z2 ="2014-15";
+      if (z2=="2015_16)")  z2 ="2015-16";
+      if (z2=="2016_17)")  z2 ="2016-17";
+      if (z2=="2017_18)")  z2 ="2017-18";
+      if (z2=="2018_19)")  z2 ="2018-19";
+      if (z2=="2019_20)") z2 ="2019-20";
+
+
+      this.service.sp_Finance_PMAY_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        if (result[0].FinYear !="0" )
+        {
+              this.Fin_Year14_15_G = result[0].FinYear;
+              this.Project_Cost_14_15_G = result[0].Project_Cost;
+              this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+              this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+              this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+              this.UC_Received_14_15_G = result[0].UC_Received;
+        }
+             // 
+            try {
+              this.Fin_Year15_16_G = result[1].FinYear;
+              this.Project_Cost_15_16_G = result[1].Project_Cost;
+              this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+              this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+              this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+              this.UC_Received_15_16_G = result[1].UC_Received;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+            this.Fin_Year16_17_G = result[2].FinYear;
+            this.Project_Cost_16_17_G = result[2].Project_Cost;
+            this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+            this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+            this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+            this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+            this.UC_Received_16_17_G = result[2].UC_Received;
+        }
+        catch{}
+        finally{}
+
+
+        try {
+            this.Fin_Year17_18_G = result[3].FinYear;
+            this.Project_Cost_17_18_G = result[3].Project_Cost;
+            this.Central_Assistance_involved_17_18_G = result[3].Central_Assistance_involved;
+            this.FirstInstallmentReleased_17_18_G = result[3].FirstInstallmentReleased;
+            this.SecondInstallmentReleased_17_18_G = result[3].SecondInstallmentReleased;
+            this.ThirdInstallmentReleased_17_18_G = result[3].ThirdInstallmentReleased;
+            this.UC_Received_17_18_G = result[3].UC_Received;
+        }
+        catch{}
+        finally{}
+
+
+         let chart = new CanvasJS.Chart("chartPMAYU", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: "Fincncial Progress  Consolidated (PMAY(U))",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Project Cost",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Project_Cost_14_15_G },
+              { label: Y1, y: this.Project_Cost_15_16_G },
+              { label: z1, y: this.Project_Cost_16_17_G },
+              { label: z2, y: this.Project_Cost_17_18_G }
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "CA Involved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label:x1, y: this.Central_Assistance_involved14_15_G },
+              { label: Y1, y: this.Central_Assistance_involved15_16_G },
+              { label: z1, y: this.Central_Assistance_involved_16_17_G },
+              { label: z2, y: this.Central_Assistance_involved_17_18_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "1st Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FirstInstallmentReleased14_15_G },
+              { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+              { label: z1, y: this.FirstInstallmentReleased_16_17_G },
+              { label: z2, y: this.FirstInstallmentReleased_17_18_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "2nd Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.SecondInstallmentReleased14_15_G },
+              { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+              { label: z1, y: this.SecondInstallmentReleased_16_17_G },
+              { label: z2, y: this.SecondInstallmentReleased_17_18_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "3rd Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.ThirdInstallmentReleased14_15_G },
+              { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+              { label: z1, y: this.ThirdInstallmentReleased_16_17_G},
+              { label: z2, y: this.ThirdInstallmentReleased_17_18_G} 
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "UC Receieved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.UC_Received_14_15_G },
+              { label: Y1, y: this.UC_Received_15_16_G },
+              { label: z1, y: this.UC_Received_16_17_G },
+              { label: z2, y: this.UC_Received_17_18_G }
+            ]
+          },
+  
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+    else if (splitted.length ==5)
+    {
+      if (x1=="2014_15)") x1 ="2014-15";
+      if (x1=="2015_16)") x1 ="2015-16";
+      if (x1=="2016_17)") x1 ="2016-17";
+      if (x1=="2017_18)") x1 ="2017-18";
+      
+      if (x1=="2018_19)") x1 ="2018-19";
+      if (x1=="2019_20)") x1 ="2019-20";
+
+
+      if (Y1=="2014_15)") Y1 ="2014-15";
+      if (Y1=="2015_16") Y1 ="2015-16";
+      if (Y1=="2016_17)") Y1 ="2016-17";
+      if (Y1=="2017_18)") Y1 ="2017-18";
+      if (Y1=="2018_19)") Y1 ="2018-19";
+      if (Y1=="2019_20)") Y1 ="2019-20";
+
+      if (z1=="2014_15)") z1 ="2014-15";
+      if (z1=="2015_16)") z1 ="2015-16";
+      if (z1=="2016_17)")  z1 ="2016-17";
+      if (z1=="2017_18)")  z1 ="2017-18";
+      if (z1=="2018_19)")  z1 ="2018-19"; 
+      if (z1=="2019_20)")  z1 ="2019-20";
+
+      if (z2=="2014_15)")   z2 ="2014-15";
+      if (z2=="2015_16)")  z2 ="2015-16";
+      if (z2=="2016_17)")  z2 ="2016-17";
+      if (z2=="2017_18)")  z2 ="2017-18";
+      if (z2=="2018_19)")  z2 ="2018-19";
+      if (z2=="2019_20)") z2 ="2019-20";
+
+      if (z3=="2014_15)")   z3 ="2014-15";
+      if (z3=="2015_16)")  z3 ="2015-16";
+      if (z3=="2016_17)")  z3 ="2016-17";
+      if (z3=="2017_18)")  z3 ="2017-18";
+      if (z3=="2018_19)")  z3 ="2018-19";
+      if (z3=="2019_20)") z3 ="2019-20";
+      
+      this.service.sp_Finance_PMAY_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        if (result[0].FinYear !="0" )
+        {
+              this.Fin_Year14_15_G = result[0].FinYear;
+              this.Project_Cost_14_15_G = result[0].Project_Cost;
+              this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+              this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+              this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+              this.UC_Received_14_15_G = result[0].UC_Received;
+        }
+             // 
+            try {
+              this.Fin_Year15_16_G = result[1].FinYear;
+              this.Project_Cost_15_16_G = result[1].Project_Cost;
+              this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+              this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+              this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+              this.UC_Received_15_16_G = result[1].UC_Received;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+            this.Fin_Year16_17_G = result[2].FinYear;
+            this.Project_Cost_16_17_G = result[2].Project_Cost;
+            this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+            this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+            this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+            this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+            this.UC_Received_16_17_G = result[2].UC_Received;
+        }
+        catch{}
+        finally{}
+
+
+        try {
+            this.Fin_Year17_18_G = result[3].FinYear;
+            this.Project_Cost_17_18_G = result[3].Project_Cost;
+            this.Central_Assistance_involved_17_18_G = result[3].Central_Assistance_involved;
+            this.FirstInstallmentReleased_17_18_G = result[3].FirstInstallmentReleased;
+            this.SecondInstallmentReleased_17_18_G = result[3].SecondInstallmentReleased;
+            this.ThirdInstallmentReleased_17_18_G = result[3].ThirdInstallmentReleased;
+            this.UC_Received_17_18_G = result[3].UC_Received;
+        }
+        catch{}
+        finally{}
+
+        try {
+          this.Fin_Year18_19_G = result[4].FinYear;
+          this.Project_Cost_18_19_G = result[4].Project_Cost;
+          this.Central_Assistance_involved_18_19_G = result[4].Central_Assistance_involved;
+          this.FirstInstallmentReleased_18_19_G = result[4].FirstInstallmentReleased;
+          this.SecondInstallmentReleased_18_19_G = result[4].SecondInstallmentReleased;
+          this.ThirdInstallmentReleased_18_19_G = result[4].ThirdInstallmentReleased;
+          this.UC_Received_18_19_G = result[4].UC_Received;
+      }
+      catch{}
+      finally{}
+
+
+         let chart = new CanvasJS.Chart("chartPMAYU", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: "Financial Progress Consolidated (PMAY(U))",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "project Cost",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Project_Cost_14_15_G },
+              { label: Y1, y: this.Project_Cost_15_16_G },
+              { label: z1, y: this.Project_Cost_16_17_G },
+              { label: z2, y: this.Project_Cost_17_18_G },
+              { label: z3, y: this.Project_Cost_18_19_G }
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "CA Involved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Central_Assistance_involved14_15_G },
+              { label: Y1, y: this.Central_Assistance_involved15_16_G },
+              { label: z1, y: this.Central_Assistance_involved_16_17_G },
+              { label: z2, y: this.Central_Assistance_involved_17_18_G },
+              { label: z3, y: this.Central_Assistance_involved_18_19_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "1st Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.FirstInstallmentReleased14_15_G },
+              { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+              { label: z1, y: this.FirstInstallmentReleased_16_17_G },
+              { label: z2, y: this.FirstInstallmentReleased_17_18_G },
+              { label: z3, y: this.FirstInstallmentReleased_18_19_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "2nd Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.SecondInstallmentReleased14_15_G },
+              { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+              { label: z1, y: this.SecondInstallmentReleased_16_17_G },
+              { label: z2, y: this.SecondInstallmentReleased_17_18_G },
+              { label: z3, y: this.SecondInstallmentReleased_18_19_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "3rd Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.ThirdInstallmentReleased14_15_G },
+              { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+              { label: z1, y: this.ThirdInstallmentReleased_16_17_G},
+              { label:z2, y: this.ThirdInstallmentReleased_17_18_G},
+              { label: z3, y: this.ThirdInstallmentReleased_18_19_G} 
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "UC Receieved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.UC_Received_14_15_G },
+              { label: Y1, y: this.UC_Received_15_16_G },
+              { label: z1, y: this.UC_Received_16_17_G },
+              { label: z2, y: this.UC_Received_17_18_G },
+              { label: z3, y: this.UC_Received_18_19_G }
+            ]
+          },
+
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+    else if (splitted.length ==6)
+    {
+      if (x1=="2014_15)") x1 ="2014-15";
+      if (x1=="2015_16)") x1 ="2015-16";
+      if (x1=="2016_17)") x1 ="2016-17";
+      if (x1=="2017_18)") x1 ="2017-18";
+      
+      if (x1=="2018_19)") x1 ="2018-19";
+      if (x1=="2019_20)") x1 ="2019-20";
+
+
+      if (Y1=="2014_15)") Y1 ="2014-15";
+      if (Y1=="2015_16") Y1 ="2015-16";
+      if (Y1=="2016_17)") Y1 ="2016-17";
+      if (Y1=="2017_18)") Y1 ="2017-18";
+      if (Y1=="2018_19)") Y1 ="2018-19";
+      if (Y1=="2019_20)") Y1 ="2019-20";
+
+      if (z1=="2014_15)") z1 ="2014-15";
+      if (z1=="2015_16)") z1 ="2015-16";
+      if (z1=="2016_17)")  z1 ="2016-17";
+      if (z1=="2017_18)")  z1 ="2017-18";
+      if (z1=="2018_19)")  z1 ="2018-19"; 
+      if (z1=="2019_20)")  z1 ="2019-20";
+
+      if (z2=="2014_15)")   z2 ="2014-15";
+      if (z2=="2015_16)")  z2 ="2015-16";
+      if (z2=="2016_17)")  z2 ="2016-17";
+      if (z2=="2017_18)")  z2 ="2017-18";
+      if (z2=="2018_19)")  z2 ="2018-19";
+      if (z2=="2019_20)") z2 ="2019-20";
+
+      if (z3=="2014_15)")   z3 ="2014-15";
+      if (z3=="2015_16)")  z3 ="2015-16";
+      if (z3=="2016_17)")  z3 ="2016-17";
+      if (z3=="2017_18)")  z3 ="2017-18";
+      if (z3=="2018_19)")  z3 ="2018-19";
+      if (z3=="2019_20)") z3 ="2019-20";
+
+      if (z4=="2014_15)")   z4 ="2014-15";
+      if (z4=="2015_16)")  z4 ="2015-16";
+
+      if (z4=="2016_17)")  z4 ="2016-17";
+      if (z4=="2017_18)")  z4 ="2017-18";
+      if (z4=="2018_19)")  z4 ="2018-19";
+      if (z4=="2019_20)") z4 ="2019-20";
+      
+      this.service.sp_Finance_PMAY_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+        if (result[0].FinYear !="0" )
+        {
+              this.Fin_Year14_15_G = result[0].FinYear;
+              this.Project_Cost_14_15_G = result[0].Project_Cost;
+              this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+              this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+              this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+              this.UC_Received_14_15_G = result[0].UC_Received;
+        }
+             // 
+            try {
+              this.Fin_Year15_16_G = result[1].FinYear;
+              this.Project_Cost_15_16_G = result[1].Project_Cost;
+              this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+              this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+              this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+              this.UC_Received_15_16_G = result[1].UC_Received;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+            this.Fin_Year16_17_G = result[2].FinYear;
+            this.Project_Cost_16_17_G = result[2].Project_Cost;
+            this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+            this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+            this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+            this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+            this.UC_Received_16_17_G = result[2].UC_Received;
+        }
+        catch{}
+        finally{}
+
+
+        try {
+            this.Fin_Year17_18_G = result[3].FinYear;
+            this.Project_Cost_17_18_G = result[3].Project_Cost;
+            this.Central_Assistance_involved_17_18_G = result[3].Central_Assistance_involved;
+            this.FirstInstallmentReleased_17_18_G = result[3].FirstInstallmentReleased;
+            this.SecondInstallmentReleased_17_18_G = result[3].SecondInstallmentReleased;
+            this.ThirdInstallmentReleased_17_18_G = result[3].ThirdInstallmentReleased;
+            this.UC_Received_17_18_G = result[3].UC_Received;
+        }
+        catch{}
+        finally{}
+
+        try {
+          this.Fin_Year18_19_G = result[4].FinYear;
+          this.Project_Cost_18_19_G = result[4].Project_Cost;
+          this.Central_Assistance_involved_18_19_G = result[4].Central_Assistance_involved;
+          this.FirstInstallmentReleased_18_19_G = result[4].FirstInstallmentReleased;
+          this.SecondInstallmentReleased_18_19_G = result[4].SecondInstallmentReleased;
+          this.ThirdInstallmentReleased_18_19_G = result[4].ThirdInstallmentReleased;
+          this.UC_Received_18_19_G = result[4].UC_Received;
+      }
+      catch{}
+      finally{}
+       
+      try {
+        this.Fin_Year19_20_G = result[5].FinYear;
+        this.Project_Cost_19_20_G = result[5].Project_Cost;
+        this.Central_Assistance_involved_19_20_G = result[5].Central_Assistance_involved;
+        this.FirstInstallmentReleased_19_20_G = result[5].FirstInstallmentReleased;
+        this.SecondInstallmentReleased_19_20_G = result[5].SecondInstallmentReleased;
+        this.ThirdInstallmentReleased_19_20_G = result[5].ThirdInstallmentReleased;
+        this.UC_Received_19_20_G = result[5].UC_Received;
+    }
+    catch{}
+    finally{} 
+         let chart = new CanvasJS.Chart("chartPMAYU", {
+          theme: "light2",
+          animationEnabled: true,
+          exportEnabled: false,
+          title: {
+            text: "Financial Progress  Consolidated (PMAY(U))",
+            fontSize: "25",
+          },
+          backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+          colorSet: "greenShades",
+
+          data: [{
+
+            options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+          },
+
+       
+       
+    
+
+          type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "Project Cost",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              // { x: "14-15", y: this.Fin_Year15_16 },
+              { label: x1, y: this.Project_Cost_14_15_G },
+              { label: Y1, y: this.Project_Cost_15_16_G },
+              { label: z1, y: this.Project_Cost_16_17_G },
+              { label: z2, y: this.Project_Cost_17_18_G },
+              { label: z3, y: this.Project_Cost_18_19_G },
+              { label: z4, y: this.Project_Cost_19_20_G }
+            ]
+          },
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "CA Involved",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.Central_Assistance_involved14_15_G },
+              { label: Y1, y: this.Central_Assistance_involved15_16_G },
+              { label: z1, y: this.Central_Assistance_involved_16_17_G },
+              { label: z2, y: this.Central_Assistance_involved_17_18_G },
+              { label: z3, y: this.Central_Assistance_involved_18_19_G },
+              { label: z4, y: this.Central_Assistance_involved_19_20_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "1st Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label:x1, y: this.FirstInstallmentReleased14_15_G },
+              { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+              { label: z1, y: this.FirstInstallmentReleased_16_17_G },
+              { label: z2, y: this.FirstInstallmentReleased_17_18_G },
+              { label: z3, y: this.FirstInstallmentReleased_18_19_G },
+              { label: z4, y: this.FirstInstallmentReleased_19_20_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "2nd Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.SecondInstallmentReleased14_15_G },
+              { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+              { label: z1, y: this.SecondInstallmentReleased_16_17_G },
+              { label: z2, y: this.SecondInstallmentReleased_17_18_G },
+              { label: z3, y: this.SecondInstallmentReleased_18_19_G },
+              { label: z4, y: this.SecondInstallmentReleased_19_20_G }
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: " Installment Released",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.ThirdInstallmentReleased14_15_G },
+              { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+              { label: z1, y: this.ThirdInstallmentReleased_16_17_G},
+              { label: z2, y: this.ThirdInstallmentReleased_17_18_G},
+              { label: z3, y: this.ThirdInstallmentReleased_18_19_G} ,
+              { label: z4, y: this.ThirdInstallmentReleased_19_20_G} 
+            ]
+          },
+
+          {
+            type: "column",
+            dockInsidePlotArea: true,
+             indexLabel: "{y}", //HG
+            bevelEnabled: true,
+            showInLegend: true,
+            legendText: "UC Received",
+             stValue: "Q",
+            indexLabelFontSize: 12,
+            indexLabelOrientation: "vertical",
+            dataPoints: [
+              { label: x1, y: this.UC_Received_14_15_G },
+              { label: Y1, y: this.UC_Received_15_16_G },
+              { label: z1, y: this.UC_Received_16_17_G },
+              { label: z2, y: this.UC_Received_17_18_G },
+              { label: z3, y: this.UC_Received_18_19_G },
+              { label: z4, y: this.UC_Received_19_20_G }
+            ]
+          },
+
+          // {
+          //   type: "column",
+          //   dockInsidePlotArea: true,
+          //    indexLabel: "{y}", //HG
+          //   bevelEnabled: true,
+          //   showInLegend: true,
+          //   legendText: "3rd Inst",
+          //    stValue: "Q",
+          //   indexLabelFontSize: 12,
+          //   indexLabelOrientation: "vertical",
+          //   dataPoints: [
+          //     { label: x1, y: this.Third_Houses14_15_G },
+          //     { label: Y1, y: this.Third_Houses15_16_G },
+          //     { label: z1, y: this.Third_Houses16_17_G },
+          //     { label: z2, y: this.Third_Houses17_18_G },
+          //     { label: z3, y: this.Third_Houses18_19_G },
+          //     { label: z4, y: this.Third_Houses19_20_G }
+          //   ]
+          // },
+
+        ],
+          options: {
+            legend: {
+              display: true,
+              labels: {
+                fontColor: 'rgb(255, 99, 132)'
+              }
+            }
+          }
+        });
+        chart.render();
+    });
+
+    }
+  }
+
+  BindBLCDatanew(stateCode, DisttCode, cityCode, Fin_Year )
+  {
+         var str = Fin_Year ; 
+        if (str.length==101)
+        {
+            var splitted = str.split(",", str.length);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+            var z1 =  splitted[2].substring(8,str.length-3);
+            var z2 =  splitted[3].substring(8,str.length-3);
+            var z3 =  splitted[4].substring(8,str.length-3);
+            var z4 =  splitted[5].substring(8,str.length-3);
+        }
+        if (str.length==84)
+        {
+            var splitted = str.split(",", str.length);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+            var z1 =  splitted[2].substring(8,str.length-3);
+            var z2 =  splitted[3].substring(8,str.length-3);
+            var z3 =  splitted[4].substring(8,str.length-3);
+        }
+        if (str.length==67)
+        {
+            var splitted = str.split(",", str.length);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+            var z1 =  splitted[2].substring(8,str.length-3);
+            var z2 =  splitted[3].substring(8,str.length-3);
+        }
+        if (str.length==50)
+        {
+            var splitted = str.split(",", str.length);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+            var z1 =  splitted[2].substring(8,str.length-3);
+        }
+        if (str.length==33)
+        {
+            var splitted = str.split(",", str.length);
+            var x1 =  splitted[0].substring(8,str.length-3);
+            var Y1 =  splitted[1].substring(8,str.length-3);
+        }
+        if (str.length==16)
+        {
+            var splitted = str.split(",", str.length);
+            var x2 =  splitted[0].substring(8,str.length-1);
+        }
+       if (splitted.length ==1)
+       {
+         if (x2=="2014_15")
+             x2 ="2014-15";
+             if (x2=="2015_16")
+             x2 ="2015-16";
+             if (x2=="2016_17")
+             x2 ="2017-18";
+             if (x2=="2018_19")
+             x2 ="2018-19";
+             if (x2=="2019_20")
+             x2 ="2019-20";
+              
+             this.service.sp_Finance_BLCS_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+              if (result[0].FinYear !="0" )
+              {
+                    this.Fin_Year14_15_G = result[0].FinYear;
+                    this.Project_Cost_14_15_G = result[0].Project_Cost;
+                    this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                    this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                    this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                    this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                    this.UC_Received14_15_G = result[0].UC_Received;
+              }
+  
+            let chart = new CanvasJS.Chart("chartBLCS", {
+              theme: "light2",
+              animationEnabled: true,
+              exportEnabled: false,
+              title: {
+                text: "Financial Progress  Consolidated (BLC)",
+                fontSize: "25",
+              },
+              backgroundColor: this.backgroundColor_G,
+              colorSet: "greenShades",
+    
+              data: [{
+    
+                options: {
+                  scales: {
+                      xAxes: [{
+                          stacked: true
+                      }],
+                      yAxes: [{
+                          stacked: true
+                      }]
+                  }
+              },
+              type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Project Cost",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                 
+                  { label: x2, y: this.Project_Cost_14_15_G },
+           
+                ]
+              },
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "CA Involved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.Central_Assistance_involved14_15_G },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Ist Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.FirstInstallmentReleased14_15_G },
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "2nd Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.SecondInstallmentReleased14_15_G },
+                ]
+              },
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "3rd Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.ThirdInstallmentReleased14_15_G },
+                ]
+              },
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "UC Receieved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x2, y: this.UC_Received14_15_G },
+                ]
+              },    
+            ],
+              options: {
+                legend: {
+                  display: true,
+                  labels: {
+                    fontColor: 'rgb(255, 99, 132)'
+                  }
+                }
+              }
+            });
+            chart.render();
+        });
+         
+  
+  
+      }
+      if (splitted.length ==2)
+      {
+        if (x1=="2014_15)")
+        x1 ="2014-15";
+        if (x1=="2015_16)")
+        x1 ="2015-16";
+        if (x1=="2016_17")
+        x1 ="2017-18";
+        if (x1=="2018_19")
+        x1 ="2018-19";
+        if (x1=="2019_20")
+        x1 ="2019-20";
+  
+  
+        if (Y1=="2014_15)")
+        Y1 ="2014-15";
+        if (Y1=="2015_16)")
+        Y1 ="2015-16";
+        if (Y1=="2016_17")
+        Y1 ="2017-18";
+        if (Y1=="2018_19")
+        Y1 ="2018-19";
+        if (Y1=="2019_20")
+        Y1 ="2019-20";
+  
+        this.service.sp_Finance_BLCS_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          if (result[0].FinYear !="0" )
+          {
+                this.Fin_Year14_15_G = result[0].FinYear;
+                this.Project_Cost_14_15_G = result[0].Project_Cost;
+                this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                this.UC_Received_14_15_G = result[0].UC_Received;
+          }
+               // 
+              try {
+                this.Fin_Year15_16_G = result[1].FinYear;
+                this.Project_Cost_15_16_G = result[1].Project_Cost;
+                this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                this.UC_Received_15_16_G = result[1].UC_Received;
+            }
+            catch{}
+            finally{}
+  
+  
+           let chart = new CanvasJS.Chart("chartBLCS", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: "Financial Progress  Consolidated (BLC)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor_G, 
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Project Cost",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Project_Cost_14_15_G },
+                { label:  Y1, y: this.Project_Cost_15_16_G }
+  
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "CA Involved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label:  x1, y: this.Central_Assistance_involved14_15_G },
+                { label:  Y1, y: this.Central_Assistance_involved15_16_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "1st Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FirstInstallmentReleased14_15_G },
+                { label: Y1, y: this.FirstInstallmentReleased15_16_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "2nd Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                { label:  Y1, y: this.SecondInstallmentReleased15_16_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "3rd Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label:  x1, y: this.ThirdInstallmentReleased14_15_G },
+                { label:  Y1, y: this.ThirdInstallmentReleased15_16_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "UC Receieved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label:  x1, y: this.UC_Received_14_15_G },
+                { label:  Y1, y: this.UC_Received_15_16_G }
+              ]
+            },
+   
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+      else  if (splitted.length ==3)
+      {
+  
+        if (x1=="2014_15)")
+        x1 ="2014-15";
+        if (x1=="2015_16)")
+        x1 ="2015-16";
+        if (x1=="2016_17)")
+        x1 ="2017-18";
+        if (x1=="2018_19)")
+        x1 ="2018-19";
+        if (x1=="2019_20)" || x1=="2019_20")
+        x1 ="2019-20";
+  
+  
+        if (Y1=="2014_15)")
+        Y1 ="2014-15";
+        if (Y1=="2015_16)")
+        Y1 ="2015-16";
+        if (Y1=="2016_17)")
+        Y1 ="2017-18";
+        if (Y1=="2018_19)")
+        Y1 ="2018-19";
+        if (Y1=="2019_20)" || Y1=="2019_20")
+        Y1 ="2019-20";
+  
+        if (z1=="2014_15)")
+        z1 ="2014-15";
+        if (z1=="2015_16)")
+        z1 ="2015-16";
+        if (z1=="2016_17)")
+        z1 ="2017-18";
+        if (z1=="2018_19)")
+        z1 ="2018-19";
+        if (z1=="2019_20)" || z1=="2019_20")
+        z1 ="2019-20";
+        
+        this.service.sp_Finance_BLCS_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          if (result[0].FinYear !="0" )
+          {
+                this.Fin_Year14_15_G = result[0].FinYear;
+                this.Project_Cost_14_15_G = result[0].Project_Cost;
+                this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                this.UC_Received_14_15_G = result[0].UC_Received;
+          }
+               // 
+              try {
+                this.Fin_Year15_16_G = result[1].FinYear;
+                this.Project_Cost_15_16_G = result[1].Project_Cost;
+                this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                this.UC_Received_15_16_G = result[1].UC_Received;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+              this.Fin_Year16_17_G = result[2].FinYear;
+              this.Project_Cost_16_17_G = result[2].Project_Cost;
+              this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+              this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+              this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+              this.UC_Received_16_17_G = result[2].UC_Received;
+          }
+          catch{}
+          finally{}
+  
+  
+           let chart = new CanvasJS.Chart("chartBLCS", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: "Financial Progress  Consolidated (BLC)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Project Cost",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Project_Cost_14_15_G },
+                { label: Y1, y: this.Project_Cost_15_16_G },
+                { label: z1, y: this.Project_Cost_16_17_G }
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "CA Involved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Central_Assistance_involved14_15_G },
+                { label: Y1, y: this.Central_Assistance_involved15_16_G },
+                { label: z1, y: this.Central_Assistance_involved_16_17_G }
+  
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "1st Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FirstInstallmentReleased14_15_G },
+                { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+                { label: z1, y: this.FirstInstallmentReleased_16_17_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "2nd Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+                { label: z1, y: this.SecondInstallmentReleased_16_17_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "3rd Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label:x1, y: this.ThirdInstallmentReleased14_15_G },
+                { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+                { label: z1, y: this.ThirdInstallmentReleased_16_17_G} 
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "UC Receieved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.UC_Received_14_15_G },
+                { label: Y1, y: this.UC_Received_15_16_G },
+                { label: z1, y: this.UC_Received_16_17_G }
+              ]
+            },
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+  
+      else if (splitted.length ==4)
+      {
+        if (x1=="2014_15)") x1 ="2014-15";
+        if (x1=="2015_16)") x1 ="2015-16";
+        if (x1=="2016_17)") x1 ="2016-17";
+        if (x1=="2017_18)") x1 ="2017-18";
+        
+        if (x1=="2018_19)") x1 ="2018-19";
+        if (x1=="2019_20)") x1 ="2019-20";
+  
+  
+        if (Y1=="2014_15)") Y1 ="2014-15";
+        if (Y1=="2015_16") Y1 ="2015-16";
+        if (Y1=="2016_17)") Y1 ="2016-17";
+        if (Y1=="2017_18)") Y1 ="2017-18";
+        if (Y1=="2018_19)") Y1 ="2018-19";
+        if (Y1=="2019_20)") Y1 ="2019-20";
+  
+        if (z1=="2014_15)") z1 ="2014-15";
+        if (z1=="2015_16)") z1 ="2015-16";
+        if (z1=="2016_17)")  z1 ="2016-17";
+        if (z1=="2017_18)")  z1 ="2017-18";
+        if (z1=="2018_19)")  z1 ="2018-19"; 
+        if (z1=="2019_20)")  z1 ="2019-20";
+  
+        if (z2=="2014_15)")   z2 ="2014-15";
+        if (z2=="2015_16)")  z2 ="2015-16";
+        if (z2=="2016_17)")  z2 ="2016-17";
+        if (z2=="2017_18)")  z2 ="2017-18";
+        if (z2=="2018_19)")  z2 ="2018-19";
+        if (z2=="2019_20)") z2 ="2019-20";
+  
+ 
+        this.service.sp_Finance_BLCS_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          if (result[0].FinYear !="0" )
+          {
+                this.Fin_Year14_15_G = result[0].FinYear;
+                this.Project_Cost_14_15_G = result[0].Project_Cost;
+                this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                this.UC_Received_14_15_G = result[0].UC_Received;
+          }
+               // 
+              try {
+                this.Fin_Year15_16_G = result[1].FinYear;
+                this.Project_Cost_15_16_G = result[1].Project_Cost;
+                this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                this.UC_Received_15_16_G = result[1].UC_Received;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+              this.Fin_Year16_17_G = result[2].FinYear;
+              this.Project_Cost_16_17_G = result[2].Project_Cost;
+              this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+              this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+              this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+              this.UC_Received_16_17_G = result[2].UC_Received;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+              this.Fin_Year17_18_G = result[3].FinYear;
+              this.Project_Cost_17_18_G = result[3].Project_Cost;
+              this.Central_Assistance_involved_17_18_G = result[3].Central_Assistance_involved;
+              this.FirstInstallmentReleased_17_18_G = result[3].FirstInstallmentReleased;
+              this.SecondInstallmentReleased_17_18_G = result[3].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased_17_18_G = result[3].ThirdInstallmentReleased;
+              this.UC_Received_17_18_G = result[3].UC_Received;
+          }
+          catch{}
+          finally{}
+  
+  
+           let chart = new CanvasJS.Chart("chartBLCS", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: "Financial Progress  Consolidated (BLC)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor_G, 
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+  
+         
+         
+      
+  
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Project Cost",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Project_Cost_14_15_G },
+                { label: Y1, y: this.Project_Cost_15_16_G },
+                { label: z1, y: this.Project_Cost_16_17_G },
+                { label: z2, y: this.Project_Cost_17_18_G }
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "CA Involved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label:x1, y: this.Central_Assistance_involved14_15_G },
+                { label: Y1, y: this.Central_Assistance_involved15_16_G },
+                { label: z1, y: this.Central_Assistance_involved_16_17_G },
+                { label: z2, y: this.Central_Assistance_involved_17_18_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "1st Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FirstInstallmentReleased14_15_G },
+                { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+                { label: z1, y: this.FirstInstallmentReleased_16_17_G },
+                { label: z2, y: this.FirstInstallmentReleased_17_18_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "2nd Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+                { label: z1, y: this.SecondInstallmentReleased_16_17_G },
+                { label: z2, y: this.SecondInstallmentReleased_17_18_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "3rd Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.ThirdInstallmentReleased14_15_G },
+                { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+                { label: z1, y: this.ThirdInstallmentReleased_16_17_G},
+                { label: z2, y: this.ThirdInstallmentReleased_17_18_G} 
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "UC Receieved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.UC_Received_14_15_G },
+                { label: Y1, y: this.UC_Received_15_16_G },
+                { label: z1, y: this.UC_Received_16_17_G },
+                { label: z2, y: this.UC_Received_17_18_G }
+              ]
+            },
+    
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+      else if (splitted.length ==5)
+      {
+        if (x1=="2014_15)") x1 ="2014-15";
+        if (x1=="2015_16)") x1 ="2015-16";
+        if (x1=="2016_17)") x1 ="2016-17";
+        if (x1=="2017_18)") x1 ="2017-18";
+        
+        if (x1=="2018_19)") x1 ="2018-19";
+        if (x1=="2019_20)") x1 ="2019-20";
+  
+  
+        if (Y1=="2014_15)") Y1 ="2014-15";
+        if (Y1=="2015_16") Y1 ="2015-16";
+        if (Y1=="2016_17)") Y1 ="2016-17";
+        if (Y1=="2017_18)") Y1 ="2017-18";
+        if (Y1=="2018_19)") Y1 ="2018-19";
+        if (Y1=="2019_20)") Y1 ="2019-20";
+  
+        if (z1=="2014_15)") z1 ="2014-15";
+        if (z1=="2015_16)") z1 ="2015-16";
+        if (z1=="2016_17)")  z1 ="2016-17";
+        if (z1=="2017_18)")  z1 ="2017-18";
+        if (z1=="2018_19)")  z1 ="2018-19"; 
+        if (z1=="2019_20)")  z1 ="2019-20";
+  
+        if (z2=="2014_15)")   z2 ="2014-15";
+        if (z2=="2015_16)")  z2 ="2015-16";
+        if (z2=="2016_17)")  z2 ="2016-17";
+        if (z2=="2017_18)")  z2 ="2017-18";
+        if (z2=="2018_19)")  z2 ="2018-19";
+        if (z2=="2019_20)") z2 ="2019-20";
+  
+        if (z3=="2014_15)")   z3 ="2014-15";
+        if (z3=="2015_16)")  z3 ="2015-16";
+        if (z3=="2016_17)")  z3 ="2016-17";
+        if (z3=="2017_18)")  z3 ="2017-18";
+        if (z3=="2018_19)")  z3 ="2018-19";
+        if (z3=="2019_20)") z3 ="2019-20";
+        
+        this.service.sp_Finance_BLCS_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          if (result[0].FinYear !="0" )
+          {
+                this.Fin_Year14_15_G = result[0].FinYear;
+                this.Project_Cost_14_15_G = result[0].Project_Cost;
+                this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                this.UC_Received_14_15_G = result[0].UC_Received;
+          }
+               // 
+              try {
+                this.Fin_Year15_16_G = result[1].FinYear;
+                this.Project_Cost_15_16_G = result[1].Project_Cost;
+                this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                this.UC_Received_15_16_G = result[1].UC_Received;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+              this.Fin_Year16_17_G = result[2].FinYear;
+              this.Project_Cost_16_17_G = result[2].Project_Cost;
+              this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+              this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+              this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+              this.UC_Received_16_17_G = result[2].UC_Received;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+              this.Fin_Year17_18_G = result[3].FinYear;
+              this.Project_Cost_17_18_G = result[3].Project_Cost;
+              this.Central_Assistance_involved_17_18_G = result[3].Central_Assistance_involved;
+              this.FirstInstallmentReleased_17_18_G = result[3].FirstInstallmentReleased;
+              this.SecondInstallmentReleased_17_18_G = result[3].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased_17_18_G = result[3].ThirdInstallmentReleased;
+              this.UC_Received_17_18_G = result[3].UC_Received;
+          }
+          catch{}
+          finally{}
+
+          try {
+            this.Fin_Year18_19_G = result[4].FinYear;
+            this.Project_Cost_18_19_G = result[4].Project_Cost;
+            this.Central_Assistance_involved_18_19_G = result[4].Central_Assistance_involved;
+            this.FirstInstallmentReleased_18_19_G = result[4].FirstInstallmentReleased;
+            this.SecondInstallmentReleased_18_19_G = result[4].SecondInstallmentReleased;
+            this.ThirdInstallmentReleased_18_19_G = result[4].ThirdInstallmentReleased;
+            this.UC_Received_18_19_G = result[4].UC_Received;
+        }
+        catch{}
+        finally{}
+  
+  
+           let chart = new CanvasJS.Chart("chartBLCS", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: "Financial Progress Consolidated (BLC)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor_G, 
+            colorSet: "greenShades",
+            data: [{
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Project Cost",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Project_Cost_14_15_G },
+                { label: Y1, y: this.Project_Cost_15_16_G },
+                { label: z1, y: this.Project_Cost_16_17_G },
+                { label: z2, y: this.Project_Cost_17_18_G },
+                { label: z3, y: this.Project_Cost_18_19_G }
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "CA Involved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Central_Assistance_involved14_15_G },
+                { label: Y1, y: this.Central_Assistance_involved15_16_G },
+                { label: z1, y: this.Central_Assistance_involved_16_17_G },
+                { label: z2, y: this.Central_Assistance_involved_17_18_G },
+                { label: z3, y: this.Central_Assistance_involved_18_19_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Ist Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.FirstInstallmentReleased14_15_G },
+                { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+                { label: z1, y: this.FirstInstallmentReleased_16_17_G },
+                { label: z2, y: this.FirstInstallmentReleased_17_18_G },
+                { label: z3, y: this.FirstInstallmentReleased_18_19_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "2nd Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+                { label: z1, y: this.SecondInstallmentReleased_16_17_G },
+                { label: z2, y: this.SecondInstallmentReleased_17_18_G },
+                { label: z3, y: this.SecondInstallmentReleased_18_19_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "3rd Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.ThirdInstallmentReleased14_15_G },
+                { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+                { label: z1, y: this.ThirdInstallmentReleased_16_17_G},
+                { label:z2, y: this.ThirdInstallmentReleased_17_18_G},
+                { label: z3, y: this.ThirdInstallmentReleased_18_19_G} 
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "UC Receieved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.UC_Received_14_15_G },
+                { label: Y1, y: this.UC_Received_15_16_G },
+                { label: z1, y: this.UC_Received_16_17_G },
+                { label: z2, y: this.UC_Received_17_18_G },
+                { label: z3, y: this.UC_Received_18_19_G }
+              ]
+            },
+  
+  
+          ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+      else if (splitted.length ==6)
+      {
+        if (x1=="2014_15)") x1 ="2014-15";
+        if (x1=="2015_16)") x1 ="2015-16";
+        if (x1=="2016_17)") x1 ="2016-17";
+        if (x1=="2017_18)") x1 ="2017-18";
+        
+        if (x1=="2018_19)") x1 ="2018-19";
+        if (x1=="2019_20)") x1 ="2019-20";
+  
+  
+        if (Y1=="2014_15)") Y1 ="2014-15";
+        if (Y1=="2015_16") Y1 ="2015-16";
+        if (Y1=="2016_17)") Y1 ="2016-17";
+        if (Y1=="2017_18)") Y1 ="2017-18";
+        if (Y1=="2018_19)") Y1 ="2018-19";
+        if (Y1=="2019_20)") Y1 ="2019-20";
+  
+        if (z1=="2014_15)") z1 ="2014-15";
+        if (z1=="2015_16)") z1 ="2015-16";
+        if (z1=="2016_17)")  z1 ="2016-17";
+        if (z1=="2017_18)")  z1 ="2017-18";
+        if (z1=="2018_19)")  z1 ="2018-19"; 
+        if (z1=="2019_20)")  z1 ="2019-20";
+  
+        if (z2=="2014_15)")   z2 ="2014-15";
+        if (z2=="2015_16)")  z2 ="2015-16";
+        if (z2=="2016_17)")  z2 ="2016-17";
+        if (z2=="2017_18)")  z2 ="2017-18";
+        if (z2=="2018_19)")  z2 ="2018-19";
+        if (z2=="2019_20)") z2 ="2019-20";
+  
+        if (z3=="2014_15)")   z3 ="2014-15";
+        if (z3=="2015_16)")  z3 ="2015-16";
+        if (z3=="2016_17)")  z3 ="2016-17";
+        if (z3=="2017_18)")  z3 ="2017-18";
+        if (z3=="2018_19)")  z3 ="2018-19";
+        if (z3=="2019_20)") z3 ="2019-20";
+  
+        if (z4=="2014_15)")   z4 ="2014-15";
+        if (z4=="2015_16)")  z4 ="2015-16";
+  
+        if (z4=="2016_17)")  z4 ="2016-17";
+        if (z4=="2017_18)")  z4 ="2017-18";
+        if (z4=="2018_19)")  z4 ="2018-19";
+        if (z4=="2019_20)") z4 ="2019-20";
+        
+        this.service.sp_Finance_BLCS_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+          if (result[0].FinYear !="0" )
+          {
+                this.Fin_Year14_15_G = result[0].FinYear;
+                this.Project_Cost_14_15_G = result[0].Project_Cost;
+                this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                this.UC_Received_14_15_G = result[0].UC_Received;
+          }
+               // 
+              try {
+                this.Fin_Year15_16_G = result[1].FinYear;
+                this.Project_Cost_15_16_G = result[1].Project_Cost;
+                this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                this.UC_Received_15_16_G = result[1].UC_Received;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+              this.Fin_Year16_17_G = result[2].FinYear;
+              this.Project_Cost_16_17_G = result[2].Project_Cost;
+              this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+              this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+              this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+              this.UC_Received_16_17_G = result[2].UC_Received;
+          }
+          catch{}
+          finally{}
+
+
+          try {
+              this.Fin_Year17_18_G = result[3].FinYear;
+              this.Project_Cost_17_18_G = result[3].Project_Cost;
+              this.Central_Assistance_involved_17_18_G = result[3].Central_Assistance_involved;
+              this.FirstInstallmentReleased_17_18_G = result[3].FirstInstallmentReleased;
+              this.SecondInstallmentReleased_17_18_G = result[3].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased_17_18_G = result[3].ThirdInstallmentReleased;
+              this.UC_Received_17_18_G = result[3].UC_Received;
+          }
+          catch{}
+          finally{}
+
+          try {
+            this.Fin_Year18_19_G = result[4].FinYear;
+            this.Project_Cost_18_19_G = result[4].Project_Cost;
+            this.Central_Assistance_involved_18_19_G = result[4].Central_Assistance_involved;
+            this.FirstInstallmentReleased_18_19_G = result[4].FirstInstallmentReleased;
+            this.SecondInstallmentReleased_18_19_G = result[4].SecondInstallmentReleased;
+            this.ThirdInstallmentReleased_18_19_G = result[4].ThirdInstallmentReleased;
+            this.UC_Received_18_19_G = result[4].UC_Received;
+        }
+        catch{}
+        finally{}
+         
+        try {
+          this.Fin_Year19_20_G = result[5].FinYear;
+          this.Project_Cost_19_20_G = result[5].Project_Cost;
+          this.Central_Assistance_involved_19_20_G = result[5].Central_Assistance_involved;
+          this.FirstInstallmentReleased_19_20_G = result[5].FirstInstallmentReleased;
+          this.SecondInstallmentReleased_19_20_G = result[5].SecondInstallmentReleased;
+          this.ThirdInstallmentReleased_19_20_G = result[5].ThirdInstallmentReleased;
+          this.UC_Received_19_20_G = result[5].UC_Received;
+      }
+      catch{}
+      finally{} 
+           let chart = new CanvasJS.Chart("chartBLCS", {
+            theme: "light2",
+            animationEnabled: true,
+            exportEnabled: false,
+            title: {
+              text: "Financial Progress Consolidated (BLC)",
+              fontSize: "25",
+            },
+            backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+            colorSet: "greenShades",
+  
+            data: [{
+  
+              options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            },
+            type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "Project Cost",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Project_Cost_14_15_G },
+                { label: Y1, y: this.Project_Cost_15_16_G },
+                { label: z1, y: this.Project_Cost_16_17_G },
+                { label: z2, y: this.Project_Cost_17_18_G },
+                { label: z3, y: this.Project_Cost_18_19_G },
+                { label: z4, y: this.Project_Cost_19_20_G }
+              ]
+            },
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "CA Involved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.Central_Assistance_involved14_15_G },
+                { label: Y1, y: this.Central_Assistance_involved15_16_G },
+                { label: z1, y: this.Central_Assistance_involved_16_17_G },
+                { label: z2, y: this.Central_Assistance_involved_17_18_G },
+                { label: z3, y: this.Central_Assistance_involved_18_19_G },
+                { label: z4, y: this.Central_Assistance_involved_19_20_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "1st Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label:x1, y: this.FirstInstallmentReleased14_15_G },
+                { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+                { label: z1, y: this.FirstInstallmentReleased_16_17_G },
+                { label: z2, y: this.FirstInstallmentReleased_17_18_G },
+                { label: z3, y: this.FirstInstallmentReleased_18_19_G },
+                { label: z4, y: this.FirstInstallmentReleased_19_20_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "2nd Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+                { label: z1, y: this.SecondInstallmentReleased_16_17_G },
+                { label: z2, y: this.SecondInstallmentReleased_17_18_G },
+                { label: z3, y: this.SecondInstallmentReleased_18_19_G },
+                { label: z4, y: this.SecondInstallmentReleased_19_20_G }
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "3rd Installment",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.ThirdInstallmentReleased14_15_G },
+                { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+                { label: z1, y: this.ThirdInstallmentReleased_16_17_G},
+                { label: z2, y: this.ThirdInstallmentReleased_17_18_G},
+                { label: z3, y: this.ThirdInstallmentReleased_18_19_G} ,
+                { label: z4, y: this.ThirdInstallmentReleased_19_20_G} 
+              ]
+            },
+  
+            {
+              type: "column",
+              dockInsidePlotArea: true,
+               indexLabel: "{y}", //HG
+              bevelEnabled: true,
+              showInLegend: true,
+              legendText: "UC Receieved",
+               stValue: "Q",
+              indexLabelFontSize: 12,
+              indexLabelOrientation: "vertical",
+              dataPoints: [
+                { label: x1, y: this.UC_Received_14_15_G },
+                { label: Y1, y: this.UC_Received_15_16_G },
+                { label: z1, y: this.UC_Received_16_17_G },
+                { label: z2, y: this.UC_Received_17_18_G },
+                { label: z3, y: this.UC_Received_18_19_G },
+                { label: z4, y: this.UC_Received_19_20_G }
+              ]
+            },
+           ],
+            options: {
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+                }
+              }
+            }
+          });
+          chart.render();
+      });
+  
+      }
+    }
+
+
+    BindAHPDatanew(stateCode, DisttCode, cityCode, Fin_Year )
+    {
+           var str = Fin_Year ;//'SUM(BENE2014_15),SUM(BENE2015_16)';
+          if (str.length==101)
+          {
+              var splitted = str.split(",", str.length);
+              var x1 =  splitted[0].substring(8,str.length-3);
+              var Y1 =  splitted[1].substring(8,str.length-3);
+              var z1 =  splitted[2].substring(8,str.length-3);
+              var z2 =  splitted[3].substring(8,str.length-3);
+              var z3 =  splitted[4].substring(8,str.length-3);
+              var z4 =  splitted[5].substring(8,str.length-3);
+          }
+          if (str.length==84)
+          {
+              var splitted = str.split(",", str.length);
+              var x1 =  splitted[0].substring(8,str.length-3);
+              var Y1 =  splitted[1].substring(8,str.length-3);
+              var z1 =  splitted[2].substring(8,str.length-3);
+              var z2 =  splitted[3].substring(8,str.length-3);
+              var z3 =  splitted[4].substring(8,str.length-3);
+          }
+          if (str.length==67)
+          {
+              var splitted = str.split(",", str.length);
+              var x1 =  splitted[0].substring(8,str.length-3);
+              var Y1 =  splitted[1].substring(8,str.length-3);
+              var z1 =  splitted[2].substring(8,str.length-3);
+              var z2 =  splitted[3].substring(8,str.length-3);
+          }
+          if (str.length==50)
+          {
+              var splitted = str.split(",", str.length);
+              var x1 =  splitted[0].substring(8,str.length-3);
+              var Y1 =  splitted[1].substring(8,str.length-3);
+              var z1 =  splitted[2].substring(8,str.length-3);
+          }
+          if (str.length==33)
+          {
+              var splitted = str.split(",", str.length);
+              var x1 =  splitted[0].substring(8,str.length-3);
+              var Y1 =  splitted[1].substring(8,str.length-3);
+          }
+          if (str.length==16)
+          {
+              var splitted = str.split(",", str.length);
+              var x2 =  splitted[0].substring(8,str.length-1);
+          }
+   
+         if (splitted.length ==1)
+         {
+           if (x2=="2014_15")
+               x2 ="2014-15";
+               if (x2=="2015_16")
+               x2 ="2015-16";
+               if (x2=="2016_17")
+               x2 ="2017-18";
+               if (x2=="2018_19")
+               x2 ="2018-19";
+               if (x2=="2019_20")
+               x2 ="2019-20";
+                
+               this.service.sp_Finance_AHP_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+                if (result[0].FinYear !="0" )
+                {
+                      this.Fin_Year14_15_G = result[0].FinYear;
+                      this.Project_Cost_14_15_G = result[0].Project_Cost;
+                      this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                      this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                      this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                      this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                      this.UC_Received14_15_G = result[0].UC_Received;
+                }
+    
+              let chart = new CanvasJS.Chart("chartAHP", {
+                theme: "light2",
+                animationEnabled: true,
+                exportEnabled: false,
+                title: {
+                  text: "Financial Progress Consolidated (AHP)",
+                  fontSize: "25",
+                },
+                backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+                colorSet: "greenShades",
+      
+                data: [{
+      
+                  options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+                },
+                type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "Project Cost",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                   
+                    { label: x2, y: this.Project_Cost_14_15_G },
+             
+                  ]
+                },
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "CA Involved",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x2, y: this.Central_Assistance_involved14_15_G },
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "1st Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x2, y: this.FirstInstallmentReleased14_15_G },
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "2nd Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x2, y: this.SecondInstallmentReleased14_15_G },
+                  ]
+                },
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "3rd Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x2, y: this.ThirdInstallmentReleased14_15_G },
+                  ]
+                },
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "UC Receieved",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x2, y: this.UC_Received14_15_G },
+                  ]
+                },    
+              ],
+                options: {
+                  legend: {
+                    display: true,
+                    labels: {
+                      fontColor: 'rgb(255, 99, 132)'
+                    }
+                  }
+                }
+              });
+              chart.render();
+          });
+           
+    
+    
+        }
+        if (splitted.length ==2)
+        {
+          if (x1=="2014_15)")
+          x1 ="2014-15";
+          if (x1=="2015_16)")
+          x1 ="2015-16";
+          if (x1=="2016_17")
+          x1 ="2017-18";
+          if (x1=="2018_19")
+          x1 ="2018-19";
+          if (x1=="2019_20")
+          x1 ="2019-20";
+    
+    
+          if (Y1=="2014_15)")
+          Y1 ="2014-15";
+          if (Y1=="2015_16)")
+          Y1 ="2015-16";
+          if (Y1=="2016_17")
+          Y1 ="2017-18";
+          if (Y1=="2018_19")
+          Y1 ="2018-19";
+          if (Y1=="2019_20")
+          Y1 ="2019-20";
+    
+          this.service.sp_Finance_AHP_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+            if (result[0].FinYear !="0" )
+            {
+                  this.Fin_Year14_15_G = result[0].FinYear;
+                  this.Project_Cost_14_15_G = result[0].Project_Cost;
+                  this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                  this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                  this.UC_Received_14_15_G = result[0].UC_Received;
+            }
+                 // 
+                try {
+                  this.Fin_Year15_16_G = result[1].FinYear;
+                  this.Project_Cost_15_16_G = result[1].Project_Cost;
+                  this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                  this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                  this.UC_Received_15_16_G = result[1].UC_Received;
+              }
+              catch{}
+              finally{}
+    
+    
+             let chart = new CanvasJS.Chart("chartAHP", {
+              theme: "light2",
+              animationEnabled: true,
+              exportEnabled: false,
+              title: {
+                text: "Financial Progress Consolidated (AHP)",
+                fontSize: "25",
+              },
+              backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+              colorSet: "greenShades",
+    
+              data: [{
+    
+                options: {
+                  scales: {
+                      xAxes: [{
+                          stacked: true
+                      }],
+                      yAxes: [{
+                          stacked: true
+                      }]
+                  }
+              },
+    
+           
+           
+        
+    
+              type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Project Cost",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  // { x: "14-15", y: this.Fin_Year15_16 },
+                  { label: x1, y: this.Project_Cost_14_15_G },
+                  { label:  Y1, y: this.Project_Cost_15_16_G }
+    
+                ]
+              },
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "CA Involved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label:  x1, y: this.Central_Assistance_involved14_15_G },
+                  { label:  Y1, y: this.Central_Assistance_involved15_16_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "1st Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.FirstInstallmentReleased14_15_G },
+                  { label: Y1, y: this.FirstInstallmentReleased15_16_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "2nd Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                  { label:  Y1, y: this.SecondInstallmentReleased15_16_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "3rd Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label:  x1, y: this.ThirdInstallmentReleased14_15_G },
+                  { label:  Y1, y: this.ThirdInstallmentReleased15_16_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "UC Receieved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label:  x1, y: this.UC_Received_14_15_G },
+                  { label:  Y1, y: this.UC_Received_15_16_G }
+                ]
+              },
+     
+    
+            ],
+              options: {
+                legend: {
+                  display: true,
+                  labels: {
+                    fontColor: 'rgb(255, 99, 132)'
+                  }
+                }
+              }
+            });
+            chart.render();
+        });
+    
+        }
+        else  if (splitted.length ==3)
+        {
+    
+          if (x1=="2014_15)")
+          x1 ="2014-15";
+          if (x1=="2015_16)")
+          x1 ="2015-16";
+          if (x1=="2016_17)")
+          x1 ="2017-18";
+          if (x1=="2018_19)")
+          x1 ="2018-19";
+          if (x1=="2019_20)" || x1=="2019_20")
+          x1 ="2019-20";
+    
+    
+          if (Y1=="2014_15)")
+          Y1 ="2014-15";
+          if (Y1=="2015_16)")
+          Y1 ="2015-16";
+          if (Y1=="2016_17)")
+          Y1 ="2017-18";
+          if (Y1=="2018_19)")
+          Y1 ="2018-19";
+          if (Y1=="2019_20)" || Y1=="2019_20")
+          Y1 ="2019-20";
+    
+          if (z1=="2014_15)")
+          z1 ="2014-15";
+          if (z1=="2015_16)")
+          z1 ="2015-16";
+          if (z1=="2016_17)")
+          z1 ="2017-18";
+          if (z1=="2018_19)")
+          z1 ="2018-19";
+          if (z1=="2019_20)" || z1=="2019_20")
+          z1 ="2019-20";
+          
+          this.service.sp_Finance_AHP_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+            if (result[0].FinYear !="0" )
+            {
+                  this.Fin_Year14_15_G = result[0].FinYear;
+                  this.Project_Cost_14_15_G = result[0].Project_Cost;
+                  this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                  this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                  this.UC_Received_14_15_G = result[0].UC_Received;
+            }
+                 // 
+                try {
+                  this.Fin_Year15_16_G = result[1].FinYear;
+                  this.Project_Cost_15_16_G = result[1].Project_Cost;
+                  this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                  this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                  this.UC_Received_15_16_G = result[1].UC_Received;
+              }
+              catch{}
+              finally{}
+    
+    
+              try {
+                this.Fin_Year16_17_G = result[2].FinYear;
+                this.Project_Cost_16_17_G = result[2].Project_Cost;
+                this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+                this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+                this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+                this.UC_Received_16_17_G = result[2].UC_Received;
+            }
+            catch{}
+            finally{}
+    
+    
+             let chart = new CanvasJS.Chart("chartAHP", {
+              theme: "light2",
+              animationEnabled: true,
+              exportEnabled: false,
+              title: {
+                text: "Financial Progress  Consolidated (AHP)",
+                fontSize: "25",
+              },
+              backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+              colorSet: "greenShades",
+    
+              data: [{
+    
+                options: {
+                  scales: {
+                      xAxes: [{
+                          stacked: true
+                      }],
+                      yAxes: [{
+                          stacked: true
+                      }]
+                  }
+              },
+    
+           
+           
+        
+    
+              type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Project Cost",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  // { x: "14-15", y: this.Fin_Year15_16 },
+                  { label: x1, y: this.Project_Cost_14_15_G },
+                  { label: Y1, y: this.Project_Cost_15_16_G },
+                  { label: z1, y: this.Project_Cost_16_17_G }
+                ]
+              },
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "CA Involved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.Central_Assistance_involved14_15_G },
+                  { label: Y1, y: this.Central_Assistance_involved15_16_G },
+                  { label: z1, y: this.Central_Assistance_involved_16_17_G }
+    
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "1st Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.FirstInstallmentReleased14_15_G },
+                  { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+                  { label: z1, y: this.FirstInstallmentReleased_16_17_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "2nd Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                  { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+                  { label: z1, y: this.SecondInstallmentReleased_16_17_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "3rd Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label:x1, y: this.ThirdInstallmentReleased14_15_G },
+                  { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+                  { label: z1, y: this.ThirdInstallmentReleased_16_17_G} 
+                ]
+              },
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "UC Receieved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.UC_Received_14_15_G },
+                  { label: Y1, y: this.UC_Received_15_16_G },
+                  { label: z1, y: this.UC_Received_16_17_G }
+                ]
+              },
+            ],
+              options: {
+                legend: {
+                  display: true,
+                  labels: {
+                    fontColor: 'rgb(255, 99, 132)'
+                  }
+                }
+              }
+            });
+            chart.render();
+        });
+    
+        }
+    
+        else if (splitted.length ==4)
+        {
+          if (x1=="2014_15)") x1 ="2014-15";
+          if (x1=="2015_16)") x1 ="2015-16";
+          if (x1=="2016_17)") x1 ="2016-17";
+          if (x1=="2017_18)") x1 ="2017-18";
+          
+          if (x1=="2018_19)") x1 ="2018-19";
+          if (x1=="2019_20)") x1 ="2019-20";
+    
+    
+          if (Y1=="2014_15)") Y1 ="2014-15";
+          if (Y1=="2015_16") Y1 ="2015-16";
+          if (Y1=="2016_17)") Y1 ="2016-17";
+          if (Y1=="2017_18)") Y1 ="2017-18";
+          if (Y1=="2018_19)") Y1 ="2018-19";
+          if (Y1=="2019_20)") Y1 ="2019-20";
+    
+          if (z1=="2014_15)") z1 ="2014-15";
+          if (z1=="2015_16)") z1 ="2015-16";
+          if (z1=="2016_17)")  z1 ="2016-17";
+          if (z1=="2017_18)")  z1 ="2017-18";
+          if (z1=="2018_19)")  z1 ="2018-19"; 
+          if (z1=="2019_20)")  z1 ="2019-20";
+    
+          if (z2=="2014_15)")   z2 ="2014-15";
+          if (z2=="2015_16)")  z2 ="2015-16";
+          if (z2=="2016_17)")  z2 ="2016-17";
+          if (z2=="2017_18)")  z2 ="2017-18";
+          if (z2=="2018_19)")  z2 ="2018-19";
+          if (z2=="2019_20)") z2 ="2019-20";
+    
+   
+          this.service.sp_Finance_AHP_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+            if (result[0].FinYear !="0" )
+            {
+                  this.Fin_Year14_15_G = result[0].FinYear;
+                  this.Project_Cost_14_15_G = result[0].Project_Cost;
+                  this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                  this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                  this.UC_Received_14_15_G = result[0].UC_Received;
+            }
+                 // 
+                try {
+                  this.Fin_Year15_16_G = result[1].FinYear;
+                  this.Project_Cost_15_16_G = result[1].Project_Cost;
+                  this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                  this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                  this.UC_Received_15_16_G = result[1].UC_Received;
+              }
+              catch{}
+              finally{}
+    
+    
+              try {
+                this.Fin_Year16_17_G = result[2].FinYear;
+                this.Project_Cost_16_17_G = result[2].Project_Cost;
+                this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+                this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+                this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+                this.UC_Received_16_17_G = result[2].UC_Received;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+                this.Fin_Year17_18_G = result[3].FinYear;
+                this.Project_Cost_17_18_G = result[3].Project_Cost;
+                this.Central_Assistance_involved_17_18_G = result[3].Central_Assistance_involved;
+                this.FirstInstallmentReleased_17_18_G = result[3].FirstInstallmentReleased;
+                this.SecondInstallmentReleased_17_18_G = result[3].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased_17_18_G = result[3].ThirdInstallmentReleased;
+                this.UC_Received_17_18_G = result[3].UC_Received;
+            }
+            catch{}
+            finally{}
+    
+    
+             let chart = new CanvasJS.Chart("chartAHP", {
+              theme: "light2",
+              animationEnabled: true,
+              exportEnabled: false,
+              title: {
+                text: "Financial Progress   Consolidated (AHP)",
+                fontSize: "25",
+              },
+              backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+              colorSet: "greenShades",
+    
+              data: [{
+    
+                options: {
+                  scales: {
+                      xAxes: [{
+                          stacked: true
+                      }],
+                      yAxes: [{
+                          stacked: true
+                      }]
+                  }
+              },
+    
+           
+           
+        
+    
+              type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Project Cost",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  // { x: "14-15", y: this.Fin_Year15_16 },
+                  { label: x1, y: this.Project_Cost_14_15_G },
+                  { label: Y1, y: this.Project_Cost_15_16_G },
+                  { label: z1, y: this.Project_Cost_16_17_G },
+                  { label: z2, y: this.Project_Cost_17_18_G }
+                ]
+              },
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "CA Involved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label:x1, y: this.Central_Assistance_involved14_15_G },
+                  { label: Y1, y: this.Central_Assistance_involved15_16_G },
+                  { label: z1, y: this.Central_Assistance_involved_16_17_G },
+                  { label: z2, y: this.Central_Assistance_involved_17_18_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "1st Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.FirstInstallmentReleased14_15_G },
+                  { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+                  { label: z1, y: this.FirstInstallmentReleased_16_17_G },
+                  { label: z2, y: this.FirstInstallmentReleased_17_18_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "2nd Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                  { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+                  { label: z1, y: this.SecondInstallmentReleased_16_17_G },
+                  { label: z2, y: this.SecondInstallmentReleased_17_18_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "3rd Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.ThirdInstallmentReleased14_15_G },
+                  { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+                  { label: z1, y: this.ThirdInstallmentReleased_16_17_G},
+                  { label: z2, y: this.ThirdInstallmentReleased_17_18_G} 
+                ]
+              },
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "UC Receieved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.UC_Received_14_15_G },
+                  { label: Y1, y: this.UC_Received_15_16_G },
+                  { label: z1, y: this.UC_Received_16_17_G },
+                  { label: z2, y: this.UC_Received_17_18_G }
+                ]
+              },
+      
+            ],
+              options: {
+                legend: {
+                  display: true,
+                  labels: {
+                    fontColor: 'rgb(255, 99, 132)'
+                  }
+                }
+              }
+            });
+            chart.render();
+        });
+    
+        }
+        else if (splitted.length ==5)
+        {
+          if (x1=="2014_15)") x1 ="2014-15";
+          if (x1=="2015_16)") x1 ="2015-16";
+          if (x1=="2016_17)") x1 ="2016-17";
+          if (x1=="2017_18)") x1 ="2017-18";
+          
+          if (x1=="2018_19)") x1 ="2018-19";
+          if (x1=="2019_20)") x1 ="2019-20";
+    
+    
+          if (Y1=="2014_15)") Y1 ="2014-15";
+          if (Y1=="2015_16") Y1 ="2015-16";
+          if (Y1=="2016_17)") Y1 ="2016-17";
+          if (Y1=="2017_18)") Y1 ="2017-18";
+          if (Y1=="2018_19)") Y1 ="2018-19";
+          if (Y1=="2019_20)") Y1 ="2019-20";
+    
+          if (z1=="2014_15)") z1 ="2014-15";
+          if (z1=="2015_16)") z1 ="2015-16";
+          if (z1=="2016_17)")  z1 ="2016-17";
+          if (z1=="2017_18)")  z1 ="2017-18";
+          if (z1=="2018_19)")  z1 ="2018-19"; 
+          if (z1=="2019_20)")  z1 ="2019-20";
+    
+          if (z2=="2014_15)")   z2 ="2014-15";
+          if (z2=="2015_16)")  z2 ="2015-16";
+          if (z2=="2016_17)")  z2 ="2016-17";
+          if (z2=="2017_18)")  z2 ="2017-18";
+          if (z2=="2018_19)")  z2 ="2018-19";
+          if (z2=="2019_20)") z2 ="2019-20";
+    
+          if (z3=="2014_15)")   z3 ="2014-15";
+          if (z3=="2015_16)")  z3 ="2015-16";
+          if (z3=="2016_17)")  z3 ="2016-17";
+          if (z3=="2017_18)")  z3 ="2017-18";
+          if (z3=="2018_19)")  z3 ="2018-19";
+          if (z3=="2019_20)") z3 ="2019-20";
+          
+          this.service.sp_Finance_AHP_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+            if (result[0].FinYear !="0" )
+            {
+                  this.Fin_Year14_15_G = result[0].FinYear;
+                  this.Project_Cost_14_15_G = result[0].Project_Cost;
+                  this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                  this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                  this.UC_Received_14_15_G = result[0].UC_Received;
+            }
+                 // 
+                try {
+                  this.Fin_Year15_16_G = result[1].FinYear;
+                  this.Project_Cost_15_16_G = result[1].Project_Cost;
+                  this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                  this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                  this.UC_Received_15_16_G = result[1].UC_Received;
+              }
+              catch{}
+              finally{}
+    
+    
+              try {
+                this.Fin_Year16_17_G = result[2].FinYear;
+                this.Project_Cost_16_17_G = result[2].Project_Cost;
+                this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+                this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+                this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+                this.UC_Received_16_17_G = result[2].UC_Received;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+                this.Fin_Year17_18_G = result[3].FinYear;
+                this.Project_Cost_17_18_G = result[3].Project_Cost;
+                this.Central_Assistance_involved_17_18_G = result[3].Central_Assistance_involved;
+                this.FirstInstallmentReleased_17_18_G = result[3].FirstInstallmentReleased;
+                this.SecondInstallmentReleased_17_18_G = result[3].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased_17_18_G = result[3].ThirdInstallmentReleased;
+                this.UC_Received_17_18_G = result[3].UC_Received;
+            }
+            catch{}
+            finally{}
+  
+            try {
+              this.Fin_Year18_19_G = result[4].FinYear;
+              this.Project_Cost_18_19_G = result[4].Project_Cost;
+              this.Central_Assistance_involved_18_19_G = result[4].Central_Assistance_involved;
+              this.FirstInstallmentReleased_18_19_G = result[4].FirstInstallmentReleased;
+              this.SecondInstallmentReleased_18_19_G = result[4].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased_18_19_G = result[4].ThirdInstallmentReleased;
+              this.UC_Received_18_19_G = result[4].UC_Received;
+          }
+          catch{}
+          finally{}
+    
+    
+             let chart = new CanvasJS.Chart("chartAHP", {
+              theme: "light2",
+              animationEnabled: true,
+              exportEnabled: false,
+              title: {
+                text: "Financial Progress  Consolidated (AHP)",
+                fontSize: "25",
+              },
+              backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+              colorSet: "greenShades",
+    
+              data: [{
+    
+                options: {
+                  scales: {
+                      xAxes: [{
+                          stacked: true
+                      }],
+                      yAxes: [{
+                          stacked: true
+                      }]
+                  }
+              },
+    
+           
+           
+        
+    
+              type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Project Cost",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  // { x: "14-15", y: this.Fin_Year15_16 },
+                  { label: x1, y: this.Project_Cost_14_15_G },
+                  { label: Y1, y: this.Project_Cost_15_16_G },
+                  { label: z1, y: this.Project_Cost_16_17_G },
+                  { label: z2, y: this.Project_Cost_17_18_G },
+                  { label: z3, y: this.Project_Cost_18_19_G }
+                ]
+              },
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "CA Involved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.Central_Assistance_involved14_15_G },
+                  { label: Y1, y: this.Central_Assistance_involved15_16_G },
+                  { label: z1, y: this.Central_Assistance_involved_16_17_G },
+                  { label: z2, y: this.Central_Assistance_involved_17_18_G },
+                  { label: z3, y: this.Central_Assistance_involved_18_19_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "1st Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.FirstInstallmentReleased14_15_G },
+                  { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+                  { label: z1, y: this.FirstInstallmentReleased_16_17_G },
+                  { label: z2, y: this.FirstInstallmentReleased_17_18_G },
+                  { label: z3, y: this.FirstInstallmentReleased_18_19_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "2nd Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                  { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+                  { label: z1, y: this.SecondInstallmentReleased_16_17_G },
+                  { label: z2, y: this.SecondInstallmentReleased_17_18_G },
+                  { label: z3, y: this.SecondInstallmentReleased_18_19_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "3rd Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.ThirdInstallmentReleased14_15_G },
+                  { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+                  { label: z1, y: this.ThirdInstallmentReleased_16_17_G},
+                  { label:z2, y: this.ThirdInstallmentReleased_17_18_G},
+                  { label: z3, y: this.ThirdInstallmentReleased_18_19_G} 
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "UC Receieved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.UC_Received_14_15_G },
+                  { label: Y1, y: this.UC_Received_15_16_G },
+                  { label: z1, y: this.UC_Received_16_17_G },
+                  { label: z2, y: this.UC_Received_17_18_G },
+                  { label: z3, y: this.UC_Received_18_19_G }
+                ]
+              },
+    
+    
+            ],
+              options: {
+                legend: {
+                  display: true,
+                  labels: {
+                    fontColor: 'rgb(255, 99, 132)'
+                  }
+                }
+              }
+            });
+            chart.render();
+        });
+    
+        }
+        else if (splitted.length ==6)
+        {
+          if (x1=="2014_15)") x1 ="2014-15";
+          if (x1=="2015_16)") x1 ="2015-16";
+          if (x1=="2016_17)") x1 ="2016-17";
+          if (x1=="2017_18)") x1 ="2017-18";
+          
+          if (x1=="2018_19)") x1 ="2018-19";
+          if (x1=="2019_20)") x1 ="2019-20";
+    
+    
+          if (Y1=="2014_15)") Y1 ="2014-15";
+          if (Y1=="2015_16") Y1 ="2015-16";
+          if (Y1=="2016_17)") Y1 ="2016-17";
+          if (Y1=="2017_18)") Y1 ="2017-18";
+          if (Y1=="2018_19)") Y1 ="2018-19";
+          if (Y1=="2019_20)") Y1 ="2019-20";
+    
+          if (z1=="2014_15)") z1 ="2014-15";
+          if (z1=="2015_16)") z1 ="2015-16";
+          if (z1=="2016_17)")  z1 ="2016-17";
+          if (z1=="2017_18)")  z1 ="2017-18";
+          if (z1=="2018_19)")  z1 ="2018-19"; 
+          if (z1=="2019_20)")  z1 ="2019-20";
+    
+          if (z2=="2014_15)")   z2 ="2014-15";
+          if (z2=="2015_16)")  z2 ="2015-16";
+          if (z2=="2016_17)")  z2 ="2016-17";
+          if (z2=="2017_18)")  z2 ="2017-18";
+          if (z2=="2018_19)")  z2 ="2018-19";
+          if (z2=="2019_20)") z2 ="2019-20";
+    
+          if (z3=="2014_15)")   z3 ="2014-15";
+          if (z3=="2015_16)")  z3 ="2015-16";
+          if (z3=="2016_17)")  z3 ="2016-17";
+          if (z3=="2017_18)")  z3 ="2017-18";
+          if (z3=="2018_19)")  z3 ="2018-19";
+          if (z3=="2019_20)") z3 ="2019-20";
+    
+          if (z4=="2014_15)")   z4 ="2014-15";
+          if (z4=="2015_16)")  z4 ="2015-16";
+    
+          if (z4=="2016_17)")  z4 ="2016-17";
+          if (z4=="2017_18)")  z4 ="2017-18";
+          if (z4=="2018_19)")  z4 ="2018-19";
+          if (z4=="2019_20)") z4 ="2019-20";
+          
+          this.service.sp_Finance_AHP_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+            if (result[0].FinYear !="0" )
+            {
+                  this.Fin_Year14_15_G = result[0].FinYear;
+                  this.Project_Cost_14_15_G = result[0].Project_Cost;
+                  this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                  this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                  this.UC_Received_14_15_G = result[0].UC_Received;
+            }
+                 // 
+                try {
+                  this.Fin_Year15_16_G = result[1].FinYear;
+                  this.Project_Cost_15_16_G = result[1].Project_Cost;
+                  this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                  this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                  this.UC_Received_15_16_G = result[1].UC_Received;
+              }
+              catch{}
+              finally{}
+    
+    
+              try {
+                this.Fin_Year16_17_G = result[2].FinYear;
+                this.Project_Cost_16_17_G = result[2].Project_Cost;
+                this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+                this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+                this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+                this.UC_Received_16_17_G = result[2].UC_Received;
+            }
+            catch{}
+            finally{}
+  
+  
+            try {
+                this.Fin_Year17_18_G = result[3].FinYear;
+                this.Project_Cost_17_18_G = result[3].Project_Cost;
+                this.Central_Assistance_involved_17_18_G = result[3].Central_Assistance_involved;
+                this.FirstInstallmentReleased_17_18_G = result[3].FirstInstallmentReleased;
+                this.SecondInstallmentReleased_17_18_G = result[3].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased_17_18_G = result[3].ThirdInstallmentReleased;
+                this.UC_Received_17_18_G = result[3].UC_Received;
+            }
+            catch{}
+            finally{}
+  
+            try {
+              this.Fin_Year18_19_G = result[4].FinYear;
+              this.Project_Cost_18_19_G = result[4].Project_Cost;
+              this.Central_Assistance_involved_18_19_G = result[4].Central_Assistance_involved;
+              this.FirstInstallmentReleased_18_19_G = result[4].FirstInstallmentReleased;
+              this.SecondInstallmentReleased_18_19_G = result[4].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased_18_19_G = result[4].ThirdInstallmentReleased;
+              this.UC_Received_18_19_G = result[4].UC_Received;
+          }
+          catch{}
+          finally{}
+           
+          try {
+            this.Fin_Year19_20_G = result[5].FinYear;
+            this.Project_Cost_19_20_G = result[5].Project_Cost;
+            this.Central_Assistance_involved_19_20_G = result[5].Central_Assistance_involved;
+            this.FirstInstallmentReleased_19_20_G = result[5].FirstInstallmentReleased;
+            this.SecondInstallmentReleased_19_20_G = result[5].SecondInstallmentReleased;
+            this.ThirdInstallmentReleased_19_20_G = result[5].ThirdInstallmentReleased;
+            this.UC_Received_19_20_G = result[5].UC_Received;
+        }
+        catch{}
+        finally{} 
+             let chart = new CanvasJS.Chart("chartAHP", {
+              theme: "light2",
+              animationEnabled: true,
+              exportEnabled: false,
+              title: {
+                text: "Financial Progress   Consolidated (AHP)",
+                fontSize: "25",
+              },
+              backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+              colorSet: "greenShades",
+    
+              data: [{
+    
+                options: {
+                  scales: {
+                      xAxes: [{
+                          stacked: true
+                      }],
+                      yAxes: [{
+                          stacked: true
+                      }]
+                  }
+              },
+    
+           
+           
+        
+    
+              type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Project Cost",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  // { x: "14-15", y: this.Fin_Year15_16 },
+                  { label: x1, y: this.Project_Cost_14_15_G },
+                  { label: Y1, y: this.Project_Cost_15_16_G },
+                  { label: z1, y: this.Project_Cost_16_17_G },
+                  { label: z2, y: this.Project_Cost_17_18_G },
+                  { label: z3, y: this.Project_Cost_18_19_G },
+                  { label: z4, y: this.Project_Cost_19_20_G }
+                ]
+              },
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "CA Involved",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.Central_Assistance_involved14_15_G },
+                  { label: Y1, y: this.Central_Assistance_involved15_16_G },
+                  { label: z1, y: this.Central_Assistance_involved_16_17_G },
+                  { label: z2, y: this.Central_Assistance_involved_17_18_G },
+                  { label: z3, y: this.Central_Assistance_involved_18_19_G },
+                  { label: z4, y: this.Central_Assistance_involved_19_20_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "Ist Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label:x1, y: this.FirstInstallmentReleased14_15_G },
+                  { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+                  { label: z1, y: this.FirstInstallmentReleased_16_17_G },
+                  { label: z2, y: this.FirstInstallmentReleased_17_18_G },
+                  { label: z3, y: this.FirstInstallmentReleased_18_19_G },
+                  { label: z4, y: this.FirstInstallmentReleased_19_20_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "2nd Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                  { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+                  { label: z1, y: this.SecondInstallmentReleased_16_17_G },
+                  { label: z2, y: this.SecondInstallmentReleased_17_18_G },
+                  { label: z3, y: this.SecondInstallmentReleased_18_19_G },
+                  { label: z4, y: this.SecondInstallmentReleased_19_20_G }
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "3rd Installment",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.ThirdInstallmentReleased14_15_G },
+                  { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+                  { label: z1, y: this.ThirdInstallmentReleased_16_17_G},
+                  { label: z2, y: this.ThirdInstallmentReleased_17_18_G},
+                  { label: z3, y: this.ThirdInstallmentReleased_18_19_G} ,
+                  { label: z4, y: this.ThirdInstallmentReleased_19_20_G} 
+                ]
+              },
+    
+              {
+                type: "column",
+                dockInsidePlotArea: true,
+                 indexLabel: "{y}", //HG
+                bevelEnabled: true,
+                showInLegend: true,
+                legendText: "UC Received",
+                 stValue: "Q",
+                indexLabelFontSize: 12,
+                indexLabelOrientation: "vertical",
+                dataPoints: [
+                  { label: x1, y: this.UC_Received_14_15_G },
+                  { label: Y1, y: this.UC_Received_15_16_G },
+                  { label: z1, y: this.UC_Received_16_17_G },
+                  { label: z2, y: this.UC_Received_17_18_G },
+                  { label: z3, y: this.UC_Received_18_19_G },
+                  { label: z4, y: this.UC_Received_19_20_G }
+                ]
+              },
+    
+            ],
+              options: {
+                legend: {
+                  display: true,
+                  labels: {
+                    fontColor: 'rgb(255, 99, 132)'
+                  }
+                }
+              }
+            });
+            chart.render();
+        });
+    
+        }
+      }
+
+      BindISSRDatanew(stateCode, DisttCode, cityCode, Fin_Year )
+      {
+            //alert(Fin_Year);
+             var str = Fin_Year ;
+            if (str.length==101)
+            {
+                var splitted = str.split(",", str.length);
+                var x1 =  splitted[0].substring(8,str.length-3);
+                var Y1 =  splitted[1].substring(8,str.length-3);
+                var z1 =  splitted[2].substring(8,str.length-3);
+                var z2 =  splitted[3].substring(8,str.length-3);
+                var z3 =  splitted[4].substring(8,str.length-3);
+                var z4 =  splitted[5].substring(8,str.length-3);
+            }
+            if (str.length==84)
+            {
+                var splitted = str.split(",", str.length);
+                var x1 =  splitted[0].substring(8,str.length-3);
+                var Y1 =  splitted[1].substring(8,str.length-3);
+                var z1 =  splitted[2].substring(8,str.length-3);
+                var z2 =  splitted[3].substring(8,str.length-3);
+                var z3 =  splitted[4].substring(8,str.length-3);
+            }
+            if (str.length==67)
+            {
+                var splitted = str.split(",", str.length);
+                var x1 =  splitted[0].substring(8,str.length-3);
+                var Y1 =  splitted[1].substring(8,str.length-3);
+                var z1 =  splitted[2].substring(8,str.length-3);
+                var z2 =  splitted[3].substring(8,str.length-3);
+            }
+            if (str.length==50)
+            {
+                var splitted = str.split(",", str.length);
+                var x1 =  splitted[0].substring(8,str.length-3);
+                var Y1 =  splitted[1].substring(8,str.length-3);
+                var z1 =  splitted[2].substring(8,str.length-3);
+            }
+            if (str.length==33)
+            {
+                var splitted = str.split(",", str.length);
+                var x1 =  splitted[0].substring(8,str.length-3);
+                var Y1 =  splitted[1].substring(8,str.length-3);
+            }
+            if (str.length==16)
+            {
+                var splitted = str.split(",", str.length);
+                var x2 =  splitted[0].substring(8,str.length-1);
+            }
+           if (splitted.length ==1)
+           {
+             if (x2=="2014_15")
+                 x2 ="2014-15";
+                 if (x2=="2015_16")
+                 x2 ="2015-16";
+                 if (x2=="2016_17")
+                 x2 ="2017-18";
+                 if (x2=="2018_19")
+                 x2 ="2018-19";
+                 if (x2=="2019_20")
+                 x2 ="2019-20";
+                  
+                 this.service.sp_Finance_ISSR_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+                  if (result[0].FinYear !="0" )
+                  {
+                        this.Fin_Year14_15_G = result[0].FinYear;
+                        this.Project_Cost_14_15_G = result[0].Project_Cost;
+                        this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                        this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                        this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                        this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                        this.UC_Received14_15_G = result[0].UC_Received;
+                  }
+      
+                let chart = new CanvasJS.Chart("chartISSR", {
+                  theme: "light2",
+                  animationEnabled: true,
+                  exportEnabled: false,
+                  title: {
+                    text: "Financial Progress Consolidated (ISSR)",
+                    fontSize: "25",
+                  },
+                  backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+                  colorSet: "greenShades",
+        
+                  data: [{
+        
+                    options: {
+                      scales: {
+                          xAxes: [{
+                              stacked: true
+                          }],
+                          yAxes: [{
+                              stacked: true
+                          }]
+                      }
+                  },
+                  type: "column",
+                    dockInsidePlotArea: true,
+                     indexLabel: "{y}", //HG
+                    bevelEnabled: true,
+                    showInLegend: true,
+                    legendText: "Project Cost",
+                     stValue: "Q",
+                    indexLabelFontSize: 12,
+                    indexLabelOrientation: "vertical",
+                    dataPoints: [
+                     
+                      { label: x2, y: this.Project_Cost_14_15_G },
+               
+                    ]
+                  },
+                  {
+                    type: "column",
+                    dockInsidePlotArea: true,
+                     indexLabel: "{y}", //HG
+                    bevelEnabled: true,
+                    showInLegend: true,
+                    legendText: "CA Involved",
+                     stValue: "Q",
+                    indexLabelFontSize: 12,
+                    indexLabelOrientation: "vertical",
+                    dataPoints: [
+                      { label: x2, y: this.Central_Assistance_involved14_15_G },
+                    ]
+                  },
+        
+                  {
+                    type: "column",
+                    dockInsidePlotArea: true,
+                     indexLabel: "{y}", //HG
+                    bevelEnabled: true,
+                    showInLegend: true,
+                    legendText: "1st Installment",
+                     stValue: "Q",
+                    indexLabelFontSize: 12,
+                    indexLabelOrientation: "vertical",
+                    dataPoints: [
+                      { label: x2, y: this.FirstInstallmentReleased14_15_G },
+                    ]
+                  },
+        
+                  {
+                    type: "column",
+                    dockInsidePlotArea: true,
+                     indexLabel: "{y}", //HG
+                    bevelEnabled: true,
+                    showInLegend: true,
+                    legendText: "2nd Installment",
+                     stValue: "Q",
+                    indexLabelFontSize: 12,
+                    indexLabelOrientation: "vertical",
+                    dataPoints: [
+                      { label: x2, y: this.SecondInstallmentReleased14_15_G },
+                    ]
+                  },
+                  {
+                    type: "column",
+                    dockInsidePlotArea: true,
+                     indexLabel: "{y}", //HG
+                    bevelEnabled: true,
+                    showInLegend: true,
+                    legendText: "3rd Installment",
+                     stValue: "Q",
+                    indexLabelFontSize: 12,
+                    indexLabelOrientation: "vertical",
+                    dataPoints: [
+                      { label: x2, y: this.ThirdInstallmentReleased14_15_G },
+                    ]
+                  },
+                  {
+                    type: "column",
+                    dockInsidePlotArea: true,
+                     indexLabel: "{y}", //HG
+                    bevelEnabled: true,
+                    showInLegend: true,
+                    legendText: "UC Receieved",
+                     stValue: "Q",
+                    indexLabelFontSize: 12,
+                    indexLabelOrientation: "vertical",
+                    dataPoints: [
+                      { label: x2, y: this.UC_Received14_15_G },
+                    ]
+                  },    
+                ],
+                  options: {
+                    legend: {
+                      display: true,
+                      labels: {
+                        fontColor: 'rgb(255, 99, 132)'
+                      }
+                    }
+                  }
+                });
+                chart.render();
+            });
+             
+      
+      
+          }
+        else  if (splitted.length ==2)
+          {
+            if (x1=="2014_15)")
+            x1 ="2014-15";
+            if (x1=="2015_16)")
+            x1 ="2015-16";
+            if (x1=="2016_17")
+            x1 ="2017-18";
+            if (x1=="2018_19")
+            x1 ="2018-19";
+            if (x1=="2019_20")
+            x1 ="2019-20";
+      
+      
+            if (Y1=="2014_15)")
+            Y1 ="2014-15";
+            if (Y1=="2015_16)")
+            Y1 ="2015-16";
+            if (Y1=="2016_17")
+            Y1 ="2017-18";
+            if (Y1=="2018_19")
+            Y1 ="2018-19";
+            if (Y1=="2019_20")
+            Y1 ="2019-20";
+      
+            this.service.sp_Finance_ISSR_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+              if (result[0].FinYear !="0" )
+              {
+                    this.Fin_Year14_15_G = result[0].FinYear;
+                    this.Project_Cost_14_15_G = result[0].Project_Cost;
+                    this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                    this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                    this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                    this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                    this.UC_Received_14_15_G = result[0].UC_Received;
+              }
+                   // 
+                  try {
+                    this.Fin_Year15_16_G = result[1].FinYear;
+                    this.Project_Cost_15_16_G = result[1].Project_Cost;
+                    this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                    this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                    this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                    this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                    this.UC_Received_15_16_G = result[1].UC_Received;
+                }
+                catch{}
+                finally{}
+      
+      
+               let chart = new CanvasJS.Chart("chartISSR", {
+                theme: "light2",
+                animationEnabled: true,
+                exportEnabled: false,
+                title: {
+                  text: "Fincncial Progress Consolidated (ISSR)",
+                  fontSize: "25",
+                },
+                backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+                colorSet: "greenShades",
+      
+                data: [{
+      
+                  options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+                },
+      
+             
+             
+          
+      
+                type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "Project Cost",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    // { x: "14-15", y: this.Fin_Year15_16 },
+                    { label: x1, y: this.Project_Cost_14_15_G },
+                    { label:  Y1, y: this.Project_Cost_15_16_G }
+      
+                  ]
+                },
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "CA Involved",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label:  x1, y: this.Central_Assistance_involved14_15_G },
+                    { label:  Y1, y: this.Central_Assistance_involved15_16_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "1st Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.FirstInstallmentReleased14_15_G },
+                    { label: Y1, y: this.FirstInstallmentReleased15_16_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "2nd Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                    { label:  Y1, y: this.SecondInstallmentReleased15_16_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "3rd Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label:  x1, y: this.ThirdInstallmentReleased14_15_G },
+                    { label:  Y1, y: this.ThirdInstallmentReleased15_16_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "UC Receieved",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label:  x1, y: this.UC_Received_14_15_G },
+                    { label:  Y1, y: this.UC_Received_15_16_G }
+                  ]
+                },
+       
+      
+              ],
+                options: {
+                  legend: {
+                    display: true,
+                    labels: {
+                      fontColor: 'rgb(255, 99, 132)'
+                    }
+                  }
+                }
+              });
+              chart.render();
+          });
+      
+          }
+          else  if (splitted.length ==3)
+          {
+      
+            if (x1=="2014_15)")
+            x1 ="2014-15";
+            if (x1=="2015_16)")
+            x1 ="2015-16";
+            if (x1=="2016_17)")
+            x1 ="2017-18";
+            if (x1=="2018_19)")
+            x1 ="2018-19";
+            if (x1=="2019_20)" || x1=="2019_20")
+            x1 ="2019-20";
+      
+      
+            if (Y1=="2014_15)")
+            Y1 ="2014-15";
+            if (Y1=="2015_16)")
+            Y1 ="2015-16";
+            if (Y1=="2016_17)")
+            Y1 ="2017-18";
+            if (Y1=="2018_19)")
+            Y1 ="2018-19";
+            if (Y1=="2019_20)" || Y1=="2019_20")
+            Y1 ="2019-20";
+      
+            if (z1=="2014_15)")
+            z1 ="2014-15";
+            if (z1=="2015_16)")
+            z1 ="2015-16";
+            if (z1=="2016_17)")
+            z1 ="2017-18";
+            if (z1=="2018_19)")
+            z1 ="2018-19";
+            if (z1=="2019_20)" || z1=="2019_20")
+            z1 ="2019-20";
+            
+            this.service.sp_Finance_ISSR_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+              if (result[0].FinYear !="0" )
+              {
+                    this.Fin_Year14_15_G = result[0].FinYear;
+                    this.Project_Cost_14_15_G = result[0].Project_Cost;
+                    this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                    this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                    this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                    this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                    this.UC_Received_14_15_G = result[0].UC_Received;
+              }
+                   // 
+                  try {
+                    this.Fin_Year15_16_G = result[1].FinYear;
+                    this.Project_Cost_15_16_G = result[1].Project_Cost;
+                    this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                    this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                    this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                    this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                    this.UC_Received_15_16_G = result[1].UC_Received;
+                }
+                catch{}
+                finally{}
+      
+      
+                try {
+                  this.Fin_Year16_17_G = result[2].FinYear;
+                  this.Project_Cost_16_17_G = result[2].Project_Cost;
+                  this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+                  this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+                  this.UC_Received_16_17_G = result[2].UC_Received;
+              }
+              catch{}
+              finally{}
+      
+      
+               let chart = new CanvasJS.Chart("chartISSR", {
+                theme: "light2",
+                animationEnabled: true,
+                exportEnabled: false,
+                title: {
+                  text: "Fincncial Progress  Consolidated (ISSR)",
+                  fontSize: "25",
+                },
+                backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+                colorSet: "greenShades",
+      
+                data: [{
+      
+                  options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+                },
+      
+             
+             
+          
+      
+                type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "Project Cost",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.Project_Cost_14_15_G },
+                    { label: Y1, y: this.Project_Cost_15_16_G },
+                    { label: z1, y: this.Project_Cost_16_17_G }
+                  ]
+                },
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "CA Involved",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.Central_Assistance_involved14_15_G },
+                    { label: Y1, y: this.Central_Assistance_involved15_16_G },
+                    { label: z1, y: this.Central_Assistance_involved_16_17_G }
+      
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "1st Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.FirstInstallmentReleased14_15_G },
+                    { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+                    { label: z1, y: this.FirstInstallmentReleased_16_17_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "2nd Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                    { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+                    { label: z1, y: this.SecondInstallmentReleased_16_17_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "3rd Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label:x1, y: this.ThirdInstallmentReleased14_15_G },
+                    { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+                    { label: z1, y: this.ThirdInstallmentReleased_16_17_G} 
+                  ]
+                },
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "UC Receieved",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.UC_Received_14_15_G },
+                    { label: Y1, y: this.UC_Received_15_16_G },
+                    { label: z1, y: this.UC_Received_16_17_G }
+                  ]
+                },
+              ],
+                options: {
+                  legend: {
+                    display: true,
+                    labels: {
+                      fontColor: 'rgb(255, 99, 132)'
+                    }
+                  }
+                }
+              });
+              chart.render();
+          });
+      
+          }
+      
+          else if (splitted.length ==4)
+          {
+            if (x1=="2014_15)") x1 ="2014-15";
+            if (x1=="2015_16)") x1 ="2015-16";
+            if (x1=="2016_17)") x1 ="2016-17";
+            if (x1=="2017_18)") x1 ="2017-18";
+            
+            if (x1=="2018_19)") x1 ="2018-19";
+            if (x1=="2019_20)") x1 ="2019-20";
+      
+      
+            if (Y1=="2014_15)") Y1 ="2014-15";
+            if (Y1=="2015_16") Y1 ="2015-16";
+            if (Y1=="2016_17)") Y1 ="2016-17";
+            if (Y1=="2017_18)") Y1 ="2017-18";
+            if (Y1=="2018_19)") Y1 ="2018-19";
+            if (Y1=="2019_20)") Y1 ="2019-20";
+      
+            if (z1=="2014_15)") z1 ="2014-15";
+            if (z1=="2015_16)") z1 ="2015-16";
+            if (z1=="2016_17)")  z1 ="2016-17";
+            if (z1=="2017_18)")  z1 ="2017-18";
+            if (z1=="2018_19)")  z1 ="2018-19"; 
+            if (z1=="2019_20)")  z1 ="2019-20";
+      
+            if (z2=="2014_15)")   z2 ="2014-15";
+            if (z2=="2015_16)")  z2 ="2015-16";
+            if (z2=="2016_17)")  z2 ="2016-17";
+            if (z2=="2017_18)")  z2 ="2017-18";
+            if (z2=="2018_19)")  z2 ="2018-19";
+            if (z2=="2019_20)") z2 ="2019-20";
+      
+     
+            this.service.sp_Finance_ISSR_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+              if (result[0].FinYear !="0" )
+              {
+                    this.Fin_Year14_15_G = result[0].FinYear;
+                    this.Project_Cost_14_15_G = result[0].Project_Cost;
+                    this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                    this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                    this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                    this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                    this.UC_Received_14_15_G = result[0].UC_Received;
+              }
+                   // 
+                  try {
+                    this.Fin_Year15_16_G = result[1].FinYear;
+                    this.Project_Cost_15_16_G = result[1].Project_Cost;
+                    this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                    this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                    this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                    this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                    this.UC_Received_15_16_G = result[1].UC_Received;
+                }
+                catch{}
+                finally{}
+      
+      
+                try {
+                  this.Fin_Year16_17_G = result[2].FinYear;
+                  this.Project_Cost_16_17_G = result[2].Project_Cost;
+                  this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+                  this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+                  this.UC_Received_16_17_G = result[2].UC_Received;
+              }
+              catch{}
+              finally{}
+    
+    
+              try {
+                  this.Fin_Year17_18_G = result[3].FinYear;
+                  this.Project_Cost_17_18_G = result[3].Project_Cost;
+                  this.Central_Assistance_involved_17_18_G = result[3].Central_Assistance_involved;
+                  this.FirstInstallmentReleased_17_18_G = result[3].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased_17_18_G = result[3].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased_17_18_G = result[3].ThirdInstallmentReleased;
+                  this.UC_Received_17_18_G = result[3].UC_Received;
+              }
+              catch{}
+              finally{}
+      
+      
+               let chart = new CanvasJS.Chart("chartISSR", {
+                theme: "light2",
+                animationEnabled: true,
+                exportEnabled: false,
+                title: {
+                  text: "Fincncial Progress Consolidated (ISSR)",
+                  fontSize: "25",
+                },
+                backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+                colorSet: "greenShades",
+      
+                data: [{
+      
+                  options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+                },
+      
+             
+             
+          
+      
+                type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "Project Cost",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.Project_Cost_14_15_G },
+                    { label: Y1, y: this.Project_Cost_15_16_G },
+                    { label: z1, y: this.Project_Cost_16_17_G },
+                    { label: z2, y: this.Project_Cost_17_18_G }
+                  ]
+                },
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "CA Involved",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label:x1, y: this.Central_Assistance_involved14_15_G },
+                    { label: Y1, y: this.Central_Assistance_involved15_16_G },
+                    { label: z1, y: this.Central_Assistance_involved_16_17_G },
+                    { label: z2, y: this.Central_Assistance_involved_17_18_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "1st Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.FirstInstallmentReleased14_15_G },
+                    { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+                    { label: z1, y: this.FirstInstallmentReleased_16_17_G },
+                    { label: z2, y: this.FirstInstallmentReleased_17_18_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "2nd Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                    { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+                    { label: z1, y: this.SecondInstallmentReleased_16_17_G },
+                    { label: z2, y: this.SecondInstallmentReleased_17_18_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "3rd Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.ThirdInstallmentReleased14_15_G },
+                    { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+                    { label: z1, y: this.ThirdInstallmentReleased_16_17_G},
+                    { label: z2, y: this.ThirdInstallmentReleased_17_18_G} 
+                  ]
+                },
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "UC Receieved",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.UC_Received_14_15_G },
+                    { label: Y1, y: this.UC_Received_15_16_G },
+                    { label: z1, y: this.UC_Received_16_17_G },
+                    { label: z2, y: this.UC_Received_17_18_G }
+                  ]
+                },
+        
+              ],
+                options: {
+                  legend: {
+                    display: true,
+                    labels: {
+                      fontColor: 'rgb(255, 99, 132)'
+                    }
+                  }
+                }
+              });
+              chart.render();
+          });
+      
+          }
+          else if (splitted.length ==5)
+          {
+            if (x1=="2014_15)") x1 ="2014-15";
+            if (x1=="2015_16)") x1 ="2015-16";
+            if (x1=="2016_17)") x1 ="2016-17";
+            if (x1=="2017_18)") x1 ="2017-18";
+            
+            if (x1=="2018_19)") x1 ="2018-19";
+            if (x1=="2019_20)") x1 ="2019-20";
+      
+      
+            if (Y1=="2014_15)") Y1 ="2014-15";
+            if (Y1=="2015_16") Y1 ="2015-16";
+            if (Y1=="2016_17)") Y1 ="2016-17";
+            if (Y1=="2017_18)") Y1 ="2017-18";
+            if (Y1=="2018_19)") Y1 ="2018-19";
+            if (Y1=="2019_20)") Y1 ="2019-20";
+      
+            if (z1=="2014_15)") z1 ="2014-15";
+            if (z1=="2015_16)") z1 ="2015-16";
+            if (z1=="2016_17)")  z1 ="2016-17";
+            if (z1=="2017_18)")  z1 ="2017-18";
+            if (z1=="2018_19)")  z1 ="2018-19"; 
+            if (z1=="2019_20)")  z1 ="2019-20";
+      
+            if (z2=="2014_15)")   z2 ="2014-15";
+            if (z2=="2015_16)")  z2 ="2015-16";
+            if (z2=="2016_17)")  z2 ="2016-17";
+            if (z2=="2017_18)")  z2 ="2017-18";
+            if (z2=="2018_19)")  z2 ="2018-19";
+            if (z2=="2019_20)") z2 ="2019-20";
+      
+            if (z3=="2014_15)")   z3 ="2014-15";
+            if (z3=="2015_16)")  z3 ="2015-16";
+            if (z3=="2016_17)")  z3 ="2016-17";
+            if (z3=="2017_18)")  z3 ="2017-18";
+            if (z3=="2018_19)")  z3 ="2018-19";
+            if (z3=="2019_20)") z3 ="2019-20";
+            
+            this.service.sp_Finance_ISSR_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+              if (result[0].FinYear !="0" )
+              {
+                    this.Fin_Year14_15_G = result[0].FinYear;
+                    this.Project_Cost_14_15_G = result[0].Project_Cost;
+                    this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                    this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                    this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                    this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                    this.UC_Received_14_15_G = result[0].UC_Received;
+              }
+                   // 
+                  try {
+                    this.Fin_Year15_16_G = result[1].FinYear;
+                    this.Project_Cost_15_16_G = result[1].Project_Cost;
+                    this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                    this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                    this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                    this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                    this.UC_Received_15_16_G = result[1].UC_Received;
+                }
+                catch{}
+                finally{}
+      
+      
+                try {
+                  this.Fin_Year16_17_G = result[2].FinYear;
+                  this.Project_Cost_16_17_G = result[2].Project_Cost;
+                  this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+                  this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+                  this.UC_Received_16_17_G = result[2].UC_Received;
+              }
+              catch{}
+              finally{}
+    
+    
+              try {
+                  this.Fin_Year17_18_G = result[3].FinYear;
+                  this.Project_Cost_17_18_G = result[3].Project_Cost;
+                  this.Central_Assistance_involved_17_18_G = result[3].Central_Assistance_involved;
+                  this.FirstInstallmentReleased_17_18_G = result[3].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased_17_18_G = result[3].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased_17_18_G = result[3].ThirdInstallmentReleased;
+                  this.UC_Received_17_18_G = result[3].UC_Received;
+              }
+              catch{}
+              finally{}
+    
+              try {
+                this.Fin_Year18_19_G = result[4].FinYear;
+                this.Project_Cost_18_19_G = result[4].Project_Cost;
+                this.Central_Assistance_involved_18_19_G = result[4].Central_Assistance_involved;
+                this.FirstInstallmentReleased_18_19_G = result[4].FirstInstallmentReleased;
+                this.SecondInstallmentReleased_18_19_G = result[4].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased_18_19_G = result[4].ThirdInstallmentReleased;
+                this.UC_Received_18_19_G = result[4].UC_Received;
+            }
+            catch{}
+            finally{}
+      
+      
+               let chart = new CanvasJS.Chart("chartISSR", {
+                theme: "light2",
+                animationEnabled: true,
+                exportEnabled: false,
+                title: {
+                  text: "Fincncial Progress Consolidated ISSR",
+                  fontSize: "25",
+                },
+                backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+                colorSet: "greenShades",
+      
+                data: [{
+      
+                  options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+                },
+      
+             
+             
+          
+      
+                type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "Project Cost",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    // { x: "14-15", y: this.Fin_Year15_16 },
+                    { label: x1, y: this.Project_Cost_14_15_G },
+                    { label: Y1, y: this.Project_Cost_15_16_G },
+                    { label: z1, y: this.Project_Cost_16_17_G },
+                    { label: z2, y: this.Project_Cost_17_18_G },
+                    { label: z3, y: this.Project_Cost_18_19_G }
+                  ]
+                },
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "CA Involved",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.Central_Assistance_involved14_15_G },
+                    { label: Y1, y: this.Central_Assistance_involved15_16_G },
+                    { label: z1, y: this.Central_Assistance_involved_16_17_G },
+                    { label: z2, y: this.Central_Assistance_involved_17_18_G },
+                    { label: z3, y: this.Central_Assistance_involved_18_19_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "1st Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.FirstInstallmentReleased14_15_G },
+                    { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+                    { label: z1, y: this.FirstInstallmentReleased_16_17_G },
+                    { label: z2, y: this.FirstInstallmentReleased_17_18_G },
+                    { label: z3, y: this.FirstInstallmentReleased_18_19_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "2nd Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                    { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+                    { label: z1, y: this.SecondInstallmentReleased_16_17_G },
+                    { label: z2, y: this.SecondInstallmentReleased_17_18_G },
+                    { label: z3, y: this.SecondInstallmentReleased_18_19_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "3rd Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.ThirdInstallmentReleased14_15_G },
+                    { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+                    { label: z1, y: this.ThirdInstallmentReleased_16_17_G},
+                    { label:z2, y: this.ThirdInstallmentReleased_17_18_G},
+                    { label: z3, y: this.ThirdInstallmentReleased_18_19_G} 
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "UC Receieved",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.UC_Received_14_15_G },
+                    { label: Y1, y: this.UC_Received_15_16_G },
+                    { label: z1, y: this.UC_Received_16_17_G },
+                    { label: z2, y: this.UC_Received_17_18_G },
+                    { label: z3, y: this.UC_Received_18_19_G }
+                  ]
+                },
+      
+      
+              ],
+                options: {
+                  legend: {
+                    display: true,
+                    labels: {
+                      fontColor: 'rgb(255, 99, 132)'
+                    }
+                  }
+                }
+              });
+              chart.render();
+          });
+      
+          }
+          else if (splitted.length ==6)
+          {
+            if (x1=="2014_15)") x1 ="2014-15";
+            if (x1=="2015_16)") x1 ="2015-16";
+            if (x1=="2016_17)") x1 ="2016-17";
+            if (x1=="2017_18)") x1 ="2017-18";
+            
+            if (x1=="2018_19)") x1 ="2018-19";
+            if (x1=="2019_20)") x1 ="2019-20";
+      
+            if (Y1=="2014_15)") Y1 ="2014-15";
+            if (Y1=="2015_16") Y1 ="2015-16";
+            if (Y1=="2016_17)") Y1 ="2016-17";
+            if (Y1=="2017_18)") Y1 ="2017-18";
+            if (Y1=="2018_19)") Y1 ="2018-19";
+            if (Y1=="2019_20)") Y1 ="2019-20";
+      
+            if (z1=="2014_15)") z1 ="2014-15";
+            if (z1=="2015_16)") z1 ="2015-16";
+            if (z1=="2016_17)")  z1 ="2016-17";
+            if (z1=="2017_18)")  z1 ="2017-18";
+            if (z1=="2018_19)")  z1 ="2018-19"; 
+            if (z1=="2019_20)")  z1 ="2019-20";
+      
+            if (z2=="2014_15)")   z2 ="2014-15";
+            if (z2=="2015_16)")  z2 ="2015-16";
+            if (z2=="2016_17)")  z2 ="2016-17";
+            if (z2=="2017_18)")  z2 ="2017-18";
+            if (z2=="2018_19)")  z2 ="2018-19";
+            if (z2=="2019_20)") z2 ="2019-20";
+      
+            if (z3=="2014_15)")   z3 ="2014-15";
+            if (z3=="2015_16)")  z3 ="2015-16";
+            if (z3=="2016_17)")  z3 ="2016-17";
+            if (z3=="2017_18)")  z3 ="2017-18";
+            if (z3=="2018_19)")  z3 ="2018-19";
+            if (z3=="2019_20)") z3 ="2019-20";
+      
+            if (z4=="2014_15)")   z4 ="2014-15";
+            if (z4=="2015_16)")  z4 ="2015-16";
+      
+            if (z4=="2016_17)")  z4 ="2016-17";
+            if (z4=="2017_18)")  z4 ="2017-18";
+            if (z4=="2018_19)")  z4 ="2018-19";
+            if (z4=="2019_20)") z4 ="2019-20";
+            
+            this.service.sp_Finance_ISSR_DATACons_New(stateCode, DisttCode, cityCode,Fin_Year).subscribe(result => { // new code
+              if (result[0].FinYear !="0" )
+              {
+                    this.Fin_Year14_15_G = result[0].FinYear;
+                    this.Project_Cost_14_15_G = result[0].Project_Cost;
+                    this.Central_Assistance_involved14_15_G = result[0].Central_Assistance_involved;
+                    this.FirstInstallmentReleased14_15_G = result[0].FirstInstallmentReleased;
+                    this.SecondInstallmentReleased14_15_G = result[0].SecondInstallmentReleased;
+                    this.ThirdInstallmentReleased14_15_G = result[0].ThirdInstallmentReleased;
+                    this.UC_Received_14_15_G = result[0].UC_Received;
+              }
+                   // 
+                  try {
+                    this.Fin_Year15_16_G = result[1].FinYear;
+                    this.Project_Cost_15_16_G = result[1].Project_Cost;
+                    this.Central_Assistance_involved15_16_G = result[1].Central_Assistance_involved;
+                    this.FirstInstallmentReleased15_16_G = result[1].FirstInstallmentReleased;
+                    this.SecondInstallmentReleased15_16_G = result[1].SecondInstallmentReleased;
+                    this.ThirdInstallmentReleased15_16_G = result[1].ThirdInstallmentReleased;
+                    this.UC_Received_15_16_G = result[1].UC_Received;
+                }
+                catch{}
+                finally{}
+      
+      
+                try {
+                  this.Fin_Year16_17_G = result[2].FinYear;
+                  this.Project_Cost_16_17_G = result[2].Project_Cost;
+                  this.Central_Assistance_involved_16_17_G = result[2].Central_Assistance_involved;
+                  this.FirstInstallmentReleased_16_17_G = result[2].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased_16_17_G = result[2].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased_16_17_G = result[2].ThirdInstallmentReleased;
+                  this.UC_Received_16_17_G = result[2].UC_Received;
+              }
+              catch{}
+              finally{}
+    
+    
+              try {
+                  this.Fin_Year17_18_G = result[3].FinYear;
+                  this.Project_Cost_17_18_G = result[3].Project_Cost;
+                  this.Central_Assistance_involved_17_18_G = result[3].Central_Assistance_involved;
+                  this.FirstInstallmentReleased_17_18_G = result[3].FirstInstallmentReleased;
+                  this.SecondInstallmentReleased_17_18_G = result[3].SecondInstallmentReleased;
+                  this.ThirdInstallmentReleased_17_18_G = result[3].ThirdInstallmentReleased;
+                  this.UC_Received_17_18_G = result[3].UC_Received;
+              }
+              catch{}
+              finally{}
+    
+              try {
+                this.Fin_Year18_19_G = result[4].FinYear;
+                this.Project_Cost_18_19_G = result[4].Project_Cost;
+                this.Central_Assistance_involved_18_19_G = result[4].Central_Assistance_involved;
+                this.FirstInstallmentReleased_18_19_G = result[4].FirstInstallmentReleased;
+                this.SecondInstallmentReleased_18_19_G = result[4].SecondInstallmentReleased;
+                this.ThirdInstallmentReleased_18_19_G = result[4].ThirdInstallmentReleased;
+                this.UC_Received_18_19_G = result[4].UC_Received;
+            }
+            catch{}
+            finally{}
+             
+            try {
+              this.Fin_Year19_20_G = result[5].FinYear;
+              this.Project_Cost_19_20_G = result[5].Project_Cost;
+              this.Central_Assistance_involved_19_20_G = result[5].Central_Assistance_involved;
+              this.FirstInstallmentReleased_19_20_G = result[5].FirstInstallmentReleased;
+              this.SecondInstallmentReleased_19_20_G = result[5].SecondInstallmentReleased;
+              this.ThirdInstallmentReleased_19_20_G = result[5].ThirdInstallmentReleased;
+              this.UC_Received_19_20_G = result[5].UC_Received;
+          }
+          catch{}
+          finally{} 
+               let chart = new CanvasJS.Chart("chartISSR", {
+                theme: "light2",
+                animationEnabled: true,
+                exportEnabled: false,
+                title: {
+                  text: "Fincncial Progress  Consolidated ISSR)",
+                  fontSize: "25",
+                },
+                backgroundColor: this.backgroundColor_G,//"#B3E5FC",  commented
+                colorSet: "greenShades",
+      
+                data: [{
+      
+                  options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+                },
+      
+             
+             
+          
+      
+                type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "Project Cost",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    // { x: "14-15", y: this.Fin_Year15_16 },
+                    { label: x1, y: this.Project_Cost_14_15_G },
+                    { label: Y1, y: this.Project_Cost_15_16_G },
+                    { label: z1, y: this.Project_Cost_16_17_G },
+                    { label: z2, y: this.Project_Cost_17_18_G },
+                    { label: z3, y: this.Project_Cost_18_19_G },
+                    { label: z4, y: this.Project_Cost_19_20_G }
+                  ]
+                },
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "CA Involved",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.Central_Assistance_involved14_15_G },
+                    { label: Y1, y: this.Central_Assistance_involved15_16_G },
+                    { label: z1, y: this.Central_Assistance_involved_16_17_G },
+                    { label: z2, y: this.Central_Assistance_involved_17_18_G },
+                    { label: z3, y: this.Central_Assistance_involved_18_19_G },
+                    { label: z4, y: this.Central_Assistance_involved_19_20_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "1st Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label:x1, y: this.FirstInstallmentReleased14_15_G },
+                    { label: Y1, y: this.FirstInstallmentReleased15_16_G },
+                    { label: z1, y: this.FirstInstallmentReleased_16_17_G },
+                    { label: z2, y: this.FirstInstallmentReleased_17_18_G },
+                    { label: z3, y: this.FirstInstallmentReleased_18_19_G },
+                    { label: z4, y: this.FirstInstallmentReleased_19_20_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "2nd Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.SecondInstallmentReleased14_15_G },
+                    { label: Y1, y: this.SecondInstallmentReleased15_16_G },
+                    { label: z1, y: this.SecondInstallmentReleased_16_17_G },
+                    { label: z2, y: this.SecondInstallmentReleased_17_18_G },
+                    { label: z3, y: this.SecondInstallmentReleased_18_19_G },
+                    { label: z4, y: this.SecondInstallmentReleased_19_20_G }
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "3rd Installment",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.ThirdInstallmentReleased14_15_G },
+                    { label: Y1, y: this.ThirdInstallmentReleased15_16_G },
+                    { label: z1, y: this.ThirdInstallmentReleased_16_17_G},
+                    { label: z2, y: this.ThirdInstallmentReleased_17_18_G},
+                    { label: z3, y: this.ThirdInstallmentReleased_18_19_G} ,
+                    { label: z4, y: this.ThirdInstallmentReleased_19_20_G} 
+                  ]
+                },
+      
+                {
+                  type: "column",
+                  dockInsidePlotArea: true,
+                   indexLabel: "{y}", //HG
+                  bevelEnabled: true,
+                  showInLegend: true,
+                  legendText: "UC Receieved",
+                   stValue: "Q",
+                  indexLabelFontSize: 12,
+                  indexLabelOrientation: "vertical",
+                  dataPoints: [
+                    { label: x1, y: this.UC_Received_14_15_G },
+                    { label: Y1, y: this.UC_Received_15_16_G },
+                    { label: z1, y: this.UC_Received_16_17_G },
+                    { label: z2, y: this.UC_Received_17_18_G },
+                    { label: z3, y: this.UC_Received_18_19_G },
+                    { label: z4, y: this.UC_Received_19_20_G }
+                  ]
+                },
+       
+              ],
+                options: {
+                  legend: {
+                    display: true,
+                    labels: {
+                      fontColor: 'rgb(255, 99, 132)'
+                    }
+                  }
+                }
+              });
+              chart.render();
+          });
+      
+          }
+        
+}
 }
