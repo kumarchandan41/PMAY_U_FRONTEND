@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { States, Designation, District, City, Charts, Comp_Values, CLSS_Values, CLSS_Citywise_Values, JNReport, Demand, JNAtAGlance, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, CompMaster, getHFACodes, ComponentWiseDATA, PMAY_FinancialData, FinancialProgress, StateScore, PMAY_DATA, Demand_SanctionStateWise, UserMaster, CLSS_CityValues, Houses_Status, StateWise_NewCLSS, RegistrationDATA, MapDATA, PMAY_DATA_New } from '../model/chart';
+import { States, Designation, District, City, Charts, Comp_Values, CLSS_Values, CLSS_Citywise_Values, JNReport, Demand, JNAtAGlance, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, CompMaster, getHFACodes, ComponentWiseDATA, PMAY_FinancialData, FinancialProgress, StateScore, PMAY_DATA, Demand_SanctionStateWise, UserMaster, CLSS_CityValues, Houses_Status, StateWise_NewCLSS, RegistrationDATA, MapDATA, PMAY_DATA_New, PMAY_DATA_Financial, PMAY_DATA_Fin } from '../model/chart';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -16,15 +16,15 @@ export class GraphService {
   CLSS_ValuesList(stateCode: any) {
     throw new Error("Method not implemented.");
   }
-   //url="http://localhost:58396/api/Buldings/";
-   //url1 ="http://localhost:58396/API/RegistrationApi/";
+     //   url="http://localhost:58396/api/Buldings/";
+     //   url1 ="http://localhost:58396/API/RegistrationApi/";
 
 
       //url="http://localhost:58396/api/Buldings/";
    //url1 ="http://localhost:58396/API/RegistrationApi/";
 
-   url="http://10.196.69.102/hfa_api/api/Buldings/";
-   url1 ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
+  url="http://10.196.69.102/hfa_api/api/Buldings/";
+ url1 ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
    
 
   StateDetails : States[];
@@ -1075,4 +1075,51 @@ ServiceUserAdminDetails():Observable<UserMaster[]>
           debugger;
             return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_Grid_Critical_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&cid=" + Comp + "&finYear=" + FinYear); 
      }
+
+     // Finance Graph
+     sp_cOnsoloidated_PMAY_GraphDATA(stateCode:string,DisttCode:string,cityCode:string,Comp:string,FinYear:string):Observable<PMAY_DATA_Financial[]>
+     {
+       //   alert(); 
+            return this.http.get<PMAY_DATA_Financial[]>(this.url + "GetFinancial_Cons_PMAYData?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&cid=" + Comp + "&finYear=" + FinYear); 
+     }
+
+
+          // Finance Graph
+          Finance_ISSR_DATA(stateCode:string,DisttCode:string,cityCode:string,Comp:string,FinYear:string):Observable<PMAY_DATA_Financial[]>
+          {
+              // alert(); 
+                 return this.http.get<PMAY_DATA_Financial[]>(this.url + "sp_create_Finance_Cons_ISSR_DATA?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&cid=" + Comp + "&finYear=" + FinYear); 
+          }
+     
+
+          //---------------------------- Graph for Finance
+          sp_Finance_PMAY_DATACons_New(stateCode:string,DisttCode:string,cityCode:string,Fin_Year:string):Observable<PMAY_DATA_Fin[]>
+          {
+             // alert(2); 
+               debugger;
+                 return this.http.get<PMAY_DATA_Fin[]>(this.url + "Fin_PMAY_Graph_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year);
+          }
+          sp_Finance_BLCS_DATACons_New(stateCode:string,DisttCode:string,cityCode:string,Fin_Year:string):Observable<PMAY_DATA_Fin[]>
+          {
+               //alert(); 
+               debugger;
+                 return this.http.get<PMAY_DATA_Fin[]>(this.url + "Fin_BLCS_Graph_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year);
+          }
+          sp_Finance_AHP_DATACons_New(stateCode:string,DisttCode:string,cityCode:string,Fin_Year:string):Observable<PMAY_DATA_Fin[]>
+          {
+               //alert(); 
+               debugger;
+                 return this.http.get<PMAY_DATA_Fin[]>(this.url + "Fin_AHP_Graph_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year);
+          }
+          sp_Finance_ISSR_DATACons_New(stateCode:string,DisttCode:string,cityCode:string,Fin_Year:string):Observable<PMAY_DATA_Fin[]>
+          {
+               //alert(); 
+               debugger;
+                 return this.http.get<PMAY_DATA_Fin[]>(this.url + "Fin_ISSR_Graph_DATAFinYeraWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year);
+          }
+
+
+          //----------------------------------
+
+      
 }
