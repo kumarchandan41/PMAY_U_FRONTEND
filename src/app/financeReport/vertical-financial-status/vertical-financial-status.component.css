@@ -35,12 +35,32 @@ table, th, td {
   background-color: #f0ad4e;
 }
 
-#urlSwitcher, #checkboxFilter{
+#urlSwitcher{
+  text-align: center; 
+  font-size: 18px; 
+  padding-top: 10px;
+}
+#checkboxFilter > span{
+padding: 0 3px;
+}
+button{
+margin-top: 0px !important;
+}
+#checkboxFilter{
 text-align: center; 
-font-size: 18px; 
+font-size: 16px; 
 padding-top: 10px;
 }
 
+
+.box.box-default {
+/* border: 1px solid #d2d6de; */
+border-style: solid;
+border-left-width: 1px;
+border-right-width: 1px;
+border-bottom-width: 1px;
+border-color: #d2d6de;
+}
 @media print {
   body *, #drpdown, #buttonGroup{display : none;}
   body #toPrint *, #urlSwitcher, #checkboxFilter {display:none} 
