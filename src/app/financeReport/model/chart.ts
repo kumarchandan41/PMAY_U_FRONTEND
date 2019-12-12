@@ -471,6 +471,65 @@ export class PMAY_DATA_New{
 
 }
 
+export class PMAY_DATA_Financial{
+    SrNo  :number;
+    Component :string;
+	State :string;
+	District: string;
+	City :string;
+	StateCode: string;
+	Dcode :string;
+	CityCode :string;
+    
+    FinYear: string;
+ 
+     Project_Cost :string;
+      Central_Assistance_involved:string;    
+ 
+      FirstInstallmentReleased:string;
+        SecondInstallmentReleased:string;    
+ ThirdInstallmentReleased:string;
+  UC_Received :string;
+
+    // Housesinvolved: string;
+    // FundsDisbursed_in_Houses: string;
+
+    // Houses_Grounded: string;
+    // Houses_Completed: string;
+    // HousesOccupied: string;
+    // First_Houses: string;
+    // Second_Houses: string;
+    // Third_Houses: string;
+ 
+
+ 
+    // Istinstyettobereleased : string;  
+    //  IIndinstyettobereleased: string;
+    // ThirdInstyettobereleased: string;
+    // GroundedbutyettobeCompleted: string;
+    // CompletedbutyettobeOccupied: string;
+
+
+}
+
+
+export class PMAY_DATA_Fin{
+    SrNo: number;
+    Component: string;
+    State: string;
+    District: string;
+    City: string;
+    StateCode: string;
+    Dcode: string;
+    CityCode: string;
+    FinYear: string;
+    Project_Cost: string;
+    Central_Assistance_involved: string;
+    FirstInstallmentReleased: string;
+    SecondInstallmentReleased: string;
+    ThirdInstallmentReleased: string;
+    UC_Received: string;   
+}
 export class Houses_Status {
     Housesinvolved :any;
     FundsDisbursed_in_Houses:number=0;
