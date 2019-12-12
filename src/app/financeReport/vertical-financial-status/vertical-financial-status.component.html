@@ -128,6 +128,38 @@
           
         </div>
   </div>
+<div id="checkboxFilter">
+  <span><b>Show /Hide</b></span>
+  <span [ngStyle]="{'display':JvrmDisplay1}">
+    <input type="checkbox" (change)="ProjectCost($event)" name="Project Cost" value="Project Cost" checked="true">
+    Project Cost
+  </span>
+  <span>
+    <input type="checkbox" (change)="test($event)" name="CA Sanctioned" value="CA Sanctioned" checked="true">
+    CA Sanct.
+  </span>
+
+  
+  <span>
+    <input type="checkbox" (change)="Firstinst($event)" name="1st Installment Released" value="1st Installment Released" checked="true">
+    1st Inst Rel.
+  </span>
+  <span>
+    <input type="checkbox" (change)="Secondinst($event)" name="2nd Installment Released" value="2nd Installment Released" checked="true">
+    2nd Inst Rel.
+  </span>
+  <span>
+    <input type="checkbox" (change)="Thirdinst($event)" name="3rd Installment Released" value="3rd Installment Released" checked="true">
+    3rd Inst Rel.
+  </span>
+  <span [ngStyle]="{'display':JvrmDisplay}">
+    <input type="checkbox" (change)="TotalCA($event)" name="Total Central Assistance Released"
+      value="Total Central Assistance Released" checked="true">Total CA Rel.
+  </span>
+  <span>
+    <input type="checkbox" (change)="UCrecd($event)" name="UC Receieved" value="UC Receieved" checked="true"> 
+    UC Receieved
+  </span>
 </div>
 
 <div class="row"  [ngStyle]="{'display':DisplayTable}">

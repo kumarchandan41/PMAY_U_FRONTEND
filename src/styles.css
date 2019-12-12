@@ -21,6 +21,10 @@ body {
     height: 500px;
 }
 
+select{
+  border-radius: 3px !important;
+}
+
 @media (min-width: 775px) {
   .modal-dialog {
     width: 600;
