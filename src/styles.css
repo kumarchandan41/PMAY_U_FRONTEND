@@ -93,5 +93,31 @@ a.canvasjs-chart-credit {
 }
 
 
+#filter{
+  background: #eee;
+  padding: 10px 0;
+}
+
+#filter > * {
+  padding: 0 5px !important;
+}
+
+#filter > *:first-child {
+  padding-left: 10px !important;
+}
+
+#filter > *:last-child {
+  padding-right: 10px !important;
+}
+
+#checkboxFilter > span{
+  padding: 0 3px;
+}
+
+#checkboxFilter{
+  text-align: center; 
+  font-size: 16px; 
+  padding-top: 10px;
+}
 
 

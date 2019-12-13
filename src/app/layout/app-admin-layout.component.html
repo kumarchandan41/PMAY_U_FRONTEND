@@ -322,9 +322,12 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">MAIN NAVIGATION</li>
+          <li [ngStyle]="{'display':AdminDisplay}" class="active">
+            <a [routerLink]="['/Admin/Dashboard']"><i class="fa fa-home"></i>Home</a>
+          </li>
+
           <li id="dashboard_input" [ngStyle]="{'display':AdminDisplay}" #inputmenutitle
-            [class.menu-open]="inputmenutitle.id == activeMenuId" class="active treeview"
-            (click)="toggle(inputmenutitle.id)">
+            [class.menu-open]="inputmenutitle.id == activeMenuId" class="treeview" (click)="toggle(inputmenutitle.id)">
             <a>
               <!-- <i class="fa fa-dashboard"></i> <span>Dashboard</span> -->
               <i class="fa fa-pie-chart"></i> <span>Dashboard</span>
@@ -334,11 +337,8 @@
             </a>
 
             <ul class="treeview-menu" [style.display]="(inputmenutitle.id == activeMenuId) ? 'block' : 'none'">
-              <li [ngStyle]="{'display':AdminDisplay}"><a [routerLink]="['/Admin/Dashboard']"><i
-                    class="fa fa-circle-o"></i>Dashboard</a></li>
               <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/MainGraph']"><i
                     class="fa fa-circle-o"></i>PMAY-U Dashboard</a></li>
-
               <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA1']"><i
                     class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-1</a></li>
               <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA3']"><i

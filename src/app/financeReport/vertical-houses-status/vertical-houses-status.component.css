@@ -23,6 +23,8 @@ th{
 #filter > *:last-child {
   padding-right: 10px !important;
 }
+
+
 table, th, td {
   height: 8px;
   font-family: "Open Sans", Arial, sans-serif;

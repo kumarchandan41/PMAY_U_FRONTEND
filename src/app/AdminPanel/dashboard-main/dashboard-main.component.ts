@@ -3429,7 +3429,7 @@ GetPsyChart(stateCode, DisttCode, cityCode, Comp, DivisionCodes) {
             //  backgroundColor: "#0074D9",
             backgroundColor: this.backgroundColor,
             labelFontWeight: "28px",
-            indexLabelFontSize: 14,
+            indexLabelFontSize: 11,
             showInLegend: false,
             toolTipContent: "{name}: {y}",
             indexLabelWrap: true,
