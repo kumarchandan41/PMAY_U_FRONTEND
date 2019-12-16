@@ -3374,7 +3374,7 @@ getDistrictDetails(DisttCode) {
               //  backgroundColor: "#0074D9",
               backgroundColor: this.backgroundColor,
               labelFontWeight: "28px",
-              indexLabelFontSize: 14,
+              indexLabelFontSize: 10,
               showInLegend: false,
               toolTipContent: "{name}: {y}",
               indexLabelWrap: true,
