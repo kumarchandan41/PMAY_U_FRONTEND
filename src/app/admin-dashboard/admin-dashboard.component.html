@@ -36,34 +36,34 @@
             <tr class="progressBar">
               <td>
                 <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
+                  <div class="progress-bar" [ngStyle]="{width: getPercent(112.24, counter)}"></div>
                 </div>
                 <span class="progress-description">
-                  {{(counter / 112.24)*100}}%
+                  {{getPercent(112.24, counter)}}
                 </span>
               </td>
               <td>
                 <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
+                  <div class="progress-bar" [ngStyle]="{width: getPercent(counter, counter1)}"></div>
                 </div>
                 <span class="progress-description">
-                  70%
+                  {{getPercent(counter, counter1)}}
                 </span>
               </td>
               <td>
                 <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
+                  <div class="progress-bar" [ngStyle]="{width: getPercent(counter1, counter2)}"></div>
                 </div>
                 <span class="progress-description">
-                  70%
+                  {{getPercent(counter1, counter2)}}
                 </span>
               </td>
               <td>
                 <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
+                  <div class="progress-bar" [ngStyle]="{width: getPercent(counter2, counter3)}"></div>
                 </div>
                 <span class="progress-description">
-                  70%
+                  {{getPercent(counter2, counter3)}}
                 </span>
               </td>
             </tr>
@@ -112,35 +112,30 @@
             </tr>
             <tr class="progressBar">
               <td>
+
+              </td>
+              <td>
                 <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
+                  <div class="progress-bar" [ngStyle]="{width: getPercent(counter5, counter4)}"></div>
                 </div>
                 <span class="progress-description">
-                  70%
+                  {{getPercent(counter5, counter4)}}
                 </span>
               </td>
               <td>
                 <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
+                  <div class="progress-bar" [ngStyle]="{width: getPercent(counter4, counter6)}"></div>
                 </div>
                 <span class="progress-description">
-                  70%
+                  {{getPercent(counter4, counter6)}}
                 </span>
               </td>
               <td>
                 <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
+                  <div class="progress-bar" [ngStyle]="{width: getPercent(counter6, counter7)}"></div>
                 </div>
                 <span class="progress-description">
-                  70%
-                </span>
-              </td>
-              <td>
-                <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
-                </div>
-                <span class="progress-description">
-                  70%
+                  {{getPercent(counter6, counter7)}}
                 </span>
               </td>
             </tr>
@@ -194,27 +189,21 @@
             </tr>
             <tr class="progressBar">
               <td>
+              </td>
+              <td>
                 <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
+                  <div class="progress-bar" [ngStyle]="{width: getPercent(counter8, counter9)}"></div>
                 </div>
                 <span class="progress-description">
-                  70%
+                  {{getPercent(counter8, counter9)}}
                 </span>
               </td>
               <td>
                 <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
+                  <div class="progress-bar" [ngStyle]="{width: getPercent(counter8, counter10)}"></div>
                 </div>
                 <span class="progress-description">
-                  70%
-                </span>
-              </td>
-              <td>
-                <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
-                </div>
-                <span class="progress-description">
-                  70%
+                  {{getPercent(counter8, counter10)}}
                 </span>
               </td>
             </tr>
