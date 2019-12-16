@@ -3348,7 +3348,7 @@ getDistrictDetails(DisttCode) {
               startAngle: 25,
               backgroundColor: this.backgroundColor,//"#0074D9",
               labelFontWeight: "28px",
-              indexLabelFontSize: 14,
+              indexLabelFontSize: 10,
               showInLegend: false,
               toolTipContent: "{name}: {y}",
               indexLabelWrap: true,
