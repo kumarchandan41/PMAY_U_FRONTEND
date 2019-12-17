@@ -45,14 +45,12 @@ export class AppAdminLayoutComponent implements OnInit {
     this.router.events.subscribe(x=>
       {
         if(x instanceof NavigationEnd){
-          debugger;  
           this.showcolourpicker=!this.reportpaths.includes(x.url);
           
           console.log(x.url);
       }
     });
     setInterval(() => {
-      // debugger;
       //  console.log(formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530'));
       this.jstoday = formatDate(new Date(), 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
     }, 1000);
@@ -132,7 +130,6 @@ export class AppAdminLayoutComponent implements OnInit {
     this.State = event.target.options[event.target.selectedIndex].text;
   }
   onChangeColor(x: any) {
-    debugger;
     this.gevent.changeColor(x);
   }
   /**

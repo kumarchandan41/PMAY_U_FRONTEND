@@ -11,13 +11,13 @@ import { ConstantUrlService } from '../Shared/constant-url.service';
 })
 export class UserService {
   [x: string]: any;
-//  baseUrl = "http://localhost:58396/Api";
-baseUrl:string;
- // baseUrl = "http://10.196.69.102/hfa_api/Api";
+//   baseUrl = "http://localhost:58396/Api";
+//baseUrl:string;
+  baseUrl = "http://10.196.69.102/hfa_api/Api";
 
 
-  //apiUrl ="http://10.196.69.102/hfa_api/API/Authenticate/";
-  //apiUrlReg ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
+   apiUrl ="http://10.196.69.102/hfa_api/API/Authenticate/";
+   apiUrlReg ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
  
   constructor(
     private http: HttpClient,private constantUrlService: ConstantUrlService
@@ -38,7 +38,6 @@ baseUrl:string;
 
   //post api for scheme master
   postSchemeData(postData: any): Observable<any> {
-    debugger
     return this.http.post(this.baseUrl + "/Admin_Value/SubmitSchemeData", postData, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response;
@@ -94,7 +93,6 @@ baseUrl:string;
   }
   //get api for state master
   getStateData(): Observable<any> {
-    
     console.log(this.baseUrl + "/Admin_Value/GetStateData");
     return this.http.get(this.baseUrl + "/Admin_Value/GetStateData", { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
@@ -112,6 +110,7 @@ baseUrl:string;
   }
   //delete api for state master
   deleteStateData(StateId: any): Observable<any> {
+   
     return this.http.get(this.baseUrl + "/Admin_Value/DeleteStateData/" + StateId, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response;
@@ -166,7 +165,6 @@ baseUrl:string;
   }
   //get api for constituency city master
   getCityConstituencyData(): Observable<any> {
-    debugger
     return this.http.get(this.baseUrl + "/Admin_Value/GetCityConstituency", { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
@@ -651,7 +649,6 @@ getClassificationMaster(): Observable<any> {
 
  //get classification on behalf of state
  getStateClassification(statecode: any): Observable<any> {
-   debugger
   return this.http.get(this.baseUrl + "/Admin_Value/getStateClassification/" + statecode , { "observe": "response" })
     .pipe(map((response: HttpResponse<any>) => {
       return response.body;

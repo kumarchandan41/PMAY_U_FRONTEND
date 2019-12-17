@@ -31,7 +31,7 @@ export class StateMasterComponent implements OnInit {
     this.txtGovernment = this.stateMaster.controls['txtGovernment'];
   }
   onClickStateMaster(event: Event, formGroup: any) {
-    debugger
+   console.log({event,formGroup});
     this.submitted = true;
     event.stopPropagation();
     if (this.stateMaster.valid) {

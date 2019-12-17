@@ -164,7 +164,6 @@ export class AdminSandbox {
     });
   }
   postScheme(formGroup: any) {
-    debugger
     var objPost =
     {
       "SchemeShortName": formGroup.get('txtSchemeShortName').value,
@@ -292,7 +291,6 @@ export class AdminSandbox {
 
   //----for components add,edit and delete------////
   getSchemeComponentData(SchemeName: any) {
-debugger
     this.userMasterService.getSchemeComponentData(SchemeName).subscribe(data => {
       this.schemeComponentMaster = data;
 
@@ -336,7 +334,6 @@ debugger
 
   }
   deleteSchemeComponentData(SchemeComponentId: any) {
-    debugger
     this.userMasterService.deleteSchemeComponentData(SchemeComponentId).subscribe(data => {
       if (data.status == "200") {
         this.snotifyService.success("Scheme Components Delete Successfully...", "", {
@@ -429,20 +426,20 @@ debugger
 
   //----for state add,edit and delete------////
   getStateData() {
-   debugger
-    this.userMasterService.getStateData().subscribe(data => {
+     
+      this.userMasterService.getStateData().subscribe(data => {
+        console.log(data);
       this.stateMaster = data;
     });
   }
   postStateData(formGroup: any) {
-    debugger
     var objPost =
     {
       "States_UT": formGroup.get('txtStateName').value,
-      "States": formGroup.get('txtStateCode').value,
+      "Codes": formGroup.get('txtStateCode').value,
       "Division": formGroup.get('txtGovernment').value,
-      "ActiveFlag": "",
-      "CreatedOn": "",
+      "Status": "Active",
+      "CreatedOn": new Date().toISOString(),
       "CreatedBy": "",
       "UpdatedOn": "",
       "UpdatedBy": ""
@@ -472,7 +469,9 @@ debugger
 
   }
   deleteStateData(SchemeComponentId: any) {
+    
     this.userMasterService.deleteStateData(SchemeComponentId).subscribe(data => {
+      console.log(data);
       if (data.status == "200") {
         this.snotifyService.success("State Delete Successfully...", "", {
           position: SnotifyPosition.rightTop,
@@ -493,7 +492,7 @@ debugger
     this.EditState = row
     this.showProperty = value;
     this.EditStateMaster.txtStateName = row.States_UT;
-    this.EditStateMaster.txtStateCode = row.States;
+    this.EditStateMaster.txtStateCode = row.Codes;
     this.EditStateMaster.hiddendTxtStateID = row.StateId;
     this.EditStateMaster.txtGovernment = row.Division;
   }
@@ -504,13 +503,13 @@ debugger
           var objPost =
           {
             "States_UT": this.EditStateMaster.txtStateName,
-            "States": this.EditStateMaster.txtStateCode,
+            "Codes": this.EditStateMaster.txtStateCode,
             "Division": this.EditStateMaster.txtGovernment,
             "StateId": this.EditStateMaster.hiddendTxtStateID,
-            "ActiveFlag": "",
+            "ActiveFlag": "Active",
             "CreatedOn": "",
             "CreatedBy": "",
-            "UpdatedOn": "",
+            "UpdatedOn": new Date().toISOString(), 
             "UpdatedBy": ""
 
           }
@@ -527,6 +526,8 @@ debugger
                 position: SnotifyPosition.rightTop,
                 timeout: 2500
               });
+              setTimeout(function(){ this.getStateData(); }, 3000);
+              
             }
             else {
               this.snotifyService.error("State Not Updated Successfully...", "", {
@@ -534,7 +535,6 @@ debugger
                 timeout: 2500
               });
             }
-            this.getStateData();
           });
         }
         else {
@@ -543,6 +543,7 @@ debugger
             timeout: 2500
           });
         }
+        this.getStateData();
       }
       else {
         this.snotifyService.error("Please Enter State Code....", "", {
@@ -704,7 +705,6 @@ debugger
 
   //----for constituency add,edit and delete------////
   getCityConsistuencyData() {
-debugger
     this.userMasterService.getCityConstituencyData().subscribe(data => {
       this.constituencyCityMaster = data;
     });
@@ -1335,7 +1335,6 @@ debugger
  
   //------Physical Progress-------//
   postPhysicalProgress() {
-debugger
     this.userMasterService.postPysicalProgressReport(this.projectDetailMaster).subscribe((data: any) => {
       if (data.StatusCode != "") {
         this.snotifyService.success("Physical Progress Save Successfully...", "", {
@@ -1396,12 +1395,10 @@ debugger
   }
 
   DistrictReportWise(StateCode: any) {
-    debugger
     this.router.navigate(['/DRMC/report-district-wise', StateCode]);
 
   }
   getReportDistrictStateWise(StateCode: any) {
-debugger
     this.userMasterService.getReportDistrictStateWise(StateCode).subscribe(data => {
       this.reportStateDistrictWise = data;
 
@@ -1576,7 +1573,6 @@ debugger
   }
    //------post get api for project brief detail------//
    projectBriefDeatil(file: File, formGroup: any): any {
-    debugger
     var filename = file.name
     var g = new Date(formGroup.get('txtSLSMC').value);
     var currentBriefDate = this.datePipe.transform(g, 'dd-MM-yyyy');
@@ -1610,13 +1606,11 @@ debugger
 
     };
     this.userMasterService.postProjectBriefDeatil(file, objPost).subscribe(data => {
-      debugger
       var objPost =
       {
         "Slum":this.Slum   
       }
       this.userMasterService.postSlum(objPost.Slum).subscribe((data: any) => {
-        debugger
         if (data.status == "200") {
        
         this.getProjectBriefDetail();
@@ -1792,7 +1786,6 @@ debugger
 }
  //-----get classfication on behalf of state----//
  getStateClassification(statecode: any) {
-   debugger
   this.userMasterService.getStateClassification(statecode).subscribe(data => {
     this.stateClassificationMapping = data;
   });
@@ -1907,7 +1900,6 @@ postCityClassificationMapping(formGroup: any) {
 }
 //---post Project classification mapping---///
 postProjectClassificationMapping(formGroup: any) {
-  debugger
   var objPost =
   {
     "StateCode": formGroup.get('ddlStateCodeP').value,
@@ -1963,7 +1955,6 @@ DeleteStateMapping(StateMappingId: any) {
   });
 }
 DeleteDistrictMapping(DistMappingId: any) {
-  debugger
   this.userMasterService.deleteDistrictClassificationMapping(DistMappingId).subscribe(data => {
     if (data.StatusCode == "OK") {
       this.snotifyService.success("District Classification Delete Successfully...", "", {
@@ -1983,7 +1974,6 @@ DeleteDistrictMapping(DistMappingId: any) {
   });
 }
 DeleteCityMapping(CityMappingId: any) {
-  debugger
   this.userMasterService.deleteCityClassificationMapping(CityMappingId).subscribe(data => {
     if (data.StatusCode == "OK") {
       this.snotifyService.success("City Classification Delete Successfully...", "", {
@@ -2003,7 +1993,6 @@ DeleteCityMapping(CityMappingId: any) {
   });
 }
 DeleteProjectMapping(ProjectMappingId: any) {
-  debugger
   this.userMasterService.deleteProjectClassificationMapping(ProjectMappingId).subscribe(data => {
     if (data.StatusCode == "OK") {
       this.snotifyService.success("Project Classification Delete Successfully...", "", {

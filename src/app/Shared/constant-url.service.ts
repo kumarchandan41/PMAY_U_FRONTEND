@@ -31,8 +31,8 @@ url1_Upload: any;
      
     
     // user service
-    this.baseUrl ="http://10.196.69.102/hfa_api/API/";
-    //this.baseUrl = "http://localhost:58396/Api";
+   // this.baseUrl ="http://10.196.69.102/hfa_api/API";
+    this.baseUrl = "http://localhost:58396/Api";
  
  // Upload
  this.url_Upload="http://10.196.69.102/hfa_api/api/Buldings/";
