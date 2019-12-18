@@ -24,7 +24,7 @@ export class ConstituencyMasterComponent implements OnInit {
     this.CityCode = '';
   }
   public onConstituencyMaster(): void {
-  
+
     this.constituencyMaster = this.fb.group({
       txtConstituencyName: ['', [Validators.required]],
       txtConstituencyNumber: ['', [Validators.required]],

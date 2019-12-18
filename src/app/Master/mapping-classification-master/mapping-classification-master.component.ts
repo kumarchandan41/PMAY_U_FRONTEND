@@ -10,14 +10,14 @@ import { AdminSandbox } from 'src/app/DRMC/admin.sandbox';
 })
 export class MappingClassificationMasterComponent implements OnInit {
   public classificationMappingMaster: FormGroup;
-  public classificationProjectMappingMaster:FormGroup;
+  public classificationProjectMappingMaster: FormGroup;
   public classificationCityMappingMaster: FormGroup;
   public classificationDistrictMappingMaster: FormGroup;
   public ddlStateCode: AbstractControl;
   CityClassification: boolean = false;
   public ddlMapping: AbstractControl;
   StateClassification: boolean = false;
-  ProjectClassification:boolean=false;
+  ProjectClassification: boolean = false;
   public ddlDistrictCode: AbstractControl;
   DistrictClassification: boolean = false;
   public submitted: boolean = false;
@@ -31,13 +31,13 @@ export class MappingClassificationMasterComponent implements OnInit {
   public ddlDistrictCodeP: AbstractControl;
   public ddlCityP: AbstractControl;
   public ddlMappingP: AbstractControl;
-  public ddlProjectName:AbstractControl;
+  public ddlProjectName: AbstractControl;
 
   State: string;
   Mapping: string;
   District: string;
   City: string;
-  ProjectName:string;
+  ProjectName: string;
   constructor(private fb: FormBuilder, public adminSandbox: AdminSandbox) { }
 
   ngOnInit() {
@@ -55,12 +55,12 @@ export class MappingClassificationMasterComponent implements OnInit {
     this.classificationMappingMaster = this.fb.group({
       ddlState: ['', [Validators.required]],
       ddlMap: ['', [Validators.required]],
-    
+
     });
 
     this.ddlMap = this.classificationMappingMaster.controls['ddlMap'];
     this.ddlState = this.classificationMappingMaster.controls['ddlState'];
-    
+
   }
   public onClassificationDistrictMappingMaster(): void {
     this.classificationDistrictMappingMaster = this.fb.group({
@@ -103,16 +103,16 @@ export class MappingClassificationMasterComponent implements OnInit {
     this.StateClassification = true;
     this.DistrictClassification = false;
     this.CityClassification = false;
-    this.ProjectClassification=false;
+    this.ProjectClassification = false;
     this.adminSandbox.getStateClassificationMapping();
   }
   radioDistrict() {
-    
+
     this.StateClassification = false;
     this.DistrictClassification = true;
     this.CityClassification = false;
-    this.ProjectClassification=false;
-    this.adminSandbox.districtMapingResult=[];
+    this.ProjectClassification = false;
+    this.adminSandbox.districtMapingResult = [];
     this.State = '';
     this.Mapping = '';
     this.District = '';
@@ -123,27 +123,26 @@ export class MappingClassificationMasterComponent implements OnInit {
     this.StateClassification = false;
     this.DistrictClassification = false;
     this.CityClassification = true;
-    this.ProjectClassification=false;
-    this.adminSandbox.cityMapingResult=[];
+    this.ProjectClassification = false;
+    this.adminSandbox.cityMapingResult = [];
     this.State = '';
     this.Mapping = '';
     this.District = '';
     this.City = '';
   }
-  radioProject(){
-    this.ProjectClassification=true;
+  radioProject() {
+    this.ProjectClassification = true;
     this.StateClassification = false;
     this.DistrictClassification = false;
     this.CityClassification = false;
-    this.adminSandbox.projectMapingResult=[];
+    this.adminSandbox.projectMapingResult = [];
     this.State = '';
     this.Mapping = '';
     this.District = '';
     this.City = '';
-    this.ProjectName='';
+    this.ProjectName = '';
   }
   onClickClassificationMappingMaster(event: Event, formGroup: any) {
-    debugger
     this.submitted = true;
     event.stopPropagation();
     if (this.classificationMappingMaster.valid) {
@@ -182,21 +181,20 @@ export class MappingClassificationMasterComponent implements OnInit {
     }
   }
   onClickProjectClassificationMappingMaster(event: Event, formGroup: any) {
-    debugger
     this.submitted = true;
     event.stopPropagation();
     if (this.classificationProjectMappingMaster.valid) {
       this.adminSandbox.postProjectClassificationMapping(formGroup);
-      this.adminSandbox.getProjectClassificationMapping(formGroup.get('ddlStateCodeP').value, formGroup.get('ddlDistrictCodeP').value,formGroup.get('ddlCityP').value);
+      this.adminSandbox.getProjectClassificationMapping(formGroup.get('ddlStateCodeP').value, formGroup.get('ddlDistrictCodeP').value, formGroup.get('ddlCityP').value);
       this.submitted = false;
       this.classificationProjectMappingMaster.reset();
       this.State = '';
       this.Mapping = '';
       this.District = '';
       this.City = '';
-      this.ProjectName='';
+      this.ProjectName = '';
     }
   }
- 
- 
+
+
 }

@@ -1,108 +1,117 @@
-
-  <div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
-    <div class="w3-card-4">
-      <h3
+<div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
+  <div class="w3-card-4">
+    <h3
       style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
-        Create City-Master </h3>
-    </div>
-    <br>
-    <div class="form-container">
-      <form [formGroup]="cityMaster" (ngSubmit)="onClickCityMaster($event, cityMaster)">
-          <div class="w3-row">
-              <div class="w3-quarter w3-left" style="width: 10%;">
-                  <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-                      State Name :
-                    </label>
-              </div>
-              <div class="w3-quarter w3-left" style="width: 22%;">
-                  <select [formControl]="ddlStateCode"  [(ngModel)]="State"  style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-                  (change)="adminSandbox.getStateDistrictData($event.target.value);adminSandbox.getCityData($event.target.value,null);this.District=''"
-                  class="w3-input w3-border">
-                  <option value="" disabled>Please select state--</option>
-                  <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
-                      {{state.States_UT}}</option>
-              </select>
-        <label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-          select
-          state name. </label>
-              </div>
-             
-              <div class="w3-quarter w3-center" style="width: 10%;">
-                  <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-                      District Name :
-                    </label>
-              </div>
-              <div class="w3-quarter w3-left" style="width: 22%;">
-                  <select [formControl]="ddlDistrictCode" [(ngModel)]="District"    style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-                  (change)="adminSandbox.getDistrictCityData($event.target.value);adminSandbox.getCityData(ddlStateCode.value,ddlDistrictCode.value);" class="w3-input w3-border">
-                  <option value="" disabled>Please select district--</option>
-                  <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster"
-                      [value]="ditrict.Dcode">
-                      {{ditrict.District}}</option>
-              </select>       
-                <label *ngIf="submitted && ddlDistrictCode.hasError('required')" class="error-label"
-                  style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                  select
-                  district name. </label>
-              </div>
-              <div class="w3-quarter w3-center" style="width: 10%;">
-                <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-                  City Name:
-                </label>
-              </div>
-              <div class="w3-quarter w3-left" style="width: 22%;">
-                  <input type="text" class="w3-input w3-border"  style="font-family: Arial, Geneva, Tahoma, sans-serif;" [formControl]="txtCityName" placeholder="City Name">
-                  <label *ngIf="submitted && txtCityName.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                    enter city name. </label>
-              </div>
-            </div>
-      <br>
-        <div class="w3-row">
-           
-          <div class="w3-quarter w3-left" style="width: 10%;">
-            <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-              City Code :
-            </label>
-          </div>
-          <div class="w3-quarter w3-left" style="width: 22%;">
-            <input type="text" class="w3-input w3-border"  style="font-family: Arial, Geneva, Tahoma, sans-serif;" [formControl]="txtCityCode" placeholder=" City Code ">
-            <label *ngIf="submitted && txtCityCode.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-              enter city code.</label>
-          </div>
-        </div>
-        <br>
-        <div style="text-align: center">
-          <button type="submit"  style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
-        </div>
-        <br>
-      </form>
-      <table class="table" border="1px"  style="width: 89%;" align="center" *ngIf="adminSandbox.cityMaster.length>0">
-        <thead style="background-color: lightgray; font-weight: bold">
-          <tr>
-            <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
-            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">City Name</td>
-            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">City Code</td>
-            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Action</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let city of adminSandbox.cityMaster;let i = index"
-            style="text-align: center;background-color:white">
-            <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
-            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{city.City}}</td>
-            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{city.CityCode}}</td>
-            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-              <button (click)="adminSandbox.editCityMaster('block',city)" type="submit"
-                class="w3-btn w3-green w3-round w3-ripple">Edit</button>
-              &nbsp;
-              <button (click)="adminSandbox.deleteCityData(city.CityId)" type="submit"
-                class="w3-btn w3-red w3-round w3-ripple">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      Create City-Master </h3>
   </div>
+  <br>
+  <div class="form-container">
+    <form [formGroup]="cityMaster" (ngSubmit)="onClickCityMaster($event, cityMaster)">
+      <div class="w3-row">
+        <div class="w3-quarter w3-left" style="width: 10%;">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            State Name :
+          </label>
+        </div>
+        <div class="w3-quarter w3-left" style="width: 22%;">
+          <select [formControl]="ddlStateCode" [(ngModel)]="State"
+            style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            (change)="adminSandbox.getStateDistrictData($event.target.value);adminSandbox.getCityData($event.target.value,null);this.District=''"
+            class="w3-input w3-border">
+            <option value="" disabled>Please select state--</option>
+            <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+              {{state.States_UT}}</option>
+          </select>
+          <label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label"
+            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+            select
+            state name. </label>
+        </div>
+
+        <div class="w3-quarter w3-center" style="width: 10%;">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            District Name :
+          </label>
+        </div>
+        <div class="w3-quarter w3-left" style="width: 22%;">
+          <select [formControl]="ddlDistrictCode" [(ngModel)]="District"
+            style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            (change)="adminSandbox.getDistrictCityData($event.target.value);adminSandbox.getCityData(ddlStateCode.value,ddlDistrictCode.value);"
+            class="w3-input w3-border">
+            <option value="" disabled>Please select district--</option>
+            <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster" [value]="ditrict.Dcode">
+              {{ditrict.District}}</option>
+          </select>
+          <label *ngIf="submitted && ddlDistrictCode.hasError('required')" class="error-label"
+            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+            select
+            district name. </label>
+        </div>
+        <div class="w3-quarter w3-center" style="width: 10%;">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            City Name:
+          </label>
+        </div>
+        <div class="w3-quarter w3-left" style="width: 22%;">
+          <input type="text" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            [formControl]="txtCityName" placeholder="City Name">
+          <label *ngIf="submitted && txtCityName.hasError('required')" class="error-label"
+            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+            enter city name. </label>
+        </div>
+      </div>
+      <br>
+      <div class="w3-row">
+
+        <div class="w3-quarter w3-left" style="width: 10%;">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            City Code :
+          </label>
+        </div>
+        <div class="w3-quarter w3-left" style="width: 22%;">
+          <input type="text" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            [formControl]="txtCityCode" placeholder=" City Code ">
+          <label *ngIf="submitted && txtCityCode.hasError('required')" class="error-label"
+            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+            enter city code.</label>
+        </div>
+      </div>
+      <br>
+      <div style="text-align: center">
+        <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+          class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+      </div>
+      <br>
+    </form>
+    <table class="table" border="1px" style="width: 89%;" align="center" *ngIf="adminSandbox.cityMaster.length>0">
+      <thead style="background-color: lightgray; font-weight: bold">
+        <tr>
+          <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">City Name</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">City Code</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let city of adminSandbox.cityMaster;let i = index"
+          style="text-align: center;background-color:white">
+          <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+            {{city.City}}</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+            {{city.CityCode}}</td>
+          <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+            <button (click)="adminSandbox.editCityMaster('block',city)" type="submit"
+              class="w3-btn w3-green w3-round w3-ripple">Edit</button>
+            &nbsp;
+            <button (click)="adminSandbox.deleteCityData(city.CityId)" type="submit"
+              class="w3-btn w3-red w3-round w3-ripple">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <div [style.display]="adminSandbox.showProperty" class="w3-modal w3-animate-opacity">
   <div class="w3-modal-content w3-card-4">
@@ -115,51 +124,50 @@
     <div class="w3-container">
       <form>
         <div class="w3-row">
-            <div class="w3-quarter w3-left">
-                <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-                  State Name :
-                </label>
-              </div>   
-                  <div class="w3-quarter w3-left" >
-                      <select name="ddlStateCode"   [(ngModel)]="adminSandbox.EditCityMaster.ddlStateCode"
-                          (change)="adminSandbox.getStateDistrictData($event.target.value)"
-                          class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-                          <option value="" disabled>Please select state--</option>
-                          <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
-                              {{state.States}}</option>
-                      </select>        
-              </div>
+          <div class="w3-quarter w3-left">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              State Name :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left">
+            <select name="ddlStateCode" [(ngModel)]="adminSandbox.EditCityMaster.ddlStateCode"
+              (change)="adminSandbox.getStateDistrictData($event.target.value)" class="w3-input w3-border"
+              style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              <option value="" disabled>Please select state--</option>
+              <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                {{state.States_UT}}</option>
+            </select>
+          </div>
           <div class="w3-quarter w3-left">
             <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
               District Name :
             </label>
           </div>
           <div class="w3-quarter w3-left">
-              <select [formControl]="ddlDistrictCode" [(ngModel)]="adminSandbox.EditCityMaster.ddlDistrictCode"
+            <select [formControl]="ddlDistrictCode" [(ngModel)]="adminSandbox.EditCityMaster.ddlDistrictCode"
               (change)="adminSandbox.getDistrictCityData($event.target.value)" class="w3-input w3-border"
               style="font-family: Arial, Geneva, Tahoma, sans-serif;">
               <option value="" disabled>Please select district--</option>
-              <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster"
-                  [value]="ditrict.Dcode">
-                  {{ditrict.District}}</option>
-          </select>
-          </div>       
+              <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster" [value]="ditrict.Dcode">
+                {{ditrict.District}}</option>
+            </select>
+          </div>
         </div>
         <div>
           <input type="hidden" name="hiddendTxtCityID" [(ngModel)]="adminSandbox.EditCityMaster.hiddendTxtCityID" />
         </div>
         <br>
         <div class="w3-row">
-            <div class="w3-quarter w3-center">
-                <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-                  City Name :
-                </label>
-              </div>
-              <div class="w3-quarter w3-left">
-                <input type="text" [(ngModel)]="adminSandbox.EditCityMaster.txtCityName" class="w3-input w3-border"
-                  name="txtCityName" placeholder=" City Name" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-    
-              </div>
+          <div class="w3-quarter w3-center">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              City Name :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left">
+            <input type="text" [(ngModel)]="adminSandbox.EditCityMaster.txtCityName" class="w3-input w3-border"
+              name="txtCityName" placeholder=" City Name" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+
+          </div>
           <div class="w3-quarter w3-left">
             <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
               City Code :
@@ -172,8 +180,8 @@
         </div>
         <br>
         <div style="text-align: center">
-          <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;" (click)="adminSandbox.updateCityMaster()"
-            class="w3-btn w3-orange w3-round w3-ripple">Submit</button>         
+          <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            (click)="adminSandbox.updateCityMaster()" class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
         </div>
         <br>
       </form>

@@ -11,7 +11,7 @@ export class CityMasterComponent implements OnInit {
   public submitted: boolean = false;
   public txtCityName: AbstractControl;
   public txtCityCode: AbstractControl;
-  public ddlStateCode:AbstractControl;
+  public ddlStateCode: AbstractControl;
   public ddlDistrictCode: AbstractControl;
   public cityMaster: FormGroup;
   DistrictCode: string;
@@ -24,9 +24,9 @@ export class CityMasterComponent implements OnInit {
     this.DistrictCode = '';
 
     this.adminSandbox.getStateData();
-    this.State='';
-    this.District='';
-    this.adminSandbox.cityMaster=[];
+    this.State = '';
+    this.District = '';
+    this.adminSandbox.cityMaster = [];
 
   }
   public onCityMaster(): void {
@@ -49,8 +49,8 @@ export class CityMasterComponent implements OnInit {
       this.adminSandbox.postCityData(formGroup)
       this.submitted = false;
       this.cityMaster.reset();
-      this.State='';
-      this.District='';
+      this.State = '';
+      this.District = '';
 
     }
   }
