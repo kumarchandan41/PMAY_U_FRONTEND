@@ -62,7 +62,6 @@ export class PhysicalProgressComponent implements OnInit {
     this.ddlComponent = this.physicalProgress.controls['ddlComponent'];
   }
   onClickPhysicalProgess(event: Event) {
-debugger
     this.submitted = true;
       this.adminSandbox.postPhysicalProgress();    
       this.submitted = false;

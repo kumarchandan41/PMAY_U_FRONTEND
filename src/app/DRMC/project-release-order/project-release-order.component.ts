@@ -75,7 +75,6 @@ export class ProjectReleaseOrderComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
   onClickReleaseOrder(event: Event, form: any): void {
-   debugger
     this.submitted = true;
     event.stopPropagation();
     if (this.releaseOrder.valid) {

@@ -88,19 +88,16 @@ export class ProjectUcSubmissionComponent implements OnInit {
 
   }
   RadioButtonInstallment(state: any, district: any, ddlcity: any, project: any) {
-    debugger
     this.getUCSubmission(state, district, ddlcity, project);
   }
 
   getUCSubmission(statecode: any, districtcode: any, citycode: any, projectName: any) {
-    debugger
     this.userMasterService.getUCSubmission(statecode, districtcode, citycode, projectName).subscribe(data => {
       this.releaseUC = data;
       this.releaseFundFlow.setControl('itemRows', this.releaseUCSubmission(this.releaseUC));
     })
   }
   releaseUCSubmission(releasefundflow: any): FormArray {
-    debugger
     if (releasefundflow.length == 0) {
       this.releaseFundFlow = this.fb.group({
         itemRows: this.fb.array([this.initItemRows('')]),
@@ -136,7 +133,6 @@ export class ProjectUcSubmissionComponent implements OnInit {
     return this.releaseFundFlow.get('itemRows') as FormArray;
   }
   initItemRows(UC: any): FormGroup {
-    debugger
     return this.fb.group({
       Source: UC.Source,
       SanctionNumber: UC.SanctionNumber,
@@ -157,7 +153,6 @@ export class ProjectUcSubmissionComponent implements OnInit {
   }
 
   addNewReleaseRow(UCValue: any, i: any) {
-    debugger
     this.formArr.push(this.initItemRows(UCValue.itemRows[i]));
   }
 

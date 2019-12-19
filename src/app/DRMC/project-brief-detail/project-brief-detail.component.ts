@@ -141,7 +141,6 @@ export class ProjectBriefDetailComponent implements OnInit {
 
   }
   onClickProjectBriefDetail(event: Event, form: any) {
-   debugger
     this.submitted = true;
     event.stopPropagation();
     if (this.projectBriefDetail.valid) {

@@ -428,7 +428,7 @@ export class AdminSandbox {
   getStateData() {
      
       this.userMasterService.getStateData().subscribe(data => {
-        console.log(data);
+        // console.log(data);
       this.stateMaster = data;
     });
   }
@@ -471,7 +471,7 @@ export class AdminSandbox {
   deleteStateData(SchemeComponentId: any) {
     
     this.userMasterService.deleteStateData(SchemeComponentId).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       if (data.status == "200") {
         this.snotifyService.success("State Delete Successfully...", "", {
           position: SnotifyPosition.rightTop,
@@ -1124,10 +1124,6 @@ export class AdminSandbox {
 
     this.userMasterService.getProjectDetailsData(statecode, districtcode, citycode, scheme, component).subscribe(data => {
       this.projectDetailMaster = data;
-
-
-
-
     });
   }
   deleteProjectDetailData(ProjectId: any) {
@@ -1626,7 +1622,7 @@ export class AdminSandbox {
 
   SlumArray(value: any) {
     this.Slum = value;
-    console.log(this.Slum);
+    // console.log(this.Slum);
   }
 
   getProjectBriefDetail() {

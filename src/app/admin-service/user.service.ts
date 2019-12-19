@@ -316,6 +316,7 @@ export class UserService {
   }
   //get api for agency on behlf of city
   getAgencyData(CityCode: any): Observable<any> {
+    console.log('CityCode---------->>>', CityCode)
     return this.http.get(this.baseUrl + "/Admin_Value/GetAgencyId/" + CityCode, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
