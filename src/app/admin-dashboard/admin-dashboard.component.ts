@@ -26,23 +26,23 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   public getPercent: any;
   LoginTypeId: string;
   data: any;
-  counter: number = 83.69;
-  counter1: number = 49.54;
-  counter5: number = 130293;
-  counter2: number = 26.14;
-  counter3: number = 23.97;
-  counter4: number = 72121;
-  counter6: number = 51550;
-  counter7: number = 41291;
-  counter8: number = 4.97;
-  counter9: number = 2.69;
-  counter10: number = 2.37;
-  counter11: number = 96.97;
-  counter12: number = 215.48;
-  counter14: number = 312.45;
-  counter15: number = 34.63;
-  counter16: number = 76.96;
-  counter17: number = 111.59;
+  counter: number = 96.58;
+  counter1: number = 56.91;
+  counter2: number = 29.53;
+  counter3: number = 27.04;
+  counter4: number = 82982;
+  counter5: number = 151026;
+  counter6: number = 57915;
+  counter7: number = 49717;
+  counter8: number = 5.70;
+  counter9: number = 2.93;
+  counter10: number = 2.77;
+  counter11: number = 106;
+  counter12: number = 233;
+  counter14: number = 339;
+  counter15: number = 38;
+  counter16: number = 83;
+  counter17: number = 121;
 
   constructor(private gevent: GlobalEvent, private router: ActivatedRoute, private renderer: Renderer) {
     //https://www.npmjs.com/package/angular2-counto
