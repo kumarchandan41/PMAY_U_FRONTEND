@@ -117,6 +117,31 @@
             checked="true">Occupied
         </span>
       </div>
+
+      <!-- component show hide -->
+      <div id="checkboxFilter">
+        <span><b>Show Components</b></span>
+        <span [ngStyle]="{'display':JvrmDisplay1}">
+          <input type="checkbox" (change)="handleBLCtable($event)" name="BLC" value="BLC">
+          BLC
+        </span>
+        <span>
+          <input type="checkbox" (change)="handleAHPtable($event)" name="AHP" value="AHP">
+          AHP
+        </span>
+        <span>
+          <input type="checkbox" (change)="handleISSRtable($event)" name="ISSR" value="ISSR">ISSR
+        </span>
+        <span>
+          <input type="checkbox" (change)="handleCLSStable($event)" name="CLSS" value="CLSS"> CLSS
+        </span>
+        <span>
+          <input type="checkbox" (change)="handleJNNURMtable($event)" name="JNNURM" value="JNNURM">JNNURM
+        </span>
+        <span>
+          <input type="checkbox" (change)="handlePMAYUtable($event)" name="PMAYU" value="PMAYU">PMAY(U)
+        </span>
+      </div>
       <!-- new code-->
 
 
@@ -131,8 +156,8 @@
         <tr style="text-align:center; background-color:#ccc" class="printHeader">
 
         <tr class="tableHeader">
-          <td rowspan="2" style="text-align:center;font-size: 13px;">
-            <b>SrNo</b></td>
+          <!-- <td rowspan="2" style="text-align:center;font-size: 13px;">
+            <b>SrNo</b></td> -->
           <td rowspan="2" style="text-align:center;font-size: 13px;">
             <b>Component</b></td>
           <td rowspan="2" style="text-align:center;font-size: 13px;">
@@ -165,10 +190,10 @@
         <!-- <tr>
             </tr> -->
 
-        <tr height="10">
-          <td align="center" height="20" rowspan="7" style="text-align:center;font-size: 13px;">
+        <tr height="10" [ngStyle]="{'display':displayBLCtable}">
+          <!-- <td align="center" height="20" rowspan="7" style="text-align:center;font-size: 13px;">
             1
-          </td>
+          </td> -->
           <td height="10" rowspan="7" style="text-align: center;font-size: 13px;">
             BLC
           </td>
@@ -192,7 +217,7 @@
           <td [ngStyle]="{'display':Occupied}" height="10" style="text-align: right;font-size: 13px;">
             {{HousesOccupied01.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayBLCtable}">
           <td style="font-size: 13px;" align="center">2015-16</td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolved1.toLocaleString('en-IN')}} </td>
@@ -210,7 +235,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied1.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayBLCtable}">
           <td style="font-size: 13px;" align="center">2016-17</td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolved2.toLocaleString('en-IN')}} </td>
@@ -229,7 +254,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied2.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayBLCtable}">
           <td style="font-size: 13px;" align="center">2017-18 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolved3.toLocaleString('en-IN')}} </td>
@@ -249,7 +274,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied3.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayBLCtable}">
           <td style="font-size: 13px;" align="center">2018-19</td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolved4.toLocaleString('en-IN')}} </td>
@@ -269,7 +294,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied4.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayBLCtable}">
           <td style="font-size: 13px;" align="center">2019-20 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolved5.toLocaleString('en-IN')}} </td>
@@ -289,7 +314,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied5.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr style="background-color:#ccc" class="printHeader">
+        <tr [ngStyle]="{'display':displayBLCtable}" style="background-color:#ccc" class="printHeader">
           <td style="font-size: 13px;" align="center">Total</td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{THouseInvolved.toLocaleString('en-IN')}}</td>
@@ -309,10 +334,10 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{THousesOccupied.toLocaleString('en-IN')}}</td>
         </tr>
-        <tr>
-          <td align="center" rowspan="7" style="text-align:center;font-size: 13px;">
+        <tr [ngStyle]="{'display':displayAHPtable}">
+          <!-- <td align="center" rowspan="7" style="text-align:center;font-size: 13px;">
             2
-          </td>
+          </td> -->
           <td rowspan="7" style="text-align: center;font-size: 13px;">
             AHP
           </td>
@@ -335,7 +360,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied0_AHP.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayAHPtable}">
 
           <td style="font-size: 13px;" align="center">2015-16 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
@@ -356,8 +381,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied1_AHP.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
-
+        <tr [ngStyle]="{'display':displayAHPtable}">
           <td style="font-size: 13px;" align="center">2016-17 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolved2_AHP.toLocaleString('en-IN')}} </td>
@@ -377,7 +401,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied2_AHP.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayAHPtable}">
 
           <td style="font-size: 13px;" align="center">2017-18 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
@@ -397,7 +421,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied3_AHP.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayAHPtable}">
 
           <td style="font-size: 13px;" align="center">2018-19 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
@@ -417,7 +441,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied4_AHP.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayAHPtable}">
 
           <td style="font-size: 13px;" align="center">2019-20 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
@@ -438,7 +462,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied5_AHP.toLocaleString('en-IN')}}</td>
         </tr>
-        <tr style="background-color:#ccc" class="printHeader">
+        <tr [ngStyle]="{'display':displayAHPtable}" style="background-color:#ccc" class="printHeader">
 
           <td style="font-size: 13px;" align="center">Total</td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
@@ -459,8 +483,8 @@
             {{THousesOccupied_AHP.toLocaleString('en-IN')}}</td>
         </tr>
 
-        <tr>
-          <td align="center" rowspan="7"> 3</td>
+        <tr [ngStyle]="{'display':displayISSRtable}">
+          <!-- <td align="center" rowspan="7"> 3</td> -->
           <td rowspan="7" style="text-align: center;font-size: 13px;">
             ISSR</td>
           <td style="font-size: 13px;" align="center">2014-15 </td>
@@ -482,7 +506,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied0_ISSR.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayISSRtable}">
           <td style="font-size: 13px;" align="center">2015-16 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolved1_ISSR.toLocaleString('en-IN')}}</td>
@@ -502,7 +526,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied1_ISSR.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayISSRtable}">
           <td style="font-size: 13px;" align="center">2016-17 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolved2_ISSR.toLocaleString('en-IN')}}</td>
@@ -521,7 +545,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied2_ISSR.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayISSRtable}">
           <td style="font-size: 13px;" align="center">2017-18 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolved3_ISSR.toLocaleString('en-IN')}}</td>
@@ -542,7 +566,7 @@
             {{HousesOccupied3_ISSR.toLocaleString('en-IN')}} </td>
         </tr>
 
-        <tr>
+        <tr [ngStyle]="{'display':displayISSRtable}">
           <td style="font-size: 13px;" align="center">2018-19 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolved4_ISSR.toLocaleString('en-IN')}}</td>
@@ -561,7 +585,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupied4_ISSR.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayISSRtable}">
           <td style="font-size: 13px;" align="center">2019-20 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolved5_ISSR.toLocaleString('en-IN')}}</td>
@@ -582,7 +606,7 @@
             {{HousesOccupied5_ISSR.toLocaleString('en-IN')}} </td>
         </tr>
 
-        <tr style="background-color:#ccc" class="printHeader">
+        <tr [ngStyle]="{'display':displayISSRtable}" style="background-color:#ccc" class="printHeader">
           <td style="font-size: 13px;" align="center">Total</td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{THouseInvolved1_ISSR.toLocaleString('en-IN')}}</td>
@@ -601,10 +625,10 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{THousesOccupied1_ISSR.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
-          <td align="center" rowspan="7" style="text-align:center;font-size: 13px;">
+        <tr [ngStyle]="{'display':displayCLSStable}">
+          <!-- <td align="center" rowspan="7" style="text-align:center;font-size: 13px;">
             4
-          </td>
+          </td> -->
           <td rowspan="7" style="text-align: center;font-size: 13px;">
             CLSS </td>
           <td style="font-size: 13px;" align="center">2014-15 </td>
@@ -626,7 +650,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{Bene2014_15_CLSS.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayCLSStable}">
 
           <td style="font-size: 13px;" align="center">2015-16 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
@@ -647,7 +671,7 @@
             {{Bene2015_16_CLSS.toLocaleString('en-IN')}}</td>
           <!-- <td  style="text-align: right;font-size: 13px;">{{Bene2015_16_CLSS}} 5 </td> -->
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayCLSStable}">
 
           <td style="font-size: 13px;" align="center">2016-17 </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
@@ -669,7 +693,7 @@
             {{Bene2016_17_CLSS.toLocaleString('en-IN')}} </td>
           <!-- <td  style="text-align: right;font-size: 13px;"> {{Bene2016_17_CLSS}} </td> -->
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayCLSStable}">
 
           <td style="font-size: 13px;" align="center">2017-18
             <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2017-18','0')">2017-18</a> -->
@@ -695,7 +719,7 @@
             {{Bene2017_18_CLSS.toLocaleString('en-IN')}} </td>
           <!-- <td  style="text-align: right;font-size: 13px;"> {{Bene2017_18_CLSS}} </td> -->
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayCLSStable}">
 
           <td style="font-size: 13px;" align="center">2018-19
             <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2018-19','0')">2018-19</a> -->
@@ -722,7 +746,7 @@
             {{Bene2018_19_CLSS.toLocaleString('en-IN')}} </td>
           <!-- <td  style="text-align: right;font-size: 13px;"> {{Bene2018_19_CLSS}} </td> -->
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayCLSStable}">
 
           <td style="font-size: 13px;" align="center">2019-20
             <!-- <a style="cursor: pointer" (click)="openModalDialog('CLSS','2019-20','0')">2019-20</a> -->
@@ -748,7 +772,7 @@
             {{Bene2019_20_CLSS.toLocaleString('en-IN')}}</td>
           <!-- <td  style="text-align: right;font-size: 13px;"> {{Bene2019_20_CLSS}}</td> -->
         </tr>
-        <tr style="background-color:#ccc" class="printHeader">
+        <tr [ngStyle]="{'display':displayCLSStable}" style="background-color:#ccc" class="printHeader">
 
           <td style="font-size: 13px;" align="center">Total</td>
 
@@ -772,10 +796,10 @@
             {{BeneCLSS_Total.toLocaleString('en-IN')}} </td>
           <!-- <td  style="text-align: right;font-size: 13px;">{{BeneCLSS_Total}} </td> -->
         </tr>
-        <tr>
-          <td align="center" rowspan="2" style="text-align:center;font-size: 13px;">
+        <tr [ngStyle]="{'display':displayJNNURMtable}">
+          <!-- <td align="center" rowspan="2" style="text-align:center;font-size: 13px;">
             5
-          </td>
+          </td> -->
           <td rowspan="2" style="text-align: center;font-size: 13px;">
             JNNURM </td>
           <td style="font-size: 13px;" align="center">2014-15
@@ -801,7 +825,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupiedJNT.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr style="background-color:#ccc" class="printHeader">
+        <tr [ngStyle]="{'display':displayJNNURMtable}" style="background-color:#ccc" class="printHeader">
 
           <td style="font-size: 13px;" align="center">Total</td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">-
@@ -824,9 +848,9 @@
             {{ HousesOccupiedJNT.toLocaleString('en-IN')}} </td>
         </tr>
 
-        <tr>
-          <td rowspan="7" align="center" style="border-bottom-color: transparent;"> 6</td>
-          <td rowspan="7" style="text-align: center;font-size: 13px; border-bottom-color: transparent;">
+        <tr [ngStyle]="{'display':displayPMAYUtable}">
+          <!-- <td rowspan="7" align="center" style="border-bottom-color: transparent;"> 6</td> -->
+          <td rowspan="7" style="text-align: center;font-size: 13px; ">
             PMAY(U) </td>
           <td style="font-size: 13px;" align="center">2014-15</td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
@@ -846,7 +870,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupiedT1.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayPMAYUtable}">
           <td style="font-size: 13px;" align="center">2015-16</td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolvedT2.toLocaleString('en-IN')}} </td>
@@ -867,7 +891,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupiedT2.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayPMAYUtable}">
 
           <td style="font-size: 13px;" align="center">2016-17</td>
 
@@ -889,7 +913,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupiedT3.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
+        <tr [ngStyle]="{'display':displayPMAYUtable}">
 
           <td style="font-size: 13px;" align="center">2017-18</td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
@@ -909,9 +933,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupiedT4.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
-        <tr>
-
+        <tr [ngStyle]="{'display':displayPMAYUtable}">
           <td style="font-size: 13px;" align="center">2018-19</td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolvedT5.toLocaleString('en-IN')}} </td>
@@ -930,10 +952,7 @@
           <td [ngStyle]="{'display':Occupied}" style="text-align: right;font-size: 13px;">
             {{HousesOccupiedT5.toLocaleString('en-IN')}} </td>
         </tr>
-        <tr>
-        <tr>
-          <td></td>
-          <td></td>
+        <tr [ngStyle]="{'display':displayPMAYUtable}">
           <td style="font-size: 13px;" align="center">2019-20</td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{HouseInvolvedT6.toLocaleString('en-IN')}}
@@ -960,10 +979,7 @@
           </td>
         </tr>
 
-        <tr class="tableHeader">
-          <td align="center"> </td>
-          <td style="text-align: right;font-size: 13px;">
-          </td>
+        <tr [ngStyle]="{'display':displayPMAYUtable}" style="background-color:#ccc" class="printHeader">
           <td style="font-size: 13px;" align="center">Total </td>
           <td [ngStyle]="{'display':SConst}" style="text-align: right;font-size: 13px;">
             {{THouseInvolvedGT.toLocaleString('en-IN')}} </td>

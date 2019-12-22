@@ -649,6 +649,13 @@ export class VerticalHousesStatusComponent implements OnInit {
   Grounded: string;
   Completed: string;
   Occupied: string;
+
+  displayBLCtable: string;
+  displayAHPtable: string;
+  displayISSRtable: string;
+  displayCLSStable: string;
+  displayJNNURMtable: string;
+  displayPMAYUtable: string;
   //  PMAYT_1: any;
 
   constructor(private router: Router, private routers: ActivatedRoute, public service: GraphService, private gevent: GlobalEvent, private modalService: NgbModal) {
@@ -796,6 +803,12 @@ export class VerticalHousesStatusComponent implements OnInit {
     this.THouseInvolved = 0;
     this.fistNumber = 0;
     this.secondNumber = 0;
+    this.displayBLCtable = 'none';
+    this.displayAHPtable = 'none';
+    this.displayISSRtable = 'none';
+    this.displayCLSStable = 'none';
+    this.displayJNNURMtable = 'none';
+    this.displayPMAYUtable = 'none';
 
     this.service.StateList();
     this.service.DisttList(this.stateCodes);
@@ -1321,6 +1334,70 @@ export class VerticalHousesStatusComponent implements OnInit {
     }
   }
 
+  getRowIndex($event) {
+    const par = $event.parentNode
+    console.log('par----------->>', par)
+    console.log('event--------------->>?', $event.rowIndex, $event)
+    return $event.rowIndex
+  }
+
+  handleBLCtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayBLCtable = 'table-row';
+    }
+    else {
+      this.displayBLCtable = 'none';
+    }
+  }
+
+  handleAHPtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayAHPtable = 'table-row';
+    }
+    else {
+      this.displayAHPtable = 'none';
+    }
+  }
+
+  handleISSRtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayISSRtable = 'table-row';
+    }
+    else {
+      this.displayISSRtable = 'none';
+    }
+  }
+  handleCLSStable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayCLSStable = 'table-row';
+    }
+    else {
+      this.displayCLSStable = 'none';
+    }
+  }
+  handleJNNURMtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayJNNURMtable = 'table-row';
+    }
+    else {
+      this.displayJNNURMtable = 'none';
+    }
+  }
+  handlePMAYUtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayPMAYUtable = 'table-row';
+    }
+    else {
+      this.displayPMAYUtable = 'none';
+    }
+  }
+
   HSubjConst($event) {
     var data: string;
     const checked = $event.target.checked;
@@ -1331,6 +1408,7 @@ export class VerticalHousesStatusComponent implements OnInit {
       this.SConst = 'none';
     }
   }
+
   CASanct($event) {
     var data: string;
     const checked = $event.target.checked;
