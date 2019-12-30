@@ -969,6 +969,11 @@ export class VerticalFinancialStatusComponent implements OnInit {
   UC_Received_19_20_G: string;
   public ReleasedFundsCol: number;
 
+  displayBLCtable: string;
+  displayAHPtable: string;
+  displayISSRtable: string;
+  displayCLSStable: string;
+  displayPMAYUtable: string;
   //----------------------------------- 
 
 
@@ -1075,6 +1080,12 @@ export class VerticalFinancialStatusComponent implements OnInit {
     //   this.GetFilterDatanew(this.stateCodes,this.districtCodes ,this.cityCodes, this.Compid );
     this.GetFinancialData(this.stateCodes, this.districtCodes, this.cityCodes, this.Compid);
 
+    this.displayBLCtable = 'none';
+    this.displayAHPtable = 'none';
+    this.displayISSRtable = 'none';
+    this.displayCLSStable = 'none';
+    this.displayPMAYUtable = 'none';
+
     //stateCodes, districtCodes, cityCodes, Compid
 
     //  <<<<<<<<<<<<<<<<<<<<<<<Graph >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -1136,6 +1147,55 @@ export class VerticalFinancialStatusComponent implements OnInit {
     }
     else {
       this.PCOST = 'none';
+    }
+  }
+
+  handleBLCtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayBLCtable = 'table-row';
+    }
+    else {
+      this.displayBLCtable = 'none';
+    }
+  }
+
+  handleAHPtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayAHPtable = 'table-row';
+    }
+    else {
+      this.displayAHPtable = 'none';
+    }
+  }
+
+  handleISSRtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayISSRtable = 'table-row';
+    }
+    else {
+      this.displayISSRtable = 'none';
+    }
+  }
+  handleCLSStable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayCLSStable = 'table-row';
+    }
+    else {
+      this.displayCLSStable = 'none';
+    }
+  }
+ 
+  handlePMAYUtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayPMAYUtable = 'table-row';
+    }
+    else {
+      this.displayPMAYUtable = 'none';
     }
   }
 

@@ -649,6 +649,13 @@ export class VerticalHousesStatusComponent implements OnInit {
   Grounded: string;
   Completed: string;
   Occupied: string;
+
+  displayBLCtable: string;
+  displayAHPtable: string;
+  displayISSRtable: string;
+  displayCLSStable: string;
+  displayJNNURMtable: string;
+  displayPMAYUtable: string;
   //  PMAYT_1: any;
 
   constructor(private router: Router, private routers: ActivatedRoute, public service: GraphService, private gevent: GlobalEvent, private modalService: NgbModal) {
@@ -796,6 +803,12 @@ export class VerticalHousesStatusComponent implements OnInit {
     this.THouseInvolved = 0;
     this.fistNumber = 0;
     this.secondNumber = 0;
+    this.displayBLCtable = 'none';
+    this.displayAHPtable = 'none';
+    this.displayISSRtable = 'none';
+    this.displayCLSStable = 'none';
+    this.displayJNNURMtable = 'none';
+    this.displayPMAYUtable = 'none';
 
     this.service.StateList();
     this.service.DisttList(this.stateCodes);
@@ -1293,7 +1306,6 @@ export class VerticalHousesStatusComponent implements OnInit {
   }
 
   checkForm($event) {
-    debugger;
     this.RdStatus = $event.target.value;
     if (this.RdStatus === 'Phy1') {
 
@@ -1321,6 +1333,64 @@ export class VerticalHousesStatusComponent implements OnInit {
     }
   }
 
+  
+  handleBLCtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayBLCtable = 'table-row';
+    }
+    else {
+      this.displayBLCtable = 'none';
+    }
+  }
+
+  handleAHPtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayAHPtable = 'table-row';
+    }
+    else {
+      this.displayAHPtable = 'none';
+    }
+  }
+
+  handleISSRtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayISSRtable = 'table-row';
+    }
+    else {
+      this.displayISSRtable = 'none';
+    }
+  }
+  handleCLSStable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayCLSStable = 'table-row';
+    }
+    else {
+      this.displayCLSStable = 'none';
+    }
+  }
+  handleJNNURMtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayJNNURMtable = 'table-row';
+    }
+    else {
+      this.displayJNNURMtable = 'none';
+    }
+  }
+  handlePMAYUtable($event) {
+    const checked = $event.target.checked;
+    if (checked) {
+      this.displayPMAYUtable = 'table-row';
+    }
+    else {
+      this.displayPMAYUtable = 'none';
+    }
+  }
+
   HSubjConst($event) {
     var data: string;
     const checked = $event.target.checked;
@@ -1331,6 +1401,7 @@ export class VerticalHousesStatusComponent implements OnInit {
       this.SConst = 'none';
     }
   }
+
   CASanct($event) {
     var data: string;
     const checked = $event.target.checked;
@@ -3621,7 +3692,6 @@ export class VerticalHousesStatusComponent implements OnInit {
 
   }
   getStateDetails_G(stateCodes) {
-    // debugger;
 
     //alert(stateCodes);
     // alert(this.districtCodes);
@@ -5496,7 +5566,6 @@ export class VerticalHousesStatusComponent implements OnInit {
 
     }
     //  let x = stringToSplit.split(" ");
-    debugger;
     if (splitted.length == 1) {
       if (x2 == "2014_15)" || x2 == "2014_15")
         x2 = "2014-15";
@@ -7163,8 +7232,6 @@ export class VerticalHousesStatusComponent implements OnInit {
 
 
   BindAHP_Datanew(stateCode, DisttCode, cityCode, Fin_Year) {
-    //debugger ;
-    //debugger ;
     // alert('Prabodh');
     var str = Fin_Year;//'SUM(BENE2014_15),SUM(BENE2015_16)';
     //  alert(str.length);
@@ -7222,7 +7289,6 @@ export class VerticalHousesStatusComponent implements OnInit {
 
     }
     //  let x = stringToSplit.split(" ");
-    debugger;
     if (splitted.length == 1) {
       if (x2 == "2014_15)")
         x2 = "2014-15";
@@ -9360,7 +9426,6 @@ export class VerticalHousesStatusComponent implements OnInit {
       this.Second_Houses18_19_G = result[4].Second_Houses;
       this.Third_Houses18_19_G = result[4].Third_Houses;
 
-      //          debugger;
       //Sixth row data
       this.Fin_Year19_20_G = result[5].FinYear;
       this.Housesinvolved19_20_G = result[5].Housesinvolved;
@@ -11432,7 +11497,6 @@ export class VerticalHousesStatusComponent implements OnInit {
     }
   }
   BindAHP_Data(stateCode, DisttCode, cityCode, Comp, Fin_Year) {
-    // debugger;
     //  alert(stateCode);
     Comp = "AHP";
     this.service.sp_create_BLC_AHP_DATA(stateCode, DisttCode, cityCode, Comp).subscribe(result => { // new code
