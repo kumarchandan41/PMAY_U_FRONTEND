@@ -1306,7 +1306,6 @@ export class VerticalHousesStatusComponent implements OnInit {
   }
 
   checkForm($event) {
-    debugger;
     this.RdStatus = $event.target.value;
     if (this.RdStatus === 'Phy1') {
 
@@ -1334,13 +1333,7 @@ export class VerticalHousesStatusComponent implements OnInit {
     }
   }
 
-  getRowIndex($event) {
-    const par = $event.parentNode
-    console.log('par----------->>', par)
-    console.log('event--------------->>?', $event.rowIndex, $event)
-    return $event.rowIndex
-  }
-
+  
   handleBLCtable($event) {
     const checked = $event.target.checked;
     if (checked) {
@@ -3699,7 +3692,6 @@ export class VerticalHousesStatusComponent implements OnInit {
 
   }
   getStateDetails_G(stateCodes) {
-    // debugger;
 
     //alert(stateCodes);
     // alert(this.districtCodes);
@@ -5574,7 +5566,6 @@ export class VerticalHousesStatusComponent implements OnInit {
 
     }
     //  let x = stringToSplit.split(" ");
-    debugger;
     if (splitted.length == 1) {
       if (x2 == "2014_15)" || x2 == "2014_15")
         x2 = "2014-15";
@@ -7241,8 +7232,6 @@ export class VerticalHousesStatusComponent implements OnInit {
 
 
   BindAHP_Datanew(stateCode, DisttCode, cityCode, Fin_Year) {
-    //debugger ;
-    //debugger ;
     // alert('Prabodh');
     var str = Fin_Year;//'SUM(BENE2014_15),SUM(BENE2015_16)';
     //  alert(str.length);
@@ -7300,7 +7289,6 @@ export class VerticalHousesStatusComponent implements OnInit {
 
     }
     //  let x = stringToSplit.split(" ");
-    debugger;
     if (splitted.length == 1) {
       if (x2 == "2014_15)")
         x2 = "2014-15";
@@ -9438,7 +9426,6 @@ export class VerticalHousesStatusComponent implements OnInit {
       this.Second_Houses18_19_G = result[4].Second_Houses;
       this.Third_Houses18_19_G = result[4].Third_Houses;
 
-      //          debugger;
       //Sixth row data
       this.Fin_Year19_20_G = result[5].FinYear;
       this.Housesinvolved19_20_G = result[5].Housesinvolved;
@@ -11510,7 +11497,6 @@ export class VerticalHousesStatusComponent implements OnInit {
     }
   }
   BindAHP_Data(stateCode, DisttCode, cityCode, Comp, Fin_Year) {
-    // debugger;
     //  alert(stateCode);
     Comp = "AHP";
     this.service.sp_create_BLC_AHP_DATA(stateCode, DisttCode, cityCode, Comp).subscribe(result => { // new code
