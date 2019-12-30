@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { States, Designation, District, City, Charts, Comp_Values, CLSS_Values, CLSS_Citywise_Values, JNReport, Demand, JNAtAGlance, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, CompMaster, getHFACodes, ComponentWiseDATA, PMAY_FinancialData, FinancialProgress, StateScore, PMAY_DATA, Demand_SanctionStateWise, UserMaster, CLSS_CityValues, Houses_Status, StateWise_NewCLSS, RegistrationDATA, MapDATA, PMAY_DATA_New, PMAY_DATA_Financial, PMAY_DATA_Fin } from '../model/chart';
+import { States, Designation, District, City, Charts, Comp_Values, CLSS_Values, CLSS_Citywise_Values, JNReport, Demand, JNAtAGlance, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, CompMaster, getHFACodes, ComponentWiseDATA, PMAY_FinancialData, FinancialProgress, StateScore, PMAY_DATA, Demand_SanctionStateWise, UserMaster, CLSS_CityValues, Houses_Status, StateWise_NewCLSS, RegistrationDATA, MapDATA, PMAY_DATA_New, PMAY_DATA_Financial, PMAY_DATA_Fin, PdashBoard } from '../model/chart';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -20,11 +20,11 @@ export class GraphService {
      //   url1 ="http://localhost:58396/API/RegistrationApi/";
 
 
-      //url="http://localhost:58396/api/Buldings/";
-   //url1 ="http://localhost:58396/API/RegistrationApi/";
+     url="http://localhost:58396/api/Buldings/";
+    url1 ="http://localhost:58396/API/RegistrationApi/";
 
-  url="http://10.196.69.102/hfa_api/api/Buldings/";
- url1 ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
+ // url="http://10.196.69.102/hfa_api/api/Buldings/";
+// url1 ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
    
 
   StateDetails : States[];
@@ -1120,6 +1120,13 @@ ServiceUserAdminDetails():Observable<UserMaster[]>
 
 
           //----------------------------------
-
+          SaveDashboard(data: PdashBoard): Observable<string> { 
+               const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };  
+               return this.http.post<string>(this.url + '/SaveDashboard/',  
+               data, httpOptions);  
+          } 
+          GetDasboardDataList(): Observable<PdashBoard>{
+               return  this.http.get<PdashBoard>(this.url + 'GetDashBoardData');
+             }
       
 }

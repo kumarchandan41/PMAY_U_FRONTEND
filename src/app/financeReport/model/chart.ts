@@ -982,3 +982,23 @@ export class data{
     Completed?:number;
 }
  
+
+export class PdashBoard {
+    Sanctioned :string;   
+     Grounded : string;
+    Completed : string;
+    Occupied : string;
+    sCommitted : string;
+    Approved : string;
+    Released : string;
+    Utilized : string;
+    Overall : string;
+    sPublic : string;
+    Private : string;
+    PDaysDirect : string;
+    PDaysIndirect : string;
+    PDaysTotal : string;
+    JobsDirect : string;
+    JobsIndirect : string;
+    JobsTotal : string;
+}
