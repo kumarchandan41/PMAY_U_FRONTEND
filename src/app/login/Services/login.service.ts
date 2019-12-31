@@ -62,13 +62,11 @@ apiUrlReg:string;
   }
   onLogin1(UserName, Password)
   {    
-    alert(this.apiUrlReg );
 
       return this._http.get<string>(this.apiUrl + "LoginMaster?Username=" + UserName+ "&password=" + Password);
   }
   onLogin(UserName, Password)
   {    
-       alert(this.apiUrlReg );
       return this._http.get<string>(this.apiUrlReg + "Login_Master?Username=" + UserName+ "&password=" + Password);
   }
   CheckCrendential(UserName, Password)

@@ -198,6 +198,8 @@ LstPayData_C:PMAY_DATA[];
   DisplayTable_C: string;
   DisplyaGraph_C: string;
   public blnShowTable_C :boolean;
+  public ReleasedFundsCol: number;
+
   Third19_20_C: any=0;
   RdStatus: any;
   lstCriticalData:PMAY_DATA_New[];
@@ -344,7 +346,6 @@ getMySelection(choice)
 ngOnInit() {
       this.gevent.ColorObservable.subscribe(x=>{
       console.log('color:'+x);
-      debugger;
     });
    
    this.backgroundColor = "#ffffff"; 
@@ -356,6 +357,7 @@ ngOnInit() {
    this.Division = "0";
    this.DivisionCodes = "0";
    this.State="--Select--";
+   this.ReleasedFundsCol = 3;
   
    
   this.service.StateList();
@@ -399,18 +401,18 @@ ngOnInit() {
     // Grid  data  below
     this.service.Get_Critical_MonitoringView(this.stateCodes, this.districtCodes, this.cityCodes,"0", "").subscribe(result_Fin14 => {
       this.lstCriticalData=result_Fin14;
-      debugger;
       let result=result_Fin14.reduce(function(groups, item) {
         const val = item['Component'];
         groups[val] = groups[val] || [];
         groups[val].push(item);
         return groups;
     }, {});
+
+    console.log('result---->', result)
     this.GroupedData=result;
     })
 
    this.service.GetFinancialYear().subscribe(result=>{
-     debugger;
     this.finyear= result;
    }   )
 
@@ -507,7 +509,6 @@ ngOnInit() {
  //--------------------------------------
  this.service.Get_Critical_MonitoringView(this.stateCodes, this.districtCodes, this.cityCodes,"0", "0").subscribe(result_Fin14 => {
   this.lstCriticalData=result_Fin14;
-  debugger;
   let result=result_Fin14.reduce(function(groups, item) {
     const val = item['Component'];
     groups[val] = groups[val] || [];
@@ -569,7 +570,6 @@ this.BindBLCS_Critical_Data(this.stateCodes, this.districtCodes, this.cityCodes,
  //--------------------------------------
  this.service.Get_Critical_MonitoringView(this.stateCodes, this.districtCodes, this.cityCodes,"0", "0").subscribe(result_Fin14 => {
   this.lstCriticalData=result_Fin14;
-  debugger;
   let result=result_Fin14.reduce(function(groups, item) {
     const val = item['Component'];
     groups[val] = groups[val] || [];
@@ -619,7 +619,6 @@ this.BindBLCS_Critical_Data(this.stateCodes, this.districtCodes, this.cityCodes,
  //--------------------------------------
  this.service.Get_Critical_MonitoringView(this.stateCodes, this.districtCodes, this.cityCodes,"0", "0").subscribe(result_Fin14 => {
   this.lstCriticalData=result_Fin14;
-  debugger;
   let result=result_Fin14.reduce(function(groups, item) {
     const val = item['Component'];
     groups[val] = groups[val] || [];
@@ -3183,21 +3182,22 @@ this.GroupedData=result;
      
  FirstInst(event)
   {
-    debugger;
     let value=event.target.checked;
     this.isFirst=value;
     if(value ==false)
     {
       this.IstInst='none';
+      this.ReleasedFundsCol = this.ReleasedFundsCol - 1
+
     }
     else{
       this.IstInst='block';
+      this.ReleasedFundsCol = this.ReleasedFundsCol + 1
     }
   }
 
   HInvolved(event)
   {
-    debugger;
     let value=event.target.checked;
     this.isDisplayHouse=value;
     if(value ==false)
@@ -3211,33 +3211,35 @@ this.GroupedData=result;
 
   SecondInst(event)
   {
-    debugger;
     let value=event.target.checked;
     this.isSecond=value;
     if(value ==false)
     {
       this.IInd='none';
+      this.ReleasedFundsCol = this.ReleasedFundsCol - 1
+
     }
     else{
       this.IInd='block';
+      this.ReleasedFundsCol = this.ReleasedFundsCol + 1
     }
   }
   ThirdInst(event)
   {
-    debugger;
     let value=event.target.checked;
     this.isThird=value;
     if(value ==false)
     {
       this.IIInst='none';
+      this.ReleasedFundsCol = this.ReleasedFundsCol - 1
     }
     else{
       this.IIInst='block';
+      this.ReleasedFundsCol = this.ReleasedFundsCol + 1
     }
   }
   Grounded(event)
   {
-    debugger;
     let value=event.target.checked;
     this.isGrounded=value;
     if(value ==false)
@@ -3251,7 +3253,6 @@ this.GroupedData=result;
 
   // Completed(event)
   // {
-  //   debugger;
   //   let value=event.target.checked;
   //   if(value ==false)
   //   {
@@ -3263,7 +3264,6 @@ this.GroupedData=result;
   // }
   Completed(event)
   {
-    debugger;
     let value=event.target.checked;
     this.isCompleted =value
     if(value ==false)
@@ -3294,11 +3294,9 @@ this.GroupedData=result;
                // Grid  data  below
               this.service.Get_Critical_MonitoringView(this.stateCodes, this.districtCodes, this.cityCodes,this.selectedComp, this.selectedYears).subscribe(result_Fin14 => {
                 this.lstCriticalData=result_Fin14;
-                debugger;
                 let result=result_Fin14.reduce(function(groups, item) {
                   const val = item['Component'];
                   groups[val] = groups[val] || [];
-                  debugger;
                   groups[val].push(item);
                   return groups;
               }, {});
@@ -3329,11 +3327,9 @@ Fin_Yr(event)
      // Grid  data  below
     this.service.Get_Critical_MonitoringView(this.stateCodes, this.districtCodes, this.cityCodes,"0", this.selectedYears).subscribe(result_Fin14 => {
       this.lstCriticalData=result_Fin14;
-      debugger;
       let result=result_Fin14.reduce(function(groups, item) {
         const val = item['Component'];
         groups[val] = groups[val] || [];
-        debugger;
         groups[val].push(item);
         return groups;
     }, {});
@@ -3354,11 +3350,9 @@ Fin_Yr(event)
 
     this.service.Get_Critical_MonitoringView(this.stateCodes, this.districtCodes, this.cityCodes,"0", this.selectedYears).subscribe(result_Fin14 => {
       this.lstCriticalData=result_Fin14;
-      debugger;
       let result=result_Fin14.reduce(function(groups, item) {
         const val = item['Component'];
         groups[val] = groups[val] || [];
-        debugger;
         groups[val].push(item);
         return groups;
     }, {});
@@ -6395,7 +6389,6 @@ sp_create_AHP_Critical_DATANew(stateCode, DisttCode, cityCode, Fin_Year )
 
       // this.Fin_Year =Fin_Year;
       // alert(Fin_Year);
-      debugger;
       Comp ="ISSR";
         this.service.sp_create_ISSR_Graph_Critical_DATA(stateCode, DisttCode, cityCode,Comp,"0").subscribe(result => { // new code
           // if (result.length >0)
@@ -6403,7 +6396,6 @@ sp_create_AHP_Critical_DATANew(stateCode, DisttCode, cityCode, Fin_Year )
           //   alert('PM');
           // }
         ///first row data
-    debugger;
       //  this.Fin_Year14_15 = result[0].FinYear;
       try {
         this.Housesinvolved14_15_C = result[0].Housesinvolved;
@@ -6644,7 +6636,6 @@ sp_create_AHP_Critical_DATANew(stateCode, DisttCode, cityCode, Fin_Year )
 
     BindPMAY_Critical_AHP_Data(stateCode, DisttCode, cityCode,Comp,Fin_Year)
     {
-      debugger;
       Comp ="AHP";
         this.service.sp_create_AHP_Graph_Critical_DATA(stateCode, DisttCode, cityCode,Comp,"0").subscribe(result => { // new code
           // if (result.length >0)
@@ -6652,7 +6643,6 @@ sp_create_AHP_Critical_DATANew(stateCode, DisttCode, cityCode, Fin_Year )
           //   alert('PM');
           // }
         ///first row data
-    debugger;
       //  this.Fin_Year14_15 = result[0].FinYear;
       try {
         this.Housesinvolved14_15_C = result[0].Housesinvolved;
@@ -6895,7 +6885,6 @@ sp_create_AHP_Critical_DATANew(stateCode, DisttCode, cityCode, Fin_Year )
  
        // this.Fin_Year =Fin_Year;
        // alert(Fin_Year);
-       debugger;
        Comp ="BLCS";
          this.service.sp_create_PMAY_Critical_BLC_DATA(stateCode, DisttCode, cityCode,Comp,"0").subscribe(result => { // new code
            // if (result.length >0)
@@ -6903,7 +6892,6 @@ sp_create_AHP_Critical_DATANew(stateCode, DisttCode, cityCode, Fin_Year )
            //   alert('PM');
            // }
          ///first row data
-     debugger;
        //  this.Fin_Year14_15 = result[0].FinYear;
        try {
          this.Housesinvolved14_15_C = result[0].Housesinvolved;
