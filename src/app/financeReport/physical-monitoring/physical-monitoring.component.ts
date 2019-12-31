@@ -1349,17 +1349,7 @@ export class PhysicalMonitoringComponent implements OnInit {
     }
   }
   checkForm($event) {
-   
-    this.RdStatus =$event.target.value;
-   // alert(this.RdStatus);
-    if (this.RdStatus ==='Phy1') {
       this.router.navigate(['/Admin/CriticalMonitoring'])
-    }
-    else 
-    {
-      this.router.navigate(['/Admin/PhysicalMonitoring'])
-    }
-   
   }
 
 
