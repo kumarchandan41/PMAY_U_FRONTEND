@@ -518,7 +518,22 @@ export class PMAY_DATA_Financial{
 
 }
 
+export class PMAY_DATA_ShortFall {
+    SrNo: number;
+    Component: string;
+    State: string;
+    District: string;
+    City: string;
+    StateCode: string;
+    Dcode: string;
+    CityCode: string;
 
+    FinYear: string;
+    Completed: string;
+    Houses_Completed: string;
+    Actual_Completed: string;
+    Shortfall_Completed: string;    
+ }
 export class PMAY_DATA_Fin{
     SrNo: number;
     Component: string;

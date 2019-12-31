@@ -1,0 +1,297 @@
+<div class="container-fluid">
+  <div id="drpdown">
+    <div class="row">
+      <div id='filter' class="col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-2 col-md-2 col-sm-2">
+          <select class="form-control" [(ngModel)]="stateCodes" title="Choose State" placeholder="Choose State"
+            (change)="getStateDetails($event.target)" style="width: 100%">
+            <option value={{stValue}}>{{StateMessage}}</option>
+            <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+              {{sntry.States_UT}}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-lg-2 col-md-2 col-sm-2">
+          <select class="form-control" title="Choose District" placeholder="Choose Distt" [(ngModel)]="districtCodes"
+            (change)="getDistrictDetails($event.target.value)" style="width: 100%">
+            <option value={{distValue}}>{{DistrictMessage}}</option>
+            <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+              {{sntry.District}}
+            </option>
+          </select>
+        </div>
+
+
+        <div class="col-lg-2 col-md-2 col-sm-2">
+          <select class="form-control" title="Choose City" placeholder="Choose City" [(ngModel)]="cityCodes"
+            (change)="getCityDetails($event.target.value)" style="width: 100%">
+            <option value={{cityValue}}>{{CityMessage}}</option>
+            <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+              {{sntry.City}}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-lg-2 col-md-2 col-sm-2">
+          <button title="Print" class="btn btn-block btn-primary" (click)="pdfReport()">
+            <i class="fa fa-print"></i> Print</button>
+        </div>
+
+        <div class="col-lg-2 col-md-2 col-sm-2">
+          <button (click)="ExportTOExcel()" title="Export to Excel" class="btn btn-block btn-success">
+            <i class="fa fa-file-excel-o"></i>
+            Export</button>
+        </div>
+
+        <div class="col-lg-2 col-md-2 col-sm-2" style="visibility: hidden;">
+          <button title="Show Graph" type="button" [ngStyle]="{'display':DisplayTable}" (click)="ShowPageM('graph')"
+            class="btn btn-block btn-warning">
+            <i class="fa fa-map-o"></i>
+            Show Graph</button>
+          <button title="Show Table" type="button" [ngStyle]="{'display':DisplyaGraph}" (click)="ShowPageM('table')"
+            class="btn btn-block btn-warning">
+            <i class="fa fa-table"></i>
+            Show Table</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 
+<div id="urlSwitcher" style="visibility: hidden;">
+  <span style="cursor: pointer;" (click)="checkForm($event)">
+    <input type="radio"  name="progress" value="Phy1">Physical
+  </span>
+  <span style="cursor: pointer;" >
+    <input type="radio" checked="true"   name="progress" value="Fin1">Financial<br>
+  </span>
+</div> -->
+
+
+
+<div class="container-fluid">
+    <!--Table View -->
+  <div class="row" [ngStyle]="{'display':DisplayTable}">
+  
+     
+    <!-- <div id="checkboxFilter" style="visibility: hidden;">
+      <span><b>Show /Hide</b></span>
+      <span [ngStyle]="{'display':JvrmDisplay1}">
+        <input type="checkbox" (change)="sSanction($event)" name="Sanction" value="Sanction" checked="true">
+        Sanction
+      </span>
+      <span>
+        <input type="checkbox" (change)="sReleased($event)" name="Released" value="Released" checked="true">
+        Released
+      </span>
+    
+      
+      <span>
+        <input type="checkbox" (change)="Firstinst($event)" name="1st Installment Released" value="1st Installment Released" checked="true">
+        1st Inst Rel.
+      </span>
+      <span>
+        <input type="checkbox" (change)="Secondinst($event)" name="2nd Installment Released" value="2nd Installment Released" checked="true">
+        2nd Inst Rel.
+      </span>
+      <span>
+        <input type="checkbox" (change)="Thirdinst($event)" name="3rd Installment Released" value="3rd Installment Released" checked="true">
+        3rd Inst Rel.
+      </span>
+      <span [ngStyle]="{'display':JvrmDisplay}">
+        <input type="checkbox" (change)="TotalLia($event)" name="Total Central Assistance Released"
+          value="Total Central Assistance Released" checked="true">Total Liability.
+      </span>
+      <span>
+        <input type="checkbox" (change)="UCrecd($event)" name="UC Receieved" value="UC Receieved" checked="true"> 
+        UC Receieved
+      </span>
+    
+    </div> -->
+
+   
+    
+    <div class="container-fluid" style="padding-bottom: 20px;" id="toPrint">
+      <div style="text-align:center; padding: 15px 10px; font-size: 20px;">
+        <b>
+          Shortfall Report under PMAY(U)   <!--for {{lblStateDisttCity}}-->
+        </b>
+      </div>
+
+      <div class="col-sm-12" >
+        <div class="col-md-3 col-sm-3 col-xs-12">
+           <div style="width:1000px;height:90px;margin-left:70px" id ="mytable">  
+            
+            <!-- <div style="text-align:center; padding: 5px 10px; font-size: 20px;">
+              <b>
+
+              </b>
+            </div> -->
+
+                
+            <table id="mytable1" class="bodyataglance" border="1px"
+            style="font-size:12px; background-color:white; align-content: center; width: 1200px;" id="printme" align="center">
+            <tr class="tableHeader"> 
+              <th > SrNo  </th>        
+              <th > Component  </th>
+              <th  > Fin Year  </th>
+              <th  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif"   > Completed </th>
+              <th  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif"   >  Actual Completed </th>
+              <th  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif"  >  Shortfall Completed  </th>
+              
+            </tr> 
+             
+              <ng-container  class="tableHeader" *ngFor="let item of GroupedData | keyvalue; let i=index">
+                <tr >
+                  <td [attr.rowspan]="item.value.length+1" >{{i + 1}}</td>      
+                   <td [attr.rowspan]="item.value.length+1" >{{item.key }} </td>   
+                </tr>
+                  <tr  *ngFor="let finData of item.value;">
+                         <td class="tbl2">{{finData.FinYear}}</td> 
+                         <td   class="tbl2">{{finData.Completed?.toLocaleString('en-IN')}}</td> <!--{{DisplayHouse}}-->
+                         <!-- <td  [ngStyle]="{'display':DisplayHouse}"   class="tbl2">{{finData.Housesinvolved?.toLocaleString('en-IN')}}</td> -->
+                         <td   class="tbl2">{{finData.Actual_Completed?.toLocaleString('en-IN')}}</td>
+                         <td   class="tbl2">{{finData.Shortfall_Completed?.toLocaleString('en-IN')}}</td>
+                  </tr>
+                </ng-container>
+       </table>
+             </div> 
+         </div>        </div>
+
+    </div>
+  </div>
+
+
+  <!-- Graph Start Here  [ngStyle]="{'opacity':DisplyaGraph === 'none' ? 0 : 1, 'height': DisplyaGraph === 'none' ? 0 : 'auto', 'overflow': DisplyaGraph === 'none' ? 'hidden' : 'visible' }">-->
+
+<!--Graph View -->
+<div class="row"
+[ngStyle]="{'opacity':DisplyaGraph === 'none' ? 0 : 1, 'height': DisplyaGraph === 'none' ? 0 : 'auto', 'overflow': DisplyaGraph === 'none' ? 'hidden' : 'visible' }">
+<!-- Graph filter -->
+<div id="checkboxFilter">
+  <span class="info-box-header"><b>Select Financial Year</b></span>
+  <span>
+    <input type="checkbox" (change)="ProjectCost($event)" name="Project Cost" value="2014_15">
+    2014-15
+  </span>
+  <span>
+    <input type="checkbox" (change)="ProjectCost($event)" name="CA Sanctioned" value="2015_16"> 2015-16
+  </span>
+  <span>
+    <input type="checkbox" (change)="ProjectCost($event)" name="1st Installment Released"
+      value="2016_17">2016-17
+  </span>
+  <span>
+    <input type="checkbox" (change)="ProjectCost($event)" name="2nd Installment Released" value="2017_18">
+    2017-18
+  </span>
+  <span>
+    <input type="checkbox" (change)="ProjectCost($event)" name="3rd Installment Released" value="2018_19">
+    2018-19
+  </span>
+  <span>
+    <input type="checkbox" (change)="ProjectCost($event)" name="UC Receieved" value="2019_20">2019-20
+  </span>
+</div>
+<div>
+
+
+    <section class="clearfix">
+      <div class="col-md-12" style="margin-top: 20px;">
+        <div class="box box-default">
+          <div class="box-header with-border">
+            <h3 class="box-title text-bold text-center">Financial Progress Consolidated (PMAY(U))</h3>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="collapse"
+                data-target="#graphData1" aria-expanded="true" aria-controls="graphData1"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+            <!-- /.box-tools -->
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body clearfix" id="graphData1">
+            <div id="chartPMAYU" style="height: 500px; width: 100%;"></div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+
+
+      <div class="col-md-12" style="margin-top: 20px;">
+        <div class="box box-default">
+          <div class="box-header with-border">
+            <h3 style="margin: 0 auto;" class="box-title text-bold">BLCS PMAY(U)</h3>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="collapse"
+                data-target="#graphData2" aria-expanded="true" aria-controls="graphData2"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+            <!-- /.box-tools -->
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body clearfix" id="graphData2">
+            <div id="chart_BLCS" style="height: 500px; width: 100%;"></div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+
+
+      <div class="col-md-12" style="margin-top: 20px;">
+        <div class="box box-default">
+          <div class="box-header with-border">
+            <h3 class="box-title text-bold">AHP PMAY(U)</h3>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="collapse"
+                data-target="#graphData3" aria-expanded="true" aria-controls="graphData3"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+            <!-- /.box-tools -->
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body clearfix" id="graphData3">
+            <div id="chartAHP" style="height: 500px; width: 100%;"></div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+
+
+
+      <div class="col-md-12" style="margin-top: 20px;">
+        <div class="box box-default">
+          <div class="box-header with-border">
+            <h3 class="box-title text-bold">ISSR PMAY(U)</h3>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="collapse"
+                data-target="#graphData4" aria-expanded="true" aria-controls="graphData4"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+            <!-- /.box-tools -->
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body clearfix" id="graphData4">
+            <div id="chartISSR" style="height: 500px; width: 100%;"></div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+
+
+
+
+
+
+     
+
+    </section>
+
+
+  </div>
+
+</div>
