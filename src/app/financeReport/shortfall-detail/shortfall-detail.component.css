@@ -83,10 +83,10 @@ tr.tableHeader, .blackPrintHeader{
 }
 
 tr.printHeader{
-    background-color: #cccc !important;
+    background-color: #ccc !important;
     -webkit-print-color-adjust: exact; 
 }
-tr.tableHeader td, tr.tableHeader td b{
+tr.tableHeader td, tr.tableHeader td b, tr.tableHeader th, tr.tableHeader th b{
     color: #fff !important;
 }
 tr.tableHeader td{
