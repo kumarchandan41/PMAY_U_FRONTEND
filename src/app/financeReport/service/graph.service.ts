@@ -20,11 +20,11 @@ export class GraphService {
      //   url1 ="http://localhost:58396/API/RegistrationApi/";
 
 
-     url="http://localhost:58396/api/Buldings/";
-    url1 ="http://localhost:58396/API/RegistrationApi/";
+  //   url="http://localhost:58396/api/Buldings/";
+  //  url1 ="http://localhost:58396/API/RegistrationApi/";
 
- // url="http://10.196.69.102/hfa_api/api/Buldings/";
-// url1 ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
+   url="http://10.196.69.102/hfa_api/api/Buldings/";
+  url1 ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
    
 
   StateDetails : States[];
