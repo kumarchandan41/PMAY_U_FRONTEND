@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LoginModel } from '../Models/LoginModel';
 import { Alert } from 'selenium-webdriver';
 import { ConstantUrlService } from 'src/app/Shared/constant-url.service';
+import { GlobalUrl } from 'src/app/Shared/GlobalUrl';
 
 
 @Injectable({
@@ -12,20 +13,21 @@ import { ConstantUrlService } from 'src/app/Shared/constant-url.service';
 })
 export class LoginService {
   public token:string;
-  apiUrl:string;
+apiUrl:string;
 apiUrlReg:string;
 
-  constructor(private _http:HttpClient,private _route:Router,private constantUrlService: ConstantUrlService) { 
-
-    this.apiUrl=this.constantUrlService.apiUrl;
-    this.apiUrlReg=this.constantUrlService.apiUrlReg;
-
-  }
+  constructor(private _http:HttpClient,private _route:Router,private constantUrlService: ConstantUrlService,private globalUrl:GlobalUrl ) { 
+   //,private globalUrl:GlobalUrl
+    //this.apiUrl=this.constantUrlService.apiUrl;
+    //this.apiUrlReg=this.constantUrlService.apiUrlReg;
+    this.apiUrl = this.globalUrl.urlIPAddess +"/API/Authenticate/";
+    this.apiUrlReg= this.globalUrl.urlIPAddess + "/API/RegistrationApi/";
+  }  
 //  apiUrl ="http://localhost:58396/hfa_api/API/Authenticate/";
 //  apiUrlReg ="http://localhost:58396/API/RegistrationApi/";
 
 
-
+ 
   // apiUrl ="http://10.196.69.102/hfa_api/API/Authenticate/";
   // apiUrlReg ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
 
@@ -33,8 +35,8 @@ apiUrlReg:string;
 
   // baseUrl = "http://localhost:58396/Api";
 
-  //  apiUrl ="http://10.196.69.102/hfa_api/API/Authenticate/";
-  //  apiUrlReg ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
+//     apiUrl ="http://10.196.69.102/hfa_api/API/Authenticate/";
+//     apiUrlReg ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
 
   public validateLoginUser(loginModel:LoginModel)
   {
@@ -60,11 +62,13 @@ apiUrlReg:string;
   }
   onLogin1(UserName, Password)
   {    
+    alert(this.apiUrlReg );
+
       return this._http.get<string>(this.apiUrl + "LoginMaster?Username=" + UserName+ "&password=" + Password);
   }
   onLogin(UserName, Password)
   {    
-     // alert(this.apiUrlReg);
+       alert(this.apiUrlReg );
       return this._http.get<string>(this.apiUrlReg + "Login_Master?Username=" + UserName+ "&password=" + Password);
   }
   CheckCrendential(UserName, Password)

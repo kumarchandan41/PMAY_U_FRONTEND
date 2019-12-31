@@ -4,12 +4,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Excel_CLSSCityWisefile, Excelfile, Excel_PMAY_Data, ExcelSheet, Excel_CLSSCityMain, ExcelfilePhyDash, Excel_JNNURN_Data, Excel_CLSSStateWisefile, Excel_DemandCityWise } from '../model/excelfile';
+import { GlobalUrl } from 'src/app/Shared/GlobalUrl';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GraphService {
   [x: string]: any;
+  url:string;
+  url1:string;
+
+
   GetStateWiseFinYrDataNew(stateCode: any, DivisionCodes: any) {
     throw new Error("Method not implemented.");
   }
@@ -20,8 +25,8 @@ export class GraphService {
      //   url1 ="http://localhost:58396/API/RegistrationApi/";
 
 
-     url="http://localhost:58396/api/Buldings/";
-    url1 ="http://localhost:58396/API/RegistrationApi/";
+//     url="http://localhost:58396/api/Buldings/";
+//    url1 ="http://localhost:58396/API/RegistrationApi/";
 
  // url="http://10.196.69.102/hfa_api/api/Buldings/";
 // url1 ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
@@ -42,7 +47,10 @@ export class GraphService {
   ChartDetail:Charts;
   ComponentData : Comp_Values[];
 
-  constructor(private http:HttpClient, private locationStrategy: LocationStrategy) { }
+constructor(private http:HttpClient, private locationStrategy: LocationStrategy ,private globalUrl:GlobalUrl) {
+     this.url = this.globalUrl.urlIPAddess +"/API/Buldings/";
+     this.url1= this.globalUrl.urlIPAddess + "/API/RegistrationApi/";
+}
 
 PriventBackButton()
 {

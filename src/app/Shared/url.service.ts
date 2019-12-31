@@ -2,23 +2,32 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { States, District, City, DistrictMaster } from './CommonModel';
+import { GlobalUrl } from './GlobalUrl';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UrlService {
+  url:string;
+  urlHFA:string;
+  urlHFA1:string;
+
 //  url="http://localhost:58396/Api/RegistrationApi/";
 //  urlHFA="http://localhost:58396/API/HFAMaster/";
 //  urlHFA1="http://localhost:58396/Api/Buldings/";
 
  
- url="http://10.196.69.102/hfa_api/Api/RegistrationApi/";
- urlHFA="http://10.196.69.102/hfa_api/API/HFAMaster/";
- urlHFA1="http://10.196.69.102/hfa_api/Api/Buldings/";
+//  url="http://10.196.69.102/hfa_api/Api/RegistrationApi/";
+//  urlHFA="http://10.196.69.102/hfa_api/API/HFAMaster/";
+//  urlHFA1="http://10.196.69.102/hfa_api/Api/Buldings/";
 
  
   
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient  ,private globalUrl:GlobalUrl) {
+    this.urlHFA = this.globalUrl.urlIPAddess +"/API/HFAMaster/";
+    this.url= this.globalUrl.urlIPAddess + "/API/RegistrationApi/";
+    this.urlHFA1 =this.globalUrl.urlIPAddess + "/API/Buldings/";
+  }
 
   StateDetails : States[];
 
