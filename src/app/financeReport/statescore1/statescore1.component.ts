@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 //import { BuildingServiceService } from 'src/app/service/building-service.service';
 import { GraphService } from 'src/app/financeReport/service/graph.service';
 
-import { States, District, City, Charts, CompMaster,StateScore } from 'src/app/financeReport/model/chart';
+import { States, District, City, Charts, CompMaster, StateScore } from 'src/app/financeReport/model/chart';
 //import { Observable } from 'rxjs';
 //import { States, StateScore } from '../model/charts.model';
 
@@ -15,7 +15,7 @@ import { Observable, never } from 'rxjs';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { lstatSync } from 'fs';
 import { Alert } from 'selenium-webdriver';
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
 import * as jspdf from 'jspdf';
 
 import * as $ from 'jspdf';
@@ -70,17 +70,17 @@ const indianFormat1 = (number, currency = 'INR') => {
   }
 }
 
- 
+
 
 @Component({
   selector: 'app-statescore1',
   templateUrl: './statescore1.component.html',
   styleUrls: ['./statescore1.component.css'],
-  providers:[DatePipe]
+  providers: [DatePipe]
 })
 
 
- 
+
 // this is final programme for state score .
 export class Statescore1Component implements OnInit {
   stateCodes: string = "0";
@@ -213,7 +213,7 @@ export class Statescore1Component implements OnInit {
   Demand_met: number;
   Demand_met1: any;
 
-  Per_Demand_met: number=0;
+  Per_Demand_met: number = 0;
   Total_PMAY_U_Houses_ISSR_AHP_BLC_CLSS: number;
   Total_PMAY_U_Houses_ISSR_AHP_BLC_CLSS1: any;
 
@@ -236,13 +236,13 @@ export class Statescore1Component implements OnInit {
 
   BLC_Sanct_for_Release: number;
   BLC_Sanct_for_Release1: any;
-  
+
   ISSR_Balance_for_Release: any;
   AHP_Balance_for_Release: any;
   AHP_Balance_for_Release1: any;
   BLC_Balance_for_Release: any;
   BLC_Balance_for_Release1: any;
-  
+
   ISSR_Houses_Sanctioned: any;
   AHP_Houses_Sanctioned: any;
   AHP_Houses_Sanctioned1: any;
@@ -264,7 +264,7 @@ export class Statescore1Component implements OnInit {
   BLC_Completed1: any;
   PMAY_Funds_Released: number;
   PMAY_Funds_Released1: any;
-  
+
   PMAY_Ucs_Received: any;
   PMAY_Ucs_Received1: any;
   PMAY_UC_Pending: any;
@@ -299,12 +299,12 @@ export class Statescore1Component implements OnInit {
 
   CLSS_Subsidy_EWS_LIG_MIG: number;
   CLSS_Subsidy_EWS_LIG_MIG1: any;
-  
+
   RAY_Houses_Completed: number;
   RAY_Houses_Occupied: any;
   RAY_Houses_In_Progress: any;
   RAY_Houses_In_Progress1: any;
-  
+
   RAY_Houses_Unoccupied: number;
   RAY_Houses_Non_Starter: any;
   RAY_UC_Pending: any;
@@ -383,7 +383,7 @@ export class Statescore1Component implements OnInit {
   Houses_Completed2: any;
   HousesOccupied2: any;
   Houses_Grounded2: number;
-  projects: number=0;
+  projects: number = 0;
   CASanctionedForRel_2: number;
   lastPopResult: StateScore[];
   CASanctioned2: number;
@@ -404,13 +404,13 @@ export class Statescore1Component implements OnInit {
   Total_CA_Committed1: any;
   ISSR_CA_Committed: any;
   AHP_CA_Committed: any;
-  BLC_CA_Committed : any;
+  BLC_CA_Committed: any;
   CASanctioned_ForRel: any;
-  DisplayDate:string;
-  displayPop="none";
-  filteredDataAfterDate:any[];
+  DisplayDate: string;
+  displayPop = "none";
+  filteredDataAfterDate: any[];
 
-  
+
   config: ExportAsConfig = {
     type: 'pdf',
     elementId: 'mytable',
@@ -418,18 +418,18 @@ export class Statescore1Component implements OnInit {
       jsPDF: {
         orientation: 'landscape',
         format: 'letter',
-        top:'-200'
-        
+        top: '-200'
+
       }
-     
-     
+
+
     }
   };
 
-  
-  constructor( private exportAsService: ExportAsService,private router: Router,private route: ActivatedRoute, config: NgbModalConfig,private datePipe: DatePipe,
-     public activeModal: NgbActiveModal, public service: GraphService,
-      private modalService: NgbModal) {
+
+  constructor(private exportAsService: ExportAsService, private router: Router, private route: ActivatedRoute, config: NgbModalConfig, private datePipe: DatePipe,
+    public activeModal: NgbActiveModal, public service: GraphService,
+    private modalService: NgbModal) {
     this.stValue = "0";
     this.distValue = "0";
     this.cityValue = "0";
@@ -438,7 +438,7 @@ export class Statescore1Component implements OnInit {
     this.CityMessage = "Select City";
     config.backdrop = 'static';
     config.keyboard = false;
- 
+
 
 
 
@@ -455,7 +455,7 @@ export class Statescore1Component implements OnInit {
 
   }
 
-  pdfCallbackFn (pdf: any) {
+  pdfCallbackFn(pdf: any) {
     // example to add page number as footer to every page of pdf
     const noOfPages = pdf.internal.getNumberOfPages();
     for (let i = 1; i <= noOfPages; i++) {
@@ -473,7 +473,7 @@ export class Statescore1Component implements OnInit {
       // save started
     });
   }
-  
+
   AdminPage() {
     // this.router.navigate(['localhost/hfaappl/menupage']);
     this.router.navigate(['/dashboard']);
@@ -486,23 +486,23 @@ export class Statescore1Component implements OnInit {
     this.cityCodes = "0";
     this.service.StateListDetails().subscribe(result => {
       this.stateDetails = result;
-   
-    this.route.params.subscribe(params => {
-      const id = params['ID'];
-      var v =this.stateDetails.find(a=>a.Codes==id).States_UT;
-      this.StateText=v;
-      this.StateMessage=v;
-      this.getStateData(id);
-  
+
+      this.route.params.subscribe(params => {
+        const id = params['ID'];
+        var v = this.stateDetails.find(a => a.Codes == id).States_UT;
+        this.StateText = v;
+        this.StateMessage = v;
+        this.getStateData(id);
+
       });
     });
-     
-     return;
+
+    return;
 
     // this.service.DisttList(this.stateCodes);
     // this.service.CityList(this.districtCodes);
     // this.States_UT = "Delhi";
-    this.StateText="Select State";
+    this.StateText = "Select State";
 
     this.service.ServiceStateScore(this.stateCodes).subscribe(result => {
       //  alert(result.StateId);
@@ -516,8 +516,8 @@ export class Statescore1Component implements OnInit {
       }
 
       this.Codes = result.Codes;
-     // this.Sanction_vs_Demand1 = result.Sanction_vs_Demand.toFixed(2);
-      this.Sanction_vs_Demand1 = (result.Sanction_vs_Demand) ? result.Sanction_vs_Demand.toFixed(2) :result.Sanction_vs_Demand;  
+      // this.Sanction_vs_Demand1 = result.Sanction_vs_Demand.toFixed(2);
+      this.Sanction_vs_Demand1 = (result.Sanction_vs_Demand) ? result.Sanction_vs_Demand.toFixed(2) : result.Sanction_vs_Demand;
 
 
       this.Grounding_Sanction = result.Grounding_Sanction;
@@ -544,9 +544,9 @@ export class Statescore1Component implements OnInit {
       this.Total_PMAY_U_Houses_ISSR_AHP_BLC_CLSS = result.Total_PMAY_U_Houses_ISSR_AHP_BLC_CLSS
       this.Valid_Aadhar_Beneficiaries = result.Valid_Aadhar_Beneficiaries
       this.Bene_Percent = result.Bene_Percentage * 100;
-//      this.HFAPoA_funds_Released = result.HFAPoA_funds_Released.toFixed(2)
+      //      this.HFAPoA_funds_Released = result.HFAPoA_funds_Released.toFixed(2)
 
-      this.HFAPoA_funds_Released = (result.HFAPoA_funds_Released) ? result.HFAPoA_funds_Released.toFixed(2) :result.HFAPoA_funds_Released;  
+      this.HFAPoA_funds_Released = (result.HFAPoA_funds_Released) ? result.HFAPoA_funds_Released.toFixed(2) : result.HFAPoA_funds_Released;
 
       this.HFAPoA_Received = result.HFAPoA_Received
       if (this.HFAPoA_Received == 0)
@@ -642,11 +642,11 @@ export class Statescore1Component implements OnInit {
         this.RAY_Houses_Completed1 = result.RAY_Houses_Completed;
 
       // alert(result.RAY_Houses_Occupied);
-    //  if (result.RAY_Houses_Occupied == 0 || result.RAY_Houses_Occupied.toString() == "" || result.RAY_Houses_Occupied.toString() == null)
-    //    this.RAY_Houses_Occupied1 = "Nil";
-    //  else if (result.RAY_Houses_Occupied != 0)
-    //    this.RAY_Houses_Occupied1 = result.RAY_Houses_Occupied;
-    this.RAY_Houses_Occupied = (result.RAY_Houses_Occupied) ? result.RAY_Houses_Occupied.toFixed(2) :result.RAY_Houses_Occupied;  
+      //  if (result.RAY_Houses_Occupied == 0 || result.RAY_Houses_Occupied.toString() == "" || result.RAY_Houses_Occupied.toString() == null)
+      //    this.RAY_Houses_Occupied1 = "Nil";
+      //  else if (result.RAY_Houses_Occupied != 0)
+      //    this.RAY_Houses_Occupied1 = result.RAY_Houses_Occupied;
+      this.RAY_Houses_Occupied = (result.RAY_Houses_Occupied) ? result.RAY_Houses_Occupied.toFixed(2) : result.RAY_Houses_Occupied;
 
       this.RAY_Houses_In_Progress = result.RAY_Houses_In_Progress;
 
@@ -703,7 +703,7 @@ export class Statescore1Component implements OnInit {
   }
 
   getStateData(stateCodes) {
-   
+
     //ServiceStateScore
     if (stateCodes == "0") {
       this.distValue = "0";
@@ -751,7 +751,7 @@ export class Statescore1Component implements OnInit {
 
 
         this.Demand_met = result.Demand_met;
-      //  this.Demand_met1 = indianFormat(result.Demand_met);
+        //  this.Demand_met1 = indianFormat(result.Demand_met);
 
 
         this.Per_Demand_met = result.Per_Demand_met;
@@ -761,7 +761,7 @@ export class Statescore1Component implements OnInit {
 
         this.Valid_Aadhar_Beneficiaries = result.Valid_Aadhar_Beneficiaries;
         this.Valid_Aadhar_Beneficiaries1 = indianFormat(result.Valid_Aadhar_Beneficiaries);
-        this.Valid_Aadhar_Beneficiaries1 = indianFormat(result.Valid_Aadhar_Beneficiaries)?result.Valid_Aadhar_Beneficiaries:result.Valid_Aadhar_Beneficiaries;
+        this.Valid_Aadhar_Beneficiaries1 = indianFormat(result.Valid_Aadhar_Beneficiaries) ? result.Valid_Aadhar_Beneficiaries : result.Valid_Aadhar_Beneficiaries;
 
 
         this.Bene_Percent = result.Bene_Percentage * 100;
@@ -789,20 +789,20 @@ export class Statescore1Component implements OnInit {
           this.AHP_Balance_for_Release1 = "--";
         }
         else {
-          this.AHP_Balance_for_Release=  result.AHP_Balance_for_Release;
+          this.AHP_Balance_for_Release = result.AHP_Balance_for_Release;
           this.AHP_Balance_for_Release1 = indianFormat1(result.AHP_Balance_for_Release);
         }
 
         if (result.BLC_Balance_for_Release == 0) {
-           this.BLC_Balance_for_Release = "--";
-           this.BLC_Balance_for_Release1 = "--";
+          this.BLC_Balance_for_Release = "--";
+          this.BLC_Balance_for_Release1 = "--";
         }
         else {
-           this.BLC_Balance_for_Release = (result.BLC_Balance_for_Release);
-           this.BLC_Balance_for_Release1 = indianFormat1(result.BLC_Balance_for_Release);
+          this.BLC_Balance_for_Release = (result.BLC_Balance_for_Release);
+          this.BLC_Balance_for_Release1 = indianFormat1(result.BLC_Balance_for_Release);
         }
 
-        
+
 
         if (result.ISSR_CA_Released == 0) {
           this.ISSR_CA_Released = "--";
@@ -814,15 +814,15 @@ export class Statescore1Component implements OnInit {
           this.AHP_CA_Released = "--";
           this.AHP_CA_Released1 = "--";
         }
-        else { 
+        else {
           this.AHP_CA_Released = result.AHP_CA_Released;
-          this.AHP_CA_Released1 =indianFormat1(result.AHP_CA_Released);
-          
+          this.AHP_CA_Released1 = indianFormat1(result.AHP_CA_Released);
+
         }
 
         this.BLC_CA_Released1 = indianFormat1(result.BLC_CA_Released);
         this.BLC_CA_Released = result.BLC_CA_Released;
-        
+
 
         if (result.ISSR_Houses_Sanctioned == 0) {
           this.ISSR_Houses_Sanctioned = "--";
@@ -881,7 +881,7 @@ export class Statescore1Component implements OnInit {
         }
         if (result.AHP_Sanct_for_Release == 0) {
           this.AHP_Sanct_for_Release1 = "--";
-          this.AHP_Sanct_for_Release ="--";
+          this.AHP_Sanct_for_Release = "--";
         }
         else {
           this.AHP_Sanct_for_Release = result.AHP_Sanct_for_Release;
@@ -893,33 +893,32 @@ export class Statescore1Component implements OnInit {
         }
         else {
           this.BLC_Sanct_for_Release1 = indianFormat1(result.BLC_Sanct_for_Release);
-          this.BLC_Sanct_for_Release  = (result.BLC_Sanct_for_Release);
-          
+          this.BLC_Sanct_for_Release = (result.BLC_Sanct_for_Release);
+
         }
         if (result.PMAY_Funds_Released == 0) {
           this.PMAY_Funds_Released = 0;
         }
         else {
-          this.PMAY_Funds_Released =result.PMAY_Funds_Released;
-          this.PMAY_Funds_Released1 =indianFormat1(result.PMAY_Funds_Released);
+          this.PMAY_Funds_Released = result.PMAY_Funds_Released;
+          this.PMAY_Funds_Released1 = indianFormat1(result.PMAY_Funds_Released);
         }
-        
+
         if (result.PMAY_Ucs_Received == 0) {
           this.PMAY_Ucs_Received = "--";
           this.PMAY_Ucs_Received1 = "--";
         }
         else {
           this.PMAY_Ucs_Received = result.PMAY_Ucs_Received;
-          this.PMAY_Ucs_Received1 =indianFormat1(result.PMAY_Ucs_Received);
+          this.PMAY_Ucs_Received1 = indianFormat1(result.PMAY_Ucs_Received);
         }
-        
+
 
         this.PMAY_UC_Pending = result.PMAY_UC_Pending;
 
         if (this.PMAY_UC_Pending == 0)
           this.PMAY_UC_Pending1 = "Nil";
-        else if (this.PMAY_UC_Pending != 0)
-        {
+        else if (this.PMAY_UC_Pending != 0) {
           this.PMAY_UC_Pending = this.PMAY_UC_Pending;
           this.PMAY_UC_Pending1 = indianFormat1(this.PMAY_UC_Pending);
         }
@@ -991,10 +990,10 @@ export class Statescore1Component implements OnInit {
 
 
         this.JN_UC_Pending = result.JN_UC_Pending;
-        
+
         if (result.RAY_Houses_Sanctioned == 0) {
           this.RAY_Houses_Sanctioned = "--";
-          this.RAY_Houses_Sanctioned1 ="--";
+          this.RAY_Houses_Sanctioned1 = "--";
         }
         else {
           this.RAY_Houses_Sanctioned = result.RAY_Houses_Sanctioned;
@@ -1045,37 +1044,31 @@ export class Statescore1Component implements OnInit {
         }
 
         this.proj = this.AHP_NOP + this.ISSR_NOP + this.BLC_NOP;
-      
-        this.BLC_CA_Committed=  result.BLC_CA_Committed ;
-        this.AHP_CA_Committed=  result.AHP_CA_Committed ;
-        this.ISSR_CA_Committed=  result.ISSR_CA_Committed ;
-        
-        if (result.ISSR_CA_Committed.toString() !=""  && result.AHP_CA_Committed.toString() !=""  && result.BLC_CA_Committed.toString() !="")
-        {
-            this.Total_CA_Committed =result.ISSR_CA_Committed + result.AHP_CA_Committed + result.BLC_CA_Committed;
+
+        this.BLC_CA_Committed = result.BLC_CA_Committed;
+        this.AHP_CA_Committed = result.AHP_CA_Committed;
+        this.ISSR_CA_Committed = result.ISSR_CA_Committed;
+
+        if (result.ISSR_CA_Committed.toString() != "" && result.AHP_CA_Committed.toString() != "" && result.BLC_CA_Committed.toString() != "") {
+          this.Total_CA_Committed = result.ISSR_CA_Committed + result.AHP_CA_Committed + result.BLC_CA_Committed;
         }
-        else if (result.ISSR_CA_Committed.toString() !=""  && result.AHP_CA_Committed.toString() !=""  && result.BLC_CA_Committed.toString() =="")
-        {
-            this.Total_CA_Committed =result.ISSR_CA_Committed + result.AHP_CA_Committed ;
+        else if (result.ISSR_CA_Committed.toString() != "" && result.AHP_CA_Committed.toString() != "" && result.BLC_CA_Committed.toString() == "") {
+          this.Total_CA_Committed = result.ISSR_CA_Committed + result.AHP_CA_Committed;
         }
-        else if (result.ISSR_CA_Committed.toString() !=""  && result.AHP_CA_Committed.toString() ==""  && result.BLC_CA_Committed.toString() !="")
-        {
-            this.Total_CA_Committed =result.ISSR_CA_Committed +  result.BLC_CA_Committed;
+        else if (result.ISSR_CA_Committed.toString() != "" && result.AHP_CA_Committed.toString() == "" && result.BLC_CA_Committed.toString() != "") {
+          this.Total_CA_Committed = result.ISSR_CA_Committed + result.BLC_CA_Committed;
         }
-        else if (result.ISSR_CA_Committed.toString() ==""  && result.AHP_CA_Committed.toString() !=""  && result.BLC_CA_Committed.toString() !="")
-        {
-            this.Total_CA_Committed =result.AHP_CA_Committed + result.BLC_CA_Committed;
+        else if (result.ISSR_CA_Committed.toString() == "" && result.AHP_CA_Committed.toString() != "" && result.BLC_CA_Committed.toString() != "") {
+          this.Total_CA_Committed = result.AHP_CA_Committed + result.BLC_CA_Committed;
         }
-        else if (result.ISSR_CA_Committed.toString() ==""  && result.AHP_CA_Committed.toString() ==""  && result.BLC_CA_Committed.toString() !="")
-        {
-            this.Total_CA_Committed = result.BLC_CA_Committed;
+        else if (result.ISSR_CA_Committed.toString() == "" && result.AHP_CA_Committed.toString() == "" && result.BLC_CA_Committed.toString() != "") {
+          this.Total_CA_Committed = result.BLC_CA_Committed;
         }
-        else if (result.ISSR_CA_Committed.toString() ==""  && result.AHP_CA_Committed.toString() !=""  && result.BLC_CA_Committed.toString() =="")
-        {
-            this.Total_CA_Committed =  result.AHP_CA_Committed;
+        else if (result.ISSR_CA_Committed.toString() == "" && result.AHP_CA_Committed.toString() != "" && result.BLC_CA_Committed.toString() == "") {
+          this.Total_CA_Committed = result.AHP_CA_Committed;
         }
-       this.Total_CA_Committed1 = indianFormat1(this.Total_CA_Committed);
-//this.Total_CA_Committed =result.ISSR_CA_Committed + result.AHP_CA_Committed + result.BLC_CA_Committed;
+        this.Total_CA_Committed1 = indianFormat1(this.Total_CA_Committed);
+        //this.Total_CA_Committed =result.ISSR_CA_Committed + result.AHP_CA_Committed + result.BLC_CA_Committed;
 
 
         if ((this.ISSR_Sanct_for_Release == "--" && this.AHP_Sanct_for_Release != "--")) {
@@ -1155,7 +1148,7 @@ export class Statescore1Component implements OnInit {
         this.CLSS_Beneficiaries_EWS_LIG_MIG1 = indianFormat(result.CLSS_Beneficiaries_EWS_LIG_MIG);
 
 
-     //   alert(result.BLC_CA_Committed);
+        //   alert(result.BLC_CA_Committed);
 
 
       });
@@ -1193,7 +1186,7 @@ export class Statescore1Component implements OnInit {
         this.Housesinvolved24 = indianFormat(this.Housesinvolved2);
 
         this.Housesinvolved21 = indianFormat(this.Housesinvolved2);
-        this.Housesinvolved2 = indianFormat(result2.Housesinvolved)?result2.Housesinvolved:result2.Housesinvolved;
+        this.Housesinvolved2 = indianFormat(result2.Housesinvolved) ? result2.Housesinvolved : result2.Housesinvolved;
 
 
         this.CentralAssistanceReleased2 = result2.CentralAssistanceReleased;
@@ -1215,16 +1208,16 @@ export class Statescore1Component implements OnInit {
 
         this.Houses_Grounded2 = result2.Houses_Grounded;
         this.Houses_Grounded21 = indianFormat(this.Houses_Grounded2);
-        this.Houses_Grounded2 = indianFormat(result2.Houses_Grounded)?result2.Houses_Grounded:result2.Houses_Grounded;
-        
-        
+        this.Houses_Grounded2 = indianFormat(result2.Houses_Grounded) ? result2.Houses_Grounded : result2.Houses_Grounded;
+
+
         this.Houses_Completed2 = result2.Houses_Completed;
         this.Houses_Completed21 = indianFormat(this.Houses_Completed2);
-        this.Houses_Completed2 = indianFormat(result2.Houses_Completed)?result2.Houses_Completed:result2.Houses_Completed;
+        this.Houses_Completed2 = indianFormat(result2.Houses_Completed) ? result2.Houses_Completed : result2.Houses_Completed;
 
         this.HousesOccupied2 = result2.HousesOccupied;
         this.HousesOccupied21 = indianFormat(this.HousesOccupied2);
-        this.HousesOccupied2 = indianFormat(result2.HousesOccupied)?result2.HousesOccupied:result2.HousesOccupied;
+        this.HousesOccupied2 = indianFormat(result2.HousesOccupied) ? result2.HousesOccupied : result2.HousesOccupied;
 
         this.projects = result2.projects;
       });
@@ -1232,31 +1225,31 @@ export class Statescore1Component implements OnInit {
   }
 
   //PDFHelper
-  private addText(pdf: any, text: string, x: number, y: number, alignment?: string,_fontSize?:number) {
+  private addText(pdf: any, text: string, x: number, y: number, alignment?: string, _fontSize?: number) {
     debugger;
-    let originalFontSize=pdf.internal.getFontSize();
-    if(_fontSize){
+    let originalFontSize = pdf.internal.getFontSize();
+    if (_fontSize) {
       pdf.setFontSize(_fontSize);
     }
     if (alignment == 'center') {
-      
-       // Get current font size
-       var fontSize = pdf.internal.getFontSize();
 
-       // Get page width
-       var pageWidth = pdf.internal.pageSize.width;
+      // Get current font size
+      var fontSize = pdf.internal.getFontSize();
 
-       // Get the actual text's width
-       /* You multiply the unit width of your string by your font size and divide
-        * by the internal scale factor. The division is necessary
-        * for the case where you use units other than 'pt' in the constructor
-        * of jsPDF.
-       */
-       let txtWidth = pdf.getStringUnitWidth(text)*fontSize/pdf.internal.scaleFactor;
+      // Get page width
+      var pageWidth = pdf.internal.pageSize.width;
 
-       // Calculate text's x coordinate
-       let xOffset = ( pageWidth - txtWidth ) / 2;
-      
+      // Get the actual text's width
+      /* You multiply the unit width of your string by your font size and divide
+       * by the internal scale factor. The division is necessary
+       * for the case where you use units other than 'pt' in the constructor
+       * of jsPDF.
+      */
+      let txtWidth = pdf.getStringUnitWidth(text) * fontSize / pdf.internal.scaleFactor;
+
+      // Calculate text's x coordinate
+      let xOffset = (pageWidth - txtWidth) / 2;
+
       pdf.text(text, xOffset, y);
     }
     else {
@@ -1269,51 +1262,51 @@ export class Statescore1Component implements OnInit {
   private addLine(pdf: any, lineWidth: number, x: number, y: number) {
     pdf.setLineWidth(lineWidth);
     pdf.line(x, y, 200, y);
-    return y + 5+ lineWidth;
+    return y + 5 + lineWidth;
   }
 
-  private addAutoTable(pdf: any, htmlId: string, y: number,tableWidth:number, headerStyle: any,margin?:any,border?:boolean) {
-    let _lineWidth=border!=true?0.2:0;
+  private addAutoTable(pdf: any, htmlId: string, y: number, tableWidth: number, headerStyle: any, margin?: any, border?: boolean) {
+    let _lineWidth = border != true ? 0.2 : 0;
     debugger;
     let autoTableOut = pdf.autoTable({
       html: htmlId,
       theme: 'plain',
-      tableWidth: tableWidth>0?tableWidth:'auto',
-      margin: margin?margin:{ right: 5, left: 5 },
+      tableWidth: tableWidth > 0 ? tableWidth : 'auto',
+      margin: margin ? margin : { right: 5, left: 5 },
       startY: y,
       headStyles: headerStyle,//{halign: 'center',textColor :'blue'},
       styles: {
         lineWidth: _lineWidth,
-        lineColor:_lineWidth>0?'black':'',
+        lineColor: _lineWidth > 0 ? 'black' : '',
         minCellHeight: 10,
       }
     });
     return autoTableOut.previousAutoTable.finalY + 2; //5
   }
-  public initfooter(doc:any){
+  public initfooter(doc: any) {
     var pageCount = doc.internal.getNumberOfPages();
 
-    for(let i = 0; i < pageCount; i++) { 
+    for (let i = 0; i < pageCount; i++) {
 
       doc.setPage(i);
-doc.setFontSize(7);
-doc.setFontStyle('italic'); 
-this.addText(doc,'Page '+ doc.internal.getCurrentPageInfo().pageNumber + " of " + pageCount,5,(doc.internal.pageSize.height-2),'center');
+      doc.setFontSize(7);
+      doc.setFontStyle('italic');
+      this.addText(doc, 'Page ' + doc.internal.getCurrentPageInfo().pageNumber + " of " + pageCount, 5, (doc.internal.pageSize.height - 2), 'center');
 
-var ddMMyyyy = this.datePipe.transform(new Date(),"dd-MM-yyyy");
-console.log(ddMMyyyy);
-this.addText(doc,'Created Date: '+ddMMyyyy,doc.internal.pageSize.width-50,5);
-doc.setFontSize(6);
-//this.addText(doc,'Report Name',10,5,'center');
-}
+      var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
+      console.log(ddMMyyyy);
+      this.addText(doc, 'Created Date: ' + ddMMyyyy, doc.internal.pageSize.width - 50, 5);
+      doc.setFontSize(6);
+      //this.addText(doc,'Report Name',10,5,'center');
+    }
   }
-public pdfReport(divName?:string) {
-  debugger;  
-  if(divName){
-    var divToPrint=document.getElementById(divName);
-    var newWin=window.open('','Print-Window');
-    newWin.document.open();
-    newWin.document.write(`<!DOCTYPE html>
+  public pdfReport(divName?: string) {
+    debugger;
+    if (divName) {
+      var divToPrint = document.getElementById(divName);
+      var newWin = window.open('', 'Print-Window');
+      newWin.document.open();
+      newWin.document.write(`<!DOCTYPE html>
     <html><style> @media print {
       #drpdown{display : none};
       /* body *{display : none}; 
@@ -1334,36 +1327,38 @@ public pdfReport(divName?:string) {
      body{text-align:center;
     font-size:18px;
     }
-</style><body onload="window.print()">`+divToPrint.innerHTML+'</body></html>');
-    newWin.document.close();
-    setTimeout(function(){newWin.close();},10);
+</style><body onload="window.print()">`+ divToPrint.innerHTML + '</body></html>');
+      newWin.document.close();
+      setTimeout(function () { newWin.close(); }, 10);
 
     }
-    else{
-      window.print();  
-    }    
-
-    
-}
+    else {
+      window.print();
+    }
 
 
+  }
 
-openPopup(content, state) {
-this.displayPop="block";
-  this.DisplayDate=state.CSMCDate;
-  const csmcno = state.CSMCNo;
-  const cmsDate = state.CSMCDate;
-  const component = state.Component;
-  this.CmsNo = csmcno;
-  this.service.GetCSMCStateCompDtWise(this.stateCodes, component, cmsDate, csmcno).subscribe(result => {
-    this.lastPopResult = result;
- 
-  });
 
-}
-closeModalDialog(){
-  this.displayPop='none';
- }
+
+  openPopup(content, state) {
+    console.log('--------->>>>>', { content, state })
+    this.displayPop = "block";
+    this.DisplayDate = state.CSMCDate;
+    const csmcno = state.CSMCNo;
+    const cmsDate = state.CSMCDate;
+    const component = state.Component;
+    this.CmsNo = csmcno;
+    console.log(this.stateCodes, { component, cmsDate, csmcno })
+    this.service.GetCSMCStateCompDtWise(this.stateCodes, component, cmsDate, csmcno).subscribe(result => {
+      console.log(result)
+      this.lastPopResult = result;
+    });
+
+  }
+  closeModalDialog() {
+    this.displayPop = 'none';
+  }
   public pdfReport4() {
     let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF 
     // var pdf = new jspdf('p', 'pt', 'letter'); 
@@ -1379,84 +1374,84 @@ closeModalDialog(){
 
     //y = this.addLine(pdf, 1, x, y);
 
-    y = this.addText(pdf, 'Pradhan Mantri Awas Yojana (U)-- SCORE CARD', 10, y,'right');
+    y = this.addText(pdf, 'Pradhan Mantri Awas Yojana (U)-- SCORE CARD', 10, y, 'right');
 
     //y = this.addLine(pdf, 0.5, x, y);
-    y = this.addAutoTable(pdf, '#one', y,0, { halign: 'right', textColor: 'blue' },null,false);
-   // y = this.addLine(pdf, 0.5, x, y);
+    y = this.addAutoTable(pdf, '#one', y, 0, { halign: 'right', textColor: 'blue' }, null, false);
+    // y = this.addLine(pdf, 0.5, x, y);
 
     //split table
-    let tableWidth=Math.floor(pdf.internal.pageSize.width/2)-10;
-  
-
-    this.addText(pdf,'General',40,y,undefined,10);
-    y=this.addText(pdf,'Demand Survey',150,y,undefined,10);
-    this.addAutoTable(pdf,'#two',y,tableWidth,{ halign: 'right', fillColor: '#A7E074' });
-    
-    
+    let tableWidth = Math.floor(pdf.internal.pageSize.width / 2) - 10;
 
 
-    y= this.addAutoTable(pdf,'#three',y,tableWidth,{ halign: 'right', fillColor: 'rgb(217, 202, 248)' },{left:tableWidth+10});
-//    y=y+1;
-
-y=y+2;  
-    
-    this.addText(pdf,'Beneficiaries with Aadhaar',40,y,undefined,10);
-    y=this.addText(pdf,'HFAPoA',150,y,undefined,10);
-   
-    this.addAutoTable(pdf,'#four',y,tableWidth,{ halign: 'right', fillColor: 'rgb(173, 211, 211)' });
-    y=this.addAutoTable(pdf,'#five',y,tableWidth,{ halign: 'right', fillColor: 'rgb(240, 232, 190)' },{left:tableWidth+10});
-    
-  //  y=y+1;
-
-    y=this.addText(pdf,'PMAY (U) - Progress*',90,y,undefined,10);
-    
-    y= this.addAutoTable(pdf,'#six',y,0,{ halign: 'right', fillColor: 'rgb(240, 178, 137)' });
-    
-    
-  //  y=y+1;
-     this.addText(pdf,'PMAY - UCs (Rs in Cr)',30,y,undefined,10);
-     this.addText(pdf,'Occupancy',110,y,undefined,10);
-     this.addText(pdf,'Reforms',150,y,undefined,10);
-     y=  this.addText(pdf,'CLSS',180,y,undefined,10);
+    this.addText(pdf, 'General', 40, y, undefined, 10);
+    y = this.addText(pdf, 'Demand Survey', 150, y, undefined, 10);
+    this.addAutoTable(pdf, '#two', y, tableWidth, { halign: 'right', fillColor: '#A7E074' });
 
 
-    this.addAutoTable(pdf,'#seven',y,tableWidth,{ halign: 'right', fillColor: '#A7E074' });
+
+
+    y = this.addAutoTable(pdf, '#three', y, tableWidth, { halign: 'right', fillColor: 'rgb(217, 202, 248)' }, { left: tableWidth + 10 });
+    //    y=y+1;
+
+    y = y + 2;
+
+    this.addText(pdf, 'Beneficiaries with Aadhaar', 40, y, undefined, 10);
+    y = this.addText(pdf, 'HFAPoA', 150, y, undefined, 10);
+
+    this.addAutoTable(pdf, '#four', y, tableWidth, { halign: 'right', fillColor: 'rgb(173, 211, 211)' });
+    y = this.addAutoTable(pdf, '#five', y, tableWidth, { halign: 'right', fillColor: 'rgb(240, 232, 190)' }, { left: tableWidth + 10 });
+
+    //  y=y+1;
+
+    y = this.addText(pdf, 'PMAY (U) - Progress*', 90, y, undefined, 10);
+
+    y = this.addAutoTable(pdf, '#six', y, 0, { halign: 'right', fillColor: 'rgb(240, 178, 137)' });
+
+
+    //  y=y+1;
+    this.addText(pdf, 'PMAY - UCs (Rs in Cr)', 30, y, undefined, 10);
+    this.addText(pdf, 'Occupancy', 110, y, undefined, 10);
+    this.addText(pdf, 'Reforms', 150, y, undefined, 10);
+    y = this.addText(pdf, 'CLSS', 180, y, undefined, 10);
+
+
+    this.addAutoTable(pdf, '#seven', y, tableWidth, { halign: 'right', fillColor: '#A7E074' });
     //70
-    this.addAutoTable(pdf,'#eight',y,tableWidth-65,{ halign: 'right', fillColor: 'rgb(217, 202, 248)' },{left:tableWidth+10});
-    
-    this.addAutoTable(pdf,'#nine',y,tableWidth-70,{ halign: 'right', fillColor: 'rgb(217, 202, 248)' },{left:tableWidth+(tableWidth-70)+20});
-    y= this.addAutoTable(pdf,'#ten',y,tableWidth-70,{ halign: 'right', fillColor: 'rgb(217, 202, 248)' },{left:tableWidth+(tableWidth-70)+(tableWidth-70)+30});
-    
-    
-    this.addText(pdf,'SLTC',40,y,undefined,10);
-    this.addText(pdf,'CLTC',130,y,undefined,10);
-    y=  this.addText(pdf,'Beneficiaries',180,y,undefined,10);
+    this.addAutoTable(pdf, '#eight', y, tableWidth - 65, { halign: 'right', fillColor: 'rgb(217, 202, 248)' }, { left: tableWidth + 10 });
 
-    this.addAutoTable(pdf,'#eleven',y,tableWidth -10,{ halign: 'right', fillColor: 'rgb(217, 202, 248)' });
-    this.addAutoTable(pdf,'#twelve',y,tableWidth-32,{ halign: 'right', fillColor: 'rgb(217, 202, 248)' },{left:tableWidth+10});
-    y= this.addAutoTable(pdf,'#thirteen',y,tableWidth-60,{ halign: 'right', fillColor: 'rgb(217, 202, 248)' },{left:(tableWidth-30)+(tableWidth-30)+40});
-
-    y=y+1;    
-    this.addText(pdf,'MIS',40,y,undefined,10);
-    this.addText(pdf,'Geo-Tagging',130,y,undefined,10);
-    y=  this.addText(pdf,'Subsidy',180,y,undefined,10);
-
-    this.addAutoTable(pdf,'#mis',y,tableWidth -10,{ halign: 'right', fillColor: 'rgb(217, 202, 248)' });
-    this.addAutoTable(pdf,'#geo',y,tableWidth-32,{ halign: 'right', fillColor: 'rgb(217, 202, 248)' },{left:tableWidth+10});
-    y= this.addAutoTable(pdf,'#subsidy',y,tableWidth-60,{ halign: 'right', fillColor: 'rgb(217, 202, 248)' },{left:(tableWidth-30)+(tableWidth-30)+40});
-
-    
-    y= this.addAutoTable(pdf,'#fourteen',y,0,{ halign: 'right', fillColor: 'rgb(217, 202, 248)' });
-    
-    
-pdf.addPage();
-y=15;
+    this.addAutoTable(pdf, '#nine', y, tableWidth - 70, { halign: 'right', fillColor: 'rgb(217, 202, 248)' }, { left: tableWidth + (tableWidth - 70) + 20 });
+    y = this.addAutoTable(pdf, '#ten', y, tableWidth - 70, { halign: 'right', fillColor: 'rgb(217, 202, 248)' }, { left: tableWidth + (tableWidth - 70) + (tableWidth - 70) + 30 });
 
 
-y=  this.addText(pdf,'State Wise - CSMC Wise Sanctions',80,y,undefined,10);
+    this.addText(pdf, 'SLTC', 40, y, undefined, 10);
+    this.addText(pdf, 'CLTC', 130, y, undefined, 10);
+    y = this.addText(pdf, 'Beneficiaries', 180, y, undefined, 10);
 
-y= this.addAutoTable(pdf,'#fifteen',y,0,{ halign: 'right', fillColor: 'rgb(217, 202, 248)' });
+    this.addAutoTable(pdf, '#eleven', y, tableWidth - 10, { halign: 'right', fillColor: 'rgb(217, 202, 248)' });
+    this.addAutoTable(pdf, '#twelve', y, tableWidth - 32, { halign: 'right', fillColor: 'rgb(217, 202, 248)' }, { left: tableWidth + 10 });
+    y = this.addAutoTable(pdf, '#thirteen', y, tableWidth - 60, { halign: 'right', fillColor: 'rgb(217, 202, 248)' }, { left: (tableWidth - 30) + (tableWidth - 30) + 40 });
+
+    y = y + 1;
+    this.addText(pdf, 'MIS', 40, y, undefined, 10);
+    this.addText(pdf, 'Geo-Tagging', 130, y, undefined, 10);
+    y = this.addText(pdf, 'Subsidy', 180, y, undefined, 10);
+
+    this.addAutoTable(pdf, '#mis', y, tableWidth - 10, { halign: 'right', fillColor: 'rgb(217, 202, 248)' });
+    this.addAutoTable(pdf, '#geo', y, tableWidth - 32, { halign: 'right', fillColor: 'rgb(217, 202, 248)' }, { left: tableWidth + 10 });
+    y = this.addAutoTable(pdf, '#subsidy', y, tableWidth - 60, { halign: 'right', fillColor: 'rgb(217, 202, 248)' }, { left: (tableWidth - 30) + (tableWidth - 30) + 40 });
+
+
+    y = this.addAutoTable(pdf, '#fourteen', y, 0, { halign: 'right', fillColor: 'rgb(217, 202, 248)' });
+
+
+    pdf.addPage();
+    y = 15;
+
+
+    y = this.addText(pdf, 'State Wise - CSMC Wise Sanctions', 80, y, undefined, 10);
+
+    y = this.addAutoTable(pdf, '#fifteen', y, 0, { halign: 'right', fillColor: 'rgb(217, 202, 248)' });
 
     this.initfooter(pdf);
     pdf.save('MYPDF.pdf');
@@ -1465,7 +1460,7 @@ y= this.addAutoTable(pdf,'#fifteen',y,0,{ halign: 'right', fillColor: 'rgb(217, 
   }
 
 
-  
+
 
   public pdfReport2() {
     var data = document.getElementById('tblPdf');
@@ -1578,7 +1573,7 @@ y= this.addAutoTable(pdf,'#fifteen',y,0,{ halign: 'right', fillColor: 'rgb(217, 
       pdf.save('MYPdf.pdf'); // Generated PDF   
     });
   }
-  
+
   public pdfReport1() {
     var data = document.getElementById('tblPdf');
     html2canvas(data).then(canvas => {
@@ -1614,10 +1609,9 @@ y= this.addAutoTable(pdf,'#fifteen',y,0,{ halign: 'right', fillColor: 'rgb(217, 
 
 
 
-  public printData(abc:any[])
-  {
+  public printData(abc: any[]) {
     let printContents = '';
-    const WindowObject = window.open('','PrintWindow','width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes');
+    const WindowObject = window.open('', 'PrintWindow', 'width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes');
     printContents += `<table>
                     
                       <tr style="background-color: gray;">
@@ -1631,9 +1625,9 @@ y= this.addAutoTable(pdf,'#fifteen',y,0,{ halign: 'right', fillColor: 'rgb(217, 
                       <td align="center"><b><font color="black"  size="2">Houses<br/>Completed</font></b></td>
                       <td align="center"><b><font color="black"  size="2">Houses<br/>Occupied</font></b></td>
                     </tr>`;
-                    abc.map((data,ind) => {
-         printContents += `<tr>
-                        <td>${ind+1}</td>
+    abc.map((data, ind) => {
+      printContents += `<tr>
+                        <td>${ind + 1}</td>
 
                         <td>${data.City}</td>
                        <td>${data.ProjectTitle}</td> 
@@ -1646,51 +1640,51 @@ y= this.addAutoTable(pdf,'#fifteen',y,0,{ halign: 'right', fillColor: 'rgb(217, 
                        
                      </tr>`;
 
-    // printContents += `<tr *ngFor='let state of lastPopResult; let i=index'>
-    //                   <td ><font  size='3' >${i+1}  </font></td>
-    //                   <td > <font  size='3' >{{state.City}}</font></td>
-    //                    <td > <font  size='2'>{{state.ProjectTitle}}</font></td>
-    //                   <td align="right"><font  size='3' > {{state.CASanctioned}}</font></td>
-    //                   <td align="right"><font  size='3' >{{state.CentralAssistanceReleased}}</font></td>
-    //                   <td align="right"><font  size='3' >{{state.HousesSanctioned}}</font></td>
-    //                   <td align="right"><font  size='3' >{{state.Houses_Grounded}}</font></td>
-    //                   <td align="right"><font  size='3' >{{state.Houses_Completed}}</font></td>
-    //                   <td align="right"><font  size='3' >{{state.HousesOccupied}}</font></td> 
-    //                 </tr>`;   
-                    
-    const htmlData = `<html><body>${printContents}</body></html>`;
-  
-    WindowObject.document.writeln(htmlData);
-    WindowObject.document.close();
-    WindowObject.focus();
-    
+      // printContents += `<tr *ngFor='let state of lastPopResult; let i=index'>
+      //                   <td ><font  size='3' >${i+1}  </font></td>
+      //                   <td > <font  size='3' >{{state.City}}</font></td>
+      //                    <td > <font  size='2'>{{state.ProjectTitle}}</font></td>
+      //                   <td align="right"><font  size='3' > {{state.CASanctioned}}</font></td>
+      //                   <td align="right"><font  size='3' >{{state.CentralAssistanceReleased}}</font></td>
+      //                   <td align="right"><font  size='3' >{{state.HousesSanctioned}}</font></td>
+      //                   <td align="right"><font  size='3' >{{state.Houses_Grounded}}</font></td>
+      //                   <td align="right"><font  size='3' >{{state.Houses_Completed}}</font></td>
+      //                   <td align="right"><font  size='3' >{{state.HousesOccupied}}</font></td> 
+      //                 </tr>`;   
 
-  // setTimeout(() => {
-  //  WindowObject.close();
-  
-  // }, 2);
-  });
-  //window.print();  
-  WindowObject.print();
-    
-  };
-
-
- public printData4(e){
-    const printContents = document.getElementById(e).innerHTML
-      const WindowObject = window.open('','PrintWindow','width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes'
-      );
       const htmlData = `<html><body>${printContents}</body></html>`;
-    
+
       WindowObject.document.writeln(htmlData);
       WindowObject.document.close();
       WindowObject.focus();
-      setTimeout(() => {
-        WindowObject.close();
-      }, 0.5);
-    };
-    
-    
+
+
+      // setTimeout(() => {
+      //  WindowObject.close();
+
+      // }, 2);
+    });
+    //window.print();  
+    WindowObject.print();
+
+  };
+
+
+  public printData4(e) {
+    const printContents = document.getElementById(e).innerHTML
+    const WindowObject = window.open('', 'PrintWindow', 'width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes'
+    );
+    const htmlData = `<html><body>${printContents}</body></html>`;
+
+    WindowObject.document.writeln(htmlData);
+    WindowObject.document.close();
+    WindowObject.focus();
+    setTimeout(() => {
+      WindowObject.close();
+    }, 0.5);
+  };
+
+
 
   public printData2(divID) {
     //Get the HTML of div
@@ -1698,32 +1692,32 @@ y= this.addAutoTable(pdf,'#fifteen',y,0,{ halign: 'right', fillColor: 'rgb(217, 
     //Get the HTML of whole page
     var oldPage = document.body.innerHTML;
     //Reset the page's HTML with div's HTML only
-    document.body.innerHTML = 
-      "<html><head><title></title></head><body>" + 
+    document.body.innerHTML =
+      "<html><head><title></title></head><body>" +
       divElements + "</body>";
     //Print Page
     window.print();
     //Restore orignal HTML
     document.body.innerHTML = oldPage;
 
-};
+  };
 
-public  printData1(divID) {  
-  var divToPrint = document.getElementById(divID);  
-  var newWin = window.open("");  
-  newWin.document.write(divToPrint.outerHTML);  
-  newWin.print();  
-  newWin.close();  
-}  
+  public printData1(divID) {
+    var divToPrint = document.getElementById(divID);
+    var newWin = window.open("");
+    newWin.document.write(divToPrint.outerHTML);
+    newWin.print();
+    newWin.close();
+  }
 
 
   public pdfReport_2final() {
     alert("print suru");
-      var data = document.getElementById('nypopup');
-      html2canvas(data).then(canvas => {
+    var data = document.getElementById('nypopup');
+    html2canvas(data).then(canvas => {
       var imgWidth = 200;
-     // if (this.stateCodes == "28") {
-        var pageHeight = 790;
+      // if (this.stateCodes == "28") {
+      var pageHeight = 790;
       //}
       var imgHeight = (canvas.height * imgWidth / canvas.width);
       var heightLeft = imgHeight;
@@ -1734,7 +1728,7 @@ public  printData1(divID) {
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.addPage();
       pdf.setFontSize(22);
-      pdf.addImage(contentDataURL, "PNG", 1,10* 10, imgWidth, 350);
+      pdf.addImage(contentDataURL, "PNG", 1, 10 * 10, imgWidth, 350);
       pdf.save('MYPdf.pdf'); // Generated PDF   
     });
   }
