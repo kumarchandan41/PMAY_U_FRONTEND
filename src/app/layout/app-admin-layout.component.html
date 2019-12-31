@@ -438,6 +438,24 @@
             </ul>
           </li>
 
+
+          <!-- Content Management-->
+          <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Admin_menu" #Adminmenu
+            [class.menu-open]="Adminmenu.id == activeMenuId" (click)="toggle(Adminmenu.id)">
+            <a>
+              <i class="fa fa-shopping-basket"></i>
+              <span>CMS</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" [style.display]="(Adminmenu.id == activeMenuId) ? 'block' : 'none'">
+               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/DashCMSForm'><i 
+                class="fa fa-circle-o"></i>Dashboard Form </a></li>   
+            </ul>
+          </li>
+
+
           <!-- fORMS Menu-->
           <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Forms_menu" #reportmenu1
             [class.menu-open]="reportmenu1.id == activeMenuId" (click)="toggle(reportmenu1.id)">
@@ -477,6 +495,7 @@
 
             </ul>
           </li>
+
 
           <!-- State Wise  Menu-->
           <li class="treeview" [ngStyle]="{'display':DivDisplay}" id="Forms_menu" #reportmenu11

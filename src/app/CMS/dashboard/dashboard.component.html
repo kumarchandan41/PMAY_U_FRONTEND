@@ -1,0 +1,177 @@
+ 
+<br>
+<div style="align-content: ;">
+  PMAYU Achievements
+</div>
+<div class="container">
+  
+
+<div>  Construction of Houses ( Nos in lakh) </div>
+
+
+  <div class="row">
+    <div class="col-md-2">
+      <b>Sanctioned</b>
+    </div>
+    <div class="col-md-2">
+        <input type="text" (keypress)="keyPress($event)" minlength="2" maxlength="15" required  name ="txtSanctioned" [(ngModel)]="Sanctioned"    class="form-control">
+    </div>
+    <div class="col-md-2">
+      <b>Grounded</b>
+    </div>
+    <div class="col-md-2">
+      <input type="text"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  name ="txtGrounded" [(ngModel)]="Grounded" class="form-control">
+    </div>
+    <div class="col-md-2">
+      <b>Completed</b>
+    </div>
+    <div class="col-md-2">
+      <input type="text" name ="txtCompleted"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  [(ngModel)]="Completed" class="form-control">
+    </div>
+  </div>>
+
+
+  <div class="row">
+    <div class="col-md-2">
+      <b>Occupied</b>
+    </div>
+    <div class="col-md-2">
+<input type="text" name ="txtOccupied"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  [(ngModel)]="Occupied"  class="form-control">
+    </div>
+    <div class="col-md-2">
+      <b></b>
+    </div>
+    <div class="col-md-2">
+      <!-- <input type="text" name ="txtCommitted" class="form-control"> -->
+    </div>
+    <div class="col-md-2">
+      <b></b>
+    </div>
+    <div class="col-md-2">
+      <!-- <input type="text" name ="txtApproved" class="form-control"> -->
+    </div>
+  </div>
+
+
+
+  <div>Expenditure of Central assistance (Rs. in Cr)</div>
+  <div class="row">
+     
+    <div class="col-md-2">
+      <b>Committed</b>
+    </div>
+    <div class="col-md-2">
+      <input type="text" name ="txtCommitted"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required   [(ngModel)]="sCommitted"  class="form-control">
+    </div>
+    <div class="col-md-2">
+      <b>Approved</b>
+    </div>
+    <div class="col-md-2">
+      <input type="text" name ="txtApproved"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  [(ngModel)]="Approved"  class="form-control">
+    </div>
+    <div class="col-md-2">
+      <b>Released</b>
+    </div>
+    <div class="col-md-2">
+<input type="text" name ="txtReleased"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required   [(ngModel)]="Released"  class="form-control">
+    </div>
+  </div>
+
+  <div class="row">
+    
+    <div class="col-md-2">
+      <b>Utilized</b>
+    </div>
+    <div class="col-md-2">
+      <input type="text"  name ="txtUtilized"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  [(ngModel)]="Utilized"  class="form-control">
+    </div>
+    <div class="col-md-2">
+      <b></b>
+    </div>
+    <div class="col-md-2">
+      <!-- <input type="text" name ="txtOverall" class="form-control"> -->
+    </div>
+    <div class="col-md-2">
+      <b></b>
+    </div>
+    <div class="col-md-2">
+      <!-- <input type="text" name ="txtOverall" class="form-control"> -->
+    </div>
+  </div>
+
+
+  <div>Investment ( in lakh cr.)</div>
+  <div class="row">
+    <div class="col-md-2">
+      <b>Overall</b>
+    </div>
+    <div class="col-md-2">
+      <input type="text"  name ="txtOverall"   (keypress)="keyPress($event)" minlength="2" maxlength="15" required  [(ngModel)]="Overall"   class="form-control">
+    </div>
+    <div class="col-md-2">
+      <b>Public</b>
+    </div>
+    <div class="col-md-2"> 
+    <input type="text" name ="txtPublic"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required   [(ngModel)]="sPublic"  class="form-control">
+    </div>
+    <div class="col-md-2">
+      <b>Private</b>
+    </div>
+    <div class="col-md-2">
+      <input type="text" name ="txtPrivate"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  [(ngModel)]="Private"  class="form-control">
+    </div>
+  </div>
+
+  <div>Generation of Employment</div>
+  <div class="row">
+    <div class="col-md-2">
+      <b>Person Days Direct</b>
+    </div>
+    <div class="col-md-2">
+      <input type="text" name ="txtPDaysDirect"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  [(ngModel)]="PDaysDirect"  class="form-control">
+    </div>
+
+    <div class="col-md-2">
+      <b>Person Days Indirect</b>
+    </div>
+    <div class="col-md-2">
+         <input type="text"  name ="txtPDaysIndirect"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  [(ngModel)]="PDaysIndirect"  class="form-control">
+    </div>
+    <div class="col-md-2">
+      <b>Person Days Total</b>
+    </div>
+    <div class="col-md-2">
+      <input type="text"  name ="txtPDaysTotal"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  [(ngModel)]="PDaysTotal"  class="form-control">
+    </div>
+      <div class="col-md-2">
+      <b> </b>
+    </div>
+    <div class="col-md-2">
+      <!-- <input type="text" name ="txtJobsDirect"   class="form-control"> -->
+    </div> 
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <b>Jobs Direct</b>
+    </div>
+    <div class="col-md-2">
+      <input type="text" name ="txtJobsDirect"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required   [(ngModel)]="JobsDirect"  class="form-control">
+    </div>
+    <div class="col-md-2">
+      <b>Jobs  Indirect</b>
+    </div>
+    <div class="col-md-2">
+      <input type="text"  name ="txtJobsIndirect"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  [(ngModel)]="JobsIndirect"  class="form-control">
+    </div>
+    <div class="col-md-2">
+      <b>Jobs Total</b>
+    </div>
+    <div class="col-md-2">
+      <input type="text"  name ="txtJobsTotal"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  [(ngModel)]="JobsTotal"  class="form-control">
+    </div> 
+  </div>
+  <div class="row" style="text-align: center;">
+    <input type="button" value="Submit"  (click) ="Save()" class="btn btn-primary"/>
+  </div>
+</div>

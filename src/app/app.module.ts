@@ -105,6 +105,8 @@ import { ComponentMasterComponent } from './Master/component-master/component-ma
 import { MappingClassificationMasterComponent } from './Master/mapping-classification-master/mapping-classification-master.component';
 import { SchemeMasterComponent } from './Master/scheme-master/scheme-master.component';
 import { PMAYuCriticalComponent } from './AdminPanel/pmayu-critical/pmayu-critical.component';
+import { DashboardComponent } from './CMS/dashboard/dashboard.component';
+// import { DasHComponent } from './CMS/das-h/das-h.component';
 // import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
 // import { ProjectDetailsComponent } from './DRMC/project-details/project-details.component';
 // import { ProjectReleaseFundFlowComponent } from './DRMC/project-release-fund-flow/project-release-fund-flow.component';
@@ -183,6 +185,9 @@ const routes: Routes = [
       {path: 'ClassificationMaster', component: ClassificationMasterComponent},
       {path: 'MappingClassificationMaster', component: MappingClassificationMasterComponent},
       {path: 'PMAYuCritical', component: PMAYuCriticalComponent},
+
+      {path: 'DashCMSForm', component: DashboardComponent},
+      
 
       
       
@@ -282,7 +287,9 @@ const routes: Routes = [
     ComponentMasterComponent,
     MappingClassificationMasterComponent,
     SchemeMasterComponent,
-    PMAYuCriticalComponent 
+    PMAYuCriticalComponent,
+    DashboardComponent,
+    DasHComponent 
   ],
   imports: [
     CountoModule,
