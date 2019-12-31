@@ -1622,7 +1622,7 @@ export class AdminSandbox {
 
   SlumArray(value: any) {
     this.Slum = value;
-    // console.log(this.Slum);
+     console.log(this.Slum);
   }
 
   getProjectBriefDetail() {

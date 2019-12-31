@@ -82,6 +82,7 @@ export class ProjectBriefDetailComponent implements OnInit {
     this.Components = '';
   }
   selectFile(event) {
+    alert(event);
     this.selectedFiles = event.target.files;
   }
   public onProjectBriefDetail(): void {

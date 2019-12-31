@@ -1,0 +1,221 @@
+/* .modal-content{
+    width: 920px;
+    padding:10px;
+  }
+  th{
+    width: 90px;
+  }
+  
+  #filter{
+  background: #eee;
+  padding: 10px 0;
+  }
+  
+  #filter > * {
+  padding: 0 5px !important;
+  }
+  
+  #filter > *:first-child {
+  padding-left: 10px !important;
+  }
+  
+  #filter > *:last-child {
+  padding-right: 10px !important;
+  }
+  
+  table, th, td {
+     height: 8px;
+     font-family: "Open Sans", Arial, sans-serif;
+    font-size: 14px;
+    padding: 1px 4px;
+  }
+   
+  .tableHeader{
+    background-color: #f0ad4e;
+  }
+  
+  #urlSwitcher{
+    text-align: center; 
+    font-size: 18px; 
+    padding-top: 10px;
+  }
+  #checkboxFilter > span{
+  padding: 0 3px;
+  }
+  button{
+  margin-top: 0px !important;
+  }
+  #checkboxFilter{
+  text-align: center; 
+  font-size: 16px; 
+  padding-top: 10px;
+  }
+  
+  
+  .box.box-default {
+  border-style: solid;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-color: #d2d6de;
+  }
+  @media print {
+    body *, #drpdown, #buttonGroup{display : none;}
+    body #toPrint *, #urlSwitcher, #checkboxFilter {display:none} 
+    table {border-collapse: collapse;}
+    #toPrint div:first-child{
+      font-size: 18px !important;
+      padding-top: 0px !important;
+    }
+    table, td, th {border: 1px solid black}
+    #toPrint { padding-left :15px; padding-top :20px;padding-right :15px;} 
+    
+    tr:nth-child(even) td,  tr:nth-child(odd) td{
+      -webkit-print-color-adjust: exact; 
+    }
+  tr.tableHeader, .blackPrintHeader{
+      background-color: #000 !important;
+      -webkit-print-color-adjust: exact; 
+  }
+  
+  tr.printHeader{
+      background-color: #cccc !important;
+      -webkit-print-color-adjust: exact; 
+  }
+  tr.tableHeader td, tr.tableHeader td b{
+      color: #fff !important;
+  }
+  tr.tableHeader td{
+    border-color: #fff !important;
+  }
+  tr.tableHeader td:first-child{
+    border-left-color:  #000 !important;
+  }
+  
+  tr.tableHeader td:last-child{
+    border-right-color:  #000 !important;
+  }
+  
+  
+  
+   }
+  
+   
+  
+  
+  
+   */
+
+   .modal-content{
+    width: 920px;
+    /* left: 20px; */
+    padding:10px;
+  }
+  th{
+    width: 90px;
+  }
+  
+  #filter{
+  background: #eee;
+  padding: 10px 0;
+  }
+  
+  #filter > * {
+  padding: 0 5px !important;
+  }
+  
+  #filter > *:first-child {
+  padding-left: 10px !important;
+  }
+  
+  #filter > *:last-child {
+  padding-right: 10px !important;
+  }
+  
+  table, th, td {
+     height: 8px;
+     font-family: "Open Sans", Arial, sans-serif;
+    font-size: 14px;
+    padding: 1px 4px;
+  }
+   
+  .tableHeader{
+    background-color: #f0ad4e;
+  }
+  
+  #urlSwitcher{
+    text-align: center; 
+    font-size: 18px; 
+    padding-top: 10px;
+  }
+  #checkboxFilter > span{
+  padding: 0 3px;
+  }
+  button{
+  margin-top: 0px !important;
+  }
+  #checkboxFilter{
+  text-align: center; 
+  font-size: 16px; 
+  padding-top: 10px;
+  }
+  
+  
+  .box.box-default {
+  /* border: 1px solid #d2d6de; */
+  border-style: solid;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-color: #d2d6de;
+  }
+  @media print {
+    body *, #drpdown, #buttonGroup{display : none;}
+    body #toPrint *, #urlSwitcher, #checkboxFilter {display:none} 
+    table {border-collapse: collapse;}
+    #toPrint div:first-child{
+      font-size: 18px !important;
+      padding-top: 0px !important;
+    }
+    table, td, th {border: 1px solid black}
+    #toPrint { padding-left :15px; padding-top :20px;padding-right :15px;} 
+    
+    tr:nth-child(even) td,  tr:nth-child(odd) td{
+      /* background-color: red !important; */
+      -webkit-print-color-adjust: exact; 
+    }
+  tr.tableHeader, .blackPrintHeader{
+      background-color: #000 !important;
+      -webkit-print-color-adjust: exact; 
+  }
+  
+  tr.printHeader{
+      background-color: #cccc !important;
+      -webkit-print-color-adjust: exact; 
+  }
+  tr.tableHeader td, tr.tableHeader td b{
+      color: #fff !important;
+  }
+  tr.tableHeader td{
+    border-color: #fff !important;
+  }
+  tr.tableHeader td:first-child{
+    border-left-color:  #000 !important;
+  }
+  
+  tr.tableHeader td:last-child{
+    border-right-color:  #000 !important;
+  }
+  
+  
+  
+   }
+  
+   
+  
+         .auto-style3 {
+            width: 60%;
+        }
+       
+  
+  

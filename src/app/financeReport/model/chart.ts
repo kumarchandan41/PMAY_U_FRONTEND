@@ -467,6 +467,8 @@ export class PMAY_DATA_New{
     ThirdInstyettobereleased: string;
     GroundedbutyettobeCompleted: string;
     CompletedbutyettobeOccupied: string;
+     
+    CentralAssistanceReleased: number;
 
 
 }
@@ -491,6 +493,10 @@ export class PMAY_DATA_Financial{
  ThirdInstallmentReleased:string;
   UC_Received :string;
 
+
+     Liability14: string;
+     UC_Pending: string;
+    CentralAssistanceReleased: string;
     // Housesinvolved: string;
     // FundsDisbursed_in_Houses: string;
 
@@ -580,6 +586,8 @@ export class Houses_Status {
         First_Houses:number;
         Second_Houses:number;
         Third_Houses:number;
+        UC_Pending:number;
+        CentralAssistanceReleased:number;
 } 
 export class StateScore{
     CASanctionedRel :number;
@@ -1001,4 +1009,35 @@ export class PdashBoard {
     JobsDirect : string;
     JobsIndirect : string;
     JobsTotal : string;
+}
+
+export class Monitoring_Status {
+    Housesinvolved: any;
+    FinYear: any;
+    Component: any;
+    Sanctioned: any;
+    CAReleased: any;
+    I_to_beRel: any;
+    II_to_beRel: any;
+    III_to_beRel: any;
+    Total_Liability: any;
+    UC_Pending: any;
+    Project_Cost: number;
+    Central_Assistance_involved: number;
+    FirstInstallmentReleased: number;
+    SecondInstallmentReleased: number;
+    ThirdInstallmentReleased: number;
+    UC_Received: number;
+}
+
+export class CLSS_MasterValues {
+    Bene2014_15: any;
+    Bene2015_16: any;
+    Bene2016_17: any;
+    Bene2017_18: any;
+    Bene2018_19: any;
+    Bene2019_20: any;
+    Bene2020_21: any;
+    Bene2021_22: any;
+    StateCode: any;
 }

@@ -401,20 +401,13 @@
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
                   href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Progress Report</a></li>
 
-              <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/VerticalHousesDetails']"  ><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li> -->
-              <!-- <li [ngStyle]="{'display':AdminDisplay}" class="active"><a style="cursor: pointer;"
-                  href='/Admin/VerticalFinancialDetails'><i class="fa fa-circle-o"></i>Financial Houses Details</a></li> -->
-
-              <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/VerticalHousesDetails']"  ><i class="fa fa-circle-o"></i>Vertical Houses Details</a></li> -->
-              <!-- <li [ngStyle]="{'display':AdminDisplay}" class="active"><a style="cursor: pointer;"  href='/Admin/VerticalFinancialDetails'><i class="fa fa-circle-o"></i>Financial Houses Details</a></li>  -->
-
-              <!-- <a [routerLink]="['/Admin/DashboardHFA3']"><i class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-3</a></li> -->
-
+                  <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
+                    href='/Admin/CriticalMonitoring'><i class="fa fa-circle-o"></i>Monitoring Report</a></li>
+            
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/IndiaMap'><i
                     class="fa fa-circle-o"></i>India Map</a></li>
 
-              <!-- <li><a href="./assets/pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="./assets/pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li> -->
+            <!-- <li><a href="./assets/pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li> -->
             </ul>
             <ul class="treeview-menu" [style.display]="(reportmenu.id == activeMenuId) ? 'block' : 'none'">
               <!-- <li><a href="./assets/pages/charts/chartjs.html"><i class="fa fa-circle-o"></i>Home Page</a></li> -->
@@ -439,21 +432,7 @@
           </li>
 
 
-          <!-- Content Management-->
-          <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Admin_menu" #Adminmenu
-            [class.menu-open]="Adminmenu.id == activeMenuId" (click)="toggle(Adminmenu.id)">
-            <a>
-              <i class="fa fa-shopping-basket"></i>
-              <span>CMS</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu" [style.display]="(Adminmenu.id == activeMenuId) ? 'block' : 'none'">
-               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/DashCMSForm'><i 
-                class="fa fa-circle-o"></i>Dashboard Form </a></li>   
-            </ul>
-          </li>
+     
 
 
           <!-- fORMS Menu-->
@@ -631,26 +610,21 @@
                   <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/Admin/DisttMaster']"><i class="fa fa-circle-o"></i>Distt Master Form</a></li>
                 </ul> -->
           </li>
-
-          <!-- DMRC Menu-->
-          <!-- <li class="treeview"  [ngStyle]="{'display':DMRCDisplay}" id="DMRC_menu" #DMRCmenu [class.menu-open]="DMRCmenu.id == activeMenuId" (click)="toggle(DMRCmenu.id)">
-          <a>
-            <i class="fa fa-laptop"></i>
-            <span>Masters</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu" [style.display]="(DMRCmenu.id == activeMenuId) ? 'block' : 'none'">
-            <li   class="active"><a [routerLink]="['/Admin/statemaster']"><i class="fa fa-circle-o"></i>State Master Form</a></li>
-          </ul>          
-          <ul class="treeview-menu" [style.display]="(DMRCmenu.id == activeMenuId) ? 'block' : 'none'">
-              <li  class="active"><a style="cursor: pointer;" (click)="OpenModalDialog()"><i class="fa fa-circle-o"></i>State Score</a></li>
-             
-          </ul> 
-      </li> -->
-
-
+     <!-- Content Management-->
+     <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="cms_menu" #cmsmenu
+     [class.menu-open]="cmsmenu.id == activeMenuId" (click)="toggle(cmsmenu.id)">
+     <a>
+       <i class="fa fa-shopping-basket"></i>
+       <span>CMS</span>
+       <span class="pull-right-container">
+         <i class="fa fa-angle-left pull-right"></i>
+       </span>
+     </a>
+     <ul class="treeview-menu" [style.display]="(cmsmenu.id == activeMenuId) ? 'block' : 'none'">
+        <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/DashCMSForm'><i 
+         class="fa fa-circle-o"></i>Dashboard Form </a></li>   
+     </ul>
+   </li>
           <li class="treeview">
             <a href="/ChangePassword">
               <i class="fa fa-shield"></i> <span>Change Password</span>
