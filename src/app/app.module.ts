@@ -109,6 +109,7 @@ import { DashboardComponent } from './CMS/dashboard/dashboard.component';
 import { CriticalMonitoringComponent } from './financeReport/critical-monitoring/critical-monitoring.component';
 import { PhysicalMonitoringComponent } from './financeReport/physical-monitoring/physical-monitoring.component';
 import { ShortfallDetailComponent } from './financeReport/shortfall-detail/shortfall-detail.component';
+import { GlobalUrl } from './Shared/GlobalUrl';
 // import { DasHComponent } from './CMS/das-h/das-h.component';
 // import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
 // import { ProjectDetailsComponent } from './DRMC/project-details/project-details.component';
@@ -332,7 +333,7 @@ providers: [HttpClientModule,
   NgbActiveModal,
   { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
   SnotifyService,AdminSandbox,DatePipe,
-GlobalEvent],
+GlobalEvent,GlobalUrl],
 bootstrap: [AppComponent],
 entryComponents:[StatescoreComponent]
 })
