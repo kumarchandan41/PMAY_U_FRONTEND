@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { States, Designation, District, City, Charts, Comp_Values, CLSS_Values, CLSS_Citywise_Values, JNReport, Demand, JNAtAGlance, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, CompMaster, getHFACodes, ComponentWiseDATA, PMAY_FinancialData, FinancialProgress, StateScore, PMAY_DATA, Demand_SanctionStateWise, UserMaster, CLSS_CityValues, Houses_Status, StateWise_NewCLSS, RegistrationDATA, MapDATA, PMAY_DATA_New, PMAY_DATA_Financial, PMAY_DATA_Fin, PdashBoard, Monitoring_Status, CLSS_MasterValues } from '../model/chart';
+import { States, Designation, District, City, Charts, Comp_Values, CLSS_Values, CLSS_Citywise_Values, JNReport, Demand, JNAtAGlance, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, CompMaster, getHFACodes, ComponentWiseDATA, PMAY_FinancialData, FinancialProgress, StateScore, PMAY_DATA, Demand_SanctionStateWise, UserMaster, CLSS_CityValues, Houses_Status, StateWise_NewCLSS, RegistrationDATA, MapDATA, PMAY_DATA_New, PMAY_DATA_Financial, PMAY_DATA_Fin, PdashBoard, Monitoring_Status, CLSS_MasterValues, PMAY_DATA_ShortFall } from '../model/chart';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -1190,5 +1190,15 @@ sp_create_Fin_ISSRDATA(stateCode:string,DisttCode:string,cityCode:string,Cid:str
           debugger;
             return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_BLC_GraphCritical_DATA_FinWise?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&finYear=" + Fin_Year); 
      }
+     Get_ShortFallView(stateCode:string,DisttCode:string,cityCode:string,Comp:string,FinYear:string):Observable<PMAY_DATA_ShortFall[]>
+     {
+            return this.http.get<PMAY_DATA_ShortFall[]>(this.url + "sp_Phy_ShortFall_View?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&Component=" + Comp + "&finYear=" + FinYear); 
+     }
 
+     Shortfall_PMAY_Graph_DATA(stateCode:string,DisttCode:string,cityCode:string,Comp:string,FinYear:string):Observable<PMAY_DATA_ShortFall[]>
+     {
+        //  alert();  table  page Load 1
+          debugger;
+            return this.http.get<PMAY_DATA_ShortFall[]>(this.url + "sp_Shortfall_BLC_AHP?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&cid=" + Comp + "&finYear=" + FinYear); 
+     }
 }

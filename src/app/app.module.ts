@@ -108,6 +108,7 @@ import { PMAYuCriticalComponent } from './AdminPanel/pmayu-critical/pmayu-critic
 import { DashboardComponent } from './CMS/dashboard/dashboard.component';
 import { CriticalMonitoringComponent } from './financeReport/critical-monitoring/critical-monitoring.component';
 import { PhysicalMonitoringComponent } from './financeReport/physical-monitoring/physical-monitoring.component';
+import { ShortfallDetailComponent } from './financeReport/shortfall-detail/shortfall-detail.component';
 // import { DasHComponent } from './CMS/das-h/das-h.component';
 // import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
 // import { ProjectDetailsComponent } from './DRMC/project-details/project-details.component';
@@ -192,7 +193,10 @@ const routes: Routes = [
       {path: 'CriticalMonitoring', component: CriticalMonitoringComponent},
       
       {path: 'PhysicalMonitoring', component: PhysicalMonitoringComponent},
+      {path: 'ShortfallDetail', component: ShortfallDetailComponent},
       
+
+
     ] 
   },
   {
@@ -293,6 +297,7 @@ const routes: Routes = [
     DashboardComponent,
     CriticalMonitoringComponent,
     PhysicalMonitoringComponent,
+    ShortfallDetailComponent,
     // DasHComponent 
   ],
   imports: [

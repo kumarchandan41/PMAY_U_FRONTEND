@@ -639,7 +639,7 @@ this.GroupedData=result;
  
   
 
-  sp_create_PMAY_Critical_DATANew2(stateCode, DisttCode, cityCode, Fin_Year )
+  sp_create_PMAY_Critical_DATANew(stateCode, DisttCode, cityCode, Fin_Year )
   {
     var x3;
     var x4;
