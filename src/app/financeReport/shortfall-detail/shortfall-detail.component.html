@@ -2,7 +2,7 @@
   <div id="drpdown">
     <div class="row">
       <div id='filter' class="col-lg-12 col-md-12 col-sm-12">
-        <div class="col-lg-2 col-md-2 col-sm-2">
+        <div class="col-lg-3 col-md-3 col-sm-3">
           <select class="form-control" [(ngModel)]="stateCodes" title="Choose State" placeholder="Choose State"
             (change)="getStateDetails($event.target)" style="width: 100%">
             <option value={{stValue}}>{{StateMessage}}</option>
@@ -12,7 +12,7 @@
           </select>
         </div>
 
-        <div class="col-lg-2 col-md-2 col-sm-2">
+        <div class="col-lg-3 col-md-3 col-sm-3">
           <select class="form-control" title="Choose District" placeholder="Choose Distt" [(ngModel)]="districtCodes"
             (change)="getDistrictDetails($event.target.value)" style="width: 100%">
             <option value={{distValue}}>{{DistrictMessage}}</option>
@@ -44,7 +44,7 @@
             Export</button>
         </div>
 
-        <div class="col-lg-2 col-md-2 col-sm-2" style="visibility: hidden;">
+        <!-- <div class="col-lg-2 col-md-2 col-sm-2">
           <button title="Show Graph" type="button" [ngStyle]="{'display':DisplayTable}" (click)="ShowPageM('graph')"
             class="btn btn-block btn-warning">
             <i class="fa fa-map-o"></i>
@@ -53,7 +53,7 @@
             class="btn btn-block btn-warning">
             <i class="fa fa-table"></i>
             Show Table</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -119,45 +119,30 @@
         </b>
       </div>
 
-      <div class="col-sm-12" >
-        <div class="col-md-3 col-sm-3 col-xs-12">
-           <div style="width:1000px;height:90px;margin-left:70px" id ="mytable">  
-            
-            <!-- <div style="text-align:center; padding: 5px 10px; font-size: 20px;">
-              <b>
-
-              </b>
-            </div> -->
-
-                
-            <table id="mytable1" class="bodyataglance" border="1px"
-            style="font-size:12px; background-color:white; align-content: center; width: 1200px;" id="printme" align="center">
-            <tr class="tableHeader"> 
-              <th > SrNo  </th>        
-              <th > Component  </th>
-              <th  > Fin Year  </th>
-              <th  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif"   > Completed </th>
-              <th  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif"   >  Actual Completed </th>
-              <th  style="text-align:center;font-size: 14px;font-family: Arial, Helvetica, sans-serif"  >  Shortfall Completed  </th>
-              
-            </tr> 
-             
-              <ng-container  class="tableHeader" *ngFor="let item of GroupedData | keyvalue; let i=index">
-                <tr >
-                  <td [attr.rowspan]="item.value.length+1" >{{i + 1}}</td>      
-                   <td [attr.rowspan]="item.value.length+1" >{{item.key }} </td>   
-                </tr>
-                  <tr  *ngFor="let finData of item.value;">
-                         <td class="tbl2">{{finData.FinYear}}</td> 
-                         <td   class="tbl2">{{finData.Completed?.toLocaleString('en-IN')}}</td> <!--{{DisplayHouse}}-->
-                         <!-- <td  [ngStyle]="{'display':DisplayHouse}"   class="tbl2">{{finData.Housesinvolved?.toLocaleString('en-IN')}}</td> -->
-                         <td   class="tbl2">{{finData.Actual_Completed?.toLocaleString('en-IN')}}</td>
-                         <td   class="tbl2">{{finData.Shortfall_Completed?.toLocaleString('en-IN')}}</td>
-                  </tr>
-                </ng-container>
-       </table>
-             </div> 
-         </div>        </div>
+      <table id="mytable1" class="bodyataglance" border="1px"
+      style="font-size:12px; background-color:white; align-content: center; width: 100%;" id="printme" align="center">
+      <tr class="tableHeader"> 
+        <th  style="text-align:center;font-size: 13px; font-weight: 600;" > Component  </th>
+        <th  style="text-align:center;font-size: 13px; font-weight: 600;" > Financial Year  </th>
+        <th  style="text-align:center;font-size: 13px; font-weight: 600;"   > Completed </th>
+        <th  style="text-align:center;font-size: 13px; font-weight: 600;"   >  Actual Completed </th>
+        <th  style="text-align:center;font-size: 13px; font-weight: 600;"  >  Shortfall Completed  </th>
+      </tr> 
+       
+        <ng-container  class="tableHeader" *ngFor="let item of GroupedData | keyvalue; let i=index">
+          <tr style="text-align: center;">
+             <td [attr.rowspan]="item.value.length+1" >{{item.key }} </td>   
+          </tr>
+          <ng-container  *ngFor="let finData of item.value;">
+            <tr style="text-align: right;" class="{{finData.FinYear === 'Total' ? 'printHeader' :''}}" [ngStyle]="{'background-color':finData.FinYear === 'Total' ? 'rgb(204, 204, 204)' : 'initial' }">
+                   <td style="text-align: center;" class="tbl2">{{finData.FinYear}}</td> 
+                   <td class="tbl2">{{finData.Completed === 0 ? '-' : finData.Completed?.toLocaleString('en-IN')}}</td> 
+                   <td class="tbl2">{{finData.Actual_Completed === 0 ? '-' : finData.Actual_Completed?.toLocaleString('en-IN')}}</td>
+                   <td class="tbl2">{{finData.Shortfall_Completed === 0 ? '-' : finData.Shortfall_Completed?.toLocaleString('en-IN')}}</td>
+            </tr>
+          </ng-container>
+        </ng-container>
+ </table>
 
     </div>
   </div>

@@ -28,11 +28,11 @@ padding-right: 10px !important;
 table, th, td {
 height: 8px;
 font-family: "Open Sans", Arial, sans-serif;
-font-size: 14px;
+font-size: 13px;
 padding: 2px 4px;
 }
 .tableHeader{
-  background-color: #f0ad4e;
+  background-color: #4ef08f;
 }
 
 #urlSwitcher{

@@ -46,13 +46,13 @@
 
         <div class="col-lg-2 col-md-2 col-sm-2">
           <button title="Show Graph" type="button" [ngStyle]="{'display':DisplayTable_C}" (click)="ShowPageM('graph')"
-            class="btn btn-block btn-warning">
-            <i class="fa fa-map-o"></i>
-            Show Graph</button>
-          <button title="Show Table" type="button" [ngStyle]="{'display':DisplyaGraph_C}" (click)="ShowPageM('table')"
-            class="btn btn-block btn-warning">
-            <i class="fa fa-table"></i>
-            Show Table</button>
+          class="btn btn-block btn-warning">
+          <i class="fa fa-map-o"></i>
+          Show Graph</button>
+        <button title="Show Table" type="button" [ngStyle]="{'display':DisplyaGraph_C}" (click)="ShowPageM('table')"
+          class="btn btn-block btn-warning">
+          <i class="fa fa-table"></i>
+          Show Table</button>
         </div>
       </div>
     </div>
@@ -71,7 +71,7 @@
 
 
 <div class="container-fluid">
-  <div class="row" [ngStyle]="{'display':DisplayTable}">
+  <div class="row" [ngStyle]="{'display':DisplayTable_C}">
     <!--Table View -->
     <div id="checkboxFilter">
       <span><b>Show /Hide </b></span>
@@ -139,22 +139,34 @@
       <table class="bodyataglance" border="1px"
         style="font-size:12px; background-color:white; align-content: center; width: 100%;" id="printme" align="center">
         <tr class="tableHeader">
-          <th style="text-align:center;font-size: 13px; font-weight: 600;"> SrNo </th>
-          <th style="text-align:center;font-size: 13px; font-weight: 600;"> Component </th>
-          <th style="text-align:center;font-size: 13px; font-weight: 600;"> Fin Year </th>
-          <th style="text-align:center;font-size: 13px; font-weight: 600;" *ngIf="isDisplayHouse"> Houses Involved </th>
-          <th style="text-align:center;font-size: 13px; font-weight: 600;" *ngIf="isFirst"> 1st
-            Inst to be Rel. </th>
-          <th style="text-align:center;font-size: 13px; font-weight: 600;" *ngIf="isSecond"> IInd
-            Inst to be Rel. </th>
-          <th style="text-align:center;font-size: 13px; font-weight: 600;" *ngIf="isThird"> IIIrd
-            Inst to be Rel. </th>
-          <th style="text-align:center;font-size: 13px; font-weight: 600;" *ngIf="isGrounded">
-            Grounded but yet tobe Completed </th>
-          <th style="text-align:center;font-size: 13px; font-weight: 600;" *ngIf="isCompleted">
-            Completed but yet tobe Occupied </th>
+          <td rowspan="2" style="text-align:center;font-size: 13px; font-weight: 600;"> SrNo </td>
+          <td rowspan="2" style="text-align:center;font-size: 13px; font-weight: 600;"> Component </td>
+          <td rowspan="2" style="text-align:center;font-size: 13px; font-weight: 600;"> Financial Year </td>
+          <td rowspan="2" style="text-align:center;font-size: 13px; font-weight: 600;" *ngIf="isDisplayHouse"> Houses Sanctioned </td>
+          <!-- <td rowspan="2" style="text-align:center;font-size: 13px; font-weight: 600;" *ngIf="isFirst"> 1st
+            Inst to be Rel. </td>
+          <td rowspan="2" style="text-align:center;font-size: 13px; font-weight: 600;" *ngIf="isSecond"> IInd
+            Inst to be Rel. </td>
+          <td rowspan="2" style="text-align:center;font-size: 13px; font-weight: 600;" *ngIf="isThird"> IIIrd
+            Inst to be Rel. </td> -->
+            <td [attr.colspan]="ReleasedFundsCol" [ngStyle]="{'display':ReleasedFundsCol=== 0 ? 'none' : 'table-cell'}"
+            style="text-align:center;font-size: 13px;">
+            <b>Houses for which Funds yet to be Release </b></td>
+          <td rowspan="2" style="text-align:center;font-size: 13px; font-weight: 600;" *ngIf="isGrounded">
+            Grounded but yet to be Completed </td>
+          <td rowspan="2" style="text-align:center;font-size: 13px; font-weight: 600;" *ngIf="isCompleted">
+            Completed but yet to be Occupied </td>
         </tr>
-
+        <tr class="tableHeader">
+          <td [ngStyle]="{'display':FundsFirst}" *ngIf="isFirst" style="text-align:center;font-size: 13px;"><b>
+              1st Inst.</b>
+          </td>
+          <td [ngStyle]="{'display':FundsSecond}" *ngIf="isSecond" style="text-align:center;font-size: 13px;"><b>
+              2nd Inst.</b></td>
+          <td [ngStyle]="{'display':FundsThird}" *ngIf="isThird" style="text-align:center;font-size: 13px;">
+            <b>3rd Inst.</b>
+          </td>
+        </tr>
 
 
         <ng-container class="tableHeader" *ngFor="let item of GroupedData | keyvalue; let i=index">
@@ -162,19 +174,17 @@
             <td [attr.rowspan]="item.value.length+1">{{i + 1}}</td>
             <td [attr.rowspan]="item.value.length+1">{{item.key }} </td>
           </tr>
-          <tr *ngFor="let finData of item.value;" class="printHeader" style="text-align: right;">
-
-            <!-- <td  class="tbl2" >{{finData.Component }} </td > -->
-            <td style="text-align: center;" class="tbl2">{{finData.FinYear}}</td>
-            <td *ngIf="isDisplayHouse" class="tbl2">{{finData.Housesinvolved?.toLocaleString('en-IN')}}</td>
-            <!--{{DisplayHouse}}-->
-            <!-- <td  [ngStyle]="{'display':DisplayHouse}"   class="tbl2">{{finData.Housesinvolved?.toLocaleString('en-IN')}}</td> -->
-            <td *ngIf="isFirst" class="tbl2">{{finData.Istinstyettobereleased?.toLocaleString('en-IN')}}</td>
-            <td *ngIf="isSecond" class="tbl2">{{finData.IIndinstyettobereleased?.toLocaleString('en-IN')}}</td>
-            <td *ngIf="isThird" class="tbl2">{{finData.ThirdInstyettobereleased?.toLocaleString('en-IN')}}</td>
-            <td *ngIf="isGrounded" class="tbl2">{{finData.GroundedbutyettobeCompleted?.toLocaleString('en-IN')}}</td>
-            <td *ngIf="isCompleted" class="tbl2">{{finData.CompletedbutyettobeOccupied?.toLocaleString('en-IN')}}</td>
-          </tr>
+          <ng-container *ngFor="let finData of item.value;">
+            <tr style="text-align: right;" class="{{finData.FinYear === 'Total' ? 'printHeader' :''}}" [ngStyle]="{'background-color':finData.FinYear === 'Total' ? '#ebebeb' : 'initial' }">
+              <td style="text-align: center;" class="tbl2">{{finData.FinYear}}</td>
+              <td *ngIf="isDisplayHouse" class="tbl2">{{finData.Housesinvolved === 0 ? '-' : finData.Housesinvolved?.toLocaleString('en-IN')}}</td>
+              <td *ngIf="isFirst" class="tbl2">{{finData.Istinstyettobereleased === 0 ? '-' : finData.Istinstyettobereleased?.toLocaleString('en-IN')}}</td>
+              <td *ngIf="isSecond" class="tbl2">{{finData.IIndinstyettobereleased === 0 ? '-' : finData.IIndinstyettobereleased?.toLocaleString('en-IN')}}</td>
+              <td *ngIf="isThird" class="tbl2">{{finData.ThirdInstyettobereleased === 0 ? '-' : finData.ThirdInstyettobereleased?.toLocaleString('en-IN')}}</td>
+              <td *ngIf="isGrounded" class="tbl2">{{finData.GroundedbutyettobeCompleted === 0 ? '-' : finData.GroundedbutyettobeCompleted?.toLocaleString('en-IN')}}</td>
+              <td *ngIf="isCompleted" class="tbl2">{{finData.CompletedbutyettobeOccupied === 0 ? '-' : finData.CompletedbutyettobeOccupied?.toLocaleString('en-IN')}}</td>
+            </tr>
+          </ng-container>
         </ng-container>
       </table>
 
@@ -185,7 +195,7 @@
   <!-- Graph Start Here -->
 
   <div class="row"
-    [ngStyle]="{'opacity':DisplyaGraph === 'none' ? 0 : 1, 'height': DisplyaGraph === 'none' ? 0 : 'auto', 'overflow': DisplyaGraph === 'none' ? 'hidden' : 'visible' }">
+    [ngStyle]="{'opacity':DisplyaGraph_C === 'none' ? 0 : 1, 'height': DisplyaGraph_C === 'none' ? 0 : 'auto', 'overflow': DisplyaGraph_C === 'none' ? 'hidden' : 'visible' }">
     <!--Graph View -->
     <div id="checkboxFilter">
       <span class="info-box-header"><b>Select Financial Year</b></span>
@@ -227,7 +237,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body clearfix" id="graphData1">
-            <div id="chartPMAYU" style="height: 500px; width: 100%;"></div>
+            <div id="chartPMAY_Critical" style="height: 500px; width: 100%;"></div>
           </div>
           <!-- /.box-body -->
         </div>
@@ -248,7 +258,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body clearfix" id="graphData2">
-            <div id="chartBLCS" style="height: 500px; width: 100%;"></div>
+            <div id="chartBLCS_Critical" style="height: 500px; width: 100%;"></div>
           </div>
           <!-- /.box-body -->
         </div>
@@ -269,7 +279,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body clearfix" id="graphData3">
-            <div id="chartAHP" style="height: 500px; width: 100%;"></div>
+            <div id="chartAHP_Critical" style="height: 500px; width: 100%;"></div>
           </div>
           <!-- /.box-body -->
         </div>
@@ -290,7 +300,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body clearfix" id="graphData4">
-            <div id="chartISSR" style="height: 500px; width: 100%;"></div>
+            <div id="chartISSR_Critical" style="height: 500px; width: 100%;"></div>
           </div>
           <!-- /.box-body -->
         </div>
