@@ -34,7 +34,6 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router,private builderForm:FormBuilder, public service: GraphService) { 
 
   }
-
   ngOnInit() {
     this.dashboardForm=this.builderForm.group({
       Sanctioned: ['',[Validators.required]],
@@ -57,10 +56,10 @@ export class DashboardComponent implements OnInit {
       JobsDirect: ['',[Validators.required]],
       JobsIndirect: ['',[Validators.required]],
       JobsTotal: ['',[Validators.required]],
-      Tdashboard : ['',[Validators.required]],
+      Tdashboard : [''],
 
     })
-    this.service.GetDasboardDataList().subscribe(result=>{
+      this.service.GetDasboardDataList().subscribe(result=>{
       this.dashboardForm.controls['Sanctioned'].setValue(result.Sanctioned);
       this.dashboardForm.controls['Grounded'].setValue(result.Grounded);
       this.dashboardForm.controls['Completed'].setValue(result.Completed);
@@ -78,16 +77,16 @@ export class DashboardComponent implements OnInit {
       this.dashboardForm.controls['JobsDirect'].setValue(result.JobsDirect);
       this.dashboardForm.controls['JobsIndirect'].setValue(result.JobsIndirect);
       this.dashboardForm.controls['JobsTotal'].setValue(result.JobsTotal);
- 
     })
   }
   onFormSubmit(){
- 
+debugger;
     if(this.dashboardForm.invalid)
     {
-      //return;
+      alert(2);
+      return;
     }
-    this.service.SaveDashboard(this.dashboardForm).subscribe(result => {
+    this.service.SaveDashboard(this.dashboardForm.value).subscribe(result => {
       alert(result);
     });
   }

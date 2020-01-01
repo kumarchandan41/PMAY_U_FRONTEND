@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { stringify } from 'querystring';
-import { formatDate } from '@angular/common';
+import { formatDate, LocationStrategy } from '@angular/common';
 import { EventEmitter, Input, Output } from '@angular/core';
 import { UrlService } from '../Shared/url.service';
 import { States } from '../Shared/CommonModel';
 import { GlobalEvent } from '../Shared/global-event';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Alert, Navigation } from 'selenium-webdriver';
+import {Location} from "@angular/common";
 
 
 @Component({
@@ -40,7 +40,12 @@ export class AppAdminLayoutComponent implements OnInit {
   RoutLink:string;
   RoutRptLink:string;
   DivText:string;
-  constructor(private service: UrlService, private gevent: GlobalEvent, private router: Router,private activatedRoute:ActivatedRoute) {
+  constructor(private service: UrlService,private location: LocationStrategy,private gevent: GlobalEvent, private router: Router,private activatedRoute:ActivatedRoute) {
+
+    history.pushState(null, null, window.location.href);  
+    this.location.onPopState(() => {
+      history.pushState(null, null, window.location.href);
+    });  
 
     this.router.events.subscribe(x=>
       {
@@ -56,8 +61,12 @@ export class AppAdminLayoutComponent implements OnInit {
     }, 1000);
   }
   ngOnInit() {
-   
-    this.LoginTypeId = localStorage.getItem("AdminUser");
+
+//---------------------------------------------------
+
+//-------------------------------------------------------
+
+    this.LoginTypeId = sessionStorage.getItem("AdminUser");
   // alert(this.LoginTypeId.toString());
    if(this.LoginTypeId==="ADMIN")
    {
@@ -110,25 +119,14 @@ export class AppAdminLayoutComponent implements OnInit {
     this.State = "--Select-";
     if (this.reportpaths.indexOf(this.router.url) > -1)
       this.showcolourpicker = false;
-    this.service.StateListDetails().subscribe(result => {
-      this.StateDetails = result;
-    });
   }
   OpenModalDialog() {
-    
     this.display = 'block';
   }
   closeModalDialog() {
     this.display = 'none';
   }
-  GoNext() {
-    this.display = 'none';
-    this.router.navigate(["Admin/Statescore1", { ID: this.Codes }]);
-  }
-  getStateDetails(event) {
-    this.Codes = event.target.value;
-    this.State = event.target.options[event.target.selectedIndex].text;
-  }
+  
   onChangeColor(x: any) {
     this.gevent.changeColor(x);
   }

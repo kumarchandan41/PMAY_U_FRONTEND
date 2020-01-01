@@ -383,8 +383,13 @@
             </a>
             <ul class="treeview-menu" [style.display]="(reportmenu.id == activeMenuId) ? 'block' : 'none'">
               <!-- <li><a href="./assets/pages/charts/chartjs.html"><i class="fa fa-circle-o"></i>Home Page</a></li> -->
-              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" (click)="OpenModalDialog()"><i
-                    class="fa fa-circle-o"></i>State Score</a></li>
+              <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" (click)="OpenModalDialog()"><i
+                    class="fa fa-circle-o"></i>State Score</a></li> -->
+
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
+                      [routerLink]="['/Admin/Statescore1']"><i class="fa fa-circle-o"></i>State Score</a></li>
+
+                    
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
                   [routerLink]="['/Admin/AtaGlance']"><i class="fa fa-circle-o"></i>At a Glance</a></li>
               <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/AtaGlance1'><i class="fa fa-circle-o"></i>At a Glance1</a></li>
@@ -881,44 +886,8 @@
             <!-- <h4 class="modal-title">Login</h4> -->
           </div>
 
-          <!-- modal-body -->
-          <div class="modal-body">
-            <img src="./assets/img/pmay_logo-2.png" width="150px" />
-            <div>
+          
 
-              <!-- <img src="./assets/img/pmay_logo-2.png" alt="Image" style="width:100%;height: 90%;opacity: 0.2"> -->
-              <div class="content-div">
-
-                <div class="col-md-4">
-                  <label>Select State:</label>
-                </div>
-                <div class="col-md-5">
-                  <div>
-
-                    <select class="form-control" placeholder="Choose State" [(ngModel)]="State" style="width: 300px;"
-                      (change)="getStateDetails($event)">
-                      <option [selected]="true" [ngValue]="State">{{State}}</option>
-                      <option *ngFor='let sntry of StateDetails' [value]='sntry.Codes'>
-                        {{sntry.States_UT}}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row" align='center' style="padding:50px;">
-                  <button class="btn btn-warning" (click)="GoNext()"><i class="fa fa-envelope"></i>Show Report.</button>
-
-                </div>
-
-              </div>
-            </div>
-
-
-
-            <!-- modal-footer -->
-            <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-default" (click)="closeModalDialog()" >Close1</button> -->
-            </div>
-          </div>
         </div>
       </div>
     </div>

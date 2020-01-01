@@ -363,6 +363,102 @@ Component14_15_G1: string;
               });
   }
 
+  getStateDetails(stateCodes) {
+  
+    this.stateCodes = stateCodes.value;
+         if (stateCodes == "0") {
+       this.distValue = "0";
+       this.cityValue = "0";
+       this.service.StateList();
+       this.DistrictMessage = "Select District";
+       this.service.DisttDetails = [];
+       this.CityMessage = "Select City";
+       this.service.CityDetails = [];
+ 
+        //---------------------------- nEW cODE -------------------------
+       this.stateCodes = stateCodes;
+       this.service.DisttList(stateCodes);
+ 
+         }
+     else {
+       this.stateCodes = stateCodes.value;
+       this.service.DisttList(stateCodes.value);
+       
+      // alert(this.stateCodes);
+ 
+       this.service.CityList(this.districtCodes);//
+      
+        // Grid  data  below
+        this.service.Get_ShortFallView(stateCodes.value, this.districtCodes, this.cityCodes,"0", "").subscribe(result_Fin14 => {
+          this.lstCriticalData=result_Fin14;
+          debugger;
+          let result=result_Fin14.reduce(function(groups, item) {
+            const val = item['Component'];
+            groups[val] = groups[val] || [];
+            groups[val].push(item);
+            return groups;
+        }, {});
+        this.GroupedData=result;
+        })
+     }
+  }
+
+
+  getDistrictDetails(districtCodes) {
+
+    if (districtCodes == "0") {
+    this.cityValue = "0";
+    this.CityMessage = "Select City";
+    this.service.CityDetails = [];
+    this.cityCodes = "0";
+
+    this.distValue = "0";
+    this.cityValue = "0";
+  }
+  else {
+    this.districtCodes = districtCodes;
+    this.service.CityList(districtCodes);
+
+    // Grid  data  below
+    this.service.Get_ShortFallView(this.stateCodes, this.districtCodes, this.cityCodes,"0", "").subscribe(result_Fin14 => {
+      this.lstCriticalData=result_Fin14;
+      debugger;
+      let result=result_Fin14.reduce(function(groups, item) {
+        const val = item['Component'];
+        groups[val] = groups[val] || [];
+        groups[val].push(item);
+        return groups;
+    }, {});
+    this.GroupedData=result;
+    })
+  }
+}
+
+
+getCityDetails(cityCodes) {
+  if (cityCodes == "0") {
+  this.cityValue = "0";
+  this.CityMessage = "Select City";
+  this.service.CityDetails = [];
+  
+}
+else  
+  this.cityCodes = cityCodes;
+   
+         // Grid  data  below
+         this.service.Get_ShortFallView(this.stateCodes, this.districtCodes, this.cityCodes,"0", "").subscribe(result_Fin14 => {
+          this.lstCriticalData=result_Fin14;
+          debugger;
+          let result=result_Fin14.reduce(function(groups, item) {
+            const val = item['Component'];
+            groups[val] = groups[val] || [];
+            groups[val].push(item);
+            return groups;
+        }, {});
+        this.GroupedData=result;
+        })
+ 
+}
 
   BindBLC_Critical_Data(stateCode, DisttCode, cityCode,Comp,Fin_Year)
   {

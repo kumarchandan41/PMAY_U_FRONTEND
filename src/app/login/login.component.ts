@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
               this._Route.navigate(['/UserDashboard']);
             }
             else {
-              localStorage.setItem('AdminUser', result);
+              sessionStorage.setItem('AdminUser', result);
               this._Route.navigate(['/Admin/Dashboard']);
             }
           }

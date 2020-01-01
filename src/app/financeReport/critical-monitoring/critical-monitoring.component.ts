@@ -203,6 +203,7 @@ LstPayData_C:PMAY_DATA[];
   Third19_20_C: any=0;
   RdStatus: any;
   lstCriticalData:PMAY_DATA_New[];
+  lstCritical:PMAY_DATA_New[];
 
   finyear:string[];
 
@@ -375,11 +376,6 @@ ngOnInit() {
   
   this.DisplyaGraph_C = "none";
   this.DisplayTable_C= "block";
-  this.BindPMAY_Critical_Data(this.stateCodes, this.districtCodes, this.cityCodes,"0", "0");
-  this.BindPMAY_Critical_ISSR_Data(this.stateCodes, this.districtCodes, this.cityCodes,"ISSR", "0");
-  this.BindPMAY_Critical_AHP_Data(this.stateCodes, this.districtCodes, this.cityCodes,"AHP", "0");
-  this.BindBLCS_Critical_Data(this.stateCodes, this.districtCodes, this.cityCodes,"BLCS", "0");
-    
 
     // Grid  data  below
     // this.service.sp_create_PMAY_Critical_DATA(this.stateCodes, this.districtCodes, this.cityCodes,"0","0").subscribe(result_Houses_Status => { // new code
@@ -407,6 +403,16 @@ ngOnInit() {
         groups[val].push(item);
         return groups;
     }, {});
+
+
+  //this.lstCritical=this.lstCriticalData.filter(a=>a.Component==='Critical');
+
+  this.BindPMAY_Critical_Data(this.stateCodes, this.districtCodes, this.cityCodes,"0", "0");
+  this.BindPMAY_Critical_ISSR_Data(this.stateCodes, this.districtCodes, this.cityCodes,"ISSR", "0");
+  this.BindPMAY_Critical_AHP_Data(this.stateCodes, this.districtCodes, this.cityCodes,"AHP", "0");
+  this.BindBLCS_Critical_Data(this.stateCodes, this.districtCodes, this.cityCodes,"BLCS", "0");
+    
+
 
     console.log('result---->', result)
     this.GroupedData=result;
@@ -440,7 +446,7 @@ ngOnInit() {
 
   getStateDetails(stateCodes) {
 
-   
+   alert(stateCodes);
     if (stateCodes == "0") {
       this.distValue = "0";
       this.cityValue = "0";
@@ -5902,6 +5908,12 @@ sp_create_AHP_Critical_DATANew(stateCode, DisttCode, cityCode, Fin_Year )
 
     BindPMAY_Critical_Data(stateCode, DisttCode, cityCode,Comp,Fin_Year)
      {
+
+
+
+ // this.Housesinvolved14_15_C = this.lstCritical[0].Housesinvolved;
+ // alert(this.Housesinvolved14_15_C);
+
          Comp ="0";
          this.service.sp_create_PMAY_Critical_DATA(stateCode, DisttCode, cityCode,Comp,"0").subscribe(result => { // new code
          ///first row data

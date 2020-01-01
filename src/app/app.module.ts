@@ -110,6 +110,7 @@ import { CriticalMonitoringComponent } from './financeReport/critical-monitoring
 import { PhysicalMonitoringComponent } from './financeReport/physical-monitoring/physical-monitoring.component';
 import { ShortfallDetailComponent } from './financeReport/shortfall-detail/shortfall-detail.component';
 import { GlobalUrl } from './Shared/GlobalUrl';
+import { AdminAuthGuardService } from './AuthGuard/AdminAuthGuardService';
 // import { DasHComponent } from './CMS/das-h/das-h.component';
 // import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
 // import { ProjectDetailsComponent } from './DRMC/project-details/project-details.component';
@@ -145,7 +146,7 @@ const routes: Routes = [
   {
     path: 'Admin', component: AppAdminLayoutComponent,
      children: [
-      {path: 'Dashboard', component: AdminDashboardComponent},
+      {path: 'Dashboard', component: AdminDashboardComponent,canActivate:[AdminAuthGuardService]},
       {path: 'statemaster', component: StateMasterComponent},
       {path: 'MainGraph', component: DashboardMainComponent},
       {path: 'DashboardHFA1', component: DashboardHFA1Component},
@@ -329,7 +330,7 @@ const routes: Routes = [
 // })
 
 
-providers: [HttpClientModule,
+providers: [HttpClientModule,AdminAuthGuardService,
   NgbActiveModal,
   { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
   SnotifyService,AdminSandbox,DatePipe,
