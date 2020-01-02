@@ -8,6 +8,7 @@ import { States, Designation, District, City, Charts, Comp_Values, CLSS_Citywise
 import { Excelfile, ExcelSheet, Excel_CLSSCityWisefile, ExcelfilePhyDash, Excel_DemandCityWise, Excel_CLSSCityMain, Excel_PMAY_Data, Excel_JNNURN_Data, Excel_CLSSStateWisefile, Excel_clssMasterNew } from '../../DataUploads/excelfile';
 import { LocationStrategy } from '@angular/common';
 import { ConstantUrlService } from 'src/app/Shared/constant-url.service';
+import { GlobalUrl } from 'src/app/Shared/GlobalUrl';
 //
 //type NewType = Excelfile;
 
@@ -18,8 +19,8 @@ import { ConstantUrlService } from 'src/app/Shared/constant-url.service';
 
 export class BuildingServiceService {
   [x: string]: any;
-  //url_Upload:string;
-  //url1_Upload:string;
+  url_Upload:string;
+  url1_Upload:string;
 
   GetStateWiseFinYrDataNew(stateCode: any, DivisionCodes: any) {
     throw new Error("Method not implemented.");
@@ -64,9 +65,10 @@ export class BuildingServiceService {
      CityDetails  : City[];
      ChartDetail:Charts;
      ComponentData : Comp_Values[];
-     constructor(private http:HttpClient, private locationStrategy: LocationStrategy,private constantUrlService: ConstantUrlService) {
-          this.url_Upload=this.constantUrlService.url_Upload;
-          this.url1_Upload=this.constantUrlService.url1_Upload;
+     constructor(private http:HttpClient, private locationStrategy: LocationStrategy,private constantUrlService: ConstantUrlService,private globalUrl:GlobalUrl) {
+         //this.url_Upload=this.constantUrlService.url_Upload;
+          this.url_Upload = this.globalUrl.urlIPAddess +"/api/Buldings/";
+          this.url1_Upload=this.globalUrl.urlIPAddess +"/Employee_API/API/RegistrationApi/";
 
       }
 
