@@ -111,6 +111,9 @@ import { PhysicalMonitoringComponent } from './financeReport/physical-monitoring
 import { ShortfallDetailComponent } from './financeReport/shortfall-detail/shortfall-detail.component';
 import { GlobalUrl } from './Shared/GlobalUrl';
 import { AdminAuthGuardService } from './AuthGuard/AdminAuthGuardService';
+import { UploadProjectDetailComponent } from './DataUploads/upload-project-detail/upload-project-detail.component';
+import { UploadPhyProgReportComponent } from './DataUploads/upload-phy-prog-report/upload-phy-prog-report.component';
+import { TwoDigitDecimaNumberDirective } from './Shared/OneDecimalAllow';
 // import { DasHComponent } from './CMS/das-h/das-h.component';
 // import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
 // import { ProjectDetailsComponent } from './DRMC/project-details/project-details.component';
@@ -197,7 +200,10 @@ const routes: Routes = [
       {path: 'PhysicalMonitoring', component: PhysicalMonitoringComponent},
       {path: 'ShortfallDetail', component: ShortfallDetailComponent},
       
-
+      {path: 'UploadProjectDetail', component: UploadProjectDetailComponent},
+     
+      {path: 'UploadPhyProgReport', component: UploadPhyProgReportComponent},
+      
 
     ] 
   },
@@ -254,6 +260,7 @@ const routes: Routes = [
     AtaGlance4Component,
     AtaGlance5Component,
     PhyfinChartComponent,
+    TwoDigitDecimaNumberDirective,
     ConsPhyFinReportComponent,
     // AdminLoginPanelComponent,
     VerticalHousesStatusComponent,
@@ -300,6 +307,8 @@ const routes: Routes = [
     CriticalMonitoringComponent,
     PhysicalMonitoringComponent,
     ShortfallDetailComponent,
+    UploadProjectDetailComponent,
+    UploadPhyProgReportComponent,
     // DasHComponent 
   ],
   imports: [

@@ -3,6 +3,7 @@ import { GlobalEvent } from '../Shared/global-event';
 import { ActivatedRoute } from '@angular/router';
 import { getValueInRange } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { interval } from 'rxjs';
+import { GraphService } from '../financeReport/service/graph.service';
 
 
 
@@ -26,25 +27,29 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   public getPercent: any;
   LoginTypeId: string;
   data: any;
-  counter: number = 96.58;
-  counter1: number = 56.91;
-  counter2: number = 29.53;
-  counter3: number = 27.04;
-  counter4: number = 82982;
-  counter5: number = 151026;
-  counter6: number = 57915;
-  counter7: number = 49717;
-  counter8: number = 5.70;
-  counter9: number = 2.93;
-  counter10: number = 2.77;
-  counter11: number = 106;
-  counter12: number = 233;
-  counter14: number = 339;
-  counter15: number = 38;
-  counter16: number = 83;
-  counter17: number = 121;
+  counter: any ;//= 96.58;
+  counter1: any;// = 56.91;
+  counter2: any;;// = 29.53; //Completed
+  counter3: any = 27.04; //Occ;upied
 
-  constructor(private gevent: GlobalEvent, private router: ActivatedRoute, private renderer: Renderer) {
+  counter4: any = 82982; //Approved
+  counter5: any = 151026; //Committed
+  counter6: any = 57915; //Released
+  counter7: any = 49717; //Utilized
+  
+  counter8: any = 5.70; //Overall
+  counter9: any = 2.93; //Public
+  counter10: any = 2.77; //Private
+
+  counter11: any = 106; //Direct
+  counter12: any = 233; //Indirect
+  counter14: any = 339; //Total
+
+  counter15: any = 38;//Direct
+  counter16: any = 83;//Indirect
+  counter17: any = 121;//Total
+
+  constructor(private gevent: GlobalEvent, private router: ActivatedRoute, private renderer: Renderer, public service: GraphService) {
     //https://www.npmjs.com/package/angular2-counto
   }
 
@@ -101,6 +106,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
+
     this.gevent.ColorObservable.subscribe(x => {
       console.log('color:' + x);
       debugger;
@@ -113,7 +119,35 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
       // (counter / 112.24)*100
       return Math.round((secondValue / firstValue) * 100) + "%";
     }
+
+     
+
+    this.service.GetDasboardDataList().subscribe(result=>{
+      this.counter=  result.Sanctioned;
+      this.counter1 = result.Grounded;
+      this.counter2 == result.Completed;
+      this.counter3 == result.Occupied;
+
+      this.counter4 == result.Approved;      
+
+this.counter5 == result.sCommitted;
+this.counter6 == result.Released;
+this.counter7 == result.Utilized;
+
+this.counter8 == result.Overall;
+this.counter9 == result.sPublic;
+this.counter10 == result.Private;
+
+
+this.counter11 == result.PDaysDirect;
+this.counter12 == result.PDaysIndirect;
+this.counter14 == result.PDaysTotal; // Total
+
+this.counter15 == result.JobsDirect;
+this.counter16 == result.JobsIndirect;
+this.counter17 == result.JobsTotal; 
+    })
+
+    
   }
-
-
 }

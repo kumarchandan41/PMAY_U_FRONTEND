@@ -14,19 +14,19 @@
       <b>Sanctioned</b>
     </div>
     <div class="col-md-2">
-        <input type="text" (keypress)="keyPress($event)" minlength="2" maxlength="15" required  name ="Sanctioned" formControlName="Sanctioned"   class="form-control">
+        <input type="text" appTwoDigitDecimaNumber minlength="2" maxlength="15" required  name ="Sanctioned" formControlName="Sanctioned"   class="form-control">
     </div>
     <div class="col-md-2">
       <b>Grounded</b>
     </div>
     <div class="col-md-2">
-      <input type="text"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  name ="Grounded" formControlName="Grounded" class="form-control">
+      <input type="text"  appTwoDigitDecimaNumber minlength="2" maxlength="15" required  name ="Grounded" formControlName="Grounded" class="form-control">
     </div>
     <div class="col-md-2">
       <b>Completed</b>
     </div>
     <div class="col-md-2">
-      <input type="text" name ="Completed"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  formControlName="Completed" class="form-control">
+      <input type="text" name ="Completed"  appTwoDigitDecimaNumber minlength="2" maxlength="15" required  formControlName="Completed" class="form-control">
     </div>
   </div>
 
@@ -36,7 +36,7 @@
       <b>Occupied</b>
     </div>
     <div class="col-md-2">
-<input type="text" name ="Occupied"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  formControlName="Occupied"  class="form-control">
+<input type="text" name ="Occupied"  appTwoDigitDecimaNumber  minlength="2" maxlength="15" required  formControlName="Occupied"  class="form-control">
     </div>
     <div class="col-md-2">
       <b></b>
@@ -61,19 +61,19 @@
       <b>Committed</b>
     </div>
     <div class="col-md-2">
-      <input type="text" name ="sCommitted"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  formControlName="sCommitted"  class="form-control">
+      <input type="text" name ="sCommitted"  appTwoDigitDecimaNumber  minlength="2" maxlength="15" required  formControlName="sCommitted"  class="form-control">
     </div>
     <div class="col-md-2">
       <b>Approved</b>
     </div>
     <div class="col-md-2">
-      <input type="text" name ="Approved"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  formControlName="Approved"  class="form-control">
+      <input type="text" name ="Approved" appTwoDigitDecimaNumber minlength="2" maxlength="15" required  formControlName="Approved"  class="form-control">
     </div>
     <div class="col-md-2">
       <b>Released</b>
     </div>
     <div class="col-md-2">
-<input type="text" name ="Released"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required   formControlName="Released"  class="form-control">
+<input type="text" name ="Released"  appTwoDigitDecimaNumber minlength="2" maxlength="15" required   formControlName="Released"  class="form-control">
     </div>
   </div>
 
@@ -83,7 +83,7 @@
       <b>Utilized</b>
     </div>
     <div class="col-md-2">
-      <input type="text"  name ="Utilized"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required formControlName="Utilized"  class="form-control">
+      <input type="text"  name ="Utilized"  appTwoDigitDecimaNumber minlength="2" maxlength="15" required formControlName="Utilized"  class="form-control">
     </div>
     <div class="col-md-2">
       <b></b>
@@ -106,19 +106,19 @@
       <b>Overall</b>
     </div>
     <div class="col-md-2">
-      <input type="text"  name ="Overall"   (keypress)="keyPress($event)" minlength="2" maxlength="15" required  formControlName="Overall"   class="form-control">
+      <input type="text"  name ="Overall" appTwoDigitDecimaNumber  minlength="2" maxlength="15" required  formControlName="Overall"   class="form-control">
     </div>
     <div class="col-md-2">
       <b>Public</b>
     </div>
     <div class="col-md-2"> 
-    <input type="text" name ="sPublic"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required   formControlName="sPublic"  class="form-control">
+    <input type="text" name ="sPublic"  appTwoDigitDecimaNumber minlength="2" maxlength="15" required   formControlName="sPublic"  class="form-control">
     </div>
     <div class="col-md-2">
       <b>Private</b>
     </div>
-    <div class="col-md-2">
-      <input type="text" name ="Private"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  formControlName="Private"  class="form-control">
+    <div class="col-md-2"><!--(keypress)="keyPress($event)" -->
+      <input type="text" name ="Private"  appTwoDigitDecimaNumber minlength="2" maxlength="15" required  formControlName="Private"  class="form-control">
     </div>
   </div>
 
@@ -128,20 +128,20 @@
       <b>Person Days Direct</b>
     </div>
     <div class="col-md-2">
-      <input type="text" name ="PDaysDirect"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  formControlName="PDaysDirect"  class="form-control">
+      <input type="text" name ="PDaysDirect"  appTwoDigitDecimaNumber  minlength="2" maxlength="15" required  formControlName="PDaysDirect"  class="form-control">
     </div>
 
     <div class="col-md-2">
       <b>Person Days Indirect</b>
     </div>
     <div class="col-md-2">
-         <input type="text"  name ="PDaysIndirect"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  formControlName="PDaysIndirect"  class="form-control">
+         <input type="text"  name ="PDaysIndirect"  appTwoDigitDecimaNumber minlength="2" maxlength="15" required  formControlName="PDaysIndirect"  class="form-control">
     </div>
     <div class="col-md-2">
       <b>Person Days Total</b>
     </div>
     <div class="col-md-2">
-      <input type="text"  name ="PDaysTotal"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  formControlName="PDaysTotal"  class="form-control">
+      <input type="text"  name ="PDaysTotal"  appTwoDigitDecimaNumber minlength="2" maxlength="15" required  formControlName="PDaysTotal"  class="form-control">
     </div>
       <div class="col-md-2">
       <b> </b>
@@ -156,19 +156,19 @@
       <b>Jobs Direct</b>
     </div>
     <div class="col-md-2">
-      <input type="text" name ="JobsDirect"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required   formControlName="JobsDirect"  class="form-control">
+      <input type="text" name ="JobsDirect"  appTwoDigitDecimaNumber minlength="2" maxlength="15" required   formControlName="JobsDirect"  class="form-control">
     </div>
     <div class="col-md-2">
       <b>Jobs  Indirect</b>
     </div>
     <div class="col-md-2">
-      <input type="text"  name ="JobsIndirect"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  formControlName="JobsIndirect"  class="form-control">
+      <input type="text"  name ="JobsIndirect"  appTwoDigitDecimaNumber  minlength="2" maxlength="15" required  formControlName="JobsIndirect"  class="form-control">
     </div>
     <div class="col-md-2">
       <b>Jobs Total</b>
     </div>
     <div class="col-md-2">
-      <input type="text"  name ="JobsTotal"  (keypress)="keyPress($event)" minlength="2" maxlength="15" required  formControlName="JobsTotal"  class="form-control">
+      <input type="text"  name ="JobsTotal"  appTwoDigitDecimaNumber minlength="2" maxlength="15" required  formControlName="JobsTotal"  class="form-control">
     </div> 
   </div>
   <div class="row" style="text-align: center;">

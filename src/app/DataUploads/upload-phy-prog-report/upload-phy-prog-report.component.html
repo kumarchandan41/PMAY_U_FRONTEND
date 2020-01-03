@@ -1,0 +1,115 @@
+<br>
+<div class="container">
+<div class="row">
+  <div class="col-md-3 col-sm-3">
+    <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
+      style="width: 200px;font-display: #FF00FF;color: black">
+      <option value={{stValue}}>{{StateMessage}}</option>
+      <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+        {{sntry.States_UT}}
+      </option>
+    </select>
+  </div>
+    <div class="col-md-3 col-sm-3">
+    <input type="file" #fileInput (cahnge)="UploadFile($event)" />
+  </div>  
+
+  <div class="col-md-3 col-sm-3">
+    <button (click)="UploadFile($event)" class="btn btn-primary">Upload</button>
+  </div>
+
+  <div class="col-md-3 col-sm-3">
+    <button (click)="DeleteTablePHY()" class="btn btn-danger">Delete Table Data</button>
+  </div>
+</div> 
+</div> 
+<br>
+
+<div class="container">
+  <div>
+          <select class="form-control" placeholder="Choose Sheet">
+            <option value="0">Select Sheet</option>
+            <option *ngFor='let st of lstExcelSheet'>
+              {{st.SheetName}}
+            </option>
+          </select>
+  </div>
+</div>
+
+
+
+
+<div style="overflow: auto;width:1180px;height:520px">  
+  <table class="table table-striped" style="overflow-y:scroll; width:100px;border:1">
+      <thead class="thead-dark">
+          <tr>
+              <th>SrNo</th>
+              <th style="width:200px">Codes</th>
+              <th>Dcode</th>
+              <th>CityCode</th>
+              <th>Scheme</th>
+              <th>ProjectCode</th>
+              <th>CentralAssistance</th>
+              <th>TotalSanction</th>
+              <th>GroundLevel</th>
+              <th>Pinth</th>
+              <th>LinterLevel</th>
+              <th>RoofLevel</th>
+              <th>SuperStructure</th>
+              <th>FinishingStage</th>
+              <th>TotalProgressHouse</th>
+              <th>ConstructionCompleted</th>
+
+              <th>NonStarterHouse</th>
+              <th>PowerSupply</th>
+              <th>WaterSupply</th>
+              <th>DrainageSupply</th>
+              <th>EntryDate</th>
+              <th>TotalHouseOccupiedBeneficiary</th>
+               <th>Update</th>
+              <th>Delete</th>
+          </tr>
+      </thead>
+      <tbody style="overflow-y:scroll; width:100px;">
+          <tr *ngFor="let data of lstExcel | paginate: { itemsPerPage: 10, currentPage: p }">
+              <td>{{data.SrNo}}</td>
+              <td>{{data.Codes}}</td>
+              <td>{{data.Dcode}}</td>
+              <td>{{data.CityCode}}</td>
+              <td>{{data.Scheme}}</td>
+              <td>{{data.ProjectCode}}</td>
+              <th>{{data.CentralAssistance}}</th>
+              <th>{{data.TotalSanction}}</th>
+
+              <th>{{data.GroundLevel}}</th>
+              <th>{{data.Pinth}}</th>
+              <th>{{data.LinterLevel}}</th>
+              <th>{{data.RoofLevel}}</th>
+              <th>{{data.SuperStructure}}</th>
+              <th>{{data.FinishingStage}}</th>
+              <th>{{data.TotalProgressHouse}}</th>
+              <th>{{data.ConstructionCompleted}}</th>
+              <th>{{data.NonStarterHouse}}</th>
+              <th>{{data.PowerSupply}}</th>
+              <th>{{data.WaterSupply}}</th>
+              <th>{{data.DrainageSupply}}</th>
+              <th>{{data.EntryDate}}</th>
+              <th>{{data.TotalHouseOccupiedBeneficiary}}</th>
+               <td><input type="button" class="btn btn-primary" (click)="Update(data)" value="Update">&nbsp;&nbsp;
+               </td>
+          <td>
+              <input type="button" class="btn btn-danger" (click)="Delete(data)" value="Delete">
+          </td>
+                </tr>
+          <tr>
+              <td colspan="4">
+                  <ul class="pagination">  
+                          <pagination-controls (pageChange)="p = $event"></pagination-controls>  
+                  </ul>  
+             </td>
+         </tr>
+      </tbody>
+  </table>
+</div>
+   
+  

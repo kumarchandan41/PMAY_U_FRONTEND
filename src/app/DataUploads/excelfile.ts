@@ -260,6 +260,62 @@ export class Excel_PMAY_Data {
 	DIVISION  :string;
 }
 
+export class Excel_Physical_Progress_Report_Data {
+	PhysicalProgressId :string;  
+	Codes  :string;
+	Dcode  :string;
+	CityCode  :string;
+	Scheme  :string;
+	ProjectCode  :string;
+	CentralAssistance  :string;
+	TotalSanction  :string;
+	GroundLevel  :string;
+	Pinth  :string;
+	LinterLevel  :string;
+	RoofLevel  :string;
+	SuperStructure  :string;
+	FinishingStage  :string;
+	TotalProgressHouse  :string;
+	ConstructionCompleted  :string;
+	NonStarterHouse  :string;
+	PowerSupply  :string;
+	WaterSupply  :string;
+	DrainageSupply  :string;
+	EntryDate   :string;
+	TotalHouseOccupiedBeneficiary  :string;
+}
+
+export class Excel_PROJECTCost {
+	 
+	ProjectId  :string;
+	ProjectCode :string;
+	StateCode :string;
+	DistrictCode :string;
+	CityCode :string;
+	CSMCDate  :string;
+	CSMCNumber :string;
+	Scheme :string;
+	SchemeComponent:string; 
+	ProjectAgencies :string;
+	ProjectStatus :string;
+	ProjectDuration :string;
+	ProjectTitle :string;
+	ProjectCost  :string;
+	CentralAssistance  :string;
+	StateGrant :string;
+	ULB :string;
+	BeneficiaryShare:string; 
+	OtherCost :string;
+	NewSanction :string;
+	UpgradeSanction :string;
+	TotalSanction  :string;
+	FirstInstallment :string;
+	ActiveFlag :string;
+	CreatedBy :string;
+	CreatedOn  :string;
+	
+}
+
 export class Excel_JNNURN_Data {
  //	id   :string;
 	SrNo     :string;  
@@ -298,3 +354,37 @@ export class Excel_JNNURN_Data {
 	Occupied1 :string;
 	Division  :string;
  }	
+
+
+
+ export class Excel_ProjectDetail_Report_Data {
+	ProjectId :string;  
+	ProjectCode  :string;
+	StateCode  :string;
+    DistrictCode  :string;
+    CityCode  :string;
+	CSMCDate  :string;
+    CSMCNumber  :string;
+	Scheme  :string;
+	SchemeComponent  :string;
+	ProjectAgencies  :string;
+	ProjectStatus  :string;
+
+	ProjectDuration  :string;
+    ProjectTitle  :string;
+    ProjectCost  :string;
+    CentralAssistance  :string;
+
+	StateGrant  :string;
+
+	ULB  :string;
+	BeneficiaryShare  :string;
+	OtherCost  :string;
+ 	NewSanction  :string;
+	UpgradeSanction   :string;
+	TotalSanction  :string;
+	FirstInstallment  :string;
+	ActiveFlag   :string;
+	CreatedBy  :string;
+	CreatedOn  :string;
+}

@@ -915,9 +915,9 @@ export class GraphService {
 
      //----------------------------------
      SaveDashboard(data: PdashBoard): Observable<string> {
-
+         //alert(this.url);
           const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-          return this.http.post<string>(this.url + '/SaveDashboard/',
+          return this.http.post<string>(this.url + 'SaveDashboard/',
                data, httpOptions);
      }
      GetDasboardDataList(): Observable<PdashBoard> {

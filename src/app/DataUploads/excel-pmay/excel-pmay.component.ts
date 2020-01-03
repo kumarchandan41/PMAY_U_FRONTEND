@@ -58,7 +58,6 @@ constructor(private service:BuildingServiceService,private router:Router) { }
    
    DeleteTablePMAY(){
     this.service.DeleteTablePMAY().subscribe(result=>{
-      alert(result);
       this.GetExcel();
     })
   }
@@ -72,7 +71,6 @@ GetExcel(){
 
 Delete(data){
     this.service.DeleteScore_ExcelDataById(data.id).subscribe(result=>{
-      alert(result);
       this.GetExcel();
     })
   }

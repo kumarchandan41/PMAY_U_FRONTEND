@@ -83,7 +83,6 @@ export class DashboardComponent implements OnInit {
 debugger;
     if(this.dashboardForm.invalid)
     {
-      alert(2);
       return;
     }
     this.service.SaveDashboard(this.dashboardForm.value).subscribe(result => {
@@ -122,7 +121,8 @@ debugger;
   // }
 
   keyPress(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
+    const pattern = /[0-9\+\-\. ]/;
+    
     let inputChar = String.fromCharCode(event.charCode);
     // console.log(inputChar, e.charCode);
        if (!pattern.test(inputChar)) {

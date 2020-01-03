@@ -5,9 +5,10 @@ import { Observable } from 'rxjs';
 import { Alert } from 'selenium-webdriver';
 //import { User } from '..Models/LoginModels.ts';
 import { States, Designation, District, City, Charts, Comp_Values, CLSS_Citywise_Values, JNReport, CLSS_CityValues, PMAY_DATA, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, PMAY_FinancialData, FinancialProgress, StateScore, UserMaster, Demand_SanctionStateWise, Demand, CompMaster, getHFACodes, ComponentWiseDATA, JNAtAGlance, CLSS_Values } from '../ModelS/chart.model';
-import { Excelfile, ExcelSheet, Excel_CLSSCityWisefile, ExcelfilePhyDash, Excel_DemandCityWise, Excel_CLSSCityMain, Excel_PMAY_Data, Excel_JNNURN_Data, Excel_CLSSStateWisefile, Excel_clssMasterNew } from '../../DataUploads/excelfile';
+import { Excelfile, ExcelSheet, Excel_CLSSCityWisefile, ExcelfilePhyDash, Excel_DemandCityWise, Excel_CLSSCityMain, Excel_PMAY_Data, Excel_JNNURN_Data, Excel_CLSSStateWisefile, Excel_clssMasterNew, Excel_Physical_Progress_Report_Data, Excel_ProjectDetail_Report_Data } from '../../DataUploads/excelfile';
 import { LocationStrategy } from '@angular/common';
 import { ConstantUrlService } from 'src/app/Shared/constant-url.service';
+import { GlobalUrl } from 'src/app/Shared/GlobalUrl';
 //
 //type NewType = Excelfile;
 
@@ -18,8 +19,10 @@ import { ConstantUrlService } from 'src/app/Shared/constant-url.service';
 
 export class BuildingServiceService {
   [x: string]: any;
-  //url_Upload:string;
-  //url1_Upload:string;
+    url_Upload:string;
+    url1_Upload:string;
+ //  url:string;
+ //  url1:string;
 
   GetStateWiseFinYrDataNew(stateCode: any, DivisionCodes: any) {
     throw new Error("Method not implemented.");
@@ -29,15 +32,13 @@ export class BuildingServiceService {
   }
 
   
-//url="http://localhost:58396/api/Buldings/";
-//url1 ="http://localhost:58396/API/RegistrationApi/";
 
 //url_Upload="http://10.196.69.102/hfa_api/api/Buldings/";
 //url1_Upload ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
+//url_Upload="http://localhost:58396/api/Buldings/";
+//url1_Upload ="http://localhost:58396/Employee_API/API/RegistrationApi/";
 
 
-// url="http://localhost/Employee_API/api/Buldings/";
-// url1 ="http://localhost/Employee_API/API/RegistrationApi/";
 
 //      url="http://10.196.69.102/Employee_API/api/Buldings/";
 //      url1 ="http://10.196.69.102/Employee_API/API/RegistrationApi/";
@@ -64,10 +65,11 @@ export class BuildingServiceService {
      CityDetails  : City[];
      ChartDetail:Charts;
      ComponentData : Comp_Values[];
-     constructor(private http:HttpClient, private locationStrategy: LocationStrategy,private constantUrlService: ConstantUrlService) {
-          this.url_Upload=this.constantUrlService.url_Upload;
-          this.url1_Upload=this.constantUrlService.url1_Upload;
+     constructor(private http:HttpClient, private locationStrategy: LocationStrategy,private constantUrlService: ConstantUrlService,private globalUrl:GlobalUrl) {
+          this.url_Upload = this.globalUrl.urlIPAddess +"/api/Buldings/";
+          this.url1_Upload= this.globalUrl.urlIPAddess + "/Employee_API/API/RegistrationApi/";
 
+ 
       }
 
      PriventBackButton()
@@ -79,6 +81,8 @@ export class BuildingServiceService {
      }
 
      StateList(){
+      //   alert( this.url_Upload);
+         
      this.http.get(this.url_Upload + 'HFA_StateDetails').toPromise().then(result=>this.StateDetails= result as States[])
      }  
      
@@ -406,7 +410,7 @@ export class BuildingServiceService {
      ServiceStateScoreNew(stateCode ,Division):Observable<StateScore>
      {
           // debugger;
-          alert(stateCode);
+       //   alert(stateCode);
           return this.http.get<StateScore>(this.url_Upload + "HFA_StateWiseScoreNew?stateCode="+ stateCode + "&Division=" +Division); 
      }
 
@@ -546,6 +550,10 @@ export class BuildingServiceService {
           return this.http.get<ExcelSheet[]>(this.url_Upload + "ReadExcelSheet");
      }
      
+     ReadPhyProgressSheet():Observable<ExcelSheet[]>
+     {
+          return this.http.get<ExcelSheet[]>(this.url_Upload + "GetExcel_Physical_Progress_Report");
+     }
 
      ReadJNNURM_ExcelSheet():Observable<ExcelSheet[]>
      {
@@ -651,9 +659,11 @@ export class BuildingServiceService {
     {
            return this.http.get<string>(this.url_Upload + "DeleteExcelPD_Details?excelId="+ id );
     }
-    DeleteScore_ExcelDataById(id:string):Observable<string>
+    
+
+    DeletePhyProg_ExcelDataById(id:string):Observable<string>
     {
-          return this.http.get<string>(this.url_Upload + "DeleteExcelScore_Details?excelId="+ id );
+          return this.http.get<string>(this.url_Upload + "DeletePhysicalProgressReport_Details?excelId="+ id );
     }
     BulkImportClssCityMainExcel1(formData:FormData):Observable<string>
     {  
@@ -671,7 +681,7 @@ export class BuildingServiceService {
     }
     BulkImport_PMayExcel(formData:FormData):Observable<string>
     {  
-        //  alert('AA');
+        //  alert(this.url_Upload);
            // Bulk insert to table statescore tblStateWiseScoreExcel
           let headers = new  HttpHeaders();
           headers.append('Content-Type','multipart/form-data');
@@ -680,10 +690,47 @@ export class BuildingServiceService {
           const httpOptions = { headers: headers};  
           return  this.http.post<string>(this.url_Upload + "UploadPMay_Excel", formData,httpOptions);
      }
+
+    BulkImport_PROJECT_DetailExcel(formData:FormData):Observable<string>
+    {  
+        //  alert(this.url_Upload);
+           // Bulk insert to table statescore tblStateWiseScoreExcel
+          let headers = new  HttpHeaders();
+          headers.append('Content-Type','multipart/form-data');
+          headers.append('Accept','application/json');
+          //new HttpHeaders({ 'Content-Type': 'application/json'}) 
+          const httpOptions = { headers: headers};  
+          return  this.http.post<string>(this.url_Upload + "UploadProjectDetail_Excel", formData,httpOptions);
+     }
+
+    BulkImport_PhyProg_Excel(formData:FormData):Observable<string>
+    {  
+       //   alert(this.url_Upload);
+           // Bulk insert 
+          let headers = new  HttpHeaders();
+          headers.append('Content-Type','multipart/form-data');
+          headers.append('Accept','application/json');
+          //new HttpHeaders({ 'Content-Type': 'application/json'}) 
+          const httpOptions = { headers: headers};  
+          return  this.http.post<string>(this.url_Upload + "UploadPhyProgressReport_Excel", formData,httpOptions);
+    }
+
+
      GetExcel_PMayData():Observable<Excel_PMAY_Data[]>
      {
           return this.http.get<Excel_PMAY_Data[]>(this.url_Upload + "GetExcelPMAYDetails");//.toPromise().then(result=>this.ChartDetail= result as Charts);
      }
+     
+     GetExcel_Physical_Progress_Report_Data():Observable<Excel_Physical_Progress_Report_Data[]>
+     {
+          return this.http.get<Excel_Physical_Progress_Report_Data[]>(this.url_Upload + "GetExcel_Physical_Progress_Report");//.toPromise().then(result=>this.ChartDetail= result as Charts);
+     }
+
+     GetExcel_Projct_Details_Report():Observable<Excel_ProjectDetail_Report_Data[]>
+     {
+          return this.http.get<Excel_ProjectDetail_Report_Data[]>(this.url_Upload + "GetExcel_Projct_Details_Report");//.toPromise().then(result=>this.ChartDetail= result as Charts);
+     }
+     
 
 //--------------------------- new Data Start
      BulkImport_ClssMainNewExcel(formData:FormData):Observable<string>
@@ -773,6 +820,32 @@ export class BuildingServiceService {
      {
           return this.http.get<string>(this.url_Upload + "DeleteTablePMAY");
      }
+
+     DeleteTableProjDetail():Observable<string>
+     {
+          return this.http.get<string>(this.url_Upload + "Del_ProjectDetail");
+     }
+
+     
+
+      // ok
+     DeleteTable_PhyProgressReport():Observable<string>
+     {
+          return this.http.get<string>(this.url_Upload + "DeleteTable_PhyProgressReport");
+     }
+     DeleteScore_ExcelDataById(id:string):Observable<string>
+     {
+          return this.http.get<string>(this.url_Upload + "DeleteExcelScore_Details?excelId="+ id );
+     }
+
+     Del_ProjectProgress():Observable<string>
+     {
+          return this.http.get<string>(this.url_Upload + "Del_ProjectProgress");
+     }
+
+
+     
+
      DeleteTableStateScore():Observable<string>
      {
           return this.http.get<string>(this.url_Upload + "DeleteTableStateScore");
