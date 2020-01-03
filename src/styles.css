@@ -21,7 +21,7 @@ body {
     height: 500px;
 }
 
-select{
+select, input{
   border-radius: 3px !important;
 }
 
