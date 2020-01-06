@@ -80,7 +80,7 @@ export class AdminSandbox {
     "ddlComponent": "",
     "ddlAgency": ""
   }
-
+  Date: DateConstructor;
   EditSchemeComponent: any[] = [];
   EditState: any[] = [];
   constituencyMaster: any[] = [];
@@ -140,19 +140,19 @@ export class AdminSandbox {
   projectBriefDetail: any[] = [];
   ProjectBriefDetailCost: any;
   classificationMaster: any[] = [];
-  EditClassificationComponent: any[]=[];
+  EditClassificationComponent: any[] = [];
   EditClassificationComponentMaster = {
     "hiddendTxtDescriptionID": "",
     "txtDescription": "",
     "txtDCode": "",
     "radioApplicable": ""
   }
-  projectClassificationName: any[]=[];
-  stateClassificationMapping: any[]=[];
-  stateMapingResult: any[]=[];
-  districtMapingResult: any[]=[];
-  cityMapingResult: any[]=[];
-  projectMapingResult: any[]=[];
+  projectClassificationName: any[] = [];
+  stateClassificationMapping: any[] = [];
+  stateMapingResult: any[] = [];
+  districtMapingResult: any[] = [];
+  cityMapingResult: any[] = [];
+  projectMapingResult: any[] = [];
 
 
   constructor(private datePipe: DatePipe, private router: Router, protected userMasterService: UserService, private snotifyService: SnotifyService) { }
@@ -426,9 +426,9 @@ export class AdminSandbox {
 
   //----for state add,edit and delete------////
   getStateData() {
-     
-      this.userMasterService.getStateData().subscribe(data => {
-        // console.log(data);
+
+    this.userMasterService.getStateData().subscribe(data => {
+      // console.log(data);
       this.stateMaster = data;
     });
   }
@@ -469,7 +469,7 @@ export class AdminSandbox {
 
   }
   deleteStateData(SchemeComponentId: any) {
-    
+
     this.userMasterService.deleteStateData(SchemeComponentId).subscribe(data => {
       // console.log(data);
       if (data.status == "200") {
@@ -509,7 +509,7 @@ export class AdminSandbox {
             "ActiveFlag": "Active",
             "CreatedOn": "",
             "CreatedBy": "",
-            "UpdatedOn": new Date().toISOString(), 
+            "UpdatedOn": new Date().toISOString(),
             "UpdatedBy": ""
 
           }
@@ -526,8 +526,8 @@ export class AdminSandbox {
                 position: SnotifyPosition.rightTop,
                 timeout: 2500
               });
-              setTimeout(function(){ this.getStateData(); }, 3000);
-              
+              setTimeout(function () { this.getStateData(); }, 3000);
+
             }
             else {
               this.snotifyService.error("State Not Updated Successfully...", "", {
@@ -1328,7 +1328,7 @@ export class AdminSandbox {
   AddProjectAgency(Agency: any) {
     this.ProjectAgency = Agency;
   }
- 
+
   //------Physical Progress-------//
   postPhysicalProgress() {
     this.userMasterService.postPysicalProgressReport(this.projectDetailMaster).subscribe((data: any) => {
@@ -1502,18 +1502,26 @@ export class AdminSandbox {
       'AmountReleased': formGroup.get('txtAmountReleased').value,
     };
     this.userMasterService.postReleasedOrder(file, objPost.Scheme, objPost.SanctionNo, objPost.State, objPost.AmountReleased, objPost.Date, objPost.Component).subscribe(data => {
-      if (data.status == "200") {
+      if (data.status === 200) {
         this.snotifyService.success("Release Order Save Successfully...", "", {
           position: SnotifyPosition.rightTop,
-          timeout: 3000
+          timeout: 30000
         });
+        //  fetch data on submit
+        setTimeout(() => {
+          this.getReleaseOrder(objPost.State)
+        }, 500)
       }
     }
     );
   }
   getReleaseOrder(stateCode: any) {
     this.userMasterService.getReleaseOrder(stateCode).subscribe(data => {
-      this.releaseOrderValue = data;
+      this.releaseOrderValue = data.sort((a, b) => {
+        const d1: any = new Date(b.Date)
+        const d2: any = new Date(a.Date)
+        return d1 - d2;
+      });
     });
   }
 
@@ -1567,8 +1575,8 @@ export class AdminSandbox {
       this.projectBriefName = data;
     });
   }
-   //------post get api for project brief detail------//
-   projectBriefDeatil(file: File, formGroup: any): any {
+  //------post get api for project brief detail------//
+  projectBriefDeatil(file: File, formGroup: any): any {
     var filename = file.name
     var g = new Date(formGroup.get('txtSLSMC').value);
     var currentBriefDate = this.datePipe.transform(g, 'dd-MM-yyyy');
@@ -1583,7 +1591,7 @@ export class AdminSandbox {
       'ImplementingAgency': formGroup.get('txtImplementingAgency').value,
       'SLSMCDate': currentBriefDate,
       'WhetherSlum': formGroup.get('radioSlum').value,
-     // 'Slum': this.Slum,
+      // 'Slum': this.Slum,
       'HousingCost': formGroup.get('txtHousingCost').value,
       'InfaCost': formGroup.get('txtInfrastructure').value,
       'OtherCost': formGroup.get('txtOther').value,
@@ -1604,25 +1612,26 @@ export class AdminSandbox {
     this.userMasterService.postProjectBriefDeatil(file, objPost).subscribe(data => {
       var objPost =
       {
-        "Slum":this.Slum   
+        "Slum": this.Slum
       }
       this.userMasterService.postSlum(objPost.Slum).subscribe((data: any) => {
         if (data.status == "200") {
-       
-        this.getProjectBriefDetail();
-        this.Slum=[];
-        this.snotifyService.success("Project Brief Details Save Successfully...", "", {
-          position: SnotifyPosition.rightTop, 
-          timeout: 3000
-        });
+
+          this.getProjectBriefDetail();
+          this.Slum = [];
+          this.snotifyService.success("Project Brief Details Save Successfully...", "", {
+            position: SnotifyPosition.rightTop,
+            timeout: 3000
+          });
+        }
       }
-    }
-    );
-  })}
+      );
+    })
+  }
 
   SlumArray(value: any) {
     this.Slum = value;
-     console.log(this.Slum);
+    console.log(this.Slum);
   }
 
   getProjectBriefDetail() {
@@ -1706,7 +1715,7 @@ export class AdminSandbox {
   }
 
   editClassificationMaster(value: any, row: any) {
-    
+
     this.EditClassificationComponent = row
     this.showProperty = value;
     this.EditClassificationComponentMaster.hiddendTxtDescriptionID = row.ClassificationId;
@@ -1715,23 +1724,23 @@ export class AdminSandbox {
     this.EditClassificationComponentMaster.radioApplicable = row.Applicable;
   }
   updateClassificationMaster() {
-    
 
-    if ( this.EditClassificationComponentMaster.txtDescription != null &&  this.EditClassificationComponentMaster.txtDescription != "" &&  this.EditClassificationComponentMaster.txtDescription != undefined) {
-      if (this.EditClassificationComponentMaster.txtDCode!= null && this.EditClassificationComponentMaster.txtDCode != "" && this.EditClassificationComponentMaster.txtDCode != undefined) {
-        if ( this.EditClassificationComponentMaster.radioApplicable!= null &&  this.EditClassificationComponentMaster.radioApplicable != "" &&  this.EditClassificationComponentMaster.radioApplicable != undefined) {
+
+    if (this.EditClassificationComponentMaster.txtDescription != null && this.EditClassificationComponentMaster.txtDescription != "" && this.EditClassificationComponentMaster.txtDescription != undefined) {
+      if (this.EditClassificationComponentMaster.txtDCode != null && this.EditClassificationComponentMaster.txtDCode != "" && this.EditClassificationComponentMaster.txtDCode != undefined) {
+        if (this.EditClassificationComponentMaster.radioApplicable != null && this.EditClassificationComponentMaster.radioApplicable != "" && this.EditClassificationComponentMaster.radioApplicable != undefined) {
           var objPost =
           {
-            "ClassificationId":this.EditClassificationComponentMaster.hiddendTxtDescriptionID,
-              "Description":this.EditClassificationComponentMaster.txtDescription,
-              "DescriptionCode":this.EditClassificationComponentMaster.txtDCode,
-              "Applicable":this.EditClassificationComponentMaster.radioApplicable
+            "ClassificationId": this.EditClassificationComponentMaster.hiddendTxtDescriptionID,
+            "Description": this.EditClassificationComponentMaster.txtDescription,
+            "DescriptionCode": this.EditClassificationComponentMaster.txtDCode,
+            "Applicable": this.EditClassificationComponentMaster.radioApplicable
 
           }
           this.userMasterService.updateClassificationMaster(JSON.stringify(objPost)).subscribe((data: any) => {
             this.showProperty = 'none';
-           
-           this.EditClassificationComponentMaster = {
+
+            this.EditClassificationComponentMaster = {
               "hiddendTxtDescriptionID": "",
               "txtDescription": "",
               "txtDCode": "",
@@ -1774,239 +1783,239 @@ export class AdminSandbox {
       });
     }
   }
- //-----get projectbriefname of project name----//
- getProjectClassificationName(statecode: any, districtcode: any, citycode: any) {
-  this.userMasterService.getProjectClassificationName(statecode, districtcode, citycode).subscribe(data => {
-    this.projectClassificationName = data;
-  });
-}
- //-----get classfication on behalf of state----//
- getStateClassification(statecode: any) {
-  this.userMasterService.getStateClassification(statecode).subscribe(data => {
-    this.stateClassificationMapping = data;
-  });
-}
-
-//---post state classification mapping---///
-postStateClassificationMapping(formGroup: any) {
- 
-  var objPost =
-  {
-    "StateCode": formGroup.get('ddlState').value,
-    "DescriptionCode": formGroup.get('ddlMap').value,
-    "selected":true
-   
-
+  //-----get projectbriefname of project name----//
+  getProjectClassificationName(statecode: any, districtcode: any, citycode: any) {
+    this.userMasterService.getProjectClassificationName(statecode, districtcode, citycode).subscribe(data => {
+      this.projectClassificationName = data;
+    });
   }
-  this.userMasterService.postStateClassificationMapping(objPost).subscribe((data: any) => {
-    if (data.StatusCode == "OK") {
+  //-----get classfication on behalf of state----//
+  getStateClassification(statecode: any) {
+    this.userMasterService.getStateClassification(statecode).subscribe(data => {
+      this.stateClassificationMapping = data;
+    });
+  }
+
+  //---post state classification mapping---///
+  postStateClassificationMapping(formGroup: any) {
+
+    var objPost =
+    {
+      "StateCode": formGroup.get('ddlState').value,
+      "DescriptionCode": formGroup.get('ddlMap').value,
+      "selected": true
+
+
+    }
+    this.userMasterService.postStateClassificationMapping(objPost).subscribe((data: any) => {
+      if (data.StatusCode == "OK") {
+        this.getStateClassificationMapping();
+        this.snotifyService.success("State Classification Mapping Save Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+
+      else {
+        this.snotifyService.error("Error...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+    });
+  }
+  //-----get state classification mapping----//
+  getStateClassificationMapping() {
+    this.userMasterService.getStateClassificationMapping().subscribe(data => {
+      this.stateMapingResult = data;
+    });
+  }
+  //---post district classification mapping---///
+  postDistrictClassificationMapping(formGroup: any) {
+
+    var objPost =
+    {
+      "StateCode": formGroup.get('ddlStateCode').value,
+      "DistrictCode": formGroup.get('ddlDistrictCode').value,
+      "DescriptionCode": formGroup.get('ddlMapping').value,
+      "selected": true
+
+
+    }
+    this.userMasterService.postDistrictClassificationMapping(objPost).subscribe((data: any) => {
+      if (data.StatusCode == "OK") {
+
+        this.snotifyService.success("District Classification Mapping Save Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+
+      else {
+        this.snotifyService.error("Error...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+    });
+  }
+  //-----get district classification mapping----//
+  getDistrictClassificationMapping(statecode: any) {
+    this.userMasterService.getDistrictClassificationMapping(statecode).subscribe(data => {
+      this.districtMapingResult = data;
+
+    });
+  }
+  //---post City classification mapping---///
+  postCityClassificationMapping(formGroup: any) {
+
+    var objPost =
+    {
+      "StateCode": formGroup.get('ddlStateCode1').value,
+      "DistrictCode": formGroup.get('ddlDistrictCode1').value,
+      "CityCode": formGroup.get('ddlCity').value,
+      "DescriptionCode": formGroup.get('ddlMapping1').value,
+      "selected": true
+
+
+    }
+    this.userMasterService.postCityClassificationMapping(objPost).subscribe((data: any) => {
+      if (data.StatusCode == "OK") {
+
+        this.snotifyService.success("City Classification Mapping Save Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+
+      else {
+        this.snotifyService.error("Error...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+    });
+  }
+  //-----get City classification mapping----//
+  getCityClassificationMapping(statecode: any, districtcode: any) {
+    this.userMasterService.getCityClassificationMapping(statecode, districtcode).subscribe(data => {
+      this.cityMapingResult = data;
+
+    });
+  }
+  //---post Project classification mapping---///
+  postProjectClassificationMapping(formGroup: any) {
+    var objPost =
+    {
+      "StateCode": formGroup.get('ddlStateCodeP').value,
+      "DistrictCode": formGroup.get('ddlDistrictCodeP').value,
+      "CityCode": formGroup.get('ddlCityP').value,
+      "ProjectCode": formGroup.get('ddlProjectName').value,
+      "DescriptionCode": formGroup.get('ddlMappingP').value,
+      "selected": true
+
+
+    }
+    this.userMasterService.postProjectClassificationMapping(objPost).subscribe((data: any) => {
+      if (data.StatusCode == "OK") {
+
+        this.snotifyService.success("Project Classification Mapping Save Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+
+      else {
+        this.snotifyService.error("Error...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+    });
+  }
+  //-----get project classification mapping----//
+  getProjectClassificationMapping(statecode: any, districtcode: any, citycode: any) {
+    this.userMasterService.getProjectClassificationMapping(statecode, districtcode, citycode).subscribe(data => {
+      this.projectMapingResult = data;
+
+    });
+  }
+  //-----delete mapping for state,district,project and city-----//
+  DeleteStateMapping(StateMappingId: any) {
+    this.userMasterService.deleteStateClassificationMapping(StateMappingId).subscribe(data => {
+      if (data.StatusCode == "OK") {
+        this.snotifyService.success("State Classification Delete Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+      else {
+        this.snotifyService.error("State Classification Not Delete Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
       this.getStateClassificationMapping();
-      this.snotifyService.success("State Classification Mapping Save Successfully...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-  
-    else {
-      this.snotifyService.error("Error...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-  });
-}
- //-----get state classification mapping----//
- getStateClassificationMapping() {
-  this.userMasterService.getStateClassificationMapping().subscribe(data => {
-    this.stateMapingResult = data;
-  });
-}
-//---post district classification mapping---///
-postDistrictClassificationMapping(formGroup: any) {
- 
-  var objPost =
-  {
-    "StateCode": formGroup.get('ddlStateCode').value,
-    "DistrictCode":formGroup.get('ddlDistrictCode').value,
-    "DescriptionCode": formGroup.get('ddlMapping').value,
-    "selected":true
-   
 
+    });
   }
-  this.userMasterService.postDistrictClassificationMapping(objPost).subscribe((data: any) => {
-    if (data.StatusCode == "OK") {
-     
-      this.snotifyService.success("District Classification Mapping Save Successfully...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-  
-    else {
-      this.snotifyService.error("Error...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-  });
-}
- //-----get district classification mapping----//
- getDistrictClassificationMapping(statecode:any) {
-  this.userMasterService.getDistrictClassificationMapping(statecode).subscribe(data => {
-    this.districtMapingResult = data;
-  
-  });
-}
-//---post City classification mapping---///
-postCityClassificationMapping(formGroup: any) {
-  
-  var objPost =
-  {
-    "StateCode": formGroup.get('ddlStateCode1').value,
-    "DistrictCode":formGroup.get('ddlDistrictCode1').value,
-    "CityCode":formGroup.get('ddlCity').value,
-    "DescriptionCode": formGroup.get('ddlMapping1').value,
-    "selected":true
-   
+  DeleteDistrictMapping(DistMappingId: any) {
+    this.userMasterService.deleteDistrictClassificationMapping(DistMappingId).subscribe(data => {
+      if (data.StatusCode == "OK") {
+        this.snotifyService.success("District Classification Delete Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+      else {
+        this.snotifyService.error("District Classification Not Delete Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+      this.districtMapingResult = []
+      // this.getStateClassificationMapping();
 
+    });
   }
-  this.userMasterService.postCityClassificationMapping(objPost).subscribe((data: any) => {
-    if (data.StatusCode == "OK") {
-     
-      this.snotifyService.success("City Classification Mapping Save Successfully...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-  
-    else {
-      this.snotifyService.error("Error...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-  });
-}
- //-----get City classification mapping----//
- getCityClassificationMapping(statecode:any,districtcode:any) {
-  this.userMasterService.getCityClassificationMapping(statecode,districtcode).subscribe(data => {
-    this.cityMapingResult = data;
-  
-  });
-}
-//---post Project classification mapping---///
-postProjectClassificationMapping(formGroup: any) {
-  var objPost =
-  {
-    "StateCode": formGroup.get('ddlStateCodeP').value,
-    "DistrictCode":formGroup.get('ddlDistrictCodeP').value,
-    "CityCode":formGroup.get('ddlCityP').value,
-    "ProjectCode":formGroup.get('ddlProjectName').value,
-    "DescriptionCode": formGroup.get('ddlMappingP').value,
-    "selected":true
-   
+  DeleteCityMapping(CityMappingId: any) {
+    this.userMasterService.deleteCityClassificationMapping(CityMappingId).subscribe(data => {
+      if (data.StatusCode == "OK") {
+        this.snotifyService.success("City Classification Delete Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+      else {
+        this.snotifyService.error("City Classification Not Delete Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+      this.cityMapingResult = []
 
+
+    });
   }
-  this.userMasterService.postProjectClassificationMapping(objPost).subscribe((data: any) => {
-    if (data.StatusCode == "OK") {
-     
-      this.snotifyService.success("Project Classification Mapping Save Successfully...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      }); 
-    }
-  
-    else {
-      this.snotifyService.error("Error...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-  });
-}
-//-----get project classification mapping----//
-getProjectClassificationMapping(statecode:any,districtcode:any,citycode:any) {
-  this.userMasterService.getProjectClassificationMapping(statecode,districtcode,citycode).subscribe(data => {
-    this.projectMapingResult = data;
-  
-  });
-}
-//-----delete mapping for state,district,project and city-----//
-DeleteStateMapping(StateMappingId: any) {
-  this.userMasterService.deleteStateClassificationMapping(StateMappingId).subscribe(data => {
-    if (data.StatusCode == "OK") {
-      this.snotifyService.success("State Classification Delete Successfully...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-    else {
-      this.snotifyService.error("State Classification Not Delete Successfully...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-    this.getStateClassificationMapping();
+  DeleteProjectMapping(ProjectMappingId: any) {
+    this.userMasterService.deleteProjectClassificationMapping(ProjectMappingId).subscribe(data => {
+      if (data.StatusCode == "OK") {
+        this.snotifyService.success("Project Classification Delete Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+      else {
+        this.snotifyService.error("Project Classification Not Delete Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+      this.projectMapingResult = []
 
-  });
-}
-DeleteDistrictMapping(DistMappingId: any) {
-  this.userMasterService.deleteDistrictClassificationMapping(DistMappingId).subscribe(data => {
-    if (data.StatusCode == "OK") {
-      this.snotifyService.success("District Classification Delete Successfully...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-    else {
-      this.snotifyService.error("District Classification Not Delete Successfully...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-    this.districtMapingResult=[]
-   // this.getStateClassificationMapping();
 
-  });
-}
-DeleteCityMapping(CityMappingId: any) {
-  this.userMasterService.deleteCityClassificationMapping(CityMappingId).subscribe(data => {
-    if (data.StatusCode == "OK") {
-      this.snotifyService.success("City Classification Delete Successfully...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-    else {
-      this.snotifyService.error("City Classification Not Delete Successfully...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-    this.cityMapingResult=[]
-  
-
-  });
-}
-DeleteProjectMapping(ProjectMappingId: any) {
-  this.userMasterService.deleteProjectClassificationMapping(ProjectMappingId).subscribe(data => {
-    if (data.StatusCode == "OK") {
-      this.snotifyService.success("Project Classification Delete Successfully...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-    else {
-      this.snotifyService.error("Project Classification Not Delete Successfully...", "", {
-        position: SnotifyPosition.rightTop,
-        timeout: 3000
-      });
-    }
-    this.projectMapingResult=[]
-  
-
-  });
-}
+    });
+  }
 
 
 }
