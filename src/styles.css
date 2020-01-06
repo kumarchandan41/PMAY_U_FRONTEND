@@ -2,9 +2,6 @@
 
 
 /* You can add global styles to this file, and also import other style files */
-body {
-    font-family: "Open Sans";
-  }
   .modal-content {
     position: relative;
     display: flex;
@@ -120,4 +117,29 @@ a.canvasjs-chart-credit {
   padding-top: 10px;
 }
 
+.content-header{
+  padding: 10px 15px;
+  background-color: #eee;
+}
 
+/* date picker theme color */
+.theme-blue .bs-datepicker-head {
+  background-color: #367fa9 !important;
+}
+.bs-datepicker-body table td{
+  color: #000000 !important;
+}
+.theme-blue .bs-datepicker-body table td.week span, .bs-datepicker-body table th {
+  color: #367fa9 !important;
+}
+
+.gBg{
+  background-color: #b8e986 !important;
+}
+.blueBg{
+  background-color: #133756 !important;
+  color: #fff !important;
+}
+.greyBg{
+  background-color: #dedede !important;
+}

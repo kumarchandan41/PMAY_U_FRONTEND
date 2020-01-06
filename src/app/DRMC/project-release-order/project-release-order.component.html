@@ -1,9 +1,7 @@
 <div class="content-header">
 	<div class="container-fluid">
-		<div class="row mb-2">
-			<div class="col-sm-6">
-				<h1>Sanctioned/Utilization</h1>
-			</div>
+		<div class="row">
+			<h1>Sanctioned/Utilization</h1>
 		</div>
 	</div>
 </div>
@@ -12,11 +10,11 @@
 <div class="container-fluid" [ngStyle]="{background: backgroundColor}">
 	<!-- <div class="w3-card-4" style="padding-top:30px;padding-left: 10px;">
         <h3
-            style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
+            style="margin-left: -46px;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
             Sanctioned/Utilization
         </h3>
     </div> -->
-	<div class="form-container">
+	<div class="form-container row gBg">
 
 		<div class="container formSwitcher">
 			<label>
@@ -41,9 +39,9 @@
 						<option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
 							{{state.States_UT}}</option>
 					</select>
-					<span class="help-block" *ngIf="submitted && ddlStateCode.hasError('required')">
+					<!-- <span class="help-block" *ngIf="submitted && ddlStateCode.hasError('required')">
 						Please select state name.
-					</span>
+					</span> -->
 				</div>
 			</div>
 
@@ -56,9 +54,6 @@
 						<option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme.SchemeShortName">
 							{{scheme.SchemeShortName}}</option>
 					</select>
-					<span class="help-block" *ngIf="submitted && ddlScheme.hasError('required')">
-						Please select Scheme.
-					</span>
 				</div>
 			</div>
 
@@ -70,9 +65,6 @@
 						<option *ngFor="let schemeComp of adminSandbox.schComponentMaster" [value]="schemeComp.Cname">
 							{{schemeComp.Cname}}</option>
 					</select>
-					<span class="help-block" *ngIf="submitted && ddlComponent.hasError('required')">
-						Please select Components.
-					</span>
 				</div>
 			</div>
 
@@ -80,9 +72,6 @@
 				<div class="form-group" [ngClass]="{'has-error': submitted && txtSanctionNumber.hasError('required')}">
 					<label class="control-label" for="Components">Sanction No.</label>
 					<input type="text" class="form-control" [formControl]="txtSanctionNumber" placeholder="Sanction Number">
-					<span class="help-block" *ngIf="submitted && txtSanctionNumber.hasError('required')">
-						Please enter sanction number.
-					</span>
 				</div>
 			</div>
 
@@ -92,9 +81,6 @@
 					<label class="control-label" for="date">Date</label>
 					<input type="text" class="form-control" [minDate]="maxStartDate" [formControl]="txtDate" bsDatepicker
 						[bsConfig]="dpConfig" autocomplete="off" onkeydown="return false" placeholder="DD/MM/YYYY">
-					<span class="help-block" *ngIf="submitted && txtDate.hasError('required')">
-						Please select date.
-					</span>
 				</div>
 			</div>
 
@@ -103,9 +89,6 @@
 					<label class="control-label" for="txtAmountReleased">Amount Released</label>
 					<input type="text" AllowOnlyDecimal="true" id="txtAmountReleased" class="form-control"
 						[formControl]="txtAmountReleased" placeholder="Amount Released">
-					<span class="help-block" *ngIf="submitted && txtAmountReleased.hasError('required')">
-						Please enter amount.
-					</span>
 				</div>
 			</div>
 
@@ -114,21 +97,18 @@
 					<label class="control-label" for="txtSelectFile">Release Order PDF</label>
 					<input type="file" [formControl]="txtSelectFile" id="txtSelectFile" accept="application/pdf"
 						(change)="selectFile($event)" name="txtSelectFile" />
-					<span class="help-block" *ngIf="submitted && txtSelectFile.hasError('required')">
-						Please upload PDF
-					</span>
 				</div>
 			</div>
 
 
 
 			<!-- <div class="w3-quarter w3-left" style="width: 10%;">
-					<label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+					<label style="padding-top: 8px;">
 						State Name:
 					</label>
 				</div>
 				<div class="w3-quarter w3-left" style="width: 22%;">
-					<select [formControl]="ddlStateCode" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+					<select [formControl]="ddlStateCode" style=""
 						(change)="adminSandbox.getReleaseOrder($event.target.value);" [(ngModel)]="State"
 						class="w3-input w3-border">
 						<option value="" disabled>Please select state--</option>
@@ -136,43 +116,43 @@
 							{{state.States_UT}}</option>
 					</select>
 					<label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label"
-						style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+						style="color: red;">Please
 						select
 						state name.
 					 </label>
 				</div> -->
 			<!-- <div class="w3-quarter w3-center" style="width: 12%;">
-					<label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+					<label style="padding-top: 8px;">
 						Scheme:
 					</label>
 				</div>
 				<div class="w3-quarter w3-left" style="width: 22%;">
 					<select [formControl]="ddlScheme" class="w3-input w3-border" [(ngModel)]="Scheme"
 						(change)="adminSandbox.getProjectSchemeComponentData($event.target.value);"
-						style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+						style="">
 						<option value="" disabled>Please select Scheme--</option>
 						<option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme.SchemeShortName">
 							{{scheme.SchemeShortName}}</option>
 					</select>
 					<label *ngIf="submitted && ddlScheme.hasError('required')" class="error-label"
-						style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+						style="color: red;">Please
 						select scheme. </label>
 				</div> -->
 
 			<!-- <div class="w3-quarter w3-center" style="width: 12%;">
-					<label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+					<label style="padding-top: 8px;">
 						Components:
 					</label>
 				</div>
 				<div class="w3-quarter w3-left" style="width: 22%;">
 					<select [formControl]="ddlComponent" [(ngModel)]="Components"
-						style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
+						style="" class="w3-input w3-border">
 						<option value="" disabled>Please select Components--</option>
 						<option *ngFor="let schemeComp of adminSandbox.schComponentMaster" [value]="schemeComp.Cname">
 							{{schemeComp.Cname}}</option>
 					</select>
 					<label *ngIf="submitted && ddlComponent.hasError('required')" class="error-label"
-						style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+						style="color: red;">Please
 						select components. </label>
 				</div> -->
 
@@ -180,13 +160,13 @@
 
 
 			<!-- <div class="w3-quarter w3-left" style="width: 10%;">
-					<label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+					<label style="padding-top: 8px;">
 						Sanction No.:
 					</label>
 				</div>
 				<div class="w3-quarter w3-left" style="width: 22%;">
 					<input type="text" class="w3-input w3-border" [formControl]="txtSanctionNumber" placeholder="Sanction Number"
-						style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+						style="">
 					<label *ngIf="submitted && txtSanctionNumber.hasError('required')" class="error-label"
 						style="color: red">Please enter sanction number.</label>
 				</div> -->
@@ -194,30 +174,30 @@
 
 
 			<!-- <div class="w3-quarter w3-center" style="width: 12%;">
-					<label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+					<label style="padding-top: 8px;">
 						Date:
 					</label>
 				</div>
 				<div class="w3-quarter w3-left" style="width: 22%;">
 					<input type="text" class="w3-input w3-border" [minDate]="maxStartDate" [formControl]="txtDate" bsDatepicker
 						[bsConfig]="dpConfig" autocomplete="off" onkeydown="return false" placeholder="dd/mm/yyyy"
-						style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+						style="">
 					<label *ngIf="submitted && txtDate.hasError('required')" class="error-label"
-						style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+						style="color: red;">Please
 						select date. </label>
 				</div> -->
 
 
 			<!-- <div class="w3-quarter w3-center" style="width: 12%;">
-					<label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+					<label style="padding-top: 8px;">
 						Amount Released :
 					</label>
 				</div>
 				<div class="w3-quarter w3-left" style="width: 22%;">
 					<input type="text" AllowOnlyDecimal="true" class="w3-input w3-border" [formControl]="txtAmountReleased"
-						placeholder="Amount Released" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+						placeholder="Amount Released" style="">
 					<label *ngIf="submitted && txtAmountReleased.hasError('required')" class="error-label"
-						style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter amount.</label>
+						style="color: red;">Please enter amount.</label>
 				</div> -->
 
 
@@ -225,198 +205,217 @@
 			<div class="w3-row">
 
 				<div class="w3-quarter w3-left" style="width: 13%;">
-					<label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+					<label style="padding-top: 8px;">
 						Release Order PDF :
 					</label>
 				</div>
 				<div class="w3-quarter w3-left" style="width: 22%;">
 					<input type="file" [formControl]="txtSelectFile" accept="application/pdf" (change)="selectFile($event)"
-						name="txtSelectFile" style="font-family: Arial, Geneva, Tahoma, sans-serif;" />
+						name="txtSelectFile" style="" />
 					<label *ngIf="submitted && txtSelectFile.hasError('required')" class="error-label" style="color: red">Please
 						upload pdf.</label>
 				</div>
 			</div> -->
 
-			<div class="box-footer col-md-12" style="clear: both;">
+			<div class="box-footer gBg col-md-12" style="clear: both;">
 				<button type="submit" class="pull-right btn btn-warning">Submit</button>
 			</div>
+		</form>
 
-			<!-- <div style="text-align: center">
-				<button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-					class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
-			</div> -->
-			<br>
-			<table class="table" border="1px" style="width: 89%;" align="center">
-				<thead style="background-color: lightgray; font-weight: bold">
-					<tr *ngIf="adminSandbox.releaseOrderValue.length>0">
-						<td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No
-						</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Sanction No.</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Date</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Scheme</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Component</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Amount Released
-						</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Release Order in
-							PDF</td>
+		<div class="col-md-12" style="background-color: #fff; padding-top: 15px;" *ngIf="Sanction">
+			<table class="table table-striped" border="1px" align="center">
+				<thead>
+					<tr align="center" class="blueBg" *ngIf="adminSandbox.releaseOrderValue.length>0">
+						<td>S.No</td>
+						<td>State</td>
+						<td>Sanction No.</td>
+						<td>Date</td>
+						<td>Scheme</td>
+						<td>Component</td>
+						<td>Amount Released </td>
+						<td>Release Order in PDF</td>
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor="let releaseOrder of adminSandbox.releaseOrderValue;let i = index"
-						style="text-align: center;background-color:white">
-						<td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+					<tr *ngFor="let releaseOrder of adminSandbox.releaseOrderValue;let i = index" style="text-align: center;">
+						<td style="border-top: 1px solid black;">{{i+1}}</td>
+						<td style="text-align: left;border-top: 1px solid black;">
 							{{releaseOrder.States_UT}}</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+						<td style="text-align: left;border-top: 1px solid black;">
 							{{releaseOrder.SanctionNo}}</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+						<td style="text-align: left;border-top: 1px solid black;">
 							{{releaseOrder.Date|date}}</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+						<td style="text-align: left;border-top: 1px solid black;">
 							{{releaseOrder.Scheme}}</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+						<td style="text-align: left;border-top: 1px solid black;">
 							{{releaseOrder.Component}}</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+						<td style="text-align: right;border-top: 1px solid black;">
 							{{releaseOrder.AmountReleased.toLocaleString('en-IN') }}</td>
 						<td style="text-align:center;color:blue;border-top: 1px solid black;"
 							(click)="adminSandbox.downloadRelease(releaseOrder.ReleasePDF)">Download</td>
 
 					</tr>
-					<tr style="text-align: center;background-color:yellow" *ngIf="adminSandbox.releaseOrderValue.length>0">
-						<td style="border-top: 1px solid black;"> </td>
-						<td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-							<b>Total</b></td>
-						<td style="text-align: right;border-top: 1px solid black;"> </td>
-						<td style="text-align: right;border-top: 1px solid black;"> </td>
-						<td style="text-align: right;border-top: 1px solid black;"> </td>
-						<td style="text-align: left;border-top: 1px solid black;"> </td>
-						<td style="text-align: left;border-top: 1px solid black;font-family: Arial, Geneva, Tahoma, sans-serif;">
+					<tr style="text-align: center; font-weight: 600;" class="greyBg"
+						*ngIf="adminSandbox.releaseOrderValue.length>0">
+						<td style="border-top: 1px solid black; text-align: left;" colspan="6">Total </td>
+						<td style="text-align: right;border-top: 1px solid black;">
 							{{ getAmountSum(5).toLocaleString('en-IN') }} </td>
 						<td style="border-top: 1px solid black;"> </td>
 					</tr>
 				</tbody>
 			</table>
-		</form>
+		</div>
+
 		<form [formGroup]="releaseOrder" *ngIf="utilization">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-4 col-sm-4 col-xs-6">
+						<div class="form-group" [ngClass]="{'has-error': submitted && ddlStateCode.hasError('required')}">
+							<label class="control-label" for="StateName">State Name</label>
+							<select [formControl]="ddlStateCode" (change)="adminSandbox.getUCOrder($event.target.value);"
+								[(ngModel)]="State" class="form-control" id="SchemeName">
+								<option value="" disabled>Please select state--</option>
+								<option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+									{{state.States_UT}}</option>
+							</select>
+							<!-- <span class="help-block" *ngIf="submitted && ddlStateCode.hasError('required')">
+								Please select state name.
+							</span> -->
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-6">
+						<div class="form-group" [ngClass]="{'has-error': submitted && ddlScheme.hasError('required')}">
+							<label class="control-label" for="SchemeName">Scheme</label>
+							<select [formControl]="ddlScheme" class="form-control" id="SchemeName" [(ngModel)]="Scheme"
+								(change)="adminSandbox.getProjectSchemeComponentData($event.target.value);">
+								<option value="" disabled>Please select Scheme--</option>
+								<option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme.SchemeShortName">
+									{{scheme.SchemeShortName}}</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="form-group" [ngClass]="{'has-error': submitted && ddlComponent.hasError('required')}">
+							<label class="control-label" for="Components">Components</label>
+							<select [formControl]="ddlComponent" [(ngModel)]="Components" id="Components" class="form-control">
+								<option value="" disabled>Please select Components--</option>
+								<option *ngFor="let schemeComp of adminSandbox.schComponentMaster" [value]="schemeComp.Cname">
+									{{schemeComp.Cname}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="w3-row">
-				<div class="w3-quarter w3-left" style="width: 10%;">
-					<label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+				<!-- <div class="w3-quarter w3-left" style="width: 10%;">
+					<label style="padding-top: 8px;">
 						State Name:
 					</label>
 				</div>
 				<div class="w3-quarter w3-left" style="width: 22%;">
 					<select [formControl]="ddlStateCode" (change)="adminSandbox.getUCOrder($event.target.value);"
-						[(ngModel)]="State" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+						[(ngModel)]="State" class="w3-input w3-border" style="">
 						<option value="" disabled>Please select state--</option>
 						<option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
 							{{state.States_UT}}</option>
 					</select>
-					<label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label"
-						style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+					<label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label" style="color: red;">Please
 						select
 						state name. </label>
-				</div>
-				<div class="w3-quarter w3-center" style="width: 12%;">
-					<label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+				</div> -->
+				<!-- <div class="w3-quarter w3-center" style="width: 12%;">
+					<label style="padding-top: 8px;">
 						Scheme:
 					</label>
 				</div>
 				<div class="w3-quarter w3-left" style="width: 22%;">
 					<select [formControl]="ddlScheme" class="w3-input w3-border" [(ngModel)]="Scheme" (change)="adminSandbox.getProjectSchemeComponentData($event.target.value);
-                          " style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          " style="">
 						<option value="" disabled>Please select Scheme--</option>
 						<option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme.SchemeShortName">
 							{{scheme.SchemeShortName}}</option>
 					</select>
-					<label *ngIf="submitted && ddlScheme.hasError('required')" class="error-label"
-						style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+					<label *ngIf="submitted && ddlScheme.hasError('required')" class="error-label" style="color: red;">Please
 						select scheme. </label>
 
-				</div>
-				<div class="w3-quarter w3-center" style="width: 12%;">
-					<label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+				</div> -->
+				<!-- <div class="w3-quarter w3-center" style="width: 12%;">
+					<label style="padding-top: 8px;">
 						Components:
 					</label>
 				</div>
 				<div class="w3-quarter w3-left" style="width: 22%;">
-					<select [formControl]="ddlComponent" [(ngModel)]="Components" class="w3-input w3-border"
-						style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+					<select [formControl]="ddlComponent" [(ngModel)]="Components" class="w3-input w3-border" style="">
 						<option value="" disabled>Please select Components--</option>
 						<option *ngFor="let schemeComp of adminSandbox.schComponentMaster" [value]="schemeComp.Cname">
 							{{schemeComp.Cname}}</option>
 					</select>
-					<label *ngIf="submitted && ddlComponent.hasError('required')" class="error-label"
-						style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+					<label *ngIf="submitted && ddlComponent.hasError('required')" class="error-label" style="color: red;">Please
 						select components. </label>
-				</div>
+				</div> -->
 			</div>
 
-			<br>
-			<table class="table" border="1px" style="width: 89%;" align="center">
-				<thead style="background-color: lightgray; font-weight: bold">
-					<tr>
-						<td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No
-						</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Sanction No.</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Date</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Amount Released
-						</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Utilization No.
-						</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">UC Date</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">UC Amount</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">UC PDF</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Submit</td>
-					</tr>
-				</thead>
+			<div class="col-md-12" style="background-color: #fff; padding-top: 15px;" *ngIf="utilization">
+				<table class="table table-striped" border="1px" align="center">
+					<thead>
+						<tr class="blueBg" align="center" *ngIf="adminSandbox.ucOrderValue.length>0">
+							<td style="text-align: right; width: 20px;">S.No
+							</td>
+							<td>State</td>
+							<td>Sanction No.</td>
+							<td>Date</td>
+							<td>Amount Released </td>
+							<td>Utilization No. </td>
+							<td>UC Date</td>
+							<td>UC Amount</td>
+							<td>UC PDF</td>
+							<td>Submit</td>
+						</tr>
+					</thead>
 
-				<tbody>
-					<tr *ngFor="let ucOrder of adminSandbox.ucOrderValue;let ucOrder1 of ucOrder;let i = index"
-						style="text-align: center;background-color:white">
-						<td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-							{{i+1}}</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-							{{ucOrder.States_UT[0]}}</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-							{{ucOrder.SanctionNo}}</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-							{{ucOrder.Date|date}}</td>
-						<td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-							{{ucOrder.AmountReleased.toLocaleString('en-IN')}}</td>
-						<td style="text-align: right;border-top: 1px solid black;">
-							<input name="UtilizationNumber" [(ngModel)]="ucOrder.UtilizationNo"
-								style="width: 143px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;"
-								type="text" [ngModelOptions]="{standalone: true}"></td>
-						<td style="text-align: right;border-top: 1px solid black;">
-							<input type="text" class="w3-input w3-border" [minDate]="maxStartDate" [(ngModel)]="ucOrder.UCDate"
-								name="UCDAte"
-								style="width: 143px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;"
-								bsDatepicker [bsConfig]="dpConfig" autocomplete="off" onkeydown="return false" placeholder="dd/mm/yyyy"
-								[ngModelOptions]="{standalone: true}">
-						</td>
-						<td style="text-align: right;border-top: 1px solid black;">
-							<input name="UCAmount" [(ngModel)]="ucOrder.UCAmount"
-								style="width: 143px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;"
-								type="text" [ngModelOptions]="{standalone: true}"></td>
-						<td style="border-top: 1px solid black;">
-							<input type="file" (ngModel)="ucOrder.UCPDF" accept="application/pdf" (change)="selectFile($event)"
-								[ngModelOptions]="{standalone: true}" name="txtSelectFile"
-								style="font-family: Arial, Geneva, Tahoma, sans-serif;" />
-							<ul *ngFor="let ucOrder1 of ucOrder.UCPDF;let i = index"
-								(click)="adminSandbox.downloadUCOrder(ucOrder1,i)">
-								<li style="text-indent: 43px;color: blue;font-family: Arial, Geneva, Tahoma, sans-serif;">
-									{{ucOrder1}}</li>
-
-							</ul>
-						</td>
-						<td style="text-align: right;border-top: 1px solid black;"><button
-								style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-btn w3-orange w3-round w3-ripple"
-								(click)="onSubmitReleaseFundFlow(adminSandbox.ucOrderValue,i)">submit</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+					<tbody>
+						<tr *ngFor="let ucOrder of adminSandbox.ucOrderValue;let ucOrder1 of ucOrder;let i = index"
+							style="text-align: center;">
+							<td style="border-top: 1px solid black;">
+								{{i+1}}</td>
+							<td style="text-align: left;border-top: 1px solid black;">
+								{{ucOrder.States_UT[0]}}</td>
+							<td style="text-align: left;border-top: 1px solid black;">
+								{{ucOrder.SanctionNo}}</td>
+							<td style="text-align: left;border-top: 1px solid black;">
+								{{ucOrder.Date|date}}</td>
+							<td style="text-align: right;border-top: 1px solid black;">
+								{{ucOrder.AmountReleased.toLocaleString('en-IN')}}</td>
+							<td style="text-align: right;border-top: 1px solid black;">
+								<input name="UtilizationNumber" [(ngModel)]="ucOrder.UtilizationNo" type="text"
+									[ngModelOptions]="{standalone: true}">
+							</td>
+							<td style="text-align: right;border-top: 1px solid black;">
+								<input type="text" [minDate]="maxStartDate" [(ngModel)]="ucOrder.UCDate" name="UCDAte" bsDatepicker
+									[bsConfig]="dpConfig" autocomplete="off" onkeydown="return false" placeholder="dd/mm/yyyy"
+									[ngModelOptions]="{standalone: true}">
+							</td>
+							<td style="text-align: right;border-top: 1px solid black;">
+								<input name="UCAmount" [(ngModel)]="ucOrder.UCAmount" type="text" [ngModelOptions]="{standalone: true}">
+							</td>
+							<td style="border-top: 1px solid black;">
+								<input type="file" (ngModel)="ucOrder.UCPDF" accept="application/pdf" (change)="selectFile($event)"
+									[ngModelOptions]="{standalone: true}" name="txtSelectFile" />
+								<ul *ngFor="let ucOrder1 of ucOrder.UCPDF;let i = index"
+									(click)="adminSandbox.downloadUCOrder(ucOrder1,i)" style="margin: 0;">
+									<li *ngIf="ucOrder" style="text-indent: 43px;color: blue;">
+										{{ucOrder1}}</li>
+								</ul>
+							</td>
+							<td style="text-align: right;border-top: 1px solid black;"><button
+									class="btn btn-block btn-primary btn-sm"
+									(click)="onSubmitReleaseFundFlow(adminSandbox.ucOrderValue,i)">Submit</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</form>
 	</div>
 </div>
