@@ -1,0 +1,402 @@
+<!-- <div class="container-fuild">
+  <div id="drpdown">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <div id='filter' class="row">
+        <div class="col-md-1">
+          <b> State:-</b>
+        </div>
+        <div class="col-md-7 col-sm-7">
+          <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event)"
+            style="width: 200px;font-display: #FF00FF;color: yellow;background-color: black">
+            <option value={{stValue}}>{{StateMessage}}</option>
+            <option *ngFor='let sntry of stateDetails' [value]='sntry.Codes'>
+              {{sntry.States_UT}}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-4 col-md-4" style="padding-left: 30px">
+          <button class="Downloadbtn" (click)="pdfReport()" width="4px"><i class="fa fa-download"></i>Print</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Project Name</h1>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- /.container-fluid -->
+<div class="container-fluid" style="padding:5px 15px 15px 15px; ">
+  <div class="bg-navy-active mainTitle col-md-12" style="margin: 10px 0;"> Project Details</div>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6">
+
+      <div class="bg-teal-active mainTitle col-md-12"> Demographic</div>
+      <div class="clearfix table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>District</th>
+              <th>City</th>
+              <th>IA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Call of Duty</td>
+              <td>455-221</td>
+              <td>981</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-teal-active mainTitle col-md-12"> Ownership of Houses </div>
+      <div class="clearfix table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Joint</th>
+              <th>Female</th>
+              <th>Male</th>
+              <th>Transgender</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>122</td>
+              <td>500</td>
+              <td>455</td>
+              <td>981</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-orange-active mainTitle col-md-12"> Project Cost <small>(INR in Cr.)</small></div>
+      <div class="clearfix table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Central</th>
+              <th>State</th>
+              <th>ULB</th>
+              <th>Beneficiary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Call of Duty</td>
+              <td>455-981-221</td>
+              <td>Driving gloves</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-teal-active mainTitle col-md-12"> Social Distribution of Beneficiaries as per DPR</div>
+      <div class="clearfix table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="cellBg">Category</th>
+              <th>DPR</th>
+              <th>MIS</th>
+              <th>Attached</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cellBg">SC</td>
+              <td>455</td>
+              <td>221</td>
+              <td>128</td>
+            </tr>
+            <tr>
+              <td class="cellBg">ST</td>
+              <td>545</td>
+              <td>545</td>
+              <td>128</td>
+            </tr>
+            <tr>
+              <td class="cellBg">OBC</td>
+              <td>455</td>
+              <td>221</td>
+              <td>128</td>
+            </tr>
+            <tr>
+              <td class="cellBg">Minority</td>
+              <td>455</td>
+              <td>221</td>
+              <td>128</td>
+            </tr>
+            <tr>
+              <td class="cellBg">Inclusive
+                Minorities</td>
+              <td>455</td>
+              <td>221</td>
+              <td>128</td>
+            </tr>
+            <tr>
+              <td class="cellBg">General</td>
+              <td>455</td>
+              <td>221</td>
+              <td>128</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
+    </div>
+    <!-- left side end -->
+
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <div class="bg-orange-active mainTitle col-md-12"> Project Title</div>
+      <div class="bg-active mainTitle col-md-12"
+        style="padding: 50px; background-color:  #f3f3f3; margin-bottom: 15px;"> </div>
+
+      <div class="clearfix table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>New</th>
+              <th>Enhnc</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>550</td>
+              <td>431</td>
+              <td>981</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="clearfix table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>CSMC No.</th>
+              <th>Date</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>122</td>
+              <td>500</td>
+              <td>455</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-navy mainTitle col-md-12"> Releases Utilisation instalments</div>
+      <div class="clearfix table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>First</th>
+              <th>Second</th>
+              <th>Third</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cellBg">SC</td>
+              <td>545</td>
+              <td>5455</td>
+              <td>4559</td>
+              <td>99900</td>
+            </tr>
+            <tr>
+              <td class="cellBg">ST</td>
+              <td>545</td>
+              <td>5455</td>
+              <td>4559</td>
+              <td>99900</td>
+            </tr>
+            <tr>
+              <td class="cellBg">Other than SC/ST</td>
+              <td>545</td>
+              <td>5455</td>
+              <td>4559</td>
+              <td>99900</td>
+            </tr>
+            <tr style="background-color: #001f3f; color: #fff;">
+              <td>Total</td>
+              <td>545</td>
+              <td>5455</td>
+              <td>4559</td>
+              <td>99900</td>
+            </tr>
+            <tr>
+              <td class="cellBg">Utilise</td>
+              <td>545</td>
+              <td>5455</td>
+              <td>4559</td>
+              <td>99900</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <!-- right side end -->
+    <div class="col-md-12">
+      <div class="clearfix table-responsive" style="padding-top: 5px;">
+        <table class="table">
+          <tr>
+            <th class="orangeBG" rowspan="2">Project Time Line</th>
+            <th class="orangeBG">1st Release</th>
+            <th class="orangeBG">1st Utilised</th>
+            <th class="orangeBG">2nd Released</th>
+            <th class="orangeBG">2nd Utilised</th>
+            <th class="orangeBG">3rd Released</th>
+            <th class="orangeBG">3rd Utilised</th>
+            <th class="orangeBG">Total</th>
+          </tr>
+          <tr>
+            <td>565</td>
+            <td>455981</td>
+            <td>565</td>
+            <td>455981</td>
+            <td>565</td>
+            <td>455981</td>
+            <td>995981</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="clearfix table-responsive" style="padding-top: 5px;">
+        <table class="table">
+          <tr>
+            <th class="orangeBG" rowspan="2">Physical Status</th>
+            <th class="orangeBG">Work Order</th>
+            <th class="orangeBG">Geo Tag</th>
+            <th class="orangeBG">Plinth </th>
+            <th class="orangeBG">Lintel</th>
+            <th class="orangeBG">Roof</th>
+            <th class="orangeBG">Completed</th>
+            <th class="orangeBG">Occupied</th>
+          </tr>
+          <tr>
+            <td>565</td>
+            <td>455981</td>
+            <td>565</td>
+            <td>455981</td>
+            <td>565</td>
+            <td>455981</td>
+            <td>995981</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="clearfix table-responsive" style="padding-top: 5px;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Indicators</th>
+              <th>Grounded</th>
+              <th>Completed</th>
+              <th>Occupied</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cellBg alignCenter">2015-16</td>
+              <td>455</td>
+              <td>221</td>
+              <td>128</td>
+            </tr>
+            <tr>
+              <td class="cellBg alignCenter">2016-17</td>
+              <td>545</td>
+              <td>545</td>
+              <td>128</td>
+            </tr>
+            <tr>
+              <td class="cellBg alignCenter">2017-18</td>
+              <td>455</td>
+              <td>221</td>
+              <td>128</td>
+            </tr>
+            <tr>
+              <td class="cellBg alignCenter">2018-19</td>
+              <td>455</td>
+              <td>221</td>
+              <td>128</td>
+            </tr>
+            <tr>
+              <td class="cellBg alignCenter">2019-20 </td>
+              <td>455</td>
+              <td>221</td>
+              <td>128</td>
+            </tr>
+            <tr>
+              <td class="cellBg alignCenter">2020-21</td>
+              <td>455</td>
+              <td>221</td>
+              <td>128</td>
+            </tr>
+            <tr>
+              <td class="cellBg alignCenter">2021-22</td>
+              <td>455</td>
+              <td>221</td>
+              <td>128</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
+    </div>
+    <!-- left side end -->
+
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="imgContainer">
+        <img src="http://fakeimg.pl/360x360/000/?text=1">
+        <img src="http://fakeimg.pl/360x360/111/?text=2">
+        <img src="http://fakeimg.pl/360x360/222/?text=3">
+        <img src="http://fakeimg.pl/360x360/333/?text=4">
+        <img src="http://fakeimg.pl/360x360/444/?text=5">
+        <img src="http://fakeimg.pl/360x360/555/?text=6">
+        <img src="http://fakeimg.pl/360x360/666/?text=7">
+        <img src="http://fakeimg.pl/360x360/777/?text=8">
+        <img src="http://fakeimg.pl/360x360/888/?text=9">
+        <img src="http://fakeimg.pl/360x360/999/?text=10">
+        <img src="http://fakeimg.pl/360x360/aaa/?text=11">
+        <img src="http://fakeimg.pl/360x360/bbb/?text=12">
+      </div>
+    </div>
+    <!-- right side end -->
+
+  </div>
+</div>
+<!-- /.container-fluid -->
