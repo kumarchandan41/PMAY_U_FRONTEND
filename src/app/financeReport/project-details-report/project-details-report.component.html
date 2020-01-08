@@ -30,7 +30,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Project Name</h1>
+        <h1>Project Derails Report</h1>
       </div>
 
     </div>
@@ -86,7 +86,8 @@
         </table>
       </div>
 
-      <div class="bg-orange-active mainTitle col-md-12"> Project Cost <small>(INR in Cr.)</small></div>
+      <div class="bg-orange-active mainTitle col-md-12"> Project Cost <small>({{projectDetail.ProjectCost.toFixed(2)}}
+          Cr.)</small></div>
       <div class="clearfix table-responsive">
         <table class="table">
           <thead>
@@ -99,10 +100,10 @@
           </thead>
           <tbody>
             <tr>
-              <td>1</td>
-              <td>Call of Duty</td>
-              <td>455-981-221</td>
-              <td>Driving gloves</td>
+              <td>{{projectDetail.CentralAssistance == 0 ? '-' : projectDetail.CentralAssistance.toFixed(2)}}</td>
+              <td>{{projectDetail.StateGrant == 0 ? '-' : projectDetail.StateGrant.toFixed(2)}}</td>
+              <td>{{projectDetail.ULB == 0 ? '-' : projectDetail.ULB.toFixed(2)}}</td>
+              <td>{{projectDetail.BeneficiaryShare == 0 ? '-' : projectDetail.BeneficiaryShare.toFixed(2)}}</td>
             </tr>
           </tbody>
         </table>
@@ -169,7 +170,9 @@
     <div class="col-md-6 col-sm-6 col-xs-6">
       <div class="bg-orange-active mainTitle col-md-12"> Project Title</div>
       <div class="bg-active mainTitle col-md-12"
-        style="padding: 50px; background-color:  #f3f3f3; margin-bottom: 15px;"> </div>
+        style="padding: 50px; background-color:  #f3f3f3; margin-bottom: 15px;">
+        {{projectDetail.ProjectTitle}}
+      </div>
 
       <div class="clearfix table-responsive">
         <table class="table">
@@ -182,9 +185,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>550</td>
-              <td>431</td>
-              <td>981</td>
+              <td>{{projectDetail.NewSanction == 0 ? '-': projectDetail.NewSanction.toFixed(0) }}</td>
+              <td>{{projectDetail.UpgradeSanction == 0 ? '-': projectDetail.UpgradeSanction.toFixed(0) }}</td>
+              <td>{{projectDetail.TotalSanction == 0 ? '-': projectDetail.TotalSanction.toFixed(0) }}</td>
             </tr>
           </tbody>
         </table>
@@ -201,9 +204,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>122</td>
-              <td>500</td>
-              <td>455</td>
+              <td>{{projectDetail.CSMCNumber}}</td>
+              <td>{{projectDetail.CSMCDate}}</td>
+              <td>{{projectDetail.ProjectDuration}}</td>
             </tr>
           </tbody>
         </table>

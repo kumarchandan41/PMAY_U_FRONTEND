@@ -8,6 +8,7 @@ import { Route, Router, ActivatedRoute } from '@angular/router';
 // import { content } from 'html2canvas/dist/types/css/property-descriptors/content';
 // import { any } from '@amcharts/amcharts4/.internal/core/utils/Array';
 import { ExportAsConfig, SupportedExtensions, ExportAsService } from 'ngx-export-as';
+import { ProjectDetail } from 'src/app/financeReport/model/chart';
 
 
 const localString = (number, format = 'en-IN') => {
@@ -45,6 +46,10 @@ const indianFormat = (number, currency = 'INR') => {
 // this is final programme for state score .
 export class ProjectDetailsReportComponent implements OnInit {
   stateCodes: string = "0";
+  projectDetail: ProjectDetail[];
+  projectBriefDetail: any;
+  projectFundRelease: any;
+  projectUCSubmission: any;
 
   constructor(private exportAsService: ExportAsService, private router: Router, private route: ActivatedRoute, config: NgbModalConfig,
     public activeModal: NgbActiveModal, public service: GraphService,
@@ -52,32 +57,31 @@ export class ProjectDetailsReportComponent implements OnInit {
 
     config.keyboard = false;
 
-    this.service.ServiceStateScore(this.stateCodes).subscribe(result => {
-      console.log('ServiceStateScore------------>>', result)
-
+    this.service.GetProjetDetailsReportByProjectId(this.route.snapshot.paramMap.get('id')).subscribe(result => {
+      this.projectDetail = {
+        ...result.Project_DetailVM[0],
+        BeneficiaryShare: Number(result.Project_DetailVM[0].BeneficiaryShare),
+        NewSanction: Number(result.Project_DetailVM[0].NewSanction),
+        UpgradeSanction: Number(result.Project_DetailVM[0].UpgradeSanction),
+        TotalSanction: Number(result.Project_DetailVM[0].TotalSanction),
+      }
+      this.projectBriefDetail = result.Project_Brief_DetailVM[0]
+      this.projectFundRelease = result.Project_Fund_ReleaseVM
+      this.projectUCSubmission = result.Project_UC_SubmissionVM
+      console.log('GetProjetDetailsReportByProjectId------------>>', result, this.route.snapshot.paramMap.get('id'))
       // this.StateId=result.st.StateId;
     });
-
-    this.service.GetCSMCStateWiseReport(this.stateCodes).subscribe(result1 => {
-      // this.StateId=result.st.StateId;
-      console.log('GetCSMCStateWiseReport------------>>', result1)
-
-    });
-
 
   }
 
 
   ngOnInit() {
     this.stateCodes = "0";
-    this.service.StateListDetails().subscribe(result => {
-      console.log('result------------>>', result)
-      this.route.params.subscribe(params => {
-        console.log('params------------>>', params)
-      });
-    });
-
-
+    const projectDetail = this.projectDetail
+    const projectBriefDetail = this.projectBriefDetail
+    const projectFundRelease = this.projectFundRelease
+    const projectUCSubmission = this.projectUCSubmission
+    console.log({ projectDetail, projectBriefDetail, projectFundRelease, projectUCSubmission })
   }
 
 
