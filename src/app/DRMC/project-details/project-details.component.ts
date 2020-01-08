@@ -57,7 +57,6 @@ export class ProjectDetailsComponent implements OnInit {
   constructor(private fb: FormBuilder, public adminSandbox: AdminSandbox) { }
 
   ngOnInit() {
-
     this.onProjectDetail();
     this.onAgencyDetail();
     const date = new Date();

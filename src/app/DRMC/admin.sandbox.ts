@@ -226,7 +226,6 @@ export class AdminSandbox {
     this.EditSchemeMaster.txtPeriodScheme = row.SchemePeriod;
   }
   updateSchemeMaster() {
-
     if (this.EditSchemeMaster.txtSchemeShortName != null && this.EditSchemeMaster.txtSchemeShortName != "" && this.EditSchemeMaster.txtSchemeShortName != undefined) {
       if (this.EditSchemeMaster.txtSchemeName != null && this.EditSchemeMaster.txtSchemeName != "" && this.EditSchemeMaster.txtSchemeName != undefined) {
         if (this.EditSchemeMaster.txtPeriodScheme != null && this.EditSchemeMaster.txtPeriodScheme != "" && this.EditSchemeMaster.txtPeriodScheme != undefined) {
@@ -241,7 +240,6 @@ export class AdminSandbox {
             "CreatedBy": "",
             "UpdatedOn": "",
             "UpdatedBy": ""
-
           }
           this.userMasterService.updateSchemeData(JSON.stringify(objPost)).subscribe((data: any) => {
             this.showProperty = 'none';
@@ -250,7 +248,6 @@ export class AdminSandbox {
               "txtSchemeName": "",
               "hiddendTxtSchemeID": "",
               "txtPeriodScheme": ""
-
             }
             if (data.status == "200") {
               this.snotifyService.success("Scheme Updated Successfully...", "", {
@@ -288,7 +285,6 @@ export class AdminSandbox {
       });
     }
   }
-
   //----for components add,edit and delete------////
   getSchemeComponentData(SchemeName: any) {
     this.userMasterService.getSchemeComponentData(SchemeName).subscribe(data => {
@@ -348,8 +344,6 @@ export class AdminSandbox {
         });
       }
       this.schemeComponentMaster = [];
-
-
     });
   }
   editSchemeComponentMaster(value: any, row: any) {
@@ -426,7 +420,6 @@ export class AdminSandbox {
 
   //----for state add,edit and delete------////
   getStateData() {
-     
       this.userMasterService.getStateData().subscribe(data => {
         // console.log(data);
       this.stateMaster = data;
@@ -709,19 +702,41 @@ export class AdminSandbox {
       this.constituencyCityMaster = data;
     });
   }
-  getConsistuencyData() {
-    this.userMasterService.getConsistuencyData().subscribe(data => {
-      this.constituencyMaster = data;
-    });
+  getConsistuencyData(stateCode:string) {
+    debugger;
+    if(stateCode==='0')
+    {
+      this.userMasterService.getConsistuencyData().subscribe(data => {
+        this.constituencyMaster = data;
+      });
+    }
+    else{
+      this.userMasterService.getConsistuencyData().subscribe(data => {
+        this.constituencyMaster = data.filter(a=>a.StateCode===stateCode);
+      });
+    }
   }
+
+  
+
+  getConsistuencyDataByNum(constituencyNumber:string) {
+    this.userMasterService.getConsistuencyData().subscribe(data => {
+      this.constituencyMaster = data.filter(a=>a.ConstituencyNumber===constituencyNumber);
+    });
+    
+  }
+  
   postConstituency(formGroup: any) {
+    alert(2);
     var objPost =
     {
       "ConstituencyName": formGroup.get('txtConstituencyName').value,
-      "CityCode": formGroup.get('ddlCity').value,
+      //"CityCode": formGroup.get('ddlCity').value,
+      "StateCode": formGroup.get('ddlState').value,
+
       "ConstituencyNumber": formGroup.get('txtConstituencyNumber').value,
       "NameShittingMp": formGroup.get('txtShittingMP').value,
-      "ActiveFlag": "",
+      "ActiveFlag": "A",
       "CreatedOn": "",
       "CreatedBy": "",
       "UpdatedOn": "",
@@ -746,7 +761,7 @@ export class AdminSandbox {
           timeout: 3000
         });
       }
-      this.getConsistuencyData();
+      this.getConsistuencyData('0');
 
     });
 
@@ -765,7 +780,7 @@ export class AdminSandbox {
           timeout: 2500
         });
       }
-      this.getConsistuencyData();
+      this.getConsistuencyData('0');
 
     });
   }
@@ -822,7 +837,7 @@ export class AdminSandbox {
                   timeout: 2500
                 });
               }
-              this.getConsistuencyData();
+              this.getConsistuencyData('0');
             });
           }
           else {
@@ -1272,6 +1287,11 @@ export class AdminSandbox {
     });
   }
 
+  getProj_ComponentWiseData(Components: any)  {
+    this.userMasterService.getProj_ComponentWiseData(Components).subscribe(data => {
+      this.schComponentMaster = data;
+    });
+  }
   //---------Add Agency------//
   getAgencyData(CityCode: any) {
     this.userMasterService.getAgencyData(CityCode).subscribe(data => {
@@ -1516,8 +1536,14 @@ export class AdminSandbox {
       this.releaseOrderValue = data;
     });
   }
+  getComponentWise_ReleaseOrder(stateCode: any,) {
+    this.userMasterService.getReleaseOrder(stateCode).subscribe(data => {
+      this.releaseOrderValue = data;
+    });
+  }
 
   downloadRelease(pdf: any) {
+    alert('PDF');
     var str = pdf;
     var newStr = str.slice(0, -4);
     this.userMasterService.getFileDownnload(newStr).subscribe((
@@ -1525,6 +1551,16 @@ export class AdminSandbox {
       importedSaveAs(data, str)
     });
   }
+
+  download_PBD_Release(pdf: any,filderName:string) {
+    var str = pdf;
+    var newStr = str.slice(0, -4);
+    this.userMasterService.getFile_PBD_Downnload(newStr,filderName).subscribe((
+      data) => {
+      importedSaveAs(data, str)
+    });
+  }
+
   //-------------post,get,download uc order--------------//
   downloadUCOrder(pdf: any) {
     var str = pdf;
@@ -1540,7 +1576,6 @@ export class AdminSandbox {
     });
   }
   postUCOrder(file: File, data: any): any {
-
     let c = new Date(data.UCDate);
     var currentDate = this.datePipe.transform(c, 'dd-MM-yyyy');
     const objPost = {
@@ -1549,16 +1584,15 @@ export class AdminSandbox {
       'UCAmount': data.UCAmount,
       'UtilizationNo': data.UtilizationNo,
       'UCDate': currentDate,
-
     };
-    this.userMasterService.postUCOrder(file, objPost.State, objPost.SanctionNo, objPost.UCAmount, objPost.UCDate, objPost.UtilizationNo).subscribe(data => {
-      if (data.status == "200") {
-        this.snotifyService.success("Release Order Save Successfully...", "", {
-          position: SnotifyPosition.rightTop,
-          timeout: 3000
-        });
-      }
-    }
+        this.userMasterService.postUCOrder(file, objPost.State, objPost.SanctionNo, objPost.UCAmount, objPost.UCDate, objPost.UtilizationNo).subscribe(data => {
+          if (data.status == "200") {
+            this.snotifyService.success("Release Order Save Successfully...", "", {
+              position: SnotifyPosition.rightTop,
+              timeout: 3000
+            });
+          }
+        }
     );
   }
   //-----get projectbriefname of project name----//
@@ -1567,6 +1601,7 @@ export class AdminSandbox {
       this.projectBriefName = data;
     });
   }
+  
    //------post get api for project brief detail------//
    projectBriefDeatil(file: File, formGroup: any): any {
     var filename = file.name
@@ -1625,10 +1660,55 @@ export class AdminSandbox {
      console.log(this.Slum);
   }
 
+  
+ 
+
   getProjectBriefDetail() {
     this.userMasterService.geProjectBriefDetail().subscribe(data => {
       this.projectBriefDetail = data;
     });
+  }
+
+  getProject_BriefData(stateCode:string) {
+    if(stateCode==='0')
+    {
+        this.userMasterService.geProjectBriefDetail().subscribe(data => {
+        this.projectBriefDetail = data;
+      });
+    }
+    else{
+        this.userMasterService.geProjectBriefDetail().subscribe(data => {
+        this.projectBriefDetail = data.filter(a=>a.Codes===stateCode);
+      });
+    }
+  }
+
+  getProject_Brief_Data(DisttCode:string) {
+    if(DisttCode==='0')
+    {
+        this.userMasterService.geProjectBriefDetail().subscribe(data => {
+        this.projectBriefDetail = data;
+      });
+    }
+    else{
+        this.userMasterService.geProjectBriefDetail().subscribe(data => {
+        this.projectBriefDetail = data.filter(a=>a.Dcode===DisttCode);
+      });
+    }
+  }
+
+  getProj_Brief_DataOnCity(CityCode:string) {
+    if(CityCode==='0')
+    {
+        this.userMasterService.geProjectBriefDetail().subscribe(data => {
+        this.projectBriefDetail = data;
+      });
+    }
+    else{
+        this.userMasterService.geProjectBriefDetail().subscribe(data => {
+        this.projectBriefDetail = data.filter(a=>a.CityCode===CityCode);
+      });
+    }
   }
   ProjectBriefDetailHousesTotal(txtJoint: any, txtFemale: any, txtMale: any, txtTransgender: any) {
     var Joint = txtJoint;

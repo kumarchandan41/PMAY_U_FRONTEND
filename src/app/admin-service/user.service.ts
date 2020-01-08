@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ConstantUrlService } from '../Shared/constant-url.service';
 import { GlobalUrl } from '../Shared/GlobalUrl';
+import { CitiesBasedOnstate, getConstutiencyData, getProjRelOrder } from '../login/Models/LoginModel';
+import { District } from '../login/ModelS/chart.model';
 
 
 
@@ -13,7 +15,7 @@ import { GlobalUrl } from '../Shared/GlobalUrl';
 export class UserService {
   [x: string]: any;
 //   baseUrl = "http://localhost:58396/Api";
-baseUrl:string;
+//baseUrl:string;
 apiUrl:string;
 apiUrlReg:string;
 
@@ -22,14 +24,14 @@ apiUrlReg:string;
 //   apiUrlReg ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
 
 
-    //  baseUrl = "http://localhost:58396/Api";
+      baseUrl = "http://localhost:58396/Api";
     //  apiUrl ="http://localhost:58396/hfa_api/API/Authenticate/";
     //  apiUrlReg ="http://localhost:58396/hfa_api/API/RegistrationApi/";
 
 
   constructor(private http: HttpClient,private constantUrlService: ConstantUrlService,private globalUrl:GlobalUrl) {
    // this.baseUrl=this.constantUrlService.baseUrl;
-     this.baseUrl = this.globalUrl.urlIPAddess +"/API";
+  //   this.baseUrl = this.globalUrl.urlIPAddess +"/API";
      this.apiUrl= this.globalUrl.urlIPAddess + "/API/Authenticate/";
      this.apiUrlReg= this.globalUrl.urlIPAddess + "/API/RegistrationApi/";
    }
@@ -170,6 +172,17 @@ apiUrlReg:string;
       })
       );
   }
+
+   //get api for constituency master
+   getConsistuency_Data(constNumber:string): Observable<any> {
+   //  alert(constNumber) ;
+    return this.http.get(this.baseUrl + "/Admin_Value/GetFinal_ConsistuencyData/" + constNumber, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+
   //get api for constituency city master
   getCityConstituencyData(): Observable<any> {
     return this.http.get(this.baseUrl + "/Admin_Value/GetCityConstituency", { "observe": "response" })
@@ -178,14 +191,36 @@ apiUrlReg:string;
       })
       );
   }
+    
+  
+
+      //get api for constituency city master
+   GetAllCitiesBasedOnsyay(stateCodes:string): Observable<CitiesBasedOnstate[]> {
+         // alert(this.baseUrl);
+        return this.http.get<CitiesBasedOnstate[]>(this.baseUrl + "/Admin_Value/getAllcitesBasedOnState?stateCode=" + stateCodes);
+   }
+
+    GetAllConstutiency(StateCode:string): Observable<getConstutiencyData> {
+      return this.http.get<getConstutiencyData>(this.baseUrl + "/Admin_Value/GetALLConsistuencyData?StateCode=" + StateCode);
+    }
+
+
+    
+    getProjRelOrderData(componentId:string): Observable<getProjRelOrder> {
+      return this.http.get<getProjRelOrder>(this.baseUrl + "/Admin_Value/GetComponentWise_projRelOrder?componentId=" + componentId);
+    }
+
+
   //post api for constituency master
   postConstituencyData(postData: any): Observable<any> {
+    alert(3);
     return this.http.post(this.baseUrl + "/Admin_Value/SubmitConstituencyData", postData, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
       })
       );
   }
+  
   //delete api for constituency master
   deleteConstituencyData(ConstituencyId: any): Observable<any> {
     return this.http.get(this.baseUrl + "/Admin_Value/DeleteConstituencyData/" + ConstituencyId, { "observe": "response" })
@@ -321,6 +356,16 @@ apiUrlReg:string;
       })
       );
   }
+
+  getProj_ComponentWiseData(Components: any): Observable<any> {
+    return this.http.get(this.baseUrl + "/Admin_Value/GetComponentWise_projRelOrder/" + Components, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+
+
   //get api for agency on behlf of city
   getAgencyData(CityCode: any): Observable<any> {
     console.log('CityCode---------->>>', CityCode)
@@ -502,16 +547,15 @@ apiUrlReg:string;
   }
   //----post api for release order-----//
   postReleasedOrder(file: File, data: string, sanction: any, state: any, amount: any, date: any, component: any): any {
-
     const formdata: FormData = new FormData();
-    formdata.append('Image', file, file.name);
+    formdata.append('Image', file, file.name +"_"+ state +"_"+ amount);
     formdata.append('Scheme', data);
     formdata.append('Sanction', sanction);
     formdata.append('State', state);
     formdata.append('Amount', amount);
     formdata.append('Date', date);
     formdata.append('Component', component)
-
+    alert(this.baseUrl);
     return this.http.post(this.baseUrl + "/Admin_Value/postReleasedOrder", formdata, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response;
@@ -540,6 +584,16 @@ apiUrlReg:string;
     );
   }
 
+  getFile_PBD_Downnload(pdf: any,folderName:string): Observable<Blob> {
+
+    return this.http.get(this.baseUrl + "/Admin_Value/GetFileNew/" + pdf + "/" + folderName, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+
+      }), responseType: 'blob'
+    }).pipe(
+    );
+  }
 
 
   //get api for project release order
@@ -555,7 +609,7 @@ apiUrlReg:string;
   //----post api for release order-----//
   postUCOrder(file: File, state: string, sanction: any, ucamount: any, ucdate: any, utilizationno: any): any {
     const formdata: FormData = new FormData();
-    formdata.append('Image', file, file.name);
+    formdata.append('Image', file, file.name  );
     formdata.append('State', state);
     formdata.append('Sanction', sanction);
     formdata.append('UCAmount', ucamount);
@@ -584,6 +638,7 @@ apiUrlReg:string;
     formdata.append('Image', file, file.name);
     formdata.append('Data', JSON.stringify(objPost));
 
+    alert(this.baseUrl);
 
     return this.http.post(this.baseUrl + "/Admin_Value/postProjectBriefDetail", formdata, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
@@ -599,6 +654,10 @@ apiUrlReg:string;
         return response.body;
       })
       );
+  }
+
+  DisttList(stateName) {
+    return this.http.get<District[]>(this.url + "HFA_DisttDetails?stateCode=" + stateName).toPromise().then(result => this.DisttDetails = result as District[]);
   }
 //post project detail bulk data
   postProjectDetailsBulkData(file) {

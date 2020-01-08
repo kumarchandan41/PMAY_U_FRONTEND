@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminSandbox } from '../admin.sandbox';
 import { FormBuilder, AbstractControl, FormGroup, Validators,FormArray } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { GraphService } from 'src/app/financeReport/service/graph.service';
 
 @Component({
   selector: 'app-project-brief-detail',
@@ -41,8 +42,13 @@ export class ProjectBriefDetailComponent implements OnInit {
   public txtTotalHouses:AbstractControl;
   State: string;
   District: string;
+  NodalAgency:string;
+  ActionStatus:string;
   City: string;
   Scheme: string;
+  CSMCDate: string;
+  CSMCNumber: string;
+  TotalSanction: string;
   ProjectName:string;
   public dpConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
   scheduleStartDate: string = undefined;
@@ -55,11 +61,16 @@ export class ProjectBriefDetailComponent implements OnInit {
   newAttribute: any[]=[];
 
   Slum: boolean = false;
+  StateCode: string;
+  DCode: any;
+  Dcode: any;
+  CityCode: any;
 
   constructor(private fb: FormBuilder, public adminSandbox: AdminSandbox) { }
 
   ngOnInit() {
     this.adminSandbox.getProjectBriefDetail();
+    this.ActionStatus="Submit";
     this.ProjectSlum = this.fb.group({
       itemRows: this.fb.array([this.initItemRows()]),
  
@@ -82,9 +93,10 @@ export class ProjectBriefDetailComponent implements OnInit {
     this.Components = '';
   }
   selectFile(event) {
-    alert(event);
+  //  alert(event);
     this.selectedFiles = event.target.files;
   }
+
   public onProjectBriefDetail(): void {
     this.projectBriefDetail = this.fb.group({
       ddlStateCode: ['', [Validators.required]],
@@ -141,27 +153,55 @@ export class ProjectBriefDetailComponent implements OnInit {
     this.txtSelectFile=this.projectBriefDetail.controls['txtSelectFile'];
 
   }
+
+  getProjectBriefData(event)
+  {
+      let StateCode=event.target.value;
+      this.StateCode=StateCode;
+      this.adminSandbox.getProject_BriefData(this.StateCode);
+  }
+  GetPrjBriefBasedonDate(event:any)
+  {
+    alert(event);
+    let strDate=event.target.value;
+    
+  }
+  PrjBriefDataonDistt(event)
+  {
+      let DisttCode=event.target.value;
+      this.Dcode=DisttCode;
+      this.adminSandbox.getProject_Brief_Data(this.Dcode);
+  }
+  PrjBriefDataonCity(event)
+  {
+      let CityCode=event.target.value;
+      this.CityCode=CityCode;
+      this.adminSandbox.getProj_Brief_DataOnCity(this.CityCode);
+  }
+
   onClickProjectBriefDetail(event: Event, form: any) {
     this.submitted = true;
     event.stopPropagation();
     if (this.projectBriefDetail.valid) {
-      this.currentFileUpload = this.selectedFiles.item(0);
-     this.adminSandbox.projectBriefDeatil(this.currentFileUpload,form)
-      this.submitted = false;    
-    this.projectBriefDetail.reset();
-    this.State = '';
-    this.District = '';
-    this.ProjectName='';
-    this.City = '';
-    this.Scheme = '';
-    this.Components = '';
-   // this.adminSandbox.Slum=[];
-    this.ProjectSlum.reset();
-    
- 
-     
+       this.currentFileUpload = this.selectedFiles.item(0);
+       this.adminSandbox.projectBriefDeatil(this.currentFileUpload,form)
+       this.submitted = false;    
+       this.projectBriefDetail.reset();
+       this.State = '';
+       this.District = '';
+       this.ProjectName='';
+       this.City = '';
+       this.Scheme = '';
+       this.Components = '';
+       this.CSMCDate = '';
+       this.CSMCNumber= '';
+       this.TotalSanction= '';
+       // this.adminSandbox.Slum=[];
+       this.ProjectSlum.reset();
     }
-  }
+    this.adminSandbox.getProjectBriefDetail();
+    this.onProjectBriefDetail();
+}
 
 get formArr() {
   return this.ProjectSlum.get('itemRows') as FormArray;
@@ -171,8 +211,6 @@ initItemRows(): FormGroup  {
     SlumName:'',
     SlumCovered:'',
     ProjectCode:''
-  
-   
   });
 }
 addNewReleaseRow() {
@@ -184,6 +222,14 @@ onSubmitProjectSlum(value1:any){
 showSlum(){
   this.Slum=true;
  
+}
+Edit(data:any)
+{
+    this.State=data.Codes;
+    //this. .DisttList(this.State);
+    this.District=data.Dcode;
+    this.ActionStatus="Update";
+    this.NodalAgency=data.NodalAgency;
 }
 hideSlum(){
   this.Slum=false;

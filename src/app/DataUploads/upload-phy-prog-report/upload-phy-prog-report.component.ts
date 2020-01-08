@@ -32,6 +32,7 @@ export class UploadPhyProgReportComponent implements OnInit {
   DistrictMessage: string;
   CityMessage: string;
   stValue: string;
+  flag:boolean;
 
 constructor(private service:BuildingServiceService,private router:Router) {
   this.stValue = "0";
@@ -55,12 +56,18 @@ ngOnInit() {
   }
   
   public UploadFile(event:any) {
+    this.flag=true;
     // for Bulk Insert 
         let formData = new FormData();
         let fileBrowser = this.fileInput.nativeElement;
         if (fileBrowser.files && fileBrowser.files[0]) {      
           formData.append('file', fileBrowser.files[0]); 
         this.service.BulkImport_PhyProg_Excel(formData).subscribe(result=>{
+          if(result !='')
+          {
+           this.flag=false;
+          }
+    
         this.GetExcel();
         });
       }

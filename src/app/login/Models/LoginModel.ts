@@ -47,3 +47,31 @@ export class RegistrationModel
      PhoneNo:string;
      TaskName:string;
 }
+export class CitiesBasedOnstate
+{
+      City:string;
+      citycode:string;
+}
+
+export class getConstutiencyData
+{
+    ConstituencyId	:string;
+    StateCode	:string;
+    CityCode	:string;
+    ConstituencyName	:string;
+    ConstituencyNumber	:string;
+    NameShittingMp	:string;
+    ActiveFlag	 :string;
+ 
+}
+export class getProjRelOrder
+{
+     ReleaseOrderID 	:string;
+	 State 	:string;
+	 SanctionNo 	:string;
+	 Scheme 	:string;
+	 Component 	:string;
+	 Date 	:string;
+	 AmountReleased 	:string;
+	 ReleasePDF 	:string;
+}

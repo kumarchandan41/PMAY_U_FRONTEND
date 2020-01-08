@@ -9,12 +9,30 @@
     <div class="form-container">
       <form [formGroup]="constituencyMaster" (ngSubmit)="onClickConstituencyMaster($event, constituencyMaster)">
           <div class="w3-row">
-              <div class="w3-quarter w3-left" style="width: 10%;">
+            <div class="w3-quarter w3-left" style="width: 10%;">
+              <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                  State Name :
+                </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+              <select   class="w3-input w3-border" (change)="getConstutiencyData($event);"
+               style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                <option value="" disabled>Please select state--</option>
+                <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                  {{state.States_UT}}</option>
+              </select>
+              <label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                select
+                state name. </label>
+          </div>
+
+            
+              <!-- <div class="w3-quarter w3-left" style="width: 10%;">
                   <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
                       City Name :
                     </label>
-              </div>
-              <div class="w3-quarter w3-left" style="width: 22%;">
+              </div> -->
+              <!-- <div class="w3-quarter w3-left" style="width: 22%;">
                   <select [formControl]="ddlCity" [(ngModel)]="CityCode" class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
                       <option value="" disabled>Please select city--</option>
                       <option *ngFor="let city of adminSandbox.constituencyCityMaster" [value]="city.CityCode">
@@ -23,21 +41,54 @@
                     <label *ngIf="submitted && ddlCity.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
                       select
                       state name. </label>
-              </div>
-             
-              <div class="w3-quarter w3-center" style="width: 10%;">
+              </div> -->
+              <!-- <div class="w3-quarter w3-left" style="width: 22%;">
+                <select [formControl]="ddlCity" [(ngModel)]="CityCode"  class="w3-input w3-border" style="font-family: Arial, Geneva, Tahoma, sans-serif;"  (change)="getConstutiencyData($event);"> 
+                    <option value="" disabled>Please select city--</option>
+                    <option *ngFor="let city of lstCity" [value]="city.citycode">
+                      {{city.City}}</option>
+                  </select>
+                  <label *ngIf="submitted && ddlCity.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                    select
+                    state name. </label>
+            </div> -->
+              
+            <div class="w3-quarter w3-center" style="width: 10%;">
                   <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
                       Constituency Name :
                     </label>
               </div>
               <div class="w3-quarter w3-left" style="width: 22%;">
+                <select   class="w3-input w3-border" (change)="getConstutiency_Data($event);"
+                 style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                  <option value="" disabled>select Constutiency--</option>
+                  <option *ngFor="let cons of adminSandbox.constituencyMaster" [value]="cons.ConstituencyNumber">
+                    {{cons.ConstituencyName}}</option>
+                </select>
+               
+            </div>
+
+              <!-- <div class="w3-quarter w3-left" style="width: 22%;">
                   <input type="text" class="w3-input w3-border" [formControl]="txtConstituencyName"
                   placeholder="Constituency Name" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
                 <label *ngIf="submitted && txtConstituencyName.hasError('required')" class="error-label"
                   style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter
                   constituency name. </label>
-              </div>
+              </div> -->
+
+
               <div class="w3-quarter w3-center" style="width: 10%;">
+                <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                    Constituency No :
+                  </label>
+            </div>
+            <div class="w3-quarter w3-left" style="width: 22%;">
+                <input type="text" class="w3-input w3-border" [formControl]="txtConstituencyNumber"
+                placeholder="Constituency Number" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              <label *ngIf="submitted && txtConstituencyNumber.hasError('required')" class="error-label"
+                style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter name of constituency number.</label>
+            </div>
+              <!-- <div class="w3-quarter w3-center" style="width: 10%;">
                   <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
                       Constituency Number :
                     </label>
@@ -47,12 +98,13 @@
                   placeholder="Constituency Number" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
                 <label *ngIf="submitted && txtConstituencyNumber.hasError('required')" class="error-label"
                   style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter name of constituency number.</label>
-              </div>
+              </div> -->
             </div>
        
         <br>
         <div class="w3-row">
         
+             
           <div class="w3-quarter w3-left" style="width: 10%;">
             <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
               Name Of Shitting MP :
@@ -75,6 +127,9 @@
         <thead style="background-color: lightgray; font-weight: bold">
           <tr>
             <td style="text-align: right; width: 20px;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+            
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State Name</td>
+
             <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Constituency Name</td>
             <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Constituency Number</td>
             <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Name Of Shitting MP</td>
@@ -85,6 +140,8 @@
           <tr *ngFor="let constituency of adminSandbox.constituencyMaster;let i = index"
             style="text-align: center;background-color:white">
             <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+            
+            <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{constituency.StateName}}</td>
             <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{constituency.ConstituencyName}}</td>
             <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{constituency.ConstituencyNumber}}</td>
             <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">{{constituency.NameShittingMp}}</td>
@@ -119,7 +176,25 @@
     <div class="w3-container">
       <form>
         <div class="w3-row">
-          <div class="w3-quarter w3-left">
+          <div class="w3-quarter w3-left" style="width: 10%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+                State Name :
+              </label>
+        </div>
+        <div class="w3-quarter w3-left" style="width: 22%;">
+            <select  class="w3-input w3-border"
+            (change)="getCityData($event);" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+              <option value="" disabled>Please select state--</option>
+              <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+                {{state.States_UT}}</option>
+            </select>
+            <label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label" style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select
+              state name. 
+            </label>
+        </div>
+
+          <!-- <div class="w3-quarter w3-left">
             <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
               City Name :
             </label>
@@ -130,8 +205,7 @@
               <option *ngFor="let city of adminSandbox.constituencyCityMaster" [value]="city.CityCode">
                 {{city.City}}</option>
             </select>
-
-          </div>
+          </div> -->
           <div class="w3-quarter w3-left">
             <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
               Constituency Name :

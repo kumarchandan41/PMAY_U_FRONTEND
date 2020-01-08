@@ -114,6 +114,7 @@ import { AdminAuthGuardService } from './AuthGuard/AdminAuthGuardService';
 import { UploadProjectDetailComponent } from './DataUploads/upload-project-detail/upload-project-detail.component';
 import { UploadPhyProgReportComponent } from './DataUploads/upload-phy-prog-report/upload-phy-prog-report.component';
 import { TwoDigitDecimaNumberDirective } from './Shared/OneDecimalAllow';
+import { ProjRelFundFlowComponent } from './financeReport/proj-rel-fund-flow/proj-rel-fund-flow.component';
 // import { DasHComponent } from './CMS/das-h/das-h.component';
 // import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
 // import { ProjectDetailsComponent } from './DRMC/project-details/project-details.component';
@@ -309,6 +310,7 @@ const routes: Routes = [
     ShortfallDetailComponent,
     UploadProjectDetailComponent,
     UploadPhyProgReportComponent,
+    ProjRelFundFlowComponent,
     // DasHComponent 
   ],
   imports: [

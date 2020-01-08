@@ -1056,3 +1056,31 @@ export class CLSS_MasterValues {
     Bene2021_22: any;
     StateCode: any;
 }
+
+export class NRSA_1_Bhuvan1 {
+    benid: any;
+    capture_location: any;
+    photo1_captured_from: any;
+    photo2_captured_from: any;
+    construction_type: any;
+    house_type: any;
+    construction_stage: any;
+    electricity: any;
+    water: any;
+    sewerage: any;
+    occupation_status: any;
+    any_other_details: any;
+    deprivedfield: any;
+    projectname: any;
+    creationtime: any;
+    remark: any;
+    reason: any;
+    Rejected_by: any;
+    Rejected_Date: any;
+    photo1: any;
+    photo2: any;
+    state_code: any;
+    district_code: any;
+    city_code: any;
+}
+     
