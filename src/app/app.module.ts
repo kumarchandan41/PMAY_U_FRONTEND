@@ -12,14 +12,14 @@ import { AllRoleComponent } from './RoleMaster/all-role.component';
 import { EditRoleComponent } from './RoleMaster/edit-role.component';
 import { RegisterComponent } from './register/register.component';
 import { Routes, RouterModule } from '@angular/router';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { from } from 'rxjs';
-import {NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HomePageComponent } from './home-page/home-page.component';
 import { StateMasterComponent } from './Master/state-master/state-master.component';
 import { GraphsComponent } from './financeReport/graphs/graphs.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { MasterComponent } from './AdminPanel/master/master.component';
 import { LandingPageComponent } from './UserForms/landing-page/landing-page.component';
 import { DashboardMainComponent } from './AdminPanel/dashboard-main/dashboard-main.component';
@@ -56,13 +56,14 @@ import { ConsPhyFinReportNewComponent } from './financeReport/cons-phy-fin-repor
 import { VerticalFinancialStatusComponent } from './financeReport/vertical-financial-status/vertical-financial-status.component';
 import { IndianmapComponent } from './financeReport/indianmap/indianmap.component';
 import { Statescore1Component } from './financeReport/statescore1/statescore1.component';
+import { ProjectDetailsReportComponent } from './financeReport/project-details-report/project-details-report.component';
 import { ExcelDemandCityWiseComponent } from './DataUploads/excel-demand-city-wise/excel-demand-city-wise.component';
 import { ExcelClssmainmasterComponent } from './DataUploads/excel-clssmainmaster/excel-clssmainmaster.component';
 import { ExcelCLSSCityMainComponent } from './DataUploads/excel-clsscity-main/excel-clsscity-main.component';
-import { CountoModule }  from 'angular2-counto';
+import { CountoModule } from 'angular2-counto';
 
 import { ExportAsModule } from 'ngx-export-as';
-import {NgxPrintModule} from 'ngx-print';
+import { NgxPrintModule } from 'ngx-print';
 import { ClssMasterUploadComponent } from './DataUploads/clss-master-upload/clss-master-upload.component';
 import { StateScoreUpdationFormComponent } from './DataUploads/state-score-updation-form/state-score-updation-form.component';
 import { CityMasterComponent } from './Master/city-master/city-master.component';
@@ -128,104 +129,105 @@ import { ProjRelFundFlowComponent } from './financeReport/proj-rel-fund-flow/pro
 
 
 const routes: Routes = [
-  
-//  {path:'Home',component:HomePageComponent},
-//  {path:'',redirectTo:'Home',pathMatch:'full'},
 
-{path:'Login',component:LoginComponent},
-{path:'',redirectTo:'Login',pathMatch:'full'},
-//  {path:'Login',component:LoginComponent},
+  //  {path:'Home',component:HomePageComponent},
+  //  {path:'',redirectTo:'Home',pathMatch:'full'},
+
+  { path: 'Login', component: LoginComponent },
+  { path: '', redirectTo: 'Login', pathMatch: 'full' },
+  //  {path:'Login',component:LoginComponent},
 
   { path: 'Register', component: RegisterComponent },
-  {path: 'ChangePassword', component: ChangePasswordComponent},
+  { path: 'ChangePassword', component: ChangePasswordComponent },
 
   // {
   //   path: 'Admin', component:MasterComponent,
   //    children: [
   //      {path: 'Dashboard', component: DashboardMainComponent}
-      
+
   //   ]
   // },
-  
+
   {
     path: 'Admin', component: AppAdminLayoutComponent,
-     children: [
-      {path: 'Dashboard', component: AdminDashboardComponent,canActivate:[AdminAuthGuardService]},
-      {path: 'statemaster', component: StateMasterComponent},
-      {path: 'MainGraph', component: DashboardMainComponent},
-      {path: 'DashboardHFA1', component: DashboardHFA1Component},
-      {path: 'DashboardHFA3', component: DashboardHFA3Component},
-      {path: 'DashboardHFA4', component: DashboardHFA4Component},
-      {path: 'DashboardHFA5', component: DashboardHFA5Component},
+    children: [
+      { path: 'Dashboard', component: AdminDashboardComponent, canActivate: [AdminAuthGuardService] },
+      { path: 'statemaster', component: StateMasterComponent },
+      { path: 'MainGraph', component: DashboardMainComponent },
+      { path: 'DashboardHFA1', component: DashboardHFA1Component },
+      { path: 'DashboardHFA3', component: DashboardHFA3Component },
+      { path: 'DashboardHFA4', component: DashboardHFA4Component },
+      { path: 'DashboardHFA5', component: DashboardHFA5Component },
       // {path: 'Statescore1', component: StatescoreComponent},
-      {path: 'Statescore1', component: Statescore1Component},
+      { path: 'Statescore1', component: Statescore1Component },
+      { path: 'project-details-report/:id', component: ProjectDetailsReportComponent },
 
-      {path: 'AtaGlance', component: AtaGlanceComponent},
-      {path: 'AtaGlance1', component: AtaGlance1Component},
-      {path: 'AtaGlance3', component: AtaGlance3Component},
-      {path: 'AtaGlance3', component: AtaGlance3Component},
-      {path: 'AtaGlance4', component: AtaGlance4Component},
-      {path: 'AtaGlance5', component: AtaGlance5Component},
-      {path: 'phyfinChart', component: PhyfinChartComponent},
-      {path: 'ConsphyfinChart', component: ConsPhyFinReportComponent} ,
+      { path: 'AtaGlance', component: AtaGlanceComponent },
+      { path: 'AtaGlance1', component: AtaGlance1Component },
+      { path: 'AtaGlance3', component: AtaGlance3Component },
+      { path: 'AtaGlance3', component: AtaGlance3Component },
+      { path: 'AtaGlance4', component: AtaGlance4Component },
+      { path: 'AtaGlance5', component: AtaGlance5Component },
+      { path: 'phyfinChart', component: PhyfinChartComponent },
+      { path: 'ConsphyfinChart', component: ConsPhyFinReportComponent },
       // {path: 'AdminLoginDetails', component: AdminLoginPanelComponent} ,
-      {path: 'VerticalHousesDetails', component: VerticalHousesStatusComponent},
-      {path: 'IndiaMap', component: IndianmapComponent},
-      {path: 'ConstituencyMaster', component: ConstituencyMasterComponent},
-      {path: 'Exceljnnurm', component: ExceljnnurmComponent},
-      {path: 'ExcelPMAY', component: ExcelPMAYComponent},
-      {path: 'ExcelStatescore', component: ExcelStatescoreComponent},
-      {path: 'ExcelPhyDashboard', component: ExcelPhyDashboardComponent},
-      {path: 'ExcelDemandCityWise', component: ExcelDemandCityWiseComponent},
-      {path: 'ExcelClssmainmaster', component: ExcelClssmainmasterComponent},
-      {path: 'ExcelCLSSCityMain', component: ExcelCLSSCityMainComponent},
+      { path: 'VerticalHousesDetails', component: VerticalHousesStatusComponent },
+      { path: 'IndiaMap', component: IndianmapComponent },
+      { path: 'ConstituencyMaster', component: ConstituencyMasterComponent },
+      { path: 'Exceljnnurm', component: ExceljnnurmComponent },
+      { path: 'ExcelPMAY', component: ExcelPMAYComponent },
+      { path: 'ExcelStatescore', component: ExcelStatescoreComponent },
+      { path: 'ExcelPhyDashboard', component: ExcelPhyDashboardComponent },
+      { path: 'ExcelDemandCityWise', component: ExcelDemandCityWiseComponent },
+      { path: 'ExcelClssmainmaster', component: ExcelClssmainmasterComponent },
+      { path: 'ExcelCLSSCityMain', component: ExcelCLSSCityMainComponent },
 
-      {path: 'UsersMaster', component: UsersMasterComponent},
-      {path: 'ConsphyfinChart1', component: ConsPhyFinReportNewComponent} ,
-      {path: 'VerticalFinancialDetails', component: VerticalFinancialStatusComponent},
-      {path: 'ClssMasterUpload', component: ClssMasterUploadComponent},
-      {path: 'StateScoreUpdationForm', component: StateScoreUpdationFormComponent},
-      {path: 'CityMaster', component: CityMasterComponent},
+      { path: 'UsersMaster', component: UsersMasterComponent },
+      { path: 'ConsphyfinChart1', component: ConsPhyFinReportNewComponent },
+      { path: 'VerticalFinancialDetails', component: VerticalFinancialStatusComponent },
+      { path: 'ClssMasterUpload', component: ClssMasterUploadComponent },
+      { path: 'StateScoreUpdationForm', component: StateScoreUpdationFormComponent },
+      { path: 'CityMaster', component: CityMasterComponent },
 
-      {path: 'PMAYuCompWise', component: PMAYuCompWiseComponent},
-      {path: 'DistrictMaster', component: DistrictMasterComponent},
-      {path: 'ComponentMaster', component: ComponentMasterComponent},
-      {path: 'SchemeMaster', component: SchemeMasterComponent},
-      {path: 'ClassificationMaster', component: ClassificationMasterComponent},
-      {path: 'MappingClassificationMaster', component: MappingClassificationMasterComponent},
-      {path: 'PMAYuCritical', component: PMAYuCriticalComponent},
+      { path: 'PMAYuCompWise', component: PMAYuCompWiseComponent },
+      { path: 'DistrictMaster', component: DistrictMasterComponent },
+      { path: 'ComponentMaster', component: ComponentMasterComponent },
+      { path: 'SchemeMaster', component: SchemeMasterComponent },
+      { path: 'ClassificationMaster', component: ClassificationMasterComponent },
+      { path: 'MappingClassificationMaster', component: MappingClassificationMasterComponent },
+      { path: 'PMAYuCritical', component: PMAYuCriticalComponent },
 
-      {path: 'DashCMSForm', component: DashboardComponent},
-      {path: 'CriticalMonitoring', component: CriticalMonitoringComponent},
-      
-      {path: 'PhysicalMonitoring', component: PhysicalMonitoringComponent},
-      {path: 'ShortfallDetail', component: ShortfallDetailComponent},
-      
-      {path: 'UploadProjectDetail', component: UploadProjectDetailComponent},
-     
-      {path: 'UploadPhyProgReport', component: UploadPhyProgReportComponent},
-      
+      { path: 'DashCMSForm', component: DashboardComponent },
+      { path: 'CriticalMonitoring', component: CriticalMonitoringComponent },
 
-    ] 
+      { path: 'PhysicalMonitoring', component: PhysicalMonitoringComponent },
+      { path: 'ShortfallDetail', component: ShortfallDetailComponent },
+
+      { path: 'UploadProjectDetail', component: UploadProjectDetailComponent },
+
+      { path: 'UploadPhyProgReport', component: UploadPhyProgReportComponent },
+
+
+    ]
   },
   {
     path: 'DRMC', component: AppAdminLayoutComponent,
     children: [
-      {path: 'ClassificationMaster', component: ClassificationMasterComponent},
-     {path: 'ReportStateWise', component: ReportStateWiseComponent},
-      {path: 'ReportStateDistrictCityWise', component: ReportStateDistrictCityWiseComponent},
+      { path: 'ClassificationMaster', component: ClassificationMasterComponent },
+      { path: 'ReportStateWise', component: ReportStateWiseComponent },
+      { path: 'ReportStateDistrictCityWise', component: ReportStateDistrictCityWiseComponent },
       // {path: 'ReportDistrictWise/:statecode', component: ReportDistrictWiseComponent},
-     { path: 'ReportDistrictWise', component: ReportDistrictWiseComponent},
-      {path: 'project-uc-submission', component: ProjectUcSubmissionComponent},
-      {path: 'ProjectReleaseOrder', component: ProjectReleaseOrderComponent},
-      {path: 'project-release-fund-flow', component: ProjectReleaseFundFlowComponent},
-      {path: 'project-detail', component: ProjectDetailsComponent},
-      {path: 'ProjectCodeWiseReport', component: ProjectCodeWiseReportComponent},
-     {path: 'physical-progress', component: PhysicalProgressComponent},
-      {path: 'ProjectBriefDetail', component: ProjectBriefDetailComponent},
-      
+      { path: 'ReportDistrictWise', component: ReportDistrictWiseComponent },
+      { path: 'project-uc-submission', component: ProjectUcSubmissionComponent },
+      { path: 'ProjectReleaseOrder', component: ProjectReleaseOrderComponent },
+      { path: 'project-release-fund-flow', component: ProjectReleaseFundFlowComponent },
+      { path: 'project-detail', component: ProjectDetailsComponent },
+      { path: 'ProjectCodeWiseReport', component: ProjectCodeWiseReportComponent },
+      { path: 'physical-progress', component: PhysicalProgressComponent },
+      { path: 'ProjectBriefDetail', component: ProjectBriefDetailComponent },
 
-    ] 
+
+    ]
   },
 ]
 
@@ -279,6 +281,7 @@ const routes: Routes = [
     VerticalFinancialStatusComponent,
     IndianmapComponent,
     Statescore1Component,
+    ProjectDetailsReportComponent,
     ExcelDemandCityWiseComponent,
     ExcelClssmainmasterComponent,
     ExcelCLSSCityMainComponent,
@@ -333,21 +336,21 @@ const routes: Routes = [
 
   ],
 
-//   providers: [HttpClientModule,
-//     NgbActiveModal,
-//   GlobalEvent],
-//   bootstrap: [AppComponent],
-//   entryComponents:[StatescoreComponent]
-// })
+  //   providers: [HttpClientModule,
+  //     NgbActiveModal,
+  //   GlobalEvent],
+  //   bootstrap: [AppComponent],
+  //   entryComponents:[StatescoreComponent]
+  // })
 
 
-providers: [HttpClientModule,AdminAuthGuardService,
-  NgbActiveModal,
-  { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-  SnotifyService,AdminSandbox,DatePipe,
-GlobalEvent,GlobalUrl],
-bootstrap: [AppComponent],
-entryComponents:[StatescoreComponent]
+  providers: [HttpClientModule, AdminAuthGuardService,
+    NgbActiveModal,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
+    SnotifyService, AdminSandbox, DatePipe,
+    GlobalEvent, GlobalUrl],
+  bootstrap: [AppComponent],
+  entryComponents: [StatescoreComponent]
 })
 
 export class AppModule { }

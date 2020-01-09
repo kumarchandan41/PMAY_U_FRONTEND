@@ -79,6 +79,46 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
+              <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-whatsapp"></i>
+                  <span class="label label-warning">10</span>
+                </a>
+                <div class="box box-success dropdown-menu" style="width: 400px;">
+                  <div class="box-header with-border">
+                    <h3 class="box-title">Share from WhatsApp</h3>
+                  </div>
+                  <div class="box-body">
+                    <form role="form" (ngSubmit)="handleWhatsAppForm($event)">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>WhatsApp Number</label>
+                        <input type="text" name="whatsappNumber" id="whatsappNumber" class="form-control">
+                      </div>
+                      <!-- textarea -->
+                      <div class="form-group">
+                        <label>Message</label>
+                        <textarea class="form-control" name="whatsappMessage" id="whatsappMessage" rows="3"></textarea>
+                      </div>
+                      <!-- select -->
+                      <div class="form-group">
+                        <label>Report Type</label>
+                        <select name="reportType" id="reportType" class="form-control">
+                          <option></option>
+                          <option>PMAY Progress State Wise</option>
+                          <option>Progress of CLSS</option>
+                        </select>
+                      </div>
+                      <div class="box-footer">
+                        <button type="submit" class="btn btn-block btn-success pull-right"> <i
+                            class="fa fa-whatsapp"></i>
+                          Send</button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+              </li>
               <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
@@ -151,47 +191,6 @@
                     </ul>
                   </li>
                   <li class="footer"><a href="#">See All Messages</a></li>
-                </ul>
-              </li>
-
-              <li class="dropdown notifications-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-bell-o"></i>
-                  <span class="label label-warning">10</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li class="header">You have 10 notifications</li>
-                  <li>
-                    <ul class="menu">
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                          page and may cause design problems
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-users text-red"></i> 5 new members joined
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-user text-red"></i> You changed your username
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="footer"><a href="#">View all</a></li>
                 </ul>
               </li>
               <li class="dropdown tasks-menu">
@@ -387,9 +386,9 @@
                     class="fa fa-circle-o"></i>State Score</a></li> -->
 
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
-                      [routerLink]="['/Admin/Statescore1']"><i class="fa fa-circle-o"></i>State Score</a></li>
+                  [routerLink]="['/Admin/Statescore1']"><i class="fa fa-circle-o"></i>State Score</a></li>
 
-                    
+
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
                   [routerLink]="['/Admin/AtaGlance']"><i class="fa fa-circle-o"></i>At a Glance</a></li>
               <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/AtaGlance1'><i class="fa fa-circle-o"></i>At a Glance1</a></li>
@@ -406,18 +405,18 @@
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
                   href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Progress Report</a></li>
 
-                  <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
-                    href='/Admin/CriticalMonitoring'><i class="fa fa-circle-o"></i>Monitoring Report</a></li>
-            
-                    <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
-                      href='/Admin/ShortfallDetail'><i class="fa fa-circle-o"></i>Shortfall Report</a></li>
-              
-                    
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/CriticalMonitoring'><i
+                    class="fa fa-circle-o"></i>Monitoring Report</a></li>
+
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/ShortfallDetail'><i
+                    class="fa fa-circle-o"></i>Shortfall Report</a></li>
+
+
 
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/IndiaMap'><i
                     class="fa fa-circle-o"></i>India Map</a></li>
 
-            <!-- <li><a href="./assets/pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li> -->
+              <!-- <li><a href="./assets/pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li> -->
             </ul>
             <ul class="treeview-menu" [style.display]="(reportmenu.id == activeMenuId) ? 'block' : 'none'">
               <!-- <li><a href="./assets/pages/charts/chartjs.html"><i class="fa fa-circle-o"></i>Home Page</a></li> -->
@@ -442,7 +441,7 @@
           </li>
 
 
-     
+
 
 
           <!-- fORMS Menu-->
@@ -552,12 +551,14 @@
                   [routerLink]="['/Admin/StateScoreUpdationForm']"><i class="fa fa-circle-o"></i>State Score Updation
                   Form</a></li>
 
-               <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/UploadProjectDetail']"><i
-                    class="fa fa-circle-o"></i>Project Detail Upload Data</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
+                  [routerLink]="['/Admin/UploadProjectDetail']"><i class="fa fa-circle-o"></i>Project Detail Upload
+                  Data</a></li>
 
-               <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/UploadPhyProgReport']"><i
-                      class="fa fa-circle-o"></i>Phy Progress Report</a></li>
-                    
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
+                  [routerLink]="['/Admin/UploadPhyProgReport']"><i class="fa fa-circle-o"></i>Phy Progress Report</a>
+              </li>
+
 
               <!-- <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DisttMaster']"><i class="fa fa-circle-o"></i>Distt Master Form</a></li>
                    -->
@@ -625,21 +626,21 @@
                   <li  [ngStyle]="{'display':DMRCDisplay}" class="active"><a [routerLink]="['/Admin/DisttMaster']"><i class="fa fa-circle-o"></i>Distt Master Form</a></li>
                 </ul> -->
           </li>
-     <!-- Content Management-->
-     <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="cms_menu" #cmsmenu
-     [class.menu-open]="cmsmenu.id == activeMenuId" (click)="toggle(cmsmenu.id)">
-     <a>
-       <i class="fa fa-shopping-basket"></i>
-       <span>CMS</span>
-       <span class="pull-right-container">
-         <i class="fa fa-angle-left pull-right"></i>
-       </span>
-     </a>
-     <ul class="treeview-menu" [style.display]="(cmsmenu.id == activeMenuId) ? 'block' : 'none'">
-        <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/DashCMSForm'><i 
-         class="fa fa-circle-o"></i>Dashboard Form </a></li>   
-     </ul>
-   </li>
+          <!-- Content Management-->
+          <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="cms_menu" #cmsmenu
+            [class.menu-open]="cmsmenu.id == activeMenuId" (click)="toggle(cmsmenu.id)">
+            <a>
+              <i class="fa fa-shopping-basket"></i>
+              <span>CMS</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" [style.display]="(cmsmenu.id == activeMenuId) ? 'block' : 'none'">
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/DashCMSForm'><i
+                    class="fa fa-circle-o"></i>Dashboard Form </a></li>
+            </ul>
+          </li>
           <li class="treeview">
             <a href="/ChangePassword">
               <i class="fa fa-shield"></i> <span>Change Password</span>
@@ -891,7 +892,7 @@
             <!-- <h4 class="modal-title">Login</h4> -->
           </div>
 
-          
+
 
         </div>
       </div>

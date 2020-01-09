@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { States, Designation, District, City, Charts, Comp_Values, CLSS_Values, CLSS_Citywise_Values, JNReport, Demand, JNAtAGlance, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, CompMaster, getHFACodes, ComponentWiseDATA, PMAY_FinancialData, FinancialProgress, StateScore, PMAY_DATA, Demand_SanctionStateWise, UserMaster, CLSS_CityValues, Houses_Status, StateWise_NewCLSS, RegistrationDATA, MapDATA, PMAY_DATA_New, PMAY_DATA_Financial, PMAY_DATA_Fin, PdashBoard, Monitoring_Status, CLSS_MasterValues, PMAY_DATA_ShortFall } from '../model/chart';
+import { States, Designation, District, City, Charts, Comp_Values, CLSS_Values, CLSS_Citywise_Values, JNReport, Demand, JNAtAGlance, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, CompMaster, getHFACodes, ComponentWiseDATA, PMAY_FinancialData, FinancialProgress, StateScore, GetProjetDetailsReport, PMAY_DATA, Demand_SanctionStateWise, UserMaster, CLSS_CityValues, Houses_Status, StateWise_NewCLSS, RegistrationDATA, MapDATA, PMAY_DATA_New, PMAY_DATA_Financial, PMAY_DATA_Fin, PdashBoard, Monitoring_Status, CLSS_MasterValues, PMAY_DATA_ShortFall } from '../model/chart';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -11,8 +11,8 @@ import { GlobalUrl } from 'src/app/Shared/GlobalUrl';
 })
 export class GraphService {
      [x: string]: any;
-     url:string;
-     url1:string;
+     url: string;
+     url1: string;
      GetStateWiseFinYrDataNew(stateCode: any, DivisionCodes: any) {
           throw new Error("Method not implemented.");
      }
@@ -26,8 +26,8 @@ export class GraphService {
      // url = "http://localhost:58396/api/Buldings/";
      // url1 = "http://localhost:58396/API/RegistrationApi/";
 
-    // url = "http://10.196.69.102/hfa_api/api/Buldings/";
-    // url1 = "http://10.196.69.102/hfa_api/API/RegistrationApi/";
+     // url = "http://10.196.69.102/hfa_api/api/Buldings/";
+     // url1 = "http://10.196.69.102/hfa_api/API/RegistrationApi/";
 
 
      StateDetails: States[];
@@ -45,9 +45,9 @@ export class GraphService {
      ChartDetail: Charts;
      ComponentData: Comp_Values[];
 
-     constructor(private http: HttpClient, private locationStrategy: LocationStrategy,private globalUrl:GlobalUrl) { 
-          this.url = this.globalUrl.urlIPAddess +"/api/Buldings/";
-          this.url1= this.globalUrl.urlIPAddess + "/API/RegistrationApi/";
+     constructor(private http: HttpClient, private locationStrategy: LocationStrategy, private globalUrl: GlobalUrl) {
+          this.url = this.globalUrl.urlIPAddess + "/api/Buldings/";
+          this.url1 = this.globalUrl.urlIPAddess + "/API/RegistrationApi/";
      }
 
      PriventBackButton() {
@@ -324,6 +324,12 @@ export class GraphService {
           //  alert(stateCode);
           return this.http.get<StateScore>(this.url + "HFA_StateWiseScore?stateCode=" + stateCode);
      }
+
+     GetProjetDetailsReportByProjectId(projectId): Observable<GetProjetDetailsReport> {
+          //  alert(stateCode);
+          return this.http.get<GetProjetDetailsReport>(this.url + "GetAllDataFn/" + projectId);
+     }
+
      ServiceStateScoreNew(stateCode, Division): Observable<StateScore> {
           //  alert(stateCode);
           return this.http.get<StateScore>(this.url + "HFA_StateWiseScoreNew?stateCode=" + stateCode + "&Division=" + Division);
@@ -915,7 +921,7 @@ export class GraphService {
 
      //----------------------------------
      SaveDashboard(data: PdashBoard): Observable<string> {
-         //alert(this.url);
+          //alert(this.url);
           const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
           return this.http.post<string>(this.url + 'SaveDashboard/',
                data, httpOptions);
@@ -994,15 +1000,13 @@ export class GraphService {
           // alert(); 
           return this.http.get<PMAY_DATA_New[]>(this.url + "sp_create_BLC_GraphCritical_DATA_FinWise?stateCode=" + stateCode + "&dcode=" + DisttCode + "&CityCode=" + cityCode + "&finYear=" + Fin_Year);
      }
-     Get_ShortFallView(stateCode:string,DisttCode:string,cityCode:string,Comp:string,FinYear:string):Observable<PMAY_DATA_ShortFall[]>
-     {
-            return this.http.get<PMAY_DATA_ShortFall[]>(this.url + "sp_Phy_ShortFall_View?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&Component=" + Comp + "&finYear=" + FinYear); 
+     Get_ShortFallView(stateCode: string, DisttCode: string, cityCode: string, Comp: string, FinYear: string): Observable<PMAY_DATA_ShortFall[]> {
+          return this.http.get<PMAY_DATA_ShortFall[]>(this.url + "sp_Phy_ShortFall_View?stateCode=" + stateCode + "&dcode=" + DisttCode + "&CityCode=" + cityCode + "&Component=" + Comp + "&finYear=" + FinYear);
      }
 
-     Shortfall_PMAY_Graph_DATA(stateCode:string,DisttCode:string,cityCode:string,Comp:string,FinYear:string):Observable<PMAY_DATA_ShortFall[]>
-     {
-        //  alert();  table  page Load 1
+     Shortfall_PMAY_Graph_DATA(stateCode: string, DisttCode: string, cityCode: string, Comp: string, FinYear: string): Observable<PMAY_DATA_ShortFall[]> {
+          //  alert();  table  page Load 1
           debugger;
-            return this.http.get<PMAY_DATA_ShortFall[]>(this.url + "sp_Shortfall_BLC_AHP?stateCode="+ stateCode + "&dcode=" +DisttCode + "&CityCode=" + cityCode   + "&cid=" + Comp + "&finYear=" + FinYear); 
+          return this.http.get<PMAY_DATA_ShortFall[]>(this.url + "sp_Shortfall_BLC_AHP?stateCode=" + stateCode + "&dcode=" + DisttCode + "&CityCode=" + cityCode + "&cid=" + Comp + "&finYear=" + FinYear);
      }
 }

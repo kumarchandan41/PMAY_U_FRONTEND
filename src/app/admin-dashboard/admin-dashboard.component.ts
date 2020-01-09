@@ -29,7 +29,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   data: any;
   counter: any ;//= 96.58;
   counter1: any;// = 56.91;
-  counter2: any;;// = 29.53; //Completed
+  counter2: any  = 29.53; //Completed
   counter3: any = 27.04; //Occ;upied
 
   counter4: any = 82982; //Approved
