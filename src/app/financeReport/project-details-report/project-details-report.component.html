@@ -55,10 +55,10 @@
           </thead>
           <tbody>
             <tr>
-              <td>1</td>
-              <td>Call of Duty</td>
-              <td>455-221</td>
-              <td>981</td>
+              <td>{{stateName ? stateName : '-'}}</td>
+              <td>{{distName ? distName : '-'}}</td>
+              <td>{{cityName ? cityName : '-'}}</td>
+              <td>{{briefDetail?.ImplementingAgency ? briefDetail?.ImplementingAgency: '-' }}</td>
             </tr>
           </tbody>
         </table>
@@ -77,16 +77,16 @@
           </thead>
           <tbody>
             <tr>
-              <td>122</td>
-              <td>500</td>
-              <td>455</td>
-              <td>981</td>
+              <td>{{briefDetail?.Joint ? briefDetail?.Joint : '-'}}</td>
+              <td>{{briefDetail?.Female ? briefDetail?.Female : '-'}}</td>
+              <td>{{briefDetail?.Male ? briefDetail?.Male : '-'}}</td>
+              <td>{{briefDetail?.Transgender ? briefDetail?.Transgender : '-'}}</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="bg-orange-active mainTitle col-md-12"> Project Cost <small>({{projectDetail.ProjectCost.toFixed(2)}}
+      <div class="bg-orange-active mainTitle col-md-12"> Project Cost <small>({{projectDetail?.ProjectCost.toFixed(2)}}
           Cr.)</small></div>
       <div class="clearfix table-responsive">
         <table class="table">
@@ -100,10 +100,10 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{projectDetail.CentralAssistance == 0 ? '-' : projectDetail.CentralAssistance.toFixed(2)}}</td>
-              <td>{{projectDetail.StateGrant == 0 ? '-' : projectDetail.StateGrant.toFixed(2)}}</td>
-              <td>{{projectDetail.ULB == 0 ? '-' : projectDetail.ULB.toFixed(2)}}</td>
-              <td>{{projectDetail.BeneficiaryShare == 0 ? '-' : projectDetail.BeneficiaryShare.toFixed(2)}}</td>
+              <td>{{projectDetail?.CentralAssistance == 0 ? '-' : projectDetail?.CentralAssistance.toFixed(2)}}</td>
+              <td>{{projectDetail?.StateGrant == 0 ? '-' : projectDetail?.StateGrant.toFixed(2)}}</td>
+              <td>{{projectDetail?.ULB == 0 ? '-' : projectDetail?.ULB.toFixed(2)}}</td>
+              <td>{{projectDetail?.BeneficiaryShare == 0 ? '-' : projectDetail?.BeneficiaryShare.toFixed(2)}}</td>
             </tr>
           </tbody>
         </table>
@@ -123,40 +123,40 @@
           <tbody>
             <tr>
               <td class="cellBg">SC</td>
-              <td>455</td>
-              <td>221</td>
-              <td>128</td>
+              <td>{{briefDetail?.SC ? briefDetail?.SC : '-'}}</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
             <tr>
               <td class="cellBg">ST</td>
-              <td>545</td>
-              <td>545</td>
-              <td>128</td>
+              <td>{{briefDetail?.ST ? briefDetail?.ST : '-'}}</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
             <tr>
               <td class="cellBg">OBC</td>
-              <td>455</td>
-              <td>221</td>
-              <td>128</td>
+              <td>{{briefDetail?.OBC ? briefDetail?.OBC : '-'}}</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
             <tr>
               <td class="cellBg">Minority</td>
-              <td>455</td>
-              <td>221</td>
-              <td>128</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
             <tr>
               <td class="cellBg">Inclusive
                 Minorities</td>
-              <td>455</td>
-              <td>221</td>
-              <td>128</td>
+              <td>{{briefDetail?.Minority ? briefDetail?.Minority : '-'}}</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
             <tr>
               <td class="cellBg">General</td>
-              <td>455</td>
-              <td>221</td>
-              <td>128</td>
+              <td>{{briefDetail?.General ? briefDetail?.General : '-'}}</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
           </tbody>
         </table>
@@ -170,8 +170,8 @@
     <div class="col-md-6 col-sm-6 col-xs-6">
       <div class="bg-orange-active mainTitle col-md-12"> Project Title</div>
       <div class="bg-active mainTitle col-md-12"
-        style="padding: 50px; background-color:  #f3f3f3; margin-bottom: 15px;">
-        {{projectDetail.ProjectTitle}}
+        style="padding: 25px; background-color:  #f3f3f3; margin-bottom: 15px;">
+        {{projectDetail?.ProjectTitle}}
       </div>
 
       <div class="clearfix table-responsive">
@@ -185,9 +185,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{projectDetail.NewSanction == 0 ? '-': projectDetail.NewSanction.toFixed(0) }}</td>
-              <td>{{projectDetail.UpgradeSanction == 0 ? '-': projectDetail.UpgradeSanction.toFixed(0) }}</td>
-              <td>{{projectDetail.TotalSanction == 0 ? '-': projectDetail.TotalSanction.toFixed(0) }}</td>
+              <td>{{projectDetail?.NewSanction == 0 ? '-': projectDetail?.NewSanction.toFixed(0) }}</td>
+              <td>{{projectDetail?.UpgradeSanction == 0 ? '-': projectDetail?.UpgradeSanction.toFixed(0) }}</td>
+              <td>{{projectDetail?.TotalSanction == 0 ? '-': projectDetail?.TotalSanction.toFixed(0) }}</td>
             </tr>
           </tbody>
         </table>
@@ -204,9 +204,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{projectDetail.CSMCNumber}}</td>
-              <td>{{projectDetail.CSMCDate}}</td>
-              <td>{{projectDetail.ProjectDuration}}</td>
+              <td>{{projectDetail?.CSMCNumber}}</td>
+              <td>{{projectDetail?.CSMCDate}}</td>
+              <td>{{projectDetail?.ProjectDuration ? projectDetail?.ProjectDuration : '-'}}</td>
             </tr>
           </tbody>
         </table>
@@ -227,38 +227,42 @@
           <tbody>
             <tr>
               <td class="cellBg">SC</td>
-              <td>545</td>
-              <td>5455</td>
-              <td>4559</td>
-              <td>99900</td>
+              <td>{{fundRelease?.first?.SC ? fundRelease?.first?.SC : '-'}}</td>
+              <td>{{fundRelease?.second?.SC ? fundRelease?.second?.SC : '-'}}</td>
+              <td>{{fundRelease?.third?.SC ? fundRelease?.third?.SC : '-'}}</td>
+              <td>{{fundRelease?.totalSC ? fundRelease?.totalSC : '-'}}</td>
             </tr>
             <tr>
               <td class="cellBg">ST</td>
-              <td>545</td>
-              <td>5455</td>
-              <td>4559</td>
-              <td>99900</td>
+              <td>{{fundRelease?.first?.ST ? fundRelease?.first?.ST : '-'}}</td>
+              <td>{{fundRelease?.second?.ST ? fundRelease?.second?.ST : '-'}}</td>
+              <td>{{fundRelease?.third?.ST ? fundRelease?.third?.ST : '-'}}</td>
+              <td>{{fundRelease?.totalST ? fundRelease?.totalST : '-'}}</td>
             </tr>
             <tr>
               <td class="cellBg">Other than SC/ST</td>
-              <td>545</td>
-              <td>5455</td>
-              <td>4559</td>
-              <td>99900</td>
+              <td>{{fundRelease?.first?.otherScSt ? fundRelease?.first?.otherScSt : '-'}}</td>
+              <td>{{fundRelease?.second?.otherScSt ? fundRelease?.second?.otherScSt : '-'}}</td>
+              <td>{{fundRelease?.third?.otherScSt ? fundRelease?.third?.otherScSt : '-'}}</td>
+              <td>{{fundRelease?.totalOtherScSt ? fundRelease?.totalOtherScSt :'-'}}</td>
             </tr>
             <tr style="background-color: #001f3f; color: #fff;">
               <td>Total</td>
-              <td>545</td>
-              <td>5455</td>
-              <td>4559</td>
-              <td>99900</td>
+              <td>{{fundRelease?.totalFirst ? fundRelease?.totalFirst : '-'}}</td>
+              <td>{{fundRelease?.totalSecond ? fundRelease?.totalSecond : '-'}}</td>
+              <td>{{fundRelease?.totalThird ? fundRelease?.totalThird : '-'}}</td>
+              <td>
+                {{(fundRelease?.totalOtherScSt + fundRelease?.totalST + fundRelease?.totalSC) ? fundRelease?.totalOtherScSt + fundRelease?.totalST + fundRelease?.totalSC : '-'}}
+              </td>
             </tr>
             <tr>
               <td class="cellBg">Utilise</td>
-              <td>545</td>
-              <td>5455</td>
-              <td>4559</td>
-              <td>99900</td>
+              <td>{{UCSubmission?.UCfirst?.UCAmount ? UCSubmission?.UCfirst?.UCAmount : '-'}}</td>
+              <td>{{UCSubmission?.UCsecond?.UCAmount ? UCSubmission?.UCsecond?.UCAmount : '-'}}</td>
+              <td>{{UCSubmission?.UCthird?.UCAmount ? UCSubmission?.UCthird?.UCAmount : '-'}}</td>
+              <td>
+                {{(UCSubmission?.UCfirst?.UCAmount+UCSubmission?.UCsecond?.UCAmount+UCSubmission?.UCthird?.UCAmount) ? UCSubmission?.UCfirst?.UCAmount+UCSubmission?.UCsecond?.UCAmount+UCSubmission?.UCthird?.UCAmount : '-'}}
+              </td>
             </tr>
 
           </tbody>
@@ -271,8 +275,8 @@
       <div class="clearfix table-responsive" style="padding-top: 5px;">
         <table class="table">
           <tr>
-            <th class="orangeBG" rowspan="2">Project Time Line</th>
-            <th class="orangeBG">1st Release</th>
+            <th class="orangeBG" rowspan="2">Project Time Line <small>(in months)</small></th>
+            <th class="orangeBG">1st Released</th>
             <th class="orangeBG">1st Utilised</th>
             <th class="orangeBG">2nd Released</th>
             <th class="orangeBG">2nd Utilised</th>
@@ -281,13 +285,13 @@
             <th class="orangeBG">Total</th>
           </tr>
           <tr>
-            <td>565</td>
-            <td>455981</td>
-            <td>565</td>
-            <td>455981</td>
-            <td>565</td>
-            <td>455981</td>
-            <td>995981</td>
+            <td>{{projectTimeline?.firstReleased ? projectTimeline?.firstReleased : '-'}}</td>
+            <td>{{projectTimeline?.firstUtilised ? projectTimeline?.firstUtilised : '-'}}</td>
+            <td>{{projectTimeline?.secondReleased ? projectTimeline?.secondReleased : '-'}}</td>
+            <td>{{projectTimeline?.secondUtilised ? projectTimeline?.secondUtilised : '-'}}</td>
+            <td>{{projectTimeline?.thirdReleased ? projectTimeline?.thirdReleased : '-'}}</td>
+            <td>{{projectTimeline?.thirdUtilised ? projectTimeline?.thirdUtilised : '-'}}</td>
+            <td>{{projectTimeline?.totalMonths ? projectTimeline?.totalMonths : '-'}}</td>
           </tr>
         </table>
       </div>
@@ -307,13 +311,14 @@
             <th class="orangeBG">Occupied</th>
           </tr>
           <tr>
-            <td>565</td>
-            <td>455981</td>
-            <td>565</td>
-            <td>455981</td>
-            <td>565</td>
-            <td>455981</td>
-            <td>995981</td>
+            <td>{{physicalStatus?.workOrder ? physicalStatus?.workOrder : '-'}}</td>
+            <td>{{physicalStatus?.geoTag ? physicalStatus?.geoTag : '-'}}</td>
+            <td>{{physicalStatus?.Pinth ? physicalStatus?.Pinth : '-'}}</td>
+            <td>{{physicalStatus?.LinterLevel ? physicalStatus?.LinterLevel : '-'}}</td>
+            <td>{{physicalStatus?.RoofLevel ? physicalStatus?.RoofLevel : '-'}}</td>
+            <td>{{physicalStatus?.ConstructionCompleted ? physicalStatus?.ConstructionCompleted : '-'}}</td>
+            <td>{{physicalStatus?.TotalHouseOccupiedBeneficiary ? physicalStatus?.TotalHouseOccupiedBeneficiary : '-'}}
+            </td>
           </tr>
         </table>
       </div>
@@ -333,45 +338,45 @@
           <tbody>
             <tr>
               <td class="cellBg alignCenter">2015-16</td>
-              <td>455</td>
-              <td>221</td>
-              <td>128</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
             <tr>
               <td class="cellBg alignCenter">2016-17</td>
-              <td>545</td>
-              <td>545</td>
-              <td>128</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
             <tr>
               <td class="cellBg alignCenter">2017-18</td>
-              <td>455</td>
-              <td>221</td>
-              <td>128</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
             <tr>
               <td class="cellBg alignCenter">2018-19</td>
-              <td>455</td>
-              <td>221</td>
-              <td>128</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
             <tr>
               <td class="cellBg alignCenter">2019-20 </td>
-              <td>455</td>
-              <td>221</td>
-              <td>128</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
             <tr>
               <td class="cellBg alignCenter">2020-21</td>
-              <td>455</td>
-              <td>221</td>
-              <td>128</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
             <tr>
               <td class="cellBg alignCenter">2021-22</td>
-              <td>455</td>
-              <td>221</td>
-              <td>128</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
           </tbody>
         </table>
