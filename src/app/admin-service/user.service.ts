@@ -14,24 +14,13 @@ import { District } from '../login/ModelS/chart.model';
 })
 export class UserService {
   [x: string]: any;
-//   baseUrl = "http://localhost:58396/Api";
-//baseUrl:string;
 apiUrl:string;
 apiUrlReg:string;
 
-// baseUrl = "http://10.196.69.102/hfa_api/Api";
-//   apiUrl ="http://10.196.69.102/hfa_api/API/Authenticate/";
-//   apiUrlReg ="http://10.196.69.102/hfa_api/API/RegistrationApi/";
-
-
-      baseUrl = "http://localhost:58396/Api";
-    //  apiUrl ="http://localhost:58396/hfa_api/API/Authenticate/";
-    //  apiUrlReg ="http://localhost:58396/hfa_api/API/RegistrationApi/";
-
 
   constructor(private http: HttpClient,private constantUrlService: ConstantUrlService,private globalUrl:GlobalUrl) {
-   // this.baseUrl=this.constantUrlService.baseUrl;
-  //   this.baseUrl = this.globalUrl.urlIPAddess +"/API";
+
+    this.baseUrl = this.globalUrl.urlIPAddess +"/API";
      this.apiUrl= this.globalUrl.urlIPAddess + "/API/Authenticate/";
      this.apiUrlReg= this.globalUrl.urlIPAddess + "/API/RegistrationApi/";
    }
