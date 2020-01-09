@@ -1076,15 +1076,22 @@ export class NRSA_1_Bhuvan1 {
     district_code: any;
     city_code: any;
 }
-     
+
 
 export class GetProjetDetailsReport {
     Project_DetailVM: any;
     Project_Brief_DetailVM: any;
     Project_Fund_ReleaseVM: any;
     Project_UC_SubmissionVM: any;
+    Physical_Progress_ReportVM: any;
 }
 
 export class ProjectDetail {
     ProjectTitle: any;
+}
+export class BriefDetail {
+    ImplementingAgency: string;
+    first: any;
+    SC: any;
+    Joint: any;
 }
