@@ -96,6 +96,9 @@ export class AdminSandbox {
   projectDetailMaster: any[] = [];
   EditProjectDetail: any[] = [];
   schComponentMaster: any[] = [];
+
+  schCSMCNo: any[] = [];
+
   ProjectOtherCost: any;
   agencyMaster: any[] = [];
   showAgency: "none";
@@ -727,7 +730,6 @@ export class AdminSandbox {
   }
   
   postConstituency(formGroup: any) {
-    alert(2);
     var objPost =
     {
       "ConstituencyName": formGroup.get('txtConstituencyName').value,
@@ -1281,6 +1283,15 @@ export class AdminSandbox {
     });
   }
 
+  // <<<<<<<<<<<<<<<<<<<<<<<<getCSMCNo >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  getCSMCNo(StateCode: any, DisttCode :any,cityCode :any, CompCode:any) {
+    this.userMasterService.getCSMC_NoData(StateCode,DisttCode,cityCode,CompCode ).subscribe(data => {
+      this.schCSMCNo = data;
+    });
+  }
+// <<<<<<<<<<<<<<<<<<<<<<<<getCSMCNo >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
   getProjectSchemeComponentData(SchemeId: any) {
     this.userMasterService.getProjectSchemeComponent(SchemeId).subscribe(data => {
       this.schComponentMaster = data;
@@ -1551,7 +1562,6 @@ export class AdminSandbox {
   }
 
   downloadRelease(pdf: any) {
-    alert('PDF');
     var str = pdf;
     var newStr = str.slice(0, -4);
     this.userMasterService.getFileDownnload(newStr).subscribe((
@@ -1603,13 +1613,60 @@ export class AdminSandbox {
         }
     );
   }
+
+  getProject_AllDetails( CSMCNumber: any, component: any) {
+   this.userMasterService.getProject_AllDetails(CSMCNumber,component).subscribe(data => {
+     this.projectBriefDetail = data;
+   });
+}
   //-----get projectbriefname of project name----//
   getProjectBriefName(statecode: any, districtcode: any, citycode: any, scheme: any, component: any) {
+       debugger;
+    if(component !=="")
+    {
+      this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
+      //  this.projectBriefDetail = data.filter(a=>a.SchemeComponent==component);
+        this.projectBriefDetail = data;
+      });
+    }
+    else
+    {
+      this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
+        this.projectBriefDetail = data;
+        //this.projectBriefDetail = data;
+      });
+    }
+  }
+
+  getProjectBriefName_SMCNo(statecode: any, districtcode: any, citycode: any, scheme: any, component: any, CSMCNumber: any) {
+   // alert(component);
+    this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
+      this.projectBriefName = data.filter(a=>a.CSMCNumber ===CSMCNumber);;
+    });
+  }
+
+   //-----get projectbriefname of project name----//
+   getProjectBriefName1(statecode: any, districtcode: any, citycode: any, scheme: any, component: any,CSMCNumber: any) {
+    //alert('Test');
+     if(CSMCNumber !="")
+     {
+    this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
+      this.projectBriefName = data.filter(a=>a.CSMCNumber ===CSMCNumber);
+    });
+  }else{
     this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
       this.projectBriefName = data;
     });
   }
-  
+  }
+
+  PrjBriefDetail_Comp(component: any)
+  {
+      this.userMasterService.getProject_Brief_Detail(component).subscribe(data => {
+        this.projectBriefName = data;
+      });
+  }
+
    //------post get api for project brief detail------//
    projectBriefDeatil(file: File, formGroup: any): any {
     var filename = file.name
@@ -1692,7 +1749,7 @@ export class AdminSandbox {
     }
   }
 
-  getProject_Brief_Data(DisttCode:string) {
+  getProject_Brief_Data(DisttCode:string,stateCode:string) {
     if(DisttCode==='0')
     {
         this.userMasterService.geProjectBriefDetail().subscribe(data => {
@@ -1701,23 +1758,15 @@ export class AdminSandbox {
     }
     else{
         this.userMasterService.geProjectBriefDetail().subscribe(data => {
-        this.projectBriefDetail = data.filter(a=>a.Dcode===DisttCode);
+        this.projectBriefDetail = data.filter(a=>a.Dcode===DisttCode && a.Codes===stateCode);
       });
     }
   }
-
-  getProj_Brief_DataOnCity(CityCode:string) {
-    if(CityCode==='0')
-    {
+  getProj_Brief_DataOnCity(stateCode :string,DisttCode:string, CityCode:string) {
+     
         this.userMasterService.geProjectBriefDetail().subscribe(data => {
-        this.projectBriefDetail = data;
+        this.projectBriefDetail = data.filter(a=>a.Codes===stateCode && a.Dcode===DisttCode && a.CityCode===CityCode);
       });
-    }
-    else{
-        this.userMasterService.geProjectBriefDetail().subscribe(data => {
-        this.projectBriefDetail = data.filter(a=>a.CityCode===CityCode);
-      });
-    }
   }
   ProjectBriefDetailHousesTotal(txtJoint: any, txtFemale: any, txtMale: any, txtTransgender: any) {
     var Joint = txtJoint;

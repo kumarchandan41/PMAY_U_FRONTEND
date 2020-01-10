@@ -40,6 +40,8 @@ export class ProjectBriefDetailComponent implements OnInit {
   public submitted: boolean = false;
   public txtSelectFile:AbstractControl;
   public txtTotalHouses:AbstractControl;
+  public ddlCSMCNo:AbstractControl;
+
   State: string;
   District: string;
   NodalAgency:string;
@@ -65,9 +67,9 @@ export class ProjectBriefDetailComponent implements OnInit {
   DCode: any;
   Dcode: any;
   CityCode: any;
+ // Comp: any;
 
   constructor(private fb: FormBuilder, public adminSandbox: AdminSandbox) { }
-
   ngOnInit() {
     this.adminSandbox.getProjectBriefDetail();
     this.ActionStatus="Submit";
@@ -123,11 +125,13 @@ export class ProjectBriefDetailComponent implements OnInit {
       txtMale: ['', [Validators.required]],
       txtTransgender: ['', [Validators.required]],
       txtSelectFile:['',[Validators.required]],
-      txtTotalHouses:['']
+      txtTotalHouses:[''],
+      ddlCSMCNo:['']
     });
     this.ddlStateCode = this.projectBriefDetail.controls['ddlStateCode'];
     this.txtTotalHouses = this.projectBriefDetail.controls['txtTotalHouses'];
     this.ddlDistrictCode = this.projectBriefDetail.controls['ddlDistrictCode'];
+
     this.ddlCity = this.projectBriefDetail.controls['ddlCity'];
     this.ddlScheme = this.projectBriefDetail.controls['ddlScheme'];
     this.ddlComponent = this.projectBriefDetail.controls['ddlComponent'];
@@ -151,34 +155,44 @@ export class ProjectBriefDetailComponent implements OnInit {
     this.txtMale = this.projectBriefDetail.controls['txtMale'];
     this.txtTransgender = this.projectBriefDetail.controls['txtTransgender'];
     this.txtSelectFile=this.projectBriefDetail.controls['txtSelectFile'];
-
+    
+    this.ddlCSMCNo = this.projectBriefDetail.controls['ddlCSMCNo'];
   }
 
   getProjectBriefData(event)
   {
+    // state wise
       let StateCode=event.target.value;
       this.StateCode=StateCode;
       this.adminSandbox.getProject_BriefData(this.StateCode);
   }
-  GetPrjBriefBasedonDate(event:any)
+  GetDetailByCSMCNo(event:any)
   {
     alert(event);
-    let strDate=event.target.value;
+    let strCSMBNo=event.target.value;
     
   }
   PrjBriefDataonDistt(event)
   {
+    // distt
       let DisttCode=event.target.value;
       this.Dcode=DisttCode;
-      this.adminSandbox.getProject_Brief_Data(this.Dcode);
+      this.adminSandbox.getProject_Brief_Data(this.Dcode, this.StateCode);
   }
   PrjBriefDataonCity(event)
   {
       let CityCode=event.target.value;
       this.CityCode=CityCode;
-      this.adminSandbox.getProj_Brief_DataOnCity(this.CityCode);
+      this.adminSandbox.getProj_Brief_DataOnCity(this.StateCode,this.Dcode,this.CityCode);
   }
 
+  // PrjBriefDetail_Comp(event)
+  // {
+  //   let Comp=event.target.value;
+  //   this.Comp=Comp;
+  //   alert(this.Comp);
+  //   this.adminSandbox.PrjBriefDetail_Comp(this.Comp);
+  // }
   onClickProjectBriefDetail(event: Event, form: any) {
     this.submitted = true;
     event.stopPropagation();
@@ -198,9 +212,18 @@ export class ProjectBriefDetailComponent implements OnInit {
        this.TotalSanction= '';
        // this.adminSandbox.Slum=[];
        this.ProjectSlum.reset();
+       this.ngOnInit();
     }
-    this.adminSandbox.getProjectBriefDetail();
-    this.onProjectBriefDetail();
+    
+        // this.adminSandbox.getProjectBriefDetail();
+        // this.ActionStatus="Submit";
+        // this.ProjectSlum = this.fb.group({
+        //   itemRows: this.fb.array([this.initItemRows()]),
+        // });
+        // this.onProjectBriefDetail();
+        // this.adminSandbox.getStateData();
+        // this.adminSandbox.getSchemeData();
+         
 }
 
 get formArr() {

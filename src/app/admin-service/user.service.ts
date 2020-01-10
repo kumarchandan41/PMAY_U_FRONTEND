@@ -213,7 +213,7 @@ apiUrlReg:string;
 
   //post api for constituency master
   postConstituencyData(postData: any): Observable<any> {
-    alert(3);
+   // alert(3);
     return this.http.post(this.baseUrl + "/Admin_Value/SubmitConstituencyData", postData, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
@@ -317,6 +317,16 @@ apiUrlReg:string;
       );
   }
 
+
+  // <<<<<<<<<<<<<<<<<<<<Get CSMC No  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  getCSMC_NoData(statecode: any, districtcode: any, citycode: any,component: any): Observable<any> {
+    return this.http.get(this.baseUrl + "/Admin_Value/GetCSMCNo/" + statecode + '/' + districtcode + '/' + citycode + '/' + component, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+
   //get api for project details
   getProjectDetailsData(statecode: any, districtcode: any, citycode: any, scheme: any, component: any): Observable<any> {
     return this.http.get(this.baseUrl + "/Admin_Value/GetProjectDetailData/" + statecode + '/' + districtcode + '/' + citycode + '/' + scheme + '/' + component, { "observe": "response" })
@@ -325,6 +335,7 @@ apiUrlReg:string;
       })
       );
   }
+
 
   //delete api for project details
   deleteProjectDetailData(ProjectId: any): Observable<any> {
@@ -555,7 +566,7 @@ apiUrlReg:string;
     formdata.append('Amount', amount);
     formdata.append('Date', date);
     formdata.append('Component', component)
-    alert(this.baseUrl);
+  //  alert(this.baseUrl);
     return this.http.post(this.baseUrl + "/Admin_Value/postReleasedOrder", formdata, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response;
@@ -583,6 +594,10 @@ apiUrlReg:string;
     }).pipe(
     );
   }
+
+
+  //getProject_AllDetails
+
 
   getFile_PBD_Downnload(pdf: any,folderName:string): Observable<Blob> {
 
@@ -632,15 +647,33 @@ apiUrlReg:string;
       );
   }
 
+   //get project name
+   getProject_AllDetails( CSMCNumber: any, component: any): Observable<any> {
+  //  alert(component);
+    return this.http.get(this.baseUrl + "/Admin_Value/GetProjectDetails/" + CSMCNumber + '/' + component , { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+
+  getProject_Brief_Detail(component: any): Observable<any> {
+    return this.http.get(this.baseUrl + "/Admin_Value/Project_Brief_Detail/" + component, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+
   //----post api for project brief detail order-----//
   postProjectBriefDeatil(file: File, objPost: any): any {
     const formdata: FormData = new FormData();
     formdata.append('Image', file, file.name);
     formdata.append('Data', JSON.stringify(objPost));
 
-    alert(this.baseUrl);
+  // alert(this.baseUrl);
 
-    return this.http.post(this.baseUrl + "/Admin_Value/postProjectBriefDetail", formdata, { "observe": "response" })
+    return this.http.post(this.baseUrl + "/Admin_Value/postProjectBrief_Detail", formdata, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response;
       })
