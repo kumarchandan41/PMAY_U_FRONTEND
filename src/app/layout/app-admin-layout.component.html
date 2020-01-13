@@ -387,10 +387,12 @@
 
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
                   [routerLink]="['/Admin/Statescore1']"><i class="fa fa-circle-o"></i>State Score</a></li>
+               
+                  <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
+                    [routerLink]="['/Admin/AtaGlanceReport']"><i class="fa fa-circle-o"></i>At a Glance Report</a></li>
+  
+ 
 
-
-              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
-                  [routerLink]="['/Admin/AtaGlance']"><i class="fa fa-circle-o"></i>At a Glance</a></li>
               <!-- <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/AtaGlance1'><i class="fa fa-circle-o"></i>At a Glance1</a></li>
             <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/AtaGlance3'><i class="fa fa-circle-o"></i>At a Glance3</a></li>
             <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"  href='/Admin/AtaGlance4'><i class="fa fa-circle-o"></i>At a Glance4</a></li>
@@ -559,7 +561,10 @@
                   [routerLink]="['/Admin/UploadPhyProgReport']"><i class="fa fa-circle-o"></i>Phy Progress Report</a>
               </li>
 
-
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
+                [routerLink]="['/Admin/ProjectRelFundFlow']"><i class="fa fa-circle-o"></i>Project Rel FundFlow Report</a>
+            </li>
+              
               <!-- <li  [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DisttMaster']"><i class="fa fa-circle-o"></i>Distt Master Form</a></li>
                    -->
             </ul>

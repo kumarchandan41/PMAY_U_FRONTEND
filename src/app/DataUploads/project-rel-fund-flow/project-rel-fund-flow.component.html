@@ -1,0 +1,111 @@
+<br>
+
+<div class="container">
+<div class="row">
+  <div class="col-md-3 col-sm-3">
+    <select class="form-control"   placeholder="Select Role" 
+    style="width: 200px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif">
+     <option value="Admin">Select Installment</option>
+     <option value="1">1</option>
+     <option value="2">2</option>
+     <option value="3">3</option>
+   </select>
+    
+</div>
+  <div class="col-md-3 col-sm-3">
+    <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
+    style="width: 200px;font-display: #FF00FF;color: black">
+    <option value={{stValue}}>{{StateMessage}}</option>
+    <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+      {{sntry.States_UT}}
+    </option>
+  </select>
+  </div>
+    <div class="col-md-2 col-sm-2">
+      <div class="col-md-3">
+        <select class="form-control" placeholder="Select Role"  (change)="getCompDetails($event.target.value)"
+        style="width: 200px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif">
+         <option value="Admin">--Select--</option>
+         <option value="Admin">AHP</option>
+         <option value="Admin">BLC</option>
+         <option value="Admin">ISSR</option>
+       </select>
+    </div>
+  </div>  
+  <div class="col-md-4 col-sm-4">
+    
+      <div class="col-sm-6" ><label><b>Please Budget/EBR :</b></label></div>
+      <div class="col-sm-6" >  <fieldset id="horizontal"  class="horizontal">
+        <input type="radio"  (change)="getEVRDetails($event.target.value)"  name="EBR" value="Budget">    Budget 
+        <input type="radio"   (change)="getEVRDetails($event.target.value)"   name="EBR" value="EBR"> EBR 
+    </fieldset></div>
+  
+        
+
+
+  </div>
+  
+</div> 
+</div> 
+<br>
+<div class="row">
+  <fieldset class="horizontal">
+    <div *ngFor="let rd of radioButtonSet">
+      <div class="col-md-1">
+        <label for="{{rd}}">{{rd}}</label>&nbsp;&nbsp;
+        <input (change)="getRELDetails($event.target.value)"   id="{{rd}}" type="radio">
+      </div>
+     
+    </div>
+
+  </fieldset>
+</div>
+<div class="row"> 
+<div class="col-md-2" style="height: 50px;;border: 1px solid gray;">
+  <div class="col-md-2">Senction No</div>
+  <div class="col-md-2"><input type="checkbox"></div>
+</div>
+<div class="col-md-2"  style="height: 50px;;border: 1px solid gray;">
+  <div class="col-md-2">HFA Amt</div>
+  <div class="col-md-2"><input type="checkbox"></div>
+</div>
+<div class="col-md-2"  style="height: 50px;;border: 1px solid gray;">
+  <div class="col-md-2">TSP Amount</div>
+  <div class="col-md-2"><input type="checkbox"></div>
+</div>
+<div class="col-md-2"  style="height: 50px;;border: 1px solid gray;">
+  <div class="col-md-2">SCSP Amount</div>
+  <div class="col-md-2"><input type="checkbox"></div>
+</div>
+</div>
+
+<div class="container">
+
+  <div class="col-md-2 col-sm-2">
+    <input type="file" #fileInput (cahnge)="UploadFile()" />
+    <button (click)="UploadFile()" class="btn btn-primary">Upload</button><br>
+    <span *ngIf="flag">uploading<img src="assets/images/30.gif"></span><br>    
+
+
+    
+ 
+
+  </div>
+
+  <div class="col-md-3 col-sm-3">
+    <button (click)="DeleteTablePHY()" class="btn btn-danger">Delete Table Data</button>
+  </div>
+
+  <!-- <div>
+          <select class="form-control" placeholder="Choose Sheet">
+            <option value="0">Select Sheet</option>
+            <option *ngFor='let st of lstExcelSheet'>
+               {{st.SheetName}} -->
+            <!-- </option>
+          </select>
+  </div>  -->
+</div>
+
+
+
+

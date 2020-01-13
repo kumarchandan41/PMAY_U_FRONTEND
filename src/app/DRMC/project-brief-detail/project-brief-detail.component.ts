@@ -71,7 +71,7 @@ export class ProjectBriefDetailComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public adminSandbox: AdminSandbox) { }
   ngOnInit() {
-    this.adminSandbox.getProjectBriefDetail();
+//    this.adminSandbox.getProjectBriefDetail();
     this.ActionStatus="Submit";
     this.ProjectSlum = this.fb.group({
       itemRows: this.fb.array([this.initItemRows()]),

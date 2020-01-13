@@ -388,3 +388,23 @@ export class Excel_JNNURN_Data {
 	CreatedBy  :string;
 	CreatedOn  :string;
 }
+
+export class Excel_ProjectRelFundFlow_Data {
+	ProjectId :string;  
+	ReleaseId:string;
+	 Codes:string;
+		 Dcode:string;
+	CityCode:string;
+	Release:string;
+	Source:string;
+	SanctionNumber:string;
+	HFAAmount:string;
+	TSPAmount:string;
+	SCSPAmount:string;
+	ProjectCode:string;
+	Installment:string;
+	TxtSCSPDate:string;
+	FirstInstallment:string;
+	Component:string;
+	 
+}

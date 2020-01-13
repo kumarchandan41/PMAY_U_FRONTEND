@@ -1095,3 +1095,50 @@ export class BriefDetail {
     SC: any;
     Joint: any;
 }
+
+export class CompWiseDisplay {
+    State_Code : string;
+   dcode : string;
+   cityCode : string;
+    Fin_Year : string;
+    FinYear : string;
+
+      Component : string;
+     NoOfprojApproved : string;
+     Project_Cost : string;
+     CentralShare : string;
+     CentralAssisRel : string;
+     HousesSanctioned : string;
+     Grounded : string;
+     Completed : string;
+     Occupied : string;
+
+    // JNNURM
+     ProjCost : string;
+     Central_Share : string;
+     Central_Share_Released_Projects : string;
+     DwellingUnit : string;
+     Under_Progress : string;
+     DisttCode : string;
+     TownCode  : string;
+     Completed1 : string;
+     Occupied1 : string;
+
+    // PMAY
+     StateCode : string;
+     Dcode : string;
+     CityCode : string;
+     Central_Assistance_involved : string;
+     CentralAssistanceReleased : string;
+     Housesinvolved : string;
+     Houses_Grounded : string;
+     Houses_Completed : string;
+     HousesOccupied : string;
+
+
+     Loan_EWS_LIG : string;
+     Subsidy_EWS_LIG : string;
+     Subsidy_MIG : string;
+     No_Beneficiary_EWS_LIG : string;
+     No_Beneficiary_MIG : string;
+}

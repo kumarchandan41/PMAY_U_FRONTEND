@@ -916,4 +916,17 @@ export class BuildingServiceService {
           return this.http.put<boolean>(this.url_Upload + '/UpdateUserDetails/',  
           data, httpOptions);  
      }
+  // 11 Jan 2019
+  BulkImport_ReleaseFundFlowExcel(formData:FormData):Observable<string>
+  {  
+     let headers = new HttpHeaders(); 
+  
+     headers.append('Content-Type', 'application/json');   
+     const httpOptions = { headers: headers };  
+   
+        return  this.http.post<string>(this.url_Upload + "UploadPrjRelFunfFlow_Excel/", formData,httpOptions);
+   }     
+
+
+
 }

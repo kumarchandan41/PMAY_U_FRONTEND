@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { States, Designation, District, City, Charts, Comp_Values, CLSS_Values, CLSS_Citywise_Values, JNReport, Demand, JNAtAGlance, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, CompMaster, getHFACodes, ComponentWiseDATA, PMAY_FinancialData, FinancialProgress, StateScore, GetProjetDetailsReport, PMAY_DATA, Demand_SanctionStateWise, UserMaster, CLSS_CityValues, Houses_Status, StateWise_NewCLSS, RegistrationDATA, MapDATA, PMAY_DATA_New, PMAY_DATA_Financial, PMAY_DATA_Fin, PdashBoard, Monitoring_Status, CLSS_MasterValues, PMAY_DATA_ShortFall } from '../model/chart';
+import { States, Designation, District, City, Charts, Comp_Values, CLSS_Values, CLSS_Citywise_Values, JNReport, Demand, JNAtAGlance, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, CompMaster, getHFACodes, ComponentWiseDATA, PMAY_FinancialData, FinancialProgress, StateScore, GetProjetDetailsReport, PMAY_DATA, Demand_SanctionStateWise, UserMaster, CLSS_CityValues, Houses_Status, StateWise_NewCLSS, RegistrationDATA, MapDATA, PMAY_DATA_New, PMAY_DATA_Financial, PMAY_DATA_Fin, PdashBoard, Monitoring_Status, CLSS_MasterValues, PMAY_DATA_ShortFall, CompWiseDisplay } from '../model/chart';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -161,7 +161,36 @@ export class GraphService {
           return this.http.get<CLSS_Values>(this.url + "HFA_Proc_CLSS_StateWise_New?stateCode=" + stateCode + "&division=" + division);//.toPromise().then(result=>this.ChartDetail= result as Charts);
      }
 
+     JNNURMCityWiseAtAGlance(stateCode, districtCode, CityCode): Observable<JNAtAGlance> {
+          return this.http.get<JNAtAGlance>(this.url + "HFA_JNNURM_AtaGlance?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
+     }
+     
 
+     CompAtAGlance(stateCode, districtCode, CityCode): Observable<CompAtAGlance> {
+          //alert(stateCode);
+          return this.http.get<CompAtAGlance>(this.url + "HFA_Component_AtaGlance?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
+     }
+     CompRAYAtAGlance(stateCode, districtCode, CityCode): Observable<CompAtAGlance> {
+          //alert(stateCode);
+          return this.http.get<CompAtAGlance>(this.url + "HFA_RAY_AtaGlance?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
+     }
+
+     
+     CompISSRAtAGlance(stateCode, districtCode, CityCode): Observable<CompAtAGlance> {
+          //alert(stateCode);
+          return this.http.get<CompAtAGlance>(this.url + "HFA_ISSR_AtAGlance?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
+     }
+     
+     CompAHPAtAGlance(stateCode, districtCode, CityCode): Observable<CompAtAGlance> {
+          //alert(stateCode);
+          return this.http.get<CompAtAGlance>(this.url + "HFA_AHP_AtAGlance?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
+     }
+     
+     
+     CompBLCSAtAGlance(stateCode, districtCode, CityCode): Observable<CompAtAGlance> {
+          //alert(stateCode);
+          return this.http.get<CompAtAGlance>(this.url + "HFA_BLCS_AtAGlance?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
+     }
 
      CLSSCityWiseReportPMayListNew(stateCode, districtCode, CityCode, division): Observable<CLSS_Citywise_Values> {
           return this.http.get<CLSS_Citywise_Values>(this.url + "HFA_Proc_CLSS_CityWise_New?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode + "&Division=" + division);//.toPromise().then(result=>this.ChartDetail= result as Charts);
@@ -173,51 +202,7 @@ export class GraphService {
      DemandCityWiseReportPMayList(stateCode, districtCode, CityCode): Observable<Demand> {
           return this.http.get<Demand>(this.url + "HFA_DemandCityWise?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
      }
-     JNNURMCityWiseAtAGlance(stateCode, districtCode, CityCode): Observable<JNAtAGlance> {
-          return this.http.get<JNAtAGlance>(this.url + "HFA_JNNURM_AtaGlance?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
-     }
-     HFA_JNNURN_AtAGlanceNew(stateCode, districtCode, CityCode, division): Observable<JNAtAGlance> {
-          return this.http.get<JNAtAGlance>(this.url + "HFA_JNNURN_AtAGlanceNew?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode + "&division=" + division);//.toPromise().then(result=>this.ChartDetail= result as Charts);
-     }
-
-     CompAtAGlance(stateCode, districtCode, CityCode): Observable<CompAtAGlance> {
-          //alert(stateCode);
-          return this.http.get<CompAtAGlance>(this.url + "HFA_Component_AtaGlance?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
-     }
-     CompRAYAtAGlance(stateCode, districtCode, CityCode): Observable<CompAtAGlance> {
-          //alert(stateCode);
-          return this.http.get<CompAtAGlance>(this.url + "HFA_RAY_AtaGlance?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
-     }
-
-     CompRAYAtAGlanceNew(stateCode, districtCode, CityCode, division): Observable<CompAtAGlance> {
-          //alert(stateCode);
-          return this.http.get<CompAtAGlance>(this.url + "HFA_RAY_AtAGlance_New?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode + "&division=" + division);//.toPromise().then(result=>this.ChartDetail= result as Charts);
-     }
-     CompISSRAtAGlance(stateCode, districtCode, CityCode): Observable<CompAtAGlance> {
-          //alert(stateCode);
-          return this.http.get<CompAtAGlance>(this.url + "HFA_ISSR_AtAGlance?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
-     }
-     CompISSRAtAGlanceNew(stateCode, districtCode, CityCode, division): Observable<CompAtAGlance> {
-          //alert(stateCode);
-          return this.http.get<CompAtAGlance>(this.url + "HFA_ISSR_AtAGlance_New?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode + "&division=" + division);//.toPromise().then(result=>this.ChartDetail= result as Charts);
-     }
-     CompAHPAtAGlance(stateCode, districtCode, CityCode): Observable<CompAtAGlance> {
-          //alert(stateCode);
-          return this.http.get<CompAtAGlance>(this.url + "HFA_AHP_AtAGlance?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
-     }
-     CompAHPAtAGlanceNew(stateCode, districtCode, CityCode, division): Observable<CompAtAGlance> {
-          //alert(stateCode);
-          return this.http.get<CompAtAGlance>(this.url + "HFA_AHP_AtAGlance_New?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode + "&division=" + division);//.toPromise().then(result=>this.ChartDetail= result as Charts);
-     }
-     CompBLCSAtAGlanceNew(stateCode, districtCode, CityCode, division): Observable<CompAtAGlance> {
-          //alert(stateCode);
-          return this.http.get<CompAtAGlance>(this.url + "HFA_BLCS_AtAGlance_New?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode + "&division=" + division);//.toPromise().then(result=>this.ChartDetail= result as Charts);
-     }
-     CompBLCSAtAGlance(stateCode, districtCode, CityCode): Observable<CompAtAGlance> {
-          //alert(stateCode);
-          return this.http.get<CompAtAGlance>(this.url + "HFA_BLCS_AtAGlance?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
-     }
-     FinYrWiseFinDataHouse(stateCode, districtCode, CityCode): Observable<FinYrWise_FinDataHouses> {// 3 a
+      FinYrWiseFinDataHouse(stateCode, districtCode, CityCode): Observable<FinYrWise_FinDataHouses> {// 3 a
           return this.http.get<FinYrWise_FinDataHouses>(this.url + "HFA_sp_PMayFinYrData?stateCode=" + stateCode + "&distrcitCode=" + districtCode + "&cityCode=" + CityCode);//.toPromise().then(result=>this.ChartDetail= result as Charts);
      }
 
@@ -945,7 +930,7 @@ export class GraphService {
      }
 
      sp_create_Fin_Cons_ISSRDATA(stateCode: string, DisttCode: string, cityCode: string, Cid: string, FinYear: string): Observable<PMAY_DATA_Financial[]> {
-          alert();
+        //  alert();
           return this.http.get<PMAY_DATA_Financial[]>(this.url + "sp_create_Fin_Cons_ISSRDATA?stateCode=" + stateCode + "&dcode=" + DisttCode + "&CityCode=" + cityCode + "&Cid=" + Cid + "&finYear=" + FinYear);
      }
 
@@ -1009,4 +994,17 @@ export class GraphService {
           debugger;
           return this.http.get<PMAY_DATA_ShortFall[]>(this.url + "sp_Shortfall_BLC_AHP?stateCode=" + stateCode + "&dcode=" + DisttCode + "&CityCode=" + cityCode + "&cid=" + Comp + "&finYear=" + FinYear);
      }
+
+     HFA_AtAGlance(stateCode,districtCode,CityCode,division):Observable<CompWiseDisplay[]>
+     {
+           return this.http.get<CompWiseDisplay[]>(this.url + "sp_CompWise_View?stateCode="+ stateCode + "&dcode=" +districtCode + "&cityCode=" + CityCode + "&Division=" + division); 
+     }
 }
+
+
+
+
+
+
+
+ 
