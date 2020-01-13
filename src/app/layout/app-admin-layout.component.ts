@@ -157,7 +157,7 @@ export class AppAdminLayoutComponent implements OnInit {
       To: 'whatsapp:+91' + whatsappNumber,
       From: 'whatsapp:+14155238886',
       Body: whatsappMessage,
-      MediaUrl: 'https://bit.ly/whatsapp-image-example',
+      MediaUrl: reportType,
     }
 
     this.service.waMsg(data).subscribe(result => {
@@ -170,3 +170,4 @@ export class AppAdminLayoutComponent implements OnInit {
     })
   }
 }
+// MediaUrl: 'https://drive.google.com/file/d/1hat50fKjpZC3N2YrBc0gXnDxdeq-lY1n/view',
