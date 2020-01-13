@@ -80,6 +80,8 @@ export class AdminSandbox {
     "ddlComponent": "",
     "ddlAgency": ""
   }
+  initialProjectBriefDetailsData: any = [];
+
   Date: DateConstructor;
   EditSchemeComponent: any[] = [];
   EditState: any[] = [];
@@ -423,8 +425,7 @@ export class AdminSandbox {
 
   //----for state add,edit and delete------////
   getStateData() {
-      this.userMasterService.getStateData().subscribe(data => {
-        // console.log(data);
+    this.userMasterService.getStateData().subscribe(data => {
       this.stateMaster = data;
     });
   }
@@ -467,7 +468,6 @@ export class AdminSandbox {
   deleteStateData(SchemeComponentId: any) {
 
     this.userMasterService.deleteStateData(SchemeComponentId).subscribe(data => {
-      // console.log(data);
       if (data.status == "200") {
         this.snotifyService.success("State Delete Successfully...", "", {
           position: SnotifyPosition.rightTop,
@@ -705,30 +705,29 @@ export class AdminSandbox {
       this.constituencyCityMaster = data;
     });
   }
-  getConsistuencyData(stateCode:string) {
+  getConsistuencyData(stateCode: string) {
     debugger;
-    if(stateCode==='0')
-    {
+    if (stateCode === '0') {
       this.userMasterService.getConsistuencyData().subscribe(data => {
         this.constituencyMaster = data;
       });
     }
-    else{
+    else {
       this.userMasterService.getConsistuencyData().subscribe(data => {
-        this.constituencyMaster = data.filter(a=>a.StateCode===stateCode);
+        this.constituencyMaster = data.filter(a => a.StateCode === stateCode);
       });
     }
   }
 
-  
 
-  getConsistuencyDataByNum(constituencyNumber:string) {
+
+  getConsistuencyDataByNum(constituencyNumber: string) {
     this.userMasterService.getConsistuencyData().subscribe(data => {
-      this.constituencyMaster = data.filter(a=>a.ConstituencyNumber===constituencyNumber);
+      this.constituencyMaster = data.filter(a => a.ConstituencyNumber === constituencyNumber);
     });
-    
+
   }
-  
+
   postConstituency(formGroup: any) {
     var objPost =
     {
@@ -1284,12 +1283,12 @@ export class AdminSandbox {
   }
 
   // <<<<<<<<<<<<<<<<<<<<<<<<getCSMCNo >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  getCSMCNo(StateCode: any, DisttCode :any,cityCode :any, CompCode:any) {
-    this.userMasterService.getCSMC_NoData(StateCode,DisttCode,cityCode,CompCode ).subscribe(data => {
+  getCSMCNo(StateCode: any, DisttCode: any, cityCode: any, CompCode: any) {
+    this.userMasterService.getCSMC_NoData(StateCode, DisttCode, cityCode, CompCode).subscribe(data => {
       this.schCSMCNo = data;
     });
   }
-// <<<<<<<<<<<<<<<<<<<<<<<<getCSMCNo >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // <<<<<<<<<<<<<<<<<<<<<<<<getCSMCNo >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
   getProjectSchemeComponentData(SchemeId: any) {
@@ -1298,7 +1297,7 @@ export class AdminSandbox {
     });
   }
 
-  getProj_ComponentWiseData(Components: any)  {
+  getProj_ComponentWiseData(Components: any) {
     this.userMasterService.getProj_ComponentWiseData(Components).subscribe(data => {
       this.schComponentMaster = data;
     });
@@ -1555,7 +1554,7 @@ export class AdminSandbox {
       });
     });
   }
-  getComponentWise_ReleaseOrder(stateCode: any,) {
+  getComponentWise_ReleaseOrder(stateCode: any, ) {
     this.userMasterService.getReleaseOrder(stateCode).subscribe(data => {
       this.releaseOrderValue = data;
     });
@@ -1570,10 +1569,10 @@ export class AdminSandbox {
     });
   }
 
-  download_PBD_Release(pdf: any,filderName:string) {
+  download_PBD_Release(pdf: any, filderName: string) {
     var str = pdf;
     var newStr = str.slice(0, -4);
-    this.userMasterService.getFile_PBD_Downnload(newStr,filderName).subscribe((
+    this.userMasterService.getFile_PBD_Downnload(newStr, filderName).subscribe((
       data) => {
       importedSaveAs(data, str)
     });
@@ -1603,34 +1602,32 @@ export class AdminSandbox {
       'UtilizationNo': data.UtilizationNo,
       'UCDate': currentDate,
     };
-        this.userMasterService.postUCOrder(file, objPost.State, objPost.SanctionNo, objPost.UCAmount, objPost.UCDate, objPost.UtilizationNo).subscribe(data => {
-          if (data.status == "200") {
-            this.snotifyService.success("Release Order Save Successfully...", "", {
-              position: SnotifyPosition.rightTop,
-              timeout: 3000
-            });
-          }
-        }
+    this.userMasterService.postUCOrder(file, objPost.State, objPost.SanctionNo, objPost.UCAmount, objPost.UCDate, objPost.UtilizationNo).subscribe(data => {
+      if (data.status == "200") {
+        this.snotifyService.success("Release Order Save Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 3000
+        });
+      }
+    }
     );
   }
 
-  getProject_AllDetails( CSMCNumber: any, component: any) {
-   this.userMasterService.getProject_AllDetails(CSMCNumber,component).subscribe(data => {
-     this.projectBriefDetail = data;
-   });
-}
+  getProject_AllDetails(CSMCNumber: any, component: any) {
+    this.userMasterService.getProject_AllDetails(CSMCNumber, component).subscribe(data => {
+      this.projectBriefDetail = data;
+    });
+  }
   //-----get projectbriefname of project name----//
   getProjectBriefName(statecode: any, districtcode: any, citycode: any, scheme: any, component: any) {
-       debugger;
-    if(component !=="")
-    {
+    debugger;
+    if (component !== "") {
       this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
-      //  this.projectBriefDetail = data.filter(a=>a.SchemeComponent==component);
+        //  this.projectBriefDetail = data.filter(a=>a.SchemeComponent==component);
         this.projectBriefDetail = data;
       });
     }
-    else
-    {
+    else {
       this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
         this.projectBriefDetail = data;
         //this.projectBriefDetail = data;
@@ -1639,36 +1636,34 @@ export class AdminSandbox {
   }
 
   getProjectBriefName_SMCNo(statecode: any, districtcode: any, citycode: any, scheme: any, component: any, CSMCNumber: any) {
-   // alert(component);
+    // alert(component);
     this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
-      this.projectBriefName = data.filter(a=>a.CSMCNumber ===CSMCNumber);;
+      this.projectBriefName = data.filter(a => a.CSMCNumber === CSMCNumber);;
     });
   }
 
-   //-----get projectbriefname of project name----//
-   getProjectBriefName1(statecode: any, districtcode: any, citycode: any, scheme: any, component: any,CSMCNumber: any) {
+  //-----get projectbriefname of project name----//
+  getProjectBriefName1(statecode: any, districtcode: any, citycode: any, scheme: any, component: any, CSMCNumber: any) {
     //alert('Test');
-     if(CSMCNumber !="")
-     {
-    this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
-      this.projectBriefName = data.filter(a=>a.CSMCNumber ===CSMCNumber);
-    });
-  }else{
-    this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
+    if (CSMCNumber != "") {
+      this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
+        this.projectBriefName = data.filter(a => a.CSMCNumber === CSMCNumber);
+      });
+    } else {
+      this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
+        this.projectBriefName = data;
+      });
+    }
+  }
+
+  PrjBriefDetail_Comp(component: any) {
+    this.userMasterService.getProject_Brief_Detail(component).subscribe(data => {
       this.projectBriefName = data;
     });
   }
-  }
 
-  PrjBriefDetail_Comp(component: any)
-  {
-      this.userMasterService.getProject_Brief_Detail(component).subscribe(data => {
-        this.projectBriefName = data;
-      });
-  }
-
-   //------post get api for project brief detail------//
-   projectBriefDeatil(file: File, formGroup: any): any {
+  //------post get api for project brief detail------//
+  projectBriefDeatil(file: File, formGroup: any): any {
     var filename = file.name
     var g = new Date(formGroup.get('txtSLSMC').value);
     var currentBriefDate = this.datePipe.transform(g, 'dd-MM-yyyy');
@@ -1709,7 +1704,7 @@ export class AdminSandbox {
       this.userMasterService.postSlum(objPost.Slum).subscribe((data: any) => {
         if (data.status == "200") {
 
-          this.getProjectBriefDetail();
+          // this.getProjectBriefDetail();
           this.Slum = [];
           this.snotifyService.success("Project Brief Details Save Successfully...", "", {
             position: SnotifyPosition.rightTop,
@@ -1723,50 +1718,49 @@ export class AdminSandbox {
 
   SlumArray(value: any) {
     this.Slum = value;
-    console.log(this.Slum);
   }
 
-  
- 
 
-  getProjectBriefDetail() {
-    this.userMasterService.geProjectBriefDetail().subscribe(data => {
-      this.projectBriefDetail = data;
+
+
+  // getProjectBriefDetail() {
+  //   this.userMasterService.geProjectBriefDetail().subscribe(data => {
+  //     this.projectBriefDetail = data;
+  //   });
+  // }
+
+  getProject_BriefData(stateCode: string) {
+    if (stateCode === '0') {
+      this.userMasterService.geProjectBriefDetail(stateCode).subscribe(data => {
+        this.projectBriefDetail = data;
+        this.initialProjectBriefDetailsData = data
+      });
+    }
+    else {
+
+      this.userMasterService.geProjectBriefDetail(stateCode).subscribe(data => {
+        this.projectBriefDetail = data.filter(a => a.Codes === stateCode);
+        this.initialProjectBriefDetailsData = data
+
+      });
+    }
+  }
+
+  getProject_Brief_Data(DisttCode: string, stateCode: string) {
+    if (DisttCode === '0') {
+      this.projectBriefDetail = this.initialProjectBriefDetailsData;
+    }
+    else {
+      this.projectBriefDetail = this.initialProjectBriefDetailsData.filter(a => a.Codes === stateCode && a.Dcode === DisttCode);
+    }
+
+
+  }
+  getProj_Brief_DataOnCity(stateCode: string, DisttCode: string, CityCode: string) {
+
+    this.userMasterService.geProjectBriefDetail(stateCode).subscribe(data => {
+      this.projectBriefDetail = this.initialProjectBriefDetailsData.filter(a => a.Codes === stateCode && a.Dcode === DisttCode && a.CityCode === CityCode);
     });
-  }
-
-  getProject_BriefData(stateCode:string) {
-    if(stateCode==='0')
-    {
-        this.userMasterService.geProjectBriefDetail().subscribe(data => {
-        this.projectBriefDetail = data;
-      });
-    }
-    else{
-        this.userMasterService.geProjectBriefDetail().subscribe(data => {
-        this.projectBriefDetail = data.filter(a=>a.Codes===stateCode);
-      });
-    }
-  }
-
-  getProject_Brief_Data(DisttCode:string,stateCode:string) {
-    if(DisttCode==='0')
-    {
-        this.userMasterService.geProjectBriefDetail().subscribe(data => {
-        this.projectBriefDetail = data;
-      });
-    }
-    else{
-        this.userMasterService.geProjectBriefDetail().subscribe(data => {
-        this.projectBriefDetail = data.filter(a=>a.Dcode===DisttCode && a.Codes===stateCode);
-      });
-    }
-  }
-  getProj_Brief_DataOnCity(stateCode :string,DisttCode:string, CityCode:string) {
-     
-        this.userMasterService.geProjectBriefDetail().subscribe(data => {
-        this.projectBriefDetail = data.filter(a=>a.Codes===stateCode && a.Dcode===DisttCode && a.CityCode===CityCode);
-      });
   }
   ProjectBriefDetailHousesTotal(txtJoint: any, txtFemale: any, txtMale: any, txtTransgender: any) {
     var Joint = txtJoint;

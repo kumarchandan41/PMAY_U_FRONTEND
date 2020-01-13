@@ -14,16 +14,16 @@ import { District } from '../login/ModelS/chart.model';
 })
 export class UserService {
   [x: string]: any;
-apiUrl:string;
-apiUrlReg:string;
+  apiUrl: string;
+  apiUrlReg: string;
 
 
-  constructor(private http: HttpClient,private constantUrlService: ConstantUrlService,private globalUrl:GlobalUrl) {
+  constructor(private http: HttpClient, private constantUrlService: ConstantUrlService, private globalUrl: GlobalUrl) {
 
-    this.baseUrl = this.globalUrl.urlIPAddess +"/API";
-     this.apiUrl= this.globalUrl.urlIPAddess + "/API/Authenticate/";
-     this.apiUrlReg= this.globalUrl.urlIPAddess + "/API/RegistrationApi/";
-   }
+    this.baseUrl = this.globalUrl.urlIPAddess + "/API";
+    this.apiUrl = this.globalUrl.urlIPAddess + "/API/Authenticate/";
+    this.apiUrlReg = this.globalUrl.urlIPAddess + "/API/RegistrationApi/";
+  }
 
   //get api for scheme master
   getSchemeData(): Observable<any> {
@@ -60,7 +60,7 @@ apiUrlReg:string;
   }
   //get api for component master
   getSchemeComponentData(SchemeName: any): Observable<any> {
-    
+
     return this.http.get(this.baseUrl + "/Admin_Value/GetComponentData/" + SchemeName, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
@@ -108,7 +108,7 @@ apiUrlReg:string;
   }
   //delete api for state master
   deleteStateData(StateId: any): Observable<any> {
-   
+
     return this.http.get(this.baseUrl + "/Admin_Value/DeleteStateData/" + StateId, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response;
@@ -162,9 +162,9 @@ apiUrlReg:string;
       );
   }
 
-   //get api for constituency master
-   getConsistuency_Data(constNumber:string): Observable<any> {
-   //  alert(constNumber) ;
+  //get api for constituency master
+  getConsistuency_Data(constNumber: string): Observable<any> {
+    //  alert(constNumber) ;
     return this.http.get(this.baseUrl + "/Admin_Value/GetFinal_ConsistuencyData/" + constNumber, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
@@ -180,36 +180,36 @@ apiUrlReg:string;
       })
       );
   }
-    
-  
-
-      //get api for constituency city master
-   GetAllCitiesBasedOnsyay(stateCodes:string): Observable<CitiesBasedOnstate[]> {
-         // alert(this.baseUrl);
-        return this.http.get<CitiesBasedOnstate[]>(this.baseUrl + "/Admin_Value/getAllcitesBasedOnState?stateCode=" + stateCodes);
-   }
-
-    GetAllConstutiency(StateCode:string): Observable<getConstutiencyData> {
-      return this.http.get<getConstutiencyData>(this.baseUrl + "/Admin_Value/GetALLConsistuencyData?StateCode=" + StateCode);
-    }
 
 
-    
-    getProjRelOrderData(componentId:string): Observable<getProjRelOrder> {
-      return this.http.get<getProjRelOrder>(this.baseUrl + "/Admin_Value/GetComponentWise_projRelOrder?componentId=" + componentId);
-    }
+
+  //get api for constituency city master
+  GetAllCitiesBasedOnsyay(stateCodes: string): Observable<CitiesBasedOnstate[]> {
+    // alert(this.baseUrl);
+    return this.http.get<CitiesBasedOnstate[]>(this.baseUrl + "/Admin_Value/getAllcitesBasedOnState?stateCode=" + stateCodes);
+  }
+
+  GetAllConstutiency(StateCode: string): Observable<getConstutiencyData> {
+    return this.http.get<getConstutiencyData>(this.baseUrl + "/Admin_Value/GetALLConsistuencyData?StateCode=" + StateCode);
+  }
+
+
+
+  getProjRelOrderData(componentId: string): Observable<getProjRelOrder> {
+    return this.http.get<getProjRelOrder>(this.baseUrl + "/Admin_Value/GetComponentWise_projRelOrder?componentId=" + componentId);
+  }
 
 
   //post api for constituency master
   postConstituencyData(postData: any): Observable<any> {
-   // alert(3);
+    // alert(3);
     return this.http.post(this.baseUrl + "/Admin_Value/SubmitConstituencyData", postData, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
       })
       );
   }
-  
+
   //delete api for constituency master
   deleteConstituencyData(ConstituencyId: any): Observable<any> {
     return this.http.get(this.baseUrl + "/Admin_Value/DeleteConstituencyData/" + ConstituencyId, { "observe": "response" })
@@ -308,7 +308,7 @@ apiUrlReg:string;
 
 
   // <<<<<<<<<<<<<<<<<<<<Get CSMC No  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  getCSMC_NoData(statecode: any, districtcode: any, citycode: any,component: any): Observable<any> {
+  getCSMC_NoData(statecode: any, districtcode: any, citycode: any, component: any): Observable<any> {
     return this.http.get(this.baseUrl + "/Admin_Value/GetCSMCNo/" + statecode + '/' + districtcode + '/' + citycode + '/' + component, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
@@ -548,14 +548,14 @@ apiUrlReg:string;
   //----post api for release order-----//
   postReleasedOrder(file: File, data: string, sanction: any, state: any, amount: any, date: any, component: any): any {
     const formdata: FormData = new FormData();
-    formdata.append('Image', file, file.name +"_"+ state +"_"+ amount);
+    formdata.append('Image', file, file.name + "_" + state + "_" + amount);
     formdata.append('Scheme', data);
     formdata.append('Sanction', sanction);
     formdata.append('State', state);
     formdata.append('Amount', amount);
     formdata.append('Date', date);
     formdata.append('Component', component)
-  //  alert(this.baseUrl);
+    //  alert(this.baseUrl);
     return this.http.post(this.baseUrl + "/Admin_Value/postReleasedOrder", formdata, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response;
@@ -588,7 +588,7 @@ apiUrlReg:string;
   //getProject_AllDetails
 
 
-  getFile_PBD_Downnload(pdf: any,folderName:string): Observable<Blob> {
+  getFile_PBD_Downnload(pdf: any, folderName: string): Observable<Blob> {
 
     return this.http.get(this.baseUrl + "/Admin_Value/GetFileNew/" + pdf + "/" + folderName, {
       headers: new HttpHeaders({
@@ -613,7 +613,7 @@ apiUrlReg:string;
   //----post api for release order-----//
   postUCOrder(file: File, state: string, sanction: any, ucamount: any, ucdate: any, utilizationno: any): any {
     const formdata: FormData = new FormData();
-    formdata.append('Image', file, file.name  );
+    formdata.append('Image', file, file.name);
     formdata.append('State', state);
     formdata.append('Sanction', sanction);
     formdata.append('UCAmount', ucamount);
@@ -636,10 +636,10 @@ apiUrlReg:string;
       );
   }
 
-   //get project name
-   getProject_AllDetails( CSMCNumber: any, component: any): Observable<any> {
-  //  alert(component);
-    return this.http.get(this.baseUrl + "/Admin_Value/GetProjectDetails/" + CSMCNumber + '/' + component , { "observe": "response" })
+  //get project name
+  getProject_AllDetails(CSMCNumber: any, component: any): Observable<any> {
+    //  alert(component);
+    return this.http.get(this.baseUrl + "/Admin_Value/GetProjectDetails/" + CSMCNumber + '/' + component, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
       })
@@ -660,7 +660,7 @@ apiUrlReg:string;
     formdata.append('Image', file, file.name);
     formdata.append('Data', JSON.stringify(objPost));
 
-  // alert(this.baseUrl);
+    // alert(this.baseUrl);
 
     return this.http.post(this.baseUrl + "/Admin_Value/postProjectBrief_Detail", formdata, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
@@ -670,8 +670,8 @@ apiUrlReg:string;
   }
 
   //get api for project brief detail
-  geProjectBriefDetail(): Observable<any> {
-    return this.http.get(this.baseUrl + "/Admin_Value/GetProjectBriefDetail", { "observe": "response" })
+  geProjectBriefDetail(stateCode): Observable<any> {
+    return this.http.get(this.baseUrl + "/Admin_Value/GetProjectBriefDetail/" + stateCode, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
       })
@@ -681,9 +681,9 @@ apiUrlReg:string;
   DisttList(stateName) {
     return this.http.get<District[]>(this.url + "HFA_DisttDetails?stateCode=" + stateName).toPromise().then(result => this.DisttDetails = result as District[]);
   }
-//post project detail bulk data
+  //post project detail bulk data
   postProjectDetailsBulkData(file) {
-   
+
     const formdata: FormData = new FormData();
     formdata.append('Image', file, file.name);
     return this.http.post(this.baseUrl + "/Admin_Value/ExcelUploadProjectDetailData", formdata, { "observe": "response" })
@@ -694,7 +694,7 @@ apiUrlReg:string;
   }
 
 
-//---------post,get,delete,update api for clssification master----------------//
+  //---------post,get,delete,update api for clssification master----------------//
   //post api for classification master
   postClassificationMaster(postData: any): Observable<any> {
     return this.http.post(this.baseUrl + "/Admin_Value/SubmitClassificationMaster", postData, { "observe": "response" })
@@ -703,30 +703,30 @@ apiUrlReg:string;
       })
       );
   }
-//get api for classification master
-getClassificationMaster(): Observable<any> {
-  return this.http.get(this.baseUrl + "/Admin_Value/GetClassificationMaster", { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
+  //get api for classification master
+  getClassificationMaster(): Observable<any> {
+    return this.http.get(this.baseUrl + "/Admin_Value/GetClassificationMaster", { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
 
- //delete api for classification master
- deleteClassificationData(ClassificationId: any): Observable<any> {
-  return this.http.get(this.baseUrl + "/Admin_Value/DeleteClassificationMaster/" + ClassificationId, { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
+  //delete api for classification master
+  deleteClassificationData(ClassificationId: any): Observable<any> {
+    return this.http.get(this.baseUrl + "/Admin_Value/DeleteClassificationMaster/" + ClassificationId, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
 
- //update api for classification master
- updateClassificationMaster(postData: any): Observable<any> {
-  const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  return this.http.post(this.baseUrl + "/Admin_Value/UpdateClassificationMaster/", postData, httpOptions
-  );
-}
+  //update api for classification master
+  updateClassificationMaster(postData: any): Observable<any> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.post(this.baseUrl + "/Admin_Value/UpdateClassificationMaster/", postData, httpOptions
+    );
+  }
   //get project name
   getProjectClassificationName(statecode: any, districtcode: any, citycode: any): Observable<any> {
     return this.http.get(this.baseUrl + "/Admin_Value/getProject/" + statecode + '/' + districtcode + '/' + citycode, { "observe": "response" })
@@ -736,33 +736,33 @@ getClassificationMaster(): Observable<any> {
       );
   }
 
- //get classification on behalf of state
- getStateClassification(statecode: any): Observable<any> {
-  return this.http.get(this.baseUrl + "/Admin_Value/getStateClassification/" + statecode , { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
+  //get classification on behalf of state
+  getStateClassification(statecode: any): Observable<any> {
+    return this.http.get(this.baseUrl + "/Admin_Value/getStateClassification/" + statecode, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
 
 
-//--------------------------api for mapping of classification master with state,district,city and project------------------------------//
-//post api for state classification mapping
-postStateClassificationMapping(postData: any): Observable<any> {
-  return this.http.post(this.baseUrl + "/Admin_Value/SubmitStateClassificationMapping", postData, { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
- //get api for state classification mapping
- getStateClassificationMapping(): Observable<any> {
-  return this.http.get(this.baseUrl + "/Admin_Value/GetStateClassificationMapping"  , { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
+  //--------------------------api for mapping of classification master with state,district,city and project------------------------------//
+  //post api for state classification mapping
+  postStateClassificationMapping(postData: any): Observable<any> {
+    return this.http.post(this.baseUrl + "/Admin_Value/SubmitStateClassificationMapping", postData, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+  //get api for state classification mapping
+  getStateClassificationMapping(): Observable<any> {
+    return this.http.get(this.baseUrl + "/Admin_Value/GetStateClassificationMapping", { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
 
   //delete api for state classification mapping
   deleteStateClassificationMapping(StateMappingId: any): Observable<any> {
@@ -773,81 +773,81 @@ postStateClassificationMapping(postData: any): Observable<any> {
       );
   }
 
-//post api for district classification mapping
-postDistrictClassificationMapping(postData: any): Observable<any> {
-  return this.http.post(this.baseUrl + "/Admin_Value/SubmitDistrictClassificationMapping", postData, { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
- //get api for district classification mapping
- getDistrictClassificationMapping(statecode:any): Observable<any> {
-  return this.http.get(this.baseUrl + "/Admin_Value/GetDistrictClassificationMapping/"+statecode  , { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
+  //post api for district classification mapping
+  postDistrictClassificationMapping(postData: any): Observable<any> {
+    return this.http.post(this.baseUrl + "/Admin_Value/SubmitDistrictClassificationMapping", postData, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+  //get api for district classification mapping
+  getDistrictClassificationMapping(statecode: any): Observable<any> {
+    return this.http.get(this.baseUrl + "/Admin_Value/GetDistrictClassificationMapping/" + statecode, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
   //delete api for district classification mapping
   deleteDistrictClassificationMapping(DistMappingId: any): Observable<any> {
-  
+
     return this.http.get(this.baseUrl + "/Admin_Value/DeleteDistrictClassificationMapping/" + DistMappingId, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
       })
       );
   }
-//post api for city classification mapping
-postCityClassificationMapping(postData: any): Observable<any> {
-  return this.http.post(this.baseUrl + "/Admin_Value/SubmitCityClassificationMapping", postData, { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
- //get api for city classification mapping
- getCityClassificationMapping(statecode:any,districtcode:any): Observable<any> {
-  return this.http.get(this.baseUrl + "/Admin_Value/GetCityClassificationMapping/"+statecode +'/'+districtcode , { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
-//delete api for city classification mapping
-deleteCityClassificationMapping(CityMapId: any): Observable<any> {
- 
-  return this.http.get(this.baseUrl + "/Admin_Value/DeleteCityClassificationMapping/" + CityMapId, { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
-//post api for project classification mapping
-postProjectClassificationMapping(postData: any): Observable<any> {
-  return this.http.post(this.baseUrl + "/Admin_Value/SubmitProjectClassificationMapping", postData, { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
- //get api for project classification mapping
- getProjectClassificationMapping(statecode:any,districtcode:any,citycode:any): Observable<any> {
-  return this.http.get(this.baseUrl + "/Admin_Value/GetProjectClassificationMapping/"+statecode +'/'+districtcode +'/'+citycode, { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
-//delete api for city classification mapping
-deleteProjectClassificationMapping(ProjectId: any): Observable<any> {
- 
-  return this.http.get(this.baseUrl + "/Admin_Value/DeleteProjectClassificationMapping/" + ProjectId, { "observe": "response" })
-    .pipe(map((response: HttpResponse<any>) => {
-      return response.body;
-    })
-    );
-}
+  //post api for city classification mapping
+  postCityClassificationMapping(postData: any): Observable<any> {
+    return this.http.post(this.baseUrl + "/Admin_Value/SubmitCityClassificationMapping", postData, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+  //get api for city classification mapping
+  getCityClassificationMapping(statecode: any, districtcode: any): Observable<any> {
+    return this.http.get(this.baseUrl + "/Admin_Value/GetCityClassificationMapping/" + statecode + '/' + districtcode, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+  //delete api for city classification mapping
+  deleteCityClassificationMapping(CityMapId: any): Observable<any> {
+
+    return this.http.get(this.baseUrl + "/Admin_Value/DeleteCityClassificationMapping/" + CityMapId, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+  //post api for project classification mapping
+  postProjectClassificationMapping(postData: any): Observable<any> {
+    return this.http.post(this.baseUrl + "/Admin_Value/SubmitProjectClassificationMapping", postData, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+  //get api for project classification mapping
+  getProjectClassificationMapping(statecode: any, districtcode: any, citycode: any): Observable<any> {
+    return this.http.get(this.baseUrl + "/Admin_Value/GetProjectClassificationMapping/" + statecode + '/' + districtcode + '/' + citycode, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+  //delete api for city classification mapping
+  deleteProjectClassificationMapping(ProjectId: any): Observable<any> {
+
+    return this.http.get(this.baseUrl + "/Admin_Value/DeleteProjectClassificationMapping/" + ProjectId, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
 
 
   //----get pagination service----//

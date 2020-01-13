@@ -17,10 +17,10 @@
         <div class="w3-quarter w3-left" style="width: 22%;">
 
           <select [formControl]="ddlStateCode" [(ngModel)]="State"
-          style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="getProjectBriefData($event);adminSandbox.getStateDistrictData($event.target.value);this.District='';this.City='';this.ProjectName='';
+            style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="getProjectBriefData($event); adminSandbox.getStateDistrictData($event.target.value);this.District='';this.City='';this.ProjectName='';
                         this.Scheme='';this.Components='';" class="w3-input w3-border">
 
-          <!-- <select [formControl]="ddlStateCode" [(ngModel)]="State"
+            <!-- <select [formControl]="ddlStateCode" [(ngModel)]="State"
             style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="adminSandbox.getStateDistrictData($event.target.value);this.District='';this.City='';this.ProjectName='';
                           this.Scheme='';this.Components='';" class="w3-input w3-border"> -->
             <option value="" disabled>Please select state--</option>
@@ -41,7 +41,7 @@
           <select [formControl]="ddlDistrictCode" [(ngModel)]="District"
             style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="PrjBriefDataonDistt($event);adminSandbox.getDistrictCityData($event.target.value);this.City='';this.ProjectName='';
             this.Scheme='';this.Components='';" class="w3-input w3-border">
-          <!-- <select [formControl]="ddlDistrictCode" [(ngModel)]="District"
+            <!-- <select [formControl]="ddlDistrictCode" [(ngModel)]="District"
             style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="adminSandbox.getDistrictCityData($event.target.value);this.City='';this.ProjectName='';
             this.Scheme='';this.Components='';" class="w3-input w3-border"> -->
 
@@ -61,7 +61,7 @@
         <div class="w3-quarter w3-left" style="width: 22%;">
           <select [formControl]="ddlCity" [(ngModel)]="City" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
             class="w3-input w3-border" (change)="PrjBriefDataonCity($event);">
-          <!-- <select [formControl]="ddlCity" [(ngModel)]="City" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            <!-- <select [formControl]="ddlCity" [(ngModel)]="City" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
             class="w3-input w3-border"> -->
             <option value="" disabled>Please select city--</option>
             <option *ngFor="let city of adminSandbox.districtCityMaster" [value]="city.CityCode">
@@ -97,17 +97,18 @@
               Component :
             </label>
           </div>
-           <!-- ;adminSandbox.getProjectBriefName(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,$event.target.value)-->
-          <div class="w3-quarter w3-left" style="width: 22%;"> 
+          <!-- ;adminSandbox.getProjectBriefName(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,$event.target.value)-->
+          <div class="w3-quarter w3-left" style="width: 22%;">
             <select [formControl]="ddlComponent" class="w3-input w3-border" [(ngModel)]="Components"
-            style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="adminSandbox.getCSMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,$event.target.value) ;adminSandbox.getProject_AllDetails( 0,$event.target.value)">
+              style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              (change)="adminSandbox.getCSMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,$event.target.value) ;adminSandbox.getProject_AllDetails( 0,$event.target.value)">
 
- 
+
 
 
               <option value="" disabled>Please select Components--</option>
-               <option *ngFor="let schemeComp of adminSandbox.schComponentMaster" [value]="schemeComp.Cname">
-                {{schemeComp.Cname}}</option> 
+              <option *ngFor="let schemeComp of adminSandbox.schComponentMaster" [value]="schemeComp.Cname">
+                {{schemeComp.Cname}}</option>
             </select>
 
 
@@ -127,35 +128,36 @@
             <label *ngIf="submitted && txtCSMCNumber.hasError('required')" class="error-label"
                 style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter csmc number.</label>
         </div> getCSMCNo(StateCode: any, DisttCode :any,cityCode :any, CompCode:any) -->
-        <div class="w3-quarter w3-center" style="width: 10%;">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-            CSMC No :
-          </label>
-        </div>   
-        <div class="w3-quarter w3-left" style="width: 22%;">
-        <!--   <select [formControl]="ddlCSMCNo" [(ngModel)]="CSMCNumber" class="w3-input w3-border"   
+          <div class="w3-quarter w3-center" style="width: 10%;">
+            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+              CSMC No :
+            </label>
+          </div>
+          <div class="w3-quarter w3-left" style="width: 22%;">
+            <!--   <select [formControl]="ddlCSMCNo" [(ngModel)]="CSMCNumber" class="w3-input w3-border"   
           this.ProjectName='';" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
             <option value="" disabled >  Please select CSMC No--</option>
             <option *ngFor="let schemeComp of adminSandbox.schCSMCNo" [value]="schemeComp.CSMCNumber" >
               {{schemeComp.CSMCNumber}}</option>
           </select>-->
 
-          <select [formControl]="ddlCSMCNo"  class="w3-input w3-border"   
-            style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change) ="adminSandbox.getProjectBriefName_SMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,ddlComponent.value,$event.target.value) ;adminSandbox.getProject_AllDetails( ddlCSMCNo.value,ddlComponent.value)">
-            <option value="" disabled >  Please select CSMC No--</option>
- 
-            <option *ngFor="let schemeComp of adminSandbox.schCSMCNo" [value]="schemeComp">
-              {{schemeComp}}</option>
-          </select>
+            <select [formControl]="ddlCSMCNo" class="w3-input w3-border"
+              style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+              (change)="adminSandbox.getProjectBriefName_SMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,ddlComponent.value,$event.target.value) ;adminSandbox.getProject_AllDetails( ddlCSMCNo.value,ddlComponent.value)">
+              <option value="" disabled> Please select CSMC No--</option>
 
-          <label *ngIf="submitted && ddlCSMCNo.hasError('required')" class="error-label"
-            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-            select CSMC No. </label>
-        </div> 
+              <option *ngFor="let schemeComp of adminSandbox.schCSMCNo" [value]="schemeComp">
+                {{schemeComp}}</option>
+            </select>
 
-        
+            <label *ngIf="submitted && ddlCSMCNo.hasError('required')" class="error-label"
+              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+              select CSMC No. </label>
+          </div>
+
+
         </div>
-       
+
       </div>
       <br>
       <div class="w3-row">
@@ -199,31 +201,31 @@
           </label>
         </div>
         <div class="w3-quarter w3-left" style="width: 22%;">
-          <input type="text" class="w3-input w3-border" [formControl]="txtImplementingAgency" 
+          <input type="text" class="w3-input w3-border" [formControl]="txtImplementingAgency"
             placeholder=" Implementing Agency" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
           <label *ngIf="submitted && txtImplementingAgency.hasError('required')" class="error-label"
             style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
             enter implementing agency. </label>
 
         </div>
-        
+
       </div>
 
       <div class="w3-row">
         <div class="w3-quarter w3-center" style="width: 10%;">
-    <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-      Date Of Approval by SLSMC :
-    </label>
-  </div>
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+            Date Of Approval by SLSMC :
+          </label>
+        </div>
 
-  <div class="w3-quarter w3-left" style="width: 22%;">
-    <input type="text" class="w3-input w3-border" [minDate]="maxStartDate" [formControl]="txtSLSMC" bsDatepicker
-      [bsConfig]="dpConfig" autocomplete="off" onkeydown="return false" placeholder="dd/mm/yyyy">
-    <label *ngIf="submitted && txtSLSMC.hasError('required')" class="error-label"
-      style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-      select date of approval. </label>
-  </div>
-</div>
+        <div class="w3-quarter w3-left" style="width: 22%;">
+          <input type="text" class="w3-input w3-border" [minDate]="maxStartDate" [formControl]="txtSLSMC" bsDatepicker
+            [bsConfig]="dpConfig" autocomplete="off" onkeydown="return false" placeholder="dd/mm/yyyy">
+          <label *ngIf="submitted && txtSLSMC.hasError('required')" class="error-label"
+            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+            select date of approval. </label>
+        </div>
+      </div>
 
       <br>
       <div class="w3-row">
@@ -323,12 +325,13 @@
                         <td style="text-align: left">
                           <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
                             (blur)="onSubmitProjectSlum(ProjectSlum.value)" [formControl]="txtHousingCost"
-                            placeholder=" Housing Cost" style="font-family: Arial, Geneva, Tahoma, sans-serif;" appTwoDigitDecimaNumber>
+                            placeholder=" Housing Cost" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                            appTwoDigitDecimaNumber>
                           <label *ngIf="submitted && txtHousingCost.hasError('required')" class="error-label"
                             style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
                             enter housing cost. </label>
                         </td>
-                      </tr>  
+                      </tr>
                     </table>
                   </th>
                   <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Infrastructure Cost :
@@ -351,7 +354,8 @@
                       <tr>
                         <td style="text-align: left">
                           <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtOther"
-                            placeholder="Other" style="font-family: Arial, Geneva, Tahoma, sans-serif;" appTwoDigitDecimaNumber>
+                            placeholder="Other" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                            appTwoDigitDecimaNumber>
                           <label *ngIf="submitted && txtOther.hasError('required')" class="error-label"
                             style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter
                             other cost. </label>
@@ -496,7 +500,8 @@
                       <tr>
                         <td style="text-align: left">
                           <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtJoint"
-                            placeholder="Joint" style="font-family: Arial, Geneva, Tahoma, sans-serif;" appTwoDigitDecimaNumber
+                            placeholder="Joint" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                            appTwoDigitDecimaNumber
                             (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
                           <label *ngIf="submitted && txtJoint.hasError('required')" class="error-label"
                             style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
@@ -525,7 +530,8 @@
                       <tr>
                         <td style="text-align: left">
                           <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtMale"
-                            placeholder="Male" style="font-family: Arial, Geneva, Tahoma, sans-serif;" appTwoDigitDecimaNumber
+                            placeholder="Male" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                            appTwoDigitDecimaNumber
                             (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
                           <label *ngIf="submitted && txtMale.hasError('required')" class="error-label"
                             style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
@@ -590,130 +596,166 @@
           class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
       </div>
     </form>
-    <br> <form>
-    <div class="pic-container">
-      <div style="width: 95%; height: 400px; overflow: scroll">
-        <table class="table" border="1px" style="width: 89%;" align="center">
-          <thead style="background-color: lightgray; font-weight: bold">
-            <tr>
-              <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State Name</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">District Name</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">City Name</td>
-              <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;display: none;" >Scheme</td>
+    <br>
+    <form>
+      <div class="pic-container">
+        <div style="width: 95%; height: 400px; overflow: scroll">
+          <table class="table" border="1px" style="width: 89%;" align="center">
+            <thead style="background-color: lightgray; font-weight: bold">
+              <tr>
+                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State Name</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">District Name</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">City Name</td>
+                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;display: none;">Scheme</td>
 
-              <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">CSMC Date</td>
-              <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">CSMC No </td>
-              <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">Houses Sanctioned</td>
-              
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Component</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Project Code</td>
+                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">CSMC Date</td>
+                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">CSMC No </td>
+                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">Houses Sanctioned</td>
 
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">NodalAgency</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">ImplementingAgency</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">SLSMC Date</td>
-                  
-              <!-- <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">Date</td> -->
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Whether Slum</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Slum Name</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Houses Covered</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Housing Cost</td>
-              <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">Infrastructure Cost</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Other</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">General</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">SC</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">ST</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">OBC</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Other EWS</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Minority</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Joint</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Female</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Male</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Transgender</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Total Houses Consructed </td>
-              <td  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;"> Action </td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Component</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Project Code</td>
 
-              <td  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Download PDF</td>
-                           </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let briefDetail of adminSandbox.projectBriefDetail;let i = index"
-              style="text-align: center;background-color:white">
-              <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.States_UT}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.District}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.City}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;display: none;">
-                {{briefDetail.Scheme}}</td>
-                
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;"> {{briefDetail.CSMCDate|date: 'yyyy-dd-MM'}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;"> {{briefDetail.CSMCNumber}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;"> {{briefDetail.TotalSanction}}</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">NodalAgency</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">ImplementingAgency</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">SLSMC Date</td>
 
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.Component}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.ProjectCode}}</td>
-            
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.NodalAgency}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.ImplementingAgency}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.SLSMCDate|date: 'yyyy-dd-MM'}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.WhetherSlum}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.SlumName}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.SlumCOvered}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.HousingCost}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.InfaCost}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.OtherCost}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.General}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.SC}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.ST}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.OBC}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.OtherEWS}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.Minority}}</td>
-            
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.Joint}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.Female}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.Male}}</td>
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.Transgender}}</td>
-            
-            
-              <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                {{briefDetail.TotalHouses}}</td>
-              <!-- <td style="text-align:center;color:blue;border-top: 1px solid black;"
+                <!-- <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">Date</td> -->
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Whether Slum</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Slum Name</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Houses Covered</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Housing Cost</td>
+                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">Infrastructure Cost</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Other</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">General</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">SC</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">ST</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">OBC</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Other EWS</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Minority</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Joint</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Female</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Male</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Transgender</td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Total Houses Consructed
+                </td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;"> Action </td>
+
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Download PDF</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let briefDetail of adminSandbox.projectBriefDetail;let i = index"
+                style="text-align: center;background-color:white">
+                <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.States_UT}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.District}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.City}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;display: none;">
+                  {{briefDetail.Scheme}}</td>
+
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.CSMCDate|date: 'yyyy-dd-MM'}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.CSMCNumber}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.TotalSanction}}</td>
+
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.Component}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.ProjectCode}}</td>
+
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.NodalAgency}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.ImplementingAgency}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.SLSMCDate|date: 'yyyy-dd-MM'}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.WhetherSlum}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.SlumName}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.SlumCOvered}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.HousingCost}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.InfaCost}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.OtherCost}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.General}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.SC}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.ST}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.OBC}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.OtherEWS}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.Minority}}</td>
+
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.Joint}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.Female}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.Male}}</td>
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.Transgender}}</td>
+
+
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  {{briefDetail.TotalHouses}}</td>
+                <!-- <td style="text-align:center;color:blue;border-top: 1px solid black;"
                               (click)="adminSandbox.downloadRelease(briefDetail.PDF)">Download</td> -->
-             
-              <td  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;"><button type="button" (click)="Edit(briefDetail)">Edit</button></td>
-               <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;"
-                (click)="adminSandbox.download_PBD_Release(briefDetail.PDF,'ProjectBriefDetail')">
-                Download</td>
-            </tr>
-          </tbody>
-        </table>
-  </div>    
-</div>
-</form>
+
+                <td
+                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
+                  <button type="button" (click)="Edit(briefDetail)">Edit</button></td>
+                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;"
+                  (click)="adminSandbox.download_PBD_Release(briefDetail.PDF,'ProjectBriefDetail')">
+                  Download</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
   </div>
 
 </div>
