@@ -1,19 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-ata-glance-report',
-//   templateUrl: './ata-glance-report.component.html',
-//   styleUrls: ['./ata-glance-report.component.css']
-// })
-// export class AtaGlanceReportComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
-
 import { Component, OnInit } from '@angular/core';
 import * as CanvasJS from 'src/assets/canvasjs.min.js';
 
@@ -70,14 +54,7 @@ const indianFormat1 = (number, currency = 'INR') => {
     return '0'
   }
 }
-
-
-// @Component({
-//   selector: 'app-at-glance',
-//   templateUrl: './at-glance.component.html',
-//   styleUrls: ['./at-glance.component.css']
-// })
-
+ 
 @Component({
   selector: 'app-ata-glance-report',
   templateUrl: './ata-glance-report.component.html',
@@ -91,10 +68,7 @@ export class AtaGlanceReportComponent implements OnInit {
   StateMessage: string;
   DistrictMessage: string;
   CityMessage: string;
-
-
   NoPApprovedJN :any; 
-
   NoOfprojRay :any;
   NoPApprovedCLSS:any;
   NoOfprojISSR:any;
@@ -102,7 +76,6 @@ export class AtaGlanceReportComponent implements OnInit {
   NoOfprojBLCS:any;
   proj_Total :any;
   ProjCostApp_JN  :any;
-
   ProjCostRay:any;
   CLSSLoanAmt:any;
   ProjCostISSR:any;
@@ -110,8 +83,6 @@ export class AtaGlanceReportComponent implements OnInit {
   ProjCostBLCS:any;
   ProjApp_Total :any;
   CShare_JN:any;
-
-
   CSRay:any;
   SubsidyAmtCr:any;
   CSISSR:any;
@@ -120,7 +91,6 @@ export class AtaGlanceReportComponent implements OnInit {
   CAS_Total :any;
   CARel_JN:any;
   CARay:any;
- // SubsidyAmtCr:any;
   CAISSR:any;
   CAAHP:any;
   CABLCS:any;
@@ -132,7 +102,6 @@ export class AtaGlanceReportComponent implements OnInit {
   HSAHP:any;
   HSBLCS:any;
   HS_Total :any;
-  
   Grounded_JN:any;
   HGrnd_JN:any;
   HGRay:any;
@@ -163,12 +132,9 @@ lblStateDisttCity: any;
     lblStateHeader: any;
     lblDistHeader: any;
   lblCityHeader: any;  
- 
  Houses_Grounded: number;
  SubsidyAmountCredited: number;
-
     
-
   constructor(private router: Router, public service: GraphService) {
     this.stValue = "0";
     this.distValue = "0";
@@ -294,6 +260,8 @@ lblStateDisttCity: any;
     })
 
     this.NoPApprovedCLSS = 0; //?
+    this.NoPApprovedCLSS ="-";
+
 
   }
   getStateDetails(stateCodes) {    
@@ -370,14 +338,8 @@ lblStateDisttCity: any;
      this.districtCodes ="0"; 
      this.cityCodes="0"; 
      this.division=0; 
-
-
-      this.GetAtAGlanceDat(this.stateCodes, this.districtCodes, this.cityCodes, this.division);
-      
-
-      
-    }
-
+     this.GetAtAGlanceDat(this.stateCodes, this.districtCodes, this.cityCodes, this.division);
+     }
   }
   getDistrictDetails(DisttCode) {
     
@@ -444,13 +406,9 @@ lblStateDisttCity: any;
       this.HGrnd_JN =0;
       this.HComp_JN =0;
       this.HOcc_JN =0;
-
- 
       this.cityCodes="0"; 
       this.division=0; 
-
       this.GetAtAGlanceDat(this.stateCodes, this.districtCodes, this.cityCodes, this.division);
-
     }
     else {
       this.districtCodes = DisttCode;
@@ -458,19 +416,13 @@ lblStateDisttCity: any;
       this.service.HFACityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes);
       this.service.CLSSCityWiseReportPMayList(this.stateCodes, this.districtCodes, this.cityCodes);
       this.service.JNNURMCityWiseAtAGlance(this.stateCodes, this.districtCodes, this.cityCodes);
-      
       this.HGrnd_JN =0;
     this.HComp_JN =0;
     this.HOcc_JN =0;
-
      this.cityCodes="0"; 
     this.division=0; 
-
       this.GetAtAGlanceDat(this.stateCodes, this.districtCodes, this.cityCodes, this.division);
-      
     }
-
-
   }
   getCityDetails(cityCode) {
 
@@ -501,9 +453,7 @@ lblStateDisttCity: any;
         this.lblStateDisttCity = this.lblCityHeader + " City of " + this.lblStateHeader;
       });
     }
-
-
-    if (cityCode == "0") {
+     if (cityCode == "0") {
       this.cityValue = "0";
       this.CityMessage = "Select City";
       this.service.CityDetails = [];

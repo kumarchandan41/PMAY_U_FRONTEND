@@ -43,7 +43,6 @@
       </div>
     </div>
   
-  
     <div class="container-fuild" id="ataglancePDF">
       <div style="text-align:center; padding-top: 10px;" class="col-md-12">
         <b>
@@ -62,16 +61,11 @@
           <tr>
             <td rowspan="2" style="text-align:center;"><b> SrNo</b></td>
             <td rowspan="2" style="text-align:center;"><b>Particulars</b></td>
-            <!-- <th>JNNURM</th>
-            <th>JNNURM New </th> -->
+          
             <th colspan="2" style="text-align:center;font-size: 16px !important">Progress of JnNURM</th>
-  
-  
             <th colspan="6" style="text-align:center;font-size: 16px!important">PMAY(U)</th>
           </tr>
           <tr style="text-align:center;">
-            <!-- <td></td>
-              <td></td>  -->
             <td style="width:100px"><b>Cumulative Progress</b></td>
             <td style="width:100px"><b>Physical Progress after 2014</b></td>
             <td style="width:100px"><b>Rajiv Awas Yojna (RAY)</b></td>
@@ -84,103 +78,102 @@
           <tr>
             <td align="center">1</td>
             <td>No of Project(s) Approved</td>
-            <td style="padding-right: 10px;text-align: right">{{NoPApprovedJN.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{NoPApprovedJN === 0 ? '-' : NoPApprovedJN?.toLocaleString('en-IN')}}</td>
             <td style="padding-right: 10px;text-align: right">-</td>
   
+            <td style="padding-right: 10px;text-align: right">{{NoOfprojRay === 0 ? '-' : NoOfprojRay.toLocaleString('en-IN') }}</td>
   
-            <td style="padding-right: 10px;text-align: right">{{NoOfprojRay.toLocaleString('en-IN') }}</td>
-  
-            <td style="padding-right: 10px;text-align: right">{{NoPApprovedCLSS.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{NoOfprojISSR.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{NoOfprojAHP.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{NoOfprojBLCS.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right;">{{proj_Total.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{NoPApprovedCLSS === 0 ? '-' : NoPApprovedCLSS.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{NoOfprojISSR === 0 ? '-' : NoOfprojISSR.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{NoOfprojAHP === 0 ? '-' : NoOfprojAHP.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{NoOfprojBLCS === 0 ? '-' : NoOfprojBLCS.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right;">{{proj_Total === 0 ? '-' : proj_Total.toLocaleString('en-IN')}}</td>
           </tr>
           <tr>
             <td align="center">2</td>
             <td>Project Cost Approved (Rs in Cr.)</td>
-            <td style="padding-right: 10px;text-align: right">{{ProjCostApp_JN.toLocaleString('en-IN') }}</td>
+            <td style="padding-right: 10px;text-align: right">{{ProjCostApp_JN === 0 ? '-' :  ProjCostApp_JN.toLocaleString('en-IN') }}</td>
             <td style="padding-right: 10px;text-align: right">-</td>
   
-            <td style="padding-right: 10px;text-align: right">{{ProjCostRay.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{CLSSLoanAmt.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{ProjCostISSR.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{ProjCostAHP.toLocaleString('en-IN') }}</td>
-            <td style="padding-right: 10px;text-align: right">{{ProjCostBLCS.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{ProjApp_Total.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{ProjCostRay === 0 ? '-' :  ProjCostRay.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CLSSLoanAmt === 0 ? '-' :  CLSSLoanAmt.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{ProjCostISSR === 0 ? '-' :  ProjCostISSR.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{ProjCostAHP === 0 ? '-' :  ProjCostAHP.toLocaleString('en-IN') }}</td>
+            <td style="padding-right: 10px;text-align: right">{{ProjCostBLCS === 0 ? '-' :  ProjCostBLCS.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{ProjApp_Total === 0 ? '-' : ProjApp_Total.toLocaleString('en-IN')}}</td>
           </tr>
           <tr>
             <td align="center"> 3</td>
             <td>Central Assistance Sanctioned (Rs in Cr.)</td>
-            <td style="padding-right: 10px;text-align: right">{{CShare_JN.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CShare_JN === 0 ? '-' : CShare_JN.toLocaleString('en-IN')}}</td>
             <td style="padding-right: 10px;text-align: right">-</td>
   
-            <td style="padding-right: 10px;text-align: right">{{CSRay.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{SubsidyAmtCr.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{CSISSR.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{CSAHP.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{CSBLCS.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{CAS_Total.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CSRay === 0 ? '-' : CSRay.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{SubsidyAmtCr === 0 ? '-' : SubsidyAmtCr.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CSISSR === 0 ? '-' : CSISSR.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CSAHP === 0 ? '-' : CSAHP.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CSBLCS === 0 ? '-' : CSBLCS.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CAS_Total === 0 ? '-' : CAS_Total.toLocaleString('en-IN')}}</td>
           </tr>
           <tr>
             <td align="center">4</td>
             <td>Central Assistance Released (Rs in Cr.)</td>
-            <td style="padding-right: 10px;text-align: right">{{CARel_JN.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CARel_JN === 0 ? '-' :  CARel_JN.toLocaleString('en-IN')}}</td>
             <td style="padding-right: 10px;text-align: right">-</td>
-            <td style="padding-right: 10px;text-align: right">{{CARay.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right"> {{SubsidyAmtCr.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{CAISSR.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{CAAHP.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{CABLCS.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{CAR_Total.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CARay === 0 ? '-' :  CARay.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right"> {{SubsidyAmtCr === 0 ? '-' :  SubsidyAmtCr.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CAISSR === 0 ? '-' :  CAISSR.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CAAHP === 0 ? '-' :  CAAHP.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CABLCS === 0 ? '-' : CABLCS.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{CAR_Total === 0 ? '-' : CAR_Total.toLocaleString('en-IN')}}</td>
           </tr>
           <tr>
             <td align="center">5</td>
             <td>Houses Sanctioned (Nos)</td>
-            <td style="padding-right: 10px;text-align: right">{{HS_JN.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HS_JN === 0 ? '-' :  HS_JN.toLocaleString('en-IN')}}</td>
             <td style="padding-right: 10px;text-align: right">-</td>
-            <td style="padding-right: 10px;text-align: right">{{HSRay.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{NoofBene.toLocaleString('en-IN') }}</td>
-            <td style="padding-right: 10px;text-align: right">{{HSISSR.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HSAHP.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HSBLCS.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HS_Total.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HSRay === 0 ? '-' :  HSRay.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{NoofBene === 0 ? '-' :  NoofBene.toLocaleString('en-IN') }}</td>
+            <td style="padding-right: 10px;text-align: right">{{HSISSR === 0 ? '-' :  HSISSR.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HSAHP === 0 ? '-' :  HSAHP.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HSBLCS === 0 ? '-' :  HSBLCS.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HS_Total === 0 ? '-' : HS_Total.toLocaleString('en-IN')}}</td>
           </tr>
           <tr>
             <td align="center">6</td>
             <td>Houses Grounded for Construction (Nos)</td>
-            <td style="padding-right: 10px;text-align: right">{{Grounded_JN.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HGrnd_JN.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HGRay.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{NoofBene.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HGISSR.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HGAHP.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HGBLCS.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HG_Total.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{Grounded_JN === 0 ? '-' :  Grounded_JN.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HGrnd_JN === 0 ? '-' :  HGrnd_JN.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HGRay === 0 ? '-' :  HGRay.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{NoofBene === 0 ? '-' :  NoofBene.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HGISSR === 0 ? '-' :  HGISSR.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HGAHP === 0 ? '-' :  HGAHP.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HGBLCS === 0 ? '-' :  HGBLCS.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HG_Total === 0 ? '-' :  HG_Total.toLocaleString('en-IN')}}</td>
           </tr>
           <tr> 
             <td align="center">7</td>  
             <td>Constructions of Houses Completed (Nos)</td>
-            <td style="padding-right: 10px;text-align: right">{{Completed_JN.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HComp_JN.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HCRay.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{NoofBene.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HCISSR.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HCAHP.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HCBLCS.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HC_Total.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{Completed_JN === 0 ? '-' :  Completed_JN.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HComp_JN === 0 ? '-' :  HComp_JN.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HCRay === 0 ? '-' :  HCRay.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{NoofBene === 0 ? '-' :  NoofBene.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HCISSR === 0 ? '-' :  HCISSR.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HCAHP === 0 ? '-' :  HCAHP.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HCBLCS === 0 ? '-' :  HCBLCS.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HC_Total === 0 ? '-' :  HC_Total.toLocaleString('en-IN')}}</td>
           </tr>
           <tr>
             <td align="center">8</td>
             <td>Houses Occupied (Nos)</td>
-            <td style="padding-right: 10px;text-align: right">{{OccupiedJN.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HOcc_JN.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HORay.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{NoofBene.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HOISSR.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HOAHP.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HOBLCS.toLocaleString('en-IN')}}</td>
-            <td style="padding-right: 10px;text-align: right">{{HO_Total.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{OccupiedJN === 0 ? '-' :  OccupiedJN.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HOcc_JN === 0 ? '-' :  HOcc_JN.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HORay === 0 ? '-' :  HORay.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{NoofBene === 0 ? '-' :  NoofBene.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HOISSR === 0 ? '-' :  HOISSR.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HOAHP === 0 ? '-' :  HOAHP.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HOBLCS === 0 ? '-' :  HOBLCS.toLocaleString('en-IN')}}</td>
+            <td style="padding-right: 10px;text-align: right">{{HO_Total === 0 ? '-' :  HO_Total.toLocaleString('en-IN')}}</td>
           </tr>
           <tr>
             <td colspan="10">
@@ -196,7 +189,4 @@
         </table>
       </div>
     </div>
-  
-  
-  
   </div>
