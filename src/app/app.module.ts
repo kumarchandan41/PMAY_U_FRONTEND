@@ -111,7 +111,7 @@ import { CriticalMonitoringComponent } from './financeReport/critical-monitoring
 import { PhysicalMonitoringComponent } from './financeReport/physical-monitoring/physical-monitoring.component';
 import { ShortfallDetailComponent } from './financeReport/shortfall-detail/shortfall-detail.component';
 import { GlobalUrl } from './Shared/GlobalUrl';
-import { AdminAuthGuardService } from './AuthGuard/AdminAuthGuardService';
+// import { AdminAuthGuardService } from './AuthGuard/AdminAuthGuardService';
 import { UploadProjectDetailComponent } from './DataUploads/upload-project-detail/upload-project-detail.component';
 import { UploadPhyProgReportComponent } from './DataUploads/upload-phy-prog-report/upload-phy-prog-report.component';
 import { TwoDigitDecimaNumberDirective } from './Shared/OneDecimalAllow';
@@ -151,7 +151,9 @@ const routes: Routes = [
   {
     path: 'Admin', component: AppAdminLayoutComponent,
     children: [
-      { path: 'Dashboard', component: AdminDashboardComponent, canActivate: [AdminAuthGuardService] },
+      // { path: 'Dashboard', component: AdminDashboardComponent, canActivate: [AdminAuthGuardService] },
+      { path: 'Dashboard', component: AdminDashboardComponent },
+
       { path: 'statemaster', component: StateMasterComponent },
       { path: 'MainGraph', component: DashboardMainComponent },
       { path: 'DashboardHFA1', component: DashboardHFA1Component },
@@ -344,7 +346,7 @@ const routes: Routes = [
   // })
 
 
-  providers: [HttpClientModule, AdminAuthGuardService,
+  providers: [HttpClientModule,
     NgbActiveModal,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
     SnotifyService, AdminSandbox, DatePipe,

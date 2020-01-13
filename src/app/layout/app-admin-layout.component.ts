@@ -149,25 +149,20 @@ export class AppAdminLayoutComponent implements OnInit {
   // Handle WhatsApp Form
 
   handleWhatsAppForm(event: Event, form: any) {
-    // this.submitted = true;
-    event.stopPropagation();
     const whatsappNumber = (<HTMLInputElement>document.getElementById("whatsappNumber")).value
     const whatsappMessage = (<HTMLInputElement>document.getElementById("whatsappMessage")).value
     const reportType = (<HTMLInputElement>document.getElementById("reportType")).value
 
-    const accountSid = 'AC7e30d1fcd5f1e5fd6ae9e0d831e3d594';
-    const authToken = '4a3561fd6e52d36e2ba12178246e34ef';
-    // const client = require('twilio')(accountSid, authToken);
+    const data = {
+      To: 'whatsapp:+91' + whatsappNumber,
+      From: 'whatsapp:+14155238886',
+      Body: whatsappMessage,
+      MediaUrl: 'https://bit.ly/whatsapp-image-example',
+    }
 
-    // client.messages
-    //   .create({
-    //     body: 'Hello hhhhhhhhhhh you ?',
-    //     from: 'whatsapp:+14155238886',
-    //     to: 'whatsapp:+919852943524'
-    //   })
-    //   .then(message => console.log(message.sid))
-    //   .done();
-
+    this.service.waMsg(data).subscribe(result => {
+      console.log('result------->>', result)
+    })
     console.log('event---->', event, {
       whatsappNumber,
       whatsappMessage,

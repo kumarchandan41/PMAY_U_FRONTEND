@@ -388,6 +388,22 @@ export class GraphService {
           const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
           return this.http.post<string>(this.url + "UserRegister/", data, httpOptions);
      }
+     // waMsg(data) {
+     //      console.log('graphql-------------------')
+     //      const formdata: FormData = new FormData();
+     //      formdata.append('To', data.To);
+     //      formdata.append('From', data.From);
+     //      formdata.append('Body', data.Body);
+
+     //      const httpOptions = {
+     //           headers: new HttpHeaders({
+     //                'Content-Type': 'multipart/form-data',
+     //                'Authorization': 'Basic QUM3ZTMwZDFmY2Q1ZjFlNWZkNmFlOWUwZDgzMWUzZDU5NDo0YTM1NjFmZDZlNTJkMzZlMmJhMTIxNzgyNDZlMzRlZg=='
+     //           })
+     //      };
+     //      // const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+     //      return this.http.post<string>(this.url + "UserRegister/", formdata, httpOptions);
+     // }
      ServiceUserAdminDetails(): Observable<UserMaster[]> {
           return this.http.get<UserMaster[]>(this.url + "GetAllUsers");
      }

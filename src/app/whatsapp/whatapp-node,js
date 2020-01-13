@@ -1,0 +1,28 @@
+// const twilio  = require('twilio');
+// client = new twilio('AC7e30d1fcd5f1e5fd6ae9e0d831e3d594', '4a3561fd6e52d36e2ba12178246e34ef');
+
+// client.messages.create({
+//   from:'whatsapp: +14155238886',
+//   to:'whatsapp:+919555797471',
+//   body:'Hello Chandan how are you ?'
+// }).then(msg=>{
+//   console.log(msg)
+// })
+
+const accountSid = 'AC7e30d1fcd5f1e5fd6ae9e0d831e3d594'; 
+const authToken = '4a3561fd6e52d36e2ba12178246e34ef'; 
+const client = require('twilio')(accountSid, authToken); 
+ 
+client.messages 
+      .create({ 
+         body: 'Hello Sir', 
+         from: 'whatsapp:+14155238886',       
+         to: 'whatsapp:+919811114656' 
+       }) 
+      .then(message => console.log(message.sid)) 
+      .done();
+
+
+ hello(){
+   console.log('-------->>Succ..')
+ }
