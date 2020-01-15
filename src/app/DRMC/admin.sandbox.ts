@@ -558,7 +558,6 @@ export class AdminSandbox {
 
   //----for district add,edit and delete------////
   getDistrictData(statecode: any) {
-
     this.userMasterService.getDistrictData(statecode).subscribe(data => {
       this.districtMaster = data;
     });
@@ -602,14 +601,20 @@ export class AdminSandbox {
     });
 
   }
-  deleteDistrictData(DistrictId: any) {
+  deleteDistrictData(value: any) {
+    console.log('value--------->>', value, value.DisttId)
 
-    this.userMasterService.deleteDistrictData(DistrictId).subscribe(data => {
+    this.userMasterService.deleteDistrictData(value.DisttId).subscribe(data => {
+      console.log('data--------->>', value, data)
       if (data.status == "200") {
         this.snotifyService.success("District Delete Successfully...", "", {
           position: SnotifyPosition.rightTop,
           timeout: 2500
         });
+        console.log('Susse------------??', value.StateCode)
+        // fetch data after delete
+        this.getDistrictData(value.StateCode);
+
       }
       else {
         this.snotifyService.error("District Not Delete Successfully...", "", {
@@ -617,7 +622,7 @@ export class AdminSandbox {
           timeout: 2500
         });
       }
-      this.districtMaster = [];
+      // this.districtMaster = [];
     });
   }
   editDistrictMaster(value: any, row: any) {
@@ -631,7 +636,6 @@ export class AdminSandbox {
     this.EditDistrictMaster.radioMinority = row.Minority;
   }
   updateDistrictMaster() {
-
     if (this.EditDistrictMaster.ddlStateCode != null && this.EditDistrictMaster.ddlStateCode != "" && this.EditDistrictMaster.ddlStateCode != undefined) {
       if (this.EditDistrictMaster.txtDistrictName != null && this.EditDistrictMaster.txtDistrictName != "" && this.EditDistrictMaster.txtDistrictName != undefined) {
         if (this.EditDistrictMaster.txtDistrictCode != null && this.EditDistrictMaster.txtDistrictCode != "" && this.EditDistrictMaster.txtDistrictCode != undefined) {
@@ -652,6 +656,10 @@ export class AdminSandbox {
           }
           var editStateCode = this.EditDistrictMaster.ddlStateCode;
           this.userMasterService.updateDistrictData(JSON.stringify(objPost)).subscribe((data: any) => {
+            // fetch data after edit
+            setTimeout(() => {
+              this.getDistrictData(editStateCode);
+            }, 500)
             this.showProperty = 'none';
             this.EditDistrictMaster = {
               "ddlStateCode": "",
@@ -668,16 +676,17 @@ export class AdminSandbox {
               });
             }
             else {
+
               this.snotifyService.error("District Not Updated Successfully...", "", {
                 position: SnotifyPosition.rightTop,
                 timeout: 2500
               });
             }
-            this.getDistrictData(editStateCode);
 
           });
         }
         else {
+
           this.snotifyService.error("Please Enter District Code...", "", {
             position: SnotifyPosition.rightTop,
             timeout: 2500
@@ -685,6 +694,7 @@ export class AdminSandbox {
         }
       }
       else {
+
         this.snotifyService.error("Please Enter District Name...", "", {
           position: SnotifyPosition.rightTop,
           timeout: 2500
@@ -692,6 +702,7 @@ export class AdminSandbox {
       }
     }
     else {
+
       this.snotifyService.error("Please Select State Name...", "", {
         position: SnotifyPosition.rightTop,
         timeout: 2500
@@ -1675,6 +1686,7 @@ export class AdminSandbox {
       'Component': formGroup.get('ddlComponent').value,
       'ProjectCode': formGroup.get('ddlProjectName').value,
       'NodalAgency': formGroup.get('txtNodalAgency').value,
+      'CSMCNumber': formGroup.get('ddlCSMCNo').value,
       'ImplementingAgency': formGroup.get('txtImplementingAgency').value,
       'SLSMCDate': currentBriefDate,
       'WhetherSlum': formGroup.get('radioSlum').value,
@@ -1729,38 +1741,36 @@ export class AdminSandbox {
   //   });
   // }
 
+  // getStateDistrictData(StateCode: any) {
+  //   this.userMasterService.getStateDistrictData(StateCode).subscribe(data => {
+  //     this.stateDistrictMaster = data;
+  //   });
+  // }
+
   getProject_BriefData(stateCode: string) {
-    if (stateCode === '0') {
+    if (stateCode) {
       this.userMasterService.geProjectBriefDetail(stateCode).subscribe(data => {
         this.projectBriefDetail = data;
         this.initialProjectBriefDetailsData = data
-      });
-    }
-    else {
-
-      this.userMasterService.geProjectBriefDetail(stateCode).subscribe(data => {
-        this.projectBriefDetail = data.filter(a => a.Codes === stateCode);
-        this.initialProjectBriefDetailsData = data
-
+        if (data) {
+          this.userMasterService.getStateDistrictData(stateCode).subscribe(data => {
+            this.stateDistrictMaster = data;
+          });
+        }
       });
     }
   }
 
   getProject_Brief_Data(DisttCode: string, stateCode: string) {
-    if (DisttCode === '0') {
-      this.projectBriefDetail = this.initialProjectBriefDetailsData;
-    }
-    else {
+    if (DisttCode) {
       this.projectBriefDetail = this.initialProjectBriefDetailsData.filter(a => a.Codes === stateCode && a.Dcode === DisttCode);
     }
-
-
   }
+
+
   getProj_Brief_DataOnCity(stateCode: string, DisttCode: string, CityCode: string) {
 
-    this.userMasterService.geProjectBriefDetail(stateCode).subscribe(data => {
-      this.projectBriefDetail = this.initialProjectBriefDetailsData.filter(a => a.Codes === stateCode && a.Dcode === DisttCode && a.CityCode === CityCode);
-    });
+    this.projectBriefDetail = this.initialProjectBriefDetailsData.filter(a => a.Codes === stateCode && a.Dcode === DisttCode && a.CityCode === CityCode);
   }
   ProjectBriefDetailHousesTotal(txtJoint: any, txtFemale: any, txtMale: any, txtTransgender: any) {
     var Joint = txtJoint;

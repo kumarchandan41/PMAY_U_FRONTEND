@@ -1,123 +1,418 @@
-<div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
-  <div class="w3-card-4">
-    <h3
-      style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
-      Project Brief Detail</h3>
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row">
+      <h1>Project Brief Detail</h1>
+    </div>
   </div>
-  <br>
-  <div class="form-container">
+</div>
 
-    <form [formGroup]="projectBriefDetail" (ngSubmit)="onClickProjectBriefDetail($event, projectBriefDetail)">
-      <div class="w3-row">
-        <div class="w3-quarter w3-left" style="width: 10%;">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-            State Name:
-          </label>
-        </div>
-        <div class="w3-quarter w3-left" style="width: 22%;">
+<!-- adminSandbox.getStateDistrictData($event.target.value); -->
 
-          <select [formControl]="ddlStateCode" [(ngModel)]="State"
-            style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="getProjectBriefData($event); adminSandbox.getStateDistrictData($event.target.value);this.District='';this.City='';this.ProjectName='';
-                        this.Scheme='';this.Components='';" class="w3-input w3-border">
-
-            <!-- <select [formControl]="ddlStateCode" [(ngModel)]="State"
-            style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="adminSandbox.getStateDistrictData($event.target.value);this.District='';this.City='';this.ProjectName='';
-                          this.Scheme='';this.Components='';" class="w3-input w3-border"> -->
+<div class="container-fluid" [ngStyle]="{background: backgroundColor}">
+  <form [formGroup]="projectBriefDetail" (ngSubmit)="onClickProjectBriefDetail($event, projectBriefDetail)">
+    <div class="row gBg" style="padding-top: 10px;">
+      <div class="col-md-3 col-sm-3 col-xs-6">
+        <div class="form-group" [ngClass]="{'has-error': submitted && ddlStateCode.hasError('required')}">
+          <label class="control-label" for="StateName">State Name</label>
+          <select [formControl]="ddlStateCode" [(ngModel)]="State" (change)="getProjectBriefData($event);this.District='';this.City='';this.ProjectName='';
+                        this.Scheme='';this.Components='';" class="form-control" id="StateName">
             <option value="" disabled>Please select state--</option>
             <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
               {{state.States_UT}}</option>
           </select>
-          <label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label"
-            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-            select state. </label>
+          <!-- <span class="help-block" *ngIf="submitted && ddlStateCode.hasError('required')">
+              Please select state name.
+            </span> -->
         </div>
-
-        <div class="w3-quarter w3-center" style="width: 10%;">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-            District Name:
-          </label>
-        </div>
-        <div class="w3-quarter w3-left" style="width: 22%;">
-          <select [formControl]="ddlDistrictCode" [(ngModel)]="District"
-            style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="PrjBriefDataonDistt($event);adminSandbox.getDistrictCityData($event.target.value);this.City='';this.ProjectName='';
-            this.Scheme='';this.Components='';" class="w3-input w3-border">
-            <!-- <select [formControl]="ddlDistrictCode" [(ngModel)]="District"
-            style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="adminSandbox.getDistrictCityData($event.target.value);this.City='';this.ProjectName='';
-            this.Scheme='';this.Components='';" class="w3-input w3-border"> -->
-
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-6">
+        <div class="form-group" [ngClass]="{'has-error': submitted && ddlDistrictCode.hasError('required')}">
+          <label class="control-label" for="District">District Name</label>
+          <select [formControl]="ddlDistrictCode" id="District" [(ngModel)]="District" (change)="PrjBriefDataonDistt($event);adminSandbox.getDistrictCityData($event.target.value);this.City='';this.ProjectName='';
+            this.Scheme='';this.Components='';" class="form-control">
             <option value="" disabled>Please select district--</option>
             <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster" [value]="ditrict.Dcode">
               {{ditrict.District}}</option>
           </select>
-          <label *ngIf="submitted && ddlDistrictCode.hasError('required')" class="error-label"
-            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-            select district. </label>
         </div>
-        <div class="w3-quarter w3-center" style="width: 10%;">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-            City Name:
-          </label>
-        </div>
-        <div class="w3-quarter w3-left" style="width: 22%;">
-          <select [formControl]="ddlCity" [(ngModel)]="City" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-            class="w3-input w3-border" (change)="PrjBriefDataonCity($event);">
-            <!-- <select [formControl]="ddlCity" [(ngModel)]="City" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-            class="w3-input w3-border"> -->
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-6">
+        <div class="form-group" [ngClass]="{'has-error': submitted && ddlCity.hasError('required')}">
+          <label class="control-label" for="CityMaster">City Name</label>
+          <select [formControl]="ddlCity" [(ngModel)]="City" id="CityMaster" class="form-control"
+            (change)="PrjBriefDataonCity($event);">
             <option value="" disabled>Please select city--</option>
             <option *ngFor="let city of adminSandbox.districtCityMaster" [value]="city.CityCode">
               {{city.City}}</option>
           </select>
-          <label *ngIf="submitted && ddlCity.hasError('required')" class="error-label"
-            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-            select city. </label>
         </div>
       </div>
-      <br>
-      <div class="w3-row">
-        <div class="w3-quarter w3-left" style="width: 10%;">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-            Scheme :
-          </label>
-        </div>
-        <div class="w3-quarter w3-left" style="width: 22%;">
-          <select [formControl]="ddlScheme" class="w3-input w3-border" [(ngModel)]="Scheme"
-            style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="adminSandbox.getProjectSchemeComponentData($event.target.value);this.ProjectName='';
+      <div class="col-md-3 col-sm-3 col-xs-6">
+        <div class="form-group" [ngClass]="{'has-error': submitted && ddlScheme.hasError('required')}">
+          <label class="control-label" for="Scheme">Scheme</label>
+          <select [formControl]="ddlScheme" id="Scheme" class="form-control" [(ngModel)]="Scheme" (change)="adminSandbox.getProjectSchemeComponentData($event.target.value);this.ProjectName='';
          this.Components=''; ">
             <option value="" disabled>Please select Scheme--</option>
             <option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme.SchemeShortName">
               {{scheme.SchemeShortName}}</option>
           </select>
-          <label *ngIf="submitted && ddlScheme.hasError('required')" class="error-label"
-            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-            select scheme. </label>
         </div>
-        <div>
-          <div class="w3-quarter w3-center" style="width: 10%;">
-            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-              Component :
-            </label>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-6">
+        <div class="form-group" [ngClass]="{'has-error': submitted && ddlComponent.hasError('required')}">
+          <label class="control-label" for="Components">Components</label>
+          <select [formControl]="ddlComponent" id="Components" class="form-control" [(ngModel)]="Components"
+            (change)="adminSandbox.getCSMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,$event.target.value)">
+            <option value="" disabled>Please select Components--</option>
+            <option *ngFor="let schemeComp of adminSandbox.schComponentMaster" [value]="schemeComp.Cname">
+              {{schemeComp.Cname}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-6">
+        <div class="form-group" [ngClass]="{'has-error': submitted && ddlCSMCNo.hasError('required')}">
+          <label class="control-label" for="CSMCNo">CSMC No.</label>
+          <select [formControl]="ddlCSMCNo" id="CSMCNo" class="form-control"
+            (change)="adminSandbox.getProjectBriefName_SMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,ddlComponent.value,$event.target.value);">
+            <option value="" disabled> Please select CSMC No--</option>
+            <option *ngFor="let schemeComp of adminSandbox.schCSMCNo" [value]="schemeComp">
+              {{schemeComp}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group" [ngClass]="{'has-error': submitted && ddlProjectName.hasError('required')}">
+          <label class="control-label" for="ProjectName">Project Name</label>
+          <select [formControl]="ddlProjectName" [(ngModel)]="ProjectName" id="ProjectName" class="form-control">
+            <option value="" disabled>Please select Project Name--</option>
+            <option *ngFor="let projectNameBrief of adminSandbox.projectBriefName"
+              [value]="projectNameBrief.ProjectCode">
+              {{projectNameBrief.ProjectTitle}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="padding-top: 5px;">
+      <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="form-group" [ngClass]="{'has-error': submitted && txtNodalAgency.hasError('required')}">
+          <label class="control-label" for="NodalAgency">State Level Nodal Agency</label>
+          <input type="text" class="form-control" id="NodalAgency" [formControl]="txtNodalAgency"
+            placeholder=" State Level Nodal Agency">
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="form-group" [ngClass]="{'has-error': submitted && txtImplementingAgency.hasError('required')}">
+          <label class="control-label" for="ImplementingAgency">Implementing Agency</label>
+          <input type="text" class="form-control" id="ImplementingAgency" [formControl]="txtImplementingAgency"
+            placeholder=" Implementing Agency">
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="form-group" [ngClass]="{'has-error': submitted && txtSLSMC.hasError('required')}">
+          <label class="control-label" for="DateSLSMC">Date Of Approval by SLSMC</label>
+          <input type="text" class="form-control" [minDate]="maxStartDate" [formControl]="txtSLSMC" bsDatepicker
+            [bsConfig]="dpConfig" autocomplete="off" onkeydown="return false" placeholder="DD/MM/YYYY">
+        </div>
+      </div>
+
+
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-3 col-xs-12">
+        <label class="control-label"> Whether Slum</label>
+        <div class="pull-right">
+          <input type="radio" name="radioSlum" value="Yes" [formControl]="radioSlum" (click)=showSlum() />
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="radioSlum" value="No" [formControl]="radioSlum" (click)=hideSlum() />
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">No</label>&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="radioSlum" value="Both" [formControl]="radioSlum" (click)=hidebothSlum() />
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">Both</label>
+          <label *ngIf="submitted && radioSlum.hasError('required')" class="error-label" style="color: #dd4b39;">Please
+            select slum. </label>
+        </div>
+      </div>
+      <div class="col-md-9 col-sm-9 col-xs-12" *ngIf="-Slum">
+        <form [formGroup]="ProjectSlum">
+          <table formArrayName="itemRows" style="width: 100%;">
+            <tr>
+              <th>Name Of Slum</th>
+              <th>Houses Covered</th>
+              <th>Add</th>
+            </tr>
+            <tr *ngFor="let itemrow of ProjectSlum.controls.itemRows['controls']; let i=index;" [formGroupName]="i">
+              <td style="padding-right: 10px;">
+                <input formControlName="SlumName" style="width: 100%;" class="form-control" placeholder="Slum Name"
+                  type="text">
+              </td>
+              <td style="padding-right: 10px;">
+                <input formControlName="SlumCovered" placeholder="Houses Covered" class="form-control"
+                  AllowOnlyNumber="true" style="width: 100%;" type="text" appTwoDigitDecimaNumber>
+                <input formControlName="ProjectCode" [(ngModel)]="ddlProjectName.value" hidden="true"
+                  style="width: 100%;" type="text" appTwoDigitDecimaNumber>
+              </td>
+              <td>
+                <button type="button" (click)="addNewReleaseRow()" class="btn btn-block btn-primary">Add</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12" style="padding-bottom: 5px;">
+        <h4 class="greyBg splitHeader">
+          Project Cost
+        </h4>
+      </div>
+
+      <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="form-group" [ngClass]="{'has-error': submitted && txtHousingCost.hasError('required')}">
+          <label class="control-label">Housing Cost</label>
+          <input AllowOnlyDecimal="true" type="text" class="form-control"
+            (blur)="onSubmitProjectSlum(ProjectSlum.value)" [formControl]="txtHousingCost" placeholder="Housing Cost"
+            appTwoDigitDecimaNumber>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="form-group" [ngClass]="{'has-error': submitted && txtInfrastructure.hasError('required')}">
+          <label class="control-label">Infrastructure Cost</label>
+          <input AllowOnlyDecimal="true" type="text" class="form-control" [formControl]="txtInfrastructure"
+            placeholder="Infrastructure Cost" appTwoDigitDecimaNumber>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="form-group" [ngClass]="{'has-error': submitted && txtOther.hasError('required')}">
+          <label class="control-label">Other </label>
+          <input AllowOnlyDecimal="true" type="text" class="form-control" [formControl]="txtOther" placeholder="Other"
+            appTwoDigitDecimaNumber>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6 clubCell" style="padding-bottom: 5px;">
+        <h4 class="greyBg splitHeader">
+          No. of EWS beneficiaries covered in the project
+        </h4>
+
+        <div class="col-md-2 col-sm-2 col-xs-3">
+          <div class="form-group" [ngClass]="{'has-error': submitted && txtGeneral.hasError('required')}">
+            <label class="control-label">General</label>
+            <input AllowOnlyDecimal="true" type="text" class="form-control" [formControl]="txtGeneral"
+              placeholder="General" appTwoDigitDecimaNumber>
           </div>
-          <!-- ;adminSandbox.getProjectBriefName(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,$event.target.value)-->
-          <div class="w3-quarter w3-left" style="width: 22%;">
-            <select [formControl]="ddlComponent" class="w3-input w3-border" [(ngModel)]="Components"
-              style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-              (change)="adminSandbox.getCSMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,$event.target.value) ;adminSandbox.getProject_AllDetails( 0,$event.target.value)">
+        </div>
 
-
-
-
-              <option value="" disabled>Please select Components--</option>
-              <option *ngFor="let schemeComp of adminSandbox.schComponentMaster" [value]="schemeComp.Cname">
-                {{schemeComp.Cname}}</option>
-            </select>
-
-
-            <label *ngIf="submitted && ddlComponent.hasError('required')" class="error-label"
-              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-              select components. </label>
+        <div class="col-md-2 col-sm-2 col-xs-3">
+          <div class="form-group" [ngClass]="{'has-error': submitted && txtSC.hasError('required')}">
+            <label class="control-label">SC</label>
+            <input AllowOnlyDecimal="true" appTwoDigitDecimaNumber type="text" class="form-control"
+              [formControl]="txtSC" placeholder="SC">
           </div>
+        </div>
 
-          <!-- <div class="w3-quarter w3-left" style="width: 12%;">  getProjectBriefName_SMCNo
+        <div class="col-md-2 col-sm-2 col-xs-3">
+          <div class="form-group" [ngClass]="{'has-error': submitted && txtST.hasError('required')}">
+            <label class="control-label">ST </label>
+            <input AllowOnlyDecimal="true" appTwoDigitDecimaNumber type="text" class="form-control"
+              [formControl]="txtST" placeholder="ST">
+          </div>
+        </div>
+
+        <div class="col-md-2 col-sm-2 col-xs-3">
+          <div class="form-group" [ngClass]="{'has-error': submitted && txtOBC.hasError('required')}">
+            <label class="control-label">OBC</label>
+            <input AllowOnlyDecimal="true" appTwoDigitDecimaNumber type="text" class="form-control"
+              [formControl]="txtOBC" placeholder="OBC">
+          </div>
+        </div>
+
+        <div class="col-md-2 col-sm-2 col-xs-3">
+          <div class="form-group" [ngClass]="{'has-error': submitted && txtOthersEWS.hasError('required')}">
+            <label class="control-label">Others </label>
+            <input AllowOnlyDecimal="true" appTwoDigitDecimaNumber type="text" class="form-control"
+              [formControl]="txtOthersEWS" placeholder="Others">
+          </div>
+        </div>
+
+        <div class="col-md-2 col-sm-2 col-xs-3">
+          <div class="form-group" [ngClass]="{'has-error': submitted && txtMinority.hasError('required')}">
+            <label class="control-label">Minority </label>
+            <input AllowOnlyDecimal="true" appTwoDigitDecimaNumber type="text" class="form-control"
+              [formControl]="txtMinority" placeholder="Minority">
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="col-md-6 clubCell" style="padding-bottom: 5px;">
+        <h4 class="greyBg splitHeader">
+          No. of Houses constructed/acquired,please specify ownership
+        </h4>
+
+        <div class="col-md-2 col-sm-2 col-xs-3">
+          <div class="form-group" [ngClass]="{'has-error': submitted && txtJoint.hasError('required')}">
+            <label class="control-label">Joint</label>
+            <input AllowOnlyDecimal="true" type="text" class="form-control" [formControl]="txtJoint" placeholder="Joint"
+              appTwoDigitDecimaNumber
+              (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
+          </div>
+        </div>
+
+        <div class="col-md-2 col-sm-2 col-xs-3">
+          <div class="form-group" [ngClass]="{'has-error': submitted && txtFemale.hasError('required')}">
+            <label class="control-label">Female</label>
+            <input AllowOnlyDecimal="true" type="text" class="form-control" [formControl]="txtFemale"
+              placeholder="Female" appTwoDigitDecimaNumber
+              (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
+          </div>
+        </div>
+
+        <div class="col-md-2 col-sm-2 col-xs-3">
+          <div class="form-group" [ngClass]="{'has-error': submitted && txtMale.hasError('required')}">
+            <label class="control-label">Male</label>
+            <input AllowOnlyDecimal="true" type="text" class="form-control" [formControl]="txtMale" placeholder="Male"
+              appTwoDigitDecimaNumber
+              (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-xs-3">
+          <div class="form-group" [ngClass]="{'has-error': submitted && txtTransgender.hasError('required')}">
+            <label class="control-label">Transgender</label>
+            <input AllowOnlyDecimal="true" type="text" class="form-control" [formControl]="txtTransgender"
+              placeholder="Transgender" appTwoDigitDecimaNumber
+              (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-xs-12">
+          <div class="form-group">
+            <label class="control-label">Total</label>
+            <input AllowOnlyDecimal="true" type="text" class="form-control" disabled [formControl]="txtTotalHouses"
+              placeholder="Total" appTwoDigitDecimaNumber [(ngModel)]="adminSandbox.ProjectBriefDetailCost">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <label class="control-label">Attached 7A,7B or 7C :</label>
+        <div style="display: inline-block; padding-left: 10px; ">
+          <input type="file" accept="application/pdf" [formControl]="txtSelectFile" (change)="selectFile($event)"
+            name="txtSelectFile" style="font-family: Arial, Geneva, Tahoma, sans-serif;" />
+        </div>
+      </div>
+
+      <div class="box-footer col-md-12" style="clear: both; text-align: center;"><button class="btn btn-warning"
+          type="submit">Submit</button></div>
+    </div>
+
+
+
+    <div class="w3-row">
+
+      <!-- <div class="w3-quarter w3-left" style="width: 10%;">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+          State Name:
+        </label>
+      </div>
+      <div class="w3-quarter w3-left" style="width: 22%;">
+        <select [formControl]="ddlStateCode" [(ngModel)]="State" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+          (change)="getProjectBriefData($event); adminSandbox.getStateDistrictData($event.target.value);this.District='';this.City='';this.ProjectName='';
+                        this.Scheme='';this.Components='';" class="w3-input w3-border">
+          <option value="" disabled>Please select state--</option>
+          <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
+            {{state.States_UT}}</option>
+        </select>
+        <label *ngIf="submitted && ddlStateCode.hasError('required')" class="error-label"
+          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+          select state. </label>
+      </div> -->
+      <!-- 
+      <div class="w3-quarter w3-center" style="width: 10%;">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+          District Name:
+        </label>
+      </div> -->
+      <!-- <div class="w3-quarter w3-left" style="width: 22%;">
+        <select [formControl]="ddlDistrictCode" [(ngModel)]="District"
+          style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="PrjBriefDataonDistt($event);adminSandbox.getDistrictCityData($event.target.value);this.City='';this.ProjectName='';
+            this.Scheme='';this.Components='';" class="w3-input w3-border">
+          <option value="" disabled>Please select district--</option>
+          <option *ngFor="let ditrict of adminSandbox.stateDistrictMaster" [value]="ditrict.Dcode">
+            {{ditrict.District}}</option>
+        </select>
+        <label *ngIf="submitted && ddlDistrictCode.hasError('required')" class="error-label"
+          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+          select district. </label>
+      </div> -->
+
+      <!-- <div class="w3-quarter w3-center" style="width: 10%;">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+          City Name:
+        </label>
+      </div> -->
+      <!-- <div class="w3-quarter w3-left" style="width: 22%;">
+        <select [formControl]="ddlCity" [(ngModel)]="City" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+          class="w3-input w3-border" (change)="PrjBriefDataonCity($event);">
+          <option value="" disabled>Please select city--</option>
+          <option *ngFor="let city of adminSandbox.districtCityMaster" [value]="city.CityCode">
+            {{city.City}}</option>
+        </select>
+        <label *ngIf="submitted && ddlCity.hasError('required')" class="error-label"
+          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+          select city. </label>
+      </div> -->
+
+    </div>
+    <div class="w3-row">
+      <!-- <div class="w3-quarter w3-left" style="width: 10%;">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+          Scheme :
+        </label>
+      </div>
+      <div class="w3-quarter w3-left" style="width: 22%;">
+        <select [formControl]="ddlScheme" class="w3-input w3-border" [(ngModel)]="Scheme"
+          style="font-family: Arial, Geneva, Tahoma, sans-serif;" (change)="adminSandbox.getProjectSchemeComponentData($event.target.value);this.ProjectName='';
+         this.Components=''; ">
+          <option value="" disabled>Please select Scheme--</option>
+          <option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme.SchemeShortName">
+            {{scheme.SchemeShortName}}</option>
+        </select>
+        <label *ngIf="submitted && ddlScheme.hasError('required')" class="error-label"
+          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+          select scheme. </label>
+      </div> -->
+      <div>
+        <!-- <div class="w3-quarter w3-center" style="width: 10%;">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            Component :
+          </label>
+        </div> -->
+        <!-- <div class="w3-quarter w3-left" style="width: 22%;">
+          <select [formControl]="ddlComponent" class="w3-input w3-border" [(ngModel)]="Components"
+            style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            (change)="adminSandbox.getCSMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,$event.target.value) ;adminSandbox.getProject_AllDetails( 0,$event.target.value)">
+            <option value="" disabled>Please select Components--</option>
+            <option *ngFor="let schemeComp of adminSandbox.schComponentMaster" [value]="schemeComp.Cname">
+              {{schemeComp.Cname}}</option>
+          </select>
+          <label *ngIf="submitted && ddlComponent.hasError('required')" class="error-label"
+            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+            select components. </label>
+        </div> -->
+
+        <!-- <div class="w3-quarter w3-left" style="width: 12%;">  getProjectBriefName_SMCNo
             <label  style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
                 CSMC No:
             </label>
@@ -128,634 +423,524 @@
             <label *ngIf="submitted && txtCSMCNumber.hasError('required')" class="error-label"
                 style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter csmc number.</label>
         </div> getCSMCNo(StateCode: any, DisttCode :any,cityCode :any, CompCode:any) -->
-          <div class="w3-quarter w3-center" style="width: 10%;">
-            <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-              CSMC No :
-            </label>
-          </div>
-          <div class="w3-quarter w3-left" style="width: 22%;">
-            <!--   <select [formControl]="ddlCSMCNo" [(ngModel)]="CSMCNumber" class="w3-input w3-border"   
-          this.ProjectName='';" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-            <option value="" disabled >  Please select CSMC No--</option>
-            <option *ngFor="let schemeComp of adminSandbox.schCSMCNo" [value]="schemeComp.CSMCNumber" >
-              {{schemeComp.CSMCNumber}}</option>
-          </select>-->
-
-            <select [formControl]="ddlCSMCNo" class="w3-input w3-border"
-              style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-              (change)="adminSandbox.getProjectBriefName_SMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,ddlComponent.value,$event.target.value) ;adminSandbox.getProject_AllDetails( ddlCSMCNo.value,ddlComponent.value)">
-              <option value="" disabled> Please select CSMC No--</option>
-
-              <option *ngFor="let schemeComp of adminSandbox.schCSMCNo" [value]="schemeComp">
-                {{schemeComp}}</option>
-            </select>
-
-            <label *ngIf="submitted && ddlCSMCNo.hasError('required')" class="error-label"
-              style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-              select CSMC No. </label>
-          </div>
-
-
-        </div>
-
-      </div>
-      <br>
-      <div class="w3-row">
-
-        <div class="w3-quarter w3-center" style="width: 10%;">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-            Project Name:
+        <!-- <div class="w3-quarter w3-center" style="width: 10%;">
+          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+            CSMC No :
           </label>
         </div>
-
         <div class="w3-quarter w3-left" style="width: 22%;">
-          <select [formControl]="ddlProjectName" [(ngModel)]="ProjectName" class="w3-input w3-border"
-            style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-            <option value="" disabled>Please select Project Name--</option>
-            <option *ngFor="let projectNameBrief of adminSandbox.projectBriefName"
-              [value]="projectNameBrief.ProjectCode">
-              {{projectNameBrief.ProjectTitle}}</option>
+          <select [formControl]="ddlCSMCNo" class="w3-input w3-border"
+            style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+            (change)="adminSandbox.getProjectBriefName_SMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,ddlComponent.value,$event.target.value) ;adminSandbox.getProject_AllDetails( ddlCSMCNo.value,ddlComponent.value)">
+            <option value="" disabled> Please select CSMC No--</option>
+            <option *ngFor="let schemeComp of adminSandbox.schCSMCNo" [value]="schemeComp">
+              {{schemeComp}}</option>
           </select>
-          <label *ngIf="submitted && ddlProjectName.hasError('required')" class="error-label"
+
+          <label *ngIf="submitted && ddlCSMCNo.hasError('required')" class="error-label"
             style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-            select project name. </label>
-        </div>
-
-
-        <div class="w3-quarter w3-left" style="width: 10%;">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-            State Level Nodal Agency :
-          </label>
-        </div>
-        <div class="w3-quarter w3-left" style="width: 22%;">
-          <input type="text" class="w3-input w3-border" [formControl]="txtNodalAgency"
-            placeholder=" State Level Nodal Agency" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-          <label *ngIf="submitted && txtNodalAgency.hasError('required')" class="error-label"
-            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-            enter lodal agency. </label>
-        </div>
-
-        <div class="w3-quarter w3-center" style="width: 10%;">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-            Implementing Agency :
-          </label>
-        </div>
-        <div class="w3-quarter w3-left" style="width: 22%;">
-          <input type="text" class="w3-input w3-border" [formControl]="txtImplementingAgency"
-            placeholder=" Implementing Agency" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-          <label *ngIf="submitted && txtImplementingAgency.hasError('required')" class="error-label"
-            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-            enter implementing agency. </label>
-
-        </div>
-
-      </div>
-
-      <div class="w3-row">
-        <div class="w3-quarter w3-center" style="width: 10%;">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-            Date Of Approval by SLSMC :
-          </label>
-        </div>
-
-        <div class="w3-quarter w3-left" style="width: 22%;">
-          <input type="text" class="w3-input w3-border" [minDate]="maxStartDate" [formControl]="txtSLSMC" bsDatepicker
-            [bsConfig]="dpConfig" autocomplete="off" onkeydown="return false" placeholder="dd/mm/yyyy">
-          <label *ngIf="submitted && txtSLSMC.hasError('required')" class="error-label"
-            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-            select date of approval. </label>
-        </div>
-      </div>
-
-      <br>
-      <div class="w3-row">
-        <div class="w3-quarter w3-left" style="width: 10%;">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-            Whether Slum :
-          </label>
-        </div>
-        <div class="w3-quarter w3-left" style="width: 22%;">
-          <input type="radio" name="radioSlum" value="Yes" [formControl]="radioSlum" (click)=showSlum() />
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;
-          <input type="radio" name="radioSlum" value="No" [formControl]="radioSlum" (click)=hideSlum() />
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">No</label>&nbsp;&nbsp;&nbsp;&nbsp;
-          <input type="radio" name="radioSlum" value="Both" [formControl]="radioSlum" (click)=hidebothSlum() />
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">Both</label>
-          <label *ngIf="submitted && radioSlum.hasError('required')" class="error-label"
-            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-            select slum. </label>
-        </div>
+            select CSMC No. </label>
+        </div> -->
 
 
       </div>
-      <br>
-      <div *ngIf="Slum">
-        <form [formGroup]="ProjectSlum">
-          <table style="width: 22%;" align="center">
-            <tr style="text-align: center;background-color:white">
-              <thead style=" font-weight: bold">
-                <table formArrayName="itemRows">
-                  <tr *ngFor="let itemrow of ProjectSlum.controls.itemRows['controls']; let i=index;"
-                    [formGroupName]="i">
-                    <div>
-                      <th style="font-family: Arial, Geneva, Tahoma, sans-serif;">Name Of Slum
-                        <table>
-                          <tr>
-                            <td style="text-align: left">
-                              <input formControlName="SlumName" placeholder="Slum Name"
-                                style="width: 200px;height: 34px;font-family: Arial, Geneva, Tahoma, sans-serif;"
-                                type="text">
-                            </td>
-                          </tr>
-                        </table>
-                      </th>
-                      <th style="font-family: Arial, Geneva, Tahoma, sans-serif;">Houses Covered
-                        <table>
-                          <tr>
-                            <td style="text-align: left">
-                              <input formControlName="SlumCovered" placeholder="Houses Covered" AllowOnlyNumber="true"
-                                style="width: 200px;height: 34px;font-family: Arial, Geneva, Tahoma, sans-serif;"
-                                type="text" appTwoDigitDecimaNumber>
-                              <input formControlName="ProjectCode" [(ngModel)]="ddlProjectName.value" hidden="true"
-                                style="width: 110px;" type="text" appTwoDigitDecimaNumber>
-                            </td>
-                          </tr>
-                        </table>
-                      </th>
-                      <th>Add
-                        <table>
 
-                          <tr>
-                            <button type="button" (click)="addNewReleaseRow()"
-                              style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-                              class="w3-btn w3-green w3-round w3-ripple">Add</button>
-                          </tr>
-                        </table>
-                      </th>
-                    </div>
-                  </tr>
+    </div>
+    <div class="w3-row">
 
-                </table>
-              </thead>
-            </tr>
-          </table>
-
-        </form>
+      <!-- <div class="w3-quarter w3-center" style="width: 10%;">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+          Project Name:
+        </label>
       </div>
-      <br>
 
-      <br>
-      <div class="w3-row">
-        <div class=" w3-quarter w3-left">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-            Project Cost
-          </label>
-        </div>
+      <div class="w3-quarter w3-left" style="width: 22%;">
+        <select [formControl]="ddlProjectName" [(ngModel)]="ProjectName" class="w3-input w3-border"
+          style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+          <option value="" disabled>Please select Project Name--</option>
+          <option *ngFor="let projectNameBrief of adminSandbox.projectBriefName" [value]="projectNameBrief.ProjectCode">
+            {{projectNameBrief.ProjectTitle}}</option>
+        </select>
+        <label *ngIf="submitted && ddlProjectName.hasError('required')" class="error-label"
+          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+          select project name. </label>
+      </div> -->
+
+      <!-- 
+      <div class="w3-quarter w3-left" style="width: 10%;">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+          State Level Nodal Agency :
+        </label>
       </div>
-      <br>
-      <table style="width: 58%;" align="center">
-        <tr style="background-color:white">
-          <thead style=" font-weight: bold">
-            <table>
-              <tr>
-                <div>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Housing Cost :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
-                            (blur)="onSubmitProjectSlum(ProjectSlum.value)" [formControl]="txtHousingCost"
-                            placeholder=" Housing Cost" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-                            appTwoDigitDecimaNumber>
-                          <label *ngIf="submitted && txtHousingCost.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                            enter housing cost. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Infrastructure Cost :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
-                            [formControl]="txtInfrastructure" placeholder="Infrastructure Cost"
-                            style="font-family: Arial, Geneva, Tahoma, sans-serif;" appTwoDigitDecimaNumber>
+      <div class="w3-quarter w3-left" style="width: 22%;">
+        <input type="text" class="w3-input w3-border" [formControl]="txtNodalAgency"
+          placeholder=" State Level Nodal Agency" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+        <label *ngIf="submitted && txtNodalAgency.hasError('required')" class="error-label"
+          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+          enter lodal agency. </label>
+      </div> -->
 
-                          <label *ngIf="submitted && txtInfrastructure.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                            enter infrastructure cost. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Other :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtOther"
-                            placeholder="Other" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-                            appTwoDigitDecimaNumber>
-                          <label *ngIf="submitted && txtOther.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter
-                            other cost. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-
-                </div>
-              </tr>
-
-            </table>
-          </thead>
-        </tr>
-      </table>
-
-      <br>
-      <div class="w3-row">
-        <div class=" w3-quarter w3-left">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-            No of EWS beneficiaries covered in the project
-          </label>
-        </div>
+      <!-- <div class="w3-quarter w3-center" style="width: 10%;">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+          Implementing Agency :
+        </label>
       </div>
-      <br>
-      <table style="width: 92%;" align="center">
-        <tr style="background-color:white">
-          <thead style=" font-weight: bold">
-            <table>
-              <tr>
-                <div>
+      <div class="w3-quarter w3-left" style="width: 22%;">
+        <input type="text" class="w3-input w3-border" [formControl]="txtImplementingAgency"
+          placeholder=" Implementing Agency" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+        <label *ngIf="submitted && txtImplementingAgency.hasError('required')" class="error-label"
+          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+          enter implementing agency. </label>
 
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> General :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
-                            [formControl]="txtGeneral" placeholder="General"
-                            style="font-family: Arial, Geneva, Tahoma, sans-serif;" appTwoDigitDecimaNumber>
-                          <label *ngIf="submitted && txtGeneral.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                            enter general. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> SC :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtSC"
-                            placeholder="SC" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-                          <label *ngIf="submitted && txtSC.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                            enter sc. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> ST :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtST"
-                            placeholder="ST" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-                          <label *ngIf="submitted && txtST.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                            enter st. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> OBC :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtOBC"
-                            placeholder="OBC" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-                          <label *ngIf="submitted && txtOBC.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                            enter obc. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Others :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
-                            [formControl]="txtOthersEWS" placeholder="Others"
-                            style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-                          <label *ngIf="submitted && txtOthersEWS.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                            enter other. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Minority :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
-                            [formControl]="txtMinority" placeholder="Minority"
-                            style="font-family: Arial, Geneva, Tahoma, sans-serif;">
-                          <label *ngIf="submitted && txtMinority.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                            enter minority. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                </div>
-              </tr>
+      </div> -->
 
-            </table>
-          </thead>
-        </tr>
-      </table>
+    </div>
 
-      <br>
-      <div class="w3-row">
-
+    <!-- <div class="w3-row">
+      <div class="w3-quarter w3-center" style="width: 10%;">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+          Date Of Approval by SLSMC :
+        </label>
       </div>
-      <br>
-      <div class="w3-row">
-        <div class=" w3-quarter w3-left">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;width:100%">
-            No of Houses constructed/acquired,please specify ownership
-          </label>
-        </div>
+
+      <div class="w3-quarter w3-left" style="width: 22%;">
+        <input type="text" class="w3-input w3-border" [minDate]="maxStartDate" [formControl]="txtSLSMC" bsDatepicker
+          [bsConfig]="dpConfig" autocomplete="off" onkeydown="return false" placeholder="dd/mm/yyyy">
+        <label *ngIf="submitted && txtSLSMC.hasError('required')" class="error-label"
+          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+          select date of approval. </label>
       </div>
-      <table style="width: 74%;" align="center">
-        <tr style="background-color:white">
-          <thead style=" font-weight: bold">
-            <table>
-              <tr>
-                <div>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Joint :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtJoint"
-                            placeholder="Joint" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-                            appTwoDigitDecimaNumber
-                            (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
-                          <label *ngIf="submitted && txtJoint.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                            enter joint. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Female :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
-                            [formControl]="txtFemale" placeholder="Female"
-                            style="font-family: Arial, Geneva, Tahoma, sans-serif;" appTwoDigitDecimaNumber
-                            (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
-                          <label *ngIf="submitted && txtFemale.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                            enter female. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Male :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtMale"
-                            placeholder="Male" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-                            appTwoDigitDecimaNumber
-                            (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
-                          <label *ngIf="submitted && txtMale.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                            enter male. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Transgender :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
-                            [formControl]="txtTransgender" placeholder="Transgender"
-                            style="font-family: Arial, Geneva, Tahoma, sans-serif;" appTwoDigitDecimaNumber
-                            (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
-                          <label *ngIf="submitted && txtTransgender.hasError('required')" class="error-label"
-                            style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
-                            enter transgender. </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                  <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Total :
-                    <table>
-                      <tr>
-                        <td style="text-align: left">
-                          <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" disabled
-                            [formControl]="txtTotalHouses" placeholder="Total" appTwoDigitDecimaNumber
-                            [(ngModel)]="adminSandbox.ProjectBriefDetailCost"
-                            style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+    </div> -->
 
-                        </td>
-                      </tr>
-                    </table>
-                  </th>
-                </div>
-              </tr>
-
-            </table>
-          </thead>
-        </tr>
-      </table>
-      <br>
-
-      <br>
-
-      <div class="w3-row">
-        <div class="w3-quarter w3-left" style="width: 14%;">
-          <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
-            Attached 7A,7B or 7C :
-          </label>
-        </div>
-        <div class="w3-quarter w3-left" style="width: 22%;">
-          <input type="file" accept="application/pdf" [formControl]="txtSelectFile" (change)="selectFile($event)"
-            name="txtSelectFile" style="font-family: Arial, Geneva, Tahoma, sans-serif;" />
-        </div>
-
+    <div class="w3-row">
+      <!-- <div class="w3-quarter w3-left" style="width: 10%;">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+          Whether Slum :
+        </label>
       </div>
-      <div style="text-align: center">
-        <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
-          class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
-      </div>
-    </form>
-    <br>
-    <form>
-      <div class="pic-container">
-        <div style="width: 95%; height: 400px; overflow: scroll">
-          <table class="table" border="1px" style="width: 89%;" align="center">
-            <thead style="background-color: lightgray; font-weight: bold">
-              <tr>
-                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">S.No</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">State Name</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">District Name</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">City Name</td>
-                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;display: none;">Scheme</td>
+      <div class="w3-quarter w3-left" style="width: 22%;">
+        <input type="radio" name="radioSlum" value="Yes" [formControl]="radioSlum" (click)=showSlum() />
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="radioSlum" value="No" [formControl]="radioSlum" (click)=hideSlum() />
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">No</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="radioSlum" value="Both" [formControl]="radioSlum" (click)=hidebothSlum() />
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">Both</label>
+        <label *ngIf="submitted && radioSlum.hasError('required')" class="error-label"
+          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+          select slum. </label>
+      </div> -->
+    </div>
 
-                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">CSMC Date</td>
-                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">CSMC No </td>
-                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">Houses Sanctioned</td>
+    <!-- <div *ngIf="Slum">
+      <form [formGroup]="ProjectSlum">
+        <table style="width: 22%;" align="center">
+          <tr style="text-align: center;background-color:white">
+            <thead style=" font-weight: bold">
+              <table formArrayName="itemRows">
+                <tr *ngFor="let itemrow of ProjectSlum.controls.itemRows['controls']; let i=index;" [formGroupName]="i">
+                  <div>
+                    <th style="font-family: Arial, Geneva, Tahoma, sans-serif;">Name Of Slum
+                      <table>
+                        <tr>
+                          <td style="text-align: left">
+                            <input formControlName="SlumName" placeholder="Slum Name"
+                              style="width: 200px;height: 34px;font-family: Arial, Geneva, Tahoma, sans-serif;"
+                              type="text">
+                          </td>
+                        </tr>
+                      </table>
+                    </th>
+                    <th style="font-family: Arial, Geneva, Tahoma, sans-serif;">Houses Covered
+                      <table>
+                        <tr>
+                          <td style="text-align: left">
+                            <input formControlName="SlumCovered" placeholder="Houses Covered" AllowOnlyNumber="true"
+                              style="width: 200px;height: 34px;font-family: Arial, Geneva, Tahoma, sans-serif;"
+                              type="text" appTwoDigitDecimaNumber>
+                            <input formControlName="ProjectCode" [(ngModel)]="ddlProjectName.value" hidden="true"
+                              style="width: 110px;" type="text" appTwoDigitDecimaNumber>
+                          </td>
+                        </tr>
+                      </table>
+                    </th>
+                    <th>Add
+                      <table>
 
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Component</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Project Code</td>
+                        <tr>
+                          <button type="button" (click)="addNewReleaseRow()"
+                            style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                            class="w3-btn w3-green w3-round w3-ripple">Add</button>
+                        </tr>
+                      </table>
+                    </th>
+                  </div>
+                </tr>
 
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">NodalAgency</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">ImplementingAgency</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">SLSMC Date</td>
-
-                <!-- <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">Date</td> -->
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Whether Slum</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Slum Name</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Houses Covered</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Housing Cost</td>
-                <td style="text-align: right;font-family: Arial, Geneva, Tahoma, sans-serif;">Infrastructure Cost</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Other</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">General</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">SC</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">ST</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">OBC</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Other EWS</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Minority</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Joint</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Female</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Male</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Transgender</td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Total Houses Consructed
-                </td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;"> Action </td>
-
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;">Download PDF</td>
-              </tr>
+              </table>
             </thead>
-            <tbody>
-              <tr *ngFor="let briefDetail of adminSandbox.projectBriefDetail;let i = index"
-                style="text-align: center;background-color:white">
-                <td style="text-align: right;border-top: 1px solid black;">{{i+1}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.States_UT}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.District}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.City}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;display: none;">
-                  {{briefDetail.Scheme}}</td>
+          </tr>
+        </table>
 
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.CSMCDate|date: 'yyyy-dd-MM'}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.CSMCNumber}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.TotalSanction}}</td>
+      </form>
+    </div> -->
 
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.Component}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.ProjectCode}}</td>
-
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.NodalAgency}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.ImplementingAgency}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.SLSMCDate|date: 'yyyy-dd-MM'}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.WhetherSlum}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.SlumName}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.SlumCOvered}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.HousingCost}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.InfaCost}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.OtherCost}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.General}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.SC}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.ST}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.OBC}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.OtherEWS}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.Minority}}</td>
-
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.Joint}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.Female}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.Male}}</td>
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.Transgender}}</td>
-
-
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  {{briefDetail.TotalHouses}}</td>
-                <!-- <td style="text-align:center;color:blue;border-top: 1px solid black;"
-                              (click)="adminSandbox.downloadRelease(briefDetail.PDF)">Download</td> -->
-
-                <td
-                  style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;">
-                  <button type="button" (click)="Edit(briefDetail)">Edit</button></td>
-                <td style="text-align: left;font-family: Arial, Geneva, Tahoma, sans-serif;border-top: 1px solid black;"
-                  (click)="adminSandbox.download_PBD_Release(briefDetail.PDF,'ProjectBriefDetail')">
-                  Download</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <!-- <div class="w3-row">
+      <div class=" w3-quarter w3-left">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+          Project Cost
+        </label>
       </div>
-    </form>
-  </div>
+    </div> -->
+    <!-- <table style="width: 58%;" align="center">
+      <tr style="background-color:white">
+        <thead style=" font-weight: bold">
+          <table>
+            <tr>
+              <div>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Housing Cost :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
+                          (blur)="onSubmitProjectSlum(ProjectSlum.value)" [formControl]="txtHousingCost"
+                          placeholder=" Housing Cost" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          appTwoDigitDecimaNumber>
+                        <label *ngIf="submitted && txtHousingCost.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter housing cost. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Infrastructure Cost :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
+                          [formControl]="txtInfrastructure" placeholder="Infrastructure Cost"
+                          style="font-family: Arial, Geneva, Tahoma, sans-serif;" appTwoDigitDecimaNumber>
 
+                        <label *ngIf="submitted && txtInfrastructure.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter infrastructure cost. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Other :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtOther"
+                          placeholder="Other" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          appTwoDigitDecimaNumber>
+                        <label *ngIf="submitted && txtOther.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please enter
+                          other cost. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+
+              </div>
+            </tr>
+
+          </table>
+        </thead>
+      </tr>
+    </table> -->
+
+    <!-- <div class="w3-row">
+      <div class=" w3-quarter w3-left">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+          No of EWS beneficiaries covered in the project
+        </label>
+      </div>
+    </div> -->
+    <!-- <table style="width: 92%;" align="center">
+      <tr style="background-color:white">
+        <thead style=" font-weight: bold">
+          <table>
+            <tr>
+              <div>
+
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> General :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtGeneral"
+                          placeholder="General" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          appTwoDigitDecimaNumber>
+                        <label *ngIf="submitted && txtGeneral.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter general. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> SC :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtSC"
+                          placeholder="SC" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                        <label *ngIf="submitted && txtSC.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter sc. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> ST :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtST"
+                          placeholder="ST" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                        <label *ngIf="submitted && txtST.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter st. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> OBC :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtOBC"
+                          placeholder="OBC" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                        <label *ngIf="submitted && txtOBC.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter obc. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Others :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
+                          [formControl]="txtOthersEWS" placeholder="Others"
+                          style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                        <label *ngIf="submitted && txtOthersEWS.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter other. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Minority :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
+                          [formControl]="txtMinority" placeholder="Minority"
+                          style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                        <label *ngIf="submitted && txtMinority.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter minority. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+              </div>
+            </tr>
+
+          </table>
+        </thead>
+      </tr>
+    </table> -->
+
+
+    <!-- <div class="w3-row">
+      <div class=" w3-quarter w3-left">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;width:100%">
+          No of Houses constructed/acquired,please specify ownership
+        </label>
+      </div>
+    </div>
+    <table style="width: 74%;" align="center">
+      <tr style="background-color:white">
+        <thead style=" font-weight: bold">
+          <table>
+            <tr>
+              <div>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Joint :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtJoint"
+                          placeholder="Joint" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          appTwoDigitDecimaNumber
+                          (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
+                        <label *ngIf="submitted && txtJoint.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter joint. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Female :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtFemale"
+                          placeholder="Female" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          appTwoDigitDecimaNumber
+                          (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
+                        <label *ngIf="submitted && txtFemale.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter female. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Male :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" [formControl]="txtMale"
+                          placeholder="Male" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          appTwoDigitDecimaNumber
+                          (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
+                        <label *ngIf="submitted && txtMale.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter male. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Transgender :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border"
+                          [formControl]="txtTransgender" placeholder="Transgender"
+                          style="font-family: Arial, Geneva, Tahoma, sans-serif;" appTwoDigitDecimaNumber
+                          (blur)="adminSandbox.ProjectBriefDetailHousesTotal(txtJoint.value,txtFemale.value,txtMale.value,txtTransgender.value)">
+                        <label *ngIf="submitted && txtTransgender.hasError('required')" class="error-label"
+                          style="color: red;font-family: Arial, Geneva, Tahoma, sans-serif;">Please
+                          enter transgender. </label>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+                <th style="font-family: Arial, Geneva, Tahoma, sans-serif;"> Total :
+                  <table>
+                    <tr>
+                      <td style="text-align: left">
+                        <input AllowOnlyDecimal="true" type="text" class="w3-input w3-border" disabled
+                          [formControl]="txtTotalHouses" placeholder="Total" appTwoDigitDecimaNumber
+                          [(ngModel)]="adminSandbox.ProjectBriefDetailCost"
+                          style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+              </div>
+            </tr>
+
+          </table>
+        </thead>
+      </tr>
+    </table> -->
+
+    <!-- <div class="w3-row">
+      <div class="w3-quarter w3-left" style="width: 14%;">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;padding-top: 8px;">
+          Attached 7A,7B or 7C :
+        </label>
+      </div>
+      <div class="w3-quarter w3-left" style="width: 22%;">
+        <input type="file" accept="application/pdf" [formControl]="txtSelectFile" (change)="selectFile($event)"
+          name="txtSelectFile" style="font-family: Arial, Geneva, Tahoma, sans-serif;" />
+      </div>
+    </div> -->
+
+    <!-- <div style="text-align: center">
+      <button type="submit" style="font-family: Arial, Geneva, Tahoma, sans-serif;"
+        class="w3-btn w3-orange w3-round w3-ripple">Submit</button>
+    </div> -->
+  </form>
+  <form>
+    <div class="pic-container">
+      <div style="width: 100%; height: 400px; overflow: scroll">
+        <table class="table table-striped" border="1px" style="width:100%" align="center">
+          <thead>
+            <tr class="blueBg">
+              <td>S.No</td>
+              <td>State Name</td>
+              <!-- <td>District Name</td> -->
+              <td>City Name</td>
+              <td>CSMC Date</td>
+              <td>CSMC No </td>
+              <td>Houses Sanctioned</td>
+              <td>Component</td>
+              <td>Project Code</td>
+              <td>Nodal Agency</td>
+              <td>Implementing Agency</td>
+              <td>SLSMC Date</td>
+              <td>Whether Slum</td>
+              <td>Slum Name</td>
+              <td>Houses Covered</td>
+              <td>Housing Cost</td>
+              <td>Infrastructure Cost</td>
+              <td>Other</td>
+              <td>General</td>
+              <td>SC</td>
+              <td>ST</td>
+              <td>OBC</td>
+              <td>Other EWS</td>
+              <td>Minority</td>
+              <td>Joint</td>
+              <td>Female</td>
+              <td>Male</td>
+              <td>Transgender</td>
+              <td> Action </td>
+              <td>Download PDF</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let briefDetail of adminSandbox.projectBriefDetail;let i = index">
+              <td>{{i+1}}</td>
+              <td> {{briefDetail.States_UT}}</td>
+              <!-- <td> {{briefDetail.District}}</td> -->
+              <td> {{briefDetail.City}}</td>
+              <td> {{briefDetail.CSMCDate}}</td>
+              <td>{{briefDetail.CSMCNumber}}</td>
+              <td> {{briefDetail.TotalSanction}}</td>
+              <td> {{briefDetail.Component}}</td>
+              <td> {{briefDetail.ProjectCode}}</td>
+              <td> {{briefDetail.NodalAgency}}</td>
+              <td> {{briefDetail.ImplementingAgency}}</td>
+              <td> {{briefDetail.SLSMCDate}}</td>
+              <td> {{briefDetail.WhetherSlum}}</td>
+              <td> {{briefDetail.SlumName}}</td>
+              <td> {{briefDetail.SlumCOvered}}</td>
+              <td> {{briefDetail.HousingCost}}</td>
+              <td> {{briefDetail.InfaCost}}</td>
+              <td> {{briefDetail.OtherCost}}</td>
+              <td>{{briefDetail.General}}</td>
+              <td>{{briefDetail.SC}}</td>
+              <td>{{briefDetail.ST}}</td>
+              <td>{{briefDetail.OBC}}</td>
+              <td>{{briefDetail.OtherEWS}}</td>
+              <td>{{briefDetail.Minority}}</td>
+              <td>{{briefDetail.Joint}}</td>
+              <td>{{briefDetail.Female}}</td>
+              <td>{{briefDetail.Male}}</td>
+              <td>{{briefDetail.Transgender}}</td>
+              <td><button type="button" (click)="Edit(briefDetail)"
+                  class="btn btn-block btn-primary btn-sm">Edit</button></td>
+              <td style="cursor: pointer; color: blue;"
+                (click)="adminSandbox.download_PBD_Release(briefDetail.PDF,'ProjectBriefDetail')"> Download</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>
 </div>
