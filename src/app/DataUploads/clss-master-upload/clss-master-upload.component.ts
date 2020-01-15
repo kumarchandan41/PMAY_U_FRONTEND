@@ -42,7 +42,7 @@ export class ClssMasterUploadComponent implements OnInit {
       let fileBrowser = this.fileInput.nativeElement;
       if (fileBrowser.files && fileBrowser.files[0]) {      
         formData.append('file', fileBrowser.files[0]); 
-      this.service.BulkImport_ClssMainNewExcel(formData).subscribe(result=>{
+      this.service.BulkImport_ClssMain_StateWiseExcel(formData).subscribe(result=>{
        this.GetExcel();
       });
       }
@@ -63,13 +63,13 @@ export class ClssMasterUploadComponent implements OnInit {
   
      
   GetExcel(){
-    this.service.GetExcel_ClssMainData().subscribe(result=>{
+    this.service.GetExcel_ClssMainStateWise().subscribe(result=>{
     this.lstExcel=result;
    });
   }
-  
+    
   Delete(data){
-      this.service.DeleteScore_ExcelDataById(data.id).subscribe(result=>{
+      this.service.DeleteClssStateWise_ExcelDataById(data.id).subscribe(result=>{
         alert(result);
         this.GetExcel();
       })

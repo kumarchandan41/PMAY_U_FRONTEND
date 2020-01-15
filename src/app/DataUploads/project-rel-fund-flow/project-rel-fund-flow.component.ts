@@ -25,12 +25,17 @@ export class ProjectRelFundFlowComponent implements OnInit {
   @ViewChild('fileInput',{static:false}) fileInput;
   lstExcel:Excel_ProjectRelFundFlow_Data[];
   lstExcelSheet:ExcelSheet[];
-  
+  InstallmentNo:string;
+  chkValues :string="";
 
   cid: number;
   Comp: string;
   EVR:string;
   rEL: any;
+  Inst: any;
+  ChkBoxArray: string[] = [];
+  
+
   constructor(private router: Router,private gevent:GlobalEvent, public service: BuildingServiceService, private modalService: NgbModal)
    { }
 
@@ -44,11 +49,15 @@ export class ProjectRelFundFlowComponent implements OnInit {
   }
 
   radioButtonSet=['R1','R2','R3','R4','R5','R6','R7','R8','R9','R10' ];
+  radioButtonInst=['I1','I2','I3'];
 
   getStateDetails(event)
   {
     this.stateCodes=event;
-
+  }
+  getInst_Details(event)
+  {
+    this.InstallmentNo=event;
   }
   getCompDetails(event)
   {
@@ -66,22 +75,48 @@ export class ProjectRelFundFlowComponent implements OnInit {
     this.rEL=event;
   }
 
+  get_InstDetails(event)
+  {
+    alert(event);
+    this.Inst=event;
+  }
+
+  
+  sendSanctCodes(event) {
+    debugger;
+   let ChkName = event.target.value;
+   let Checked = event.target.checked;
+
+     if (Checked) {
+       this.ChkBoxArray.push(ChkName);
+      this.chkValues= this.ChkBoxArray.toString();
+     }
+     else {
+       let index = this.ChkBoxArray.findIndex(a => a == ChkName);
+       if (index !== -1) {
+         this.ChkBoxArray.splice(index, 1);
+         this.chkValues= this.ChkBoxArray.toString();
+       } 
+      }
+
+ }
+
   public UploadFile() {
   debugger;
     // for Bulk Insert 
-    const formData: FormData = new FormData(); 
-  
-     formData.append('fileExcel',  this.fileInput.nativeElement.files[0]); 
-    formData.append('SateCode',this.stateCodes);
+    const formData: FormData = new FormData();   
+    formData.append('fileExcel',  this.fileInput.nativeElement.files[0]); 
+    formData.append('StateCode',this.stateCodes);
     formData.append('Comp',this.Comp);
-    formData.append('EVR',this.EVR);
-    formData.append('Rel',this.rEL);
-    
+    formData.append('EBR',this.EVR);
+    formData.append('Rel',this.rEL);    
+    formData.append('Inst',this.Inst);
+    formData.append('CheckValuse',this.chkValues);
 
 
-
+   // formData.append('InstNo',this.InstallmentNo);
     this.service.BulkImport_ReleaseFundFlowExcel(formData).subscribe(result=>{
-alert(result);
+          alert(result);
     });
   }
 

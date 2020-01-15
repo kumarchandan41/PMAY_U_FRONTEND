@@ -928,5 +928,26 @@ export class BuildingServiceService {
    }     
 
 
+   BulkImport_ClssMain_StateWiseExcel(formData:FormData):Observable<string>
+   {  
+       //  alert('AA');
+          // Bulk insert to table statescore tblStateWiseScoreExcel
+         let headers = new  HttpHeaders();
+         headers.append('Content-Type','multipart/form-data');
+         headers.append('Accept','application/json');
+         //new HttpHeaders({ 'Content-Type': 'application/json'}) 
+         const httpOptions = { headers: headers};  
+         return  this.http.post<string>(this.url_Upload + "UploadCLSS_Masternew_Excel", formData,httpOptions);
+    }
+    //
 
+    GetExcel_ClssMainStateWise():Observable<Excel_clssMasterNew[]>
+     {
+          return this.http.get<Excel_clssMasterNew[]>(this.url_Upload + "GetExcel_CLSSMasterStateWiseDetails");//.toPromise().then(result=>this.ChartDetail= result as Charts);
+     }
+
+     // DeleteClssStateWise_ExcelDataById(id:string):Observable<string>
+     // {
+     //      return this.http.get<string>(this.url_Upload + "DeleteExcelCLSSMaster?excelId="+ id );
+     // }
 }

@@ -181,7 +181,9 @@ const routes: Routes = [
       { path: 'ExcelStatescore', component: ExcelStatescoreComponent },
       { path: 'ExcelPhyDashboard', component: ExcelPhyDashboardComponent },
       { path: 'ExcelDemandCityWise', component: ExcelDemandCityWiseComponent },
+      
       { path: 'ExcelClssmainmaster', component: ExcelClssmainmasterComponent },
+
       { path: 'ExcelCLSSCityMain', component: ExcelCLSSCityMainComponent },
 
       { path: 'UsersMaster', component: UsersMasterComponent },

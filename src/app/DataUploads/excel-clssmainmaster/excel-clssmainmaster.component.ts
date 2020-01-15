@@ -49,6 +49,7 @@ UpdateQ(data)
    // this.router.navigate(["/updatePMayData"],{queryParams:{ID:data.id}});
     this.router.navigate(["/updatePMayData",{ID:data.SrNo}]);
  }
+ 
  public UploadFile(event:any) {
     // for Bulk Insert 
     let formData = new FormData();

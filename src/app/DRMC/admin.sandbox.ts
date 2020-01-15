@@ -1569,10 +1569,10 @@ export class AdminSandbox {
     });
   }
 
-  download_PBD_Release(pdf: any, filderName: string) {
+  download_PBD_Release(pdf: any, filderName: string,stateCode :string, csmcno : string ,Component :string) {
     var str = pdf;
     var newStr = str.slice(0, -4);
-    this.userMasterService.getFile_PBD_Downnload(newStr, filderName).subscribe((
+    this.userMasterService.getFile_PBD_Downnload(newStr, filderName,stateCode,csmcno,Component).subscribe((
       data) => {
       importedSaveAs(data, str)
     });
