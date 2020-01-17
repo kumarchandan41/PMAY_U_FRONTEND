@@ -63,3 +63,9 @@ export class DistrictMaster
          StatesName  :     string;
 		  
     }
+
+	export class Prj_Master
+    {
+        ProjectCode :     string;
+		projectTitle :     string;
+	}

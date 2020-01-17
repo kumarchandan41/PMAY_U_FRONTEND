@@ -7,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { States } from 'src/app/Shared/CommonModel';
 import { GraphService } from 'src/app/financeReport/service/graph.service';
 import { ExcelSheet } from 'src/app/financeReport/model/excelfile';
-import { Excel_ProjectRelFundFlow_Data } from '../excelfile';
+import { Excel_ProjectRelFundFlow_Data, Excel_Project_RelFundFlow_Data } from '../excelfile';
 import { BuildingServiceService } from '../../login/Services/building-service.service';
 
 
@@ -23,7 +23,7 @@ export class ProjectRelFundFlowComponent implements OnInit {
   saveDetailsForm:any;
   StateMessage:string;
   @ViewChild('fileInput',{static:false}) fileInput;
-  lstExcel:Excel_ProjectRelFundFlow_Data[];
+  lstExcel:Excel_Project_RelFundFlow_Data[];
   lstExcelSheet:ExcelSheet[];
   InstallmentNo:string;
   chkValues :string="";
@@ -120,8 +120,60 @@ export class ProjectRelFundFlowComponent implements OnInit {
     });
   }
 
-
+// Step 1 
+  public UploadAllData(event:any) {
+    // for Bulk Insert 
+    let formData = new FormData();
+    let fileBrowser = this.fileInput.nativeElement;
+    if (fileBrowser.files && fileBrowser.files[0]) {      
+      formData.append('file', fileBrowser.files[0]); 
+    this.service.BulkImport_Project_fund_Rel(formData).subscribe(result=>{
+    // this.GetExcel();
+    });
+    }
+  }
+ 
   
+
+// Step 2
+public UploadAll_HFAData(event:any) {
+  // for Bulk Insert 
+  let formData = new FormData();
+  let fileBrowser = this.fileInput.nativeElement;
+  if (fileBrowser.files && fileBrowser.files[0]) {      
+    formData.append('file', fileBrowser.files[0]); 
+  this.service.BulkImport_Project_HFAfund_Rel(formData).subscribe(result=>{
+  // this.GetExcel();
+  });
+  }
+}
+
+// Step 3
+public UploadAll_SCSPData(event:any) {
+  // for Bulk Insert 
+  let formData = new FormData();
+  let fileBrowser = this.fileInput.nativeElement;
+  if (fileBrowser.files && fileBrowser.files[0]) {      
+    formData.append('file', fileBrowser.files[0]); 
+  this.service.BulkImport_Project_SCSPfund_Rel(formData).subscribe(result=>{
+  // this.GetExcel();
+  });
+  }
+}
+
+
+// Step 3
+public UploadTSP_FundRel_Excel(event:any) {
+  // for Bulk Insert 
+  let formData = new FormData();
+  let fileBrowser = this.fileInput.nativeElement;
+  if (fileBrowser.files && fileBrowser.files[0]) {      
+    formData.append('file', fileBrowser.files[0]); 
+  this.service.UploadTSP_FundRel_Excel(formData).subscribe(result=>{
+  // this.GetExcel();
+  });
+  }
+}  
   
   //GetExcel(){
   //  this.service.GetExcel_PMayData().subscribe(result=>{

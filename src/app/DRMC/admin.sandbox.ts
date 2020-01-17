@@ -4,6 +4,7 @@ import { SnotifyService, SnotifyPosition } from 'ng-snotify';
 import { saveAs as importedSaveAs } from "file-saver";
 import { DatePipe } from '@angular/common';
 import { UserService } from '../admin-service/user.service';
+import { Prj_Master } from '../Shared/CommonModel';
 
 @Injectable()
 export class AdminSandbox {
@@ -98,8 +99,13 @@ export class AdminSandbox {
   projectDetailMaster: any[] = [];
   EditProjectDetail: any[] = [];
   schComponentMaster: any[] = [];
+  schemeSMCNo:string[];
+
+  schCompMaster: any[] = [];
+
 
   schCSMCNo: any[] = [];
+  CMCNo:string;
 
   ProjectOtherCost: any;
   agencyMaster: any[] = [];
@@ -141,6 +147,8 @@ export class AdminSandbox {
   pdf: any[] = [];
   ucOrderValue: any[] = [];
   projectBriefName: any[] = [];
+  
+  projectBrieDetais: Prj_Master[];
   Slum: any;
   projectBriefDetail: any[] = [];
   ProjectBriefDetailCost: any;
@@ -158,6 +166,7 @@ export class AdminSandbox {
   districtMapingResult: any[] = [];
   cityMapingResult: any[] = [];
   projectMapingResult: any[] = [];
+  schemeComp: any[] = [];
 
 
   constructor(private datePipe: DatePipe, private router: Router, protected userMasterService: UserService, private snotifyService: SnotifyService) { }
@@ -168,6 +177,16 @@ export class AdminSandbox {
       this.schemeMaster = data;
     });
   }
+
+// New Code 1
+  getSchemeDataBasedonProjBriefDetail() {
+    this.userMasterService.GetBriefDet_Scheme().subscribe(data => {
+      this.schemeMaster = data;
+    });
+  }
+
+
+  
   postScheme(formGroup: any) {
     var objPost =
     {
@@ -717,7 +736,7 @@ export class AdminSandbox {
     });
   }
   getConsistuencyData(stateCode: string) {
-    debugger;
+   // debugger;
     if (stateCode === '0') {
       this.userMasterService.getConsistuencyData().subscribe(data => {
         this.constituencyMaster = data;
@@ -1304,10 +1323,28 @@ export class AdminSandbox {
 
   getProjectSchemeComponentData(SchemeId: any) {
     this.userMasterService.getProjectSchemeComponent(SchemeId).subscribe(data => {
+    //  this.schComponentMaster = data;
+    });
+  }
+// 2 New Code 
+  getProjectComponent(StateCode: any, DisttCode: any, cityCode: any,SchemeId: any) {
+  //  alert(1);
+    this.userMasterService.getProject_Component(StateCode , DisttCode , cityCode, SchemeId).subscribe(data => {
       this.schComponentMaster = data;
+      console.log(data);
     });
   }
 
+  
+  GetBriefDet_CSMCNo(StateCode: any, DisttCode: any, cityCode: any,SchemeId: any ,Component: any) {
+    //  alert(1);
+      this.userMasterService.GetBriefDet_CSMCNo(StateCode , DisttCode , cityCode, SchemeId,Component).subscribe(data => {
+        this.schemeSMCNo = data;
+  
+      });
+    }
+
+    
   getProj_ComponentWiseData(Components: any) {
     this.userMasterService.getProj_ComponentWiseData(Components).subscribe(data => {
       this.schComponentMaster = data;
@@ -1631,7 +1668,7 @@ export class AdminSandbox {
   }
   //-----get projectbriefname of project name----//
   getProjectBriefName(statecode: any, districtcode: any, citycode: any, scheme: any, component: any) {
-    debugger;
+     
     if (component !== "") {
       this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
         //  this.projectBriefDetail = data.filter(a=>a.SchemeComponent==component);
@@ -1646,10 +1683,22 @@ export class AdminSandbox {
     }
   }
 
-  getProjectBriefName_SMCNo(statecode: any, districtcode: any, citycode: any, scheme: any, component: any, CSMCNumber: any) {
+  // getProjectBriefName_SMCNo(statecode: any, districtcode: any, citycode: any, scheme: any, component: any, CSMCNumber: any) {
+  //   // alert(component);
+  //   this.CMCNo=CSMCNumber;
+  //   this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
+  //     this.projectBriefName = data.filter(a => a.CSMCNumber === CSMCNumber);;
+  //   });
+  // }
+
+// new Code 
+getPrjBriefName_SMCNo(statecode: any, districtcode: any, citycode: any, scheme: any, component: any, CSMCNumber: any) {
     // alert(component);
-    this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
-      this.projectBriefName = data.filter(a => a.CSMCNumber === CSMCNumber);;
+    //debugger;
+    this.CMCNo=CSMCNumber;
+    this.userMasterService.getPrjBriefName(statecode, districtcode, citycode, scheme, component,CSMCNumber).subscribe(data => {
+      this.projectBrieDetais = data;
+      console.log(data);
     });
   }
 

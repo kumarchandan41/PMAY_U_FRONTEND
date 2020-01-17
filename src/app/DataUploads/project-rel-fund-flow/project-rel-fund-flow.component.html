@@ -97,15 +97,33 @@
   </div>
   </div>
   
-
-
   <div class="container">
     <div class="col-md-2 col-sm-2">
       <input type="file" #fileInput (cahnge)="UploadFile()" />
-      <button (click)="UploadFile()" class="btn btn-primary">  Upload </button><br>
+      <button (click)="UploadAllData()" class="btn btn-primary">  Upload All Data </button><br>
       <span *ngIf="flag"> uploading<img src="assets/images/30.gif"/></span><br>      
     </div>
-  
+
+    <div class="col-md-2 col-sm-2">
+      <input type="file" #fileInput (cahnge)="UploadFile()" />
+      <button (click)="UploadAll_HFAData()" class="btn btn-primary">  Upload HFA-Head Data </button><br>
+      <span *ngIf="flag"> uploading<img src="assets/images/30.gif"/></span><br>      
+    </div>
+
+
+    <div class="col-md-2 col-sm-2">
+      <input type="file" #fileInput (cahnge)="UploadFile()" />
+      <button (click)="UploadAll_SCSPData()" class="btn btn-primary">  Upload SCSP-Head Data </button><br>
+      <span *ngIf="flag"> uploading<img src="assets/images/30.gif"/></span><br>      
+    </div>    
+
+    <div class="col-md-2 col-sm-2">
+      <input type="file" #fileInput (cahnge)="UploadFile()" />
+      <button (click)="UploadTSP_FundRel_Excel()" class="btn btn-primary">  Upload TSP-Head Data </button><br>
+      <span *ngIf="flag"> uploading<img src="assets/images/30.gif"/></span><br>      
+    </div>    
+
+
     <div class="col-md-3 col-sm-3">
       <button (click)="DeleteTablePHY()" class="btn btn-danger"> Delete Table Data</button>
     </div>

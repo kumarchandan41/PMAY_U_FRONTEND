@@ -47,45 +47,54 @@
           </select>
         </div>
       </div>
+
+
+                <!-- (change)="adminSandbox.getProjectSchemeComponentData($event.target.value);this.ProjectName=''; -->
+
       <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="form-group" [ngClass]="{'has-error': submitted && ddlScheme.hasError('required')}">
           <label class="control-label" for="Scheme">Scheme</label>
-          <select [formControl]="ddlScheme" id="Scheme" class="form-control" [(ngModel)]="Scheme" (change)="adminSandbox.getProjectSchemeComponentData($event.target.value);this.ProjectName='';
+          <select [formControl]="ddlScheme" id="Scheme" class="form-control" [(ngModel)]="Scheme" 
+          (change)="adminSandbox.getProjectComponent(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value , $event.target.value);this.ProjectName='';
+           
          this.Components=''; ">
             <option value="" disabled>Please select Scheme--</option>
-            <option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme.SchemeShortName">
-              {{scheme.SchemeShortName}}</option>
+            <option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme">
+              {{scheme}}</option>
           </select>
         </div>
       </div>
+      
       <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="form-group" [ngClass]="{'has-error': submitted && ddlComponent.hasError('required')}">
           <label class="control-label" for="Components">Components</label>
           <select [formControl]="ddlComponent" id="Components" class="form-control" [(ngModel)]="Components"
-            (change)="adminSandbox.getCSMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,$event.target.value)">
+            (change)="adminSandbox.GetBriefDet_CSMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value ,$event.target.value)">
             <option value="" disabled>Please select Components--</option>
-            <option *ngFor="let schemeComp of adminSandbox.schComponentMaster" [value]="schemeComp.Cname">
-              {{schemeComp.Cname}}</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-3 col-xs-6">
-        <div class="form-group" [ngClass]="{'has-error': submitted && ddlCSMCNo.hasError('required')}">
-          <label class="control-label" for="CSMCNo">CSMC No.</label>
-          <select [formControl]="ddlCSMCNo" id="CSMCNo" class="form-control"
-            (change)="adminSandbox.getProjectBriefName_SMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,ddlComponent.value,$event.target.value);">
-            <option value="" disabled> Please select CSMC No--</option>
-            <option *ngFor="let schemeComp of adminSandbox.schCSMCNo" [value]="schemeComp">
+            <option *ngFor="let schemeComp of adminSandbox.schComponentMaster" [value]="schemeComp">
               {{schemeComp}}</option>
           </select>
         </div>
       </div>
+
+      <div class="col-md-3 col-sm-3 col-xs-6">
+        <div class="form-group" [ngClass]="{'has-error': submitted && ddlCSMCNo.hasError('required')}">
+          <label class="control-label" for="CSMCNo">CSMC No.</label>
+          <select [formControl]="ddlCSMCNo" id="CSMCNo" class="form-control"
+            (change)="adminSandbox.getPrjBriefName_SMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,ddlComponent.value,$event.target.value);">
+            <option value="" disabled> Please select CSMC No--</option>
+            <option *ngFor="let schemeComp1 of adminSandbox.schemeSMCNo" [value]="schemeComp1">
+              {{schemeComp1}}</option> 
+          </select>
+        </div>
+      </div>
+      
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="form-group" [ngClass]="{'has-error': submitted && ddlProjectName.hasError('required')}">
           <label class="control-label" for="ProjectName">Project Name</label>
           <select [formControl]="ddlProjectName" [(ngModel)]="ProjectName" id="ProjectName" class="form-control">
             <option value="" disabled>Please select Project Name--</option>
-            <option *ngFor="let projectNameBrief of adminSandbox.projectBriefName"
+            <option *ngFor="let projectNameBrief of adminSandbox.projectBrieDetais"
               [value]="projectNameBrief.ProjectCode">
               {{projectNameBrief.ProjectTitle}}</option>
           </select>
@@ -936,7 +945,9 @@
               <td><button type="button" (click)="Edit(briefDetail)"
                   class="btn btn-block btn-primary btn-sm">Edit</button></td>
               <td style="cursor: pointer; color: blue;"
-                (click)="adminSandbox.download_PBD_Release(briefDetail.PDF,'ProjectBriefDetail')"> Download</td>
+                (click)="adminSandbox.download_PBD_Release(briefDetail.PDF,'ProjectBriefDetail')"> 
+                <a  (click)="adminSandbox.download_PBD_Release(briefDetail.PDF,'ProjectBriefDetail',briefDetail.Codes,briefDetail.CSMCNumber,briefDetail.Component)">Download</a>
+              </td>
             </tr>
           </tbody>
         </table>

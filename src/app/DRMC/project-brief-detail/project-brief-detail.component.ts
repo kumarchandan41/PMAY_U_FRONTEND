@@ -79,7 +79,10 @@ export class ProjectBriefDetailComponent implements OnInit {
     });
     this.onProjectBriefDetail();
     this.adminSandbox.getStateData();
-    this.adminSandbox.getSchemeData();
+    
+//    this.adminSandbox.getSchemeData();
+this.adminSandbox.getSchemeDataBasedonProjBriefDetail();
+
     const date = new Date();
     //   this.maxStartDate = date;
     this.dpConfig = Object.assign({},
@@ -194,8 +197,10 @@ export class ProjectBriefDetailComponent implements OnInit {
     this.submitted = true;
     event.stopPropagation();
     if (this.projectBriefDetail.valid) {
+      
       this.currentFileUpload = this.selectedFiles.item(0);
-      this.adminSandbox.projectBriefDeatil(this.currentFileUpload, form)
+      this.adminSandbox.projectBriefDeatil(this.currentFileUpload, form) //,  this.CSMCNumber
+      alert('Data Saved Successfully');
       this.submitted = false;
       this.projectBriefDetail.reset();
       this.State = '';

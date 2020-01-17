@@ -392,8 +392,8 @@ export class Excel_JNNURN_Data {
 export class Excel_ProjectRelFundFlow_Data {
 	ProjectId :string;  
 	ReleaseId:string;
-	 Codes:string;
-		 Dcode:string;
+	Codes:string;
+	Dcode:string;
 	CityCode:string;
 	Release:string;
 	Source:string;
@@ -408,3 +408,38 @@ export class Excel_ProjectRelFundFlow_Data {
 	Component:string;
 	 
 }
+
+export class Excel_Project_RelFundFlow_Data {
+
+	SrNo:string;
+	Codes:string;
+	Dcode:string;
+	CityCode:string;
+	
+	ProjectCode:string;
+	Installment:string;
+	ReleaseNo:string;
+	ProjKey:string;
+	Source:string;
+	Amount:string;
+	AmountSCSP:string;
+	Amount_TSP:string;
+	sDate:string;
+	SanctionedNo:string;
+	Component:string;
+	Head:string;
+	sFlag:string;
+
+
+	ReleaseId:string;
+	Release:string;
+	 
+	SanctionNumber:string;
+	HFAAmount:string;
+	TSPAmount:string;
+	SCSPAmount:string;
+	TxtSCSPDate:string;
+	FirstInstallment:string;
+	 
+}
+

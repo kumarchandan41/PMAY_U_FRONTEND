@@ -950,4 +950,46 @@ export class BuildingServiceService {
      // {
      //      return this.http.get<string>(this.url_Upload + "DeleteExcelCLSSMaster?excelId="+ id );
      // }
+
+     // Project_fund_Release
+     BulkImport_Project_fund_Rel(formData:FormData):Observable<string>
+    {  
+        //  alert(this.url_Upload);
+           // Bulk insert to table statescore tblStateWiseScoreExcel
+          let headers = new  HttpHeaders();
+          headers.append('Content-Type','multipart/form-data');
+          headers.append('Accept','application/json');
+          //new HttpHeaders({ 'Content-Type': 'application/json'}) 
+          const httpOptions = { headers: headers};  
+          return  this.http.post<string>(this.url_Upload + "UploadProject_FundRel_Excel", formData,httpOptions);
+     }
+
+     // Project_fund_Release HFA
+    BulkImport_Project_HFAfund_Rel(formData:FormData):Observable<string>
+    {  
+          let headers = new  HttpHeaders();
+          headers.append('Content-Type','multipart/form-data');
+          headers.append('Accept','application/json');
+          const httpOptions = { headers: headers};  
+          return  this.http.post<string>(this.url_Upload + "UploadHFA_FundRel_Excel", formData,httpOptions);
+     }
+
+    BulkImport_Project_SCSPfund_Rel(formData:FormData):Observable<string>
+    {  
+          let headers = new  HttpHeaders();
+          headers.append('Content-Type','multipart/form-data');
+          headers.append('Accept','application/json');
+          const httpOptions = { headers: headers};  
+          return  this.http.post<string>(this.url_Upload + "UploadSCSP_FundRel_Excel", formData,httpOptions);
+    }
+     
+    UploadTSP_FundRel_Excel(formData:FormData):Observable<string>
+    {  
+          let headers = new  HttpHeaders();
+          headers.append('Content-Type','multipart/form-data');
+          headers.append('Accept','application/json');
+          const httpOptions = { headers: headers};  
+          return  this.http.post<string>(this.url_Upload + "UploadTSP_FundRel_Excel", formData,httpOptions);
+    }
+    
 }

@@ -6,6 +6,7 @@ import { ConstantUrlService } from '../Shared/constant-url.service';
 import { GlobalUrl } from '../Shared/GlobalUrl';
 import { CitiesBasedOnstate, getConstutiencyData, getProjRelOrder } from '../login/Models/LoginModel';
 import { District } from '../login/ModelS/chart.model';
+import { Prj_Master } from '../Shared/CommonModel';
 
 
 
@@ -33,6 +34,17 @@ export class UserService {
       })
       );
   }
+
+  // New Code 1
+  GetBriefDet_Scheme(): Observable<any> {
+    return this.http.get(this.baseUrl + "/Admin_Value/GetBriefDet_Scheme", { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+  
+
 
   //post api for scheme master
   postSchemeData(postData: any): Observable<any> {
@@ -357,6 +369,27 @@ export class UserService {
       );
   }
 
+  getProject_Component(StateCode: any , DisttCode: any , cityCode: any, SchemeId: any): Observable<any> {
+   // alert(1);
+    return this.http.get(this.baseUrl + "/Admin_Value/GetBriefDet_Comp/" + StateCode + '/' + DisttCode + '/' + cityCode +  '/' + SchemeId, { "observe": "response" })
+      .pipe(map((response: HttpResponse<any>) => {
+        return response.body;
+      })
+      );
+  }
+
+
+  GetBriefDet_CSMCNo(StateCode: any , DisttCode: any , cityCode: any, Schemeid: any, Component: any): Observable<any> {
+    // alert(1);
+     return this.http.get(this.baseUrl + "/Admin_Value/GetBriefDet_CSMCNo/" + StateCode + '/' + DisttCode + '/' + cityCode +  '/' + Schemeid +  '/' + Component, { "observe": "response" })
+       .pipe(map((response: HttpResponse<any>) => {
+         return response.body;
+       })
+       );
+   }
+  
+
+
   getProj_ComponentWiseData(Components: any): Observable<any> {
     return this.http.get(this.baseUrl + "/Admin_Value/GetComponentWise_projRelOrder/" + Components, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
@@ -636,6 +669,16 @@ export class UserService {
       );
   }
 
+// New Code 
+getPrjBriefName(statecode: any, districtcode: any, citycode: any, scheme: any, component: any,CSMCNumber: any): Observable<Prj_Master[]> {
+  return this.http.get(this.baseUrl + "/Admin_Value/GetBriefDet_ProjDet/" + statecode + '/' + districtcode + '/' + citycode + '/' + scheme + '/' + component + '/' + CSMCNumber, { "observe": "response" })
+    .pipe(map((response: HttpResponse<Prj_Master[]>) => {
+      return response.body;
+    })
+    );
+}
+
+
   //get project name
   getProject_AllDetails(CSMCNumber: any, component: any): Observable<any> {
     //  alert(component);
@@ -656,12 +699,12 @@ export class UserService {
 
   //----post api for project brief detail order-----//
   postProjectBriefDeatil(file: File, objPost: any): any {
+    //alert();
+ 
     const formdata: FormData = new FormData();
     formdata.append('Image', file, file.name);
     formdata.append('Data', JSON.stringify(objPost));
-
-    // alert(this.baseUrl);
-
+    // alert(this.baseUrl);  CSMCNumber
     return this.http.post(this.baseUrl + "/Admin_Value/postProjectBrief_Detail", formdata, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response;
@@ -669,6 +712,23 @@ export class UserService {
       );
   }
 
+
+    //----post api for project brief detail order-----//
+    postProjectBriefDeatil1(file: File, objPost: any): any {
+      const formdata: FormData = new FormData();
+      formdata.append('Image', file, file.name);
+      formdata.append('Data', JSON.stringify(objPost));
+  
+      // alert(this.baseUrl);
+  
+      return this.http.post(this.baseUrl + "/Admin_Value/postProjectBrief_Detail", formdata, { "observe": "response" })
+        .pipe(map((response: HttpResponse<any>) => {
+          return response;
+        })
+        );
+    }
+  
+  
   //get api for project brief detail
   geProjectBriefDetail(stateCode): Observable<any> {
     return this.http.get(this.baseUrl + "/Admin_Value/GetProjectBriefDetail/" + stateCode, { "observe": "response" })
