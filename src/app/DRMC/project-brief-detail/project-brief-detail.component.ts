@@ -79,9 +79,9 @@ export class ProjectBriefDetailComponent implements OnInit {
     });
     this.onProjectBriefDetail();
     this.adminSandbox.getStateData();
-    
-//    this.adminSandbox.getSchemeData();
-this.adminSandbox.getSchemeDataBasedonProjBriefDetail();
+
+    //    this.adminSandbox.getSchemeData();
+    this.adminSandbox.getSchemeDataBasedonProjBriefDetail();
 
     const date = new Date();
     //   this.maxStartDate = date;
@@ -197,10 +197,10 @@ this.adminSandbox.getSchemeDataBasedonProjBriefDetail();
     this.submitted = true;
     event.stopPropagation();
     if (this.projectBriefDetail.valid) {
-      
+
       this.currentFileUpload = this.selectedFiles.item(0);
       this.adminSandbox.projectBriefDeatil(this.currentFileUpload, form) //,  this.CSMCNumber
-      alert('Data Saved Successfully');
+      // alert('Data Saved Successfully');
       this.submitted = false;
       this.projectBriefDetail.reset();
       this.State = '';
