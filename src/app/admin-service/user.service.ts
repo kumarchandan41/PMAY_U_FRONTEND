@@ -264,8 +264,10 @@ export class UserService {
   //update for city data
   updateCityData(postData: any): Observable<any> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post(this.baseUrl + "/Admin_Value/UpdateCityData/", postData, httpOptions
-
+    return this.http.post(this.baseUrl + "/Admin_Value/UpdateCityData/", postData, httpOptions).pipe(map((response: HttpResponse<any>) => {
+      console.log('response------->>', response)
+      return response;
+    })
     );
   }
   //get district on behalf of state
@@ -623,7 +625,7 @@ export class UserService {
   // {stateCode}/{csmcno}/{Component}
   getFile_PBD_Downnload(pdf: any, folderName: string, stateCode: string, csmcno: string, Component: string): Observable<Blob> {
 
-    return this.http.get(this.baseUrl + "/Admin_Value/GetFileNew/" + pdf + "/" + folderName + "/" + stateCode + "/" + csmcno + "/" + Component, {
+    return this.http.get(this.baseUrl + "/Admin_Value/GetFile_New/" + pdf + "/" + folderName + "/" + stateCode + "/" + csmcno + "/" + Component, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
 
