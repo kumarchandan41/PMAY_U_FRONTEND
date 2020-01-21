@@ -10,12 +10,17 @@
             </strong>( Nos in lakh)</h5>
           <table class="table" border="1">
             <tr style="background-color: rgba(0,0,0,0.2);color:#fff;">
+              <th>Demand</th>
               <th>Sanctioned</th>
               <th>Grounded</th>
               <th>Completed</th>
               <th>Occupied</th>
             </tr>
             <tr>
+              <td>
+                <div counto [step]="25" [countTo]="counter" [countFrom]="0" [duration]="4"
+                  (countoChange)="counto_a = $event" (countoEnd)="onCountoEnd()">{{112.24}}</div>
+              </td>
               <td>
                 <div counto [step]="25" [countTo]="counter" [countFrom]="0" [duration]="4"
                   (countoChange)="counto_a = $event" (countoEnd)="onCountoEnd()">{{counto_a | number:'1.2-3'}}</div>
@@ -34,6 +39,7 @@
               </td>
             </tr>
             <tr class="progressBar">
+              <td></td>
               <td>
                 <div class="progress">
                   <div class="progress-bar" [ngStyle]="{width: getPercent(112.24, counter)}"></div>

@@ -7,14 +7,13 @@
 </div>
 
 <!-- adminSandbox.getStateDistrictData($event.target.value); -->
-
 <div class="container-fluid" [ngStyle]="{background: backgroundColor}">
   <form [formGroup]="projectBriefDetail" (ngSubmit)="onClickProjectBriefDetail($event, projectBriefDetail)">
     <div class="row gBg" style="padding-top: 10px;">
       <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="form-group" [ngClass]="{'has-error': submitted && ddlStateCode.hasError('required')}">
           <label class="control-label" for="StateName">State Name</label>
-          <select [formControl]="ddlStateCode" [(ngModel)]="State" (change)="getProjectBriefData($event);this.District='';this.City='';this.ProjectName='';
+          <select [formControl]="ddlStateCode" [(ngModel)]="State" (change)="getProjectBriefData($event);this.District=''; this.CMCNo='';this.City='';this.ProjectName='';
                         this.Scheme='';this.Components='';" class="form-control" id="StateName">
             <option value="" disabled>Please select state--</option>
             <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
@@ -40,7 +39,7 @@
         <div class="form-group" [ngClass]="{'has-error': submitted && ddlCity.hasError('required')}">
           <label class="control-label" for="CityMaster">City Name</label>
           <select [formControl]="ddlCity" [(ngModel)]="City" id="CityMaster" class="form-control"
-            (change)="PrjBriefDataonCity($event);">
+            (change)="PrjBriefDataonCity($event); this.ProjectName='';this.Scheme='';this.Components='';">
             <option value="" disabled>Please select city--</option>
             <option *ngFor="let city of adminSandbox.districtCityMaster" [value]="city.CityCode">
               {{city.City}}</option>
@@ -49,27 +48,26 @@
       </div>
 
 
-                <!-- (change)="adminSandbox.getProjectSchemeComponentData($event.target.value);this.ProjectName=''; -->
+      <!-- (change)="adminSandbox.getProjectSchemeComponentData($event.target.value);this.ProjectName=''; -->
 
       <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="form-group" [ngClass]="{'has-error': submitted && ddlScheme.hasError('required')}">
           <label class="control-label" for="Scheme">Scheme</label>
-          <select [formControl]="ddlScheme" id="Scheme" class="form-control" [(ngModel)]="Scheme" 
-          (change)="adminSandbox.getProjectComponent(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value , $event.target.value);this.ProjectName='';
+          <select [formControl]="ddlScheme" id="Scheme" class="form-control" [(ngModel)]="Scheme" (change)="adminSandbox.getProjectComponent(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value , $event.target.value);this.ProjectName='';
            
-         this.Components=''; ">
+         this.Components=''; this.CSMCNumber='';this.txtCSMCNumber=''">
             <option value="" disabled>Please select Scheme--</option>
             <option *ngFor="let scheme of adminSandbox.schemeMaster" [value]="scheme">
               {{scheme}}</option>
           </select>
         </div>
       </div>
-      
+
       <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="form-group" [ngClass]="{'has-error': submitted && ddlComponent.hasError('required')}">
           <label class="control-label" for="Components">Components</label>
           <select [formControl]="ddlComponent" id="Components" class="form-control" [(ngModel)]="Components"
-            (change)="adminSandbox.GetBriefDet_CSMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value ,$event.target.value)">
+            (change)="adminSandbox.GetBriefDet_CSMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value ,$event.target.value); this.ProjectName=''">
             <option value="" disabled>Please select Components--</option>
             <option *ngFor="let schemeComp of adminSandbox.schComponentMaster" [value]="schemeComp">
               {{schemeComp}}</option>
@@ -81,14 +79,14 @@
         <div class="form-group" [ngClass]="{'has-error': submitted && ddlCSMCNo.hasError('required')}">
           <label class="control-label" for="CSMCNo">CSMC No.</label>
           <select [formControl]="ddlCSMCNo" id="CSMCNo" class="form-control"
-            (change)="adminSandbox.getPrjBriefName_SMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,ddlComponent.value,$event.target.value);">
+            (change)="adminSandbox.getPrjBriefName_SMCNo(ddlStateCode.value,ddlDistrictCode.value,ddlCity.value,ddlScheme.value,ddlComponent.value,$event.target.value); this.ProjectName=''">
             <option value="" disabled> Please select CSMC No--</option>
             <option *ngFor="let schemeComp1 of adminSandbox.schemeSMCNo" [value]="schemeComp1">
-              {{schemeComp1}}</option> 
+              {{schemeComp1}}</option>
           </select>
         </div>
       </div>
-      
+
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="form-group" [ngClass]="{'has-error': submitted && ddlProjectName.hasError('required')}">
           <label class="control-label" for="ProjectName">Project Name</label>
@@ -265,7 +263,7 @@
 
 
       <div class="col-md-6 clubCell" style="padding-bottom: 5px;">
-        <h4 class="greyBg splitHeader">
+        <h4 class="greyBg splitHeader" style="clear: both;">
           No. of Houses constructed/acquired,please specify ownership
         </h4>
 
@@ -915,7 +913,7 @@
           <tbody>
             <tr *ngFor="let briefDetail of adminSandbox.projectBriefDetail;let i = index">
               <td>{{i+1}}</td>
-              <td> {{briefDetail.States_UT}}</td>
+              <td> {{stateName}}</td>
               <!-- <td> {{briefDetail.District}}</td> -->
               <td> {{briefDetail.City}}</td>
               <td> {{briefDetail.CSMCDate}}</td>
@@ -944,9 +942,9 @@
               <td>{{briefDetail.Transgender}}</td>
               <td><button type="button" (click)="Edit(briefDetail)"
                   class="btn btn-block btn-primary btn-sm">Edit</button></td>
-              <td style="cursor: pointer; color: blue;"
-                (click)="adminSandbox.download_PBD_Release(briefDetail.PDF,'ProjectBriefDetail')"> 
-                <a  (click)="adminSandbox.download_PBD_Release(briefDetail.PDF,'ProjectBriefDetail',briefDetail.Codes,briefDetail.CSMCNumber,briefDetail.Component)">Download</a>
+              <td style="cursor: pointer; color: blue;">
+                <a target="_blank"
+                  href="{{baseUrl}}/Download/ProjectBriefDetail/{{stateName}}/{{briefDetail.CSMCNumber}}/{{briefDetail.Component}}/{{briefDetail.PDF}}.pdf">Download</a>
               </td>
             </tr>
           </tbody>
@@ -955,3 +953,5 @@
     </div>
   </form>
 </div>
+
+<!-- (click)="adminSandbox.download_PBD_Release(briefDetail.PDF,'ProjectBriefDetail',briefDetail.Codes,briefDetail.CSMCNumber,briefDetail.Component)" -->

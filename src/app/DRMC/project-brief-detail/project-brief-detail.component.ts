@@ -3,6 +3,7 @@ import { AdminSandbox } from '../admin.sandbox';
 import { FormBuilder, AbstractControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { GraphService } from 'src/app/financeReport/service/graph.service';
+import { GlobalUrl } from '../../Shared/GlobalUrl';
 
 @Component({
   selector: 'app-project-brief-detail',
@@ -41,8 +42,10 @@ export class ProjectBriefDetailComponent implements OnInit {
   public txtSelectFile: AbstractControl;
   public txtTotalHouses: AbstractControl;
   public ddlCSMCNo: AbstractControl;
-
+  public stateName: string;
   State: string;
+  GlobalUrl: any;
+  urlIPAddess: string;
   District: string;
   NodalAgency: string;
   ActionStatus: string;
@@ -57,6 +60,7 @@ export class ProjectBriefDetailComponent implements OnInit {
   scheduleEndDate: string = undefined;
   maxStartDate: any;
   Components: string;
+  public baseUrl: string;
   selectedFiles = null;
   currentFileUpload: File;
   private fieldArray: any[] = [];
@@ -69,7 +73,9 @@ export class ProjectBriefDetailComponent implements OnInit {
   CityCode: any;
   // Comp: any;
 
-  constructor(private fb: FormBuilder, public adminSandbox: AdminSandbox) { }
+  constructor(private fb: FormBuilder, public adminSandbox: AdminSandbox, private globalUrl: GlobalUrl) {
+
+  }
   ngOnInit() {
     //    this.adminSandbox.getProjectBriefDetail();
     this.ActionStatus = "Submit";
@@ -79,9 +85,9 @@ export class ProjectBriefDetailComponent implements OnInit {
     });
     this.onProjectBriefDetail();
     this.adminSandbox.getStateData();
-    
-//    this.adminSandbox.getSchemeData();
-this.adminSandbox.getSchemeDataBasedonProjBriefDetail();
+
+    //    this.adminSandbox.getSchemeData();
+    this.adminSandbox.getSchemeDataBasedonProjBriefDetail();
 
     const date = new Date();
     //   this.maxStartDate = date;
@@ -93,9 +99,12 @@ this.adminSandbox.getSchemeDataBasedonProjBriefDetail();
     this.State = '';
     this.District = '';
     this.ProjectName = '';
+    this.CSMCNumber = '';
     this.City = '';
     this.Scheme = '';
     this.Components = '';
+    this.stateName = 'test'
+    this.baseUrl = this.globalUrl.urlIPAddess
   }
   selectFile(event) {
     //  alert(event);
@@ -164,6 +173,12 @@ this.adminSandbox.getSchemeDataBasedonProjBriefDetail();
 
   getProjectBriefData(event) {
     // state wise
+    const selectedOptions = event.target['options'];
+    const selectedIndex = selectedOptions.selectedIndex;
+    const selectElementText = selectedOptions[selectedIndex].text;
+    this.stateName = selectElementText;
+
+    // console.log('stat---3>>', event.target['options'].selectedIndex.text)
     let StateCode = event.target.value;
     this.StateCode = StateCode;
     this.adminSandbox.getProject_BriefData(this.StateCode);
@@ -197,10 +212,10 @@ this.adminSandbox.getSchemeDataBasedonProjBriefDetail();
     this.submitted = true;
     event.stopPropagation();
     if (this.projectBriefDetail.valid) {
-      
+
       this.currentFileUpload = this.selectedFiles.item(0);
       this.adminSandbox.projectBriefDeatil(this.currentFileUpload, form) //,  this.CSMCNumber
-      alert('Data Saved Successfully');
+      // alert('Data Saved Successfully');
       this.submitted = false;
       this.projectBriefDetail.reset();
       this.State = '';
