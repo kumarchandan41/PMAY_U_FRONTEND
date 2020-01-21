@@ -1323,7 +1323,7 @@ export class AdminSandbox {
 
   getProjectSchemeComponentData(SchemeId: any) {
     this.userMasterService.getProjectSchemeComponent(SchemeId).subscribe(data => {
-    //  this.schComponentMaster = data;
+       this.schComponentMaster = data;
     });
   }
 // 2 New Code 

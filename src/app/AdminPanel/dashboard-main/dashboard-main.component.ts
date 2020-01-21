@@ -1272,7 +1272,7 @@ BindCompletedGraph(stateCode, DisttCode, cityCode, Comp, DivisionCodes) {
           // alert(Comp);
 
           if (DivisionCodes != 0 && Comp == 0  && stateCode == 0 && DisttCode == 0 && cityCode == 0) {
-            alert('Division');
+           // alert('Division');
             this.Ground_Total = this.Houses_Grounded_State; // (this.Houses_Grounded +this.Grounded + this.NoofBeneficiaries);
             this.Sanction_Total = this.CAApproved;   //this.Sanctioned +  this.NoofBeneficiaries ;
             this.GTCompleted = this.Completed_State;       //this.Houses_Completed +this.Completed1 + this.NoofBeneficiaries ;

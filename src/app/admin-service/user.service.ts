@@ -360,7 +360,7 @@ export class UserService {
     return this.http.post(this.baseUrl + "/Admin_Value/UpdateProjectCodeData/", postData, httpOptions);
   }
 
-  //get api for scheme on behlf of component
+  //get api for scheme on behlf of component SchemeId
   getProjectSchemeComponent(SchemeId: any): Observable<any> {
     return this.http.get(this.baseUrl + "/Admin_Value/GetSchemeComponentId/" + SchemeId, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
