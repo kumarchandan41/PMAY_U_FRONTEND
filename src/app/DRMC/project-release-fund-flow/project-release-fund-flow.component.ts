@@ -40,6 +40,7 @@ export class ProjectReleaseFundFlowComponent implements OnInit {
   disabled:boolean;
 
 
+
   releaseUC: any[]=[];
   constructor(private fb: FormBuilder, public adminSandbox: AdminSandbox,protected userMasterService: UserService) { }
 
@@ -102,9 +103,9 @@ export class ProjectReleaseFundFlowComponent implements OnInit {
   }
  
   getReleaseFundFlow(statecode: any, districtcode: any, citycode: any, projectName: any,radio:any) {
-
     this.userMasterService.getReleaseFundFlow(statecode, districtcode, citycode, projectName,radio).subscribe(data => {
     this.releaseUC = data;
+    console.log(data);
     this.releaseFundFlow.setControl('itemRows',this.release(this.releaseUC));
 
   })}
@@ -164,7 +165,13 @@ return formArray;
     });
   }
   addNewReleaseRow() {
+    if((this.Total !== 0 ) || this.HFAAmount !==0)
+    {
     this.formArr.push(this.initItemRows());
+    }
+    else{
+      alert("Field all fields");
+    }
   }
 
   deleteRow(index: number) {
@@ -173,6 +180,10 @@ return formArray;
   onSubmitReleaseFundFlow(value1:any){
     this.adminSandbox.postReleaseFundFlowInstallment(value1.itemRows);
     
+  }
+  AddTotal(params)
+  {
+   this.Total=this.HFAAmount + this.SCSPAmount + this.TSPAmount;
   }
   getTotalHFAAmount(index: number) : number {
     let sum = 0;

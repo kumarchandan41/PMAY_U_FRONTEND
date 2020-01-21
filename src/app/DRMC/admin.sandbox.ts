@@ -5,6 +5,7 @@ import { saveAs as importedSaveAs } from "file-saver";
 import { DatePipe } from '@angular/common';
 import { UserService } from '../admin-service/user.service';
 import { Prj_Master } from '../Shared/CommonModel';
+import { SlumDetail } from '../login/ModelS/chart.model';
 
 @Injectable()
 export class AdminSandbox {
@@ -920,6 +921,10 @@ export class AdminSandbox {
     var cityStateCode = formGroup.get('ddlStateCode').value;
     var cityDistrictCode = formGroup.get('ddlDistrictCode').value
     this.userMasterService.postCityData(objPost).subscribe((data: any) => {
+      if (data.status == 200)
+      {
+           alert('Data Save Successfully') ;
+      }
       if (data.status == "200") {
         this.snotifyService.success("City Save Successfully...", "", {
           position: SnotifyPosition.rightTop,
@@ -950,6 +955,10 @@ export class AdminSandbox {
   }
   deleteCityData(CityId: any) {
     this.userMasterService.deleteCityData(CityId).subscribe(data => {
+      if (data.status == "200")
+      {
+         alert("City Data Delete Successfully..."); 
+      }
       if (data.status == "200") {
         this.snotifyService.success("City Delete Successfully...", "", {
           position: SnotifyPosition.rightTop,
@@ -967,7 +976,7 @@ export class AdminSandbox {
     });
   }
   editCityMaster(value: any, row: any) {
-
+  
     this.getStateDistrictData(row.StateCode);
     this.EditCity = row
     this.showProperty = value;
@@ -976,6 +985,7 @@ export class AdminSandbox {
     this.EditCityMaster.txtCityCode = row.CityCode;
     this.EditCityMaster.txtCityName = row.City;
     this.EditCityMaster.ddlStateCode = row.StateCode;
+    
   }
   updateCityMaster() {
     if (this.EditCityMaster.ddlDistrictCode != null && this.EditCityMaster.ddlDistrictCode != "" && this.EditCityMaster.ddlDistrictCode != undefined) {
@@ -1005,8 +1015,9 @@ export class AdminSandbox {
               "hiddendTxtCityID": "",
               "txtCityCode": "",
               "ddlStateCode": ""
-
             }
+
+           
             if (data.status == "200") {
               this.snotifyService.success("City Updated Successfully...", "", {
                 position: SnotifyPosition.rightTop,
@@ -1019,9 +1030,13 @@ export class AdminSandbox {
                 timeout: 2500
               });
             }
-            this.getCityData(editCityStateCode, editDistrictCode);
+            if (data.status == 200) {
+              alert("City data Updated Successfully");
+            }
 
-          });
+            this.getCityData(editCityStateCode, editDistrictCode);
+          }
+          );
         }
         else {
           this.snotifyService.error("Please Enter City Code...", "", {
@@ -1029,6 +1044,8 @@ export class AdminSandbox {
             timeout: 2500
           });
         }
+ 
+          alert("City data Updated Successfully");
       }
       else {
         this.snotifyService.error("Please Enter City Name...", "", {
@@ -1043,12 +1060,14 @@ export class AdminSandbox {
         timeout: 2500
       });
     }
+    
   }
   //-----get district on behalf of state----//
   getStateDistrictData(StateCode: any) {
     this.userMasterService.getStateDistrictData(StateCode).subscribe(data => {
       this.stateDistrictMaster = data;
     });
+
   }
   //-----get city on behalf of district----//
   getDistrictCityData(DistrictCode: any) {
@@ -1505,10 +1524,7 @@ export class AdminSandbox {
   postReleaseFundFlowInstallment(value1: any) {
     this.userMasterService.postReleaseFundFlowInstallment(value1).subscribe((data: any) => {
       if (data.StatusCode == "OK") {
-        this.snotifyService.success("Release Fund Flow Installment Save Successfully...", "", {
-          position: SnotifyPosition.rightTop,
-          timeout: 3000
-        });
+          alert("Release funf flow data saved successfully");
       }
     });
   }
@@ -1754,7 +1770,7 @@ getPrjBriefName_SMCNo(statecode: any, districtcode: any, citycode: any, scheme: 
       'Male': formGroup.get('txtMale').value,
       'Transgender': formGroup.get('txtTransgender').value,
       'PDF': filename,
-      'TotalHouses': formGroup.get('txtTotalHouses').value
+      'TotalHouses': formGroup.get('txtTotalHouses').value 
 
     };
     this.userMasterService.postProjectBriefDeatil(file, objPost).subscribe(data => {

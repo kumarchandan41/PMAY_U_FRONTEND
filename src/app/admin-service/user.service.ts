@@ -622,11 +622,9 @@ export class UserService {
 
  // {stateCode}/{csmcno}/{Component}
   getFile_PBD_Downnload(pdf: any, folderName: string,stateCode :string, csmcno : string ,Component :string): Observable<Blob> {
-
     return this.http.get(this.baseUrl + "/Admin_Value/GetFileNew/" + pdf + "/" + folderName + "/" + stateCode+ "/" + csmcno+ "/" + Component, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-
       }), responseType: 'blob'
     }).pipe(
     );
