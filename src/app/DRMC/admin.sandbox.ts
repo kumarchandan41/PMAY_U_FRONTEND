@@ -99,13 +99,13 @@ export class AdminSandbox {
   projectDetailMaster: any[] = [];
   EditProjectDetail: any[] = [];
   schComponentMaster: any[] = [];
-  schemeSMCNo:string[];
+  schemeSMCNo: string[];
 
   schCompMaster: any[] = [];
 
 
   schCSMCNo: any[] = [];
-  CMCNo:string;
+  CMCNo: string;
 
   ProjectOtherCost: any;
   agencyMaster: any[] = [];
@@ -147,7 +147,7 @@ export class AdminSandbox {
   pdf: any[] = [];
   ucOrderValue: any[] = [];
   projectBriefName: any[] = [];
-  
+
   projectBrieDetais: Prj_Master[];
   Slum: any;
   projectBriefDetail: any[] = [];
@@ -178,7 +178,7 @@ export class AdminSandbox {
     });
   }
 
-// New Code 1
+  // New Code 1
   getSchemeDataBasedonProjBriefDetail() {
     this.userMasterService.GetBriefDet_Scheme().subscribe(data => {
       this.schemeMaster = data;
@@ -186,7 +186,7 @@ export class AdminSandbox {
   }
 
 
-  
+
   postScheme(formGroup: any) {
     var objPost =
     {
@@ -736,7 +736,7 @@ export class AdminSandbox {
     });
   }
   getConsistuencyData(stateCode: string) {
-   // debugger;
+    // debugger;
     if (stateCode === '0') {
       this.userMasterService.getConsistuencyData().subscribe(data => {
         this.constituencyMaster = data;
@@ -948,13 +948,14 @@ export class AdminSandbox {
       this.cityMaster = data;
     });
   }
-  deleteCityData(CityId: any) {
-    this.userMasterService.deleteCityData(CityId).subscribe(data => {
+  deleteCityData(obj: any) {
+    this.userMasterService.deleteCityData(obj.CityId).subscribe(data => {
       if (data.status == "200") {
         this.snotifyService.success("City Delete Successfully...", "", {
           position: SnotifyPosition.rightTop,
           timeout: 2500
         });
+        this.getCityData(obj.StateCode, obj.Dcode)
       }
       else {
         this.snotifyService.error("City Not Delete Successfully...", "", {
@@ -962,13 +963,12 @@ export class AdminSandbox {
           timeout: 2500
         });
       }
-      // this.getCityData();
       this.cityMaster = [];
     });
   }
   editCityMaster(value: any, row: any) {
 
-    this.getStateDistrictData(row.StateCode);
+    // this.getStateDistrictData(row.StateCode);
     this.EditCity = row
     this.showProperty = value;
     this.EditCityMaster.ddlDistrictCode = row.Dcode;
@@ -977,6 +977,7 @@ export class AdminSandbox {
     this.EditCityMaster.txtCityName = row.City;
     this.EditCityMaster.ddlStateCode = row.StateCode;
   }
+
   updateCityMaster() {
     if (this.EditCityMaster.ddlDistrictCode != null && this.EditCityMaster.ddlDistrictCode != "" && this.EditCityMaster.ddlDistrictCode != undefined) {
       if (this.EditCityMaster.txtCityName != null && this.EditCityMaster.txtCityName != "" && this.EditCityMaster.txtCityName != undefined) {
@@ -1007,6 +1008,13 @@ export class AdminSandbox {
               "ddlStateCode": ""
 
             }
+
+            console.log('city data----->>', data)
+            //  fetch data on submit
+            setTimeout(() => {
+              this.getCityData(objPost.StateCode, objPost.Dcode)
+            }, 500)
+
             if (data.status == "200") {
               this.snotifyService.success("City Updated Successfully...", "", {
                 position: SnotifyPosition.rightTop,
@@ -1326,25 +1334,26 @@ export class AdminSandbox {
        this.schComponentMaster = data;
     });
   }
-// 2 New Code 
-  getProjectComponent(StateCode: any, DisttCode: any, cityCode: any,SchemeId: any) {
-  //  alert(1);
-    this.userMasterService.getProject_Component(StateCode , DisttCode , cityCode, SchemeId).subscribe(data => {
+  // 2 New Code 
+  getProjectComponent(StateCode: any, DisttCode: any, cityCode: any, SchemeId: any) {
+    //  alert(1);
+    this.userMasterService.getProject_Component(StateCode, DisttCode, cityCode, SchemeId).subscribe(data => {
       this.schComponentMaster = data;
       console.log(data);
     });
   }
 
-  
-  GetBriefDet_CSMCNo(StateCode: any, DisttCode: any, cityCode: any,SchemeId: any ,Component: any) {
-    //  alert(1);
-      this.userMasterService.GetBriefDet_CSMCNo(StateCode , DisttCode , cityCode, SchemeId,Component).subscribe(data => {
-        this.schemeSMCNo = data;
-  
-      });
-    }
 
-    
+  GetBriefDet_CSMCNo(StateCode: any, DisttCode: any, cityCode: any, SchemeId: any, Component: any) {
+    //  alert(1);
+    this.projectBriefDetail = this.initialProjectBriefDetailsData.filter(a => a.Dcode === DisttCode && a.CityCode === cityCode && a.Component === Component);
+    this.userMasterService.GetBriefDet_CSMCNo(StateCode, DisttCode, cityCode, SchemeId, Component).subscribe(data => {
+      this.schemeSMCNo = data;
+    });
+
+  }
+
+
   getProj_ComponentWiseData(Components: any) {
     this.userMasterService.getProj_ComponentWiseData(Components).subscribe(data => {
       this.schComponentMaster = data;
@@ -1617,10 +1626,11 @@ export class AdminSandbox {
     });
   }
 
-  download_PBD_Release(pdf: any, filderName: string,stateCode :string, csmcno : string ,Component :string) {
+  download_PBD_Release(pdf: any, filderName: string, stateCode: string, csmcno: string, Component: string) {
     var str = pdf;
     var newStr = str.slice(0, -4);
-    this.userMasterService.getFile_PBD_Downnload(newStr, filderName,stateCode,csmcno,Component).subscribe((
+    // console.log({ newStr,pdf, filderName, stateCode, csmcno, Component })
+    this.userMasterService.getFile_PBD_Downnload(newStr, filderName, stateCode, csmcno, Component).subscribe((
       data) => {
       importedSaveAs(data, str)
     });
@@ -1668,7 +1678,7 @@ export class AdminSandbox {
   }
   //-----get projectbriefname of project name----//
   getProjectBriefName(statecode: any, districtcode: any, citycode: any, scheme: any, component: any) {
-     
+
     if (component !== "") {
       this.userMasterService.getProjectBriefName(statecode, districtcode, citycode, scheme, component).subscribe(data => {
         //  this.projectBriefDetail = data.filter(a=>a.SchemeComponent==component);
@@ -1691,14 +1701,15 @@ export class AdminSandbox {
   //   });
   // }
 
-// new Code 
-getPrjBriefName_SMCNo(statecode: any, districtcode: any, citycode: any, scheme: any, component: any, CSMCNumber: any) {
-    // alert(component);
-    //debugger;
-    this.CMCNo=CSMCNumber;
-    this.userMasterService.getPrjBriefName(statecode, districtcode, citycode, scheme, component,CSMCNumber).subscribe(data => {
+
+  // new Code 
+  getPrjBriefName_SMCNo(statecode: any, districtcode: any, citycode: any, scheme: any, component: any, CSMCNumber: any) {
+
+    this.CMCNo = CSMCNumber;
+    this.projectBriefDetail = this.initialProjectBriefDetailsData.filter(a => a.Dcode === districtcode && a.CityCode === citycode && a.Component === component && a.CSMCNumber === CSMCNumber);
+    this.userMasterService.getPrjBriefName(statecode, districtcode, citycode, scheme, component, CSMCNumber).subscribe(data => {
       this.projectBrieDetais = data;
-      console.log(data);
+      // console.log(data);
     });
   }
 
@@ -1726,7 +1737,8 @@ getPrjBriefName_SMCNo(statecode: any, districtcode: any, citycode: any, scheme: 
   projectBriefDeatil(file: File, formGroup: any): any {
     var filename = file.name
     var g = new Date(formGroup.get('txtSLSMC').value);
-    var currentBriefDate = this.datePipe.transform(g, 'dd-MM-yyyy');
+    var currentBriefDate = this.datePipe.transform(g, 'MM-dd-yyyy');
+    console.log('this.Slum-*------->>', this.Slum)
     const objPost = {
       'Codes': formGroup.get('ddlStateCode').value,
       'Dcode': formGroup.get('ddlDistrictCode').value,
@@ -1755,25 +1767,35 @@ getPrjBriefName_SMCNo(statecode: any, districtcode: any, citycode: any, scheme: 
       'Transgender': formGroup.get('txtTransgender').value,
       'PDF': filename,
       'TotalHouses': formGroup.get('txtTotalHouses').value
-
     };
+    console.log('------->>', objPost)
     this.userMasterService.postProjectBriefDeatil(file, objPost).subscribe(data => {
-      var objPost =
-      {
-        "Slum": this.Slum
+      if (data.status == 200) {
+        this.snotifyService.success("Project Brief Details Save Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 2000
+        });
+      } else {
+        this.snotifyService.error("Project Brief Details Save Successfully...", "", {
+          position: SnotifyPosition.rightTop,
+          timeout: 2000
+        });
       }
-      this.userMasterService.postSlum(objPost.Slum).subscribe((data: any) => {
-        if (data.status == "200") {
-
-          // this.getProjectBriefDetail();
-          this.Slum = [];
-          this.snotifyService.success("Project Brief Details Save Successfully...", "", {
-            position: SnotifyPosition.rightTop,
-            timeout: 3000
-          });
-        }
-      }
-      );
+      // var objSlum = {
+      //   "Slum": this.Slum
+      // }
+      // this.userMasterService.postSlum(objSlum.Slum).subscribe(({ data: slumRef }: any) => {
+      //   console.log('slum--------->>', slumRef)
+      //   if (data.status == "200") {
+      //     // this.getProjectBriefDetail();
+      //     this.Slum = [];
+      //     this.snotifyService.success("Project Brief Details Save Successfully...", "", {
+      //       position: SnotifyPosition.rightTop,
+      //       timeout: 3000
+      //     });
+      //   }
+      // }
+      // );
     })
   }
 

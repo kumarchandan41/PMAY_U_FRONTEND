@@ -1,5 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~ng-snotify/styles/material.css";
 
+.snotifyToast__progressBar__percentage, .snotifyToast__progressBar{
+  height: 5px !important;
+}
+
+.snotifyToast__inner{
+  min-height: 48px !important;
+}
+.snotify-icon{
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.snotifyToast__body{
+  color: #fff !important;
+}
 
 /* You can add global styles to this file, and also import other style files */
   .modal-content {
