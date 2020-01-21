@@ -69,7 +69,7 @@ export class AppAdminLayoutComponent implements OnInit {
 
     this.LoginTypeId = sessionStorage.getItem("AdminUser");
     // alert(this.LoginTypeId.toString());
-    if (this.LoginTypeId === "ADMIN") {
+    if (this.LoginTypeId === "ADMIN" || this.LoginTypeId =='JSHFA'){
       this.AdminDisplay = 'block';
       this.DMRCDisplay = 'block';
       this.DivDisplay = 'none';

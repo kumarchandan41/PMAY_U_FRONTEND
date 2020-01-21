@@ -85,6 +85,7 @@ export class LoginComponent implements OnInit {
           }
           else {
             if (result == "USER") {
+              sessionStorage.setItem('UserLogin', result);
               this._Route.navigate(['/UserDashboard']);
             }
             else {
@@ -93,7 +94,6 @@ export class LoginComponent implements OnInit {
             }
           }
         });
-
       }
       else {
         alert('Check captcha Code Again');

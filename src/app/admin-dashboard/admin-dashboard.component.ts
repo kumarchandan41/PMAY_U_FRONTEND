@@ -5,11 +5,6 @@ import { getValueInRange } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { interval } from 'rxjs';
 import { GraphService } from '../financeReport/service/graph.service';
 
-
-
-
-
-
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -27,40 +22,35 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   public getPercent: any;
   LoginTypeId: string;
   data: any;
-  counter: any ;//= 96.58;
-  counter1: any;// = 56.91;
-  counter2: any  = 29.53; //Completed
-  counter3: any = 27.04; //Occ;upied
-
-  counter4: any = 82982; //Approved
-  counter5: any = 151026; //Committed
-  counter6: any = 57915; //Released
-  counter7: any = 49717; //Utilized
-  
-  counter8: any = 5.70; //Overall
-  counter9: any = 2.93; //Public
-  counter10: any = 2.77; //Private
-
-  counter11: any = 106; //Direct
-  counter12: any = 233; //Indirect
-  counter14: any = 339; //Total
-
-  counter15: any = 38;//Direct
-  counter16: any = 83;//Indirect
-  counter17: any = 121;//Total
+  counter:any;//= 96.58;
+  counter1:any;// = 56.91;
+  counter2:any;// = 29.53; //Completed
+  counter3:any;// = 27.04; //Occ;upied
+  counter4: any;// = 82982; //Approved
+  counter5: any;// = 151026; //Committed
+  counter6: any;// = 57915; //Released
+  counter7: any;// = 49717; //Utilized
+  counter8: any;// = 5.70; //Overall
+  counter9: any;// = 2.93; //Public
+  counter10: any;// = 2.77; //Private
+  counter11: any;// = 106; //Direct
+  counter12: any;// = 233; //Indirect
+  counter14: any;// = 339; //Total
+  counter15: any;// = 38;//Direct
+  counter16: any;// = 83;//Indirect
+  counter17: any;// = 121;//Total
 
   constructor(private gevent: GlobalEvent, private router: ActivatedRoute, private renderer: Renderer, public service: GraphService) {
     //https://www.npmjs.com/package/angular2-counto
+      this.service.GetDasboardDataList().subscribe(result=>{
+      });
   }
-
-
-
-
   ngAfterViewInit() {
     //this.d1.nativeElement.innerHTML ='<span class="num_tiles">'+10+'</span>';
-
   }
-
+  onCountoEnd(){
+    console.log('Counter End');
+  }
 
   /**
      * Set color from color picker
@@ -73,15 +63,11 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
     // case 'background':
 
     this.backgroundColor = color;
-
-
-
     let eleList = document.getElementsByClassName("dynamicColor");
     for (let i = 0; i < eleList.length; i++) {
       //  debugger;
       eleList[i]["style"] = "background-color:" + color;
     }
-
     this.backgroundColor = color;
   }
 
@@ -105,49 +91,35 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-
-
     this.gevent.ColorObservable.subscribe(x => {
       console.log('color:' + x);
       debugger;
       this.setColor(x);
     });
     // this.State="-Select--";
-
     this.backgroundColor = this.backgroundColor;// 
     this.getPercent = function (firstValue, secondValue) {
       // (counter / 112.24)*100
       return Math.round((secondValue / firstValue) * 100) + "%";
     }
-
-     
-
     this.service.GetDasboardDataList().subscribe(result=>{
       this.counter=  result.Sanctioned;
       this.counter1 = result.Grounded;
-      this.counter2 == result.Completed;
-      this.counter3 == result.Occupied;
-
-      this.counter4 == result.Approved;      
-
-this.counter5 == result.sCommitted;
-this.counter6 == result.Released;
-this.counter7 == result.Utilized;
-
-this.counter8 == result.Overall;
-this.counter9 == result.sPublic;
-this.counter10 == result.Private;
-
-
-this.counter11 == result.PDaysDirect;
-this.counter12 == result.PDaysIndirect;
-this.counter14 == result.PDaysTotal; // Total
-
-this.counter15 == result.JobsDirect;
-this.counter16 == result.JobsIndirect;
-this.counter17 == result.JobsTotal; 
+      this.counter2 = result.Completed;
+      this.counter3 = result.Occupied;
+      this.counter4 = result.Approved;      
+      this.counter5 = result.sCommitted;
+      this.counter6 = result.Released;
+      this.counter7 = result.Utilized;
+      this.counter8 = result.Overall;
+      this.counter9 = result.sPublic;
+      this.counter10 = result.Private;
+      this.counter11 = result.PDaysDirect;
+      this.counter12 = result.PDaysIndirect;
+      this.counter14 = result.PDaysTotal; // Total
+      this.counter15 = result.JobsDirect;
+      this.counter16 = result.JobsIndirect;
+      this.counter17 = result.JobsTotal; 
     })
-
-    
   }
 }

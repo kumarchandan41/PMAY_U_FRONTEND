@@ -1017,6 +1017,8 @@ export class PdashBoard {
     JobsDirect: string;
     JobsIndirect: string;
     JobsTotal: string;
+    counter2 :any;
+    counter_2 :any;
 }
 
 export class Monitoring_Status {

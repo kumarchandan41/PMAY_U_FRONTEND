@@ -30,8 +30,12 @@
                   (countoChange)="counto_b = $event" (countoEnd)="onCountoEnd()">{{counto_b | number:'1.2-2'}}</div>
               </td>
               <td>
-                <div counto [step]="25" [countTo]="counter2" [countFrom]="0" [duration]="4"
+                <!-- <div counto [step]="25" [countTo]="" [countFrom]="0" [duration]="4"
+                  (countoChange)=" = $event" (countoEnd)="onCountoEnd()">{{counto_c1 | number:'1.2-2'}}</div> -->
+
+                  <div counto [step]="25" [countTo]="counter2" [countFrom]="0" [duration]="4"
                   (countoChange)="counto_c1 = $event" (countoEnd)="onCountoEnd()">{{counto_c1 | number:'1.2-2'}}</div>
+
               </td>
               <td>
                 <div counto [step]="25" [countTo]="counter3" [countFrom]="0" [duration]="4"
