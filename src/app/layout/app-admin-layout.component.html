@@ -8,12 +8,12 @@
   <!-- bower_components/bootstrap/dist/css/bootstrap.min.css -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/bower_components/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="assets/bower_components/Ionicons/css/ionicons.min.css">
-  <link rel="stylesheet" href="assets/bower_components/jvectormap/jquery-jvectormap.css">
-  <link rel="stylesheet" href="assets/dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="assets/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="assets/bower_components/jvectormap/jquery-jvectormap.css"> -->
+  <!-- <link rel="stylesheet" href="assets/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="assets/dist/css/skins/_all-skins.min.css"> -->
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -372,39 +372,39 @@
               </span>
             </a>
             <ul class="treeview-menu" [style.display]="(reportmenu.id == activeMenuId) ? 'block' : 'none'">
-          
-              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/Statescore1']"><i
-                    class="fa fa-circle-o"></i>State Score</a></li>
-          
-              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/AtaGlanceReport']"><i
-                    class="fa fa-circle-o"></i>At a Glance Report</a></li>
-          
-              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/VerticalHousesDetails'><i
-                    class="fa fa-circle-o"></i>Progress Report</a></li>
-          
+
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
+                  [routerLink]="['/Admin/Statescore1']"><i class="fa fa-circle-o"></i>State Score</a></li>
+
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
+                  [routerLink]="['/Admin/AtaGlanceReport']"><i class="fa fa-circle-o"></i>At a Glance Report</a></li>
+
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
+                  href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Progress Report</a></li>
+
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/CriticalMonitoring'><i
                     class="fa fa-circle-o"></i>Monitoring Report</a></li>
-          
+
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/ShortfallDetail'><i
                     class="fa fa-circle-o"></i>Shortfall Report</a></li>
-          
+
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/IndiaMap'><i
                     class="fa fa-circle-o"></i>India Map</a></li>
             </ul>
             <ul class="treeview-menu" [style.display]="(reportmenu.id == activeMenuId) ? 'block' : 'none'">
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;" (click)="OpenModalDialog()"><i
-                    class="fa fa-circle-o"></i>State Score</a></li>
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  (click)="OpenModalDialog()"><i class="fa fa-circle-o"></i>State Score</a></li>
               <li [ngStyle]="{'display':DivDisplay}" class="active"><a [routerLink]="RoutRptLink"><i
                     class="fa fa-circle-o"></i>PMAY-U Dashboard {{DivText}}</a></li>
-          
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;" href='/Admin/phyfinChart'><i
-                    class="fa fa-circle-o"></i>Physical Fin Chart</a></li>
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;" href='/Admin/ConsphyfinChart'><i
-                    class="fa fa-circle-o"></i>Cons. Phy-Fin Report</a></li>
+
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  href='/Admin/phyfinChart'><i class="fa fa-circle-o"></i>Physical Fin Chart</a></li>
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  href='/Admin/ConsphyfinChart'><i class="fa fa-circle-o"></i>Cons. Phy-Fin Report</a></li>
             </ul>
           </li>
-          
-          
+
+
           <!--JSHFA Reports Menu-->
           <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="report_menu" #reportmenu
             [class.menu-open]="reportmenu.id == activeMenuId" (click)="toggle(reportmenu.id)">
@@ -416,40 +416,40 @@
               </span>
             </a>
             <ul class="treeview-menu" [style.display]="(reportmenu.id == activeMenuId) ? 'block' : 'none'">
-          
-              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/Statescore1']"><i
-                    class="fa fa-circle-o"></i>State Score</a></li>
-          
-              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" [routerLink]="['/Admin/AtaGlanceReport']"><i
-                    class="fa fa-circle-o"></i>At a Glance Report</a></li>
-          
-              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/VerticalHousesDetails'><i
-                    class="fa fa-circle-o"></i>Progress Report</a></li>
-          
+
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
+                  [routerLink]="['/Admin/Statescore1']"><i class="fa fa-circle-o"></i>State Score</a></li>
+
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
+                  [routerLink]="['/Admin/AtaGlanceReport']"><i class="fa fa-circle-o"></i>At a Glance Report</a></li>
+
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
+                  href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Progress Report</a></li>
+
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/CriticalMonitoring'><i
                     class="fa fa-circle-o"></i>Monitoring Report</a></li>
-          
+
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/ShortfallDetail'><i
                     class="fa fa-circle-o"></i>Shortfall Report</a></li>
-          
+
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/IndiaMap'><i
                     class="fa fa-circle-o"></i>India Map</a></li>
             </ul>
             <ul class="treeview-menu" [style.display]="(reportmenu.id == activeMenuId) ? 'block' : 'none'">
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;" (click)="OpenModalDialog()"><i
-                    class="fa fa-circle-o"></i>State Score</a></li>
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  (click)="OpenModalDialog()"><i class="fa fa-circle-o"></i>State Score</a></li>
               <li [ngStyle]="{'display':DivDisplay}" class="active"><a [routerLink]="RoutRptLink"><i
                     class="fa fa-circle-o"></i>PMAY-U Dashboard {{DivText}}</a></li>
-          
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;" href='/Admin/phyfinChart'><i
-                    class="fa fa-circle-o"></i>Physical Fin Chart</a></li>
-              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;" href='/Admin/ConsphyfinChart'><i
-                    class="fa fa-circle-o"></i>Cons. Phy-Fin Report</a></li>
+
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  href='/Admin/phyfinChart'><i class="fa fa-circle-o"></i>Physical Fin Chart</a></li>
+              <li [ngStyle]="{'display':DivDisplay}" class="active"><a style="cursor: pointer;"
+                  href='/Admin/ConsphyfinChart'><i class="fa fa-circle-o"></i>Cons. Phy-Fin Report</a></li>
             </ul>
           </li>
-          
-          
-          
+
+
+
           <!--Masters fORMS Menu-->
           <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Forms_menu" #reportmenu1
             [class.menu-open]="reportmenu1.id == activeMenuId" (click)="toggle(reportmenu1.id)">
@@ -471,13 +471,13 @@
                     class="fa fa-circle-o"></i>Constituency Master</a></li>
               <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ComponentMaster']"><i
                     class="fa fa-circle-o"></i>Component Master</a></li>
-              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ClassificationMaster']"><i
-                    class="fa fa-circle-o"></i>Classification Master</a>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
+                  [routerLink]="['/Admin/ClassificationMaster']"><i class="fa fa-circle-o"></i>Classification Master</a>
               </li>
               <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/SchemeMaster']"><i
                     class="fa fa-circle-o"></i>Scheme Master </a></li>
-              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/MappingClassificationMaster']"><i
-                    class="fa fa-circle-o"></i>Mapping
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
+                  [routerLink]="['/Admin/MappingClassificationMaster']"><i class="fa fa-circle-o"></i>Mapping
                   Classification Master</a></li>
             </ul>
           </li>
@@ -532,13 +532,13 @@
                   [routerLink]="['/Admin/ExcelDemandCityWise']"><i class="fa fa-circle-o"></i>Demand City-Wise Upload
                   Data</a></li>
               <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
-                  [routerLink]="['/Admin/ExcelClssmainmaster']"><i class="fa fa-circle-o"></i>Clss master 
-                   Old Format Data</a></li>
+                  [routerLink]="['/Admin/ExcelClssmainmaster']"><i class="fa fa-circle-o"></i>Clss master
+                  Old Format Data</a></li>
 
               <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ExcelCLSSCityMain']"><i
                     class="fa fa-circle-o"></i>Clss City main Upload Data</a></li>
-              
-                    <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ClssMasterUpload']"><i
+
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ClssMasterUpload']"><i
                     class="fa fa-circle-o"></i>Clss State Wise Main Master Upload Data</a></li>
 
               <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
@@ -553,10 +553,10 @@
                   [routerLink]="['/Admin/UploadPhyProgReport']"><i class="fa fa-circle-o"></i>Phy Progress Report</a>
               </li>
 
-              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a
-                [routerLink]="['/Admin/ProjectRelFundFlow']"><i class="fa fa-circle-o"></i>Project Rel FundFlow Report</a>
-            </li>
-              
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/ProjectRelFundFlow']"><i
+                    class="fa fa-circle-o"></i>Project Rel FundFlow Report</a>
+              </li>
+
             </ul>
           </li>
 
