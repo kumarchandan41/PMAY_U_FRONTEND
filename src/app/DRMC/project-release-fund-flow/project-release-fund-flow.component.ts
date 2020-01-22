@@ -4,6 +4,7 @@ import { AdminSandbox } from '../admin.sandbox';
 
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { UserService } from 'src/app/admin-service/user.service';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -42,7 +43,7 @@ export class ProjectReleaseFundFlowComponent implements OnInit {
 
 
   releaseUC: any[]=[];
-  constructor(private fb: FormBuilder, public adminSandbox: AdminSandbox,protected userMasterService: UserService) { }
+  constructor(private datePipe: DatePipe,private fb: FormBuilder, public adminSandbox: AdminSandbox,protected userMasterService: UserService) { }
 
   ngOnInit() {
     this.releaseFundFlow = this.fb.group({
@@ -128,7 +129,7 @@ export class ProjectReleaseFundFlowComponent implements OnInit {
         SCSPAmount:element.SCSPAmount,
         ProjectCode:element.ProjectCode,
         Installment:element.Installment,
-        TxtSCSPDate:element.TxtSCSPDate,
+        TxtSCSPDate: this.datePipe.transform(element.TxtSCSPDate, "MM/dd/yyyy").toString(),       
         Codes:element.Codes,
         Dcode:element.Dcode,
         CityCode:element.CityCode,

@@ -29,6 +29,7 @@ import { DashboardHFA3Component } from './AdminPanel/dashboard-hfa3/dashboard-hf
 import { DashboardHFA4Component } from './AdminPanel/dashboard-hfa4/dashboard-hfa4.component';
 import { DashboardHFA5Component } from './AdminPanel/dashboard-hfa5/dashboard-hfa5.component';
 
+
 import { StatescoreComponent } from './financeReport/statescore/statescore.component';
 import { AtaGlanceComponent } from './financeReport/ata-glance/ata-glance.component';
 import { DynamicCompComponent } from './dynamic-comp/dynamic-comp.component';
@@ -354,7 +355,7 @@ const routes: Routes = [
   // })
 
 
-  providers: [HttpClientModule, AdminAuthGuardService,
+  providers: [DatePipe,HttpClientModule, AdminAuthGuardService,
     NgbActiveModal,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
     SnotifyService, AdminSandbox, DatePipe,
