@@ -5,7 +5,7 @@ import { saveAs as importedSaveAs } from "file-saver";
 import { DatePipe } from '@angular/common';
 import { UserService } from '../admin-service/user.service';
 import { Prj_Master } from '../Shared/CommonModel';
-import { SlumDetail } from '../login/ModelS/chart.model';
+// import { SlumDetail } from '../login/ModelS/chart.model';
 
 @Injectable()
 export class AdminSandbox {
@@ -921,10 +921,7 @@ export class AdminSandbox {
     var cityStateCode = formGroup.get('ddlStateCode').value;
     var cityDistrictCode = formGroup.get('ddlDistrictCode').value
     this.userMasterService.postCityData(objPost).subscribe((data: any) => {
-      if (data.status == 200)
-      {
-           alert('Data Save Successfully') ;
-      }
+
       if (data.status == "200") {
         this.snotifyService.success("City Save Successfully...", "", {
           position: SnotifyPosition.rightTop,
@@ -981,7 +978,7 @@ export class AdminSandbox {
     this.EditCityMaster.txtCityCode = row.CityCode;
     this.EditCityMaster.txtCityName = row.City;
     this.EditCityMaster.ddlStateCode = row.StateCode;
-    
+
   }
 
   updateCityMaster() {
@@ -1032,9 +1029,6 @@ export class AdminSandbox {
                 timeout: 2500
               });
             }
-            if (data.status == 200) {
-              alert("City data Updated Successfully");
-            }
 
             this.getCityData(editCityStateCode, editDistrictCode);
           }
@@ -1046,8 +1040,7 @@ export class AdminSandbox {
             timeout: 2500
           });
         }
- 
-          alert("City data Updated Successfully");
+
       }
       else {
         this.snotifyService.error("Please Enter City Name...", "", {
@@ -1062,7 +1055,7 @@ export class AdminSandbox {
         timeout: 2500
       });
     }
-    
+
   }
   //-----get district on behalf of state----//
   getStateDistrictData(StateCode: any) {
@@ -1344,7 +1337,7 @@ export class AdminSandbox {
 
   getProjectSchemeComponentData(SchemeId: any) {
     this.userMasterService.getProjectSchemeComponent(SchemeId).subscribe(data => {
-       this.schComponentMaster = data;
+      this.schComponentMaster = data;
     });
   }
   // 2 New Code 
@@ -1527,7 +1520,7 @@ export class AdminSandbox {
   postReleaseFundFlowInstallment(value1: any) {
     this.userMasterService.postReleaseFundFlowInstallment(value1).subscribe((data: any) => {
       if (data.StatusCode == "OK") {
-          alert("Release funf flow data saved successfully");
+        alert("Release funf flow data saved successfully");
       }
     });
   }

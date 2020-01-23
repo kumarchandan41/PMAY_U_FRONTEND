@@ -227,39 +227,39 @@
           <tbody>
             <tr>
               <td class="cellBg">SC</td>
-              <td>{{fundRelease?.first?.SC ? fundRelease?.first?.SC : '-'}}</td>
-              <td>{{fundRelease?.second?.SC ? fundRelease?.second?.SC : '-'}}</td>
-              <td>{{fundRelease?.third?.SC ? fundRelease?.third?.SC : '-'}}</td>
-              <td>{{fundRelease?.totalSC ? fundRelease?.totalSC : '-'}}</td>
+              <td>{{fundRelease?.first?.SC ? fundRelease?.first?.SC.toFixed(2) : '-'}}</td>
+              <td>{{fundRelease?.second?.SC ? fundRelease?.second?.SC.toFixed(2) : '-'}}</td>
+              <td>{{fundRelease?.third?.SC ? fundRelease?.third?.SC.toFixed(2) : '-'}}</td>
+              <td>{{fundRelease?.totalSC ? fundRelease?.totalSC.toFixed(2) : '-'}}</td>
             </tr>
             <tr>
               <td class="cellBg">ST</td>
-              <td>{{fundRelease?.first?.ST ? fundRelease?.first?.ST : '-'}}</td>
-              <td>{{fundRelease?.second?.ST ? fundRelease?.second?.ST : '-'}}</td>
-              <td>{{fundRelease?.third?.ST ? fundRelease?.third?.ST : '-'}}</td>
-              <td>{{fundRelease?.totalST ? fundRelease?.totalST : '-'}}</td>
+              <td>{{fundRelease?.first?.ST ? fundRelease?.first?.ST.toFixed(2) : '-'}}</td>
+              <td>{{fundRelease?.second?.ST ? fundRelease?.second?.ST.toFixed(2) : '-'}}</td>
+              <td>{{fundRelease?.third?.ST ? fundRelease?.third?.ST.toFixed(2) : '-'}}</td>
+              <td>{{fundRelease?.totalST ? fundRelease?.totalST.toFixed(2) : '-'}}</td>
             </tr>
             <tr>
               <td class="cellBg">Other than SC/ST</td>
-              <td>{{fundRelease?.first?.otherScSt ? fundRelease?.first?.otherScSt : '-'}}</td>
-              <td>{{fundRelease?.second?.otherScSt ? fundRelease?.second?.otherScSt : '-'}}</td>
-              <td>{{fundRelease?.third?.otherScSt ? fundRelease?.third?.otherScSt : '-'}}</td>
-              <td>{{fundRelease?.totalOtherScSt ? fundRelease?.totalOtherScSt :'-'}}</td>
+              <td>{{fundRelease?.first?.otherScSt ? fundRelease?.first?.otherScSt.toFixed(2) : '-'}}</td>
+              <td>{{fundRelease?.second?.otherScSt ? fundRelease?.second?.otherScSt.toFixed(2) : '-'}}</td>
+              <td>{{fundRelease?.third?.otherScSt ? fundRelease?.third?.otherScSt.toFixed(2) : '-'}}</td>
+              <td>{{fundRelease?.totalOtherScSt ? fundRelease?.totalOtherScSt.toFixed(2) :'-'}}</td>
             </tr>
             <tr style="background-color: #001f3f; color: #fff;">
               <td>Total</td>
-              <td>{{fundRelease?.totalFirst ? fundRelease?.totalFirst : '-'}}</td>
-              <td>{{fundRelease?.totalSecond ? fundRelease?.totalSecond : '-'}}</td>
-              <td>{{fundRelease?.totalThird ? fundRelease?.totalThird : '-'}}</td>
+              <td>{{fundRelease?.totalFirst ? fundRelease?.totalFirst.toFixed(2) : '-'}}</td>
+              <td>{{fundRelease?.totalSecond ? fundRelease?.totalSecond.toFixed(2) : '-'}}</td>
+              <td>{{fundRelease?.totalThird ? fundRelease?.totalThird.toFixed(2) : '-'}}</td>
               <td>
-                {{(fundRelease?.totalOtherScSt + fundRelease?.totalST + fundRelease?.totalSC) ? fundRelease?.totalOtherScSt + fundRelease?.totalST + fundRelease?.totalSC : '-'}}
+                {{(fundRelease?.totalOtherScSt + fundRelease?.totalST + fundRelease?.totalSC) ? (fundRelease?.totalOtherScSt + fundRelease?.totalST + fundRelease?.totalSC).toFixed(2) : '-'}}
               </td>
             </tr>
             <tr>
               <td class="cellBg">Utilise</td>
-              <td>{{UCSubmission?.UCfirst?.UCAmount ? UCSubmission?.UCfirst?.UCAmount : '-'}}</td>
-              <td>{{UCSubmission?.UCsecond?.UCAmount ? UCSubmission?.UCsecond?.UCAmount : '-'}}</td>
-              <td>{{UCSubmission?.UCthird?.UCAmount ? UCSubmission?.UCthird?.UCAmount : '-'}}</td>
+              <td>{{UCSubmission?.UCfirst?.UCAmount ? UCSubmission?.UCfirst?.UCAmount.toFixed(2) : '-'}}</td>
+              <td>{{UCSubmission?.UCsecond?.UCAmount ? UCSubmission?.UCsecond?.UCAmount.toFixed(2) : '-'}}</td>
+              <td>{{UCSubmission?.UCthird?.UCAmount ? UCSubmission?.UCthird?.UCAmount.toFixed(2) : '-'}}</td>
               <td>
                 {{(UCSubmission?.UCfirst?.UCAmount+UCSubmission?.UCsecond?.UCAmount+UCSubmission?.UCthird?.UCAmount) ? UCSubmission?.UCfirst?.UCAmount+UCSubmission?.UCsecond?.UCAmount+UCSubmission?.UCthird?.UCAmount : '-'}}
               </td>
