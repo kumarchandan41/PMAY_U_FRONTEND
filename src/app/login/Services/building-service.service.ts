@@ -842,4 +842,9 @@ export class BuildingServiceService {
           return this.http.post<string>(this.url_Upload + "UploadTSP_FundRel_Excel", formData, httpOptions);
      }
 
+     DeleteTableFundRel(): Observable<string> {
+
+          return this.http.get<string>(this.url_Upload + "DeleteTableFundRelease");
+     }
+
 }
