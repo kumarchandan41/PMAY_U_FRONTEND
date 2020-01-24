@@ -481,8 +481,8 @@
                   <th style="font-family: Arial, Geneva, Tahoma, sans-serif;">HFA Amount
                     <table>
                       <tr>
-                        <td style="text-align: left">
-                          <input formControlName="HFAAmount"  [(ngModel)]="HFAAmount" AllowOnlyNumber="true"  style="width: 118px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;"
+                        <td style="text-align: left"> <!-- [(ngModel)]="HFAAmount" -->
+                          <input id ="n" formControlName="HFAAmount"  type="number" step=".01" AllowOnlyNumber="true"  style="width: 118px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;"
                             type="text">
                         </td>
                       </tr>
@@ -491,8 +491,8 @@
                   <th style="font-family: Arial, Geneva, Tahoma, sans-serif;">TSP Amount
                     <table>
                       <tr>
-                        <td style="text-align: left">
-                          <input formControlName="TSPAmount"  [(ngModel)]="TSPAmount" AllowOnlyNumber="true"  style="width: 118px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;"
+                        <td style="text-align: left"> <!--[(ngModel)]="TSPAmount"-->
+                          <input formControlName="TSPAmount"   AllowOnlyNumber="true"  style="width: 118px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;"
                             type="text">
                         </td>
                       </tr>
@@ -501,8 +501,8 @@
                   <th style="font-family: Arial, Geneva, Tahoma, sans-serif;">SCSP Amount
                     <table>
                       <tr>
-                        <td style="text-align: left">
-                          <input formControlName="SCSPAmount" [(ngModel)]="SCSPAmount" (change)="AddTotal()" type="text" AllowOnlyNumber="true" 
+                        <td style="text-align: left"> <!--[(ngModel)]="SCSPAmount" -->
+                          <input formControlName="SCSPAmount" (change)="AddTotal()" type="text" AllowOnlyNumber="true" 
                             style="width: 118px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;">
                         </td>
                       </tr>
@@ -511,8 +511,8 @@
                   <th style="font-family: Arial, Geneva, Tahoma, sans-serif;">Total released
                     <table>
                       <tr>
-                        <td style="text-align: left">
-                          <input formControlName="Total"   [(ngModel)]="Total"  disabled type="text" style="width: 117px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                        <td style="text-align: left"> <!-- [(ngModel)]="Total" --> 
+                          <input formControlName="Total"   disabled type="text" style="width: 117px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;">
                         </td>
                       </tr>
                     </table>
