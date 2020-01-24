@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { ConstantUrlService } from '../Shared/constant-url.service';
 import { GlobalUrl } from '../Shared/GlobalUrl';
 import { CitiesBasedOnstate, getConstutiencyData, getProjRelOrder } from '../login/Models/LoginModel';
-import { District } from '../login/ModelS/chart.model';
+import { District } from '../login/Models/chart.model';
 import { Prj_Master } from '../Shared/CommonModel';
 
 
@@ -622,9 +622,9 @@ export class UserService {
 
   //getProject_AllDetails
 
- // {stateCode}/{csmcno}/{Component}
-  getFile_PBD_Downnload(pdf: any, folderName: string,stateCode :string, csmcno : string ,Component :string): Observable<Blob> {
-    return this.http.get(this.baseUrl + "/Admin_Value/GetFileNew/" + pdf + "/" + folderName + "/" + stateCode+ "/" + csmcno+ "/" + Component, {
+  // {stateCode}/{csmcno}/{Component}
+  getFile_PBD_Downnload(pdf: any, folderName: string, stateCode: string, csmcno: string, Component: string): Observable<Blob> {
+    return this.http.get(this.baseUrl + "/Admin_Value/GetFileNew/" + pdf + "/" + folderName + "/" + stateCode + "/" + csmcno + "/" + Component, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }), responseType: 'blob'
