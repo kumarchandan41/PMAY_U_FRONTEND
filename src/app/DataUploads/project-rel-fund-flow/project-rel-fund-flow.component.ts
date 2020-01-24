@@ -181,4 +181,10 @@ public UploadTSP_FundRel_Excel(event:any) {
   // });
   //}
 
+  DeleteTablePHY()
+  {
+    this.service.DeleteTableFundRel().subscribe(result=>{
+     // this.GetExcel();
+    })
+  }
 }

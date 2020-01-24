@@ -4,7 +4,49 @@ import { AdminSandbox } from '../admin.sandbox';
 
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { UserService } from 'src/app/admin-service/user.service';
+import { DatePipe } from '@angular/common';
+import { array } from '@amcharts/amcharts4/core';
 
+
+const localString = (number, format = 'en-IN') => {
+  return (
+    Number(number).toLocaleString(format, {
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0
+    })
+  )
+}
+
+const indianFormat = (number, currency = 'INR') => {
+  const currencyList = [{ 'INR': 'en-IN' }, { 'USD': 'en-US' }, { 'EGP': 'en-EG' }, { 'RMB': 'en-CN' }, { 'HKD': 'en-HK' }]
+  const code = currencyList.find(o => {
+    return o[currency]
+  })
+  if (currency !== '0') {
+    return number > 0 ? localString(number, code[currency]) : number < 0 ? `(${localString(Math.abs(number), code[currency])})` : `--`
+  } else {
+    return '0'
+  }
+}
+const localString1 = (number, format = 'en-IN') => {
+  return (
+    Number(number).toLocaleString(format, {
+      maximumFractionDigits: 4,
+      minimumFractionDigits: 4
+    })
+  )
+}
+const indianFormat1 = (number, currency = 'INR') => {
+  const currencyList = [{ 'INR': 'en-IN' }, { 'USD': 'en-US' }, { 'EGP': 'en-EG' }, { 'RMB': 'en-CN' }, { 'HKD': 'en-HK' }]
+  const code = currencyList.find(o => {
+    return o[currency]
+  })
+  if (currency !== '0') {
+    return number > 0 ? localString1(number, code[currency]) : number < 0 ? `(${localString1(Math.abs(number), code[currency])})` : `0`
+  } else {
+    return '0'
+  }
+}
 
 @Component({
   selector: 'app-project-release-fund-flow',
@@ -36,13 +78,15 @@ export class ProjectReleaseFundFlowComponent implements OnInit {
   HFAAmount:number=0;
   TSPAmount:number=0;
   SCSPAmount:number=0;
-  Total:number=0;
+  Total:any=0;
   disabled:boolean;
 
 
 
   releaseUC: any[]=[];
-  constructor(private fb: FormBuilder, public adminSandbox: AdminSandbox,protected userMasterService: UserService) { }
+  Total_n: string;
+  ReleaseProjectCode: string;
+  constructor(private datePipe: DatePipe,private fb: FormBuilder, public adminSandbox: AdminSandbox,protected userMasterService: UserService) { }
 
   ngOnInit() {
     this.releaseFundFlow = this.fb.group({
@@ -123,12 +167,12 @@ export class ProjectReleaseFundFlowComponent implements OnInit {
       formArray.push(this.fb.group({
         Source:element.Source,
         SanctionNumber:element.SanctionNumber,
-        HFAAmount:element.HFAAmount,
+        HFAAmount:element.HFAAmount ==  null ? "0.000" : element.HFAAmount,
         TSPAmount:element.TSPAmount,
         SCSPAmount:element.SCSPAmount,
         ProjectCode:element.ProjectCode,
         Installment:element.Installment,
-        TxtSCSPDate:element.TxtSCSPDate,
+        TxtSCSPDate: this.datePipe.transform(element.TxtSCSPDate, "MM/dd/yyyy").toString(),       
         Codes:element.Codes,
         Dcode:element.Dcode,
         CityCode:element.CityCode,
@@ -165,25 +209,27 @@ return formArray;
     });
   }
   addNewReleaseRow() {
-    if((this.Total !== 0 ) || this.HFAAmount !==0)
-    {
     this.formArr.push(this.initItemRows());
-    }
-    else{
-      alert("Field all fields");
-    }
   }
-
+  resetvalue()
+  {
+    this.releaseUC = [];
+    this.releaseFundFlow.setControl('itemRows',this.release(this.releaseUC));
+    // this.projCode.text ='';
+  //  this.ReleaseProjectCode="";
+   this.adminSandbox.ReleaseProjectCode=[];
+  // this.ReleaseProjectCode ="";
+  }
   deleteRow(index: number) {
     this.formArr.removeAt(index);
   }
   onSubmitReleaseFundFlow(value1:any){
     this.adminSandbox.postReleaseFundFlowInstallment(value1.itemRows);
-    
   }
   AddTotal(params)
   {
    this.Total=this.HFAAmount + this.SCSPAmount + this.TSPAmount;
+   this.Total =indianFormat1(Number(this.Total));
   }
   getTotalHFAAmount(index: number) : number {
     let sum = 0;
@@ -218,6 +264,8 @@ return formArray;
   calculate()
   {
     this.Total=Number(this.HFAAmount)+ Number(this.TSPAmount)+Number(this.SCSPAmount);
+    this.Total =indianFormat1(Number(this.Total));
+    alert(this.Total);
     this.disabled = false;
   }
 }
