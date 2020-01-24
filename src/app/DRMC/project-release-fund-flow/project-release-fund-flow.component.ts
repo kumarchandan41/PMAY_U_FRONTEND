@@ -85,6 +85,7 @@ export class ProjectReleaseFundFlowComponent implements OnInit {
 
   releaseUC: any[]=[];
   Total_n: string;
+  ReleaseProjectCode: string;
   constructor(private datePipe: DatePipe,private fb: FormBuilder, public adminSandbox: AdminSandbox,protected userMasterService: UserService) { }
 
   ngOnInit() {
@@ -214,14 +215,16 @@ return formArray;
   {
     this.releaseUC = [];
     this.releaseFundFlow.setControl('itemRows',this.release(this.releaseUC));
-   // this.projCode.text ='';
+    // this.projCode.text ='';
+  //  this.ReleaseProjectCode="";
+   this.adminSandbox.ReleaseProjectCode=[];
+  // this.ReleaseProjectCode ="";
   }
   deleteRow(index: number) {
     this.formArr.removeAt(index);
   }
   onSubmitReleaseFundFlow(value1:any){
     this.adminSandbox.postReleaseFundFlowInstallment(value1.itemRows);
-    
   }
   AddTotal(params)
   {
