@@ -1066,8 +1066,10 @@ export class AdminSandbox {
   }
   //-----get district on behalf of state----//
   getStateDistrictData(StateCode: any) {
+    this.releaseUC=[];
     this.userMasterService.getStateDistrictData(StateCode).subscribe(data => {
       this.stateDistrictMaster = data;
+
     });
 
   }

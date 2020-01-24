@@ -310,7 +310,7 @@
         </div>
         <div class="w3-quarter w3-left" style="width: 22%;">
           <select [formControl]="ddlStateCode" [(ngModel)]="state" (change)="adminSandbox.getStateDistrictData($event.target.value);this.district='';
-          this.city=''; this.csmcnumber=''; this.projectName=''" style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
+          this.city=''; this.csmcnumber=''; this.projectName='' ;resetvalue();" style="font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
             <option value="" disabled>Please select state--</option>
             <option *ngFor="let state of adminSandbox.stateMaster" [value]="state.Codes">
               {{state.States_UT}}</option>
@@ -376,12 +376,12 @@
         </div>
       </div>
       <div class="w3-quarter w3-center" style="width: 10%;">
-        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;" >
           Project Code:
         </label>
       </div>
       <div class="w3-quarter w3-left" style="width: 22%;">
-        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;"><b>{{adminSandbox.ReleaseProjectCode}}</b></label>
+        <label style="font-family: Arial, Geneva, Tahoma, sans-serif;" id ="projCode"><b>{{adminSandbox.ReleaseProjectCode}}</b></label>
       </div>
       <br>
       <br>
@@ -413,7 +413,7 @@
     </form>
 
     <form [formGroup]="releaseFundFlow">
-      <table style="width: 41%;" align="center" border="1px">
+      <table style="width: 71%;" align="center" border="1px">
         <tr style="text-align: center;background-color:white">
           <thead style="background-color: lightgray; font-weight: bold">
             <table formArrayName="itemRows" border="1px">
@@ -448,7 +448,7 @@
                     <table>
                       <tr>
                         <td style="text-align: left">
-                          <input formControlName="SanctionNumber" style="width: 143px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          <input formControlName="SanctionNumber" style="width: 285px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;"
                             type="text">
                           <input formControlName="Codes" [(ngModel)]="ddlStateCode.value" hidden="true"
                             style="width: 110px;background-color: yellow" type="text">
@@ -511,7 +511,7 @@
                   <th style="font-family: Arial, Geneva, Tahoma, sans-serif;">Total released
                     <table>
                       <tr>
-                        <td style="text-align: left">  <!-- [(ngModel)]="Total" -->
+                        <td style="text-align: center">  <!-- [(ngModel)]="Total" -->
                           <input formControlName="Total"    disabled type="text" style="width: 117px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;">
                         </td>
                       </tr>
@@ -538,29 +538,29 @@
                       </tr>
                     </table>
                   </th>
-                  <th style="width: 119px;">
-                    <table>
-                      <tr style="font-family: Arial, Geneva, Tahoma, sans-serif;">
+                  <th style="width: 149px">
+                    <table style="cursor: 400px;margin-left: 200px;">
+                      <tr style="font-family: Arial, Geneva, Tahoma, sans-serif" >
                         {{ getTotalHFAAmount(3)}}
                       </tr>
                     </table>
                   </th>
-                  <th style="width: 119px;">
-                    <table>
+                  <th style="width: 129px;">
+                    <table style="cursor: 400px;margin-left: 80px;">
                       <tr style="font-family: Arial, Geneva, Tahoma, sans-serif;">
                         {{ getTotalTSPAmount(4)}}
                       </tr>
                     </table>
                   </th>
                   <th style="width: 120px;">
-                    <table>
+                    <table style="cursor: 400px;margin-left: 70px;">
                       <tr style="font-family: Arial, Geneva, Tahoma, sans-serif;">
                         {{ getTotalSCSPAmount(4)}}
                       </tr>
                     </table>
                   </th>
-                  <th style="width: 117px;">
-                    <table>
+                  <th style="width: 129px;">
+                    <table style="cursor: 400px;margin-left: 60px;">
                       <tr style="font-family: Arial, Geneva, Tahoma, sans-serif;">
                         {{getTotalRelease(5)}}
                       </tr>
