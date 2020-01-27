@@ -7,6 +7,7 @@ import { States } from '../Shared/CommonModel';
 import { GlobalEvent } from '../Shared/global-event';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Location } from "@angular/common";
+import { StringValueToken } from 'html2canvas/dist/types/css/syntax/tokenizer';
 // const accountSid = 'AC7e30d1fcd5f1e5fd6ae9e0d831e3d594';
 // const authToken = '4a3561fd6e52d36e2ba12178246e34ef';
 // const client = require('twilio')(accountSid, authToken);
@@ -30,6 +31,8 @@ export class AppAdminLayoutComponent implements OnInit {
   display: string = 'none';
 
   StateDetails: States[];
+
+
   reportpaths = ["/Admin/AtaGlance", "/Admin/AtaGlance1", "/Admin/AtaGlance3", "/Admin/AtaGlance4", "/Admin/AtaGlance5", "/Admin/phyfinChart", "/Admin/ConsphyfinChart", "/Admin/Statescore", "/Admin/VerticalHousesDetails", "/Admin/IndiaMap", "/Admin/statemaster", "/Admin/Exceljnnurm",
     "/Admin/UsersMaster", "/Admin/ConsphyfinChart1", "/Admin/VerticalFinancialDetails"];
 
@@ -42,6 +45,14 @@ export class AppAdminLayoutComponent implements OnInit {
   RoutLink: string;
   RoutRptLink: string;
   DivText: string;
+  
+  AdminView:string="block";
+  AdminViewHFA1:string="none";
+  AdminViewHFA3:string="none";
+  AdminViewHFA4:string="none";
+  AdminViewHFA5:string="none";
+
+
   constructor(private service: UrlService, private location: LocationStrategy, private gevent: GlobalEvent, private router: Router, private activatedRoute: ActivatedRoute) {
 
     history.pushState(null, null, window.location.href);
@@ -73,34 +84,61 @@ export class AppAdminLayoutComponent implements OnInit {
       this.AdminDisplay = 'block';
       this.DMRCDisplay = 'block';
       this.DivDisplay = 'none';
+      this.AdminView='block';
+      this.AdminViewHFA1="none";
+      this.AdminViewHFA3="none";
+      this.AdminViewHFA4="none";
+      this.AdminViewHFA5="none";
     }
-    else if (this.LoginTypeId === "DIV1") {
-      this.AdminDisplay = 'none';
-      this.DivDisplay = 'block';
+    else if (this.LoginTypeId === "HFA1") {
+
+      this.AdminDisplay = 'block';
+      this.DivDisplay = 'none';
       this.RoutLink = "/Admin/DashboardHFA1";
       this.RoutRptLink = "/Admin/AtaGlance1";
       this.DivText = "HFA-1";
+      this.AdminView='none';
+      this.AdminViewHFA1="block";
+      this.AdminViewHFA3="none";
+      this.AdminViewHFA4="none";
+      this.AdminViewHFA5="none";
+      
     }
-    else if (this.LoginTypeId === "DIV3") {
-      this.AdminDisplay = 'none';
-      this.DivDisplay = 'block';
+    else if (this.LoginTypeId === "HFA3") {
+      this.AdminDisplay = 'block';
+      this.DivDisplay = 'none';
       this.RoutLink = "/Admin/DashboardHFA3";
       this.RoutRptLink = "/Admin/AtaGlance3";
       this.DivText = "HFA-3";
+      this.AdminView='none';
+      this.AdminViewHFA1="none";
+      this.AdminViewHFA3="block";
+      this.AdminViewHFA4="none";
+      this.AdminViewHFA5="none";
     }
-    else if (this.LoginTypeId === "DIV4") {
-      this.AdminDisplay = 'none';
-      this.DivDisplay = 'block';
+    else if (this.LoginTypeId === "HFA4") {
+      this.AdminDisplay = 'block';
+      this.DivDisplay = 'none';
       this.RoutLink = "/Admin/DashboardHFA4";
       this.RoutRptLink = "/Admin/AtaGlance4";
       this.DivText = "HFA-4";
+      this.AdminView='none';
+      this.AdminViewHFA1="none";
+      this.AdminViewHFA3="none";
+      this.AdminViewHFA4="block";
+      this.AdminViewHFA5="none";
     }
-    else if (this.LoginTypeId === "DIV5") {
-      this.AdminDisplay = 'none';
-      this.DivDisplay = 'block';
+    else if (this.LoginTypeId === "HFA5") {
+      this.AdminDisplay = 'block';
+      this.DivDisplay = 'none';
       this.RoutLink = "/Admin/DashboardHFA5";
       this.RoutRptLink = "/Admin/AtaGlance5";
       this.DivText = "HFA-5";
+      this.AdminView='none';
+      this.AdminViewHFA1="none";
+      this.AdminViewHFA3="none";
+      this.AdminViewHFA4="none";
+      this.AdminViewHFA5="block";
     }
     else if (this.LoginTypeId === "DRMC") {
       //  this.AdminDisplay = 'none';

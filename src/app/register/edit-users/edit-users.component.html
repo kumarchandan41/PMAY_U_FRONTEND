@@ -1,0 +1,210 @@
+<div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 22px;padding-top: 15px">
+    <u><label font-size="20px" font-name="arial" style="align-content: center; margin-left: 500px;"> USER MASTER UPDATION FORM</label></u><br/>
+</div>
+
+<br/><br/><br/><br/>
+<div class="row"  >
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <label font-size="20px">SrNo :</label>
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+     <input type="text" name="SrNo"    class="form-control"  width="100px">
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <label font-size="20px">UserName  :</label>
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <input type="text" name="UserName"   class="form-control" width="100px">
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <label font-size="20px">LastName  :</label>
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+            <!-- <input type="text" class="form-control">CSMCNo -->
+        <input type="text" name="LastName"    class="form-control" type="number">
+ </div>
+ <div class="col-md-3 col-sm-6 col-xs-12">
+    <label>UserType  :</label>
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <!-- <input type="text" class="form-control"> FinYear -->
+    <input type="text" name="UserType"     class="form-control">
+</div>    
+</div>
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+            <label>Address :</label>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <!-- <input type="text" class="form-control">NoofProjects -->
+            <input type="text" name="Address"     class="form-control" type="number">
+        </div>
+    
+        <div class="col-md-3 col-sm-6 col-xs-12">  
+            <label>Password  :</label>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <!-- <input type="text" class="form-control">Project_Cost -->
+            <input type="text" name="Password"    class="form-control" type="number">
+        </div>
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+            <label>DesignationId  :</label>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <input type="text" name="DesignationId"    class="form-control" type="number">
+        </div>
+        <!-- <div class="col-md-3 col-sm-6 col-xs-12">
+            <label>StateName  :</label>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <input type="text" name="StateName"     class="form-control" type="number">
+        </div> -->
+
+        <div class="col-md-2">
+            <label>State</label>
+        </div>
+        <div class="col-md-2">
+            <!-- <input type="text" class="form-control"> -->
+             <select class="form-control"  [(ngModel)]="StateCode" placeholder="Choose State" (change)="getDistrictDetails($event.target.value)"
+                        style="width: 200px;font-display: #FF00FF;color:black;">
+                        <option value={{stValue}}>{{StateMessage}}</option>
+                        <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+                                {{sntry.States_UT}}
+                        </option>
+            </select>
+        </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+            <label>DisttName :</label>
+        </div>
+        <div class="col-md-2"> <select class="form-control"  [(ngModel)]="Dcode" placeholder="Choose Distt" (change)="getCityDetails($event.target.value)"
+            style="width: 200px;font-display: #FF00FF;color: black;">
+              <option  value={{distValue}}>{{DistrictMessage}}</option>
+              <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+                {{sntry.District}}
+              </option>
+            </select></div>
+        <!-- <div class="col-md-3 col-sm-6 col-xs-12">
+            <input type="text" name="DisttName"    class="form-control" type="number">
+        </div> -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <label>CityName  :</label>
+        </div>
+        <div class="col-md-2"> <select class="form-control"  [(ngModel)]="CityCode" placeholder="Choose City" (change)="getCityDetails($event.target.value)"
+            style="width: 200px;font-display: #FF00FF;color: black;">
+              <option value={{cityValue}}>{{CityMessage}}</option>
+              <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+                {{sntry.City}}
+              </option>
+            </select>
+          </div>
+        <!-- <div class="col-md-3 col-sm-6 col-xs-12">
+            <input type="text" name="CityName"     class="form-control" type="number">
+        </div> -->
+</div>
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+            <label>Zip Code :</label>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <input type="text" name="ZipCode"    class="form-control" type="number">
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <label>LastLoginDate  :</label>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <input type="text" name="LastLoginDate"     class="form-control" type="number">
+        </div>
+</div>
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+            <label>PasswordChangeDate :</label>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <input type="text" name="PasswordChangeDate"    class="form-control" type="number">
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <label>Role  :</label>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <input type="text" name="Role"     class="form-control" type="number">
+        </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+    <label>EmailId  :</label>
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <input type="text" name="EmailId"    class="form-control" type="number">
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <label>phone  :</label>
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <input type="text" name="phone"      class="form-control" type="number">
+</div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+            <label>mobile no :</label>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <input type="text" name="mobileno"      class="form-control" type="number">
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+        <label></label>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        
+    </div>
+
+</div>
+
+<!-- <div class="row">
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+            <label>CLTC Funds Released RsinCr  :</label>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <input type="text" name="CLTC_Funds_Released_RsinCr"     class="form-control" type="number">
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <label>CLTC Specialists Approved  :</label>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+             <input type="text" class="form-control">UC_Received 
+            <input type="text" name="CLTC_Specialists_Approved"    class="form-control" type="number">
+        </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+    <label>CLTC Specialists in Place  :</label>
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <input type="text" name="CLTC_Specialists_in_Place"     class="form-control" type="number">
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+        <label>BLC Houses Geo Tagged  :</label>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <input type="text" name="BLC_Houses_Geo_Tagged"     class="form-control" type="number">
+    </div>    
+</div> -->

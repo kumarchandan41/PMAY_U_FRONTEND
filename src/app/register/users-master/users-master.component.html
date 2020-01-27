@@ -27,9 +27,9 @@
        <tbody style="overflow-y:scroll; width:100px;">
             <tr *ngFor="let data of lstUserDetails | paginate: { itemsPerPage: 10, currentPage: p }">
                 <td>1</td>
-                <td style="width:200px">{{data.UserName}}</td>
+                <td style="width:250px">  <span style="color: green;"  class="glyphicon glyphicon-user"></span>&nbsp;{{data.UserName}}</td>
                 <td>{{data.LastName}}</td>
-                <td>{{data.UserType}}</td>
+                <td> <i class="fa fa-user-circle-o" style="color: blue;" aria-hidden="true"></i>&nbsp;{{data.UserType}}</td>
                 <td>{{data.Address}}</td>
                 <td>{{data.Password}}</td>
                 <td>{{data.DesignationId}}</td>

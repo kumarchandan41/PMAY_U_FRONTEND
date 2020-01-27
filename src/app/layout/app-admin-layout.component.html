@@ -337,17 +337,32 @@
             </a>
 
             <ul class="treeview-menu" [style.display]="(inputmenutitle.id == activeMenuId) ? 'block' : 'none'">
-              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/MainGraph']"><i
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [ngStyle]="{'display':AdminView}" [routerLink]="['/Admin/MainGraph']"><i
                     class="fa fa-circle-o"></i>PMAY-U Dashboard</a></li>
-              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA1']"><i
+                    <!-- <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [ngStyle]="{'display':AdminView}" [routerLink]="['/Admin/DashboardMainForm']"><i
+                      class="fa fa-circle-o"></i>PMAY-U DashboardStateWise </a></li>        -->
+
+                    
+
+
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [ngStyle]="{'display':AdminViewHFA1}" [routerLink]="['/Admin/DashboardHFA1']"><i
                     class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-1</a></li>
-              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA3']"><i
+             
+                    <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [ngStyle]="{'display':AdminViewHFA1}" [routerLink]="['/Admin/DashboardMainForm']"><i
+                      class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-1 </a></li>       
+
+
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [ngStyle]="{'display':AdminViewHFA3}" [routerLink]="['/Admin/DashboardHFA3']"><i
                     class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-3</a></li>
-              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA4']"><i
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [ngStyle]="{'display':AdminViewHFA4}" [routerLink]="['/Admin/DashboardHFA4']"><i
                     class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-4</a></li>
-              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/DashboardHFA5']"><i
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [ngStyle]="{'display':AdminViewHFA5}" [routerLink]="['/Admin/DashboardHFA5']"><i
                     class="fa fa-circle-o"></i>PMAY-U Dashboard HFA-5</a></li>
+
+
             </ul>
+
+
 
             <ul class="treeview-menu" [style.display]="(inputmenutitle.id == activeMenuId) ? 'block' : 'none'">
               <li [ngStyle]="{'display':DivDisplay}"><a [routerLink]="['/Admin/Dashboard']"><i
@@ -531,6 +546,8 @@
                     class="fa fa-circle-o"></i>Users Master</a></li>
               <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/MappingStates']"><i
                     class="fa fa-circle-o"></i>Mapping of States</a></li>
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [routerLink]="['/Admin/EditUsers']"><i
+                      class="fa fa-circle-o"></i>Edit Users</a></li>    
             </ul>
           </li>
 

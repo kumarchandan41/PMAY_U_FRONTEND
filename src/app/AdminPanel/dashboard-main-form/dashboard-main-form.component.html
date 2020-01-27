@@ -1,0 +1,200 @@
+<div class="container-fluid">
+    <div id="drpdown">
+      <div class="row">
+        <div id='filter' class="col-lg-12 col-md-12 col-sm-12">
+  
+          <div class="col-lg-3 col-md-3 col-sm-4">
+            <select class="form-control" title="Choose State" placeholder="Choose State"
+              (change)="getStateDetails($event.target.value)" style="width: 100%;">
+              <option value={{stValue}}>{{StateMessage}}</option>
+              <option *ngFor='let sntry of service.StateDetails1' [value]='sntry.Codes'>
+                {{sntry.States_UT}}
+              </option>
+            </select>
+          </div>
+  
+          <div class="col-lg-3 col-md-3 col-sm-4">
+            <select class="form-control" title="Choose District" placeholder="Choose Distt"
+              (change)="getDistrictDetails($event.target.value)" style="width: 100%;">
+              <option value={{distValue}}>{{DistrictMessage}}</option>
+              <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
+                {{sntry.District}}
+              </option>
+            </select>
+          </div>
+  
+          <div class="col-lg-3 col-md-3 col-sm-4">
+            <select class="form-control" title="Choose City" placeholder="Choose City"
+              (change)="getCityDetails($event.target.value)" style="width: 100%;">
+              <option value={{cityValue}}>{{CityMessage}}</option>
+              <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
+                {{sntry.City}}
+              </option>
+            </select>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  
+  
+  
+  
+  <div class="container-fluid dynamicColors">
+    <div class="col-md-6 col-sm-12">
+      <!-- FILRER -->
+      <div class="row" id="checkboxFilter">
+        <span class="info-box-header" style="padding:-10px;"><b>Division:</b></span>
+        <ng-container *ngFor="let chkValue of lstHFACodes;let i=index">
+          <span>
+            <input class="form-check-input" type="checkbox" [disabled]="DisabledCheckBox" value="{{chkValue.HFAid}}"
+              (change)="sendHFA_Codes(chkValue.Name,$event.target.checked)" />
+            <label class="form-check-label" for="inlineCheckbox1">{{chkValue.Name}}</label>
+          </span>
+        </ng-container>
+      </div>
+      <!-- FILRER END -->
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <!-- FILRER -->
+      <div class="row" id="checkboxFilter">
+        <span class="info-box-header"><b>Component:</b></span>
+        <ng-container *ngFor="let chkValue of lstComp;let i=index">
+          <span class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="{{chkValue.Cid}}"
+              (change)="sendComp(chkValue.Cid,$event.target.checked)" />
+            <label class="form-check-label" for="inlineCheckbox1">{{chkValue.Cname}}</label>
+          </span>
+        </ng-container>
+      </div>
+      <!-- FILRER END -->
+    </div>
+  </div>
+  
+  
+  <div class="container-fluid dynamicColors">
+  
+    <div class="row manageChild ">
+      <!-- 1st Graph -->
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="clearfix border">
+          <div class="col-md-6" style="padding: 10px">
+            <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+              <p style="text-align: center"> Investments <br />₹ {{Total_CostNw}} cr</p>
+            </font>
+            <div id="chartContainer1" style="height: 170px; width: 100%;"></div>
+          </div>
+  
+          <div class="col-md-6" style="padding: 10px">
+            <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+              <p style="text-align: center"><br />{{ZeroDemand}}<br /> {{ZeroDemand1}}</p>
+            </font>
+            <div id="DemandContainer" style="height: 158px; width: 100%;padding:10px"></div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- 2st Graph -->
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="clearfix border">
+          <div class="col-md-12">
+            <marquee direction="right" behavior="alternate" scrolldelay="300">
+              <b>
+                <font style="color: #f01c31;border-left: 180px;font-size:17px">F I N A N C I A L - P R O G R E S S</font>
+              </b>
+            </marquee>
+          </div>
+          <div class="col-md-4" style="padding:5px">
+            <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+              <p style="text-align: center">Sanction/Commitment <br /> ₹ {{CA_ApprovdNew}} cr </p>
+            </font>
+            <div id="sancforRel" style="height: 160px; width: 100%;"></div>
+          </div>
+          <div class="col-md-4" style="padding: 5px">
+            <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+              <p style="text-align: center">Disbursed/Sanctions <br /> ₹ {{this.CASanct_forReleaseNChange}} cr</p>
+            </font>
+            <div id="caReleased" style="height: 160px; width: 100%;"></div>
+          </div>
+          <div class="col-md-4" style="padding: 5px">
+            <!-- <div>.</div>    -->
+            <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+              <p style="text-align: center">Utilized/Disbursed <br />₹ {{CA_ReleasedNw}} cr </p>
+            </font>
+            <div id="CAApprovedContainer" style="height: 160px; width: 100%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row manageChild">
+      <!-- 3rd Graph -->
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="clearfix border">
+          <div class="col-md-12">
+            <marquee direction="right" behavior="alternate" scrolldelay="300"> <b>
+                <font style="color: #f01c31;border-left: 1S0px;font-size:17px">CREDIT LINKED SUBSIDY SCHEME.</font>
+              </b></marquee>
+          </div>
+          <div class="col-md-6" style="padding:10px;" id="clss1">
+            <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+              <p style="text-align: center;">Subsidy</p>
+            </font>
+            <div id="clssSubsi" style="height: 180px; width: 100%;"></div>
+          </div>
+  
+          <div class="col-md-6" style="padding:10px;">
+            <!-- <div class="col-md-7"> -->
+            <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+              <p style="text-align: center;">
+                Beneficiaries</p>
+            </font>
+            <div id="clssBene" style="height: 180px; width: 100%;"></div>
+          </div>
+  
+        </div>
+      </div>
+  
+      <!-- 4th Graph -->
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="clearfix border">
+          <div class="col-md-12">
+            <marquee direction="right" behavior="alternate" scrolldelay="300"> <b>
+                <font style="color: #f01c31;border-left: 150px;font-size:17px">P H Y S I C A L - P R O G R E S S
+                </font>
+              </b>
+            </marquee>
+          </div>
+          <div class="col-md-4" style="padding:5px">
+            <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+              <p style="text-align: center">
+                Grounded/Sanctioned<br /> {{Sanction_Total_New4}}</p>
+            </font>
+            <div id="groundedContainer" style="height: 167px; width: 100%;"></div>
+          </div>
+  
+          <div class="col-md-4" style="padding: 5px">
+            <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+              <p style="text-align: center">
+                Completed/Grounded <br />{{Ground_TotalNew}}</p>
+            </font>
+            <div id="CompletedContainer" style="height: 167px; width: 100%;"></div>
+          </div>
+  
+          <div class="col-md-4" style="padding: 5px;">
+            <font size=3px style="font-family:'Open Sans',Arial Narrow;">
+              <p style="text-align: center">
+                Occupied/Completed <br />{{GTCompleted_}}</p>
+            </font>
+            <div id="OccupiedContainer" style="height: 167px; width: 100%;"></div>
+          </div>
+  
+        </div>
+      </div>
+  
+  
+  
+    </div>
+  </div>

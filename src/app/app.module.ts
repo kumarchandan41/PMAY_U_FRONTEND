@@ -119,6 +119,8 @@ import { TwoDigitDecimaNumberDirective } from './Shared/OneDecimalAllow';
 import { ProjRelFundFlowComponent } from './financeReport/proj-rel-fund-flow/proj-rel-fund-flow.component';
 import { ProjectRelFundFlowComponent } from './DataUploads/project-rel-fund-flow/project-rel-fund-flow.component';
 import { AtaGlanceReportComponent } from './financeReport/ata-glance-report/ata-glance-report.component';
+import { EditUsersComponent } from './register/edit-users/edit-users.component';
+import { DashboardMainFormComponent } from './AdminPanel/dashboard-main-form/dashboard-main-form.component';
 // import { DasHComponent } from './CMS/das-h/das-h.component';
 // import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
 // import { ProjectDetailsComponent } from './DRMC/project-details/project-details.component';
@@ -215,6 +217,8 @@ const routes: Routes = [
       { path: 'ProjectRelFundFlow', component: ProjectRelFundFlowComponent },
       { path: 'AtaGlanceReport', component: AtaGlanceReportComponent },
       
+      { path: 'EditUsers', component: EditUsersComponent },
+      { path: 'DashboardMainForm', component: DashboardMainFormComponent },
       
       
     ]
@@ -325,6 +329,8 @@ const routes: Routes = [
     ProjRelFundFlowComponent,
     ProjectRelFundFlowComponent,
     AtaGlanceReportComponent,
+    EditUsersComponent,
+    DashboardMainFormComponent,
     // DasHComponent 
   ],
   imports: [
