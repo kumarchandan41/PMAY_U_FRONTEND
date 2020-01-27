@@ -425,6 +425,11 @@ ngOnInit() {
 
   }
 
+  pdfReport()
+  {
+    window.print();
+  }
+  
   ShowPageM(status: string) {
     if (status === "graph") {
       this.DisplyaGraph_C = "block";
