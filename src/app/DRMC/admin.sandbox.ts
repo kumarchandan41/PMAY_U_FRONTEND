@@ -128,6 +128,7 @@ export class AdminSandbox {
   csmcNumberMaster: any[] = [];
   projectNameMaster: any[] = [];
   projectTitle: any[] = [];
+  CmcNumbersArray:number[] = [];
   projectCodeMaster: any[] = [];
   ReleaseProjectCode: any[] = [];
   reportStateWise: any[] = [];
@@ -1077,9 +1078,20 @@ export class AdminSandbox {
   //-----get csmcnumber on behalf of city----//
   getCSMCNumber(CityCode: any) {
     this.userMasterService.getCSMCNumber(CityCode).subscribe(data => {
-      this.csmcNumberMaster = data;
+      this.csmcNumberMaster = data; //
+     data.forEach(element => {
+     const value= element.CSMCNumber;
+     if(value !=="")
+     {
+            this.CmcNumbersArray.push(value);
+     }
+     });
+     this.CmcNumbersArray=this.CmcNumbersArray.filter((item, i, ar) => ar.indexOf(item) === i);
+     // console.log(this.CmcNumbersArray);
     });
   }
+
+
   //-----get projectName on behalf of csmcnumber----//
   getProjectName(statecode: any, districtcode: any, citycode: any, csmcnumber: any) {
     this.userMasterService.getProjectName(statecode, districtcode, citycode, csmcnumber).subscribe(data => {
@@ -1347,7 +1359,7 @@ export class AdminSandbox {
     //  alert(1);
     this.userMasterService.getProject_Component(StateCode, DisttCode, cityCode, SchemeId).subscribe(data => {
       this.schComponentMaster = data;
-      console.log(data);
+      //console.log(data);
     });
   }
 
@@ -1541,8 +1553,8 @@ export class AdminSandbox {
     this.userMasterService.getReleaseTotalIns1(ProjectCode, Installment).subscribe(data => {
       if (data != 0) {
         this.totalReleaseInstallment1 = data;
+        console.log(data);
       }
-
     });
   }
   //-------------total of release and uc--------------//

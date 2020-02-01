@@ -1,81 +1,68 @@
+<div class="container" style="padding-left: 100px;">
 <div style="float:left;font-family: Arial, Geneva, Tahoma, sans-serif;font-size: 22px;padding-top: 15px">
-    <u><label font-size="20px" font-name="arial" style="align-content: center; margin-left: 500px;"> USER MASTER UPDATION FORM</label></u><br/>
+    <u><label font-size="20px" font-name="arial" style="align-content: center; margin-left: 350px;">
+         USER MASTER UPDATION FORM</label></u><br/>
 </div>
+
 
 <br/><br/><br/><br/>
 <div class="row"  >
-<div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3">
     <label font-size="20px">SrNo :</label>
 </div>
-<div class="col-md-3 col-sm-6 col-xs-12">
-     <input type="text" name="SrNo"    class="form-control"  width="100px">
+<div class="col-md-3">
+     <input type="text" name="SrNo"  [(ngModel)]="SrNo"   class="form-control" type="number"  width="150px">
 </div>
-
-<div class="col-md-3 col-sm-6 col-xs-12">
+<div class="col-md-3">
     <label font-size="20px">UserName  :</label>
 </div>
-<div class="col-md-3 col-sm-6 col-xs-12">
-    <input type="text" name="UserName"   class="form-control" width="100px">
+<div class="col-md-3">
+    <input type="text" name="UserName"  [(ngModel)]="UserName"
+      class="form-control"  width="150px">
 </div>
 </div>
-
 <div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3">
         <label font-size="20px">LastName  :</label>
 </div>
-<div class="col-md-3 col-sm-6 col-xs-12">
-            <!-- <input type="text" class="form-control">CSMCNo -->
-        <input type="text" name="LastName"    class="form-control" type="number">
+<div class="col-md-3">
+        <input type="text" name="LastName"  [(ngModel)]="LastName"  class="form-control"  width="150px">
  </div>
- <div class="col-md-3 col-sm-6 col-xs-12">
+ <div class="col-md-3">
     <label>UserType  :</label>
 </div>
-<div class="col-md-3 col-sm-6 col-xs-12">
-    <!-- <input type="text" class="form-control"> FinYear -->
-    <input type="text" name="UserType"     class="form-control">
+<div class="col-md-3">
+    <input type="text" name="UserType"  [(ngModel)]="UserType"  class="form-control"   width="150px">
 </div>    
 </div>
-
 <div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3">
             <label>Address :</label>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <!-- <input type="text" class="form-control">NoofProjects -->
-            <input type="text" name="Address"     class="form-control" type="number">
+        <div class="col-md-3">
+            <input type="text" name="Address"  [(ngModel)]="Address"  class="form-control" type="number"  width="150px">
         </div>
     
-        <div class="col-md-3 col-sm-6 col-xs-12">  
+        <div class="col-md-3">
             <label>Password  :</label>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <!-- <input type="text" class="form-control">Project_Cost -->
-            <input type="text" name="Password"    class="form-control" type="number">
+        <div class="col-md-3">
+            <input type="text" name="Password"  [(ngModel)]="Password"   class="form-control" type="number"  width="150px">
         </div>
-
-
 </div>
 
 <div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3">
             <label>DesignationId  :</label>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-3">
             <input type="text" name="DesignationId"    class="form-control" type="number">
         </div>
-        <!-- <div class="col-md-3 col-sm-6 col-xs-12">
-            <label>StateName  :</label>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <input type="text" name="StateName"     class="form-control" type="number">
-        </div> -->
-
-        <div class="col-md-2">
+        <div class="col-md-3">
             <label>State</label>
         </div>
-        <div class="col-md-2">
-            <!-- <input type="text" class="form-control"> -->
-             <select class="form-control"  [(ngModel)]="StateCode" placeholder="Choose State" (change)="getDistrictDetails($event.target.value)"
+        <div class="col-md-3">
+             <select class="form-control"  [(ngModel)]="StateId" placeholder="Choose State" (change)="getDistrictDetails($event.target.value)"
                         style="width: 200px;font-display: #FF00FF;color:black;">
                         <option value={{stValue}}>{{StateMessage}}</option>
                         <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
@@ -86,23 +73,21 @@
 </div>
 
 <div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3">
             <label>DisttName :</label>
         </div>
-        <div class="col-md-2"> <select class="form-control"  [(ngModel)]="Dcode" placeholder="Choose Distt" (change)="getCityDetails($event.target.value)"
+        <div class="col-md-3"> <select class="form-control"  [(ngModel)]="Dcode" placeholder="Choose Distt" (change)="getCityDetails($event.target.value)"
             style="width: 200px;font-display: #FF00FF;color: black;">
               <option  value={{distValue}}>{{DistrictMessage}}</option>
               <option *ngFor='let sntry of service.DisttDetails' [value]='sntry.Dcode'>
                 {{sntry.District}}
               </option>
             </select></div>
-        <!-- <div class="col-md-3 col-sm-6 col-xs-12">
-            <input type="text" name="DisttName"    class="form-control" type="number">
-        </div> -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="col-md-3">
             <label>CityName  :</label>
         </div>
-        <div class="col-md-2"> <select class="form-control"  [(ngModel)]="CityCode" placeholder="Choose City" (change)="getCityDetails($event.target.value)"
+        <div class="col-md-3"> 
+            <select class="form-control"  [(ngModel)]="CityCode" placeholder="Choose City"
             style="width: 200px;font-display: #FF00FF;color: black;">
               <option value={{cityValue}}>{{CityMessage}}</option>
               <option *ngFor='let sntry of service.CityDetails' [value]='sntry.CityCode'>
@@ -110,101 +95,67 @@
               </option>
             </select>
           </div>
-        <!-- <div class="col-md-3 col-sm-6 col-xs-12">
-            <input type="text" name="CityName"     class="form-control" type="number">
-        </div> -->
 </div>
 <div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3">
             <label>Zip Code :</label>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <input type="text" name="ZipCode"    class="form-control" type="number">
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-3">
+            <input type="text" name="ZipCode"  [(ngModel)]="ZipCode"   class="form-control" type="number"  width="150px">
+         </div>
+        <div class="col-md-3">
             <label>LastLoginDate  :</label>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <input type="text" name="LastLoginDate"     class="form-control" type="number">
+        <div class="col-md-3">
+            <input type="text" name="LastLoginDate"  [(ngModel)]="LastLoginDate"   class="form-control" type="number"  width="150px">
         </div>
 </div>
 <div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3">
             <label>PasswordChangeDate :</label>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <input type="text" name="PasswordChangeDate"    class="form-control" type="number">
+        <div class="col-md-3">
+            <input type="text" name="PasswordChangeDate"  [(ngModel)]="PasswordChangeDate"   class="form-control" type="number"  width="150px">
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-3">
             <label>Role  :</label>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-3">
             <input type="text" name="Role"     class="form-control" type="number">
         </div>
 </div>
 
 
 <div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3">
     <label>EmailId  :</label>
 </div>
-<div class="col-md-3 col-sm-6 col-xs-12">
-    <input type="text" name="EmailId"    class="form-control" type="number">
+<div class="col-md-3">
+    <input type="text" name="EmailId"  [(ngModel)]="EmailId"   class="form-control" type="number"  width="150px">
 </div>
-<div class="col-md-3 col-sm-6 col-xs-12">
+<div class="col-md-3">
     <label>phone  :</label>
 </div>
-<div class="col-md-3 col-sm-6 col-xs-12">
-    <input type="text" name="phone"      class="form-control" type="number">
+<div class="col-md-3">
+    <input type="text" name="phone"  [(ngModel)]="phone"   class="form-control" type="number"  width="150px">
 </div>
 
 </div>
 
 <div class="row">
-
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3">
             <label>mobile no :</label>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <input type="text" name="mobileno"      class="form-control" type="number">
+        <div class="col-md-3">
+            <input type="text" name="mobileno"  [(ngModel)]="mobileno"   class="form-control" type="number"  width="150px">
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-        <label></label>
+        <div class="col-md-3">
+                    <label></label>
     </div>
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        
+    <div class="col-md-2">        
     </div>
-
-</div>
-
-<!-- <div class="row">
-
-    <div class="col-md-3 col-sm-6 col-xs-12">
-            <label>CLTC Funds Released RsinCr  :</label>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <input type="text" name="CLTC_Funds_Released_RsinCr"     class="form-control" type="number">
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <label>CLTC Specialists Approved  :</label>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-             <input type="text" class="form-control">UC_Received 
-            <input type="text" name="CLTC_Specialists_Approved"    class="form-control" type="number">
+        <div class="col-md-3">
+                <button type="button" class="btn btn-lg btn-info" (click)="UpdateRecord()" >Update Record</button>
         </div>
 </div>
-
-<div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12">
-    <label>CLTC Specialists in Place  :</label>
 </div>
-<div class="col-md-3 col-sm-6 col-xs-12">
-    <input type="text" name="CLTC_Specialists_in_Place"     class="form-control" type="number">
-</div>
-<div class="col-md-3 col-sm-6 col-xs-12">
-        <label>BLC Houses Geo Tagged  :</label>
-    </div>
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <input type="text" name="BLC_Houses_Geo_Tagged"     class="form-control" type="number">
-    </div>    
-</div> -->

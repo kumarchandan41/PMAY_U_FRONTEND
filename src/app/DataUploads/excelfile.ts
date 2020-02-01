@@ -443,3 +443,25 @@ export class Excel_Project_RelFundFlow_Data {
 	 
 }
 
+
+export class User_Register_Data {
+	UserId:string;
+	UserName:string;
+	LastName:string;
+	UserType:string;
+	Address:string;
+	Password:string;
+	DesignationId:string;
+	StateId:string;
+	DisttId:string;
+	CityId:string;
+	ZipCode:string;
+	LastLoginDate:string;
+	PasswordChangeDate:string;
+	RoleId:string;
+	EmailId:string;
+	MobileNo:string;
+	PhoneNo:string;
+	TaskName:string;
+	UserStatus:string;
+}

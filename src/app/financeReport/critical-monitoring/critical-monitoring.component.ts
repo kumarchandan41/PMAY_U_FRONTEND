@@ -451,7 +451,7 @@ ngOnInit() {
 
   getStateDetails(stateCodes) {
 
-   alert(stateCodes);
+   //alert(stateCodes);
     if (stateCodes == "0") {
       this.distValue = "0";
       this.cityValue = "0";

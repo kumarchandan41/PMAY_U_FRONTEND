@@ -48,11 +48,11 @@ apiUrlReg:string;
       {
         if(data.UserType == "1")
         {
-          localStorage.setItem('AdminUser',JSON.stringify({username:loginModel.userName,token:data.token}));
+          sessionStorage.setItem('AdminUser',JSON.stringify({username:loginModel.userName,token:data.token}));
         }
         else if(data.UserType == "2")
         {
-          localStorage.setItem('CurrentUser',JSON.stringify({username:loginModel.userName,token:data.token}));
+          sessionStorage.setItem('CurrentUser',JSON.stringify({username:loginModel.userName,token:data.token}));
         }
         else{
           return null;

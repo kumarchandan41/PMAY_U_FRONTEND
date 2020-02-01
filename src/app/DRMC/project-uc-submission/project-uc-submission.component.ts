@@ -33,6 +33,7 @@ export class ProjectUcSubmissionComponent implements OnInit {
   district: string;
   projectName: any;
   releaseUC: any[] = [];
+  arr:[];
 
 
   constructor(private fb: FormBuilder, public adminSandbox: AdminSandbox, protected userMasterService: UserService) { }
@@ -48,6 +49,7 @@ export class ProjectUcSubmissionComponent implements OnInit {
       itemRows: this.fb.array([this.initItemRows('')]),
       // itemRows1: this.fb.array([this.initItemRows1()]),
     });
+
     const date = new Date();
     //   this.maxStartDate = date;
     this.dpConfig = Object.assign({},
@@ -97,6 +99,7 @@ export class ProjectUcSubmissionComponent implements OnInit {
       this.releaseFundFlow.setControl('itemRows', this.releaseUCSubmission(this.releaseUC));
     })
   }
+
   releaseUCSubmission(releasefundflow: any): FormArray {
     if (releasefundflow.length == 0) {
       this.releaseFundFlow = this.fb.group({
@@ -153,7 +156,22 @@ export class ProjectUcSubmissionComponent implements OnInit {
   }
 
   addNewReleaseRow(UCValue: any, i: any) {
-    this.formArr.push(this.initItemRows(UCValue.itemRows[i]));
+     debugger;
+   
+   // alert(i);
+   // alert(UCValue);
+    
+    // this.formArr.push(this.initItemRows(UCValue.itemRows[i]));
+   // UCValue.itemRows[i + 1].Source='';
+   // UCValue.itemRows[i + 1].SanctionNumber='';
+    //UCValue.itemRows[i + 1].TotalRelease='';
+    const uc1:any={};
+    this.formArr.insert(i+1,this.initItemRows(uc1)) ;
+    //   UCValue.itemRows[i + 1].Source='';
+  // UCValue.itemRows[i + 1].SanctionNumber='';
+  //  UCValue.itemRows[i + 1].TotalRelease='';
+    
+   
   }
 
   deleteRow(index: number) {

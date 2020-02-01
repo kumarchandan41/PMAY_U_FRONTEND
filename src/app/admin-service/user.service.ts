@@ -496,7 +496,6 @@ export class UserService {
 
   //post api for release fund Flow
   postReleaseFundFlowInstallment(postData: any): Observable<any> {
-
     return this.http.post(this.baseUrl + "/Admin_Value/SubmitReleaseFundFlowInstallmentWise", postData, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
@@ -505,7 +504,6 @@ export class UserService {
   }
   //get api for release fund Flow
   getReleaseFundFlow(statecode: any, districtcode: any, citycode: any, projectCode: any, radio: any): Observable<any> {
-
     return this.http.get(this.baseUrl + "/Admin_Value/GetReleaseFundFlow/" + statecode + '/' + districtcode + '/' + citycode + '/' + projectCode + '/' + radio, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
@@ -514,8 +512,7 @@ export class UserService {
   }
   //post api for uc submission
   postUCSubmission(postData: any): Observable<any> {
-
-    return this.http.post(this.baseUrl + "/Admin_Value/SubmitUCSubmission", postData, { "observe": "response" })
+       return this.http.post(this.baseUrl + "/Admin_Value/SubmitUCSubmission", postData, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
       })
@@ -523,8 +520,7 @@ export class UserService {
   }
   //get api for uc fund Flow
   getUCSubmission(statecode: any, districtcode: any, citycode: any, projectCode: any): Observable<any> {
-
-    return this.http.get(this.baseUrl + "/Admin_Value/GetUCSubmission/" + statecode + '/' + districtcode + '/' + citycode + '/' + projectCode, { "observe": "response" })
+       return this.http.get(this.baseUrl + "/Admin_Value/GetUCSubmission/" + statecode + '/' + districtcode + '/' + citycode + '/' + projectCode, { "observe": "response" })
       .pipe(map((response: HttpResponse<any>) => {
         return response.body;
       })

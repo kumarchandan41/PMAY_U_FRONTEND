@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 // import { Alert } from 'selenium-webdriver';
 //import { User } from '..Models/LoginModels.ts';
 import { States, Designation, District, City, Charts, Comp_Values, CLSS_Citywise_Values, JNReport, CLSS_CityValues, PMAY_DATA, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, PMAY_FinancialData, FinancialProgress, StateScore, UserMaster, Demand_SanctionStateWise, Demand, CompMaster, getHFACodes, ComponentWiseDATA, JNAtAGlance, CLSS_Values } from '../Models/chart.model';
-import { Excelfile, ExcelSheet, Excel_CLSSCityWisefile, ExcelfilePhyDash, Excel_DemandCityWise, Excel_CLSSCityMain, Excel_PMAY_Data, Excel_JNNURN_Data, Excel_CLSSStateWisefile, Excel_clssMasterNew, Excel_Physical_Progress_Report_Data, Excel_ProjectDetail_Report_Data } from '../../DataUploads/excelfile';
+import { Excelfile, ExcelSheet, Excel_CLSSCityWisefile, ExcelfilePhyDash, Excel_DemandCityWise, Excel_CLSSCityMain, Excel_PMAY_Data, Excel_JNNURN_Data, Excel_CLSSStateWisefile, Excel_clssMasterNew, Excel_Physical_Progress_Report_Data, Excel_ProjectDetail_Report_Data, User_Register_Data } from '../../DataUploads/excelfile';
 import { LocationStrategy } from '@angular/common';
 import { ConstantUrlService } from 'src/app/Shared/constant-url.service';
 import { GlobalUrl } from 'src/app/Shared/GlobalUrl';
@@ -586,6 +586,7 @@ export class BuildingServiceService {
      }
 
      BulkImport_PROJECT_DetailExcel(formData: FormData): Observable<string> {
+          alert();
           //  alert(this.url_Upload);
           // Bulk insert to table statescore tblStateWiseScoreExcel
           let headers = new HttpHeaders();
@@ -846,5 +847,7 @@ export class BuildingServiceService {
 
           return this.http.get<string>(this.url_Upload + "DeleteTableFundRelease");
      }
-
+     GetUserRegister_Data(UserId: string): Observable<User_Register_Data> {
+          return this.http.get<User_Register_Data>(this.url_Upload + "GetUsers_Register_ById?UserId=" + UserId);
+     }
 }

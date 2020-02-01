@@ -1,10 +1,19 @@
 
   <div class="container" style=" width: 1337px;" [ngStyle]="{background: backgroundColor}">
-    <div class="w3-card-4">
+    <!-- <div class="w3-card-4">
       <h3
       style="margin-left: -46px;font-family: Arial, Geneva, Tahoma, sans-serif;background-color: cadetblue;color:white;font-weight: bold; height: 69px;margin-top: -30px;padding-top: 20px; padding-left: 32px">
         UC-Submission</h3>
+    </div> -->
+
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <h1>UC-Submission</h1>
+        </div>
+      </div>
     </div>
+
     <br>
     <div class="form-container">
       <form [formGroup]="ucSubmission">
@@ -69,8 +78,8 @@
             adminSandbox.totalReleaseInstallment2=[];adminSandbox.totalReleaseInstallment3=[];adminSandbox.totalUCInstallment1=[];adminSandbox.totalUCInstallment2=[];
             adminSandbox.totalUCInstallment3=[];" style="font-family: Arial, Geneva, Tahoma, sans-serif;">
             <option value="" disabled>Please select csmc number--</option>
-            <option *ngFor="let csmcNumber of adminSandbox.csmcNumberMaster" [value]="csmcNumber.CSMCNumber">
-              {{csmcNumber.CSMCNumber}}</option>
+            <option *ngFor="let csmcNumber of adminSandbox.CmcNumbersArray" [value]="csmcNumber">
+              {{csmcNumber}}</option>
           </select>
         </div>
         <div>
@@ -212,7 +221,7 @@
                             <tr>
                               <td style="text-align: left">
                                 <input disabled formControlName="Installment" style="width: 124px;font-family: Arial, Geneva, Tahoma, sans-serif;
-                             height: 32px;background-color: yellow" type="text">
+                             height: 32px;background-color: white" type="text">
                                
                               </td>
                             </tr>
@@ -224,7 +233,7 @@
                         <tr>
                           <td style="text-align: left">
                             <input disabled formControlName="Release" style="width: 122px;font-family: Arial, Geneva, Tahoma, sans-serif;
-                         height: 32px;background-color: yellow" type="text">
+                         height: 32px;background-color: white" type="text">
                         
                           </td>
                         </tr>
@@ -236,7 +245,7 @@
                         <tr>
                           <td style="text-align: left">
                             <select disabled formControlName="Source"
-                              style="width: 114px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
+                              style="width: 114px;height: 32px;background-color: white;font-family: Arial, Geneva, Tahoma, sans-serif;" class="w3-input w3-border">
                               <option value="" disabled>Please select Source--</option>
                               <option value="EBR">EBR</option>
                               <option value="Budget">Budget</option>
@@ -252,9 +261,9 @@
                         <tr>
                           <td style="text-align: left">
                             <input disabled formControlName="SanctionNumber"
-                              style="width: 115px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;" type="text">
+                              style="width: 115px;height: 32px;background-color: white;font-family: Arial, Geneva, Tahoma, sans-serif;" type="text">
                             <input formControlName="Codes" [(ngModel)]="ddlStateCode.value" hidden="true"
-                              style="width: 110px;background-color: yellow" type="text">
+                              style="width: 110px;background-color:yellow" type="text">
                             <input formControlName="Dcode" [(ngModel)]="ddlDistrictCode.value" hidden="true"
                               style="width: 110px;background-color: yellow" type="text">
                             <input formControlName="CityCode" [(ngModel)]="ddlCity.value" hidden="true"
@@ -277,7 +286,7 @@
                           <td style="text-align: left">
                             <input disabled [minDate]="maxStartDate" bsDatepicker [bsConfig]="dpConfig"
                               autocomplete="off" formControlName="TxtSCSPDate" onkeydown="return false"
-                              placeholder="dd/mm/yyyy" style="width: 121px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                              placeholder="dd/mm/yyyy" style="width: 121px;height: 32px;background-color: white;font-family: Arial, Geneva, Tahoma, sans-serif;">
                           </td>
                         </tr>
                       </table>
@@ -287,7 +296,7 @@
                         <tr>
                           <td style="text-align: left">
                             <input disabled formControlName="TotalRelease"
-                              style="width: 121px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;" type="text">
+                              style="width: 121px;height: 32px;background-color: white;font-family: Arial, Geneva, Tahoma, sans-serif;" type="text">
                           </td>
                         </tr>
                       </table>
@@ -297,7 +306,7 @@
                         <tr>
                           <td style="text-align: left">
                             <input formControlName="LetterNo" type="text"
-                              style="width: 113px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                              style="width: 113px;height: 32px;background-color: #FFFF4D;font-family: Arial, Geneva, Tahoma, sans-serif;">
                           </td>
                         </tr>
                       </table>
@@ -306,8 +315,8 @@
                       <table>
                         <tr>
                           <td style="text-align: left">
-                            <input formControlName="UCAmount" type="text" AllowOnlyNumber="true" 
-                              style="width: 115px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                            <input formControlName="UCAmount" type="text" AllowOnlyNumber="true" class="only-numeric" 
+                              style="width: 115px;height: 32px;background-color: #FFFF4D;font-family: Arial, Geneva, Tahoma, sans-serif;">
                           </td>
                         </tr>
                       </table>
@@ -318,7 +327,7 @@
                           <td style="text-align: left">
                             <input [minDate]="maxStartDate" bsDatepicker [bsConfig]="dpConfig" autocomplete="off"
                               formControlName="UCDate" onkeydown="return false" placeholder="dd/mm/yyyy"
-                              style="width: 114px;height: 32px;background-color: yellow;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                              style="width: 114px;height: 32px;background-color: #FFFF4D;font-family: Arial, Geneva, Tahoma, sans-serif;">
                           </td>
                         </tr>
                       </table>
@@ -443,3 +452,19 @@
         
 </div>
   </div>
+  <script type="text/javascript">
+    
+    $(document).ready(function() {
+      $(".only-numeric").bind("keypress", function (e) {
+          var keyCode = e.which ? e.which : e.keyCode
+               
+          if (!(keyCode >= 48 && keyCode <= 57)) {
+            $(".error").css("display", "inline");
+            return false;
+          }else{
+            $(".error").css("display", "none");
+          }
+      });
+    });
+     
+</script>
