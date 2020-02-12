@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { States, Designation, District, City, Charts, Comp_Values, CLSS_Values, CLSS_Citywise_Values, JNReport, Demand, JNAtAGlance, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, CompMaster, getHFACodes, ComponentWiseDATA, PMAY_FinancialData, FinancialProgress, StateScore, GetProjetDetailsReport, PMAY_DATA, Demand_SanctionStateWise, UserMaster, CLSS_CityValues, Houses_Status, StateWise_NewCLSS, RegistrationDATA, MapDATA, PMAY_DATA_New, PMAY_DATA_Financial, PMAY_DATA_Fin, PdashBoard, Monitoring_Status, CLSS_MasterValues, PMAY_DATA_ShortFall, CompWiseDisplay } from '../model/chart';
+import { States, Designation, District, City, Charts, Comp_Values, CLSS_Values, CLSS_Citywise_Values, JNReport, Demand, JNAtAGlance, CompAtAGlance, FinYrWise_FinDataHouses, FinDetails, FinanceYrWiseHouses, phy_Fin_Graph, FinValue_Wise_Graph, CompMaster, getHFACodes, ComponentWiseDATA, PMAY_FinancialData, FinancialProgress, StateScore, GetProjetDetailsReport, PMAY_DATA, Demand_SanctionStateWise, UserMaster, CLSS_CityValues, Houses_Status, StateWise_NewCLSS, RegistrationDATA, MapDATA, PMAY_DATA_New, PMAY_DATA_Financial, PMAY_DATA_Fin, PdashBoard, Monitoring_Status, CLSS_MasterValues, PMAY_DATA_ShortFall, CompWiseDisplay, StateDisttCityAtaGlance } from '../model/chart';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -998,6 +998,12 @@ export class GraphService {
      HFA_AtAGlance(stateCode,districtCode,CityCode,division):Observable<CompWiseDisplay[]>
      {
            return this.http.get<CompWiseDisplay[]>(this.url + "sp_CompWise_View?stateCode="+ stateCode + "&dcode=" +districtCode + "&cityCode=" + CityCode + "&Division=" + division); 
+     }
+
+     
+     Get_StateDisttCityAtaGlance(stateCode: string, DisttCode: string, cityCode:  string, Division:string  ,Comp: string): Observable<StateDisttCityAtaGlance[]> {
+        //  alert(stateCode);
+          return this.http.get<StateDisttCityAtaGlance[]>(this.url + "ap_State_Distt_CityWiseCons_AtAGlance?stateCode=" + stateCode + "&dcode=" + DisttCode + "&cityCode=" + cityCode  + "&Division=" + Division  +  "&component=" + Comp);
      }
 }
 

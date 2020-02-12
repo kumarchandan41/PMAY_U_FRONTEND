@@ -472,8 +472,11 @@
                       <tr>
                         <td style="text-align: left">
                           <input  autocomplete="off"
-                            formControlName="TxtSCSPDate" onkeydown="return false" placeholder="yyyy/mm/dd"
+                            formControlName="TxtSCSPDate" onkeydown="return false" [minDate]="maxStartDate" bsDatepicker [bsConfig]="dpConfig" placeholder="yyyy/mm/dd"
                             style="width: 110px;height: 32px;background-color: #FFFF4D;font-family: Arial, Geneva, Tahoma, sans-serif;">
+
+                        
+
                         </td>
                       </tr>
                     </table>
@@ -482,7 +485,7 @@
                     <table>
                       <tr>
                         <td style="text-align: left">
-                          <input formControlName="HFAAmount"  AllowOnlyNumber="true"  style="width: 128px;height: 32px;background-color: #FFFF4D;font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          <input formControlName="HFAAmount" [(ngModel)]="HFAAmount"  AllowOnlyNumber="true"  style="width: 128px;height: 32px;background-color: #FFFF4D;font-family: Arial, Geneva, Tahoma, sans-serif;"
                             type="text">
                         </td>
                       </tr>
@@ -492,7 +495,7 @@
                     <table>
                       <tr>
                         <td style="text-align: left">  <!-- [(ngModel)]="TSPAmount"-->
-                          <input formControlName="TSPAmount"  AllowOnlyNumber="true"  style="width: 99px;height: 32px;background-color: #FFFF4D;font-family: Arial, Geneva, Tahoma, sans-serif;"
+                          <input formControlName="TSPAmount" [(ngModel)]="TSPAmount"  appTwoDigitDecimaNumber  style="width: 99px;height: 32px;background-color: #FFFF4D;font-family: Arial, Geneva, Tahoma, sans-serif;"
                             type="text">
                         </td>
                       </tr>
@@ -502,7 +505,7 @@
                     <table>
                       <tr>
                         <td style="text-align: left">  <!--[(ngModel)]="SCSPAmount"-->
-                          <input formControlName="SCSPAmount"  (change)="AddTotal()" type="text" AllowOnlyNumber="true" 
+                          <input formControlName="SCSPAmount" [(ngModel)]="SCSPAmount" (change)="AddTotal()" type="text" AllowOnlyNumber="true" 
                             style="width: 98px;height: 32px;background-color: #FFFF4D;font-family: Arial, Geneva, Tahoma, sans-serif;">
                         </td>
                       </tr>
@@ -512,7 +515,7 @@
                     <table>
                       <tr>
                         <td style="text-align: left">  <!-- [(ngModel)]="Total" -->
-                          <input formControlName="Total"    disabled type="text" style="width: 100px;height: 32px;background-color: #FFFF4D;font-family: Arial, Geneva, Tahoma, sans-serif;">
+                          <input formControlName="Total"  [(ngModel)]="Total"  disabled type="text" style="width: 100px;height: 32px;background-color: #FFFF4D;font-family: Arial, Geneva, Tahoma, sans-serif;">
                         </td>
                       </tr>
                     </table>

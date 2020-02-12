@@ -56,7 +56,6 @@ export class LoginComponent implements OnInit {
     console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
   onLoginSubmit2(loginForm: any) {
-
     if (this.loginForm.value.UserName != "" && this.loginForm.value.Password != "") {
       this._loginService.onLogin(this.loginForm.value.UserName, this.loginForm.value.Password).subscribe(result => {
         if (result == "1") {
@@ -75,8 +74,7 @@ export class LoginComponent implements OnInit {
     }
   }
   onLoginSubmit(loginForm: any) {
-    //alert(this.code);
-    //alert(this.loginForm.value.UserCaptacha);
+//debugger;
     if (this.code == this.loginForm.value.UserCaptacha) {
       if (this.loginForm.value.UserName != "" && this.loginForm.value.Password != "") {
         this._loginService.onLogin(this.loginForm.value.UserName, this.loginForm.value.Password).subscribe(result => {
@@ -84,6 +82,7 @@ export class LoginComponent implements OnInit {
             alert("Incorect user name or password");
           }
           else {
+            localStorage.setItem('userToken',result.access_token);
             if (result == "USER") {
               sessionStorage.setItem('UserLogin', result);
               this._Route.navigate(['/UserDashboard']);

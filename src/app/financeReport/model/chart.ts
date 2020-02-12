@@ -1144,3 +1144,27 @@ export class CompWiseDisplay {
      No_Beneficiary_EWS_LIG : string;
      No_Beneficiary_MIG : string;
 }
+
+export class StateDisttCityAtaGlance {
+         SrNo: string; 
+         Division: string; 
+         State : string;
+         StateCode : string;
+         State_Code : string;
+         Distt : string;
+         Dcode : string;
+
+         DisttCode : string;
+         City : string;
+         citycode : string;
+         Component : string;
+
+         NoOfprojApproved: string; 
+         Project_Cost : string;
+         CentralShare : string;
+         CentralAssisRel : string;
+         HousesSanctioned : string;
+         Grounded : string;
+         Completed : string;
+         Occupied : string;
+}

@@ -1,0 +1,158 @@
+<div class="container-fluid">
+    <div id="drpdown">
+      <div class="row">
+        <div id='filter' class="col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-2 col-sm-2">
+            <select class="form-control" [(ngModel)]="stateCodes" title="Choose State" placeholder="Choose State"
+              (change)="getStateDetails($event.target)" style="width: 100%">
+              <option value={{stValue}}>{{StateMessage}}</option>
+              <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+                {{sntry.States_UT}}
+              </option>
+            </select>
+          </div>
+  
+          <div class="col-lg-2 col-md-2 col-sm-2">
+             
+          </div>
+  
+  
+          <div class="col-lg-2 col-md-2 col-sm-2">
+             
+          </div>
+  
+          <div class="col-lg-2 col-md-2 col-sm-2">
+            <!-- <button title="Print" class="btn btn-block btn-primary" (click)="pdfReport()">
+              <i class="fa fa-print"></i> Print</button> -->
+          </div>
+  
+          <div class="col-lg-2 col-md-2 col-sm-2">
+            <button (click)="ExportTOExcel()" title="Export to Excel" class="btn btn-block btn-success">
+              <i class="fa fa-file-excel-o"></i>
+              Export</button>
+          </div>
+  
+          <div class="col-lg-2 col-md-2 col-sm-2">
+             
+          <button title="Show Table" type="button" [ngStyle]="{'display':DisplyaGraph_C}" (click)="ShowPageM('table')"
+            class="btn btn-block btn-warning">
+            <i class="fa fa-table"></i>
+            Show Table</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- <div id="urlSwitcher">
+    <span style="cursor: pointer;" (click)="checkForm($event)">
+      <input type="radio" name="progress" value="Fin1">Financial<br>
+    </span>
+  </div> -->
+  
+  
+  
+  <div class="container-fluid">
+    <div class="row" [ngStyle]="{'display':DisplayTable_C}">
+    
+      <div class="row" [ngStyle]="{'display':DisplayTable}">
+        <div class="container-fluid" style="padding-bottom: 20px;" id="toPrint" #TABLE #table>
+          <div id="checkboxFilter">
+            <span><b>Show /Hide</b></span>
+
+            <span>
+              <input type="radio" (change)="disttwise($event)" name="selectType" value="state" checked="true">
+              State Wise
+            </span>            
+
+            <span>
+              <input type="radio" (change)="disttwise($event)" name="selectType" value="distt" checked="true">
+              District Wise
+            </span>
+            <span>
+              <input type="radio" (change)="disttwise($event)" name="selectType"
+                value="city" checked="true">City Wise
+            </span>
+             
+          </div>
+    
+          <!-- component show hide -->
+          <div id="checkboxFilter">
+            <span><b>Show Components</b></span>
+            <span [ngStyle]="{'display':JvrmDisplay1}">
+              <input type="checkbox" [(ngModel)]="AllStatus" (change)="handleALLtableAll($event)" name="ALL" value="ALL">
+              ALL
+            </span>  
+            <span [ngStyle]="{'display':JvrmDisplay1}">
+              <input type="checkbox" (change)="handleALLtable($event)" name="BLCS" value="BLCS">
+              BLC
+            </span>
+            <span>
+              <input type="checkbox" (change)="handleALLtable($event)" name="RAY" value="RAY">RAY
+            </span>
+            <span>
+              <input type="checkbox" (change)="handleALLtable($event)" name="AHP" value="AHP">
+              AHP
+            </span>
+            <span>
+              <input type="checkbox" (change)="handleALLtable($event)" name="ISSR" value="ISSR">ISSR
+            </span>
+            <span>
+              <input type="checkbox" (change)="handleALLtable($event)" name="CLSS" value="CLSS"> CLSS
+            </span>
+            <span>
+              <input type="checkbox" (change)="handleALLtable($event)" name="JNN" value="JNN">JNNURM
+            </span>
+          </div>
+ 
+      <div class="container-fluid" style="padding-bottom: 20px;" id="toPrint">
+        <div style="text-align:center; padding: 15px 10px; font-size: 20px;">
+          <b>
+              Physical Financial Progress of PMAY(U) Projects At a Glance {{lblStateDisttCity}} <!--under PMAY(U) for {{lblStateDisttCity}} Critical Consolidated -->
+          </b>
+        </div>
+    <div id ="msg" *ngIf="isLoading"> <label>Working</label></div>
+        <table class="bodyataglance" border="1px"
+        style="font-size:12px; background-color:white; align-content: center; width: 100%;" id="printme" align="center">        
+          <tr class="tableHeader">
+             <td style="text-align:center;font-size: 13px; font-weight: 600;"> SrNo </td>
+             <td style="text-align:center;font-size: 13px; font-weight: 600;"> State </td>
+             <td *ngIf="isDist"> District</td>
+             <td *ngIf="isCity"> City</td>  
+             <td *ngIf="isCOmponent"> Component</td>
+             <td style="text-align:center;font-size: 13px; font-weight: 600;">NoOfprojApproved </td>
+             <td>Project_Cost</td> 
+             <td>CentralShare</td> 
+             <td>CentralAssisRel</td> 
+             <td>HousesSanctioned</td> 
+             <td>Grounded</td> 
+             <td>Completed</td>
+             <td>Occupied</td> 
+          </tr>
+            <tr *ngFor="let finData of lstCriticalData; let i=index" >            
+            
+              <td>{{i + 1}}</td>
+              <td  >  {{finData.State }}</td>
+              <td *ngIf="isDist" >  {{finData.Distt }}</td>
+              <td   *ngIf="isCity"  > {{finData.City }}</td> 
+              <td  *ngIf="isCOmponent"  > {{finData.Component }}</td>
+               
+              <td> {{finData.NoOfprojApproved.toLocaleString('en-IN')}}</td>
+              <td> {{finData.Project_Cost.toLocaleString('en-IN')}}</td>
+              <td> {{finData.CentralShare.toLocaleString('en-IN')}}</td>
+              <td> {{ finData.CentralAssisRel.toLocaleString('en-IN')}}</td>
+              <td> {{finData.HousesSanctioned.toLocaleString('en-IN')}}</td>
+              <td> {{finData.Grounded.toLocaleString('en-IN')}}</td>
+              <td> {{finData.Completed.toLocaleString('en-IN')}}</td>
+              <td> {{finData.Occupied.toLocaleString('en-IN')}}</td>
+            </tr>
+        </table>
+  
+      </div>
+    </div>
+  
+  
+  </div>
+  
+     
+  </div>

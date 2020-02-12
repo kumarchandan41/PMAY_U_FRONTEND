@@ -13,7 +13,7 @@ import { EditRoleComponent } from './RoleMaster/edit-role.component';
 import { RegisterComponent } from './register/register.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { from } from 'rxjs';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -121,6 +121,9 @@ import { ProjectRelFundFlowComponent } from './DataUploads/project-rel-fund-flow
 import { AtaGlanceReportComponent } from './financeReport/ata-glance-report/ata-glance-report.component';
 import { EditUsersComponent } from './register/edit-users/edit-users.component';
 import { DashboardMainFormComponent } from './AdminPanel/dashboard-main-form/dashboard-main-form.component';
+import { AuthGuard } from './AuthGuard/auth.guard';
+import { AuthInterceptor } from './AuthGuard/auth.interceptor';
+import { StatedisttdityAtaGlanceComponent } from './financeReport/statedisttdity-ata-glance/statedisttdity-ata-glance.component';
 // import { DasHComponent } from './CMS/das-h/das-h.component';
 // import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
 // import { ProjectDetailsComponent } from './DRMC/project-details/project-details.component';
@@ -219,7 +222,7 @@ const routes: Routes = [
       
       { path: 'EditUsers', component: EditUsersComponent },
       { path: 'DashboardMainForm', component: DashboardMainFormComponent },
-      
+      { path: 'StatedisttCityAtaGlance', component: StatedisttdityAtaGlanceComponent },
       
     ]
   },
@@ -331,6 +334,7 @@ const routes: Routes = [
     AtaGlanceReportComponent,
     EditUsersComponent,
     DashboardMainFormComponent,
+    StatedisttdityAtaGlanceComponent,
     // DasHComponent 
   ],
   imports: [
@@ -361,7 +365,11 @@ const routes: Routes = [
   // })
 
 
-  providers: [DatePipe,HttpClientModule, AdminAuthGuardService,
+  providers: [DatePipe,HttpClientModule, AdminAuthGuardService,AuthGuard,{
+    provide : HTTP_INTERCEPTORS,
+    useClass : AuthInterceptor,
+    multi : true
+  },
     NgbActiveModal,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
     SnotifyService, AdminSandbox, DatePipe,

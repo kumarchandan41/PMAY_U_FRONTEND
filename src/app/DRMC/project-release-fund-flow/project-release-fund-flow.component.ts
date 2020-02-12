@@ -78,7 +78,7 @@ export class ProjectReleaseFundFlowComponent implements OnInit {
   HFAAmount:number=0;
   TSPAmount:number=0;
   SCSPAmount:number=0;
-  Total:any=0;
+  Total:number=0;
   disabled:boolean;
 
 
@@ -226,11 +226,14 @@ return formArray;
   onSubmitReleaseFundFlow(value1:any){
     this.adminSandbox.postReleaseFundFlowInstallment(value1.itemRows);
   }
-  AddTotal(params)
+  AddTotal()
   {
-   this.Total=this.HFAAmount + this.SCSPAmount + this.TSPAmount;
-   this.Total =indianFormat1(Number(this.Total));
+    this.Total=Number(this.HFAAmount)+ Number(this.TSPAmount)+Number(this.SCSPAmount);
+  // this.Total=this.HFAAmount + this.SCSPAmount + this.TSPAmount;
+
+ //  this.Total =indianFormat1(Number(this.Total));
   }
+
   getTotalHFAAmount(index: number) : number {
     let sum = 0;
     for(let i = 0; i < this.releaseUC.length; i++) {
@@ -264,7 +267,7 @@ return formArray;
   calculate()
   {
     this.Total=Number(this.HFAAmount)+ Number(this.TSPAmount)+Number(this.SCSPAmount);
-    this.Total =indianFormat1(Number(this.Total));
+    //this.Total =indianFormat1(Number(this.Total));
     alert(this.Total);
     this.disabled = false;
   }

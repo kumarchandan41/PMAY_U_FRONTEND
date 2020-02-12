@@ -775,15 +775,22 @@ export class BuildingServiceService {
                data, httpOptions);
      }
      // 11 Jan 2019
+     BulkImport_ReleaseFundFlowExcel1(formData: FormData): Observable<string> {
+          let headers = new HttpHeaders();
+          headers.append('Content-Type', 'application/json');
+          const httpOptions = { headers: headers };
+          return this.http.post<string>(this.url_Upload + "UploadRelease_Excel/", formData, httpOptions);
+     }
+
      BulkImport_ReleaseFundFlowExcel(formData: FormData): Observable<string> {
+      //A 
           let headers = new HttpHeaders();
 
           headers.append('Content-Type', 'application/json');
           const httpOptions = { headers: headers };
 
-          return this.http.post<string>(this.url_Upload + "UploadPrjRelFunfFlow_Excel/", formData, httpOptions);
+          return this.http.post<string>(this.url_Upload + "UploadReleaseData_Excel/", formData, httpOptions);
      }
-
 
      BulkImport_ClssMain_StateWiseExcel(formData: FormData): Observable<string> {
           //  alert('AA');

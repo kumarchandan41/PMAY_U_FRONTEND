@@ -1,106 +1,140 @@
 <br>
 
-<div class="container">
-<div class="row">
-  <div class="col-md-3 col-sm-3">
-    <select class="form-control"   placeholder="Select Role" (change)="getInst_Details($event.target.value)"
-    style="width: 200px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif">
-     <option value="Admin">Select Installment</option>
-     <option value="1">1</option>
-     <option value="2">2</option>
-     <option value="3">3</option>
-   </select>
-    
-</div>
-  <div class="col-md-3 col-sm-3">
-    <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
-    style="width: 200px;font-display: #FF00FF;color: black">
-    <option value={{stValue}}>{{StateMessage}}</option>
-    <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
-      {{sntry.States_UT}}
-    </option>
-  </select>
+
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row">
+      <h1>Release Data Upload </h1>
+    </div>
   </div>
-    <div class="col-md-2 col-sm-2">
-      <div class="col-md-3">
-        <select class="form-control" placeholder="Select Role"  (change)="getCompDetails($event.target.value)"
-        style="width: 200px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif">
-         <option value="Admin">Select Component</option>
-         <option value="Admin">AHP</option>
-         <option value="Admin">BLC</option>
-         <option value="Admin">ISSR</option>
-       </select>
-    </div>
-  </div>  
-  <div class="col-md-4 col-sm-4">
-      <div class="col-sm-6" ><label><b>Select Option:</b></label></div>
-      <div class="col-sm-6" >  <fieldset id="horizontal"  class="horizontal">
-        <input type="radio"  (change)="getEVRDetails($event.target.value)"  name="EBR" value="Budget">Budget 
-        <input type="radio"   (change)="getEVRDetails($event.target.value)"   name="EBR" value="EBR"> EBR 
-    </fieldset></div>
-  </div>
-  
- </div>  
-</div> 
-<br>
-<div class="row">
-  
-  <fieldset class="horizontal">
-    Release :
-    <div *ngFor="let rd of radioButtonSet">
-      <div class="col-md-1">
-        <label for="{{rd}}">{{rd}}</label>&nbsp;&nbsp;
-        <input (change)="getRELDetails($event.target.value)"   id="{{rd}}" type="radio">
-      </div>
-    </div>
-    <br><br>
-    Installment :  
-    <div *ngFor="let Id of radioButtonInst">
-      <div class="col-md-1">
-        <label for="{{Id}}">{{Id}}</label>&nbsp;&nbsp;
-        <input (change)="get_InstDetails($event.target.value)"   id="{{Id}}" type="radio">
-      </div>
-    </div>
-  </fieldset>
 </div>
 
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        <b>  Installment</b>
+      </div>
+      <div class="col-md-2">
+        <select class="form-control" id="Installment"   placeholder="Select Role" (change)="get_InstDetails($event.target.value)"
+        style="width: 150px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif">
+         <option value="Admin">Select </option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+       </select>
+      </div>
+
+      <div class="col-md-2">
+        <b>Senction No</b>
+      </div>
+      <div class="col-md-2">
+        <input type="text"  style="width: 130px;"  minlength="40" maxlength="130" required  name ="Sanctioned"   (change)="sendSanctionNo($event)"  class="form-control">
+      </div>
+
+      <div class="col-md-2">
+        <b>Release Date</b>
+      </div>
+      <div class="col-md-2">
+        <!-- <div class="col-md-2"><input type="checkbox" value="ReleaseDate"  (change)="sendDate($event)"></div> -->
+        <!-- <input type="text"  appTwoDigitDecimaNumber minlength="2" maxlength="15" required  name ="Grounded" formControlName="Grounded" class="form-control"> -->
+        <input  autocomplete="off"
+        name="TxtSCSPDate" onkeydown="return false" [(ngModel)]=sdt [minDate]="maxStartDate" bsDatepicker [bsConfig]="dpConfig" placeholder="yyyy/mm/dd"
+        style="width: 110px;height: 32px;background-color: #FFFF4D;font-family: Arial, Geneva, Tahoma, sans-serif;">
+      </div>
+
+      <!-- <div class="col-md-2">
+        <b>  Release</b>
+      </div>
+      <div class="col-md-2">
+        <select class="form-control"  id="Release"  placeholder="Select Role" (change)="getRELDetails($event.target.value)"
+        style="width: 150px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif">
+         <option value="Admin">Select </option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="3">4</option>
+         <option value="3">5</option>
+         <option value="3">6</option>
+         <option value="3">7</option>
+         <option value="3">8</option>
+         <option value="3">9</option>
+         <option value="3">10</option>
+       </select>
+      </div> -->
+  
+      <!-- <div class="col-md-2">
+        <b>  Component</b>
+      </div>
+      <div class="col-md-2">
+        <select id="Component" class="form-control" placeholder="Select Role"  (change)="getCompDetails($event.target.value)"
+        style="width: 150px;font-display: #FF00FF;color:maroon;border: black;font-family: Arial, Helvetica, sans-serif">
+        <option value="Admin">Select </option>
+        <option value="AHP">AHP</option>
+        <option value="BLC">BLC</option>
+        <option value="ISSR">ISSR</option>
+</select>
+      </div> -->
+    </div>
+
+
+   <div class="row">
+    
+    
+
+    <div class="col-md-2">
+      <b>  State</b>
+    </div>
+    <div class="col-md-2">
+      <select class="form-control" placeholder="Choose State" (change)="getStateDetails($event.target.value)"
+        style="width: 150px;font-display: #FF00FF;color: black">
+        <option value={{stValue}}>{{StateMessage}}</option>
+        <option *ngFor='let sntry of service.StateDetails' [value]='sntry.Codes'>
+          {{sntry.States_UT}}
+        </option>
+      </select>
+    </div>
 
 
 <div class="row"> 
-  <div class="col-md-2" style="height: 50px;;border: 1px solid gray;">
-    <div class="col-md-2">Senction No</div>
-    <div class="col-md-2"><input type="checkbox"  
-      value="SenctionNo"  (change)="sendSanctCodes($event)"></div>
-  </div>
+  <div class="col-sm-2" ><label><b>Select Source :</b></label></div>
+  <div class="col-md-2">
+
+      <fieldset id="horizontal" class="horizontal">
+          <input type="radio"  (change)="getEVRDetails($event.target.value)"  name="EBR" value="Budget">    Budget 
+          <input type="radio"  (change)="getEVRDetails($event.target.value)"    name="EBR" value="EBR"> EBR 
+      </fieldset>
+    </div>
+</div>   
+
+
+</div> 
+
+
+ 
+
+
+
+
+<br>
+<div class="row">
   
-  <div class="col-md-2" style="height: 50px;;border: 1px solid gray;">
-    <div class="col-md-2">Release Date</div>
-    <div class="col-md-2"><input type="checkbox" value="ReleaseDate"  (change)="sendSanctCodes($event)"></div>
+
+
+  <div class="col-md-2">
+    <!-- <b>ProjectCode</b> -->
   </div>
+  <div class="col-md-2">  <!--formControlName="ProjectCode" -->
+    <!-- <input type="text"  style="width: 110px;"  minlength="40" maxlength="40" required  name ="ProjectCode" (change)="get_projCode($event)"   class="form-control"> -->
+  </div>
+</div>
+
+
+
   
-  <div class="col-md-2"  style="height: 50px;;border: 1px solid gray;">
-    <div class="col-md-2">HFA Amt</div>
-    <div class="col-md-2"><input type="checkbox" value="HFAAmt"  (change)="sendSanctCodes($event)"></div>
-  </div>
-  <div class="col-md-2"  style="height: 50px;;border: 1px solid gray;">
-    <div class="col-md-2">TSP Amount</div>
-    <div class="col-md-2"><input type="checkbox" value="TSPAmount"  (change)="sendSanctCodes($event)"></div>
-  </div>
-  <div class="col-md-2"  style="height: 50px;;border: 1px solid gray;">
-    <div class="col-md-2">SCSP Amount</div>
-    <div class="col-md-2"><input type="checkbox" value="SCSPAmount"  (change)="sendSanctCodes($event)"></div>
-  </div>
-  
-  <div class="col-md-2"  style="height: 50px;;border: 1px solid gray;">
-    <div class="col-md-2">Project Code</div>
-    <div class="col-md-2"><input type="checkbox" value="ProjectCode"  (change)="sendSanctCodes($event)"></div>
-  </div>
-  </div>
-  
-  <div class="container">
     <div class="col-md-2 col-sm-2">
       <input type="file" #fileInput (cahnge)="UploadFile()" />
-      <button (click)="UploadAllData()" class="btn btn-primary">  Upload All Data </button><br>
+      <button (click)="UploadAllData11()" class="btn btn-primary">  Upload All Data </button><br>
       <span *ngIf="flag"> uploading<img src="assets/images/30.gif"/></span><br>      
     </div>
 
@@ -124,11 +158,7 @@
     </div>     -->
 
 
-    <div class="col-md-3 col-sm-3">
+    <!-- <div class="col-md-3 col-sm-3">
       <button (click)="DeleteTablePHY()" class="btn btn-danger"> Delete Table Data</button>
-    </div>
-  </div>
-  
-
-
-
+    </div> -->
+</div> 

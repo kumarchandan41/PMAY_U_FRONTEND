@@ -322,7 +322,7 @@
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">MAIN NAVIGATION</li>
           <li [ngStyle]="{'display':AdminDisplay}" class="active">
-            <a [routerLink]="['/Admin/Dashboard']"><i class="fa fa-home"></i>Home</a>
+            <a [routerLink]="['/Admin/Dashboard']"><i style="color: pink;" class="fa fa-home"></i>Home</a>
           </li>
 
           <!-- Dashboard-->
@@ -330,15 +330,17 @@
             [class.menu-open]="inputmenutitle.id == activeMenuId" class="treeview" (click)="toggle(inputmenutitle.id)">
             <a>
               <!-- <i class="fa fa-dashboard"></i> <span>Dashboard</span> -->
-              <i class="fa fa-pie-chart"></i> <span>Dashboard</span>
+              <i style="color: yellow;" class="fa fa-pie-chart"></i> <span>Dashboard</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
 
             <ul class="treeview-menu" [style.display]="(inputmenutitle.id == activeMenuId) ? 'block' : 'none'">
-              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [ngStyle]="{'display':AdminView}" [routerLink]="['/Admin/MainGraph']"><i
+              <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [ngStyle]="{'display':AdminView}" [routerLink]="['/Admin/MainGraph']"><i style="color: red;"
                     class="fa fa-circle-o"></i>PMAY-U Dashboard</a></li>
+
+
                     <!-- <li [ngStyle]="{'display':AdminDisplay}" class="active"><a [ngStyle]="{'display':AdminView}" [routerLink]="['/Admin/DashboardMainForm']"><i
                       class="fa fa-circle-o"></i>PMAY-U DashboardStateWise </a></li>        -->
 
@@ -380,28 +382,32 @@
           <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="report_menu" #reportmenu
             [class.menu-open]="reportmenu.id == activeMenuId" (click)="toggle(reportmenu.id)">
             <a>
-              <i class="fa fa-laptop"></i>
+              <i style="color: pink;" class="fa fa-laptop"></i>
               <span>Reports</span>
               <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
+                <i style="color: green;" class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu" [style.display]="(reportmenu.id == activeMenuId) ? 'block' : 'none'">
 
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
-                  [routerLink]="['/Admin/Statescore1']"><i class="fa fa-circle-o"></i>State Score</a></li>
+                  [routerLink]="['/Admin/Statescore1']"><i style="color: red;" class="fa fa-circle-o"></i>State Score</a></li>
 
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
-                  [routerLink]="['/Admin/AtaGlanceReport']"><i class="fa fa-circle-o"></i>At a Glance Report</a></li>
+                  [routerLink]="['/Admin/AtaGlanceReport']"><i style="color: blue;" class="fa fa-circle-o"></i>At a Glance Report</a></li>
 
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;"
-                  href='/Admin/VerticalHousesDetails'><i class="fa fa-circle-o"></i>Progress Report</a></li>
+                  href='/Admin/VerticalHousesDetails'><i style="color:violet;" class="fa fa-circle-o"></i>Progress Report</a></li>
 
-              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/CriticalMonitoring'><i
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/CriticalMonitoring'><i style="color: yellow;"
                     class="fa fa-circle-o"></i>Monitoring Report</a></li>
 
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/ShortfallDetail'><i
                     class="fa fa-circle-o"></i>Shortfall Report</a></li>
+
+              <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/StatedisttCityAtaGlance'><i
+                      class="fa fa-circle-o"></i>State-distt-City AtaGlance Report</a></li>
+                    
 
               <li [ngStyle]="{'display':AdminDisplay}"><a style="cursor: pointer;" href='/Admin/IndiaMap'><i
                     class="fa fa-circle-o"></i>India Map</a></li>
@@ -423,7 +429,7 @@
           <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Forms_menu" #reportmenu1
             [class.menu-open]="reportmenu1.id == activeMenuId" (click)="toggle(reportmenu1.id)">
             <a>
-              <i class="fa fa-telegram"></i>
+              <i style="color: blue;" class="fa fa-telegram"></i>
               <span>Masters Forms</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -455,7 +461,7 @@
           <li class="treeview" [ngStyle]="{'display':DivDisplay}" id="Forms_menu" #reportmenu11
             [class.menu-open]="reportmenu11.id == activeMenuId" (click)="toggle(reportmenu11.id)">
             <a>
-              <i class="fa fa-telegram"></i>
+              <i style="color: coral;"  class="fa fa-telegram"></i>
               <span>Masters Forms</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -482,7 +488,7 @@
           <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Upload_menu" #reportmenu2
             [class.menu-open]="reportmenu2.id == activeMenuId" (click)="toggle(reportmenu2.id)">
             <a>
-              <i class="fa fa-star"></i>
+              <i  style="color:darkcyan;" class="fa fa-star"></i>
               <span>Data Uploads</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -533,7 +539,7 @@
           <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="Admin_menu" #Adminmenu
             [class.menu-open]="Adminmenu.id == activeMenuId" (click)="toggle(Adminmenu.id)">
             <a>
-              <i class="fa fa-shopping-basket"></i>
+              <i  style="color:darkorange;" class="fa fa-shopping-basket"></i>
               <span>Administration</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -555,7 +561,7 @@
           <li class="treeview" [ngStyle]="{'display':DMRCDisplay}" id="DRMC_menu" #DMRC_menu
             [class.menu-open]="DMRC_menu.id == activeMenuId" (click)="toggle(DMRC_menu.id)">
             <a>
-              <i class="fa fa-phone-square"></i>
+              <i  style="color:gold" class="fa fa-phone-square"></i>
               <span>DRMC</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -592,7 +598,7 @@
           <li class="treeview" [ngStyle]="{'display':AdminDisplay}" id="cms_menu" #cmsmenu
             [class.menu-open]="cmsmenu.id == activeMenuId" (click)="toggle(cmsmenu.id)">
             <a>
-              <i class="fa fa-shopping-basket"></i>
+              <i  style="color:green;" class="fa fa-shopping-basket"></i>
               <span>CMS</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -607,14 +613,14 @@
 
           <li class="treeview">
             <a href="/ChangePassword">
-              <i class="fa fa-shield"></i> <span>Change Password</span>
+              <i  style="color:royalblue;" class="fa fa-shield"></i> <span>Change Password</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
 
             <a href="Login">
-              <i class="fa fa-plane"></i> <span>Logout</span>
+              <i  style="color:seagreen;" class="fa fa-plane"></i> <span>Logout</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>

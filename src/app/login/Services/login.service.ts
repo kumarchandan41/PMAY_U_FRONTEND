@@ -15,6 +15,7 @@ export class LoginService {
   public token:string;
 apiUrl:string;
 apiUrlReg:string;
+rootUrl:string;
 
   constructor(private _http:HttpClient,private _route:Router,private constantUrlService: ConstantUrlService,private globalUrl:GlobalUrl ) { 
    //,private globalUrl:GlobalUrl
@@ -22,6 +23,7 @@ apiUrlReg:string;
     //this.apiUrlReg=this.constantUrlService.apiUrlReg;
     this.apiUrl = this.globalUrl.urlIPAddess +"/API/Authenticate/";
     this.apiUrlReg= this.globalUrl.urlIPAddess + "/API/RegistrationApi/";
+    this.rootUrl = 'http://localhost:58396';
   }  
 //  apiUrl ="http://localhost:58396/hfa_api/API/Authenticate/";
 //  apiUrlReg ="http://localhost:58396/API/RegistrationApi/";
@@ -69,6 +71,13 @@ apiUrlReg:string;
   {    
       return this._http.get<string>(this.apiUrlReg + "Login_Master?Username=" + UserName+ "&password=" + Password);
   }
+
+  userAuthentication(userName, password) {
+    var data = "username=" + userName + "&password=" + password + "&grant_type=password";
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','No-Auth':'True' });
+    return this._http.post(this.rootUrl + '/token', data, { headers: reqHeader });
+  }
+
   CheckCrendential(UserName, Password)
   {    
       return this._http.get<boolean>(this.apiUrlReg + "CheckIdPass?Username=" + UserName+ "&password=" + Password);
