@@ -119,6 +119,7 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
   title = 'Excel';
   IsLoading: string;
   lblStateDisttCity: string;
+  chk_Value:boolean =false;
 
   constructor(private router: Router, private gevent: GlobalEvent, public service: GraphService, private modalService: NgbModal) {
     this.StateMessage = "Select State";
@@ -247,34 +248,53 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
 
 
   handleALLtable(event) {
-    const HFAName=event.target.value;
-    const checked=event.target.value;
+   // debugger;
+//  if (his.chk_Value == true)
+//  {   
+//    this.handleALLtable_All(event);
+//  }
+   //--------------------------------------------------
+   const HFAName=event.target.value;
+    const checked=event.target.checked;
     this.AllStatus=false;
+    let textValue='';
 
-    // if (checked) {
-    //   //this.StateDetails=[];
-    //   this.lstChkValues.push(HFAName);
-    //   this.chkValue = this.lstChkValues.toString();
-    // }
-    // else {
-    //   let index = this.lstChkValues.findIndex(a => a == HFAName);
-    //   if (index !== -1) {
-    //     this.lstChkValues.splice(index, 1);
-    //     this.chkValue = this.lstChkValues.toString();
-    //   }
-    // }
-    // this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
-    //   const value = result_Fin14;
-    //   if(value.length > 0)
-    //   {
-    //        this.lstCriticalData=value;
-    //   }
-    //   else{
-    //     this.IsLoading="waiting";
-    //   }
-
+    if (checked) {
+      //this.StateDetails=[];
+      this.lstChkValues.push(HFAName);
+      this.chkValue = this.lstChkValues.toString();
+    }
+    else {
+      let index = this.lstChkValues.findIndex(a => a == HFAName);
+      this.lstChkValues.splice(index, 1);
+      this.chkValue = this.lstChkValues.toString();
+    }
+   // alert(this.chkValue);
+    this.lstCriticalData=[];
+    let v=null;
+   
+    this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
+        this.lstChkValues.forEach(b=>{
+          v = result_Fin14.filter(a=>a.Component==b);
+          Array.prototype.push.apply(this.lstCriticalData,  v);
+          this.lstCriticalData.sort(function(a, b) {
+            var nameA = a.State.toUpperCase(); // ignore upper and lowercase
+            var nameB = b.State.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+          
+            // names must be equal
+            return 0;
+          });
+      });
+     
+    });  
+   return;
     //----------------------------------------------
-
 
     if (HFAName == 'BLCS') {
       this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
@@ -320,9 +340,77 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
 
     
 
+
+  }
+
+
+  handleALLtable_All(event) {  // ALL Component CheckBox with state - distt - city 
+    this.islabel = "none";
+    const valueComp = event.target.value;
+    this.chk_Value = true; 
+    if ( this.valueComp === "state") {
+     // alert(22);
+      this.distStatus = "none";
+      this.cityStaus = "none";
+      this.componentStaus = "none";
+      this.stateCodes = "0";
+      this.districtCodes = "0";
+      this.cityCodes = "0";
+      this.Division = "0";
+      this.Comp = "1";//1
+      this.isCOmponent = true;
+
+      this.isCity = false;
+      this.isDist = false;
+      this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
+        this.lstCriticalData = result_Fin14;
+      })
+      this.islabel = "block";
     }
+    else {
+      if ( this.valueComp === "distt") {
+        this.distStatus = "none";
+        this.cityStaus = "block";
+        this.componentStaus = "none";//
+        this.stateCodes = this.stateCodes;
+        this.districtCodes = "0";
+        this.cityCodes = "0";
+        this.Division = "0";
+        this.Comp = "4";
+        this.isCity = false;
+        this.isDist = true;
+        this.isCOmponent = true;
 
 
+        this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
+          this.lstCriticalData = result_Fin14;
+        })
+        return;
+      }
+      else ( this.valueComp === "city")
+      {
+        //alert("all");
+        this.lblStateDisttCity = "All India";
+        this.distStatus = "none";
+        this.cityStaus = "none";
+        this.componentStaus = "none";
+        this.stateCodes = "ALL";
+        this.districtCodes = "ALL";
+        this.cityCodes = "ALL";
+        this.Division = "0";
+        this.Comp = "3";
+        this.isCity = true;
+        this.isDist = true;
+        this.isCOmponent = true;
+
+
+        this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
+          this.lstCriticalData = result_Fin14;
+        })
+        return;
+      }
+    }
+  }
     
     handleALLtableAll(event) {  // ALL Component CheckBox with state - distt - city 
     this.islabel = "none";

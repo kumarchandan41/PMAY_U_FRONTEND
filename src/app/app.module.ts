@@ -121,8 +121,8 @@ import { ProjectRelFundFlowComponent } from './DataUploads/project-rel-fund-flow
 import { AtaGlanceReportComponent } from './financeReport/ata-glance-report/ata-glance-report.component';
 import { EditUsersComponent } from './register/edit-users/edit-users.component';
 import { DashboardMainFormComponent } from './AdminPanel/dashboard-main-form/dashboard-main-form.component';
-import { AuthGuard } from './AuthGuard/auth.guard';
-import { AuthInterceptor } from './AuthGuard/auth.interceptor';
+//import { AuthGuard } from './AuthGuard/auth.guard';
+//import { AuthInterceptor } from './AuthGuard/auth.interceptor';
 import { StatedisttdityAtaGlanceComponent } from './financeReport/statedisttdity-ata-glance/statedisttdity-ata-glance.component';
 // import { DasHComponent } from './CMS/das-h/das-h.component';
 // import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
@@ -365,17 +365,26 @@ const routes: Routes = [
   // })
 
 
-  providers: [DatePipe,HttpClientModule, AdminAuthGuardService,AuthGuard,{
-    provide : HTTP_INTERCEPTORS,
-    useClass : AuthInterceptor,
-    multi : true
-  },
-    NgbActiveModal,
-    { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
-    SnotifyService, AdminSandbox, DatePipe,
-    GlobalEvent, GlobalUrl],
-  bootstrap: [AppComponent],
-  entryComponents: [StatescoreComponent]
+//   providers: [DatePipe,HttpClientModule, AdminAuthGuardService,AuthGuard,{
+//     provide : HTTP_INTERCEPTORS,
+//     useClass : AuthInterceptor,
+//     multi : true
+//   },
+//     NgbActiveModal,
+//     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
+//     SnotifyService, AdminSandbox, DatePipe,
+//     GlobalEvent, GlobalUrl],
+//   bootstrap: [AppComponent],
+//   entryComponents: [StatescoreComponent]
+// })
+
+providers: [DatePipe,HttpClientModule, AdminAuthGuardService, NgbActiveModal, 
+  { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
+  SnotifyService, AdminSandbox, DatePipe,
+  GlobalEvent, GlobalUrl],
+bootstrap: [AppComponent],
+entryComponents: [StatescoreComponent]
 })
+
 
 export class AppModule { }
