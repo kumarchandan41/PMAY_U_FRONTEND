@@ -268,8 +268,9 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
       let index = this.lstChkValues.findIndex(a => a == HFAName);
       this.lstChkValues.splice(index, 1);
       this.chkValue = this.lstChkValues.toString();
-    }
-   // alert(this.chkValue);
+    }   
+   // alert(this.chkValue);  
+   
     this.lstCriticalData=[];
     let v=null;
    

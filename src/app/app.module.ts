@@ -386,5 +386,4 @@ bootstrap: [AppComponent],
 entryComponents: [StatescoreComponent]
 })
 
-
 export class AppModule { }
