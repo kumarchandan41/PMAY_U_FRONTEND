@@ -193,7 +193,7 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
   }
 
   ngOnInit() {
-    alert();
+   // alert();
     this.gevent.ColorObservable.subscribe(x => {
       console.log('color:' + x);
     });
@@ -579,7 +579,7 @@ this.SingleStatus6=false;
   }
     
     handleALLtableAll(event) {  // ALL Component CheckBox with state - distt - city 
-      alert();
+    //  alert();
       // this.SingleStatus1=false;
       // this.SingleStatus2=false;
       // this.SingleStatus3=false;
