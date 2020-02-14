@@ -1005,6 +1005,18 @@ export class GraphService {
         //  alert(stateCode);
           return this.http.get<StateDisttCityAtaGlance[]>(this.url + "ap_State_Distt_CityWiseCons_AtAGlance?stateCode=" + stateCode + "&dcode=" + DisttCode + "&cityCode=" + cityCode  + "&Division=" + Division  +  "&component=" + Comp);
      }
+
+     Get_State_DisttWiseCons_AtAGlance(stateCode: string, DisttCode: string, cityCode:  string, Division:string  ,Comp: string,CompMultiple :string): Observable<StateDisttCityAtaGlance[]> {
+          //  alert(stateCode);
+            return this.http.get<StateDisttCityAtaGlance[]>(this.url + "ap_State_DisttWiseCons_AtAGlance?stateCode=" + stateCode + "&dcode=" + DisttCode + "&cityCode=" + cityCode  + "&Division=" + Division  +  "&component=" + Comp +  "&CompMultiple=" + CompMultiple);
+     }
+
+     // 1ST FOR STATE 
+     Get_ap_State_WiseConpwise_AtAGlance(stateCode: string, DisttCode: string, cityCode:  string, Division:string  ,Comp: string,CompMultiple :string): Observable<StateDisttCityAtaGlance[]> {
+          //  alert(stateCode);  
+            return this.http.get<StateDisttCityAtaGlance[]>(this.url + "ap_State_WiseConpwise_AtAGlance?stateCode=" + stateCode + "&dcode=" + DisttCode + "&cityCode=" + cityCode  + "&Division=" + Division  +  "&component=" + Comp +  "&CompMultiple=" + CompMultiple);
+     }
+     
 }
 
 

@@ -22,8 +22,9 @@
           </div>
   
           <div class="col-lg-2 col-md-2 col-sm-2">
-            <!-- <button title="Print" class="btn btn-block btn-primary" (click)="pdfReport()">
-              <i class="fa fa-print"></i> Print</button> -->
+            <button (click)="Reset()" title="Export to Excel" class="btn btn-block btn-success">
+              <i class="fa fa-file-excel-o"></i>
+              Reset</button>
           </div>
   
           <div class="col-lg-2 col-md-2 col-sm-2">
@@ -61,16 +62,16 @@
             <span><b>Show /Hide</b></span>
 
             <span>
-              <input type="radio" (change)="disttwise($event)" name="selectType" value="state" checked="true">
+              <input type="radio"  (change)="disttwise($event)" name="selectType" value="state" checked="true">
               State Wise
             </span>            
 
             <span>
-              <input type="radio" (change)="disttwise($event)" name="selectType" value="distt" checked="true">
+              <input type="radio" [(ngModel)]="AllDistt"  (change)="disttwise($event)" name="selectType" value="distt" checked="true">
               District Wise
             </span>
             <span>
-              <input type="radio" (change)="disttwise($event)" name="selectType"
+              <input type="radio" [(ngModel)]="AllCity" (change)="disttwise($event)" name="selectType"
                 value="city" checked="true">City Wise
             </span>
              
@@ -84,24 +85,24 @@
               ALL
             </span>  
             <span [ngStyle]="{'display':JvrmDisplay1}">
-              <input type="checkbox" (change)="handleALLtable($event)" name="BLCS" value="BLCS">
+              <input type="checkbox" [(ngModel)]="SingleStatus1"  (change)="handleALLtable($event)" name="BLCS" value="BLCS">
               BLC
             </span>
             <span>
-              <input type="checkbox" (change)="handleALLtable($event)" name="RAY" value="RAY">RAY
+              <input type="checkbox"  [(ngModel)]="SingleStatus2"   (change)="handleALLtable($event)" name="RAY" value="RAY">RAY
             </span>
             <span>
-              <input type="checkbox" (change)="handleALLtable($event)" name="AHP" value="AHP">
+              <input type="checkbox"  [(ngModel)]="SingleStatus3"   (change)="handleALLtable($event)" name="AHP" value="AHP">
               AHP
             </span>
             <span>
-              <input type="checkbox" (change)="handleALLtable($event)" name="ISSR" value="ISSR">ISSR
+              <input type="checkbox" [(ngModel)]="SingleStatus4"    (change)="handleALLtable($event)" name="ISSR" value="ISSR">ISSR
             </span>
             <span>
-              <input type="checkbox" (change)="handleALLtable($event)" name="CLSS" value="CLSS"> CLSS
+              <input type="checkbox"  [(ngModel)]="SingleStatus5"   (change)="handleALLtable($event)" name="CLSS" value="CLSS"> CLSS
             </span>
             <span>
-              <input type="checkbox" (change)="handleALLtable($event)" name="JNN" value="JNN">JNNURM
+              <input type="checkbox"  [(ngModel)]="SingleStatus6"   (change)="handleALLtable($event)" name="JNN" value="JNN">JNNURM
             </span>
           </div>
  

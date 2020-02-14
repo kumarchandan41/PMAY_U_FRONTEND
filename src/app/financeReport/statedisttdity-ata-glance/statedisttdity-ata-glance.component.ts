@@ -86,6 +86,8 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
   isGrounded: boolean = true;
   isCompleted: boolean = true;
   DisplayHouse: string = 'block';
+
+  AllState: boolean = true;
   isDist: boolean = true;
   isCity: boolean = true;
   isCOmponent: boolean = true;
@@ -96,7 +98,15 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
   IIInst: string;
   IInd: string;
   AllStatus:boolean=false;
-
+  AllDistt:boolean=false;
+  AllCity:boolean=false;
+ // SingleStatus1:boolean=false;
+  SingleStatus2:boolean=false;
+  SingleStatus3:boolean=false;
+  SingleStatus4:boolean=false;
+  SingleStatus5:boolean=false;
+  SingleStatus6:boolean=false;
+  
 
   public backgroundColor: string;
   LstPayData_C: PMAY_DATA[];
@@ -120,6 +130,8 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
   IsLoading: string;
   lblStateDisttCity: string;
   chk_Value:boolean =false;
+  CompMultiple: string;
+  SingleStatus1:boolean=false;
 
   constructor(private router: Router, private gevent: GlobalEvent, public service: GraphService, private modalService: NgbModal) {
     this.StateMessage = "Select State";
@@ -181,6 +193,7 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
   }
 
   ngOnInit() {
+    alert();
     this.gevent.ColorObservable.subscribe(x => {
       console.log('color:' + x);
     });
@@ -223,7 +236,6 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
   }
 
   handleBLCtable(event) {
-
     const valueComp = event.target.value;
     if (valueComp == "BLC" && this.valueComp === "state") {
       this.msg = "Working";
@@ -245,15 +257,165 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
     }
   }
 
+// START  
+// this is to get same no of rows for state as per component 
+handleALLtableAll_____(event) {
+//  alert(0);
+debugger;
+  const HFAName=event.target.value;
+  const checked=event.target.checked;
+  this.AllStatus=false;
+  let textValue='';
+
+  if (checked) {
+    //this.StateDetails=[];
+    this.lstChkValues.push(HFAName);
+    this.chkValue = this.lstChkValues.toString();
+  }
+  else {
+    let index = this.lstChkValues.findIndex(a => a == HFAName);
+    this.lstChkValues.splice(index, 1);
+    this.chkValue = this.lstChkValues.toString();
+  }   
+ // alert(this.chkValue);  
+ 
+  this.lstCriticalData=[];
+//  alert(this.chkValue);
+  let v=null;
 
 
-  handleALLtable(event) {
+  this.islabel = "none";
+  const valueComp = event.target.value;
+ // alert(valueComp);
+  if ( this.valueComp === "state") {
+    this.distStatus = "none";
+    this.cityStaus = "none";
+    this.componentStaus = "none";
+    this.stateCodes = "ALL";
+    this.districtCodes = "0";
+    this.cityCodes = "0";
+    this.Division = "0";
+    this.Comp = "0";
+    //alert(valueComp);
+
+    if (valueComp =="ALL")
+    {
+      this.CompMultiple = 'BLCS,AHP,JNN,CLSS,RAY,ISSR'
+    }
+    else 
+    {
+          this.CompMultiple =this.chkValue;
+    }
+
+    this.isCOmponent = true;
+
+    this.isCity = false;
+    this.isDist = false;
+    this.service.Get_ap_State_WiseConpwise_AtAGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp, this.CompMultiple).subscribe(result_Fin14 => {
+      this.lstCriticalData = result_Fin14;
+    })
+    this.islabel = "block";
+  }  
+}
+
+
+  // 
+  handleALLtable22 (event) {
+   debugger ;
+    const HFAName=event.target.value;
+    const checked=event.target.checked;
+    this.AllStatus=false;
+    let textValue='';
+    this.SingleStatus1=false;
+
+    if (checked) {
+      //this.StateDetails=[];
+      this.lstChkValues.push(HFAName);
+      this.chkValue = this.lstChkValues.toString();
+    }
+    else {
+      let index = this.lstChkValues.findIndex(a => a == HFAName);
+      this.lstChkValues.splice(index, 1);
+      this.chkValue = this.lstChkValues.toString();
+    }   
+   // alert(this.chkValue);  
+   
+    this.lstCriticalData=[];
+  //  alert(this.chkValue);
+    let v=null;
+    if ( this.valueComp === "distt") {
+        this.distStatus = "none";
+        this.cityStaus = "block";
+        this.componentStaus = "none";//
+        this.stateCodes = "ALL";
+        this.districtCodes = "ALL";
+        this.cityCodes = "0";
+        this.Division = "0";
+        this.Comp = "1";
+        this.isCity = false;
+        this.isDist = true;
+        this.isCOmponent = true;
+        this.CompMultiple =this.chkValue;
+ 
+        this.service.Get_State_DisttWiseCons_AtAGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp, this.CompMultiple).subscribe(result_Fin14 => {
+          this.lstCriticalData = result_Fin14 ;
+        })
+       // return;
+
+
+       
+    }
+   
+
+    //this.handleALLtableAll_____(event);
+  //  alert(this.valueComp);
+    if ( this.valueComp === "state") {
+      this.distStatus = "none";
+      this.cityStaus = "none";
+      this.componentStaus = "none";
+      this.stateCodes = "ALL";
+      this.districtCodes = "0";
+      this.cityCodes = "0";
+      this.Division = "0";
+      this.Comp = "0";
+
+     //  alert(this.chkValue);
+      this.CompMultiple =this.chkValue;
+      this.isCOmponent = true;
+      this.isCity = false;
+      this.isDist = false;
+      // this.service.Get_ap_State_WiseConpwise_AtAGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp, this.CompMultiple).subscribe(result_Fin14 => {
+      //   this.lstCriticalData = result_Fin14;
+      // })
+      if (this.chkValue=="BLCS")
+      {
+        this.service.Get_State_DisttWiseCons_AtAGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp, this.CompMultiple).subscribe(result_Fin14 => {
+          this.lstCriticalData = result_Fin14.filter(a=>a.Component=='BLCS'); ;
+        })
+      }
+      this.islabel = "block";
+    } 
+    
+  }
+
+  
+  handleALLtable(event) { 
+   // alert('myproc');
    // debugger;
 //  if (his.chk_Value == true)
 //  {   
 //    this.handleALLtable_All(event);
-//  }
-   //--------------------------------------------------
+// this.SingleStatus1=false;
+
+this.AllStatus =false;
+this.SingleStatus1=false;
+this.SingleStatus2=false;
+this.SingleStatus3=false;
+this.SingleStatus4=false;
+this.SingleStatus5=false;
+this.SingleStatus6=false;
+
+
    const HFAName=event.target.value;
     const checked=event.target.checked;
     this.AllStatus=false;
@@ -269,7 +431,7 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
       this.lstChkValues.splice(index, 1);
       this.chkValue = this.lstChkValues.toString();
     }   
-   // alert(this.chkValue);  
+    // alert(this.chkValue);  
    
     this.lstCriticalData=[];
     let v=null;
@@ -345,6 +507,8 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
   }
 
 
+  
+
   handleALLtable_All(event) {  // ALL Component CheckBox with state - distt - city 
     this.islabel = "none";
     const valueComp = event.target.value;
@@ -370,6 +534,7 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
     }
     else {
       if ( this.valueComp === "distt") {
+      //  alert(1);
         this.distStatus = "none";
         this.cityStaus = "block";
         this.componentStaus = "none";//
@@ -414,7 +579,19 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
   }
     
     handleALLtableAll(event) {  // ALL Component CheckBox with state - distt - city 
-    this.islabel = "none";
+      alert();
+      // this.SingleStatus1=false;
+      // this.SingleStatus2=false;
+      // this.SingleStatus3=false;
+      // this.SingleStatus4=false;
+      // this.SingleStatus5=false;
+      // this.SingleStatus6=false;
+      // this.AllState=false;
+      // this.AllCity=false;
+      // this.AllDistt=false;
+      
+
+      this.islabel = "none";
     const valueComp = event.target.value;
 
     if (valueComp == "ALL" && this.valueComp === "state") {
@@ -441,15 +618,15 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
         this.distStatus = "none";
         this.cityStaus = "block";
         this.componentStaus = "none";//
-        this.stateCodes = this.stateCodes;
-        this.districtCodes = "0";
+        this.stateCodes = "ALL";//this.stateCodes;
+        this.districtCodes = "ALL";
         this.cityCodes = "0";
         this.Division = "0";
-        this.Comp = "4";
+        this.Comp = "1"; //4
         this.isCity = false;
         this.isDist = true;
         this.isCOmponent = true;
-
+       // alert('YES');
 
         this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
           this.lstCriticalData = result_Fin14;
@@ -458,7 +635,7 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
       }
       else (valueComp == "ALL" && this.valueComp === "city")
       {
-        //alert("all");
+       // alert("all CITY");
         this.lblStateDisttCity = "All India";
         this.distStatus = "none";
         this.cityStaus = "none";
@@ -484,7 +661,28 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
   // this works with state dropdown and Check box state-distt-city - no comp
   disttwise(event) {
    // alert('test');
-    const valueDemo = event.target.value;
+   //this.AllDistt =false;
+   try{
+        this.AllStatus= false;
+        this.SingleStatus1 =false;
+        try {
+        this.SingleStatus2 =false;
+        this.SingleStatus3 =false;
+        this.SingleStatus4 =false;
+        this.SingleStatus5 =false;
+        this.SingleStatus6 =false;
+        }
+        catch{}
+        finally{}
+       // this.AllCity =false;
+       // this.AllState =false;
+       // this.AllDistt=false;
+   }
+   catch{}
+   finally{}
+
+  // alert(1);
+   const valueDemo = event.target.value;
     this.valueComp = valueDemo;
     if (this.stateCodes != "ALL") {
      // alert('test1');
@@ -507,7 +705,7 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
         return;
       }
       else if ((this.stateCodes != "0" && this.stateCodes != "ALL") && valueDemo == "distt") {
-       // alert(11);
+      //   alert(11);
         this.stateCodes = this.stateCodes;
         this.districtCodes = "0";
         this.cityCodes = "0";
@@ -525,12 +723,12 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
         return;
       }
       else if (this.stateCodes != "0" && valueDemo == "city") {
-       // alert(12);
-        this.stateCodes = this.stateCodes;
+         // alert(12);
+        this.stateCodes =  this.stateCodes;
         this.districtCodes = "ALL";
         this.cityCodes = "ALL";
-        this.Division = "ALL";
-        this.Comp = "6";
+        this.Division = "0";
+        this.Comp = "111";
         this.distStatus = "block";
         this.cityStaus = "block";
         this.componentStaus = "none";
@@ -542,10 +740,28 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
         })
         return;
       }
+      else if (this.stateCodes == "0" && valueDemo == "city") {
+        // alert(13);
+       this.stateCodes = "ALL"; //this.stateCodes;
+       this.districtCodes = "ALL";
+       this.cityCodes = "ALL";
+       this.Division = "ALL";
+       this.Comp = "6";
+       this.distStatus = "block";
+       this.cityStaus = "block";
+       this.componentStaus = "none";
+       this.isCity = true;
+       this.isDist = true;
+       this.isCOmponent = false;
+       this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
+         this.lstCriticalData = result_Fin14;
+       })
+       return;
+     }
     }
 
     if (valueDemo == "state") {
-      //alert('state');
+      // alert('state');
       this.distStatus = "none";
       this.cityStaus = "none";
       this.componentStaus = "none";
@@ -564,7 +780,7 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
       return;
     }
     else if (valueDemo == "distt") {
-      //alert('distt');
+      // alert('distt');
       this.stateCodes = "ALL";
       this.districtCodes = "ALL";
       this.cityCodes = "0";
@@ -577,7 +793,7 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
       this.isCOmponent = false;
     }
     else { //<<<<<<<<<<<<<<< City>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
-      //alert('citywise');
+      // alert('citywise11');
       this.stateCodes = "ALL";
       this.districtCodes = "ALL";
       this.cityCodes = "ALL";
@@ -625,4 +841,20 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, 'AtaGlance.xlsx');
   }
+  Reset()
+  {
+
+    this.ngOnInit();
+
+    this.SingleStatus1 = false;
+    this.SingleStatus2 = false;
+    this.SingleStatus3 = false;
+    this.SingleStatus4 = false;
+    this.SingleStatus5 = false;
+    this.SingleStatus6 = false;
+    this.AllStatus = false;
+    this.AllDistt = false;
+    this.AllCity = false;
+ 
+   }
 }

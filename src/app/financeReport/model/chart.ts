@@ -1167,4 +1167,5 @@ export class StateDisttCityAtaGlance {
          Grounded : string;
          Completed : string;
          Occupied : string;
+         CompMultiple:string;
 }
