@@ -309,7 +309,8 @@ this.SingleStatus6=false;
             if (nameA > nameB) {
               return 1;
             }
-          
+            
+            
             // names must be equal
             return 0;
           });
