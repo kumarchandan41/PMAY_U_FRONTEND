@@ -82,28 +82,28 @@
           <div id="checkboxFilter">
             <span><b>Show Components</b></span>
             <span [ngStyle]="{'display':JvrmDisplay1}">
-              <input type="checkbox" [(ngModel)]="AllStatus" (change)="handleALLtableAll($event)" name="ALL" value="ALL">
+              <input type="checkbox" [(ngModel)]="allstatus" (change)="handleALLtableAll($event)" name="ALL" value="ALL">
               ALL
             </span>  
             <span [ngStyle]="{'display':JvrmDisplay1}">
-              <input type="checkbox" [(ngModel)]="SingleStatus1"  (change)="handleALLtable($event)" name="BLCS" value="BLCS">
+              <input type="checkbox" [(ngModel)]="selected1" [disabled]="chkEnebled" (change)="handleALLtable($event)" name="BLCS" value="BLCS">
               BLC
             </span>
             <span>
-              <input type="checkbox"  [(ngModel)]="SingleStatus2"   (change)="handleALLtable($event)" name="RAY" value="RAY">RAY
+              <input type="checkbox"  [(ngModel)]="selected2"   (change)="handleALLtable($event)" name="RAY" value="RAY">RAY
             </span>
             <span>
-              <input type="checkbox"  [(ngModel)]="SingleStatus3"   (change)="handleALLtable($event)" name="AHP" value="AHP">
+              <input type="checkbox"  [(ngModel)]="selected3"   (change)="handleALLtable($event)" name="AHP" value="AHP">
               AHP
             </span>
             <span>
-              <input type="checkbox" [(ngModel)]="SingleStatus4"    (change)="handleALLtable($event)" name="ISSR" value="ISSR">ISSR
+              <input type="checkbox" [(ngModel)]="selected4"    (change)="handleALLtable($event)" name="ISSR" value="ISSR">ISSR
             </span>
             <span>
-              <input type="checkbox"  [(ngModel)]="SingleStatus5"   (change)="handleALLtable($event)" name="CLSS" value="CLSS"> CLSS
+              <input type="checkbox"  [(ngModel)]="selected5"   (change)="handleALLtable($event)" name="CLSS" value="CLSS"> CLSS
             </span>
             <span>
-              <input type="checkbox"  [(ngModel)]="SingleStatus6"   (change)="handleALLtable($event)" name="JNN" value="JNN">JNNURM
+              <input type="checkbox"  [(ngModel)]="selected6"   (change)="handleALLtable($event)" name="JNN" value="JNN">JNNURM
             </span>
           </div>
  
@@ -113,23 +113,32 @@
               Physical Financial Progress of PMAY(U) Projects At a Glance {{lblStateDisttCity}} <!--under PMAY(U) for {{lblStateDisttCity}} Critical Consolidated -->
           </b>
         </div>
-    <div id ="msg" *ngIf="isLoading"> <label>Working</label></div>
+       
+        <div class="row">
+          <div class="col-md-9"> <div style="font-size: 25px;">
+            {{loader}}
+           </div></div>
+          <div class="col-md-3">
+            <input type="button" class="btn btn-primary" (click)="Prev()" value="Previous">&nbsp;&nbsp;
+            <input type="button" class="btn btn-primary" (click)="Next()" value="Next">
+          </div>
+        </div>
         <table class="bodyataglance" border="1px"
         style="font-size:12px; background-color:white; align-content: center; width: 100%;" id="printme" align="center">        
           <tr class="tableHeader">
              <td style="text-align:center;font-size: 13px; font-weight: 600;"> SrNo </td>
              <td style="text-align:center;font-size: 13px; font-weight: 600;"> State </td>
-             <td *ngIf="isDist"> District</td>
-             <td *ngIf="isCity"> City</td>  
-             <td *ngIf="isCOmponent"> Component</td>
+             <td *ngIf="isDist" style="text-align:center;font-size: 13px; font-weight: 600;"> District</td>
+             <td *ngIf="isCity" style="text-align:center;font-size: 13px; font-weight: 600;"> City</td>  
+             <td *ngIf="isCOmponent" style="text-align:center;font-size: 13px; font-weight: 600;"> Component</td>
              <td style="text-align:center;font-size: 13px; font-weight: 600;">NoOfprojApproved </td>
-             <td>Project_Cost</td> 
-             <td>CentralShare</td> 
-             <td>CentralAssisRel</td> 
-             <td>HousesSanctioned</td> 
-             <td>Grounded</td> 
-             <td>Completed</td>
-             <td>Occupied</td> 
+             <td style="text-align:center;font-size: 13px; font-weight: 600;">Project_Cost</td> 
+             <td style="text-align:center;font-size: 13px; font-weight: 600;">CentralShare</td> 
+             <td style="text-align:center;font-size: 13px; font-weight: 600;">CentralAssisRel</td> 
+             <td style="text-align:center;font-size: 13px; font-weight: 600;">HousesSanctioned</td> 
+             <td style="text-align:center;font-size: 13px; font-weight: 600;">Grounded</td> 
+             <td style="text-align:center;font-size: 13px; font-weight: 600;">Completed</td>
+             <td style="text-align:center;font-size: 13px; font-weight: 600;">Occupied</td> 
           </tr>
             <tr *ngFor="let finData of lstCriticalData; let i=index" >            
             
@@ -157,4 +166,43 @@
   </div>
   
      
+  </div>
+
+  
+  <div style="display: none;">
+    <table #tblExcel id="tbl" class="bodyataglance" border="1px"
+    style="font-size:12px; background-color:white; align-content: center; width: 100%;"  align="center">        
+      <tr class="tableHeader">
+         <td style="text-align:center;font-size: 13px; font-weight: 600;"> SrNo </td>
+         <td style="text-align:center;font-size: 13px; font-weight: 600;"> State </td>
+         <td *ngIf="isDist" style="text-align:center;font-size: 13px; font-weight: 600;"> District</td>
+         <td *ngIf="isCity" style="text-align:center;font-size: 13px; font-weight: 600;"> City</td>  
+         <td *ngIf="isCOmponent" style="text-align:center;font-size: 13px; font-weight: 600;"> Component</td>
+         <td style="text-align:center;font-size: 13px; font-weight: 600;">NoOfprojApproved </td>
+         <td style="text-align:center;font-size: 13px; font-weight: 600;">Project_Cost</td> 
+         <td style="text-align:center;font-size: 13px; font-weight: 600;">CentralShare</td> 
+         <td style="text-align:center;font-size: 13px; font-weight: 600;">CentralAssisRel</td> 
+         <td style="text-align:center;font-size: 13px; font-weight: 600;">HousesSanctioned</td> 
+         <td style="text-align:center;font-size: 13px; font-weight: 600;">Grounded</td> 
+         <td style="text-align:center;font-size: 13px; font-weight: 600;">Completed</td>
+         <td style="text-align:center;font-size: 13px; font-weight: 600;">Occupied</td> 
+      </tr>
+        <tr *ngFor="let finData of lstCriticalData1; let i=index" >            
+        
+          <td>{{i + 1}}</td>
+          <td  >  {{finData.State }}</td>
+          <td *ngIf="isDist" >  {{finData.Distt }}</td>
+          <td   *ngIf="isCity"  > {{finData.City }}</td> 
+          <td  *ngIf="isCOmponent"  > {{finData.Component }}</td>
+           
+          <td> {{finData.NoOfprojApproved.toLocaleString('en-IN')}}</td>
+          <td> {{finData.Project_Cost.toLocaleString('en-IN')}}</td>
+          <td> {{finData.CentralShare.toLocaleString('en-IN')}}</td>
+          <td> {{ finData.CentralAssisRel.toLocaleString('en-IN')}}</td>
+          <td> {{finData.HousesSanctioned.toLocaleString('en-IN')}}</td>
+          <td> {{finData.Grounded.toLocaleString('en-IN')}}</td>
+          <td> {{finData.Completed.toLocaleString('en-IN')}}</td>
+          <td> {{finData.Occupied.toLocaleString('en-IN')}}</td>
+        </tr>
+    </table>
   </div>

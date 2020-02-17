@@ -1001,10 +1001,19 @@ export class GraphService {
      }
 
      
-     Get_StateDisttCityAtaGlance(stateCode: string, DisttCode: string, cityCode:  string, Division:string  ,Comp: string): Observable<StateDisttCityAtaGlance[]> {
-        //  alert(stateCode);
-          return this.http.get<StateDisttCityAtaGlance[]>(this.url + "ap_State_Distt_CityWiseCons_AtAGlance?stateCode=" + stateCode + "&dcode=" + DisttCode + "&cityCode=" + cityCode  + "&Division=" + Division  +  "&component=" + Comp);
-     }
+     // Get_StateDisttCityAtaGlance(stateCode: string, DisttCode: string, cityCode:  string, Division:string  ,Comp: string ): Observable<StateDisttCityAtaGlance[]> {
+     //    //  alert(stateCode);
+     //      return this.http.get<StateDisttCityAtaGlance[]>(this.url + "ap_State_Distt_CityWiseCons_AtAGlance?stateCode=" + stateCode + "&dcode=" + DisttCode + "&cityCode=" + cityCode  + "&Division=" + Division  +  "&component=" + Comp );
+     // }
+
+     Get_StateDisttCityAtaGlance(stateCode: string, DisttCode: string, cityCode:  string, Division:string  ,Comp: string,pageNumber:number,skip :number): Observable<StateDisttCityAtaGlance[]> {
+          //  alert(stateCode);
+            return this.http.get<StateDisttCityAtaGlance[]>(this.url + "ap_State_Distt_CityWiseCons_AtAGlance?stateCode=" + stateCode + "&dcode=" + DisttCode + "&cityCode=" + cityCode  + "&Division=" + Division  +  "&component=" + Comp + "&pageNumber=" + pageNumber + "&skip=" + skip);
+       }
+     Get_StateDisttCityAtaGlance_(stateCode: string, DisttCode: string, cityCode:  string, Division:string  ,Comp: string): Observable<StateDisttCityAtaGlance[]> {
+          //  alert(stateCode);
+            return this.http.get<StateDisttCityAtaGlance[]>(this.url + "ap_State_Distt_CityWiseCons_AtAGlance_?stateCode=" + stateCode + "&dcode=" + DisttCode + "&cityCode=" + cityCode  + "&Division=" + Division  +  "&component=" + Comp);
+     }  
 
      Get_State_DisttWiseCons_AtAGlance(stateCode: string, DisttCode: string, cityCode:  string, Division:string  ,Comp: string,CompMultiple :string): Observable<StateDisttCityAtaGlance[]> {
           //  alert(stateCode);
