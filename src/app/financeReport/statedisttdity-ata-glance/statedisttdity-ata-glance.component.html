@@ -90,20 +90,20 @@
               BLC
             </span>
             <span>
-              <input type="checkbox"  [(ngModel)]="selected2"   (change)="handleALLtable($event)" name="RAY" value="RAY">RAY
+              <input type="checkbox"  [(ngModel)]="selected2"  [disabled]="chkEnebled"  (change)="handleALLtable($event)" name="RAY" value="RAY">RAY
             </span>
             <span>
-              <input type="checkbox"  [(ngModel)]="selected3"   (change)="handleALLtable($event)" name="AHP" value="AHP">
+              <input type="checkbox"  [(ngModel)]="selected3"  [disabled]="chkEnebled"  (change)="handleALLtable($event)" name="AHP" value="AHP">
               AHP
             </span>
             <span>
-              <input type="checkbox" [(ngModel)]="selected4"    (change)="handleALLtable($event)" name="ISSR" value="ISSR">ISSR
+              <input type="checkbox" [(ngModel)]="selected4"  [disabled]="chkEnebled"  (change)="handleALLtable($event)" name="ISSR" value="ISSR">ISSR
             </span>
             <span>
-              <input type="checkbox"  [(ngModel)]="selected5"   (change)="handleALLtable($event)" name="CLSS" value="CLSS"> CLSS
+              <input type="checkbox"  [(ngModel)]="selected5"  [disabled]="chkEnebled" (change)="handleALLtable($event)" name="CLSS" value="CLSS"> CLSS
             </span>
             <span>
-              <input type="checkbox"  [(ngModel)]="selected6"   (change)="handleALLtable($event)" name="JNN" value="JNN">JNNURM
+              <input type="checkbox"  [(ngModel)]="selected6"  [disabled]="chkEnebled"  (change)="handleALLtable($event)" name="JNN" value="JNN">JNNURM
             </span>
           </div>
  
@@ -131,8 +131,8 @@
              <td *ngIf="isDist" style="text-align:center;font-size: 13px; font-weight: 600;"> District</td>
              <td *ngIf="isCity" style="text-align:center;font-size: 13px; font-weight: 600;"> City</td>  
              <td *ngIf="isCOmponent" style="text-align:center;font-size: 13px; font-weight: 600;"> Component</td>
-             <td style="text-align:center;font-size: 13px; font-weight: 600;">NoOfprojApproved </td>
-             <td style="text-align:center;font-size: 13px; font-weight: 600;">Project_Cost</td> 
+             <td style="text-align:center;font-size: 13px; font-weight: 600;">No Of proj Approved </td>
+             <td style="text-align:center;font-size: 13px; font-weight: 600;">Project Cost</td> 
              <td style="text-align:center;font-size: 13px; font-weight: 600;">CentralShare</td> 
              <td style="text-align:center;font-size: 13px; font-weight: 600;">CentralAssisRel</td> 
              <td style="text-align:center;font-size: 13px; font-weight: 600;">HousesSanctioned</td> 
@@ -178,8 +178,8 @@
          <td *ngIf="isDist" style="text-align:center;font-size: 13px; font-weight: 600;"> District</td>
          <td *ngIf="isCity" style="text-align:center;font-size: 13px; font-weight: 600;"> City</td>  
          <td *ngIf="isCOmponent" style="text-align:center;font-size: 13px; font-weight: 600;"> Component</td>
-         <td style="text-align:center;font-size: 13px; font-weight: 600;">NoOfprojApproved </td>
-         <td style="text-align:center;font-size: 13px; font-weight: 600;">Project_Cost</td> 
+         <td style="text-align:center;font-size: 13px; font-weight: 600;">No Of proj Approved </td>
+         <td style="text-align:center;font-size: 13px; font-weight: 600;">Project Cost</td> 
          <td style="text-align:center;font-size: 13px; font-weight: 600;">CentralShare</td> 
          <td style="text-align:center;font-size: 13px; font-weight: 600;">CentralAssisRel</td> 
          <td style="text-align:center;font-size: 13px; font-weight: 600;">HousesSanctioned</td> 

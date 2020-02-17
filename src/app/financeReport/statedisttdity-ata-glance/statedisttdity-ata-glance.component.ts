@@ -200,18 +200,12 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
     this.service.sp_create_PMAY_Critical_BLC_DATA(this.stateCodes, this.districtCodes, this.cityCodes, 'BLCS', "0").subscribe(result => { // new cod
     });
 
-    // this.stateCodes = "28";
-    // this.districtCodes = "ALL";
-    // this.cityCodes = "ALL";
-    // this.Division = "0";
-    // this.Comp = "ALL";
   }
   pdfReport() {
     window.print();
   }
 
   ngOnInit() {
-   // alert();
     this.gevent.ColorObservable.subscribe(x => {
       console.log('color:' + x);
     });
@@ -280,16 +274,8 @@ export class StatedisttdityAtaGlanceComponent implements OnInit {
       })     
     }
   }
-
-
- 
-
-
   
   handleALLtable(event) { 
-  //  alert('myproc');
-   // debugger;
- 
 this.allstatus =false;
 this.SingleStatus1=false;
 this.SingleStatus2=false;
@@ -301,11 +287,9 @@ this.SingleStatus6=false;
 
    const HFAName=event.target.value;
     const checked=event.target.checked;
- //   this.allstatus=false;
     let textValue='';
 
     if (checked) {
-      //this.StateDetails=[];
       this.lstChkValues.push(HFAName);
       this.chkValue = this.lstChkValues.toString();
     }
@@ -314,7 +298,6 @@ this.SingleStatus6=false;
       this.lstChkValues.splice(index, 1);
       this.chkValue = this.lstChkValues.toString();
     }   
-    // alert(this.chkValue);  
    
     this.lstCriticalData=[];
     let v=null;
@@ -344,21 +327,14 @@ this.SingleStatus6=false;
     });  
     this.islabel = "block";
 
-    this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
-      this.lstCriticalData1 = result_Fin14;
-    })     
+    // this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
+    //   this.lstCriticalData1 = result_Fin14;
+    // })     
    return;
-    //----------------------------------------------
- 
   }
-
-
-  
-
- 
     
     handleALLtableAll(event) {  // ALL Component CheckBox with state - distt - city
-      
+      this.chkEnebled=false;
       this.selected1 = false;
       this.selected2 = false;
       this.selected3 = false;
@@ -366,6 +342,11 @@ this.SingleStatus6=false;
       this.selected5 = false;
       this.selected6 = false;
 
+      if (this.allstatus ==false )
+      {
+        this.chkEnebled =true;
+      }
+       
         this.islabel = "none";
         const valueComp = event.target.value;
         if (this.blnChkStateSelection == true )
@@ -388,11 +369,13 @@ this.SingleStatus6=false;
               this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
                 this.lstCriticalData = result_Fin14;
                 this.rowLenth=result_Fin14.length;
+                this.loader="Done";
               })
               this.islabel = "block";
 
               this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
                 this.lstCriticalData1 = result_Fin14;
+                this.loader="Done";
               })     
           
               return; 
@@ -414,7 +397,7 @@ this.SingleStatus6=false;
             this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, "8",this.pageNumber,this.skip).subscribe(result_Fin14 => {
                  this.lstCriticalData = result_Fin14;
                  this.rowLenth=result_Fin14.length;
-                 
+                 this.loader="Done";
               this.lstCriticalData.sort(function(a, b) {
                 var nameA = a.Dcode.toUpperCase(); 
                 var nameB = b.Dcode.toUpperCase();
@@ -440,7 +423,7 @@ this.SingleStatus6=false;
         }
         else (valueComp == "ALL" && this.valueComp === "city")
           {
-           // alert("all CITY");
+           // alert("all CITY1");
             this.lblStateDisttCity = "All India";
             this.distStatus = "none";
             this.cityStaus = "none";
@@ -456,6 +439,7 @@ this.SingleStatus6=false;
             this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
               this.lstCriticalData = result_Fin14;
               this.rowLenth=result_Fin14.length;
+              this.loader="Done";
             })
             this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
               this.lstCriticalData1 = result_Fin14;
@@ -482,6 +466,7 @@ this.SingleStatus6=false;
               this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
                 this.lstCriticalData = result_Fin14;
                 this.rowLenth=result_Fin14.length;
+                this.loader="Done";
               })
               this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
                 this.lstCriticalData1 = result_Fin14;
@@ -505,6 +490,7 @@ this.SingleStatus6=false;
             this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
               this.lstCriticalData = result_Fin14;
               this.rowLenth=result_Fin14.length;
+              this.loader="Done";
             })
             this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
               this.lstCriticalData1 = result_Fin14;
@@ -514,7 +500,7 @@ this.SingleStatus6=false;
           }
           else if (valueComp == "ALL" && this.valueComp === "city")
           {
-          // alert("all CITY");
+         //  alert("all CITY");
             this.lblStateDisttCity = "All India";
             this.distStatus = "none";
             this.cityStaus = "none";
@@ -532,6 +518,7 @@ this.SingleStatus6=false;
             this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
               this.lstCriticalData = result_Fin14;
               this.rowLenth=result_Fin14.length;
+              this.loader="Done";
             })
             this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
               this.lstCriticalData1 = result_Fin14;
@@ -544,12 +531,12 @@ this.SingleStatus6=false;
         }
    }
   
-
   // this works with state dropdown and Check box state-distt-city - no comp
   disttwise(event) {
       //  alert(this.stateCodes); 
-   //   this.pageNumber =1;
-this.chkEnebled=false;
+      this.pageNumber =1;
+      this.rowLenth =0;
+      this.chkEnebled=true;
               debugger;
         this.allstatus= false;
         this.selected1 =false;
@@ -560,9 +547,7 @@ this.chkEnebled=false;
         this.selected6 =false;
         this.loader=" loading...";
          
-
-  // alert(1);
-   const valueDemo = event.target.value;
+  const valueDemo = event.target.value;
     this.valueComp = valueDemo;
     if (this.stateCodes != "ALL") {
      //  alert('test1');
@@ -581,6 +566,7 @@ this.chkEnebled=false;
         this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
           this.lstCriticalData = result_Fin14;
           this.rowLenth=result_Fin14.length;
+          this.loader="Done";
         })
         this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
           this.lstCriticalData1 = result_Fin14;
@@ -604,6 +590,7 @@ this.chkEnebled=false;
         this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
           this.lstCriticalData = result_Fin14;
           this.rowLenth=result_Fin14.length;
+          this.loader="Done";
         })
         this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
           this.lstCriticalData1 = result_Fin14;
@@ -652,6 +639,7 @@ this.chkEnebled=false;
        this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
          this.lstCriticalData = result_Fin14;
          this.rowLenth=result_Fin14.length;
+         this.loader="Done";
        })
        this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin141 => {
         this.lstCriticalData1 = result_Fin141;
@@ -678,6 +666,7 @@ this.chkEnebled=false;
       this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
         this.lstCriticalData = result_Fin14;
         this.rowLenth=result_Fin14.length;
+        this.loader="Done";
       })
       this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
         this.lstCriticalData1 = result_Fin14;
@@ -700,6 +689,7 @@ this.chkEnebled=false;
       this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
         this.lstCriticalData = result_Fin14;
         this.rowLenth=result_Fin14.length;
+        this.loader="Done";
       })
       this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
         this.lstCriticalData1 = result_Fin14;
@@ -707,7 +697,7 @@ this.chkEnebled=false;
       return;
     }
     else { //<<<<<<<<<<<<<<< City>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
-       // alert('citywise11');
+      //  alert('citywise11');
       this.stateCodes = "ALL";
       this.districtCodes = "ALL";
       this.cityCodes = "ALL";
@@ -722,6 +712,7 @@ this.chkEnebled=false;
     this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
       this.lstCriticalData = result_Fin14;
       this.rowLenth=result_Fin14.length;
+      this.loader="Done";
     })
     this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
       this.lstCriticalData1 = result_Fin14;
@@ -731,10 +722,17 @@ this.chkEnebled=false;
   }
 
   getStateDetails(stateCodes) {
-    // Only State selection 
-    //StatedisttdityAtaGlanceComponent.name['selectType'].reset();
-   // alert('Only State ');
-   this.blnChkStateSelection = false;
+    this.AllDistt=false;
+    this.AllCity=false;
+    this.selected1 =false;
+    this.selected2 =false;
+    this.selected3 =false;
+    this.selected4 =false;
+    this.selected5 =false;
+    this.selected6 =false;
+
+
+    this.blnChkStateSelection = false;
     if (this.stateCodes != "0") {
       this.blnChkStateSelection = true;
       this.distStatus = "none";
@@ -752,6 +750,7 @@ this.chkEnebled=false;
       this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
         this.lstCriticalData = result_Fin14;
         this.rowLenth=result_Fin14.length;
+        this.loader="Done";
       })
 
       this.service.Get_StateDisttCityAtaGlance_(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp).subscribe(result_Fin14 => {
@@ -773,7 +772,6 @@ this.chkEnebled=false;
     this.skip=this.rowLenth;
     this.service.Get_StateDisttCityAtaGlance(this.stateCodes, this.districtCodes, this.cityCodes, this.Division, this.Comp,this.pageNumber,this.skip).subscribe(result_Fin14 => {
       this.lstCriticalData = result_Fin14;
-      
     })
   }
   Prev()
@@ -793,9 +791,7 @@ this.chkEnebled=false;
   }
   Reset()
   {
-
     this.ngOnInit();
-    
     this.allstatus =false;
     this.selected1 =false;
     this.selected2 =false;
@@ -804,11 +800,6 @@ this.chkEnebled=false;
     this.selected5 =false;
     this.selected6 =false;
    }
-
-//-------------------------------------------------------------------------------------------
-
-
-
 }
 
 
