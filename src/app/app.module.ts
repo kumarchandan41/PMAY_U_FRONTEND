@@ -124,6 +124,7 @@ import { DashboardMainFormComponent } from './AdminPanel/dashboard-main-form/das
 //import { AuthGuard } from './AuthGuard/auth.guard';
 //import { AuthInterceptor } from './AuthGuard/auth.interceptor';
 import { StatedisttdityAtaGlanceComponent } from './financeReport/statedisttdity-ata-glance/statedisttdity-ata-glance.component';
+import { StatedisttcityReportComponent } from './financeReport/statedisttcity-report/statedisttcity-report.component';
 // import { DasHComponent } from './CMS/das-h/das-h.component';
 // import { ProjectCodeWiseReportComponent } from './DRMC/project-code-wise-report/project-code-wise-report.component';
 // import { ProjectDetailsComponent } from './DRMC/project-details/project-details.component';
@@ -223,6 +224,9 @@ const routes: Routes = [
       { path: 'EditUsers', component: EditUsersComponent },
       { path: 'DashboardMainForm', component: DashboardMainFormComponent },
       { path: 'StatedisttCityAtaGlance', component: StatedisttdityAtaGlanceComponent },
+
+      { path: 'StatedisttcityReport', component: StatedisttcityReportComponent },
+      
       
     ]
   },
@@ -335,6 +339,7 @@ const routes: Routes = [
     EditUsersComponent,
     DashboardMainFormComponent,
     StatedisttdityAtaGlanceComponent,
+    StatedisttcityReportComponent,
     // DasHComponent 
   ],
   imports: [
