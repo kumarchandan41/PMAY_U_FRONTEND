@@ -26,7 +26,7 @@
     "angular2-counto": "^1.2.5",
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.2.11",
     "lodash": "^4.17.15",
