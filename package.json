@@ -30,7 +30,7 @@
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.2.11",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng-snotify": "^4.3.1",
     "ng2-search-filter": "^0.5.1",
     "ngx-bootstrap": "^5.2.0",
